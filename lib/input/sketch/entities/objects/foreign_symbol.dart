@@ -1,9 +1,9 @@
-
 import 'package:pbdl/input/sketch/entities/layers/symbol_master.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'foreign_symbol.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 
 // title: Document
 // description: The document entry in a Sketch file.

@@ -1,9 +1,9 @@
-//Nothing to import
+import 'package:json_annotation/json_annotation.dart';
 
 part 'frame.g.dart';
 
-@JsonSerializable(nullable: true)
-class Frame implements Rect {
+@JsonSerializable()
+class Frame {
   @JsonKey(name: '_class')
   final String classField;
   final bool constrainProportions;

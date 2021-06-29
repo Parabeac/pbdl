@@ -1,7 +1,8 @@
-//nothing to import
+import 'package:json_annotation/json_annotation.dart';
+
 part 'override_value.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 
 /// title: Override Property
 /// description: Defines override properties on symbol masters
