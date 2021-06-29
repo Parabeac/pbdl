@@ -1,14 +1,13 @@
-
-
-import 'package:pbdl/input/figma/entities/layers/frame.dart';
+import 'package:pbdl/input/helper/pb_color.dart';
 import 'package:pbdl/input/sketch/entities/style/font_descriptor.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
-
+import 'package:json_annotation/json_annotation.dart';
+import 'package:recase/recase.dart';
 part 'shared_style.g.dart';
 
 Map<String, String> SharedStyle_UUIDToName = {};
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class SharedStyle with PBColorMixin {
   @JsonKey(name: '_class')
   final String classField;
@@ -27,11 +26,14 @@ class SharedStyle with PBColorMixin {
     this.style,
   }) {
     name = name.camelCase;
-    SharedStyle_UUIDToName[UUID] = name.replaceAll(RegExp(r'[^A-Za-z0-9_]',), '');
+    SharedStyle_UUIDToName[UUID] = name.replaceAll(
+        RegExp(
+          r'[^A-Za-z0-9_]',
+        ),
+        '');
   }
 
   String generate() {
-
     var buffer = StringBuffer();
 
     if (style != null) {
@@ -48,8 +50,7 @@ class SharedStyle with PBColorMixin {
         }
         if (fontDescriptor.fontWeight != null) {
           buffer.write(
-              'fontWeight: FontWeight.${fontDescriptor.fontWeight
-                  .toString()},\n');
+              'fontWeight: FontWeight.${fontDescriptor.fontWeight.toString()},\n');
         }
 
         if (fontDescriptor.fontStyle != null) {
@@ -74,10 +75,8 @@ class SharedStyle with PBColorMixin {
     }
 
     return buffer.toString();
-
   }
 
   factory SharedStyle.fromJson(Map json) => _$SharedStyleFromJson(json);
   Map<String, dynamic> toJson() => _$SharedStyleToJson(this);
-
 }

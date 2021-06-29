@@ -1,7 +1,9 @@
-//nothing to import
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/input/helper/pb_color.dart';
+
 part 'color.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Color implements PBColor {
   @JsonKey(name: '_class')
   final String classField;

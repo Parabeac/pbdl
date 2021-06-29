@@ -1,15 +1,18 @@
-
+import 'package:pbdl/input/helper/pb_color.dart';
 import 'package:pbdl/input/sketch/entities/style/border.dart';
 import 'package:pbdl/input/sketch/entities/style/border_options.dart';
 import 'package:pbdl/input/sketch/entities/style/color_controls.dart';
 import 'package:pbdl/input/sketch/entities/style/context_settings.dart';
 import 'package:pbdl/input/sketch/entities/style/fill.dart';
 import 'package:pbdl/input/sketch/entities/style/text_style.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+import 'blur.dart';
 
 part 'style.g.dart';
 
-@JsonSerializable(nullable: true)
-class Style implements PBStyle {
+@JsonSerializable()
+class Style {
   @JsonKey(name: '_class')
   final String classField;
   @override
@@ -23,9 +26,9 @@ class Style implements PBStyle {
   final List<Border> borders;
   final ColorControls colorControls;
   final ContextSettings contextSettings;
-  List<PBFill> fills, innerShadows, shadows;
+  List<Fill> fills, innerShadows, shadows;
   @JsonKey(nullable: true)
-  PBTextStyle textStyle;
+  TextStyle textStyle;
 
   Style({
     this.blur,
@@ -54,15 +57,8 @@ class Style implements PBStyle {
   factory Style.fromJson(Map json) => _$StyleFromJson(json);
   Map<String, dynamic> toJson() => _$StyleToJson(this);
 
-  @override
   @JsonKey(ignore: true)
   PBColor backgroundColor;
-
-  @override
-  set borderOptions(PBBorderOptions _borderOptions) {}
-
-  @override
-  set borders(List<PBBorder> _borders) {}
 
   @override
   @JsonKey(ignore: true)

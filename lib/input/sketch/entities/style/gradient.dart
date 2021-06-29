@@ -1,9 +1,9 @@
-
 import 'package:pbdl/input/sketch/entities/style/gradient_stop.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'gradient.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Gradient {
   @JsonKey(name: '_class')
   final String classField;

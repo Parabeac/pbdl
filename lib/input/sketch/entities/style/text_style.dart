@@ -1,18 +1,21 @@
+import 'package:pbdl/input/helper/pb_color.dart';
+import 'package:pbdl/input/sketch/entities/style/color.dart';
 
 import 'package:pbdl/input/sketch/entities/style/font_descriptor.dart';
 import 'package:pbdl/input/sketch/entities/style/paragraph_style.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'text_style.g.dart';
 
-@JsonSerializable(nullable: true)
-class TextStyle implements PBTextStyle {
+@JsonSerializable()
+class TextStyle {
   @JsonKey(name: 'encodedAttributes')
   Map<String, dynamic> rawEncodedAttributes;
   @override
   @JsonKey(ignore: true)
-  PBFontDescriptor fontDescriptor;
+  FontDescriptor fontDescriptor;
   @JsonKey(ignore: true)
-  PBParagraphStyle paragraphStyle;
+  ParagraphStyle paragraphStyle;
   @JsonKey(ignore: true)
   num verticalAlignment;
   @JsonKey(ignore: true)
@@ -95,7 +98,6 @@ class TextStyle implements PBTextStyle {
       _$TextStyleFromJson(json);
   Map<String, dynamic> toJson() => _$TextStyleToJson(this);
 
-  @override
   @JsonKey(ignore: true)
   PBColor fontColor;
 
