@@ -1,24 +1,20 @@
-
-
+import 'package:pbdl/input/figma/entities/layers/figma_font_descriptor.dart';
+import 'package:pbdl/input/figma/entities/layers/figma_paragraph_style.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
-
+import 'package:json_annotation/json_annotation.dart';
 part 'figma_text_style.g.dart';
 
 @JsonSerializable()
-class FigmaTextStyle implements PBTextStyle {
-  @override
-  PBColor fontColor;
+class FigmaTextStyle {
+  FigmaColor fontColor;
 
-  @override
   String weight;
 
   @JsonKey(ignore: true)
-  @override
-  PBFontDescriptor fontDescriptor;
+  FigmaFontDescriptor fontDescriptor;
 
-  @override
   @JsonKey(ignore: true)
-  PBParagraphStyle paragraphStyle;
+  FigmaParagraphStyle paragraphStyle;
 
   FigmaTextStyle({
     FigmaColor this.fontColor,

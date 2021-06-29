@@ -1,4 +1,5 @@
-//no packages were imported
+import 'package:pbdl/input/helper/pb_color.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'figma_color.g.dart';
 
