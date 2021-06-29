@@ -1,11 +1,9 @@
-
-
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 
-abstract class AbstractGroupLayer extends SketchNode implements GroupNode {
+abstract class AbstractGroupLayer extends SketchNode {
   final bool hasClickThrough;
   final dynamic groupLayout;
   @override
@@ -69,7 +67,7 @@ abstract class AbstractGroupLayer extends SketchNode implements GroupNode {
   List<Map> getChildren() {
     List<Map> result = [];
     for (var child in children) {
-      result.add((child as DesignNode).toPBDF());
+      // result.add((child as DesignNode).toPBDF()); // TODO: Uncomment this code
     }
     return result;
   }

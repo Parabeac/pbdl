@@ -1,14 +1,14 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/input/sketch/entities/style/style.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 // title: Abstract Layer
 // description: Abstract base schema for all layers
 // type: object
-abstract class SketchNode implements DesignNode {
+abstract class SketchNode {
   @override
   @JsonKey(name: 'do_objectID')
   final String UUID;

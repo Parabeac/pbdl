@@ -1,4 +1,3 @@
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_shape_layer.dart';
@@ -6,12 +5,13 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/sketch_asset_processor.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'shape_path.g.dart';
 
 // title: Shape Path Layer
 // description: Shape path layers are the result of adding a vector layer
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ShapePath extends AbstractShapeLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'shapePath';

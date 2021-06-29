@@ -1,13 +1,12 @@
 // title: Abstract Shape Layer
 // description: Abstract base layer for all shape layers
 
-
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 
-abstract class AbstractShapeLayer extends SketchNode implements DesignShape {
+abstract class AbstractShapeLayer extends SketchNode {
   final bool edited;
   final bool isClosed;
   final dynamic pointRadiusBehaviour;

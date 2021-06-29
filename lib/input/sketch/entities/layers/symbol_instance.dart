@@ -1,5 +1,3 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
@@ -7,16 +5,16 @@ import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/objects/override_value.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
-//no proposed solution for class SymbolInstance
+import 'package:json_annotation/json_annotation.dart';
 
 part 'symbol_instance.g.dart';
 
 // title: Symbol Instance Layer
 // description: Symbol instance layers represent an instance of a symbol master
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class SymbolInstance extends SketchNode
     with SymbolNodeMixin
-    implements SketchNodeFactory, PBSharedInstanceDesignNode {
+    implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolInstance';
   final List<OverridableValue> overrideValues;

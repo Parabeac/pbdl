@@ -1,5 +1,5 @@
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
+import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
@@ -7,15 +7,16 @@ import 'package:pbdl/input/sketch/entities/objects/override_property.dart';
 import 'package:pbdl/input/sketch/entities/style/color.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'symbol_master.g.dart';
 
 // title: Symbol Master Layer
 // description: A symbol master layer represents a reusable group of layers
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class SymbolMaster extends AbstractGroupLayer
     with SymbolNodeMixin
-    implements SketchNodeFactory, PBSharedInstanceDesignNode {
+    implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolMaster';
   @override

@@ -1,18 +1,16 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
-//No proposed solution for class SketchText
+import 'package:json_annotation/json_annotation.dart';
 
 part 'sketch_text.g.dart';
 
 // title: Text Layer
 // description: A text layer represents a discrete block or line of text
-@JsonSerializable(nullable: true)
-class SketchText extends SketchNode implements SketchNodeFactory, Text {
+@JsonSerializable()
+class SketchText extends SketchNode implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'text';
 

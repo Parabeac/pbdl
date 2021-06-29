@@ -1,5 +1,3 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
@@ -7,12 +5,13 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/sketch_asset_processor.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'shape_group.g.dart';
 
 // title: Shape Group Layer
 // description: Shape groups layers group together multiple shape layers
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'shapeGroup';

@@ -1,5 +1,3 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_shape_layer.dart';
@@ -7,13 +5,13 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/sketch_asset_processor.dart';
-//no proposed solution for class Oval
+import 'package:json_annotation/json_annotation.dart';
 
 part 'oval.g.dart';
 
 // title: Oval Layer
 // description: Oval layers are the result of adding an oval shape to the canvas
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Oval extends AbstractShapeLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'oval';

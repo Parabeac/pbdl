@@ -1,5 +1,3 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_shape_layer.dart';
@@ -7,13 +5,13 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/sketch_asset_processor.dart';
-//no proposed solution for class Polygon
+import 'package:json_annotation/json_annotation.dart';
 
 part 'polygon.g.dart';
 
 // title: Polygon Layer
 // description: Polygon layers are the result of adding an polygon shape to the canvas
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'polygon';

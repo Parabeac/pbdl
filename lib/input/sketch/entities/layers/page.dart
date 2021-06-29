@@ -1,19 +1,17 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
-//no proposed solution for class Page
+import 'package:json_annotation/json_annotation.dart';
 
 part 'page.g.dart';
 
 // title: Page Layer
 // description:
 //   Page layers are the top level organisational abstraction within a document
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Page extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'page';
