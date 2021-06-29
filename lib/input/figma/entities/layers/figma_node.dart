@@ -1,33 +1,30 @@
 //no packages to import
-
+import 'package:json_annotation/json_annotation.dart';
 import '../abstract_figma_node_factory.dart';
 
-@JsonSerializable(nullable: true)
-abstract class FigmaNode implements DesignNode {
-  @JsonKey(name: 'id')
-  @override
+@JsonSerializable()
+abstract class FigmaNode {
+  @JsonKey(
+    name: 'id',
+  )
   String UUID;
 
-  @override
   String name;
 
-  @override
   String type;
 
   var pluginData;
 
   var sharedPluginData;
 
-  @override
   @JsonKey(name: 'visible', defaultValue: true)
   bool isVisible;
 
-  @override
   @JsonKey(name: 'transitionNodeID')
   String prototypeNodeUUID;
-  @JsonKey(nullable: true)
+  @JsonKey()
   num transitionDuration;
-  @JsonKey(nullable: true)
+  @JsonKey()
   String transitionEasing;
 
   FigmaNode(

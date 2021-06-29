@@ -1,16 +1,13 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/input/sketch/entities/objects/override_value.dart';
-
+import 'package:json_annotation/json_annotation.dart';
 part 'instance.g.dart';
 
-@JsonSerializable(nullable: true)
-class Instance extends FigmaFrame
-    implements AbstractFigmaNodeFactory, PBSharedInstanceDesignNode {
+@JsonSerializable()
+class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   String type = 'INSTANCE';
 
@@ -28,7 +25,7 @@ class Instance extends FigmaFrame
       type,
       pluginData,
       sharedPluginData,
-      Frame boundaryRectangle,
+      boundaryRectangle,
       style,
       fills,
       strokes,

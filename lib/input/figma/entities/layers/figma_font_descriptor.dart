@@ -1,10 +1,6 @@
-//was not given option to import library packahge for PBfontDescriptor
-
-class FigmaFontDescriptor implements PBFontDescriptor {
-  @override
+class FigmaFontDescriptor {
   String fontName;
 
-  @override
   num fontSize;
 
   String fontWeight;
@@ -13,7 +9,6 @@ class FigmaFontDescriptor implements PBFontDescriptor {
 
   num letterSpacing;
 
-  @override
   Map<String, dynamic> rawAttributes;
 
   FigmaFontDescriptor(

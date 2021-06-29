@@ -1,7 +1,12 @@
-//deleted existing package with error-- no new package to import
-
-class FigmaParagraphStyle implements PBParagraphStyle {
+class FigmaParagraphStyle {
   int alignment = ALIGNMENT.LEFT.index;
 
   FigmaParagraphStyle({this.alignment});
+}
+
+enum ALIGNMENT {
+  LEFT,
+  RIGHT,
+  CENTER,
+  JUSTIFY,
 }

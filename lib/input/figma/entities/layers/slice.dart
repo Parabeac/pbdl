@@ -1,12 +1,10 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-
+import 'package:json_annotation/json_annotation.dart';
 part 'slice.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 
 ///A slice is an invisible object with a bounding box,
 ///represented as dashed lines in the editor.

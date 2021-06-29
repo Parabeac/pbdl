@@ -1,17 +1,17 @@
-
-
+import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
+import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
 
 part 'component.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Component extends FigmaFrame
     with SymbolNodeMixin
-    implements AbstractFigmaNodeFactory, PBSharedMasterDesignNode {
+    implements AbstractFigmaNodeFactory {
   @override
   String type = 'COMPONENT';
   Component({

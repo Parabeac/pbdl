@@ -1,15 +1,14 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
+import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-
+import 'package:json_annotation/json_annotation.dart';
 import 'figma_node.dart';
 
 part 'regular_polygon.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class FigmaRegularPolygon extends FigmaVector
     implements AbstractFigmaNodeFactory {
   @override
@@ -23,7 +22,7 @@ class FigmaRegularPolygon extends FigmaVector
     style,
     layoutAlign,
     constraints,
-    Frame boundaryRectangle,
+    FigmaFrame boundaryRectangle,
     size,
     fills,
     strokes,

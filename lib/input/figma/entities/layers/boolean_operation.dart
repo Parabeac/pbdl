@@ -1,20 +1,20 @@
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-
+import 'package:json_annotation/json_annotation.dart';
+import 'package:quick_log/quick_log.dart';
 import 'figma_node.dart';
 
 part 'boolean_operation.g.dart';
 
-@JsonSerializable(nullable: true)
-class BooleanOperation extends FigmaVector
-    implements FigmaNodeFactory, GroupNode, Image {
+@JsonSerializable()
+class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
+  @override
   @JsonKey(ignore: true)
   Logger log;
-  @override
+
   List children;
   String booleanOperation;
 
@@ -24,17 +24,18 @@ class BooleanOperation extends FigmaVector
   @override
   var boundaryRectangle;
 
-  BooleanOperation({
-    List<FigmaNode> this.children,
-    booleanOperation,
-    type,
-    FigmaStyle style,
-    Frame this.boundaryRectangle,
-    String UUID,
-    String prototypeNodeUUID,
-    num transitionDuration,
-    String transitionEasing,
-  }) : super(
+  BooleanOperation(
+      {children,
+      booleanOperation,
+      type,
+      style,
+      boundaryRectangle,
+      UUID,
+      prototypeNodeUUID,
+      transitionDuration,
+      transitionEasing,
+      imageReference})
+      : super(
             style: style,
             UUID: UUID,
             prototypeNodeUUID: prototypeNodeUUID,

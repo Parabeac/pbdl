@@ -1,13 +1,11 @@
-
-
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
-
+import 'package:json_annotation/json_annotation.dart';
 import '../abstract_figma_node_factory.dart';
 
 part 'canvas.g.dart';
 
-@JsonSerializable(nullable: true)
-class Canvas extends FigmaNode implements FigmaNodeFactory, GroupNode {
+@JsonSerializable()
+class Canvas extends FigmaNode implements FigmaNodeFactory {
   @override
   String type = 'CANVAS';
 

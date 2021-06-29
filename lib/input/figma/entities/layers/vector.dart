@@ -1,23 +1,20 @@
-
-
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
+import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-//there was no proposed solution for FigmaVector
-
+import 'package:json_annotation/json_annotation.dart';
+import 'package:quick_log/quick_log.dart';
 
 part 'vector.g.dart';
 
-@JsonSerializable(nullable: true)
-class FigmaVector extends FigmaNode implements FigmaNodeFactory, Image {
+@JsonSerializable()
+class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   @JsonKey(ignore: true)
   Logger log;
-  @override
-  PBStyle style;
+
+  FigmaStyle style;
 
   String layoutAlign;
 
@@ -51,7 +48,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory, Image {
     FigmaStyle this.style,
     this.layoutAlign,
     this.constraints,
-    Frame this.boundaryRectangle,
+    FigmaFrame this.boundaryRectangle,
     this.size,
     this.strokes,
     this.strokeWeight,
@@ -93,7 +90,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory, Image {
         InheritedBitmap(this, name, currentContext: currentContext));
   }
 
-  @override
   String imageReference;
 
   @override

@@ -1,17 +1,18 @@
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
+import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
-
+import 'package:json_annotation/json_annotation.dart';
+import 'package:quick_log/quick_log.dart';
 import 'figma_node.dart';
 
 part 'ellipse.g.dart';
 
-@JsonSerializable(nullable: true)
-class FigmaEllipse extends FigmaVector
-    implements AbstractFigmaNodeFactory, Image {
+@JsonSerializable()
+class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String imageReference;
+  @override
   @JsonKey(ignore: true)
   Logger log;
 
@@ -29,7 +30,7 @@ class FigmaEllipse extends FigmaVector
     style,
     layoutAlign,
     constraints,
-    Frame boundaryRectangle,
+    FigmaFrame boundaryRectangle,
     size,
     this.fills,
     strokes,

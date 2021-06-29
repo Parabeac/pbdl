@@ -1,17 +1,16 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
+import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-
+import 'package:json_annotation/json_annotation.dart';
 import 'figma_node.dart';
 
 part 'text.g.dart';
 
-@JsonSerializable(nullable: true)
-class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
+@JsonSerializable()
+class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String type = 'TEXT';
   FigmaText(
@@ -23,7 +22,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
       FigmaStyle this.style,
       layoutAlign,
       constraints,
-      Frame boundaryRectangle,
+      FigmaFrame boundaryRectangle,
       size,
       fills,
       strokes,
@@ -58,12 +57,11 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
     pbdfType = 'text';
   }
 
-  @override
   @JsonKey(name: 'characters')
   String content;
 
   @override
-  PBStyle style;
+  FigmaStyle style;
 
   List<double> characterStyleOverrides;
 

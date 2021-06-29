@@ -1,16 +1,17 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/frame.dart';
+import 'package:pbdl/input/figma/entities/layers/vector.dart';
+import 'package:pbdl/input/figma/entities/style/figma_border.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/figma/helper/style_extractor.dart';
+import 'package:pbdl/input/helper/pb_color.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-
+import 'package:json_annotation/json_annotation.dart';
 import 'figma_node.dart';
 
 part 'rectangle.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class FigmaRectangle extends FigmaVector
     with PBColorMixin
     implements AbstractFigmaNodeFactory {
@@ -25,7 +26,7 @@ class FigmaRectangle extends FigmaVector
       style,
       layoutAlign,
       constraints,
-      Frame boundaryRectangle,
+      FigmaFrame boundaryRectangle,
       size,
       strokes,
       strokeWeight,
@@ -93,7 +94,7 @@ class FigmaRectangle extends FigmaVector
       return Future.value(
           InheritedBitmap(this, name, currentContext: currentContext));
     }
-    PBBorder border;
+    FigmaBorder border;
     for (var b in style?.borders?.reversed ?? []) {
       if (b.isEnabled) {
         border = b;

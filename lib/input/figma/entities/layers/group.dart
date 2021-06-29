@@ -1,5 +1,3 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/layers/frame.dart';
@@ -7,17 +5,19 @@ import 'package:pbdl/input/figma/entities/layers/text.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart'; //sketch?
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/input/sketch/entities/objects/frame.dart';
+import 'package:quick_log/quick_log.dart'; //sketch?
 //no proposed solution for class Group
 
 part 'group.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 
 /// Class that represents a Figma Group.
 /// The reason this class implements Image is because Groups can hold multiple vectors
 /// which we need to convert into images.
-class Group extends FigmaFrame implements AbstractFigmaNodeFactory, Image {
+class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   @JsonKey(ignore: true)
   Logger log;
   @override
