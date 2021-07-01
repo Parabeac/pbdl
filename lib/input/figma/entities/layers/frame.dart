@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/layers/group.dart';
@@ -119,7 +120,7 @@ class FigmaFrame extends FigmaNode
   Map<String, dynamic> toJson() => _$FigmaFrameToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
     /// TODO: change `isHomeScreen` to its actual value
     if (isScaffold) {
       return Future.value(InheritedScaffold(
@@ -156,7 +157,7 @@ class FigmaFrame extends FigmaNode
         transitionEasing: transitionEasing,
       );
 
-      return Future.value(tempGroup.interpretNode(currentContext));
+      return Future.value(tempGroup.interpretNode(currentContext)); */
     }
   }
 

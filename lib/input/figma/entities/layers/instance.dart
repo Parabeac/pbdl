@@ -87,7 +87,7 @@ class Instance extends FigmaFrame
   Map<String, dynamic> toJson() => _$InstanceToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode(PBContext currentContext) {
     /// TODO: Check if `sharedParamValues` exits and pass to it, default to emptu for now
     var sym = PBSharedInstanceIntermediateNode(
       this,

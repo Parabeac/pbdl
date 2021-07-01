@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
@@ -62,7 +63,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaLineToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
     return Future.value(InheritedContainer(
       this,
       Point(boundaryRectangle.x, boundaryRectangle.y),
@@ -71,7 +72,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
         boundaryRectangle.y + boundaryRectangle.height,
       ),
       name,
-    ));
+    )); */
   }
 
   @override

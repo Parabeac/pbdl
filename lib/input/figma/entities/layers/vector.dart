@@ -2,6 +2,7 @@
 
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/style/figma_style.dart';
@@ -86,11 +87,11 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory, Image {
   Map<String, dynamic> toJson() => _$FigmaVectorToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) async {
+  Future<PBDLNode> interpretNode(PBContext currentContext) async { /*
     imageReference = FigmaAssetProcessor().processImage(UUID);
 
     return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext));
+        InheritedBitmap(this, name, currentContext: currentContext)); */
   }
 
   @override

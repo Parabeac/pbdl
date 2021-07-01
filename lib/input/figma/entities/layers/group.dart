@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/layers/frame.dart';
@@ -91,7 +92,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory, Image {
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) async {
+  Future<PBDLNode> interpretNode(PBContext currentContext) async { /*
     if (areAllVectors()) {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
@@ -112,7 +113,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory, Image {
     return Future.value(TempGroupLayoutNode(this, currentContext, name,
         topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
         bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
-            boundaryRectangle.y + boundaryRectangle.height)));
+            boundaryRectangle.y + boundaryRectangle.height))); */
   }
 
   bool areAllVectors() {

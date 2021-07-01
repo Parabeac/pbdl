@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
@@ -103,7 +104,7 @@ class Component extends FigmaFrame
   }
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
     var sym_master = PBSharedMasterNode(
       this,
       UUID,
@@ -114,7 +115,7 @@ class Component extends FigmaFrame
       overridableProperties: _extractParameters() ?? [],
       currentContext: currentContext,
     );
-    return Future.value(sym_master);
+    return Future.value(sym_master); */
   }
 
   @override

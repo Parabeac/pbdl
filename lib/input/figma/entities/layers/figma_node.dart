@@ -46,5 +46,5 @@ abstract class FigmaNode implements DesignNode {
   factory FigmaNode.fromJson(Map<String, dynamic> json) =>
       AbstractFigmaNodeFactory.getFigmaNode(json);
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext);
+  Future<PBDLNode> interpretNode(PBContext currentContext);
 }

@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
@@ -64,11 +65,11 @@ class FigmaRegularPolygon extends FigmaVector
   Map<String, dynamic> toJson() => _$FigmaRegularPolygonToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
     imageReference = FigmaAssetProcessor().processImage(UUID);
 
     return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext));
+        InheritedBitmap(this, name, currentContext: currentContext)); */
   }
 
   @override

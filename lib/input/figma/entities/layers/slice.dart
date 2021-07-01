@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
@@ -62,14 +63,14 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaSliceToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
     return Future.value(InheritedContainer(
         this,
         Point(boundaryRectangle.x, boundaryRectangle.y),
         Point(boundaryRectangle.x + boundaryRectangle.width,
             boundaryRectangle.y + boundaryRectangle.height),
         name,
-        currentContext: currentContext));
+        currentContext: currentContext)); */
   }
 
   @override

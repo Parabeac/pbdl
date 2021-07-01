@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -7,7 +8,7 @@ import '../abstract_figma_node_factory.dart';
 part 'canvas.g.dart';
 
 @JsonSerializable(nullable: true)
-class Canvas extends FigmaNode implements FigmaNodeFactory, GroupNode {
+class Canvas extends FigmaNode implements FigmaNodeFactory{
   @override
   String type = 'CANVAS';
 
@@ -69,9 +70,9 @@ class Canvas extends FigmaNode implements FigmaNodeFactory, GroupNode {
   var style;
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
     assert(false, 'We don\'t product pages as Intermediate Nodes.');
-    return null;
+    return null; */
   }
 
   @override
