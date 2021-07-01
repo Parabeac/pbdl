@@ -6,6 +6,7 @@ import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'figma_node.dart';
 
@@ -83,7 +84,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
   Map<String, dynamic> toJson() => _$FigmaTextToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
+  Future<PBDLNode> interpretNode() { /*
     return Future.value(InheritedContainer(
       this,
       Point(boundaryRectangle.x, boundaryRectangle.y),

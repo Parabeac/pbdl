@@ -1,5 +1,7 @@
 //no packages to import
 
+import 'package:pbdl/pbdl/pbdl_node.dart';
+
 import '../abstract_figma_node_factory.dart';
 
 @JsonSerializable(nullable: true)
@@ -46,5 +48,5 @@ abstract class FigmaNode implements DesignNode {
   factory FigmaNode.fromJson(Map<String, dynamic> json) =>
       AbstractFigmaNodeFactory.getFigmaNode(json);
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext);
+  Future<PBDLNode> interpretNode();
 }

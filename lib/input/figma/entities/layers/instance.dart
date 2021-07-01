@@ -5,6 +5,7 @@ import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/input/sketch/entities/objects/override_value.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'instance.g.dart';
 
@@ -87,7 +88,7 @@ class Instance extends FigmaFrame
   Map<String, dynamic> toJson() => _$InstanceToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
     /// TODO: Check if `sharedParamValues` exits and pass to it, default to emptu for now
     var sym = PBSharedInstanceIntermediateNode(
       this,

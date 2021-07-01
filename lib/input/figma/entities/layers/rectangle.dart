@@ -6,6 +6,7 @@ import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'figma_node.dart';
 
@@ -85,7 +86,7 @@ class FigmaRectangle extends FigmaVector
   Map<String, dynamic> toJson() => _$FigmaRectangleToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
+  Future<PBDLNode> interpretNode() { /*
     var fillsMap =
         (fillsList == null || fillsList.isEmpty) ? {} : fillsList.first;
     if (fillsMap != null && fillsMap['type'] == 'IMAGE') {

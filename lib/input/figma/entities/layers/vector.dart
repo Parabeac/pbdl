@@ -8,6 +8,7 @@ import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 //there was no proposed solution for FigmaVector
 
 
@@ -87,7 +88,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory, Image {
   Map<String, dynamic> toJson() => _$FigmaVectorToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) async { /*
+  Future<PBDLNode> interpretNode() async { /*
     imageReference = FigmaAssetProcessor().processImage(UUID);
 
     return Future.value(

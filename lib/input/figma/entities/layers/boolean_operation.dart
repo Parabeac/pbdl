@@ -5,6 +5,7 @@ import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'figma_node.dart';
 
@@ -54,7 +55,7 @@ class BooleanOperation extends FigmaVector
   Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) async { /*
+  Future<PBDLNode> interpretNode() async { /*
     imageReference = FigmaAssetProcessor().processImage(UUID);
 
     return Future.value(
