@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
@@ -74,5 +75,5 @@ abstract class SketchNode implements DesignNode {
   factory SketchNode.fromJson(Map<String, dynamic> json) =>
       AbstractSketchNodeFactory.getSketchNode(json);
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext);
+  Future<PBDLNode> interpretNode(PBContext currentContext);
 }

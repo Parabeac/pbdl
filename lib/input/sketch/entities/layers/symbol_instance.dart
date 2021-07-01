@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
@@ -140,11 +141,11 @@ class SymbolInstance extends SketchNode
   }
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
     var sym = PBSharedInstanceIntermediateNode(this, symbolID,
         sharedParamValues: _extractParameters(),
         currentContext: currentContext);
-    return Future.value(sym);
+    return Future.value(sym); */
   }
 
   @override

@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
@@ -119,9 +120,9 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$PageToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() { /*
     assert(false, 'We don\'t product pages as Intermediate Nodes.');
-    return null;
+    return null; */
   }
 
   @override

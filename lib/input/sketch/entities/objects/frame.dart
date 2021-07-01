@@ -1,5 +1,7 @@
 //Nothing to import
 
+import 'package:pbdl/design_logic/rect.dart';
+
 part 'frame.g.dart';
 
 @JsonSerializable(nullable: true)

@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
@@ -122,7 +123,7 @@ class SketchText extends SketchNode implements SketchNodeFactory, Text {
   Map<String, dynamic> toJson() => _$SketchTextToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) =>
+  Future<PBDLNode> interpretNode(PBContext currentContext) =>
       Future.value(InjectedContainer(
         Point(boundaryRectangle.x + boundaryRectangle.width,
             boundaryRectangle.y + boundaryRectangle.height),

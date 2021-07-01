@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_shape_layer.dart';
@@ -114,12 +115,12 @@ class Oval extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$OvalToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) async {
+  Future<PBDLNode> interpretNode(PBContext currentContext) async { /*
     var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
 
-    return Future.value(InheritedOval(this, name,
-        currentContext: currentContext, image: image));
+    return Future.value(InheritedOval(this, name, 
+        currentContext: currentContext, image: image)); */
   }
 
   @override

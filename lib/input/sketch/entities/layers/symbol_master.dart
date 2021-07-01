@@ -1,4 +1,5 @@
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
@@ -176,7 +177,7 @@ class SymbolMaster extends AbstractGroupLayer
   }
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
     var sym_master = PBSharedMasterNode(
       this,
       symbolID,
@@ -187,7 +188,7 @@ class SymbolMaster extends AbstractGroupLayer
       overridableProperties: _extractParameters(),
       currentContext: currentContext,
     );
-    return Future.value(sym_master);
+    return Future.value(sym_master); */
   }
 
   @override

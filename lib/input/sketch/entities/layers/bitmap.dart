@@ -1,5 +1,7 @@
 
 
+import 'package:pbdl/design_logic/image.dart';
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
@@ -12,7 +14,7 @@ part 'bitmap.g.dart';
 
 // title: Bitmap Layer
 // description: Bitmap layers house a single image
-class Bitmap extends SketchNode implements SketchNodeFactory, Image {
+class Bitmap extends SketchNode implements SketchNodeFactory{
   @override
   String CLASS_NAME = 'bitmap';
   final bool fillReplacesImage;
@@ -94,8 +96,9 @@ class Bitmap extends SketchNode implements SketchNodeFactory, Image {
   Map<String, dynamic> toJson() => _$BitmapToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
-    var intermediateNode;
+  Future<PBDLNode> interpretNode(PBContext currentContext) {
+    return PBDLImage();
+  /*  var intermediateNode;
     intermediateNode = PBDenyListHelper().returnDenyListNodeIfExist(this);
     if (intermediateNode != null) {
       return intermediateNode;
@@ -106,7 +109,7 @@ class Bitmap extends SketchNode implements SketchNodeFactory, Image {
     }
     return Future.value(
         InheritedBitmap(this, name, currentContext: currentContext));
-  }
+  } */
 
   @JsonKey(name: 'image')
   Map imageReferenceMap;

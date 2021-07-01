@@ -1,5 +1,6 @@
 
 
+import 'package:pbdl/design_logic/pbdl_node.dart';
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
@@ -112,7 +113,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   Map<String, dynamic> toJson() => _$GroupToJson(this);
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) =>
+  Future<PBDLNode> interpretNode(PBContext currentContext) =>
       Future.value(TempGroupLayoutNode(this, currentContext, name,
           topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
           bottomRightCorner: Point(
