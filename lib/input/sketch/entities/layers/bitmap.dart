@@ -7,6 +7,7 @@ import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'bitmap.g.dart';
 
@@ -96,7 +97,7 @@ class Bitmap extends SketchNode implements SketchNodeFactory{
   Map<String, dynamic> toJson() => _$BitmapToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
     return PBDLImage();
   /*  var intermediateNode;
     intermediateNode = PBDenyListHelper().returnDenyListNodeIfExist(this);

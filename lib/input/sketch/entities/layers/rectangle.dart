@@ -8,6 +8,7 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/border.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 // no proposed solution for AbstractShapeLayer
 // no proposed solution for class Rectangke
 
@@ -122,7 +123,7 @@ class Rectangle extends AbstractShapeLayer
   Map<String, dynamic> toJson() => _$RectangleToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
+  Future<PBDLNode> interpretNode() { /*
     Border border;
     for (var b in style.borders.reversed) {
       if (b.isEnabled) {

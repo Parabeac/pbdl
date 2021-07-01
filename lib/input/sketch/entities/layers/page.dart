@@ -7,6 +7,7 @@ import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 //no proposed solution for class Page
 
 part 'page.g.dart';

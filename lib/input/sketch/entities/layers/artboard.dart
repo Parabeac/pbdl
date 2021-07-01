@@ -8,6 +8,7 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/color.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 //no proposed solution for class Artboard
 
 part 'artboard.g.dart';
@@ -140,7 +141,7 @@ class Artboard extends AbstractGroupLayer
   Map<String, dynamic> toJson() => _$ArtboardToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
+  Future<PBDLNode> interpretNode() { /*
     return Future.value(InheritedScaffold(
       this,
       currentContext: currentContext,

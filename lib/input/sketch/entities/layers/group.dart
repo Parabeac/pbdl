@@ -7,6 +7,7 @@ import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 //no proposed solution for class Group
 
 part 'group.g.dart';
@@ -113,7 +114,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   Map<String, dynamic> toJson() => _$GroupToJson(this);
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) =>
+  Future<PBDLNode> interpretNode() =>
       Future.value(TempGroupLayoutNode(this, currentContext, name,
           topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
           bottomRightCorner: Point(

@@ -8,6 +8,7 @@ import 'package:pbdl/input/sketch/entities/objects/override_property.dart';
 import 'package:pbdl/input/sketch/entities/style/color.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'symbol_master.g.dart';
 
@@ -177,7 +178,7 @@ class SymbolMaster extends AbstractGroupLayer
   }
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) { /*
+  Future<PBDLNode> interpretNode() { /*
     var sym_master = PBSharedMasterNode(
       this,
       symbolID,

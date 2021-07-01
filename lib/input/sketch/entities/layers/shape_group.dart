@@ -8,6 +8,7 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/sketch_asset_processor.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'shape_group.g.dart';
 
@@ -117,7 +118,7 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ShapeGroupToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode(PBContext currentContext) async { /*
+  Future<PBDLNode> interpretNode() async { /*
     var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
 
