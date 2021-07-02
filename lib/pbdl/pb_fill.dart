@@ -1,4 +1,4 @@
-import 'package:parabeac_core/design_logic/color.dart';
+import 'package:pbdl/pbdl/color.dart';
 
 abstract class PBFill {
   PBColor color;

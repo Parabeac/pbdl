@@ -1,38 +1,28 @@
-import 'package:parabeac_core/design_logic/color.dart';
-import 'package:parabeac_core/design_logic/design_node.dart';
-import 'package:parabeac_core/design_logic/group_node.dart';
-import 'package:parabeac_core/design_logic/pb_style.dart';
-import 'package:parabeac_core/design_logic/rect.dart';
-import 'package:parabeac_core/input/sketch/entities/layers/flow.dart';
-import 'package:parabeac_core/input/sketch/entities/objects/frame.dart';
-import 'package:parabeac_core/input/sketch/entities/style/color.dart';
-import 'package:parabeac_core/input/sketch/entities/style/style.dart';
-import 'package:parabeac_core/interpret_and_optimize/entities/inherited_scaffold.dart';
-import 'package:parabeac_core/interpret_and_optimize/entities/subclasses/pb_intermediate_node.dart';
-import 'package:parabeac_core/interpret_and_optimize/helpers/pb_context.dart';
-import 'package:pbdl/design_logic/pbdl_node.dart';
+import 'package:pbdl/pbdl/color.dart';
+import 'package:pbdl/pbdl/pbdl_flow.dart';
+import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'abstract_design_node_factory.dart';
+import 'group_node.dart';
 
-class PBArtboard extends DesignNode implements GroupNode, PBDLNodeFactory {
+class PBArtboard extends PBDLNode implements GroupNode, PBDLNodeFactory {
   PBColor backgroundColor;
   @override
   var boundaryRectangle;
   var isFlowHome;
 
-  @override
   var style;
   PBArtboard(
-      {Color this.backgroundColor,
+      {this.backgroundColor,
       this.isFlowHome,
       hasClickThrough,
       groupLayout,
       UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
-      Flow flow,
+      PBDLFrame this.boundaryRectangle,
+      PBDLFlow flow,
       isFixedToViewport,
       isFlippedHorizontal,
       isFlippedVertical,
@@ -63,63 +53,64 @@ class PBArtboard extends DesignNode implements GroupNode, PBDLNodeFactory {
   String pbdfType = 'artboard';
 
   @override
-  DesignNode createDesignNode(Map<String, dynamic> json) => fromPBDF(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
 
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    var node = PBArtboard(
-      backgroundColor: json['backgroundColor'] == null
-          ? null
-          : Color.fromJson(json['backgroundColor'] as Map<String, dynamic>),
-      isFlowHome: json['isFlowHome'] as bool,
-      hasClickThrough: json['hasClickThrough'],
-      groupLayout: json['groupLayout'],
-      UUID: json['id'] as String,
-      booleanOperation: json['booleanOperation'],
-      exportOptions: json['exportOptions'],
-      boundaryRectangle: json['absoluteBoundingBox'] == null
-          ? null
-          : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-      flow: json['flow'] == null
-          ? null
-          : Flow.fromJson(json['flow'] as Map<String, dynamic>),
-      isFixedToViewport: json['isFixedToViewport'],
-      isFlippedHorizontal: json['isFlippedHorizontal'],
-      isFlippedVertical: json['isFlippedVertical'],
-      isLocked: json['isLocked'],
-      isVisible: json['visible'],
-      layerListExpandedType: json['layerListExpandedType'],
-      name: json['name'],
-      nameIsFixed: json['nameIsFixed'],
-      resizingConstraint: json['resizingConstraint'],
-      resizingType: json['resizingType'],
-      rotation: json['rotation'],
-      sharedStyleID: json['sharedStyleID'],
-      shouldBreakMaskChain: json['shouldBreakMaskChain'],
-      hasClippingMask: json['hasClippingMask'],
-      clippingMaskMode: json['clippingMaskMode'],
-      userInfo: json['userInfo'],
-      maintainScrollPosition: json['maintainScrollPosition'],
-      style: json['style'] == null
-          ? null
-          : PBStyle.fromPBDF(json['style'] as Map<String, dynamic>),
-    )
-      ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-      ..type = json['type'] as String;
-    if (json.containsKey('children')) {
-      if (json['children'] != null) {
-        for (var item in json['children']) {
-          var child = DesignNode.fromPBDF(item as Map<String, dynamic>);
-          if (child != null) {
-            node.children.add(child);
-          }
-        }
-      }
-    }
-    return node;
-  }
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   var node = PBArtboard(
+  //     backgroundColor: json['backgroundColor'] == null
+  //         ? null
+  //         : Color.fromJson(json['backgroundColor'] as Map<String, dynamic>),
+  //     isFlowHome: json['isFlowHome'] as bool,
+  //     hasClickThrough: json['hasClickThrough'],
+  //     groupLayout: json['groupLayout'],
+  //     UUID: json['id'] as String,
+  //     booleanOperation: json['booleanOperation'],
+  //     exportOptions: json['exportOptions'],
+  //     boundaryRectangle: json['absoluteBoundingBox'] == null
+  //         ? null
+  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
+  //     flow: json['flow'] == null
+  //         ? null
+  //         : Flow.fromJson(json['flow'] as Map<String, dynamic>),
+  //     isFixedToViewport: json['isFixedToViewport'],
+  //     isFlippedHorizontal: json['isFlippedHorizontal'],
+  //     isFlippedVertical: json['isFlippedVertical'],
+  //     isLocked: json['isLocked'],
+  //     isVisible: json['visible'],
+  //     layerListExpandedType: json['layerListExpandedType'],
+  //     name: json['name'],
+  //     nameIsFixed: json['nameIsFixed'],
+  //     resizingConstraint: json['resizingConstraint'],
+  //     resizingType: json['resizingType'],
+  //     rotation: json['rotation'],
+  //     sharedStyleID: json['sharedStyleID'],
+  //     shouldBreakMaskChain: json['shouldBreakMaskChain'],
+  //     hasClippingMask: json['hasClippingMask'],
+  //     clippingMaskMode: json['clippingMaskMode'],
+  //     userInfo: json['userInfo'],
+  //     maintainScrollPosition: json['maintainScrollPosition'],
+  //     style: json['style'] == null
+  //         ? null
+  //         : PBStyle.fromPBDF(json['style'] as Map<String, dynamic>),
+  //   )
+  //     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
+  //     ..type = json['type'] as String;
+  //   if (json.containsKey('children')) {
+  //     if (json['children'] != null) {
+  //       for (var item in json['children']) {
+  //         var child = DesignNode.fromPBDF(item as Map<String, dynamic>);
+  //         if (child != null) {
+  //           node.children.add(child);
+  //         }
+  //       }
+  //     }
+  //   }
+  //   return node;
+  // }
 
   @override
-  Future<PBDLNode> interpretNode() { /*
+  Future<PBDLNode> interpretNode() {
+    /*
     return Future.value(InheritedScaffold(
       this,
       currentContext: currentContext,
@@ -127,4 +118,5 @@ class PBArtboard extends DesignNode implements GroupNode, PBDLNodeFactory {
       isHomeScreen: isFlowHome,
     ));
   } */
+  }
 }

@@ -1,10 +1,9 @@
-//Nothing to import
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/rect.dart';
 
-import 'package:pbdl/design_logic/rect.dart';
+part 'pbdl_frame.g.dart';
 
-part 'frame.g.dart';
-
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class PBDLFrame implements Rect {
   @JsonKey(name: '_class')
   final String classField;
@@ -19,6 +18,7 @@ class PBDLFrame implements Rect {
     this.width,
     this.height,
   });
-  factory PBDLFrame.fromJson(Map<String, dynamic> json) => _$FrameFromJson(json);
-  Map<String, dynamic> toJson() => _$FrameToJson(this);
+  factory PBDLFrame.fromJson(Map<String, dynamic> json) =>
+      _$PBDLFrameFromJson(json);
+  Map<String, dynamic> toJson() => _$PBDLFrameToJson(this);
 }

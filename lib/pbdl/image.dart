@@ -1,16 +1,4 @@
-import 'dart:io';
-
-import 'package:parabeac_core/controllers/main_info.dart';
-import 'package:parabeac_core/design_logic/design_element.dart';
-import 'package:parabeac_core/design_logic/design_node.dart';
-import 'package:parabeac_core/design_logic/pb_style.dart';
-import 'package:parabeac_core/input/helper/azure_asset_service.dart';
-import 'package:parabeac_core/input/sketch/entities/objects/frame.dart';
-import 'package:parabeac_core/interpret_and_optimize/entities/inherited_bitmap.dart';
-import 'package:parabeac_core/interpret_and_optimize/entities/subclasses/pb_intermediate_node.dart';
-import 'package:parabeac_core/interpret_and_optimize/helpers/pb_context.dart';
-import 'package:pbdl/design_logic/pbdl_frame.dart';
-import 'package:pbdl/design_logic/pbdl_node.dart';
+import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'abstract_design_node_factory.dart';
@@ -59,41 +47,41 @@ class PBDLImage extends DesignElement implements PBDLNodeFactory, PBDLNode {
   String pbdfType = 'image';
 
   @override
-  PBDLNode createDesignNode(Map<String, dynamic> json) => fromPBDF(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
 
-  PBDLNode fromPBDF(Map<String, dynamic> json) {
-    return PBDLImage(
-      UUID: json['id'] as String,
-      booleanOperation: json['booleanOperation'],
-      exportOptions: json['exportOptions'],
-      boundaryRectangle: json['absoluteBoundingBox'] == null
-          ? null
-          : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-      isFixedToViewport: json['isFixedToViewport'],
-      isFlippedHorizontal: json['isFlippedHorizontal'],
-      isFlippedVertical: json['isFlippedVertical'],
-      isLocked: json['isLocked'],
-      isVisible: json['visible'],
-      layerListExpandedType: json['layerListExpandedType'],
-      name: json['name'],
-      nameIsFixed: json['nameIsFixed'],
-      resizingConstraint: json['resizingConstraint'],
-      resizingType: json['resizingType'],
-      rotation: json['rotation'] as num,
-      sharedStyleID: json['sharedStyleID'],
-      shouldBreakMaskChain: json['shouldBreakMaskChain'],
-      hasClippingMask: json['hasClippingMask'],
-      clippingMaskMode: json['clippingMaskMode'],
-      userInfo: json['userInfo'],
-      maintainScrollPosition: json['maintainScrollPosition'],
-      pbdfType: json['pbdfType'],
-      style: json['style'] == null
-          ? null
-          : PBStyle.fromPBDF(json['style'] as Map<String, dynamic>),
-    )
-      ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-      ..type = json['type'] as String;
-  }
+  // PBDLNode fromPBDF(Map<String, dynamic> json) {
+  //   return PBDLImage(
+  //     UUID: json['id'] as String,
+  //     booleanOperation: json['booleanOperation'],
+  //     exportOptions: json['exportOptions'],
+  //     boundaryRectangle: json['absoluteBoundingBox'] == null
+  //         ? null
+  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
+  //     isFixedToViewport: json['isFixedToViewport'],
+  //     isFlippedHorizontal: json['isFlippedHorizontal'],
+  //     isFlippedVertical: json['isFlippedVertical'],
+  //     isLocked: json['isLocked'],
+  //     isVisible: json['visible'],
+  //     layerListExpandedType: json['layerListExpandedType'],
+  //     name: json['name'],
+  //     nameIsFixed: json['nameIsFixed'],
+  //     resizingConstraint: json['resizingConstraint'],
+  //     resizingType: json['resizingType'],
+  //     rotation: json['rotation'] as num,
+  //     sharedStyleID: json['sharedStyleID'],
+  //     shouldBreakMaskChain: json['shouldBreakMaskChain'],
+  //     hasClippingMask: json['hasClippingMask'],
+  //     clippingMaskMode: json['clippingMaskMode'],
+  //     userInfo: json['userInfo'],
+  //     maintainScrollPosition: json['maintainScrollPosition'],
+  //     pbdfType: json['pbdfType'],
+  //     style: json['style'] == null
+  //         ? null
+  //         : PBStyle.fromPBDF(json['style'] as Map<String, dynamic>),
+  //   )
+  //     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
+  //     ..type = json['type'] as String;
+  // }
 
   @override
   Future<PBDLNode> interpretNode() async {
@@ -122,7 +110,7 @@ class PBDLImage extends DesignElement implements PBDLNodeFactory, PBDLNode {
         currentContext: currentContext,
       ));
     } */
-  } 
+  }
 
   @override
   String UUID;
@@ -145,12 +133,6 @@ class PBDLImage extends DesignElement implements PBDLNodeFactory, PBDLNode {
   @override
   toJson() {
     // TODO: implement toJson
-    throw UnimplementedError();
-  }
-
-  @override
-  Map<String, dynamic> toPBDF() {
-    // TODO: implement toPBDF
     throw UnimplementedError();
   }
 }

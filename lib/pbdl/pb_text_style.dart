@@ -1,7 +1,8 @@
-import 'package:parabeac_core/design_logic/color.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:parabeac_core/design_logic/pb_font_descriptor.dart';
-import 'package:parabeac_core/design_logic/pb_paragraph_style.dart';
+import 'package:pbdl/pbdl/pb_font_descriptor.dart';
+import 'package:pbdl/pbdl/pb_paragraph_style.dart';
+
+import 'color.dart';
 
 abstract class PBTextStyle {
   PBColor fontColor;

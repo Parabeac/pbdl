@@ -1,22 +1,13 @@
-import 'dart:io';
-
-import 'package:parabeac_core/controllers/main_info.dart';
-import 'package:parabeac_core/design_logic/design_node.dart';
-import 'package:parabeac_core/design_logic/pb_style.dart';
-import 'package:parabeac_core/input/helper/azure_asset_service.dart';
-import 'package:parabeac_core/input/sketch/entities/objects/frame.dart';
-import 'package:parabeac_core/interpret_and_optimize/entities/inherited_bitmap.dart';
-import 'package:parabeac_core/interpret_and_optimize/helpers/pb_context.dart';
-import 'package:parabeac_core/interpret_and_optimize/entities/subclasses/pb_intermediate_node.dart';
-import 'package:pbdl/design_logic/pbdl_node.dart';
+import 'package:pbdl/pbdl/pb_style.dart';
+import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'abstract_design_node_factory.dart';
 
-class BooleanOperation implements PBDLNodeFactory, DesignNode {
+class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'boolean_operation';
-  List<DesignNode> children = [];
+  List<PBDLNode> children = [];
 
   @override
   var boundaryRectangle;
@@ -24,7 +15,7 @@ class BooleanOperation implements PBDLNodeFactory, DesignNode {
   BooleanOperation({
     booleanOperation,
     type,
-    Frame this.boundaryRectangle,
+    PBDLFrame this.boundaryRectangle,
     String UUID,
     String this.name,
     bool isVisible,
@@ -47,28 +38,28 @@ class BooleanOperation implements PBDLNodeFactory, DesignNode {
   }
 
   @override
-  DesignNode createDesignNode(Map<String, dynamic> json) => fromPBDF(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
 
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    var node = BooleanOperation(
-      booleanOperation: json['booleanOperation'],
-      type: json['type'],
-      boundaryRectangle: json['absoluteBoundingBox'] == null
-          ? null
-          : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-      UUID: json['id'] as String,
-      name: json['name'] as String,
-      isVisible: json['visible'] as bool ?? true,
-      pbdfType: json['pbdfType'] as String,
-    );
-    if (json.containsKey('children')) {
-      if (json['children'] != null) {
-        node.children
-            .add(DesignNode.fromPBDF(json['children'] as Map<String, dynamic>));
-      }
-    }
-    return node;
-  }
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   var node = BooleanOperation(
+  //     booleanOperation: json['booleanOperation'],
+  //     type: json['type'],
+  //     boundaryRectangle: json['absoluteBoundingBox'] == null
+  //         ? null
+  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
+  //     UUID: json['id'] as String,
+  //     name: json['name'] as String,
+  //     isVisible: json['visible'] as bool ?? true,
+  //     pbdfType: json['pbdfType'] as String,
+  //   );
+  //   if (json.containsKey('children')) {
+  //     if (json['children'] != null) {
+  //       node.children
+  //           .add(DesignNode.fromPBDF(json['children'] as Map<String, dynamic>));
+  //     }
+  //   }
+  //   return node;
+  // }
 
   @override
   String UUID;
@@ -87,11 +78,6 @@ class BooleanOperation implements PBDLNodeFactory, DesignNode {
 
   @override
   toJson() {
-    throw UnimplementedError();
-  }
-
-  @override
-  Map<String, dynamic> toPBDF() {
     throw UnimplementedError();
   }
 

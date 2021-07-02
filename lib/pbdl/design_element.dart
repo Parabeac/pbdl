@@ -1,6 +1,6 @@
-import 'package:parabeac_core/design_logic/design_node.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
-abstract class DesignElement extends DesignNode {
+abstract class DesignElement extends PBDLNode {
   DesignElement({
     UUID,
     name,
