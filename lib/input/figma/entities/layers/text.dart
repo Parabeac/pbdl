@@ -5,6 +5,8 @@ import 'package:pbdl/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
+
 import 'figma_node.dart';
 
 part 'text.g.dart';
@@ -80,7 +82,8 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaTextToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     return Future.value(InheritedContainer(
       this,
       Point(boundaryRectangle.x, boundaryRectangle.y),
@@ -91,7 +94,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       isBackgroundVisible: style.backgroundColor != null,
     )..addChild(
         InheritedText(this, name, currentContext: currentContext),
-      ));
+      )); */
   }
 
   @override

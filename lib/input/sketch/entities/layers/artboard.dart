@@ -6,6 +6,7 @@ import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/color.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'artboard.g.dart';
 
@@ -136,13 +137,14 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ArtboardToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     return Future.value(InheritedScaffold(
       this,
       currentContext: currentContext,
       name: name,
       isHomeScreen: isFlowHome,
-    ));
+    )); */
   }
 
   @override

@@ -1,5 +1,8 @@
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
+
 import '../abstract_figma_node_factory.dart';
 
 part 'canvas.g.dart';
@@ -67,9 +70,10 @@ class Canvas extends FigmaNode implements FigmaNodeFactory {
   var style;
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     assert(false, 'We don\'t product pages as Intermediate Nodes.');
-    return null;
+    return null; */
   }
 
   @override

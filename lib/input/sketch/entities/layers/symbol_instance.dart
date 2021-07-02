@@ -6,6 +6,7 @@ import 'package:pbdl/input/sketch/entities/objects/override_value.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'symbol_instance.g.dart';
 
@@ -138,11 +139,12 @@ class SymbolInstance extends SketchNode
   }
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     var sym = PBSharedInstanceIntermediateNode(this, symbolID,
         sharedParamValues: _extractParameters(),
         currentContext: currentContext);
-    return Future.value(sym);
+    return Future.value(sym); */
   }
 
   @override

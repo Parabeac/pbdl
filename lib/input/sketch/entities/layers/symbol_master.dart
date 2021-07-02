@@ -8,6 +8,7 @@ import 'package:pbdl/input/sketch/entities/style/color.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'symbol_master.g.dart';
 
@@ -177,7 +178,8 @@ class SymbolMaster extends AbstractGroupLayer
   }
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     var sym_master = PBSharedMasterNode(
       this,
       symbolID,
@@ -188,7 +190,7 @@ class SymbolMaster extends AbstractGroupLayer
       overridableProperties: _extractParameters(),
       currentContext: currentContext,
     );
-    return Future.value(sym_master);
+    return Future.value(sym_master); */
   }
 
   @override

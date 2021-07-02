@@ -2,6 +2,8 @@ import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
+
 part 'slice.g.dart';
 
 @JsonSerializable()
@@ -60,14 +62,15 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaSliceToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     return Future.value(InheritedContainer(
         this,
         Point(boundaryRectangle.x, boundaryRectangle.y),
         Point(boundaryRectangle.x + boundaryRectangle.width,
             boundaryRectangle.y + boundaryRectangle.height),
         name,
-        currentContext: currentContext));
+        currentContext: currentContext)); */
   }
 
   @override

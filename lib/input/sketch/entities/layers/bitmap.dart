@@ -4,10 +4,11 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'bitmap.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 
 // title: Bitmap Layer
 // description: Bitmap layers house a single image
@@ -93,8 +94,8 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$BitmapToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
-    var intermediateNode;
+  Future<PBDLNode> interpretNode() {
+    /*  var intermediateNode;
     intermediateNode = PBDenyListHelper().returnDenyListNodeIfExist(this);
     if (intermediateNode != null) {
       return intermediateNode;
@@ -105,6 +106,7 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
     }
     return Future.value(
         InheritedBitmap(this, name, currentContext: currentContext));
+         */
   }
 
   @JsonKey(name: 'image')

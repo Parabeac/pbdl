@@ -1,12 +1,12 @@
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
-import 'package:pbdl/input/figma/entities/style/figma_border.dart';
-import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/input/helper/pb_color.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
+
 import 'figma_node.dart';
 
 part 'rectangle.g.dart';
@@ -85,7 +85,8 @@ class FigmaRectangle extends FigmaVector
   Map<String, dynamic> toJson() => _$FigmaRectangleToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     var fillsMap =
         (fillsList == null || fillsList.isEmpty) ? {} : fillsList.first;
     if (fillsMap != null && fillsMap['type'] == 'IMAGE') {
@@ -117,7 +118,7 @@ class FigmaRectangle extends FigmaVector
             ? toHex(style.borders[0].color)
             : null
       },
-    ));
+    )); */
   }
 
   @override

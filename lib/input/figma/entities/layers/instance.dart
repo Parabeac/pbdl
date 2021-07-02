@@ -4,6 +4,8 @@ import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/input/sketch/entities/objects/override_value.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
+
 part 'instance.g.dart';
 
 @JsonSerializable()
@@ -84,7 +86,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$InstanceToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
     /// TODO: Check if `sharedParamValues` exits and pass to it, default to emptu for now
     var sym = PBSharedInstanceIntermediateNode(
       this,

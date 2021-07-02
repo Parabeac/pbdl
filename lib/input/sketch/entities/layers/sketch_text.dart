@@ -4,6 +4,7 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'sketch_text.g.dart';
 
@@ -120,17 +121,18 @@ class SketchText extends SketchNode implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$SketchTextToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) =>
-      Future.value(InjectedContainer(
-        Point(boundaryRectangle.x + boundaryRectangle.width,
-            boundaryRectangle.y + boundaryRectangle.height),
-        Point(boundaryRectangle.x, boundaryRectangle.y),
-        name,
-        Uuid().v4(),
-        currentContext: currentContext,
-      )..addChild(
-          InheritedText(this, name, currentContext: currentContext),
-        ));
+  Future<PBDLNode> interpretNode() {
+    // Future.value(InjectedContainer(
+    //   Point(boundaryRectangle.x + boundaryRectangle.width,
+    //       boundaryRectangle.y + boundaryRectangle.height),
+    //   Point(boundaryRectangle.x, boundaryRectangle.y),
+    //   name,
+    //   Uuid().v4(),
+    //   currentContext: currentContext,
+    // )..addChild(
+    //     InheritedText(this, name, currentContext: currentContext),
+    //   ));
+  }
 
   @override
   @JsonKey(ignore: true)

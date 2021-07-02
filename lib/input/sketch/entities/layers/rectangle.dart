@@ -4,9 +4,9 @@ import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_shape_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-import 'package:pbdl/input/sketch/entities/style/border.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'rectangle.g.dart';
 
@@ -119,7 +119,8 @@ class Rectangle extends AbstractShapeLayer
   Map<String, dynamic> toJson() => _$RectangleToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     Border border;
     for (var b in style.borders.reversed) {
       if (b.isEnabled) {
@@ -139,7 +140,7 @@ class Rectangle extends AbstractShapeLayer
         'borderColorHex': border != null ? toHex(border.color) : null,
         'borderThickness': border != null ? border.thickness : null
       },
-    ));
+    )); */
   }
 
   @override

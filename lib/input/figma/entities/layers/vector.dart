@@ -2,10 +2,10 @@ import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/style/figma_style.dart';
-import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:quick_log/quick_log.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'vector.g.dart';
 
@@ -83,11 +83,12 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaVectorToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) async {
+  Future<PBDLNode> interpretNode() async {
+    /*
     imageReference = FigmaAssetProcessor().processImage(UUID);
 
     return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext));
+        InheritedBitmap(this, name, currentContext: currentContext)); */
   }
 
   String imageReference;
