@@ -6,7 +6,7 @@ part 'document.g.dart';
 
 // title: Document
 // description: The document entry in a Sketch file.
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Document extends AbstractDocument {
   List pages;
 

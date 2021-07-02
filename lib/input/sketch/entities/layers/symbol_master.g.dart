@@ -68,11 +68,7 @@ SymbolMaster _$SymbolMasterFromJson(Map<String, dynamic> json) {
   )
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..CLASS_NAME = json['CLASS_NAME'] as String
-    ..overrideValues = (json['overrideValues'] as List)
-        ?.map((e) => e == null
-            ? null
-            : OverridableValue.fromJson(e as Map<String, dynamic>))
-        ?.toList()
+    ..overrideValues = json['overrideValues']
     ..type = json['_class'] as String
     ..parameters = json['parameters'] as List;
 }

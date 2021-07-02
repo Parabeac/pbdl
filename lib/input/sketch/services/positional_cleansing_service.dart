@@ -6,7 +6,7 @@ import 'package:pbdl/pbdl/pbdl_node.dart';
 import '../entities/layers/symbol_master.dart';
 
 ///Class for cleansing the positional data of the [DesignNode]
-///TODO(Eddie): Abstract it, not only for Sketch node but potentially more design files.
+/// TODO: (Eddie): Abstract it, not only for Sketch node but potentially more design files.
 class PositionalCleansingService {
   ///Eliminating the offset of the nodes. NOTE: the only nodes that have an offset are [Artboard] and [Group]
   PBDLNode eliminateOffset(PBDLNode rootNode) {

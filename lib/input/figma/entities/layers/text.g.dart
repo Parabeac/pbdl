@@ -19,7 +19,8 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
     constraints: json['constraints'],
     boundaryRectangle: json['absoluteBoundingBox'] == null
         ? null
-        : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
+        : FigmaFrame.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>),
     size: json['size'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],

@@ -27,7 +27,7 @@ class Style {
   final ColorControls colorControls;
   final ContextSettings contextSettings;
   List<Fill> fills, innerShadows, shadows;
-  @JsonKey(nullable: true)
+  @JsonKey()
   TextStyle textStyle;
 
   Style({

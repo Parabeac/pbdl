@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'blur.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Blur {
   @JsonKey(name: '_class')
   final String classField;

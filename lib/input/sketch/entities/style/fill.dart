@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'fill.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Fill {
   @JsonKey(name: '_class')
   final String classField;

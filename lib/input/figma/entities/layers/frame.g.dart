@@ -38,7 +38,7 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
     prototypeNodeUUID: json['transitionNodeID'] as String,
   )
-    ..isFlowHome = json['isFlowHome'] ?? false
+    ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
     ..pbdfType = json['pbdfType'] as String;

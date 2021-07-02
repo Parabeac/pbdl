@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 
-@JsonSerializable()
+@JsonSerializable(nullable: true)
 // title: Abstract Layer
 // description: Abstract base schema for all layers
 // type: object
