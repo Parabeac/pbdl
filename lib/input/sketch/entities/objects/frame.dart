@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:pbdl/design_logic/rect.dart';
-
 part 'frame.g.dart';
 
 @JsonSerializable()

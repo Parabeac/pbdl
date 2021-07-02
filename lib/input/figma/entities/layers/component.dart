@@ -83,26 +83,26 @@ class Component extends FigmaFrame
   @override
   Map<String, dynamic> toJson() => _$ComponentToJson(this);
 
-  List<PBSharedParameterProp> _extractParameters() {
-    Set<String> ovrNames = {};
-    List<PBSharedParameterProp> sharedParameters = [];
-    overrideProperties ??= [];
-    for (var prop in overrideProperties) {
-      if (!ovrNames.contains(prop.overrideName)) {
-        var properties = extractParameter(prop.overrideName);
-        sharedParameters.add(PBSharedParameterProp(
-            name,
-            properties['type'],
-            null,
-            prop.canOverride,
-            prop.overrideName,
-            properties['uuid'],
-            properties['default_value']));
-        ovrNames.add(prop.overrideName);
-      }
-    }
-    return sharedParameters;
-  }
+  // List<PBSharedParameterProp> _extractParameters() {
+  //   Set<String> ovrNames = {};
+  //   List<PBSharedParameterProp> sharedParameters = [];
+  //   overrideProperties ??= [];
+  //   for (var prop in overrideProperties) {
+  //     if (!ovrNames.contains(prop.overrideName)) {
+  //       var properties = extractParameter(prop.overrideName);
+  //       sharedParameters.add(PBSharedParameterProp(
+  //           name,
+  //           properties['type'],
+  //           null,
+  //           prop.canOverride,
+  //           prop.overrideName,
+  //           properties['uuid'],
+  //           properties['default_value']));
+  //       ovrNames.add(prop.overrideName);
+  //     }
+  //   }
+  //   return sharedParameters;
+  // }
 
   @override
   Future<PBDLNode> interpretNode() {
@@ -132,17 +132,17 @@ class Component extends FigmaFrame
   @override
   String pbdfType = 'symbol_master';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 
   @override
   var isFlowHome;

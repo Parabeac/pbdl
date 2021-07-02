@@ -88,13 +88,13 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   Future<PBDLNode> interpretNode() {
     /// TODO: Check if `sharedParamValues` exits and pass to it, default to emptu for now
-    var sym = PBSharedInstanceIntermediateNode(
-      this,
-      componentId,
-      sharedParamValues: [],
-      currentContext: currentContext,
-    );
-    return Future.value(sym);
+    // var sym = PBSharedInstanceIntermediateNode(
+    //   this,
+    //   componentId,
+    //   sharedParamValues: [],
+    //   currentContext: currentContext,
+    // );
+    // return Future.value(sym);
   }
 
   @override

@@ -120,23 +120,23 @@ class SymbolInstance extends SketchNode
   Map<String, dynamic> toJson() => _$SymbolInstanceToJson(this);
 
   ///Converting the [OverridableValue] into [PBSharedParameterValue] to be processed in intermediate phase.
-  List<PBSharedParameterValue> _extractParameters() {
-    Set<String> ovrNames = {};
-    List<PBSharedParameterValue> sharedParameters = [];
-    for (var overrideValue in overrideValues) {
-      if (!ovrNames.contains(overrideValue.overrideName)) {
-        var properties = extractParameter(overrideValue.overrideName);
-        sharedParameters.add(PBSharedParameterValue(
-            properties['type'],
-            overrideValue.value,
-            properties['uuid'],
-            overrideValue.overrideName));
-        ovrNames.add(overrideValue.overrideName);
-      }
-    }
+  // List<PBSharedParameterValue> _extractParameters() {
+  //   Set<String> ovrNames = {};
+  //   List<PBSharedParameterValue> sharedParameters = [];
+  //   for (var overrideValue in overrideValues) {
+  //     if (!ovrNames.contains(overrideValue.overrideName)) {
+  //       var properties = extractParameter(overrideValue.overrideName);
+  //       sharedParameters.add(PBSharedParameterValue(
+  //           properties['type'],
+  //           overrideValue.value,
+  //           properties['uuid'],
+  //           overrideValue.overrideName));
+  //       ovrNames.add(overrideValue.overrideName);
+  //     }
+  //   }
 
-    return sharedParameters;
-  }
+  //   return sharedParameters;
+  // }
 
   @override
   Future<PBDLNode> interpretNode() {
@@ -191,15 +191,15 @@ class SymbolInstance extends SketchNode
   @JsonKey(ignore: true)
   String pbdfType = 'symbol_instance';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }

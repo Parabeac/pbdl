@@ -82,15 +82,15 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String pbdfType = 'image';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }

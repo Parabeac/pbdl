@@ -141,7 +141,7 @@ class SymbolMaster extends AbstractGroupLayer
             maintainScrollPosition) {
     if (name != null) {
       this.name = name?.replaceAll(RegExp(r'[\s_\+]'), '');
-      this.name = PBInputFormatter.removeFirstDigits(name);
+      // this.name = PBInputFormatter.removeFirstDigits(name);
     }
   }
 
@@ -157,25 +157,25 @@ class SymbolMaster extends AbstractGroupLayer
   Map<String, dynamic> toJson() => _$SymbolMasterToJson(this);
 
   ///Converting the [OverridableProperty] into [PBSharedParameterProp] to be processed in intermediate phase.
-  List<PBSharedParameterProp> _extractParameters() {
-    Set<String> ovrNames = {};
-    List<PBSharedParameterProp> sharedParameters = [];
-    for (var prop in overrideProperties) {
-      if (!ovrNames.contains(prop.overrideName)) {
-        var properties = AddMasterSymbolName(prop.overrideName, children);
-        sharedParameters.add(PBSharedParameterProp(
-            properties['name'],
-            properties['type'],
-            null,
-            prop.canOverride,
-            prop.overrideName,
-            properties['uuid'],
-            properties['default_value']));
-        ovrNames.add(prop.overrideName);
-      }
-    }
-    return sharedParameters;
-  }
+  // List<PBSharedParameterProp> _extractParameters() {
+  //   Set<String> ovrNames = {};
+  //   List<PBSharedParameterProp> sharedParameters = [];
+  //   for (var prop in overrideProperties) {
+  //     if (!ovrNames.contains(prop.overrideName)) {
+  //       var properties = AddMasterSymbolName(prop.overrideName, children);
+  //       sharedParameters.add(PBSharedParameterProp(
+  //           properties['name'],
+  //           properties['type'],
+  //           null,
+  //           prop.canOverride,
+  //           prop.overrideName,
+  //           properties['uuid'],
+  //           properties['default_value']));
+  //       ovrNames.add(prop.overrideName);
+  //     }
+  //   }
+  //   return sharedParameters;
+  // }
 
   @override
   Future<PBDLNode> interpretNode() {
@@ -246,15 +246,15 @@ class SymbolMaster extends AbstractGroupLayer
   @JsonKey(ignore: true)
   String pbdfType = 'symbol_master';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }
