@@ -1,13 +1,12 @@
-
-
 import 'package:pbdl/input/sketch/entities/documents/abstract_document.dart';
 import 'package:pbdl/input/sketch/entities/objects/foreign_symbol.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'document.g.dart';
 
 // title: Document
 // description: The document entry in a Sketch file.
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Document extends AbstractDocument {
   List pages;
 

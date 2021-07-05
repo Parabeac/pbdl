@@ -1,33 +1,30 @@
-//no packages to import
-
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
 
 @JsonSerializable(nullable: true)
-abstract class FigmaNode implements DesignNode {
-  @JsonKey(name: 'id')
-  @override
+abstract class FigmaNode {
+  @JsonKey(
+    name: 'id',
+  )
   String UUID;
 
-  @override
   String name;
 
-  @override
   String type;
 
   var pluginData;
 
   var sharedPluginData;
 
-  @override
   @JsonKey(name: 'visible', defaultValue: true)
   bool isVisible;
 
-  @override
   @JsonKey(name: 'transitionNodeID')
   String prototypeNodeUUID;
-  @JsonKey(nullable: true)
+  @JsonKey()
   num transitionDuration;
-  @JsonKey(nullable: true)
+  @JsonKey()
   String transitionEasing;
 
   FigmaNode(
@@ -46,5 +43,5 @@ abstract class FigmaNode implements DesignNode {
   factory FigmaNode.fromJson(Map<String, dynamic> json) =>
       AbstractFigmaNodeFactory.getFigmaNode(json);
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext);
+  Future<PBDLNode> interpretNode();
 }

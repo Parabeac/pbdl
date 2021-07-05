@@ -1,8 +1,8 @@
-//deleted import error -- nothing new to import
+import 'package:json_annotation/json_annotation.dart';
 
 part 'flow.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Flow {
   @JsonKey(name: '_class')
   final String classField;

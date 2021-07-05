@@ -1,18 +1,17 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
-import 'package:pbdl/input/sketch/helper/sketch_asset_processor.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'shape_group.g.dart';
 
 // title: Shape Group Layer
 // description: Shape groups layers group together multiple shape layers
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'shapeGroup';
@@ -116,12 +115,13 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ShapeGroupToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) async {
+  Future<PBDLNode> interpretNode() async {
+    /*
     var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
 
     return InheritedShapeGroup(this, name,
-        currentContext: currentContext, image: image);
+        currentContext: currentContext, image: image); */
   }
 
   @override
@@ -163,15 +163,15 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
   @JsonKey(ignore: true)
   String pbdfType = 'image';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }

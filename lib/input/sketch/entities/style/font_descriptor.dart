@@ -1,15 +1,13 @@
-//no proposed solution
+import 'package:json_annotation/json_annotation.dart';
+
 part 'font_descriptor.g.dart';
 
-@JsonSerializable(nullable: true)
-class FontDescriptor implements PBFontDescriptor {
-  @override
+@JsonSerializable()
+class FontDescriptor {
   @JsonKey(name: 'attributes')
   Map<String, dynamic> rawAttributes;
-  @override
   @JsonKey(ignore: true)
   String fontName;
-  @override
   @JsonKey(ignore: true)
   num fontSize;
   @JsonKey(ignore: true)

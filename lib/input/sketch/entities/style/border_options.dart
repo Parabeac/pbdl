@@ -1,8 +1,9 @@
-//nothing to import
+import 'package:json_annotation/json_annotation.dart';
+
 part 'border_options.g.dart';
 
-@JsonSerializable(nullable: true)
-class BorderOptions implements PBBorderOptions {
+@JsonSerializable()
+class BorderOptions {
   @JsonKey(name: '_class')
   String classField;
   @override

@@ -1,6 +1,5 @@
-
-
 import 'package:pbdl/input/helper/design_page.dart';
+import 'package:quick_log/quick_log.dart';
 
 class SketchPage extends DesignPage {
   @override

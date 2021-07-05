@@ -1,19 +1,16 @@
-
-
+import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
-
 
 part 'figma_border.g.dart';
 
 @JsonSerializable()
-class FigmaBorder implements PBBorder {
-  @override
+class FigmaBorder {
   final bool isEnabled;
-  @override
+
   final double fillType;
-  @override
+
   final FigmaColor color;
-  @override
+
   final double thickness;
 
   FigmaBorder({

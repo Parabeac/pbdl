@@ -1,23 +1,22 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/layers/text.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
-import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart'; //sketch?
-//no proposed solution for class Group
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/input/sketch/entities/objects/frame.dart';
+import 'package:quick_log/quick_log.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'group.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 
 /// Class that represents a Figma Group.
 /// The reason this class implements Image is because Groups can hold multiple vectors
 /// which we need to convert into images.
-class Group extends FigmaFrame implements AbstractFigmaNodeFactory, Image {
+class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   @JsonKey(ignore: true)
   Logger log;
   @override
@@ -91,7 +90,8 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory, Image {
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) async {
+  Future<PBDLNode> interpretNode() async {
+    /*
     if (areAllVectors()) {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
@@ -112,7 +112,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory, Image {
     return Future.value(TempGroupLayoutNode(this, currentContext, name,
         topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
         bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
-            boundaryRectangle.y + boundaryRectangle.height)));
+            boundaryRectangle.y + boundaryRectangle.height))); */
   }
 
   bool areAllVectors() {
@@ -152,7 +152,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory, Image {
   }
 
   String childrenHavePrototypeNode() {
-    for (DesignNode child in children) {
+    for (PBDLNode child in children) {
       if (child.prototypeNodeUUID != null) {
         return child.prototypeNodeUUID;
       }

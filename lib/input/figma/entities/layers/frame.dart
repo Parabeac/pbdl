@@ -1,28 +1,24 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
 import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
-import 'package:pbdl/input/figma/entities/layers/group.dart';
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/input/figma/helper/style_extractor.dart';
+import 'package:pbdl/input/helper/pb_color.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'frame.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class FigmaFrame extends FigmaNode
     with PBColorMixin
-    implements FigmaNodeFactory, GroupNode, PBArtboard, Image {
-  @override
+    implements FigmaNodeFactory {
   @JsonKey(name: 'absoluteBoundingBox')
   var boundaryRectangle;
 
-  @override
   @JsonKey(ignore: true)
   var style;
 
-  @override
   List children;
 
   @JsonKey(ignore: true)
@@ -48,7 +44,6 @@ class FigmaFrame extends FigmaNode
 
   double itemSpacing;
 
-  @override
   PBColor backgroundColor;
 
   @override
@@ -57,8 +52,7 @@ class FigmaFrame extends FigmaNode
   @JsonKey(ignore: true)
   bool isScaffold = false;
 
-  @override
-  @JsonKey(nullable: true, defaultValue: false)
+  @JsonKey(defaultValue: false)
   var isFlowHome = false;
 
   FigmaFrame({
@@ -119,7 +113,8 @@ class FigmaFrame extends FigmaNode
   Map<String, dynamic> toJson() => _$FigmaFrameToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     /// TODO: change `isHomeScreen` to its actual value
     if (isScaffold) {
       return Future.value(InheritedScaffold(
@@ -156,8 +151,8 @@ class FigmaFrame extends FigmaNode
         transitionEasing: transitionEasing,
       );
 
-      return Future.value(tempGroup.interpretNode(currentContext));
-    }
+      return Future.value(tempGroup.interpretNode(currentContext)); */
+    // }
   }
 
   @override
@@ -169,18 +164,16 @@ class FigmaFrame extends FigmaNode
   @override
   String pbdfType = 'group';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
-}
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 
-class PBColorMixin {
 }

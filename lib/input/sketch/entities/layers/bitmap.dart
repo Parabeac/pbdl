@@ -1,18 +1,18 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'bitmap.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 
 // title: Bitmap Layer
 // description: Bitmap layers house a single image
-class Bitmap extends SketchNode implements SketchNodeFactory, Image {
+class Bitmap extends SketchNode implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'bitmap';
   final bool fillReplacesImage;
@@ -94,8 +94,8 @@ class Bitmap extends SketchNode implements SketchNodeFactory, Image {
   Map<String, dynamic> toJson() => _$BitmapToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
-    var intermediateNode;
+  Future<PBDLNode> interpretNode() {
+    /*  var intermediateNode;
     intermediateNode = PBDenyListHelper().returnDenyListNodeIfExist(this);
     if (intermediateNode != null) {
       return intermediateNode;
@@ -106,6 +106,7 @@ class Bitmap extends SketchNode implements SketchNodeFactory, Image {
     }
     return Future.value(
         InheritedBitmap(this, name, currentContext: currentContext));
+         */
   }
 
   @JsonKey(name: 'image')
@@ -174,15 +175,15 @@ class Bitmap extends SketchNode implements SketchNodeFactory, Image {
   @JsonKey(ignore: true)
   String pbdfType = 'image';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }

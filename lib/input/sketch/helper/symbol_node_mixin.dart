@@ -1,9 +1,8 @@
 import 'dart:core';
-
+import 'package:recase/recase.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/entities/style/text_style.dart';
-
 
 // both need to be global because a symbol instance could have multiple master symbols with name conflicts
 Map<String, String> SN_UUIDtoVarName = {};

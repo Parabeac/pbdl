@@ -1,5 +1,3 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
@@ -7,16 +5,17 @@ import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/objects/override_value.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
-//no proposed solution for class SymbolInstance
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'symbol_instance.g.dart';
 
 // title: Symbol Instance Layer
 // description: Symbol instance layers represent an instance of a symbol master
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class SymbolInstance extends SketchNode
     with SymbolNodeMixin
-    implements SketchNodeFactory, PBSharedInstanceDesignNode {
+    implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolInstance';
   final List<OverridableValue> overrideValues;
@@ -121,30 +120,31 @@ class SymbolInstance extends SketchNode
   Map<String, dynamic> toJson() => _$SymbolInstanceToJson(this);
 
   ///Converting the [OverridableValue] into [PBSharedParameterValue] to be processed in intermediate phase.
-  List<PBSharedParameterValue> _extractParameters() {
-    Set<String> ovrNames = {};
-    List<PBSharedParameterValue> sharedParameters = [];
-    for (var overrideValue in overrideValues) {
-      if (!ovrNames.contains(overrideValue.overrideName)) {
-        var properties = extractParameter(overrideValue.overrideName);
-        sharedParameters.add(PBSharedParameterValue(
-            properties['type'],
-            overrideValue.value,
-            properties['uuid'],
-            overrideValue.overrideName));
-        ovrNames.add(overrideValue.overrideName);
-      }
-    }
+  // List<PBSharedParameterValue> _extractParameters() {
+  //   Set<String> ovrNames = {};
+  //   List<PBSharedParameterValue> sharedParameters = [];
+  //   for (var overrideValue in overrideValues) {
+  //     if (!ovrNames.contains(overrideValue.overrideName)) {
+  //       var properties = extractParameter(overrideValue.overrideName);
+  //       sharedParameters.add(PBSharedParameterValue(
+  //           properties['type'],
+  //           overrideValue.value,
+  //           properties['uuid'],
+  //           overrideValue.overrideName));
+  //       ovrNames.add(overrideValue.overrideName);
+  //     }
+  //   }
 
-    return sharedParameters;
-  }
+  //   return sharedParameters;
+  // }
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     var sym = PBSharedInstanceIntermediateNode(this, symbolID,
         sharedParamValues: _extractParameters(),
         currentContext: currentContext);
-    return Future.value(sym);
+    return Future.value(sym); */
   }
 
   @override
@@ -191,15 +191,15 @@ class SymbolInstance extends SketchNode
   @JsonKey(ignore: true)
   String pbdfType = 'symbol_instance';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }

@@ -1,18 +1,17 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
-//No proposed solution for class SketchText
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'sketch_text.g.dart';
 
 // title: Text Layer
 // description: A text layer represents a discrete block or line of text
-@JsonSerializable(nullable: true)
-class SketchText extends SketchNode implements SketchNodeFactory, Text {
+@JsonSerializable()
+class SketchText extends SketchNode implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'text';
 
@@ -122,17 +121,18 @@ class SketchText extends SketchNode implements SketchNodeFactory, Text {
   Map<String, dynamic> toJson() => _$SketchTextToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) =>
-      Future.value(InjectedContainer(
-        Point(boundaryRectangle.x + boundaryRectangle.width,
-            boundaryRectangle.y + boundaryRectangle.height),
-        Point(boundaryRectangle.x, boundaryRectangle.y),
-        name,
-        Uuid().v4(),
-        currentContext: currentContext,
-      )..addChild(
-          InheritedText(this, name, currentContext: currentContext),
-        ));
+  Future<PBDLNode> interpretNode() {
+    // Future.value(InjectedContainer(
+    //   Point(boundaryRectangle.x + boundaryRectangle.width,
+    //       boundaryRectangle.y + boundaryRectangle.height),
+    //   Point(boundaryRectangle.x, boundaryRectangle.y),
+    //   name,
+    //   Uuid().v4(),
+    //   currentContext: currentContext,
+    // )..addChild(
+    //     InheritedText(this, name, currentContext: currentContext),
+    //   ));
+  }
 
   @override
   @JsonKey(ignore: true)
@@ -179,17 +179,17 @@ class SketchText extends SketchNode implements SketchNodeFactory, Text {
   @JsonKey(ignore: true)
   String pbdfType = 'text';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 
   @override
   var attributedString;

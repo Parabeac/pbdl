@@ -8,22 +8,16 @@ part of 'boolean_operation.dart';
 
 BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
   return BooleanOperation(
-    children: (json['children'] as List)
-        ?.map((e) =>
-            e == null ? null : FigmaNode.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    children: json['children'],
     booleanOperation: json['booleanOperation'],
     type: json['type'],
-    style: json['style'] == null
-        ? null
-        : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
-    boundaryRectangle: json['absoluteBoundingBox'] == null
-        ? null
-        : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-    UUID: json['id'] as String,
-    prototypeNodeUUID: json['transitionNodeID'] as String,
-    transitionDuration: json['transitionDuration'] as num,
-    transitionEasing: json['transitionEasing'] as String,
+    style: json['style'],
+    boundaryRectangle: json['absoluteBoundingBox'],
+    UUID: json['id'],
+    prototypeNodeUUID: json['transitionNodeID'],
+    transitionDuration: json['transitionDuration'],
+    transitionEasing: json['transitionEasing'],
+    imageReference: json['imageReference'],
   )
     ..name = json['name'] as String
     ..pluginData = json['pluginData']
@@ -37,7 +31,6 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
     ..strokeAlign = json['strokeAlign'] as String
     ..styles = json['styles']
     ..fillsList = json['fills'] as List
-    ..imageReference = json['imageReference'] as String
     ..pbdfType = json['pbdfType'] as String;
 }
 

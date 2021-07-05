@@ -1,8 +1,9 @@
-//no proposed solution
+import 'package:json_annotation/json_annotation.dart';
+
 part 'paragraph_style.g.dart';
 
-@JsonSerializable(nullable: true)
-class ParagraphStyle implements PBParagraphStyle {
+@JsonSerializable()
+class ParagraphStyle {
   @override
   int alignment;
 

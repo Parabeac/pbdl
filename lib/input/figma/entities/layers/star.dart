@@ -1,15 +1,15 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
+import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
-import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'figma_node.dart';
 
 part 'star.g.dart';
 
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String type = 'STAR';
@@ -22,7 +22,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     style,
     layoutAlign,
     constraints,
-    Frame boundaryRectangle,
+    FigmaFrame boundaryRectangle,
     size,
     fills,
     strokes,
@@ -63,14 +63,15 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaStarToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) async {
+  Future<PBDLNode> interpretNode() async {
+    /*
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(InheritedBitmap(
       this,
       name,
       currentContext: currentContext,
       referenceImage: imageReference,
-    ));
+    )); */
   }
 
   @override
@@ -79,15 +80,15 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String pbdfType = 'star';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }

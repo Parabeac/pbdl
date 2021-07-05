@@ -1,19 +1,18 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
-//no proposed solution for class Page
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'page.g.dart';
 
 // title: Page Layer
 // description:
 //   Page layers are the top level organisational abstraction within a document
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Page extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'page';
@@ -119,9 +118,10 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$PageToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     assert(false, 'We don\'t product pages as Intermediate Nodes.');
-    return null;
+    return null; */
   }
 
   @override
@@ -167,15 +167,15 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
   @JsonKey(ignore: true)
   String pbdfType = 'page';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }

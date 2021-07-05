@@ -1,12 +1,13 @@
-
+import 'package:pbdl/input/helper/pb_color.dart';
 import 'package:pbdl/input/sketch/entities/style/color.dart';
 import 'package:pbdl/input/sketch/entities/style/context_settings.dart';
 import 'package:pbdl/input/sketch/entities/style/gradient.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 part 'fill.g.dart';
 
-@JsonSerializable(nullable: true)
-class Fill implements PBFill {
+@JsonSerializable()
+class Fill {
   @JsonKey(name: '_class')
   final String classField;
   @override

@@ -13,9 +13,7 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    boundaryRectangle: json['absoluteBoundingBox'] == null
-        ? null
-        : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
+    boundaryRectangle: json['absoluteBoundingBox'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],
     strokeAlign: json['strokeAlign'],
@@ -41,7 +39,7 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
   )
     ..UUID = json['id'] as String
-    ..isFlowHome = json['isFlowHome'] ?? false
+    ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
     ..pbdfType = json['pbdfType'] as String;

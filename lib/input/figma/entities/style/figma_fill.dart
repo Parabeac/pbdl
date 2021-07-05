@@ -1,17 +1,13 @@
-
-
 import 'package:pbdl/input/figma/entities/style/figma_color.dart';
-
+import 'package:json_annotation/json_annotation.dart';
 part 'figma_fill.g.dart';
 
 @JsonSerializable()
-class FigmaFill implements PBFill {
-  @override
-  PBColor color;
+class FigmaFill {
+  FigmaColor color;
 
-  FigmaFill(FigmaColor this.color, [this.isEnabled = true]);
+  FigmaFill(this.color, [this.isEnabled = true]);
 
-  @override
   bool isEnabled;
 
   Map<String, dynamic> toJson() => _$FigmaFillToJson(this);

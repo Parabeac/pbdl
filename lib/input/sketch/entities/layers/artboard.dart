@@ -1,5 +1,3 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
@@ -7,13 +5,13 @@ import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/color.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
-//no proposed solution for class Artboard
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'artboard.g.dart';
 
-@JsonSerializable(nullable: true)
-class Artboard extends AbstractGroupLayer
-    implements SketchNodeFactory, PBArtboard {
+@JsonSerializable()
+class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   @JsonKey(name: 'layers')
   List children;
@@ -139,13 +137,14 @@ class Artboard extends AbstractGroupLayer
   Map<String, dynamic> toJson() => _$ArtboardToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     return Future.value(InheritedScaffold(
       this,
       currentContext: currentContext,
       name: name,
       isHomeScreen: isFlowHome,
-    ));
+    )); */
   }
 
   @override
@@ -198,17 +197,17 @@ class Artboard extends AbstractGroupLayer
   @JsonKey(ignore: true)
   String pbdfType = 'artboard';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 
   @override
   void set isFlowHome(_isFlowHome) {

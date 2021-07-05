@@ -1,19 +1,17 @@
-
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_shape_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
-import 'package:pbdl/input/sketch/helper/sketch_asset_processor.dart';
-//no proposed solution for class Star
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'star.g.dart';
 
 // title: Star Layer
 // description: Star layers are the result of adding an star shape to the canvas
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Star extends AbstractShapeLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'star';
@@ -114,12 +112,13 @@ class Star extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$StarToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) async {
+  Future<PBDLNode> interpretNode() async {
+    /*
     var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
 
     return Future.value(InheritedStar(this, name,
-        currentContext: currentContext, image: image));
+        currentContext: currentContext, image: image)); */
   }
 
   @override

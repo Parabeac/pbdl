@@ -1,17 +1,18 @@
-
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
+import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'figma_node.dart';
 
 part 'text.g.dart';
 
-@JsonSerializable(nullable: true)
-class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
+@JsonSerializable()
+class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String type = 'TEXT';
   FigmaText(
@@ -23,7 +24,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
       FigmaStyle this.style,
       layoutAlign,
       constraints,
-      Frame boundaryRectangle,
+      FigmaFrame boundaryRectangle,
       size,
       fills,
       strokes,
@@ -58,12 +59,11 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
     pbdfType = 'text';
   }
 
-  @override
   @JsonKey(name: 'characters')
   String content;
 
   @override
-  PBStyle style;
+  FigmaStyle style;
 
   List<double> characterStyleOverrides;
 
@@ -82,7 +82,8 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
   Map<String, dynamic> toJson() => _$FigmaTextToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     return Future.value(InheritedContainer(
       this,
       Point(boundaryRectangle.x, boundaryRectangle.y),
@@ -93,7 +94,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
       isBackgroundVisible: style.backgroundColor != null,
     )..addChild(
         InheritedText(this, name, currentContext: currentContext),
-      ));
+      )); */
   }
 
   @override
@@ -102,17 +103,17 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory, Text {
   @override
   String pbdfType = 'text';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 
   @override
   var attributedString;

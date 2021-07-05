@@ -1,19 +1,15 @@
-//no need to import any packages
+import 'package:json_annotation/json_annotation.dart';
 
 part 'figma_border_options.g.dart';
 
 @JsonSerializable()
-class FigmaBorderOptions implements PBBorderOptions {
-  @override
+class FigmaBorderOptions {
   List dashPattern;
 
-  @override
   bool isEnabled;
 
-  @override
   int lineCapStyle;
 
-  @override
   int lineJoinStyle;
 
   FigmaBorderOptions(

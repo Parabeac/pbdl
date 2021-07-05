@@ -1,5 +1,5 @@
-
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
+import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
@@ -7,15 +7,17 @@ import 'package:pbdl/input/sketch/entities/objects/override_property.dart';
 import 'package:pbdl/input/sketch/entities/style/color.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'symbol_master.g.dart';
 
 // title: Symbol Master Layer
 // description: A symbol master layer represents a reusable group of layers
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class SymbolMaster extends AbstractGroupLayer
     with SymbolNodeMixin
-    implements SketchNodeFactory, PBSharedInstanceDesignNode {
+    implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolMaster';
   @override
@@ -139,7 +141,7 @@ class SymbolMaster extends AbstractGroupLayer
             maintainScrollPosition) {
     if (name != null) {
       this.name = name?.replaceAll(RegExp(r'[\s_\+]'), '');
-      this.name = PBInputFormatter.removeFirstDigits(name);
+      // this.name = PBInputFormatter.removeFirstDigits(name);
     }
   }
 
@@ -155,28 +157,29 @@ class SymbolMaster extends AbstractGroupLayer
   Map<String, dynamic> toJson() => _$SymbolMasterToJson(this);
 
   ///Converting the [OverridableProperty] into [PBSharedParameterProp] to be processed in intermediate phase.
-  List<PBSharedParameterProp> _extractParameters() {
-    Set<String> ovrNames = {};
-    List<PBSharedParameterProp> sharedParameters = [];
-    for (var prop in overrideProperties) {
-      if (!ovrNames.contains(prop.overrideName)) {
-        var properties = AddMasterSymbolName(prop.overrideName, children);
-        sharedParameters.add(PBSharedParameterProp(
-            properties['name'],
-            properties['type'],
-            null,
-            prop.canOverride,
-            prop.overrideName,
-            properties['uuid'],
-            properties['default_value']));
-        ovrNames.add(prop.overrideName);
-      }
-    }
-    return sharedParameters;
-  }
+  // List<PBSharedParameterProp> _extractParameters() {
+  //   Set<String> ovrNames = {};
+  //   List<PBSharedParameterProp> sharedParameters = [];
+  //   for (var prop in overrideProperties) {
+  //     if (!ovrNames.contains(prop.overrideName)) {
+  //       var properties = AddMasterSymbolName(prop.overrideName, children);
+  //       sharedParameters.add(PBSharedParameterProp(
+  //           properties['name'],
+  //           properties['type'],
+  //           null,
+  //           prop.canOverride,
+  //           prop.overrideName,
+  //           properties['uuid'],
+  //           properties['default_value']));
+  //       ovrNames.add(prop.overrideName);
+  //     }
+  //   }
+  //   return sharedParameters;
+  // }
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     var sym_master = PBSharedMasterNode(
       this,
       symbolID,
@@ -187,7 +190,7 @@ class SymbolMaster extends AbstractGroupLayer
       overridableProperties: _extractParameters(),
       currentContext: currentContext,
     );
-    return Future.value(sym_master);
+    return Future.value(sym_master); */
   }
 
   @override
@@ -243,15 +246,15 @@ class SymbolMaster extends AbstractGroupLayer
   @JsonKey(ignore: true)
   String pbdfType = 'symbol_master';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }

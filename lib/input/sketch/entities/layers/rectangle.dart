@@ -1,21 +1,19 @@
-
-
-import 'package:pbdl/input/figma/entities/layers/frame.dart';
+import 'package:pbdl/input/helper/pb_color.dart';
 import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
 import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
+import 'package:pbdl/input/sketch/entities/layers/abstract_shape_layer.dart';
 import 'package:pbdl/input/sketch/entities/layers/flow.dart';
 import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-import 'package:pbdl/input/sketch/entities/style/border.dart';
 import 'package:pbdl/input/sketch/entities/style/style.dart';
-// no proposed solution for AbstractShapeLayer
-// no proposed solution for class Rectangke
+import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 part 'rectangle.g.dart';
 
 // title: Rectangle Layer
 // description:
 //   Rectangle layers are the result of adding a rectangle shape to the canvas
-@JsonSerializable(nullable: true)
+@JsonSerializable()
 class Rectangle extends AbstractShapeLayer
     with PBColorMixin
     implements SketchNodeFactory {
@@ -121,7 +119,8 @@ class Rectangle extends AbstractShapeLayer
   Map<String, dynamic> toJson() => _$RectangleToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) {
+  Future<PBDLNode> interpretNode() {
+    /*
     Border border;
     for (var b in style.borders.reversed) {
       if (b.isEnabled) {
@@ -141,7 +140,7 @@ class Rectangle extends AbstractShapeLayer
         'borderColorHex': border != null ? toHex(border.color) : null,
         'borderThickness': border != null ? border.thickness : null
       },
-    ));
+    )); */
   }
 
   @override

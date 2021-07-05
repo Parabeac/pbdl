@@ -1,17 +1,20 @@
-
 import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
+import 'package:pbdl/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
+import 'package:json_annotation/json_annotation.dart';
+import 'package:quick_log/quick_log.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'figma_node.dart';
 
 part 'ellipse.g.dart';
 
-@JsonSerializable(nullable: true)
-class FigmaEllipse extends FigmaVector
-    implements AbstractFigmaNodeFactory, Image {
+@JsonSerializable()
+class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String imageReference;
+  @override
   @JsonKey(ignore: true)
   Logger log;
 
@@ -29,7 +32,7 @@ class FigmaEllipse extends FigmaVector
     style,
     layoutAlign,
     constraints,
-    Frame boundaryRectangle,
+    FigmaFrame boundaryRectangle,
     size,
     this.fills,
     strokes,
@@ -71,10 +74,11 @@ class FigmaEllipse extends FigmaVector
   Map<String, dynamic> toJson() => _$FigmaEllipseToJson(this);
 
   @override
-  Future<PBIntermediateNode> interpretNode(PBContext currentContext) async {
+  Future<PBDLNode> interpretNode() async {
+    /*
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext));
+        InheritedBitmap(this, name, currentContext: currentContext)); */
   }
 
   @override
@@ -83,15 +87,15 @@ class FigmaEllipse extends FigmaVector
   @override
   String pbdfType = 'oval';
 
-  @override
-  DesignNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode createDesignNode(Map<String, dynamic> json) {
+  //   // TODO: implement createDesignNode
+  //   throw UnimplementedError();
+  // }
 
-  @override
-  DesignNode fromPBDF(Map<String, dynamic> json) {
-    // TODO: implement fromPBDF
-    throw UnimplementedError();
-  }
+  // @override
+  // DesignNode fromPBDF(Map<String, dynamic> json) {
+  //   // TODO: implement fromPBDF
+  //   throw UnimplementedError();
+  // }
 }

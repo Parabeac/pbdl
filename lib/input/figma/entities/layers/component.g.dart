@@ -44,7 +44,7 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
     ..pbdfType = json['pbdfType'] as String
-    ..isFlowHome = json['isFlowHome'] ?? false;
+    ..isFlowHome = json['isFlowHome'] as bool ?? false;
 }
 
 Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
