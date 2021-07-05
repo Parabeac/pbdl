@@ -245,16 +245,4 @@ class SymbolMaster extends AbstractGroupLayer
   @override
   @JsonKey(ignore: true)
   String pbdfType = 'symbol_master';
-
-  // @override
-  // DesignNode createDesignNode(Map<String, dynamic> json) {
-  //   // TODO: implement createDesignNode
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   // TODO: implement fromPBDF
-  //   throw UnimplementedError();
-  // }
 }

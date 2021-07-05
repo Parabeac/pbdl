@@ -47,15 +47,8 @@ class PBDLProject implements PBDLNodeFactory {
     return result;
   }
 
-  @override
-  PBDLNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
-
   factory PBDLProject.fromPBDF(Map<String, dynamic> json) {
-    var project =
-        PBDLProject(projectName: json['projectName'], id: json['id']);
+    var project = PBDLProject(projectName: json['projectName'], id: json['id']);
     if (json.containsKey('pages')) {
       (json['pages'] as List)?.forEach((value) {
         if (value != null) {
@@ -80,7 +73,7 @@ class PBDLProject implements PBDLNodeFactory {
   /// Returns a [Map] that represents the PBDL screen with ID `screenId`
   /// inside `pbdlPage`'s screens property.
   Map getPbdlScreen(Map pbdlPage, String screenId) {
-   /* if (MainInfo().pbdf != null) {
+    /* if (MainInfo().pbdf != null) {
       List screens = pbdlPage['screens'];
       return screens.singleWhere((element) => element['id'] == screenId,
           orElse: () => null);
@@ -92,5 +85,5 @@ class PBDLProject implements PBDLNodeFactory {
   PBDLNode createPBDLNode(Map<String, dynamic> json) {
     // TODO: implement createPBDLNode
     throw UnimplementedError();
-  } 
+  }
 }

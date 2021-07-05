@@ -197,18 +197,6 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   @JsonKey(ignore: true)
   String pbdfType = 'artboard';
 
-  // @override
-  // DesignNode createDesignNode(Map<String, dynamic> json) {
-  //   // TODO: implement createDesignNode
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   // TODO: implement fromPBDF
-  //   throw UnimplementedError();
-  // }
-
   @override
   void set isFlowHome(_isFlowHome) {
     // TODO: implement isFlowHome

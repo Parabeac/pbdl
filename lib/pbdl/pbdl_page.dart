@@ -50,19 +50,12 @@ class PBDLPage implements PBDLNodeFactory {
   @override
   String pbdfType = 'design_page';
 
-  @override
-  PBDLNode createDesignNode(Map<String, dynamic> json) {
-    // TODO: implement createDesignNode
-    throw UnimplementedError();
-  }
-
   factory PBDLPage.fromPBDF(Map<String, dynamic> json) {
     var page = PBDLPage(name: json['name'], id: json['id']);
     if (json.containsKey('screens')) {
       (json['screens'] as List)?.forEach((value) {
         if (value != null && (value['convert'] ?? true)) {
-          page.screens
-              .add(PBDLScreen.fromPBDF(value as Map<String, dynamic>));
+          page.screens.add(PBDLScreen.fromPBDF(value as Map<String, dynamic>));
         }
       });
     }

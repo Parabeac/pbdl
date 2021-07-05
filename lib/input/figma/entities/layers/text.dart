@@ -103,18 +103,6 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String pbdfType = 'text';
 
-  // @override
-  // DesignNode createDesignNode(Map<String, dynamic> json) {
-  //   // TODO: implement createDesignNode
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   // TODO: implement fromPBDF
-  //   throw UnimplementedError();
-  // }
-
   @override
   var attributedString;
 

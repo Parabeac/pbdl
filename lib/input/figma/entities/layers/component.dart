@@ -132,18 +132,6 @@ class Component extends FigmaFrame
   @override
   String pbdfType = 'symbol_master';
 
-  // @override
-  // DesignNode createDesignNode(Map<String, dynamic> json) {
-  //   // TODO: implement createDesignNode
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   // TODO: implement fromPBDF
-  //   throw UnimplementedError();
-  // }
-
   @override
   var isFlowHome;
 }

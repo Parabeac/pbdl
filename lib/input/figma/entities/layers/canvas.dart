@@ -81,16 +81,4 @@ class Canvas extends FigmaNode implements FigmaNodeFactory {
 
   @override
   String pbdfType = 'artboard';
-
-  // @override
-  // DesignNode createDesignNode(Map<String, dynamic> json) {
-  //   // TODO: implement createDesignNode
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   // TODO: implement fromPBDF
-  //   throw UnimplementedError();
-  // }
 }

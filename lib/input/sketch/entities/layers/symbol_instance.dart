@@ -190,16 +190,4 @@ class SymbolInstance extends SketchNode
   @override
   @JsonKey(ignore: true)
   String pbdfType = 'symbol_instance';
-
-  // @override
-  // DesignNode createDesignNode(Map<String, dynamic> json) {
-  //   // TODO: implement createDesignNode
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   // TODO: implement fromPBDF
-  //   throw UnimplementedError();
-  // }
 }

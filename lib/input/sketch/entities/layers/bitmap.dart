@@ -174,16 +174,4 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
   @override
   @JsonKey(ignore: true)
   String pbdfType = 'image';
-
-  // @override
-  // DesignNode createDesignNode(Map<String, dynamic> json) {
-  //   // TODO: implement createDesignNode
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   // TODO: implement fromPBDF
-  //   throw UnimplementedError();
-  // }
 }
