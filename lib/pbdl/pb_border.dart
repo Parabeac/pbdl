@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pb_border.g.dart';
 
 @JsonSerializable()
-abstract class PBBorder {
+class PBBorder {
   final bool isEnabled;
   final double fillType;
   final PBColor color;

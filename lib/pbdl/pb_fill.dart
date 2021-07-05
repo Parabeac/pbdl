@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pb_fill.g.dart';
 
 @JsonSerializable()
-abstract class PBFill {
+class PBFill {
   PBColor color;
   bool isEnabled;
   PBFill(this.color, [this.isEnabled = true]);
