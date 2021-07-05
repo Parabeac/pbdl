@@ -30,6 +30,6 @@ class PBDLNode {
   @override
   Map<String, dynamic> toJson() => _$PBDLNodeToJson(this);
 
-  factory PBDLNode.fromPBDF(Map<String, dynamic> json) =>
+  factory PBDLNode.fromJson(Map<String, dynamic> json) =>
       AbstractDesignNodeFactory.getPBDLNode(json);
 }
