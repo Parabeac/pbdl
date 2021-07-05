@@ -58,40 +58,6 @@ class PBDLImage extends DesignElement implements PBDLNodeFactory, PBDLNode {
   @override
   Map<String, dynamic> toJson() => _$PBDLImageToJson(this);
 
-  // PBDLNode fromPBDF(Map<String, dynamic> json) {
-  //   return PBDLImage(
-  //     UUID: json['id'] as String,
-  //     booleanOperation: json['booleanOperation'],
-  //     exportOptions: json['exportOptions'],
-  //     boundaryRectangle: json['absoluteBoundingBox'] == null
-  //         ? null
-  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-  //     isFixedToViewport: json['isFixedToViewport'],
-  //     isFlippedHorizontal: json['isFlippedHorizontal'],
-  //     isFlippedVertical: json['isFlippedVertical'],
-  //     isLocked: json['isLocked'],
-  //     isVisible: json['visible'],
-  //     layerListExpandedType: json['layerListExpandedType'],
-  //     name: json['name'],
-  //     nameIsFixed: json['nameIsFixed'],
-  //     resizingConstraint: json['resizingConstraint'],
-  //     resizingType: json['resizingType'],
-  //     rotation: json['rotation'] as num,
-  //     sharedStyleID: json['sharedStyleID'],
-  //     shouldBreakMaskChain: json['shouldBreakMaskChain'],
-  //     hasClippingMask: json['hasClippingMask'],
-  //     clippingMaskMode: json['clippingMaskMode'],
-  //     userInfo: json['userInfo'],
-  //     maintainScrollPosition: json['maintainScrollPosition'],
-  //     pbdfType: json['pbdfType'],
-  //     style: json['style'] == null
-  //         ? null
-  //         : PBStyle.fromPBDF(json['style'] as Map<String, dynamic>),
-  //   )
-  //     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-  //     ..type = json['type'] as String;
-  // }
-
   @override
   Future<PBDLNode> interpretNode() async {
     /* try {

@@ -71,45 +71,6 @@ class Text extends DesignElement implements PBDLNodeFactory, PBDLNode {
   @override
   Map<String, dynamic> toJson() => _$TextToJson(this);
 
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   return Text(
-  //     UUID: json['id'] as String,
-  //     booleanOperation: json['booleanOperation'],
-  //     exportOptions: json['exportOptions'],
-  //     boundaryRectangle: json['absoluteBoundingBox'] == null
-  //         ? null
-  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-  //     isFixedToViewport: json['isFixedToViewport'] as bool,
-  //     isFlippedHorizontal: json['isFlippedHorizontal'] as bool,
-  //     isFlippedVertical: json['isFlippedVertical'] as bool,
-  //     isLocked: json['isLocked'] as bool,
-  //     isVisible: json['visible'] as bool,
-  //     layerListExpandedType: json['layerListExpandedType'],
-  //     name: json['name'] as String,
-  //     nameIsFixed: json['nameIsFixed'] as bool,
-  //     resizingConstraint: json['resizingConstraint'],
-  //     resizingType: json['resizingType'],
-  //     rotation: (json['rotation'] as num)?.toDouble(),
-  //     sharedStyleID: json['sharedStyleID'],
-  //     shouldBreakMaskChain: json['shouldBreakMaskChain'] as bool,
-  //     hasClippingMask: json['hasClippingMask'] as bool,
-  //     clippingMaskMode: json['clippingMaskMode'] as int,
-  //     maintainScrollPosition: json['maintainScrollPosition'] as bool,
-  //     attributedString: json['attributedString'] as Map<String, dynamic>,
-  //     automaticallyDrawOnUnderlyingPath:
-  //         json['automaticallyDrawOnUnderlyingPath'] as bool,
-  //     dontSynchroniseWithSymbol: json['dontSynchroniseWithSymbol'] as bool,
-  //     lineSpacingBehaviour: json['lineSpacingBehaviour'],
-  //     textBehaviour: json['textBehaviour'],
-  //     glyphBounds: json['glyphBounds'],
-  //     type: json['type'] as String,
-  //     pbdfType: json['pbdfType'],
-  //     style: json['style'] == null
-  //         ? null
-  //         : PBStyle.fromPBDF(json['style'] as Map<String, dynamic>),
-  //   );
-  // }
-
   @override
   Future<PBDLNode> interpretNode() {
     // Future.value(InjectedContainer(

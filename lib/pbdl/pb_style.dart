@@ -18,16 +18,6 @@ class PBStyle {
 
   PBStyle({this.fills, this.backgroundColor});
 
-  // toPBDF() {}
-
-  // factory PBStyle.fromPBDF(Map<String, dynamic> json) {
-  //   if (json.containsKey('_class')) {
-  //     return Style.fromJson(json);
-  //   } else {
-  //     return FigmaStyle.fromJson(json);
-  //   }
-  // }
-
   @override
   factory PBStyle.fromJson(Map<String, dynamic> json) =>
       _$PBStyleFromJson(json);

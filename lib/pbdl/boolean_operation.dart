@@ -48,27 +48,6 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   @override
   Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
 
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   var node = BooleanOperation(
-  //     booleanOperation: json['booleanOperation'],
-  //     type: json['type'],
-  //     boundaryRectangle: json['absoluteBoundingBox'] == null
-  //         ? null
-  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-  //     UUID: json['id'] as String,
-  //     name: json['name'] as String,
-  //     isVisible: json['visible'] as bool ?? true,
-  //     pbdfType: json['pbdfType'] as String,
-  //   );
-  //   if (json.containsKey('children')) {
-  //     if (json['children'] != null) {
-  //       node.children
-  //           .add(DesignNode.fromPBDF(json['children'] as Map<String, dynamic>));
-  //     }
-  //   }
-  //   return node;
-  // }
-
   @override
   String UUID;
 

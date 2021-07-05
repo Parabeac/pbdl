@@ -49,53 +49,6 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
   @override
   Map<String, dynamic> toJson() => _$GroupNodeToJson(this);
 
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   var node = GroupNode(
-  //     hasClickThrough: json['hasClickThrough'] as bool,
-  //     groupLayout: json['groupLayout'],
-  //     UUID: json['id'] as String,
-  //     booleanOperation: json['booleanOperation'],
-  //     exportOptions: json['exportOptions'],
-  //     boundaryRectangle: json['absoluteBoundingBox'] == null
-  //         ? null
-  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-  //     isFixedToViewport: json['isFixedToViewport'],
-  //     isFlippedHorizontal: json['isFlippedHorizontal'],
-  //     isFlippedVertical: json['isFlippedVertical'],
-  //     isLocked: json['isLocked'],
-  //     isVisible: json['visible'],
-  //     layerListExpandedType: json['layerListExpandedType'],
-  //     name: json['name'],
-  //     nameIsFixed: json['nameIsFixed'],
-  //     resizingConstraint: json['resizingConstraint'],
-  //     resizingType: json['resizingType'],
-  //     rotation: json['rotation'],
-  //     sharedStyleID: json['sharedStyleID'],
-  //     shouldBreakMaskChain: json['shouldBreakMaskChain'],
-  //     hasClippingMask: json['hasClippingMask'],
-  //     clippingMaskMode: json['clippingMaskMode'],
-  //     userInfo: json['userInfo'],
-  //     maintainScrollPosition: json['maintainScrollPosition'],
-  //     pbdfType: json['pbdfType'],
-  //     style: json['style'] == null
-  //         ? null
-  //         : PBStyle.fromPBDF(json['style'] as Map<String, dynamic>),
-  //   )
-  //     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-  //     ..type = json['type'] as String;
-  //   if (json.containsKey('children')) {
-  //     if (json['children'] != null) {
-  //       for (var item in json['children']) {
-  //         var child = DesignNode.fromPBDF(item as Map<String, dynamic>);
-  //         if (child != null) {
-  //           node.children.add(child);
-  //         }
-  //       }
-  //     }
-  //   }
-  //   return node;
-  // }
-
   @override
   String UUID;
 

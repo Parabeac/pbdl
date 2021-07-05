@@ -62,48 +62,6 @@ class Rectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
   @override
   Map<String, dynamic> toJson() => _$RectangleToJson(this);
 
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   return Rectangle(
-  //     fixedRadius: (json['fixedRadius'] as num)?.toDouble(),
-  //     hasConvertedToNewRoundCorners:
-  //         json['hasConvertedToNewRoundCorners'] as bool,
-  //     needsConvertionToNewRoundCorners:
-  //         json['needsConvertionToNewRoundCorners'] as bool,
-  //     edited: json['edited'] as bool,
-  //     isClosed: json['isClosed'] as bool,
-  //     pointRadiusBehaviour: json['pointRadiusBehaviour'],
-  //     points: json['points'] as List,
-  //     UUID: json['do_objectID'] as String,
-  //     booleanOperation: json['booleanOperation'],
-  //     exportOptions: json['exportOptions'],
-  //     boundaryRectangle: json['absoluteBoundingBox'] == null
-  //         ? null
-  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-  //     isFixedToViewport: json['isFixedToViewport'],
-  //     isFlippedHorizontal: json['isFlippedHorizontal'],
-  //     isFlippedVertical: json['isFlippedVertical'],
-  //     isLocked: json['isLocked'],
-  //     isVisible: json['isVisible'],
-  //     layerListExpandedType: json['layerListExpandedType'],
-  //     name: json['name'],
-  //     nameIsFixed: json['nameIsFixed'],
-  //     resizingConstraint: json['resizingConstraint'],
-  //     resizingType: json['resizingType'],
-  //     rotation: json['rotation'],
-  //     sharedStyleID: json['sharedStyleID'],
-  //     shouldBreakMaskChain: json['shouldBreakMaskChain'],
-  //     hasClippingMask: json['hasClippingMask'],
-  //     clippingMaskMode: json['clippingMaskMode'],
-  //     userInfo: json['userInfo'],
-  //     type: json['type'] as String,
-  //     maintainScrollPosition: json['maintainScrollPosition'],
-  //     pbdfType: json['pbdfType'],
-  //     style: json['style'] == null
-  //         ? null
-  //         : PBStyle.fromPBDF(json['style'] as Map<String, dynamic>),
-  //   );
-  // }
-
   @override
   String UUID;
 
