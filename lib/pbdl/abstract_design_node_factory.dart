@@ -1,4 +1,7 @@
 import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/pbdl/pbdl_page.dart';
+import 'package:pbdl/pbdl/pbdl_project.dart';
+import 'package:pbdl/pbdl/pbdl_screen.dart';
 import 'artboard.dart';
 import 'boolean_operation.dart';
 import 'group_node.dart';
@@ -28,9 +31,9 @@ class AbstractDesignNodeFactory {
     Star(),
     Text(),
     Vector(),
-    DesignProject(),
-    DesignPage(),
-    DesignScreen(),
+    PBDLProject(),
+    PBDLPage(),
+    PBDLScreen(),
   ];
 
   AbstractDesignNodeFactory();

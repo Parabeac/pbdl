@@ -31,6 +31,6 @@ class PBDLNode {
   // factory PBDLNode.fromPBDF(Map<String, dynamic> json) =>
   //     AbstractDesignNodeFactory.getDesignNode(json);
 
-  factory PBDLNode.fromJson(Map<String, dynamic> json) =>
+  factory PBDLNode.fromPBDF(Map<String, dynamic> json) =>
       AbstractDesignNodeFactory.getPBDLNode(json);
 }
