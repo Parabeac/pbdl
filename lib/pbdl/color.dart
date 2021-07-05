@@ -1,5 +1,9 @@
 import 'package:hex/hex.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'color.g.dart';
+
+@JsonSerializable()
 abstract class PBColor {
   PBColor(
     this.alpha,
@@ -13,7 +17,10 @@ abstract class PBColor {
   double green;
   double blue;
 
-  toJson();
+  factory PBColor.fromJson(Map<String, dynamic> json) =>
+      _$PBColorFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PBColorToJson(this);
 }
 
 mixin PBColorMixin {
@@ -41,5 +48,4 @@ mixin PBColorMixin {
     }
     return null;
   }
-
 }

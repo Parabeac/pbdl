@@ -1,6 +1,10 @@
 import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-abstract class DesignElement extends PBDLNode {
+part 'design_element.g.dart';
+
+@JsonSerializable()
+class DesignElement extends PBDLNode {
   DesignElement({
     UUID,
     name,
@@ -18,4 +22,9 @@ abstract class DesignElement extends PBDLNode {
           style,
           prototypeNodeUUID,
         );
+
+  factory DesignElement.fromJson(Map<String, dynamic> json) =>
+      _$DesignElementFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$DesignElementToJson(this);
 }

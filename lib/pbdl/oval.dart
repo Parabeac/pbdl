@@ -1,9 +1,13 @@
 import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
 
+import 'package:json_annotation/json_annotation.dart';
+
+part 'oval.g.dart';
+
+@JsonSerializable()
 class Oval implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'oval';
@@ -11,9 +15,6 @@ class Oval implements PBDLNodeFactory, PBDLNode {
   var boundaryRectangle;
 
   var UUID;
-
-  @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
 
   Oval({
     bool edited,
@@ -45,6 +46,12 @@ class Oval implements PBDLNodeFactory, PBDLNode {
     this.pbdfType = 'oval',
     this.style,
   });
+
+  @override
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => Oval.fromJson(json);
+  factory Oval.fromJson(Map<String, dynamic> json) => _$OvalFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$OvalToJson(this);
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   return Oval(
@@ -104,10 +111,5 @@ class Oval implements PBDLNodeFactory, PBDLNode {
 
     return Future.value(
         InheritedOval(this, name, currentContext: currentContext, image: img)); */
-  }
-
-  @override
-  toJson() {
-    throw UnimplementedError();
   }
 }

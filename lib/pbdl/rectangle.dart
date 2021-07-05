@@ -1,10 +1,13 @@
 import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
 import 'color.dart';
 import 'pbdl_frame.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'rectangle.g.dart';
+
+@JsonSerializable()
 class Rectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'rectangle';
@@ -52,7 +55,12 @@ class Rectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      Rectangle.fromJson(json);
+  factory Rectangle.fromJson(Map<String, dynamic> json) =>
+      _$RectangleFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$RectangleToJson(this);
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   return Rectangle(
@@ -140,10 +148,5 @@ class Rectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
         'borderThickness': border != null ? border.thickness : null
       },
     )); */
-  }
-
-  @override
-  toJson() {
-    throw UnimplementedError();
   }
 }

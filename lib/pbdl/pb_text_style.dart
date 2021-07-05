@@ -1,10 +1,13 @@
-import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pb_font_descriptor.dart';
 import 'package:pbdl/pbdl/pb_paragraph_style.dart';
 
 import 'color.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-abstract class PBTextStyle {
+part 'pb_text_style.g.dart';
+
+@JsonSerializable()
+class PBTextStyle {
   PBColor fontColor;
   String weight;
   PBFontDescriptor fontDescriptor;
@@ -16,5 +19,9 @@ abstract class PBTextStyle {
     this.paragraphStyle,
   });
 
-  toJson();
+  @override
+  factory PBTextStyle.fromJson(Map<String, dynamic> json) =>
+      _$PBTextStyleFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PBTextStyleToJson(this);
 }

@@ -1,7 +1,10 @@
 import 'package:pbdl/pbdl/pb_style.dart';
-
 import 'abstract_design_node_factory.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'pbdl_node.g.dart';
+
+@JsonSerializable()
 class PBDLNode {
   PBDLNode(
     this.UUID,
@@ -22,14 +25,10 @@ class PBDLNode {
   PBStyle style;
   String prototypeNodeUUID;
 
-  toJson() {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLNode.fromJson(json);
 
-  Future<PBDLNode> interpretNode() {}
-
-  // Map<String, dynamic> toPBDF() {}
-
-  // factory PBDLNode.fromPBDF(Map<String, dynamic> json) =>
-  //     AbstractDesignNodeFactory.getDesignNode(json);
+  @override
+  Map<String, dynamic> toJson() => _$PBDLNodeToJson(this);
 
   factory PBDLNode.fromJson(Map<String, dynamic> json) =>
       AbstractDesignNodeFactory.getPBDLNode(json);

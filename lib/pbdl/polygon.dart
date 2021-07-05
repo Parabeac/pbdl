@@ -1,9 +1,12 @@
 import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'polygon.g.dart';
+
+@JsonSerializable()
 class Polygon implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'polygon';
@@ -44,7 +47,11 @@ class Polygon implements PBDLNodeFactory, PBDLNode {
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => Polygon.fromJson(json);
+  factory Polygon.fromJson(Map<String, dynamic> json) =>
+      _$PolygonFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PolygonToJson(this);
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   return Polygon(
@@ -106,10 +113,5 @@ class Polygon implements PBDLNodeFactory, PBDLNode {
     return Future.value(InheritedPolygon(this, name,
         currentContext: currentContext, image: img));
   */
-  }
-
-  @override
-  toJson() {
-    throw UnimplementedError();
   }
 }

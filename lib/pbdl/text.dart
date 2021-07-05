@@ -3,7 +3,11 @@ import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'abstract_design_node_factory.dart';
 import 'design_element.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'text.g.dart';
+
+@JsonSerializable()
 class Text extends DesignElement implements PBDLNodeFactory, PBDLNode {
   var attributedString;
 
@@ -62,7 +66,10 @@ class Text extends DesignElement implements PBDLNodeFactory, PBDLNode {
   String pbdfType = 'text';
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => Text.fromJson(json);
+  factory Text.fromJson(Map<String, dynamic> json) => _$TextFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$TextToJson(this);
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   return Text(

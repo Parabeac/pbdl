@@ -1,9 +1,13 @@
+import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
 import 'design_element.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'image.g.dart';
+
+@JsonSerializable()
 class PBDLImage extends DesignElement implements PBDLNodeFactory, PBDLNode {
   @override
   var style;
@@ -47,7 +51,12 @@ class PBDLImage extends DesignElement implements PBDLNodeFactory, PBDLNode {
   String pbdfType = 'image';
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      PBDLImage.fromJson(json);
+  factory PBDLImage.fromJson(Map<String, dynamic> json) =>
+      _$PBDLImageFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PBDLImageToJson(this);
 
   // PBDLNode fromPBDF(Map<String, dynamic> json) {
   //   return PBDLImage(
@@ -129,10 +138,4 @@ class PBDLImage extends DesignElement implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
-
-  @override
-  toJson() {
-    // TODO: implement toJson
-    throw UnimplementedError();
-  }
 }

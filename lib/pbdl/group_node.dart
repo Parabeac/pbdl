@@ -1,9 +1,12 @@
 import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'group_node.g.dart';
+
+@JsonSerializable()
 class GroupNode implements PBDLNodeFactory, PBDLNode {
   List children = [];
 
@@ -39,7 +42,12 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      GroupNode.fromJson(json);
+  factory GroupNode.fromJson(Map<String, dynamic> json) =>
+      _$GroupNodeFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$GroupNodeToJson(this);
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   var node = GroupNode(
@@ -115,11 +123,5 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
     //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
     //     bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
     //         boundaryRectangle.y + boundaryRectangle.height)));
-  }
-
-  @override
-  toJson() {
-    // TODO: implement toJson
-    throw UnimplementedError();
   }
 }

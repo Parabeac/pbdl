@@ -1,11 +1,15 @@
 import 'package:pbdl/pbdl/color.dart';
+import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_flow.dart';
 import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
 import 'group_node.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'artboard.g.dart';
+
+@JsonSerializable()
 class PBArtboard extends PBDLNode implements GroupNode, PBDLNodeFactory {
   PBColor backgroundColor;
   @override
@@ -53,7 +57,12 @@ class PBArtboard extends PBDLNode implements GroupNode, PBDLNodeFactory {
   String pbdfType = 'artboard';
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      PBArtboard.fromJson(json);
+  factory PBArtboard.fromJson(Map<String, dynamic> json) =>
+      _$PBArtboardFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PBArtboardToJson(this);
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   var node = PBArtboard(

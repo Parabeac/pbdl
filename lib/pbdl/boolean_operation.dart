@@ -1,9 +1,12 @@
 import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'boolean_operation.g.dart';
+
+@JsonSerializable()
 class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'boolean_operation';
@@ -38,7 +41,12 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   }
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      BooleanOperation.fromJson(json);
+  factory BooleanOperation.fromJson(Map<String, dynamic> json) =>
+      _$BooleanOperationFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   var node = BooleanOperation(
@@ -75,11 +83,6 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
-
-  @override
-  toJson() {
-    throw UnimplementedError();
-  }
 
   @override
   bool isVisible;

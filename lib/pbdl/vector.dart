@@ -1,10 +1,13 @@
 import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
 import 'image.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'vector.g.dart';
+
+@JsonSerializable()
 class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
   @override
   String pbdfType = 'vector';
@@ -46,7 +49,10 @@ class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => Vector.fromJson(json);
+  factory Vector.fromJson(Map<String, dynamic> json) => _$VectorFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$VectorToJson(this);
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   return Vector(
@@ -104,11 +110,6 @@ class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
     file.writeAsBytesSync(img);
     return Future.value(
         InheritedBitmap(this, name, currentContext: currentContext)); */
-  }
-
-  @override
-  toJson() {
-    throw UnimplementedError();
   }
 
   @override

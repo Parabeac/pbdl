@@ -3,7 +3,11 @@ import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import 'abstract_design_node_factory.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'star.g.dart';
+
+@JsonSerializable()
 class Star implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'star';
@@ -40,7 +44,10 @@ class Star implements PBDLNodeFactory, PBDLNode {
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => Star.fromJson(json);
+  factory Star.fromJson(Map<String, dynamic> json) => _$StarFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$StarToJson(this);
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   return Star(
@@ -105,10 +112,5 @@ class Star implements PBDLNodeFactory, PBDLNode {
     /* var img = await AzureAssetService().downloadImage(UUID);
     return Future.value(
         InheritedStar(this, name, currentContext: currentContext, image: img)); */
-  }
-
-  @override
-  toJson() {
-    throw UnimplementedError();
   }
 }

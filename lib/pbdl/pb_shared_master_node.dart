@@ -1,9 +1,12 @@
 import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
 import 'group_node.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'pb_shared_master_node.g.dart';
+
+@JsonSerializable()
 class PBSharedMasterDesignNode extends PBDLNode
     with SymbolNodeMixin
     implements PBDLNodeFactory, GroupNode {
@@ -63,6 +66,14 @@ class PBSharedMasterDesignNode extends PBDLNode
   String pbdfType = 'symbol_master';
 
   @override
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      PBSharedMasterDesignNode.fromJson(json);
+  factory PBSharedMasterDesignNode.fromJson(Map<String, dynamic> json) =>
+      _$PBSharedMasterDesignNodeFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PBSharedMasterDesignNodeToJson(this);
+
+  @override
   Future<PBDLNode> interpretNode() {
     /* var sym_master = PBSharedMasterNode(
       this,
@@ -97,9 +108,6 @@ class PBSharedMasterDesignNode extends PBDLNode
   //   }
   //   return sharedParameters;
   // }
-
-  @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
 
   // DesignNode fromPBDF(Map<String, dynamic> json) {
   //   var node = PBSharedMasterDesignNode(
