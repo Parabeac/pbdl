@@ -1,11 +1,12 @@
-import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
-import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
-import 'package:pbdl/input/sketch/entities/layers/abstract_shape_layer.dart';
-import 'package:pbdl/input/sketch/entities/layers/flow.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+
+import '../abstract_sketch_node_factory.dart';
+import '../objects/frame.dart';
+import '../style/style.dart';
+import 'abstract_shape_layer.dart';
+import 'flow.dart';
+import 'sketch_node.dart';
 
 part 'polygon.g.dart';
 
@@ -121,41 +122,6 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
     return Future.value(InheritedPolygon(this, name,
         currentContext: currentContext, image: image)); */
   }
-
-  @override
-  Map<String, dynamic> toPBDF() => <String, dynamic>{
-        'booleanOperation': booleanOperation,
-        'exportOptions': exportOptions,
-        'flow': flow,
-        'isFixedToViewport': isFixedToViewport,
-        'isFlippedHorizontal': isFlippedHorizontal,
-        'isFlippedVertical': isFlippedVertical,
-        'isLocked': isLocked,
-        'layerListExpandedType': layerListExpandedType,
-        'name': name,
-        'nameIsFixed': nameIsFixed,
-        'resizingConstraint': resizingConstraint,
-        'resizingType': resizingType,
-        'rotation': rotation,
-        'sharedStyleID': sharedStyleID,
-        'shouldBreakMaskChain': shouldBreakMaskChain,
-        'hasClippingMask': hasClippingMask,
-        'clippingMaskMode': clippingMaskMode,
-        'userInfo': userInfo,
-        'maintainScrollPosition': maintainScrollPosition,
-        'prototypeNodeUUID': prototypeNodeUUID,
-        'edited': edited,
-        'isClosed': isClosed,
-        'pointRadiusBehaviour': pointRadiusBehaviour,
-        'points': points,
-        'CLASS_NAME': CLASS_NAME,
-        'absoluteBoundingBox': boundaryRectangle,
-        'id': UUID,
-        'type': type,
-        'visible': isVisible,
-        'style': style,
-        'pbdfType': pbdfType,
-      };
 
   @override
   @JsonKey(ignore: true)

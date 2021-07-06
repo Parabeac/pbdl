@@ -1,5 +1,5 @@
-import 'package:pbdl/input/sketch/entities/style/color.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'color.dart';
 
 part 'gradient_stop.g.dart';
 

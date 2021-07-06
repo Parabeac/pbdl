@@ -1,6 +1,4 @@
-
-
-import 'package:pbdl/input/sketch/entities/objects/foreign_symbol.dart';
+import '../objects/foreign_symbol.dart';
 
 abstract class AbstractDocument {
   final String CLASS_NAME = 'document';

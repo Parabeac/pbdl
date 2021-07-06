@@ -1,6 +1,7 @@
-import 'package:pbdl/input/sketch/entities/documents/abstract_document.dart';
-import 'package:pbdl/input/sketch/entities/objects/foreign_symbol.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../objects/foreign_symbol.dart';
+import 'abstract_document.dart';
 
 part 'document.g.dart';
 

@@ -1,12 +1,13 @@
-import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
-import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
-import 'package:pbdl/input/sketch/entities/layers/flow.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-import 'package:pbdl/input/sketch/entities/objects/override_value.dart';
-import 'package:pbdl/input/sketch/entities/style/style.dart';
-import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+
+import '../../helper/symbol_node_mixin.dart';
+import '../abstract_sketch_node_factory.dart';
+import '../objects/frame.dart';
+import '../objects/override_value.dart';
+import '../style/style.dart';
+import 'flow.dart';
+import 'sketch_node.dart';
 
 part 'symbol_instance.g.dart';
 
@@ -149,43 +150,6 @@ class SymbolInstance extends SketchNode
 
   @override
   List parameters;
-
-  @override
-  Map<String, dynamic> toPBDF() => <String, dynamic>{
-        'booleanOperation': booleanOperation,
-        'exportOptions': exportOptions,
-        'flow': flow,
-        'isFixedToViewport': isFixedToViewport,
-        'isFlippedHorizontal': isFlippedHorizontal,
-        'isFlippedVertical': isFlippedVertical,
-        'isLocked': isLocked,
-        'layerListExpandedType': layerListExpandedType,
-        'name': name,
-        'nameIsFixed': nameIsFixed,
-        'resizingConstraint': resizingConstraint,
-        'resizingType': resizingType,
-        'rotation': rotation,
-        'sharedStyleID': sharedStyleID,
-        'shouldBreakMaskChain': shouldBreakMaskChain,
-        'hasClippingMask': hasClippingMask,
-        'clippingMaskMode': clippingMaskMode,
-        'userInfo': userInfo,
-        'maintainScrollPosition': maintainScrollPosition,
-        'prototypeNodeUUID': prototypeNodeUUID,
-        'CLASS_NAME': CLASS_NAME,
-        'overrideValues': overrideValues,
-        'scale': scale,
-        'symbolID': symbolID,
-        'verticalSpacing': verticalSpacing,
-        'horizontalSpacing': horizontalSpacing,
-        'absoluteBoundingBox': boundaryRectangle,
-        'id': UUID,
-        'type': type,
-        'visible': isVisible,
-        'style': style,
-        'parameters': parameters,
-        'pbdfType': pbdfType,
-      };
 
   @override
   @JsonKey(ignore: true)

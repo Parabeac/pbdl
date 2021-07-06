@@ -1,14 +1,15 @@
-import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
-import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
-import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
-import 'package:pbdl/input/sketch/entities/layers/flow.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-import 'package:pbdl/input/sketch/entities/objects/override_property.dart';
-import 'package:pbdl/input/sketch/entities/style/color.dart';
-import 'package:pbdl/input/sketch/entities/style/style.dart';
-import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+
+import '../../helper/symbol_node_mixin.dart';
+import '../abstract_sketch_node_factory.dart';
+import '../objects/frame.dart';
+import '../objects/override_property.dart';
+import '../style/color.dart';
+import '../style/style.dart';
+import 'abstract_group_layer.dart';
+import 'flow.dart';
+import 'sketch_node.dart';
 
 part 'symbol_master.g.dart';
 
@@ -192,55 +193,6 @@ class SymbolMaster extends AbstractGroupLayer
     );
     return Future.value(sym_master); */
   }
-
-  @override
-  Map<String, dynamic> toPBDF() => <String, dynamic>{
-        'booleanOperation': booleanOperation,
-        'exportOptions': exportOptions,
-        'flow': flow,
-        'isFixedToViewport': isFixedToViewport,
-        'isFlippedHorizontal': isFlippedHorizontal,
-        'isFlippedVertical': isFlippedVertical,
-        'isLocked': isLocked,
-        'layerListExpandedType': layerListExpandedType,
-        'name': name,
-        'nameIsFixed': nameIsFixed,
-        'resizingConstraint': resizingConstraint,
-        'resizingType': resizingType,
-        'rotation': rotation,
-        'sharedStyleID': sharedStyleID,
-        'shouldBreakMaskChain': shouldBreakMaskChain,
-        'hasClippingMask': hasClippingMask,
-        'clippingMaskMode': clippingMaskMode,
-        'userInfo': userInfo,
-        'maintainScrollPosition': maintainScrollPosition,
-        'prototypeNodeUUID': prototypeNodeUUID,
-        'hasClickThrough': hasClickThrough,
-        'groupLayout': groupLayout,
-        'CLASS_NAME': CLASS_NAME,
-        'backgroundColor': backgroundColor,
-        'hasBackgroundColor': hasBackgroundColor,
-        'horizontalRulerData': horizontalRulerData,
-        'includeBackgroundColorInExport': includeBackgroundColorInExport,
-        'includeInCloudUpload': includeInCloudUpload,
-        'isFlowHome': isFlowHome,
-        'resizesContent': resizesContent,
-        'verticalRulerData': verticalRulerData,
-        'includeBackgroundColorInInstance': includeBackgroundColorInInstance,
-        'symbolID': symbolID,
-        'changeIdentifier': changeIdentifier,
-        'allowsOverrides': allowsOverrides,
-        'overrideProperties': overrideProperties,
-        'presetDictionary': presetDictionary,
-        'absoluteBoundingBox': boundaryRectangle,
-        'id': UUID,
-        'type': type,
-        'visible': isVisible,
-        'style': style,
-        'children': getChildren(),
-        'parameters': parameters,
-        'pbdfType': pbdfType,
-      };
 
   @override
   @JsonKey(ignore: true)

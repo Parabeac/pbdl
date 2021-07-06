@@ -1,9 +1,8 @@
-import 'package:pbdl/input/helper/pb_color.dart';
-import 'package:pbdl/input/sketch/entities/style/color.dart';
-
-import 'package:pbdl/input/sketch/entities/style/font_descriptor.dart';
-import 'package:pbdl/input/sketch/entities/style/paragraph_style.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'color.dart';
+import 'font_descriptor.dart';
+import 'paragraph_style.dart';
 
 part 'text_style.g.dart';
 
@@ -99,7 +98,7 @@ class TextStyle {
   Map<String, dynamic> toJson() => _$TextStyleToJson(this);
 
   @JsonKey(ignore: true)
-  PBColor fontColor;
+  Color fontColor;
 
   @override
   String fontFamily;

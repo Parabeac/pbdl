@@ -1,9 +1,10 @@
-import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
-import 'package:pbdl/input/sketch/entities/layers/flow.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+
+import '../abstract_sketch_node_factory.dart';
+import '../objects/frame.dart';
+import '../style/style.dart';
+import 'flow.dart';
 
 @JsonSerializable(nullable: true)
 // title: Abstract Layer
@@ -74,6 +75,5 @@ abstract class SketchNode {
   Map<String, dynamic> toJson();
   factory SketchNode.fromJson(Map<String, dynamic> json) =>
       AbstractSketchNodeFactory.getSketchNode(json);
-  @override
   Future<PBDLNode> interpretNode();
 }

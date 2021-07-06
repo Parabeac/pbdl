@@ -1,7 +1,7 @@
-import 'package:pbdl/input/sketch/entities/style/color.dart';
-import 'package:pbdl/input/sketch/entities/style/context_settings.dart';
-import 'package:pbdl/input/sketch/entities/style/gradient.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'color.dart';
+import 'context_settings.dart';
+import 'gradient.dart';
 
 part 'border.g.dart';
 

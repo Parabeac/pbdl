@@ -1,20 +1,18 @@
-
-
-import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
-import 'package:pbdl/input/sketch/entities/layers/artboard.dart';
-import 'package:pbdl/input/sketch/entities/layers/bitmap.dart';
-import 'package:pbdl/input/sketch/entities/layers/group.dart';
-import 'package:pbdl/input/sketch/entities/layers/oval.dart';
-import 'package:pbdl/input/sketch/entities/layers/page.dart';
-import 'package:pbdl/input/sketch/entities/layers/polygon.dart';
-import 'package:pbdl/input/sketch/entities/layers/rectangle.dart';
-import 'package:pbdl/input/sketch/entities/layers/shape_group.dart';
-import 'package:pbdl/input/sketch/entities/layers/shape_path.dart';
-import 'package:pbdl/input/sketch/entities/layers/sketch_text.dart';
-import 'package:pbdl/input/sketch/entities/layers/star.dart';
-import 'package:pbdl/input/sketch/entities/layers/symbol_instance.dart';
-import 'package:pbdl/input/sketch/entities/layers/symbol_master.dart';
-import 'package:pbdl/input/sketch/entities/layers/triangle.dart';
+import 'layers/artboard.dart';
+import 'layers/bitmap.dart';
+import 'layers/group.dart';
+import 'layers/oval.dart';
+import 'layers/page.dart';
+import 'layers/polygon.dart';
+import 'layers/rectangle.dart';
+import 'layers/shape_group.dart';
+import 'layers/shape_path.dart';
+import 'layers/sketch_node.dart';
+import 'layers/sketch_text.dart';
+import 'layers/star.dart';
+import 'layers/symbol_instance.dart';
+import 'layers/symbol_master.dart';
+import 'layers/triangle.dart';
 
 ///Abstract Factory for [SketchNode]
 class AbstractSketchNodeFactory {

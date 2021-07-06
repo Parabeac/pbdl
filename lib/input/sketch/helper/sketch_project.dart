@@ -1,18 +1,16 @@
 import 'dart:convert';
-
-import 'package:pbdl/input/helper/design_project.dart';
-import 'package:pbdl/input/sketch/entities/documents/document.dart';
-import 'package:pbdl/input/sketch/entities/layers/page.dart';
-import 'package:pbdl/input/sketch/entities/objects/foreign_symbol.dart';
-import 'package:pbdl/input/sketch/entities/style/shared_style.dart';
-import 'package:pbdl/input/sketch/helper/sketch_page.dart';
-import 'package:pbdl/input/sketch/helper/sketch_screen.dart';
-import 'package:pbdl/input/sketch/services/input_design.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:archive/archive.dart';
 import 'package:recase/recase.dart';
+import '../entities/documents/document.dart';
+import '../entities/layers/page.dart';
+import '../entities/objects/foreign_symbol.dart';
+import '../entities/style/shared_style.dart';
+import '../services/input_design.dart';
+import 'sketch_page.dart';
+import 'sketch_screen.dart';
 
-class SketchProject extends DesignProject {
+class SketchProject {
   var log = Logger('SketchNodeTree');
   SketchPage rootScreen;
 
@@ -20,6 +18,12 @@ class SketchProject extends DesignProject {
   String projectName;
   @override
   bool debug = false;
+
+  String id;
+
+  List<SketchPage> pages = [];
+  List<SketchPage> miscPages = [];
+  List<SharedStyle> sharedStyles = [];
 
   final InputDesignService _ids;
   Archive _originalArchive;
@@ -79,10 +83,10 @@ class SketchProject extends DesignProject {
       var pg = SketchPage('third_party_widgets', jsonData['do_objectID']);
       for (var layer in foreignLayers) {
         pg.addScreen(SketchScreen(
-          layer.originalMaster,
-          layer.UUID,
-          '',
-          layer.originalMaster.type,
+          designNode: layer.originalMaster,
+          id: layer.UUID,
+          name: '',
+          type: layer.originalMaster.type,
         ));
       }
       return pg;
@@ -103,30 +107,41 @@ class SketchProject extends DesignProject {
           _originalArchive.findFile('pages/${entry.key}.json').content;
       var jsonData = json.decode(utf8.decode(pageContent));
 
-      var pbdlPage = getPbdlPage(jsonData['do_objectID']);
+      var pbdlPage = getSketchPage(jsonData['do_objectID']);
       if (pbdlPage != null && !(pbdlPage['convert'] ?? true)) {
         continue;
       }
 
       var pg = SketchPage(
-          jsonData['name'], jsonData['do_objectID']); // Sketch Node Holder
+          name: jsonData['name'],
+          id: jsonData['do_objectID']); // Sketch Node Holder
       var node = Page.fromJson(jsonData); // Actual Sketch Node
 
       // Turn layers into PBNodes
       for (var layer in node.children) {
-        var pbdlScreen = getPbdlScreen(pbdlPage, layer.UUID);
+        var pbdlScreen = getSjetchScreen(pbdlPage, layer.UUID);
         if (pbdlScreen != null && !(pbdlScreen['convert'] ?? true)) {
           continue;
         }
         pg.addScreen(SketchScreen(
-          layer,
-          layer.UUID,
-          layer.name,
-          layer.type,
+          designNode: layer,
+          id: layer.UUID,
+          name: layer.name,
+          type: layer.type,
         ));
       }
       sketchPages.add(pg);
     }
     return sketchPages;
+  }
+
+  Map getSketchPage(String pageId) {
+    // TODO: implement
+    // ask Ivan H to clarify
+  }
+
+  Map getSjetchScreen(Map pbdlPage, String screenId) {
+    // TODO: implement
+    // ask Ivan H to clarify
   }
 }

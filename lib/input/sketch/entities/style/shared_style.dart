@@ -1,8 +1,9 @@
-import 'package:pbdl/input/helper/pb_color.dart';
-import 'package:pbdl/input/sketch/entities/style/font_descriptor.dart';
-import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:recase/recase.dart';
+
+import 'color.dart';
+import 'font_descriptor.dart';
+import 'style.dart';
 part 'shared_style.g.dart';
 
 Map<String, String> SharedStyle_UUIDToName = {};
