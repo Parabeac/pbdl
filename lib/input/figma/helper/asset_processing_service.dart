@@ -1,9 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
-
-import 'package:pbdl/input/helper/azure_asset_service.dart';
-
-
+import 'azure_asset_service.dart';
 
 abstract class AssetProcessingService {
   dynamic processImage(String uuid);
