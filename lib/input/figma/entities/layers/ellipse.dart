@@ -1,12 +1,11 @@
-import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
-import 'package:pbdl/input/figma/entities/layers/frame.dart';
-import 'package:pbdl/input/figma/entities/layers/vector.dart';
-import 'package:pbdl/input/figma/helper/figma_asset_processor.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:quick_log/quick_log.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:quick_log/quick_log.dart';
 
+import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
+import 'frame.dart';
+import 'vector.dart';
 
 part 'ellipse.g.dart';
 

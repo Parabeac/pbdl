@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/input/figma/entities/style/figma_color.dart';
+import 'figma_color.dart';
 
 part 'figma_border.g.dart';
 

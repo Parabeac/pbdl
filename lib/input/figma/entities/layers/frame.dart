@@ -1,11 +1,9 @@
-import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
-import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
-import 'package:pbdl/input/figma/entities/style/figma_color.dart';
-import 'package:pbdl/input/figma/helper/style_extractor.dart';
-import 'package:pbdl/input/helper/pb_color.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+import '../../helper/style_extractor.dart';
+import '../abstract_figma_node_factory.dart';
+import '../style/figma_color.dart';
+import 'figma_node.dart';
 
 part 'frame.g.dart';
 
@@ -44,7 +42,7 @@ class FigmaFrame extends FigmaNode
 
   double itemSpacing;
 
-  PBColor backgroundColor;
+  FigmaColor backgroundColor;
 
   @override
   String type = 'FRAME';
@@ -61,7 +59,7 @@ class FigmaFrame extends FigmaNode
     type,
     pluginData,
     sharedPluginData,
-    Frame this.boundaryRectangle,
+    this.boundaryRectangle,
     this.style,
     this.fills,
     this.strokes,

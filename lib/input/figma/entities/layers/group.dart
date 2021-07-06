@@ -1,13 +1,14 @@
-import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
-import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
-import 'package:pbdl/input/figma/entities/layers/frame.dart';
-import 'package:pbdl/input/figma/entities/layers/text.dart';
-import 'package:pbdl/input/figma/entities/layers/vector.dart';
-import 'package:pbdl/input/figma/entities/style/figma_color.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-import 'package:quick_log/quick_log.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:quick_log/quick_log.dart';
+
+import '../../helper/rect.dart';
+import '../abstract_figma_node_factory.dart';
+import '../style/figma_color.dart';
+import 'figma_node.dart';
+import 'frame.dart';
+import 'text.dart';
+import 'vector.dart';
 
 part 'group.g.dart';
 
@@ -31,7 +32,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       type,
       pluginData,
       sharedPluginData,
-      Frame boundaryRectangle,
+      boundaryRectangle,
       style,
       fills,
       strokes,
@@ -130,7 +131,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     return true;
   }
 
-  Frame fitFrame() {
+  FigmaRect fitFrame() {
     var heights = [];
     var widths = [];
     for (var child in children) {
@@ -140,7 +141,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
 
     if (heights.every((element) => element == heights[0]) &&
         widths.every((element) => element == widths[0])) {
-      return Frame(
+      return FigmaRect(
         height: heights[0],
         width: widths[0],
         x: boundaryRectangle.x,
@@ -152,7 +153,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   }
 
   String childrenHavePrototypeNode() {
-    for (PBDLNode child in children) {
+    for (FigmaFrame child in children) {
       if (child.prototypeNodeUUID != null) {
         return child.prototypeNodeUUID;
       }

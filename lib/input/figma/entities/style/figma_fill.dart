@@ -1,5 +1,6 @@
-import 'package:pbdl/input/figma/entities/style/figma_color.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'figma_color.dart';
 part 'figma_fill.g.dart';
 
 @JsonSerializable()

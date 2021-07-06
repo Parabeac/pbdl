@@ -1,13 +1,11 @@
-import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
-import 'package:pbdl/input/figma/entities/layers/frame.dart';
-import 'package:pbdl/input/figma/entities/layers/vector.dart';
-import 'package:pbdl/input/figma/entities/style/figma_style.dart';
-import 'package:pbdl/input/figma/helper/style_extractor.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
+import '../../helper/style_extractor.dart';
+import '../abstract_figma_node_factory.dart';
+import '../style/figma_style.dart';
 import 'figma_node.dart';
+import 'frame.dart';
+import 'vector.dart';
 
 part 'text.g.dart';
 

@@ -1,9 +1,8 @@
-import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import '../abstract_figma_node_factory.dart';
+import 'figma_node.dart';
 
 part 'canvas.g.dart';
 
