@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'color.g.dart';
 
 @JsonSerializable()
-abstract class PBColor {
+class PBColor {
   PBColor(
     this.alpha,
     this.red,
