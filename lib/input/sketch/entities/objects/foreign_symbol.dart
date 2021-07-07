@@ -1,5 +1,6 @@
-import 'package:pbdl/input/sketch/entities/layers/symbol_master.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../layers/symbol_master.dart';
 
 part 'foreign_symbol.g.dart';
 

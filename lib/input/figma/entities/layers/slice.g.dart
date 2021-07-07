@@ -14,9 +14,7 @@ FigmaSlice _$FigmaSliceFromJson(Map<String, dynamic> json) {
     sharedPluginData: json['sharedPluginData'],
     layoutAlign: json['layoutAlign'] as String,
     constraints: json['constraints'],
-    boundaryRectangle: json['absoluteBoundingBox'] == null
-        ? null
-        : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
+    boundaryRectangle: json['absoluteBoundingBox'],
     size: json['size'],
     prototypeNodeUUID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,

@@ -1,10 +1,9 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
-
 import 'package:http/http.dart' as http;
-import 'package:pbdl/input/figma/helper/api_call_service.dart';
-import 'package:pbdl/input/helper/asset_processing_service.dart';
 import 'package:quick_log/quick_log.dart';
+import 'api_call_service.dart';
+import 'asset_processing_service.dart';
 
 class FigmaAssetProcessor extends AssetProcessingService {
   FigmaAssetProcessor._internal();

@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
-import 'package:pbdl/input/helper/asset_processing_service.dart';
 import 'package:quick_log/quick_log.dart';
+import 'asset_processing_service.dart';
 
 class SketchAssetProcessor extends AssetProcessingService {
   final svg_convertion_endpoint =

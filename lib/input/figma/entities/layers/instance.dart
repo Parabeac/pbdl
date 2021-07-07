@@ -1,10 +1,10 @@
-import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
-import 'package:pbdl/input/figma/entities/layers/figma_node.dart';
-import 'package:pbdl/input/figma/entities/layers/frame.dart';
-import 'package:pbdl/input/figma/entities/style/figma_color.dart';
-import 'package:pbdl/input/sketch/entities/objects/override_value.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+import '../../helper/override_value.dart';
+import '../abstract_figma_node_factory.dart';
+import '../style/figma_color.dart';
+import 'figma_node.dart';
+import 'frame.dart';
 
 part 'instance.g.dart';
 
@@ -120,7 +120,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   @override
   // TODO: implement overrideValues
-  List<OverridableValue> get overrideValues => throw UnimplementedError();
+  List<FigmaOverridableValue> get overrideValues => throw UnimplementedError();
 
   @override
   // TODO: implement typeToAbbreviation

@@ -1,8 +1,8 @@
-import 'package:pbdl/input/helper/pb_color.dart';
-import 'package:pbdl/input/sketch/entities/style/color.dart';
-import 'package:pbdl/input/sketch/entities/style/context_settings.dart';
-import 'package:pbdl/input/sketch/entities/style/gradient.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'color.dart';
+import 'context_settings.dart';
+import 'gradient.dart';
 
 part 'fill.g.dart';
 
@@ -13,8 +13,7 @@ class Fill {
   @override
   bool isEnabled;
   final int fillType;
-  @override
-  PBColor color;
+  Color color;
   final ContextSettings contextSettings;
   final Gradient gradient;
   final int noiseIndex;

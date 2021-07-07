@@ -1,11 +1,9 @@
-import 'package:pbdl/input/figma/entities/abstract_figma_node_factory.dart';
-import 'package:pbdl/input/figma/entities/layers/frame.dart';
-import 'package:pbdl/input/figma/entities/layers/vector.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
+import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
+import 'frame.dart';
+import 'vector.dart';
 
 part 'line.g.dart';
 
@@ -81,16 +79,4 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
 
   @override
   String pbdfType = 'image';
-
-  // @override
-  // DesignNode createDesignNode(Map<String, dynamic> json) {
-  //   // TODO: implement createDesignNode
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   // TODO: implement fromPBDF
-  //   throw UnimplementedError();
-  // }
 }

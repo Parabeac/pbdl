@@ -1,10 +1,10 @@
 // title: Abstract Shape Layer
 // description: Abstract base layer for all shape layers
 
-import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
-import 'package:pbdl/input/sketch/entities/layers/flow.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-import 'package:pbdl/input/sketch/entities/style/style.dart';
+import '../objects/frame.dart';
+import '../style/style.dart';
+import 'sketch_node.dart';
+import 'flow.dart';
 
 abstract class AbstractShapeLayer extends SketchNode {
   final bool edited;

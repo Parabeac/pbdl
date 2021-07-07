@@ -46,7 +46,7 @@ class PBDLScreen implements PBDLNodeFactory {
   PBDLNode createDesignNode(Map<String, dynamic> json) {
     var screen = PBDLScreen(name: json['name'], id: json['id']);
     if (json.containsKey('designNode') && (json['convert'] ?? true)) {
-      screen.designNode = PBDLNode.fromPBDF(json['designNode']);
+      screen.designNode = PBDLNode.fromJson(json['designNode']);
     }
     // return screen;
     throw UnimplementedError();
@@ -55,7 +55,7 @@ class PBDLScreen implements PBDLNodeFactory {
   factory PBDLScreen.fromPBDF(Map<String, dynamic> json) {
     var screen = PBDLScreen(name: json['name'], id: json['id']);
     if (json.containsKey('designNode') && (json['convert'] ?? true)) {
-      screen.designNode = PBDLNode.fromPBDF(json['designNode']);
+      screen.designNode = PBDLNode.fromJson(json['designNode']);
     }
     return screen;
   }

@@ -1,19 +1,18 @@
-import 'package:pbdl/input/figma/entities/layers/boolean_operation.dart';
-import 'package:pbdl/input/figma/entities/layers/canvas.dart';
-import 'package:pbdl/input/figma/entities/layers/component.dart';
-import 'package:pbdl/input/figma/entities/layers/ellipse.dart';
-import 'package:pbdl/input/figma/entities/layers/frame.dart';
-import 'package:pbdl/input/figma/entities/layers/group.dart';
-import 'package:pbdl/input/figma/entities/layers/instance.dart';
-import 'package:pbdl/input/figma/entities/layers/line.dart';
-import 'package:pbdl/input/figma/entities/layers/rectangle.dart';
-import 'package:pbdl/input/figma/entities/layers/regular_polygon.dart';
-import 'package:pbdl/input/figma/entities/layers/slice.dart';
-import 'package:pbdl/input/figma/entities/layers/star.dart';
-import 'package:pbdl/input/figma/entities/layers/text.dart';
-import 'package:pbdl/input/figma/entities/layers/vector.dart';
-
+import 'layers/boolean_operation.dart';
+import 'layers/canvas.dart';
+import 'layers/component.dart';
+import 'layers/ellipse.dart';
 import 'layers/figma_node.dart';
+import 'layers/frame.dart';
+import 'layers/group.dart';
+import 'layers/instance.dart';
+import 'layers/line.dart';
+import 'layers/rectangle.dart';
+import 'layers/regular_polygon.dart';
+import 'layers/slice.dart';
+import 'layers/star.dart';
+import 'layers/text.dart';
+import 'layers/vector.dart';
 
 class AbstractFigmaNodeFactory {
   static final String FIGMA_CLASS_KEY = 'type';

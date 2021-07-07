@@ -1,9 +1,12 @@
 import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'boolean_operation.g.dart';
+
+@JsonSerializable()
 class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'boolean_operation';
@@ -23,6 +26,7 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   });
 
   @override
+  // PBDL node does not need interpretNode
   Future<PBDLNode> interpretNode() async {
     /* var img = await AzureAssetService().downloadImage(UUID);
     var file =
@@ -38,28 +42,12 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   }
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
-
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   var node = BooleanOperation(
-  //     booleanOperation: json['booleanOperation'],
-  //     type: json['type'],
-  //     boundaryRectangle: json['absoluteBoundingBox'] == null
-  //         ? null
-  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-  //     UUID: json['id'] as String,
-  //     name: json['name'] as String,
-  //     isVisible: json['visible'] as bool ?? true,
-  //     pbdfType: json['pbdfType'] as String,
-  //   );
-  //   if (json.containsKey('children')) {
-  //     if (json['children'] != null) {
-  //       node.children
-  //           .add(DesignNode.fromPBDF(json['children'] as Map<String, dynamic>));
-  //     }
-  //   }
-  //   return node;
-  // }
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      BooleanOperation.fromJson(json);
+  factory BooleanOperation.fromJson(Map<String, dynamic> json) =>
+      _$BooleanOperationFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
 
   @override
   String UUID;
@@ -75,11 +63,6 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
-
-  @override
-  toJson() {
-    throw UnimplementedError();
-  }
 
   @override
   bool isVisible;

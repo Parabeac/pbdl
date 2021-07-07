@@ -1,20 +1,17 @@
-import 'package:pbdl/input/figma/entities/style/figma_border.dart';
-import 'package:pbdl/input/figma/entities/style/figma_border_options.dart';
-import 'package:pbdl/input/figma/entities/style/figma_color.dart';
-import 'package:pbdl/input/figma/entities/style/figma_fill.dart';
-import 'package:pbdl/input/figma/entities/style/figma_text_style.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/input/helper/pb_color.dart';
+
+import 'figma_border.dart';
+import 'figma_border_options.dart';
+import 'figma_color.dart';
+import 'figma_fill.dart';
+import 'figma_text_style.dart';
 part 'figma_style.g.dart';
 
 @JsonSerializable()
 class FigmaStyle {
-  PBColor backgroundColor;
-  @override
+  FigmaColor backgroundColor;
   List<FigmaFill> fills = [];
-  @override
   List<FigmaBorder> borders;
-  @override
   FigmaTextStyle textStyle;
 
   FigmaStyle({

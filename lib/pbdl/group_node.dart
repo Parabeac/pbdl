@@ -1,9 +1,12 @@
 import 'package:pbdl/pbdl/pb_style.dart';
 import 'package:pbdl/pbdl/pbdl_frame.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import 'abstract_design_node_factory.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'group_node.g.dart';
+
+@JsonSerializable()
 class GroupNode implements PBDLNodeFactory, PBDLNode {
   List children = [];
 
@@ -39,54 +42,12 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {}
-
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   var node = GroupNode(
-  //     hasClickThrough: json['hasClickThrough'] as bool,
-  //     groupLayout: json['groupLayout'],
-  //     UUID: json['id'] as String,
-  //     booleanOperation: json['booleanOperation'],
-  //     exportOptions: json['exportOptions'],
-  //     boundaryRectangle: json['absoluteBoundingBox'] == null
-  //         ? null
-  //         : Frame.fromJson(json['absoluteBoundingBox'] as Map<String, dynamic>),
-  //     isFixedToViewport: json['isFixedToViewport'],
-  //     isFlippedHorizontal: json['isFlippedHorizontal'],
-  //     isFlippedVertical: json['isFlippedVertical'],
-  //     isLocked: json['isLocked'],
-  //     isVisible: json['visible'],
-  //     layerListExpandedType: json['layerListExpandedType'],
-  //     name: json['name'],
-  //     nameIsFixed: json['nameIsFixed'],
-  //     resizingConstraint: json['resizingConstraint'],
-  //     resizingType: json['resizingType'],
-  //     rotation: json['rotation'],
-  //     sharedStyleID: json['sharedStyleID'],
-  //     shouldBreakMaskChain: json['shouldBreakMaskChain'],
-  //     hasClippingMask: json['hasClippingMask'],
-  //     clippingMaskMode: json['clippingMaskMode'],
-  //     userInfo: json['userInfo'],
-  //     maintainScrollPosition: json['maintainScrollPosition'],
-  //     pbdfType: json['pbdfType'],
-  //     style: json['style'] == null
-  //         ? null
-  //         : PBStyle.fromPBDF(json['style'] as Map<String, dynamic>),
-  //   )
-  //     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-  //     ..type = json['type'] as String;
-  //   if (json.containsKey('children')) {
-  //     if (json['children'] != null) {
-  //       for (var item in json['children']) {
-  //         var child = DesignNode.fromPBDF(item as Map<String, dynamic>);
-  //         if (child != null) {
-  //           node.children.add(child);
-  //         }
-  //       }
-  //     }
-  //   }
-  //   return node;
-  // }
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      GroupNode.fromJson(json);
+  factory GroupNode.fromJson(Map<String, dynamic> json) =>
+      _$GroupNodeFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$GroupNodeToJson(this);
 
   @override
   String UUID;
@@ -115,11 +76,5 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
     //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
     //     bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
     //         boundaryRectangle.y + boundaryRectangle.height)));
-  }
-
-  @override
-  toJson() {
-    // TODO: implement toJson
-    throw UnimplementedError();
   }
 }

@@ -1,4 +1,4 @@
-class PBDLFlow{
+class PBDLFlow {
   String nodeID;
-  //type?
+  String type;
 }

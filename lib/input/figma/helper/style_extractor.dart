@@ -1,19 +1,17 @@
-
-
-import 'package:pbdl/input/figma/entities/layers/figma_font_descriptor.dart';
-import 'package:pbdl/input/figma/entities/layers/figma_paragraph_style.dart';
-import 'package:pbdl/input/figma/entities/style/figma_border.dart';
-import 'package:pbdl/input/figma/entities/style/figma_border_options.dart';
-import 'package:pbdl/input/figma/entities/style/figma_color.dart';
-import 'package:pbdl/input/figma/entities/style/figma_fill.dart';
-import 'package:pbdl/input/figma/entities/style/figma_style.dart';
-import 'package:pbdl/input/figma/entities/style/figma_text_style.dart';
+import '../entities/layers/figma_font_descriptor.dart';
+import '../entities/layers/figma_paragraph_style.dart';
+import '../entities/style/figma_border.dart';
+import '../entities/style/figma_border_options.dart';
+import '../entities/style/figma_color.dart';
+import '../entities/style/figma_fill.dart';
+import '../entities/style/figma_style.dart';
+import '../entities/style/figma_text_style.dart';
 
 /// Helper class used to get and sort the styling of FigmaNodes
 class StyleExtractor {
   StyleExtractor();
 
-  PBStyle getStyle(Map<String, dynamic> json) {
+  FigmaStyle getStyle(Map<String, dynamic> json) {
     if (json != null) {
       var bgColor;
       // Check if color exists in fills

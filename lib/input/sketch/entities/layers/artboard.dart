@@ -1,12 +1,13 @@
-import 'package:pbdl/input/sketch/entities/abstract_sketch_node_factory.dart';
-import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
-import 'package:pbdl/input/sketch/entities/layers/abstract_layer.dart';
-import 'package:pbdl/input/sketch/entities/layers/flow.dart';
-import 'package:pbdl/input/sketch/entities/objects/frame.dart';
-import 'package:pbdl/input/sketch/entities/style/color.dart';
-import 'package:pbdl/input/sketch/entities/style/style.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+
+import '../abstract_sketch_node_factory.dart';
+import '../objects/frame.dart';
+import '../style/color.dart';
+import '../style/style.dart';
+import 'abstract_group_layer.dart';
+import 'sketch_node.dart';
+import 'flow.dart';
 
 part 'artboard.g.dart';
 
@@ -148,66 +149,8 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   }
 
   @override
-  Map<String, dynamic> toPBDF() => <String, dynamic>{
-        // Change _class for type and layers for children and do_objectID for id
-        'booleanOperation': booleanOperation,
-        'exportOptions': exportOptions,
-        'flow': flow,
-        'isFixedToViewport': isFixedToViewport,
-        'isFlippedHorizontal': isFlippedHorizontal,
-        'isFlippedVertical': isFlippedVertical,
-        'isLocked': isLocked,
-        'layerListExpandedType': layerListExpandedType,
-        'name': name,
-        'nameIsFixed': nameIsFixed,
-        'resizingConstraint': resizingConstraint,
-        'resizingType': resizingType,
-        'rotation': rotation,
-        'sharedStyleID': sharedStyleID,
-        'shouldBreakMaskChain': shouldBreakMaskChain,
-        'hasClippingMask': hasClippingMask,
-        'clippingMaskMode': clippingMaskMode,
-        'userInfo': userInfo,
-        'maintainScrollPosition': maintainScrollPosition,
-        'prototypeNodeUUID': prototypeNodeUUID,
-        'hasClickThrough': hasClickThrough,
-        'groupLayout': groupLayout,
-        'children': getChildren(), // changed it was layers
-        'CLASS_NAME': CLASS_NAME,
-        'type': type, // changed it was _class
-        'includeInCloudUpload': includeInCloudUpload,
-        'includeBackgroundColorInExport': includeBackgroundColorInExport,
-        'horizontalRulerData': horizontalRulerData,
-        'verticalRulerData': verticalRulerData,
-        'layout': layout,
-        'grid': grid,
-        'absoluteBoundingBox': boundaryRectangle, // changed it was frame
-        'backgroundColor': backgroundColor,
-        'id': UUID, // changed it was do_objectID
-        'hasBackgroundColor': hasBackgroundColor,
-        'isFlowHome': isFlowHome,
-        'resizesContent': resizesContent,
-        'presetDictionary': presetDictionary,
-        'visible': isVisible, // changed it was isVisible
-        'style': style,
-        'pbdfType': pbdfType,
-      };
-
-  @override
   @JsonKey(ignore: true)
   String pbdfType = 'artboard';
-
-  // @override
-  // DesignNode createDesignNode(Map<String, dynamic> json) {
-  //   // TODO: implement createDesignNode
-  //   throw UnimplementedError();
-  // }
-
-  // @override
-  // DesignNode fromPBDF(Map<String, dynamic> json) {
-  //   // TODO: implement fromPBDF
-  //   throw UnimplementedError();
-  // }
 
   @override
   void set isFlowHome(_isFlowHome) {

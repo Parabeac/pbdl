@@ -1,17 +1,16 @@
-import 'package:pbdl/input/figma/entities/layers/canvas.dart';
-import 'package:pbdl/input/figma/helper/figma_page.dart';
-import 'package:pbdl/input/helper/design_project.dart';
 import 'package:quick_log/quick_log.dart';
 
+import '../entities/layers/canvas.dart';
+import 'figma_page.dart';
 import 'figma_screen.dart';
 
-class FigmaProject extends DesignProject {
-  @override
+class FigmaProject {
   bool debug;
 
   Logger log = Logger('FigmaProject');
 
-  @override
+  List<FigmaPage> pages;
+
   String projectName;
 
   var figmaJson;
@@ -22,7 +21,7 @@ class FigmaProject extends DesignProject {
     this.projectName,
     this.figmaJson, {
     String id,
-  }) : super(id: id) {
+  }) : super() {
     pages.addAll(_setConventionalPages(figmaJson['document']['children']));
   }
 
@@ -30,18 +29,18 @@ class FigmaProject extends DesignProject {
     var figmaPages = <FigmaPage>[];
     for (var canvas in canvasAndArtboards) {
       // Skip current canvas if its convert property is false
-      var pbdlPage = getPbdlPage(canvas['id']);
+      var pbdlPage = getFigmaPage(canvas['id']);
       if (pbdlPage != null && !(pbdlPage['convert'] ?? true)) {
         continue;
       }
 
-      var pg = FigmaPage(canvas['name'], canvas['id']);
+      var pg = FigmaPage(name: canvas['name'], id: canvas['id']);
 
       var node = Canvas.fromJson(canvas);
 
       for (var layer in node.children) {
         // Skip current screen if its convert property is false
-        var pbdlScreen = getPbdlScreen(pbdlPage, layer.UUID);
+        var pbdlScreen = getFigmaScreen(pbdlPage, layer.UUID);
         if (pbdlScreen != null && !(pbdlScreen['convert'] ?? true)) {
           continue;
         }
@@ -49,13 +48,23 @@ class FigmaProject extends DesignProject {
           layer.isFlowHome = true;
         }
         pg.addScreen(FigmaScreen(
-          layer,
-          layer.UUID,
-          layer.name,
+          figmaNode: layer,
+          id: layer.UUID,
+          name: layer.name,
         ));
       }
       figmaPages.add(pg);
     }
     return figmaPages;
+  }
+
+  Map getFigmaPage(String pageId) {
+    // TODO: implement
+    // Ask Ivan H to clarify
+  }
+
+  Map getFigmaScreen(Map figmaPage, String screenId) {
+    // TODO: implement
+    // Ask Ivan H to clarify
   }
 }

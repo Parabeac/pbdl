@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:archive/archive.dart';
 import 'package:path/path.dart';
-import 'package:pbdl/input/sketch/helper/sketch_page.dart';
+import '../helper/sketch_page.dart';
 
 /// Takes Initial Design File and puts it into a tree in object format.
 /// Currently only supports Sketch Files

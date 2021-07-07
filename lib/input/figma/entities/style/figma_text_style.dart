@@ -1,7 +1,8 @@
-import 'package:pbdl/input/figma/entities/layers/figma_font_descriptor.dart';
-import 'package:pbdl/input/figma/entities/layers/figma_paragraph_style.dart';
-import 'package:pbdl/input/figma/entities/style/figma_color.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import '../layers/figma_font_descriptor.dart';
+import '../layers/figma_paragraph_style.dart';
+import 'figma_color.dart';
 part 'figma_text_style.g.dart';
 
 @JsonSerializable()
