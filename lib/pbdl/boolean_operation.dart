@@ -26,6 +26,7 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   });
 
   @override
+  // PBDL node does not need interpretNode
   Future<PBDLNode> interpretNode() async {
     /* var img = await AzureAssetService().downloadImage(UUID);
     var file =
