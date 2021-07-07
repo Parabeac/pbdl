@@ -73,21 +73,6 @@ class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
   String type;
 
   @override
-  Future<PBDLNode> interpretNode() async {
-    /*
-    var img = await AzureAssetService().downloadImage(UUID);
-
-    imageReference = AssetProcessingService.getImageName(UUID);
-
-    var file =
-        File('${MainInfo().outputPath}pngs/${UUID}.png'.replaceAll(':', '_'))
-          ..createSync(recursive: true);
-    file.writeAsBytesSync(img);
-    return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext)); */
-  }
-
-  @override
   var boundaryRectangle;
 
   @override

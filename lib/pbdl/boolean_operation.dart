@@ -26,22 +26,6 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   });
 
   @override
-  // PBDL node does not need interpretNode
-  Future<PBDLNode> interpretNode() async {
-    /* var img = await AzureAssetService().downloadImage(UUID);
-    var file =
-        File('${MainInfo().outputPath}pngs/${UUID}.png'.replaceAll(':', '_'))
-          ..createSync(recursive: true);
-    file.writeAsBytesSync(img);
-
-    return Future.value(InheritedBitmap(
-      this,
-      name,
-      currentContext: currentContext,
-    ));*/
-  }
-
-  @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       BooleanOperation.fromJson(json);
   factory BooleanOperation.fromJson(Map<String, dynamic> json) =>

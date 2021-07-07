@@ -73,21 +73,6 @@ class PBSharedMasterDesignNode extends PBDLNode
   @override
   Map<String, dynamic> toJson() => _$PBSharedMasterDesignNodeToJson(this);
 
-  @override
-  Future<PBDLNode> interpretNode() {
-    /* var sym_master = PBSharedMasterNode(
-      this,
-      symbolID,
-      name,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(boundaryRectangle.x + boundaryRectangle.width,
-          boundaryRectangle.y + boundaryRectangle.height),
-      overridableProperties: _extractParameters(),
-      currentContext: currentContext,
-    );
-    return Future.value(sym_master); */
-  }
-
   ///Converting the [OverridableProperty] into [PBSharedParameterProp] to be processed in intermediate phase.
   // List<PBSharedParameterProp> _extractParameters() {
   //   Set<String> ovrNames = {};

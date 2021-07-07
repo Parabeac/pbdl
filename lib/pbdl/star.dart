@@ -69,11 +69,4 @@ class Star implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
-
-  @override
-  Future<PBDLNode> interpretNode() async {
-    /* var img = await AzureAssetService().downloadImage(UUID);
-    return Future.value(
-        InheritedStar(this, name, currentContext: currentContext, image: img)); */
-  }
 }

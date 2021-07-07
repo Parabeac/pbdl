@@ -67,12 +67,4 @@ class Oval implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
-
-  @override
-  Future<PBDLNode> interpretNode() async {
-    /*var img = await AzureAssetService().downloadImage(UUID);
-
-    return Future.value(
-        InheritedOval(this, name, currentContext: currentContext, image: img)); */
-  }
 }

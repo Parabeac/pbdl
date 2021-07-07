@@ -67,14 +67,4 @@ class Polygon implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
-
-  @override
-  Future<PBDLNode> interpretNode() async {
-    /*
-    var img = await AzureAssetService().downloadImage(UUID);
-
-    return Future.value(InheritedPolygon(this, name,
-        currentContext: currentContext, image: img));
-  */
-  }
 }

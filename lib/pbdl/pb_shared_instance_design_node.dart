@@ -60,14 +60,6 @@ class PBSharedInstanceDesignNode extends PBDLNode
   @override
   Map<String, dynamic> toJson() => _$PBSharedInstanceDesignNodeToJson(this);
 
-  @override
-  Future<PBDLNode> interpretNode() {
-    /* var sym = PBSharedInstanceIntermediateNode(this, symbolID,
-        sharedParamValues: _extractParameters(),
-        currentContext: currentContext);
-    return Future.value(sym); */
-  }
-
   ///Converting the [OverridableValue] into [PBSharedParameterValue] to be processed in intermediate phase.
   // List<PBSharedParameterValue> _extractParameters() {
   //   Set<String> ovrNames = {};

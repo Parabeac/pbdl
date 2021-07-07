@@ -82,29 +82,4 @@ class Rectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
-
-  @override
-  Future<PBDLNode> interpretNode() {
-    /*
-    Border border;
-    for (var b in style.borders.reversed) {
-      if (b.isEnabled) {
-        border = b;
-      }
-    }
-    return Future.value(InheritedContainer(
-      this,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(boundaryRectangle.x + boundaryRectangle.width,
-          boundaryRectangle.y + boundaryRectangle.height),
-      name,
-      currentContext: currentContext,
-      borderInfo: {
-        'borderRadius':
-            style.borderOptions.isEnabled ? points[0]['cornerRadius'] : null,
-        'borderColorHex': border != null ? toHex(border.color) : null,
-        'borderThickness': border != null ? border.thickness : null
-      },
-    )); */
-  }
 }

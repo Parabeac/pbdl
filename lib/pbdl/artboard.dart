@@ -63,16 +63,4 @@ class PBArtboard extends PBDLNode implements GroupNode, PBDLNodeFactory {
       _$PBArtboardFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBArtboardToJson(this);
-
-  @override
-  Future<PBDLNode> interpretNode() {
-    /*
-    return Future.value(InheritedScaffold(
-      this,
-      currentContext: currentContext,
-      name: name,
-      isHomeScreen: isFlowHome,
-    ));
-  } */
-  }
 }

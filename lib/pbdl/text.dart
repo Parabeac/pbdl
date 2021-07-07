@@ -70,18 +70,4 @@ class Text extends DesignElement implements PBDLNodeFactory, PBDLNode {
   factory Text.fromJson(Map<String, dynamic> json) => _$TextFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$TextToJson(this);
-
-  @override
-  Future<PBDLNode> interpretNode() {
-    // Future.value(InjectedContainer(
-    //   Point(boundaryRectangle.x + boundaryRectangle.width,
-    //       boundaryRectangle.y + boundaryRectangle.height),
-    //   Point(boundaryRectangle.x, boundaryRectangle.y),
-    //   name,
-    //   Uuid().v4(),
-    //   currentContext: currentContext,
-    // )..addChild(
-    //     InheritedText(this, name, currentContext: currentContext),
-    //   ));
-  }
 }

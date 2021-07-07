@@ -69,12 +69,4 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
-
-  @override
-  Future<PBDLNode> interpretNode() {
-    // Future.value(TempGroupLayoutNode(this, currentContext, name,
-    //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
-    //     bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
-    //         boundaryRectangle.y + boundaryRectangle.height)));
-  }
 }
