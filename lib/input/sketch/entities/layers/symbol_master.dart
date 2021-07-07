@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/input/general_helper/input_formatter.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 
 import '../../helper/symbol_node_mixin.dart';
@@ -142,7 +143,7 @@ class SymbolMaster extends AbstractGroupLayer
             maintainScrollPosition) {
     if (name != null) {
       this.name = name?.replaceAll(RegExp(r'[\s_\+]'), '');
-      // this.name = PBInputFormatter.removeFirstDigits(name);
+      this.name = PBInputFormatter.removeFirstDigits(name);
     }
   }
 
