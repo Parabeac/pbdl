@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-import '../../helper/symbol_node_mixin.dart';
+
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
@@ -9,9 +9,7 @@ import 'frame.dart';
 part 'component.g.dart';
 
 @JsonSerializable()
-class Component extends FigmaFrame
-    with FigmaSymbolNodeMixin
-    implements AbstractFigmaNodeFactory {
+class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   String type = 'COMPONENT';
   Component({

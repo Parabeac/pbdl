@@ -1,7 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
-import '../../helper/symbol_node_mixin.dart';
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
 import '../objects/override_value.dart';
@@ -14,9 +12,7 @@ part 'symbol_instance.g.dart';
 // title: Symbol Instance Layer
 // description: Symbol instance layers represent an instance of a symbol master
 @JsonSerializable()
-class SymbolInstance extends SketchNode
-    with SymbolNodeMixin
-    implements SketchNodeFactory {
+class SymbolInstance extends SketchNode implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolInstance';
   final List<OverridableValue> overrideValues;

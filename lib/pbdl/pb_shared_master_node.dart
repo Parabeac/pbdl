@@ -1,4 +1,3 @@
-import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 import 'abstract_design_node_factory.dart';
 import 'group_node.dart';
@@ -8,7 +7,6 @@ part 'pb_shared_master_node.g.dart';
 
 @JsonSerializable()
 class PBSharedMasterDesignNode extends PBDLNode
-    with SymbolNodeMixin
     implements PBDLNodeFactory, GroupNode {
   String symbolID;
   List overriadableProperties;

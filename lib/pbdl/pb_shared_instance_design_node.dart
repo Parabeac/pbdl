@@ -1,5 +1,4 @@
 import 'package:pbdl/input/sketch/entities/objects/override_value.dart';
-import 'package:pbdl/input/sketch/helper/symbol_node_mixin.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 import 'abstract_design_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -7,9 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pb_shared_instance_design_node.g.dart';
 
 @JsonSerializable()
-class PBSharedInstanceDesignNode extends PBDLNode
-    with SymbolNodeMixin
-    implements PBDLNodeFactory {
+class PBSharedInstanceDesignNode extends PBDLNode implements PBDLNodeFactory {
   String symbolID;
   List parameters;
 

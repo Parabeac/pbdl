@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/input/general_helper/input_formatter.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
-import '../../helper/symbol_node_mixin.dart';
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
 import '../objects/override_property.dart';
@@ -17,9 +15,7 @@ part 'symbol_master.g.dart';
 // title: Symbol Master Layer
 // description: A symbol master layer represents a reusable group of layers
 @JsonSerializable()
-class SymbolMaster extends AbstractGroupLayer
-    with SymbolNodeMixin
-    implements SketchNodeFactory {
+class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolMaster';
   @override
