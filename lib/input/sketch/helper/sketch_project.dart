@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:pbdl/input/helper/design_project.dart';
+import 'package:pbdl/pbdl/pbdl_project.dart';
 import 'package:pbdl/input/sketch/entities/documents/document.dart';
 import 'package:pbdl/input/sketch/entities/layers/page.dart';
 import 'package:pbdl/input/sketch/entities/objects/foreign_symbol.dart';
@@ -62,7 +62,7 @@ class SketchProject extends DesignProject {
 
       return sharedStyles;
     } catch (e, stackTrace) {
-      MainInfo().sentry.captureException(
+      //MainInfo().sentry.captureException(
             exception: e,
             stackTrace: stackTrace,
           );
@@ -87,7 +87,7 @@ class SketchProject extends DesignProject {
       }
       return pg;
     } catch (e, stackTrace) {
-      MainInfo().sentry.captureException(
+     // MainInfo().sentry.captureException(
             exception: e,
             stackTrace: stackTrace,
           );

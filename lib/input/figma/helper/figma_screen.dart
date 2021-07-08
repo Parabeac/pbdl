@@ -1,10 +1,11 @@
 
 
-import 'package:pbdl/input/helper/design_screen.dart';
+import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/pbdl/pbdl_screen.dart';
 
 class FigmaScreen extends DesignScreen {
   FigmaScreen(
-    DesignNode root,
+    PBDLNode root,
     String id,
     String name,
   ) : super(

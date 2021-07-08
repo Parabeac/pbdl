@@ -1,5 +1,5 @@
 
-import 'package:pbdl/input/helper/design_screen.dart';
+import 'package:pbdl/pbdl/pbdl_screen.dart';
 
 class SketchScreen extends DesignScreen {
   SketchScreen(

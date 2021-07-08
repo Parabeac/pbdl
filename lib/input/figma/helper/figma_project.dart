@@ -1,6 +1,6 @@
 import 'package:pbdl/input/figma/entities/layers/canvas.dart';
 import 'package:pbdl/input/figma/helper/figma_page.dart';
-import 'package:pbdl/input/helper/design_project.dart';
+import 'package:pbdl/pbdl/pbdl_project.dart';
 import 'package:quick_log/quick_log.dart';
 
 import 'figma_screen.dart';

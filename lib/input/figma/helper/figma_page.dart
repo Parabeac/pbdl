@@ -1,4 +1,4 @@
-import 'package:pbdl/input/helper/design_page.dart';
+import 'package:pbdl/pbdl/pbdl_page.dart';
 import 'package:quick_log/quick_log.dart';
 
 class FigmaPage extends DesignPage {
