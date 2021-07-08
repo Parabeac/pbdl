@@ -1,5 +1,12 @@
 import 'dart:convert';
 import 'package:pbdl/input/general_helper/input_formatter.dart';
+import 'package:pbdl/input/sketch/entities/documents/document.dart';
+import 'package:pbdl/input/sketch/entities/layers/page.dart';
+import 'package:pbdl/input/sketch/entities/objects/foreign_symbol.dart';
+import 'package:pbdl/input/sketch/entities/style/shared_style.dart';
+import 'package:pbdl/input/sketch/helper/sketch_page.dart';
+import 'package:pbdl/input/sketch/helper/sketch_screen.dart';
+import 'package:pbdl/input/sketch/services/input_design.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:archive/archive.dart';
 import 'package:recase/recase.dart';
@@ -67,10 +74,10 @@ class SketchProject {
 
       return sharedStyles;
     } catch (e, stackTrace) {
-      MainInfo().sentry.captureException(
-            exception: e,
-            stackTrace: stackTrace,
-          );
+      //MainInfo().sentry.captureException(
+      //   exception: e,
+      //   stackTrace: stackTrace,
+      // );
       log.error(e.toString());
       return null;
     }
@@ -81,7 +88,8 @@ class SketchProject {
       var jsonData = _ids.documentFile;
       var doc = Document.fromJson(jsonData);
       var foreignLayers = doc.foreignSymbols ?? <ForeignSymbol>[];
-      var pg = SketchPage('third_party_widgets', jsonData['do_objectID']);
+      var pg =
+          SketchPage(name: 'third_party_widgets', id: jsonData['do_objectID']);
       for (var layer in foreignLayers) {
         pg.addScreen(SketchScreen(
           designNode: layer.originalMaster,
@@ -92,10 +100,10 @@ class SketchProject {
       }
       return pg;
     } catch (e, stackTrace) {
-      MainInfo().sentry.captureException(
-            exception: e,
-            stackTrace: stackTrace,
-          );
+      // MainInfo().sentry.captureException(
+      //   exception: e,
+      //   stackTrace: stackTrace,
+      // );
       log.error(e.toString());
       return null;
     }

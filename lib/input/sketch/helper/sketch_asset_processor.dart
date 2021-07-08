@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
+import 'package:pbdl/constants/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 import 'asset_processing_service.dart';
 
@@ -59,7 +60,7 @@ class SketchAssetProcessor extends AssetProcessingService {
       var imageErr = File(
               '${MainInfo().cwd.path}/lib/input/assets/image-conversion-error.png')
           .readAsBytesSync();
-      await MainInfo().sentry.captureException(exception: e);
+      // await MainInfo().sentry.captureException(exception: e);
       log.error(e.toString());
       return imageErr;
     }
