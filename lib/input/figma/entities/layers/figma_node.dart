@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import '../abstract_figma_node_factory.dart';
 
+part 'figma_node.g.dart';
+
 @JsonSerializable(nullable: true)
-abstract class FigmaNode {
+class FigmaNode {
   @JsonKey(
     name: 'id',
   )
@@ -39,10 +40,11 @@ abstract class FigmaNode {
     this.transitionDuration,
     this.transitionEasing,
   });
-  @override
-  Map<String, dynamic> toJson();
-  factory FigmaNode.fromJson(Map<String, dynamic> json) =>
-      AbstractFigmaNodeFactory.getFigmaNode(json);
 
-  Future<PBDLNode> interpretNode();
+  Future<PBDLNode> interpretNode() {}
+
+  factory FigmaNode.fromJson(Map<String, dynamic> json) =>
+      _$FigmaNodeFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$FigmaNodeToJson(this);
 }
