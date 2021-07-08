@@ -1,16 +1,17 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
-
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
 import '../style/style.dart';
 import 'flow.dart';
 
+part 'sketch_node.g.dart';
+
 @JsonSerializable(nullable: true)
 // title: Abstract Layer
 // description: Abstract base schema for all layers
 // type: object
-abstract class SketchNode {
+class SketchNode {
   @override
   @JsonKey(name: 'do_objectID')
   final String UUID;
@@ -71,9 +72,10 @@ abstract class SketchNode {
       this.style,
       this.maintainScrollPosition);
 
-  @override
-  Map<String, dynamic> toJson();
+  Future<PBDLNode> interpretNode() {}
+
   factory SketchNode.fromJson(Map<String, dynamic> json) =>
-      AbstractSketchNodeFactory.getSketchNode(json);
-  Future<PBDLNode> interpretNode();
+      _$SketchNodeFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$SketchNodeToJson(this);
 }
