@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
-
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
 import 'vector.dart';

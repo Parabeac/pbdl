@@ -1,10 +1,13 @@
-import 'package:pbdl/pbdl/pbdl_page.dart';
 import 'package:quick_log/quick_log.dart';
 import '../entities/abstract_figma_node_factory.dart';
-import '../entities/layers/figma_node.dart';
 import 'figma_screen.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'figma_page.g.dart';
+
+@JsonSerializable()
 class FigmaPage implements FigmaNodeFactory {
+  @JsonKey(ignore: true)
   var log = Logger('FigmaPage');
 
   String id;
@@ -29,20 +32,20 @@ class FigmaPage implements FigmaNodeFactory {
     return screens;
   }
 
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> result = {};
-    result['pbdfType'] = pbdfType;
-    result['id'] = id;
-    result['name'] = name;
-    result['convert'] = convert;
+  // Map<String, dynamic> toJson() {
+  //   Map<String, dynamic> result = {};
+  //   result['pbdfType'] = pbdfType;
+  //   result['id'] = id;
+  //   result['name'] = name;
+  //   result['convert'] = convert;
 
-    List<Map> tempScreens = [];
-    for (var screen in screens) {
-      tempScreens.add(screen.toJson());
-    }
-    result['screens'] = tempScreens;
-    return result;
-  }
+  //   List<Map> tempScreens = [];
+  //   for (var screen in screens) {
+  //     tempScreens.add(screen.toJson());
+  //   }
+  //   result['screens'] = tempScreens;
+  //   return result;
+  // }
 
   @override
   String pbdfType = 'design_page';
@@ -59,18 +62,15 @@ class FigmaPage implements FigmaNodeFactory {
     return page;
   }
 
-  @override
-  FigmaNode createPBDLNode(Map<String, dynamic> json) {
-    // TODO: implement createPBDLNode
-    throw UnimplementedError();
-  }
+  factory FigmaPage.fromJson(Map<String, dynamic> json) =>
+      _$FigmaPageFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FigmaPageToJson(this);
 
   @override
   String type;
 
   @override
-  FigmaNode createFigmaNode(Map<String, dynamic> json) {
-    // TODO: implement createFigmaNode
-    throw UnimplementedError();
-  }
+  FigmaPage createFigmaNode(Map<String, dynamic> json) =>
+      FigmaPage.fromJson(json);
 }

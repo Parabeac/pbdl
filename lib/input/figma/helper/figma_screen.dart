@@ -1,6 +1,10 @@
 import '../entities/abstract_figma_node_factory.dart';
 import '../entities/layers/figma_node.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'figma_screen.g.dart';
+
+@JsonSerializable()
 class FigmaScreen implements FigmaNodeFactory {
   String id;
   String name;
@@ -19,31 +23,15 @@ class FigmaScreen implements FigmaNodeFactory {
     this.type,
   });
 
-  Map<String, dynamic> toPBDF() {
-    var result = <String, Object>{};
-    if (this.type == 'symbolMaster') {
-      result['pbdfType'] = 'symbol_master';
-    } else {
-      result['pbdfType'] = pbdfType;
-    }
-    result['id'] = id;
-    result['name'] = name;
-    result['convert'] = convert;
-    result['type'] = type;
-    result['designNode'] = figmaNode.toJson();
-    result['azure_blob_uri'] = imageURI;
-    return result;
-  }
-
   @override
   String pbdfType = 'screen';
 
   @override
   FigmaNode createDesignNode(Map<String, dynamic> json) {
-    var screen = FigmaScreen(name: json['name'], id: json['id']);
-    if (json.containsKey('designNode') && (json['convert'] ?? true)) {
-      screen.figmaNode = FigmaNode.fromJson(json['designNode']);
-    }
+    // var screen = FigmaScreen(name: json['name'], id: json['id']);
+    // if (json.containsKey('designNode') && (json['convert'] ?? true)) {
+    //   screen.figmaNode = FigmaNode.fromJson(json['designNode']);
+    // }
     // return screen;
     throw UnimplementedError();
   }
@@ -62,14 +50,6 @@ class FigmaScreen implements FigmaNodeFactory {
   }
 
   @override
-  FigmaNode createPBDLNode(Map<String, dynamic> json) {
-    // TODO: implement createPBDLNode
-    throw UnimplementedError();
-  }
-
-  @override
-  FigmaNode createFigmaNode(Map<String, dynamic> json) {
-    // TODO: implement createFigmaNode
-    throw UnimplementedError();
-  }
+  FigmaScreen createFigmaNode(Map<String, dynamic> json) =>
+      FigmaScreen.fromJson(json);
 }
