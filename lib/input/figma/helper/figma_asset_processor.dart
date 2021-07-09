@@ -1,7 +1,6 @@
 import 'dart:io';
-import 'package:path/path.dart' as p;
 import 'package:http/http.dart' as http;
-import 'package:pbdl/constants/main_info.dart';
+import 'package:pbdl/src/constants/main_info.dart';
 import 'package:pbdl/input/figma/helper/api_call_service.dart';
 import 'package:quick_log/quick_log.dart';
 import 'api_call_service.dart';

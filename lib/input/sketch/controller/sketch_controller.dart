@@ -5,7 +5,7 @@ import 'package:parabeac_core/input/helper/azure_asset_service.dart';
 import 'package:parabeac_core/input/helper/design_project.dart';
 import 'package:parabeac_core/input/sketch/helper/sketch_project.dart';
 import 'package:parabeac_core/input/sketch/services/input_design.dart';
-import 'package:pbdl/constants/main_info.dart';
+import 'package:pbdl/src/constants/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 
 import 'main_info.dart';

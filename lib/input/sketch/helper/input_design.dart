@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:path/path.dart';
 import 'package:archive/archive.dart';
-import 'package:pbdl/constants/main_info.dart';
+import 'package:pbdl/src/constants/main_info.dart';
 
 import 'sketch_page.dart';
 
