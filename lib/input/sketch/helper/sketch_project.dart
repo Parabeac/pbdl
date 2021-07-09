@@ -128,7 +128,7 @@ class SketchProject {
 
       // Turn layers into PBNodes
       for (var layer in node.children) {
-        var pbdlScreen = getSjetchScreen(pbdlPage, layer.UUID);
+        var pbdlScreen = getSketchScreen(pbdlPage, layer.UUID);
         if (pbdlScreen != null && !(pbdlScreen['convert'] ?? true)) {
           continue;
         }
@@ -149,7 +149,7 @@ class SketchProject {
     // ask Ivan H to clarify
   }
 
-  Map getSjetchScreen(Map pbdlPage, String screenId) {
+  Map getSketchScreen(Map pbdlPage, String screenId) {
     // TODO: implement
     // ask Ivan H to clarify
   }

@@ -1,10 +1,14 @@
-import 'package:pbdl/pbdl/pbdl_page.dart';
 import 'package:quick_log/quick_log.dart';
 import '../entities/abstract_sketch_node_factory.dart';
 import '../entities/layers/sketch_node.dart';
 import 'sketch_screen.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'sketch_page.g.dart';
+
+@JsonSerializable()
 class SketchPage implements SketchNodeFactory {
+  @JsonKey(ignore: true)
   var log = Logger('DesignPage');
 
   String id;

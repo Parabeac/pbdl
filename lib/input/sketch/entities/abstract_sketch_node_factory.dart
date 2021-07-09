@@ -57,5 +57,5 @@ class AbstractSketchNodeFactory {
 ///method is just going to call the factory method.
 abstract class SketchNodeFactory {
   String CLASS_NAME;
-  SketchNode createSketchNode(Map<String, dynamic> json);
+  dynamic createSketchNode(Map<String, dynamic> json);
 }

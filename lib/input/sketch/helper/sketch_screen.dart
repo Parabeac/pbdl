@@ -1,6 +1,10 @@
 import '../entities/abstract_sketch_node_factory.dart';
 import '../entities/layers/sketch_node.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'sketch_screen.g.dart';
+
+@JsonSerializable()
 class SketchScreen implements SketchNodeFactory {
   String id;
   String name;
@@ -21,34 +25,34 @@ class SketchScreen implements SketchNodeFactory {
     this.designNode = designNode;
   }
 
-  Map<String, dynamic> toPBDF() {
-    var result = <String, Object>{};
-    if (this.type == 'symbolMaster') {
-      result['pbdfType'] = 'symbol_master';
-    } else {
-      result['pbdfType'] = pbdfType;
-    }
-    result['id'] = id;
-    result['name'] = name;
-    result['convert'] = convert;
-    result['type'] = type;
-    result['designNode'] = designNode.toJson();
-    result['azure_blob_uri'] = imageURI;
-    return result;
-  }
+  // Map<String, dynamic> toPBDF() {
+  //   var result = <String, Object>{};
+  //   if (this.type == 'symbolMaster') {
+  //     result['pbdfType'] = 'symbol_master';
+  //   } else {
+  //     result['pbdfType'] = pbdfType;
+  //   }
+  //   result['id'] = id;
+  //   result['name'] = name;
+  //   result['convert'] = convert;
+  //   result['type'] = type;
+  //   result['designNode'] = designNode.toJson();
+  //   result['azure_blob_uri'] = imageURI;
+  //   return result;
+  // }
 
   @override
   String pbdfType = 'screen';
 
-  @override
-  SketchNode createDesignNode(Map<String, dynamic> json) {
-    var screen = SketchScreen(name: json['name'], id: json['id']);
-    if (json.containsKey('designNode') && (json['convert'] ?? true)) {
-      screen.designNode = SketchNode.fromJson(json['designNode']);
-    }
-    // return screen;
-    throw UnimplementedError();
-  }
+  // @override
+  // SketchNode createDesignNode(Map<String, dynamic> json) {
+  //   var screen = SketchScreen(name: json['name'], id: json['id']);
+  //   if (json.containsKey('designNode') && (json['convert'] ?? true)) {
+  //     screen.designNode = SketchNode.fromJson(json['designNode']);
+  //   }
+  //   // return screen;
+  //   throw UnimplementedError();
+  // }
 
   factory SketchScreen.fromJson(Map<String, dynamic> json) {
     var screen = SketchScreen(name: json['name'], id: json['id']);
