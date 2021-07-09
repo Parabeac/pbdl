@@ -116,11 +116,6 @@ class SketchProject {
           _originalArchive.findFile('pages/${entry.key}.json').content;
       var jsonData = json.decode(utf8.decode(pageContent));
 
-      var pbdlPage = getSketchPage(jsonData['do_objectID']);
-      if (pbdlPage != null && !(pbdlPage['convert'] ?? true)) {
-        continue;
-      }
-
       var pg = SketchPage(
           name: jsonData['name'],
           id: jsonData['do_objectID']); // Sketch Node Holder
@@ -128,10 +123,6 @@ class SketchProject {
 
       // Turn layers into PBNodes
       for (var layer in node.children) {
-        var pbdlScreen = getSketchScreen(pbdlPage, layer.UUID);
-        if (pbdlScreen != null && !(pbdlScreen['convert'] ?? true)) {
-          continue;
-        }
         pg.addScreen(SketchScreen(
           designNode: layer,
           id: layer.UUID,
@@ -142,15 +133,5 @@ class SketchProject {
       sketchPages.add(pg);
     }
     return sketchPages;
-  }
-
-  Map getSketchPage(String pageId) {
-    // TODO: implement
-    // ask Ivan H to clarify
-  }
-
-  Map getSketchScreen(Map pbdlPage, String screenId) {
-    // TODO: implement
-    // ask Ivan H to clarify
   }
 }

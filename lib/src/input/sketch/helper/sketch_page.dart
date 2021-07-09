@@ -1,14 +1,7 @@
 import 'package:quick_log/quick_log.dart';
-import '../entities/abstract_sketch_node_factory.dart';
-import '../entities/layers/sketch_node.dart';
 import 'sketch_screen.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-part 'sketch_page.g.dart';
-
-@JsonSerializable()
-class SketchPage implements SketchNodeFactory {
-  @JsonKey(ignore: true)
+class SketchPage {
   var log = Logger('DesignPage');
 
   String id;
@@ -34,7 +27,7 @@ class SketchPage implements SketchNodeFactory {
   }
 
   /// Parabeac Design File
-  Map<String, dynamic> toPBDF() {
+  Map<String, dynamic> toJSON() {
     Map<String, dynamic> result = {};
     result['pbdfType'] = pbdfType;
     result['id'] = id;
@@ -52,7 +45,7 @@ class SketchPage implements SketchNodeFactory {
   @override
   String pbdfType = 'design_page';
 
-  factory SketchPage.fromPBDF(Map<String, dynamic> json) {
+  factory SketchPage.fromJson(Map<String, dynamic> json) {
     var page = SketchPage(name: json['name'], id: json['id']);
     if (json.containsKey('screens')) {
       (json['screens'] as List)?.forEach((value) {
@@ -67,10 +60,4 @@ class SketchPage implements SketchNodeFactory {
 
   @override
   String CLASS_NAME;
-
-  @override
-  SketchNode createSketchNode(Map<String, dynamic> json) {
-    // TODO: implement createSketchNode
-    throw UnimplementedError();
-  }
 }
