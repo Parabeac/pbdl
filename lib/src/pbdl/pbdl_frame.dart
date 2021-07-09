@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/pbdl/rect.dart';
+import 'package:pbdl/src/pbdl/rect.dart';
 
 part 'pbdl_frame.g.dart';
 

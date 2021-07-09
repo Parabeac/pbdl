@@ -1,5 +1,5 @@
-import 'package:pbdl/pbdl/pbdl_frame.dart';
-import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import 'abstract_design_node_factory.dart';
 import 'design_element.dart';

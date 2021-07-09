@@ -1,8 +1,8 @@
-import 'package:pbdl/pbdl/color.dart';
-import 'package:pbdl/pbdl/pb_style.dart';
-import 'package:pbdl/pbdl/pbdl_flow.dart';
-import 'package:pbdl/pbdl/pbdl_frame.dart';
-import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/color.dart';
+import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_flow.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_design_node_factory.dart';
 import 'group_node.dart';
 import 'package:json_annotation/json_annotation.dart';

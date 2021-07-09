@@ -1,21 +1,22 @@
-import 'package:pbdl/pbdl/pb_style.dart';
-import 'package:pbdl/pbdl/pbdl_frame.dart';
-import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
+
 import 'abstract_design_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'group_node.g.dart';
+part 'star.g.dart';
 
 @JsonSerializable()
-class GroupNode implements PBDLNodeFactory, PBDLNode {
-  List children = [];
-
+class Star implements PBDLNodeFactory, PBDLNode {
   @override
-  String pbdfType = 'group';
+  String pbdfType = 'star';
 
-  GroupNode({
-    bool hasClickThrough,
-    groupLayout,
+  Star({
+    bool edited,
+    bool isClosed,
+    pointRadiusBehaviour,
+    List points,
     this.UUID,
     booleanOperation,
     exportOptions,
@@ -24,9 +25,9 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    this.isVisible,
+    isVisible,
     layerListExpandedType,
-    this.name,
+    name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -37,17 +38,16 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.pbdfType = 'group',
+    type,
+    pbdfType,
     this.style,
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
-      GroupNode.fromJson(json);
-  factory GroupNode.fromJson(Map<String, dynamic> json) =>
-      _$GroupNodeFromJson(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => Star.fromJson(json);
+  factory Star.fromJson(Map<String, dynamic> json) => _$StarFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$GroupNodeToJson(this);
+  Map<String, dynamic> toJson() => _$StarToJson(this);
 
   @override
   String UUID;

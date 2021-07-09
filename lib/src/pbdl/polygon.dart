@@ -1,18 +1,21 @@
-import 'package:pbdl/pbdl/pb_style.dart';
-import 'package:pbdl/pbdl/pbdl_frame.dart';
-import 'package:pbdl/pbdl/pbdl_node.dart';
-
+import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_design_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'star.g.dart';
+part 'polygon.g.dart';
 
 @JsonSerializable()
-class Star implements PBDLNodeFactory, PBDLNode {
+class Polygon implements PBDLNodeFactory, PBDLNode {
   @override
-  String pbdfType = 'star';
+  String pbdfType = 'polygon';
 
-  Star({
+  var boundaryRectangle;
+
+  var UUID;
+
+  Polygon({
     bool edited,
     bool isClosed,
     pointRadiusBehaviour,
@@ -44,16 +47,11 @@ class Star implements PBDLNodeFactory, PBDLNode {
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) => Star.fromJson(json);
-  factory Star.fromJson(Map<String, dynamic> json) => _$StarFromJson(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => Polygon.fromJson(json);
+  factory Polygon.fromJson(Map<String, dynamic> json) =>
+      _$PolygonFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$StarToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
+  Map<String, dynamic> toJson() => _$PolygonToJson(this);
 
   @override
   bool isVisible;

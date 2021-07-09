@@ -1,7 +1,7 @@
-import 'package:pbdl/pbdl/pb_border.dart';
-import 'package:pbdl/pbdl/pb_border_options.dart';
-import 'package:pbdl/pbdl/pb_fill.dart';
-import 'package:pbdl/pbdl/pb_text_style.dart';
+import 'package:pbdl/src/pbdl/pb_border.dart';
+import 'package:pbdl/src/pbdl/pb_border_options.dart';
+import 'package:pbdl/src/pbdl/pb_fill.dart';
+import 'package:pbdl/src/pbdl/pb_text_style.dart';
 import 'color.dart';
 import 'package:json_annotation/json_annotation.dart';
 

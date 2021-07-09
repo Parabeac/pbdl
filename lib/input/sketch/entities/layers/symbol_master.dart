@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/input/general_helper/input_formatter.dart';
-import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
 import '../objects/override_property.dart';

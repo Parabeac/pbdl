@@ -1,5 +1,5 @@
-import 'package:pbdl/pbdl/abstract_design_node_factory.dart';
-import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/abstract_design_node_factory.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_screen.g.dart';

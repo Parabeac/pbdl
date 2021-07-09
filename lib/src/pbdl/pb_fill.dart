@@ -1,4 +1,4 @@
-import 'package:pbdl/pbdl/color.dart';
+import 'package:pbdl/src/pbdl/color.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pb_fill.g.dart';

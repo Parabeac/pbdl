@@ -1,25 +1,21 @@
-import 'package:pbdl/pbdl/pb_style.dart';
-import 'package:pbdl/pbdl/pbdl_frame.dart';
-import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_design_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'polygon.g.dart';
+part 'group_node.g.dart';
 
 @JsonSerializable()
-class Polygon implements PBDLNodeFactory, PBDLNode {
+class GroupNode implements PBDLNodeFactory, PBDLNode {
+  List children = [];
+
   @override
-  String pbdfType = 'polygon';
+  String pbdfType = 'group';
 
-  var boundaryRectangle;
-
-  var UUID;
-
-  Polygon({
-    bool edited,
-    bool isClosed,
-    pointRadiusBehaviour,
-    List points,
+  GroupNode({
+    bool hasClickThrough,
+    groupLayout,
     this.UUID,
     booleanOperation,
     exportOptions,
@@ -28,9 +24,9 @@ class Polygon implements PBDLNodeFactory, PBDLNode {
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    isVisible,
+    this.isVisible,
     layerListExpandedType,
-    name,
+    this.name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -41,17 +37,23 @@ class Polygon implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    type,
-    pbdfType,
+    this.pbdfType = 'group',
     this.style,
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) => Polygon.fromJson(json);
-  factory Polygon.fromJson(Map<String, dynamic> json) =>
-      _$PolygonFromJson(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      GroupNode.fromJson(json);
+  factory GroupNode.fromJson(Map<String, dynamic> json) =>
+      _$GroupNodeFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PolygonToJson(this);
+  Map<String, dynamic> toJson() => _$GroupNodeToJson(this);
+
+  @override
+  String UUID;
+
+  @override
+  var boundaryRectangle;
 
   @override
   bool isVisible;

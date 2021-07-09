@@ -1,7 +1,7 @@
 // import 'package:pbdl/input/sketch/entities/layers/abstract_group_layer.dart';
 // import 'package:pbdl/input/sketch/entities/layers/artboard.dart';
 // import 'package:pbdl/input/sketch/entities/layers/group.dart';
-// import 'package:pbdl/pbdl/pbdl_node.dart';
+// import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 // import '../entities/layers/symbol_master.dart';
 

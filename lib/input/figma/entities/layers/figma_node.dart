@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
 
 part 'figma_node.g.dart';

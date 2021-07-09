@@ -1,5 +1,5 @@
-import 'package:pbdl/pbdl/pb_font_descriptor.dart';
-import 'package:pbdl/pbdl/pb_paragraph_style.dart';
+import 'package:pbdl/src/pbdl/pb_font_descriptor.dart';
+import 'package:pbdl/src/pbdl/pb_paragraph_style.dart';
 
 import 'color.dart';
 import 'package:json_annotation/json_annotation.dart';

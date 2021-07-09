@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../../helper/override_value.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
