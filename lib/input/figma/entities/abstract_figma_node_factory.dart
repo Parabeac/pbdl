@@ -51,5 +51,5 @@ class AbstractFigmaNodeFactory {
 
 abstract class FigmaNodeFactory {
   String type;
-  dynamic createFigmaNode(Map<String, dynamic> json);
+  FigmaNode createFigmaNode(Map<String, dynamic> json);
 }

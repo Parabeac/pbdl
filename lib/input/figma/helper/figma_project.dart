@@ -30,22 +30,13 @@ class FigmaProject {
   List<FigmaPage> _setConventionalPages(var canvasAndArtboards) {
     var figmaPages = <FigmaPage>[];
     for (var canvas in canvasAndArtboards) {
-      // Skip current canvas if its convert property is false
-      var pbdlPage = getFigmaPage(canvas['id']);
-      if (pbdlPage != null && !(pbdlPage['convert'] ?? true)) {
-        continue;
-      }
-
       var pg = FigmaPage(name: canvas['name'], id: canvas['id']);
 
       var node = Canvas.fromJson(canvas);
 
       for (var layer in node.children) {
         // Skip current screen if its convert property is false
-        var pbdlScreen = getFigmaScreen(pbdlPage, layer.UUID);
-        if (pbdlScreen != null && !(pbdlScreen['convert'] ?? true)) {
-          continue;
-        }
+
         if (layer.UUID == node.prototypeStartNodeID) {
           layer.isFlowHome = true;
         }
@@ -58,15 +49,5 @@ class FigmaProject {
       figmaPages.add(pg);
     }
     return figmaPages;
-  }
-
-  Map getFigmaPage(String pageId) {
-    // TODO: implement
-    // Ask Ivan H to clarify
-  }
-
-  Map getFigmaScreen(Map figmaPage, String screenId) {
-    // TODO: implement
-    // Ask Ivan H to clarify
   }
 }

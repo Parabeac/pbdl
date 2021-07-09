@@ -1,13 +1,8 @@
 import 'package:quick_log/quick_log.dart';
 import '../entities/abstract_figma_node_factory.dart';
 import 'figma_screen.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-part 'figma_page.g.dart';
-
-@JsonSerializable()
-class FigmaPage implements FigmaNodeFactory {
-  @JsonKey(ignore: true)
+class FigmaPage {
   var log = Logger('FigmaPage');
 
   String id;
@@ -32,20 +27,20 @@ class FigmaPage implements FigmaNodeFactory {
     return screens;
   }
 
-  // Map<String, dynamic> toJson() {
-  //   Map<String, dynamic> result = {};
-  //   result['pbdfType'] = pbdfType;
-  //   result['id'] = id;
-  //   result['name'] = name;
-  //   result['convert'] = convert;
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> result = {};
+    result['pbdfType'] = pbdfType;
+    result['id'] = id;
+    result['name'] = name;
+    result['convert'] = convert;
 
-  //   List<Map> tempScreens = [];
-  //   for (var screen in screens) {
-  //     tempScreens.add(screen.toJson());
-  //   }
-  //   result['screens'] = tempScreens;
-  //   return result;
-  // }
+    List<Map> tempScreens = [];
+    for (var screen in screens) {
+      tempScreens.add(screen.toJson());
+    }
+    result['screens'] = tempScreens;
+    return result;
+  }
 
   @override
   String pbdfType = 'design_page';
@@ -62,15 +57,6 @@ class FigmaPage implements FigmaNodeFactory {
     return page;
   }
 
-  factory FigmaPage.fromJson(Map<String, dynamic> json) =>
-      _$FigmaPageFromJson(json);
-
-  Map<String, dynamic> toJson() => _$FigmaPageToJson(this);
-
   @override
   String type;
-
-  @override
-  FigmaPage createFigmaNode(Map<String, dynamic> json) =>
-      FigmaPage.fromJson(json);
 }
