@@ -1,5 +1,5 @@
-import 'package:pbdl/input/figma/entities/layers/canvas.dart';
-import 'package:pbdl/input/figma/helper/figma_page.dart';
+import 'package:pbdl/src/input/figma/entities/layers/canvas.dart';
+import 'package:pbdl/src/input/figma/helper/figma_page.dart';
 import 'package:pbdl/src/pbdl/pbdl_project.dart';
 import 'package:quick_log/quick_log.dart';
 import '../entities/layers/canvas.dart';

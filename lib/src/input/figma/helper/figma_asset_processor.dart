@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:pbdl/src/constants/main_info.dart';
-import 'package:pbdl/input/figma/helper/api_call_service.dart';
+import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
 import 'package:quick_log/quick_log.dart';
 import 'api_call_service.dart';
 import 'asset_processing_service.dart';

@@ -3,7 +3,7 @@
 import 'package:pbdl/src/pbdl/abstract_design_node_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
-import 'package:pbdl/input/sketch/entities/style/shared_style.dart';
+import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_project.g.dart';
