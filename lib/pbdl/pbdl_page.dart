@@ -3,10 +3,14 @@
 import 'package:pbdl/pbdl/abstract_design_node_factory.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
-
 import 'pbdl_screen.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'pbdl_page.g.dart';
+
+@JsonSerializable()
 class PBDLPage implements PBDLNodeFactory {
+  @JsonKey(ignore: true)
   var log = Logger('DesignPage');
 
   String id;
@@ -31,40 +35,13 @@ class PBDLPage implements PBDLNodeFactory {
     return screens;
   }
 
-  /// Parabeac Design File
-  Map<String, dynamic> toPBDF() {
-    Map<String, dynamic> result = {};
-    result['pbdfType'] = pbdfType;
-    result['id'] = id;
-    result['name'] = name;
-    result['convert'] = convert;
-
-    List<Map> tempScreens = [];
-    for (var screen in screens) {
-      tempScreens.add(screen.toPBDF());
-    }
-    result['screens'] = tempScreens;
-    return result;
-  }
-
   @override
   String pbdfType = 'design_page';
 
-  factory PBDLPage.fromPBDF(Map<String, dynamic> json) {
-    var page = PBDLPage(name: json['name'], id: json['id']);
-    if (json.containsKey('screens')) {
-      (json['screens'] as List)?.forEach((value) {
-        if (value != null && (value['convert'] ?? true)) {
-          page.screens.add(PBDLScreen.fromPBDF(value as Map<String, dynamic>));
-        }
-      });
-    }
-    return page;
-  }
-
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {
-    // TODO: implement createPBDLNode
-    throw UnimplementedError();
-  }
+  PBDLPage createPBDLNode(Map<String, dynamic> json) => PBDLPage.fromJson(json);
+  factory PBDLPage.fromJson(Map<String, dynamic> json) =>
+      _$PBDLPageFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PBDLPageToJson(this);
 }

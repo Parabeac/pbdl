@@ -1,8 +1,10 @@
-// maybe we dont need this one anymore, or we might use it for PBDL
-
 import 'package:pbdl/pbdl/abstract_design_node_factory.dart';
 import 'package:pbdl/pbdl/pbdl_node.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'pbdl_screen.g.dart';
+
+@JsonSerializable()
 class PBDLScreen implements PBDLNodeFactory {
   String id;
   String name;
@@ -23,51 +25,14 @@ class PBDLScreen implements PBDLNodeFactory {
     this.designNode = designNode;
   }
 
-  Map<String, dynamic> toPBDF() {
-    var result = <String, Object>{};
-    if (this.type == 'symbolMaster') {
-      result['pbdfType'] = 'symbol_master';
-    } else {
-      result['pbdfType'] = pbdfType;
-    }
-    result['id'] = id;
-    result['name'] = name;
-    result['convert'] = convert;
-    result['type'] = type;
-    result['designNode'] = designNode.toJson();
-    result['azure_blob_uri'] = imageURI;
-    return result;
-  }
-
   @override
   String pbdfType = 'screen';
 
   @override
-  PBDLNode createDesignNode(Map<String, dynamic> json) {
-    var screen = PBDLScreen(name: json['name'], id: json['id']);
-    if (json.containsKey('designNode') && (json['convert'] ?? true)) {
-      screen.designNode = PBDLNode.fromJson(json['designNode']);
-    }
-    // return screen;
-    throw UnimplementedError();
-  }
-
-  factory PBDLScreen.fromPBDF(Map<String, dynamic> json) {
-    var screen = PBDLScreen(name: json['name'], id: json['id']);
-    if (json.containsKey('designNode') && (json['convert'] ?? true)) {
-      screen.designNode = PBDLNode.fromJson(json['designNode']);
-    }
-    return screen;
-  }
-  Map<String, Object> toJson() {
-    var result = <String, Object>{'azure_blob_uri': imageURI};
-    result.addAll(designNode.toJson());
-    return result;
-  }
-
+  PBDLScreen createPBDLNode(Map<String, dynamic> json) =>
+      PBDLScreen.fromJson(json);
+  factory PBDLScreen.fromJson(Map<String, dynamic> json) =>
+      _$PBDLScreenFromJson(json);
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) {
-    // TODO: implement createPBDLNode
-    throw UnimplementedError();
-  }
+  Map<String, dynamic> toJson() => _$PBDLScreenToJson(this);
 }

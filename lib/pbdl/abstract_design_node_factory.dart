@@ -53,5 +53,5 @@ class AbstractDesignNodeFactory {
 
 abstract class PBDLNodeFactory {
   String pbdfType;
-  PBDLNode createPBDLNode(Map<String, dynamic> json);
+  dynamic createPBDLNode(Map<String, dynamic> json);
 }
