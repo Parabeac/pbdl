@@ -30,6 +30,16 @@ class PBDLProject implements PBDLNodeFactory {
       PBDLProject.fromJson(json);
   factory PBDLProject.fromJson(Map<String, dynamic> json) =>
       _$PBDLProjectFromJson(json);
-  @override
   Map<String, dynamic> toJson() => _$PBDLProjectToJson(this);
+
+  /// Method that creates and returns a [PBDLProject] from a Sketch file `path`
+  factory PBDLProject.fromSketch(String path) {
+    
+    return PBDLProject();
+  }
+
+  /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
+  factory PBDLProject.fromFigma(String projectID, String key) {
+    return PBDLProject();
+  }
 }
