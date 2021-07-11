@@ -4,8 +4,9 @@ import 'package:json_annotation/json_annotation.dart';
 part 'design_element.g.dart';
 
 @JsonSerializable()
-class DesignElement extends PBDLNode {
-  DesignElement({
+// TODO: Not sure why this class exists.
+class PBDLElement extends PBDLNode {
+  PBDLElement({
     UUID,
     name,
     isVisible,
@@ -23,7 +24,7 @@ class DesignElement extends PBDLNode {
           prototypeNodeUUID,
         );
 
-  factory DesignElement.fromJson(Map<String, dynamic> json) =>
+  factory PBDLElement.fromJson(Map<String, dynamic> json) =>
       _$DesignElementFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$DesignElementToJson(this);

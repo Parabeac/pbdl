@@ -1,28 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pb_text_style.dart';
+part of 'pbdl_text_style.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBTextStyle _$PBTextStyleFromJson(Map<String, dynamic> json) {
-  return PBTextStyle(
+PBDLTextStyle _$PBTextStyleFromJson(Map<String, dynamic> json) {
+  return PBDLTextStyle(
     fontColor: json['fontColor'] == null
         ? null
-        : PBColor.fromJson(json['fontColor'] as Map<String, dynamic>),
+        : PBDLColor.fromJson(json['fontColor'] as Map<String, dynamic>),
     weight: json['weight'] as String,
     paragraphStyle: json['paragraphStyle'] == null
         ? null
-        : PBParagraphStyle.fromJson(
+        : PBDLParagraphStyle.fromJson(
             json['paragraphStyle'] as Map<String, dynamic>),
   )..fontDescriptor = json['fontDescriptor'] == null
       ? null
-      : PBFontDescriptor.fromJson(
+      : PBDLFontDescriptor.fromJson(
           json['fontDescriptor'] as Map<String, dynamic>);
 }
 
-Map<String, dynamic> _$PBTextStyleToJson(PBTextStyle instance) =>
+Map<String, dynamic> _$PBTextStyleToJson(PBDLTextStyle instance) =>
     <String, dynamic>{
       'fontColor': instance.fontColor,
       'weight': instance.weight,

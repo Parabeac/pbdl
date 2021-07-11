@@ -1,14 +1,14 @@
-import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
-import 'image.dart';
+import 'abstract_pbdl_node_factory.dart';
+import 'pbdl_image.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'vector.g.dart';
 
 @JsonSerializable()
-class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
+class PBDLVector implements PBDLNodeFactory, PBDLNode, PBDLImage {
   @override
   String pbdfType = 'vector';
 
@@ -28,7 +28,7 @@ class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
 
   var fillsList;
 
-  Vector({
+  PBDLVector({
     this.name,
     visible,
     this.type,
@@ -49,8 +49,10 @@ class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) => Vector.fromJson(json);
-  factory Vector.fromJson(Map<String, dynamic> json) => _$VectorFromJson(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      PBDLVector.fromJson(json);
+  factory PBDLVector.fromJson(Map<String, dynamic> json) =>
+      _$VectorFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$VectorToJson(this);
 
@@ -67,7 +69,7 @@ class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
   String prototypeNodeUUID;
 
   @override
-  PBStyle style;
+  PBDLStyle style;
 
   @override
   String type;

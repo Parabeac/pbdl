@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'design_element.dart';
+part of 'pbdl_element.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-DesignElement _$DesignElementFromJson(Map<String, dynamic> json) {
-  return DesignElement(
+PBDLElement _$DesignElementFromJson(Map<String, dynamic> json) {
+  return PBDLElement(
     UUID: json['UUID'],
     name: json['name'],
     isVisible: json['isVisible'],
@@ -18,7 +18,7 @@ DesignElement _$DesignElementFromJson(Map<String, dynamic> json) {
   )..pbdfType = json['pbdfType'] as String;
 }
 
-Map<String, dynamic> _$DesignElementToJson(DesignElement instance) =>
+Map<String, dynamic> _$DesignElementToJson(PBDLElement instance) =>
     <String, dynamic>{
       'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,

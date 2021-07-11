@@ -1,5 +1,5 @@
-import 'package:pbdl/src/pbdl/pb_style.dart';
-import 'abstract_design_node_factory.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
+import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_node.g.dart';
@@ -22,7 +22,7 @@ class PBDLNode {
   bool isVisible;
   var boundaryRectangle;
   String type;
-  PBStyle style;
+  PBDLStyle style;
   String prototypeNodeUUID;
 
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLNode.fromJson(json);
@@ -31,7 +31,5 @@ class PBDLNode {
   Map<String, dynamic> toJson() => _$PBDLNodeToJson(this);
 
   factory PBDLNode.fromJson(Map<String, dynamic> json) =>
-      AbstractDesignNodeFactory.getPBDLNode(json);
-
-    
+      AbstractPBDLNodeFactory.getPBDLNode(json);
 }

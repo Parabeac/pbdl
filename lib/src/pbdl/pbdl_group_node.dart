@@ -1,26 +1,21 @@
-import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
-
+import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'oval.g.dart';
+part 'group_node.g.dart';
 
 @JsonSerializable()
-class Oval implements PBDLNodeFactory, PBDLNode {
+class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
+  List children = [];
+
   @override
-  String pbdfType = 'oval';
+  String pbdfType = 'group';
 
-  var boundaryRectangle;
-
-  var UUID;
-
-  Oval({
-    bool edited,
-    bool isClosed,
-    pointRadiusBehaviour,
-    List points,
+  PBDLGroupNode({
+    bool hasClickThrough,
+    groupLayout,
     this.UUID,
     booleanOperation,
     exportOptions,
@@ -42,16 +37,23 @@ class Oval implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    type,
-    this.pbdfType = 'oval',
+    this.pbdfType = 'group',
     this.style,
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) => Oval.fromJson(json);
-  factory Oval.fromJson(Map<String, dynamic> json) => _$OvalFromJson(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      PBDLGroupNode.fromJson(json);
+  factory PBDLGroupNode.fromJson(Map<String, dynamic> json) =>
+      _$GroupNodeFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$OvalToJson(this);
+  Map<String, dynamic> toJson() => _$GroupNodeToJson(this);
+
+  @override
+  String UUID;
+
+  @override
+  var boundaryRectangle;
 
   @override
   bool isVisible;
@@ -63,7 +65,7 @@ class Oval implements PBDLNodeFactory, PBDLNode {
   String prototypeNodeUUID;
 
   @override
-  PBStyle style;
+  PBDLStyle style;
 
   @override
   String type;

@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/pbdl/rect.dart';
+import 'package:pbdl/src/pbdl/pbdl_rect.dart';
 
 part 'pbdl_frame.g.dart';
 
 @JsonSerializable()
-class PBDLFrame implements Rect {
+class PBDLFrame implements PBDLRect {
   @JsonKey(name: '_class')
   final String classField;
   final bool constrainProportions;

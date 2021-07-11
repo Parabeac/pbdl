@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'rectangle.dart';
+part of 'pbdl_rectangle.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Rectangle _$RectangleFromJson(Map<String, dynamic> json) {
-  return Rectangle(
+PBDLRectangle _$RectangleFromJson(Map<String, dynamic> json) {
+  return PBDLRectangle(
     fixedRadius: json['fixedRadius'],
     hasConvertedToNewRoundCorners: json['hasConvertedToNewRoundCorners'],
     needsConvertionToNewRoundCorners: json['needsConvertionToNewRoundCorners'],
@@ -22,11 +22,12 @@ Rectangle _$RectangleFromJson(Map<String, dynamic> json) {
     pbdfType: json['pbdfType'] as String,
     style: json['style'] == null
         ? null
-        : PBStyle.fromJson(json['style'] as Map<String, dynamic>),
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
   )..prototypeNodeUUID = json['prototypeNodeUUID'] as String;
 }
 
-Map<String, dynamic> _$RectangleToJson(Rectangle instance) => <String, dynamic>{
+Map<String, dynamic> _$RectangleToJson(PBDLRectangle instance) =>
+    <String, dynamic>{
       'pbdfType': instance.pbdfType,
       'hasConvertedToNewRoundCorners': instance.hasConvertedToNewRoundCorners,
       'fixedRadius': instance.fixedRadius,

@@ -1,21 +1,25 @@
-import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
+import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'group_node.g.dart';
+part 'polygon.g.dart';
 
 @JsonSerializable()
-class GroupNode implements PBDLNodeFactory, PBDLNode {
-  List children = [];
-
+class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
   @override
-  String pbdfType = 'group';
+  String pbdfType = 'polygon';
 
-  GroupNode({
-    bool hasClickThrough,
-    groupLayout,
+  var boundaryRectangle;
+
+  var UUID;
+
+  PBDLPolygon({
+    bool edited,
+    bool isClosed,
+    pointRadiusBehaviour,
+    List points,
     this.UUID,
     booleanOperation,
     exportOptions,
@@ -24,9 +28,9 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    this.isVisible,
+    isVisible,
     layerListExpandedType,
-    this.name,
+    name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -37,23 +41,18 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.pbdfType = 'group',
+    type,
+    pbdfType,
     this.style,
   });
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
-      GroupNode.fromJson(json);
-  factory GroupNode.fromJson(Map<String, dynamic> json) =>
-      _$GroupNodeFromJson(json);
+      PBDLPolygon.fromJson(json);
+  factory PBDLPolygon.fromJson(Map<String, dynamic> json) =>
+      _$PolygonFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$GroupNodeToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
+  Map<String, dynamic> toJson() => _$PolygonToJson(this);
 
   @override
   bool isVisible;
@@ -65,7 +64,7 @@ class GroupNode implements PBDLNodeFactory, PBDLNode {
   String prototypeNodeUUID;
 
   @override
-  PBStyle style;
+  PBDLStyle style;
 
   @override
   String type;

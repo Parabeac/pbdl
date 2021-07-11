@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'polygon.dart';
+part of 'pbdl_polygon.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Polygon _$PolygonFromJson(Map<String, dynamic> json) {
-  return Polygon(
+PBDLPolygon _$PolygonFromJson(Map<String, dynamic> json) {
+  return PBDLPolygon(
     UUID: json['UUID'] as String,
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
@@ -18,11 +18,11 @@ Polygon _$PolygonFromJson(Map<String, dynamic> json) {
     pbdfType: json['pbdfType'],
     style: json['style'] == null
         ? null
-        : PBStyle.fromJson(json['style'] as Map<String, dynamic>),
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
   )..prototypeNodeUUID = json['prototypeNodeUUID'] as String;
 }
 
-Map<String, dynamic> _$PolygonToJson(Polygon instance) => <String, dynamic>{
+Map<String, dynamic> _$PolygonToJson(PBDLPolygon instance) => <String, dynamic>{
       'pbdfType': instance.pbdfType,
       'boundaryRectangle': instance.boundaryRectangle,
       'UUID': instance.UUID,

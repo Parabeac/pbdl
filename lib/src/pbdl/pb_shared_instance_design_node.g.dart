@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pb_shared_instance_design_node.dart';
+part of 'pbdl_shared_instance_node.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBSharedInstanceDesignNode _$PBSharedInstanceDesignNodeFromJson(
+PBDLSharedInstanceNode _$PBSharedInstanceDesignNodeFromJson(
     Map<String, dynamic> json) {
-  return PBSharedInstanceDesignNode(
+  return PBDLSharedInstanceNode(
     UUID: json['UUID'] as String,
     overrideValues: (json['overrideValues'] as List)
         ?.map((e) => e == null
@@ -28,7 +28,7 @@ PBSharedInstanceDesignNode _$PBSharedInstanceDesignNodeFromJson(
 }
 
 Map<String, dynamic> _$PBSharedInstanceDesignNodeToJson(
-        PBSharedInstanceDesignNode instance) =>
+        PBDLSharedInstanceNode instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,

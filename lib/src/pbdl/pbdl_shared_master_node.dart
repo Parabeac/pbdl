@@ -1,19 +1,19 @@
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
-import 'group_node.dart';
+import 'abstract_pbdl_node_factory.dart';
+import 'pbdl_group_node.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pb_shared_master_node.g.dart';
 
 @JsonSerializable()
-class PBSharedMasterDesignNode extends PBDLNode
-    implements PBDLNodeFactory, GroupNode {
+class PBDLSharedMasterNode extends PBDLNode
+    implements PBDLNodeFactory, PBDLGroupNode {
   String symbolID;
   List overriadableProperties;
 
   var overrideProperties;
 
-  PBSharedMasterDesignNode({
+  PBDLSharedMasterNode({
     String UUID,
     this.overrideProperties,
     String name,
@@ -65,8 +65,8 @@ class PBSharedMasterDesignNode extends PBDLNode
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
-      PBSharedMasterDesignNode.fromJson(json);
-  factory PBSharedMasterDesignNode.fromJson(Map<String, dynamic> json) =>
+      PBDLSharedMasterNode.fromJson(json);
+  factory PBDLSharedMasterNode.fromJson(Map<String, dynamic> json) =>
       _$PBSharedMasterDesignNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBSharedMasterDesignNodeToJson(this);
