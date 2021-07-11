@@ -4,7 +4,7 @@ import 'dart:convert';
 import 'package:quick_log/quick_log.dart';
 
 class SACInstaller {
-  static Logger log = Logger('SACInstaller');
+  static Logger _log = Logger('SACInstaller');
 
   /// Method that installs the SAC submodule and its dependencies.
   ///
@@ -57,11 +57,11 @@ class SACInstaller {
     await for (var event in process.stdout.transform(utf8.decoder)) {
       if (event.toLowerCase().contains('server is listening on port')) {
         exitCode = 0;
-        log.fine('SAC started successfully');
+        _log.fine('SAC started successfully');
         break;
       } else if (event.toLowerCase().contains('error')) {
         exitCode = 1;
-        log.error(event);
+        _log.error(event);
         break;
       }
     }
