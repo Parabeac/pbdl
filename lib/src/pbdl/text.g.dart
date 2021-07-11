@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'text.dart';
+part of 'pbdl_text.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Text _$TextFromJson(Map<String, dynamic> json) {
-  return Text(
+PBDLText _$TextFromJson(Map<String, dynamic> json) {
+  return PBDLText(
     UUID: json['UUID'],
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
@@ -29,7 +29,7 @@ Text _$TextFromJson(Map<String, dynamic> json) {
     ..content = json['content'] as String;
 }
 
-Map<String, dynamic> _$TextToJson(Text instance) => <String, dynamic>{
+Map<String, dynamic> _$TextToJson(PBDLText instance) => <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,

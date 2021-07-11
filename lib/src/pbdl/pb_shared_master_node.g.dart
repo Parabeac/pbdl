@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pb_shared_master_node.dart';
+part of 'pbdl_shared_master_node.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBSharedMasterDesignNode _$PBSharedMasterDesignNodeFromJson(
+PBDLSharedMasterNode _$PBSharedMasterDesignNodeFromJson(
     Map<String, dynamic> json) {
-  return PBSharedMasterDesignNode(
+  return PBDLSharedMasterNode(
     UUID: json['UUID'] as String,
     overrideProperties: json['overrideProperties'],
     name: json['name'] as String,
@@ -25,7 +25,7 @@ PBSharedMasterDesignNode _$PBSharedMasterDesignNodeFromJson(
 }
 
 Map<String, dynamic> _$PBSharedMasterDesignNodeToJson(
-        PBSharedMasterDesignNode instance) =>
+        PBDLSharedMasterNode instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,

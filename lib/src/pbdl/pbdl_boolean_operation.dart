@@ -1,13 +1,13 @@
-import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
+import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'boolean_operation.g.dart';
 
 @JsonSerializable()
-class BooleanOperation implements PBDLNodeFactory, PBDLNode {
+class PBDLBooleanOperation implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'boolean_operation';
   List<PBDLNode> children = [];
@@ -15,7 +15,7 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   @override
   var boundaryRectangle;
 
-  BooleanOperation({
+  PBDLBooleanOperation({
     booleanOperation,
     type,
     PBDLFrame this.boundaryRectangle,
@@ -27,8 +27,8 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
-      BooleanOperation.fromJson(json);
-  factory BooleanOperation.fromJson(Map<String, dynamic> json) =>
+      PBDLBooleanOperation.fromJson(json);
+  factory PBDLBooleanOperation.fromJson(Map<String, dynamic> json) =>
       _$BooleanOperationFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
@@ -43,7 +43,7 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   String prototypeNodeUUID;
 
   @override
-  PBStyle style;
+  PBDLStyle style;
 
   @override
   String type;

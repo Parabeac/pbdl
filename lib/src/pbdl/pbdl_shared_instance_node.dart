@@ -1,16 +1,16 @@
 import 'package:pbdl/src/input/sketch/entities/objects/override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
+import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pb_shared_instance_design_node.g.dart';
 
 @JsonSerializable()
-class PBSharedInstanceDesignNode extends PBDLNode implements PBDLNodeFactory {
+class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   String symbolID;
   List parameters;
 
-  PBSharedInstanceDesignNode(
+  PBDLSharedInstanceNode(
       {String UUID,
       this.overrideValues,
       String name,
@@ -51,8 +51,8 @@ class PBSharedInstanceDesignNode extends PBDLNode implements PBDLNodeFactory {
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
-      PBSharedInstanceDesignNode.fromJson(json);
-  factory PBSharedInstanceDesignNode.fromJson(Map<String, dynamic> json) =>
+      PBDLSharedInstanceNode.fromJson(json);
+  factory PBDLSharedInstanceNode.fromJson(Map<String, dynamic> json) =>
       _$PBSharedInstanceDesignNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBSharedInstanceDesignNodeToJson(this);

@@ -1,23 +1,23 @@
-import 'color.dart';
+import 'pbdl_color.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pb_border.g.dart';
 
 @JsonSerializable()
-class PBBorder {
+class PBDLBorder {
   final bool isEnabled;
   final double fillType;
-  final PBColor color;
+  final PBDLColor color;
   final double thickness;
 
-  PBBorder({
+  PBDLBorder({
     this.isEnabled = true,
     this.fillType,
     this.color,
     this.thickness,
   });
 
-  factory PBBorder.fromJson(Map<String, dynamic> json) =>
+  factory PBDLBorder.fromJson(Map<String, dynamic> json) =>
       _$PBBorderFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBBorderToJson(this);

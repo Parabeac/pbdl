@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'image.dart';
+part of 'pbdl_image.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -18,7 +18,7 @@ PBDLImage _$PBDLImageFromJson(Map<String, dynamic> json) {
     pbdfType: json['pbdfType'] as String,
     style: json['style'] == null
         ? null
-        : PBStyle.fromJson(json['style'] as Map<String, dynamic>),
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
   )
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..type = json['type'] as String;

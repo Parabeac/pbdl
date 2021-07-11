@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'color.dart';
+part of 'pbdl_color.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBColor _$PBColorFromJson(Map<String, dynamic> json) {
-  return PBColor(
+PBDLColor _$PBColorFromJson(Map<String, dynamic> json) {
+  return PBDLColor(
     (json['alpha'] as num)?.toDouble(),
     (json['red'] as num)?.toDouble(),
     (json['green'] as num)?.toDouble(),
@@ -15,7 +15,7 @@ PBColor _$PBColorFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$PBColorToJson(PBColor instance) => <String, dynamic>{
+Map<String, dynamic> _$PBColorToJson(PBDLColor instance) => <String, dynamic>{
       'alpha': instance.alpha,
       'red': instance.red,
       'green': instance.green,

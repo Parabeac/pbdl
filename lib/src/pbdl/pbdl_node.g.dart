@@ -15,7 +15,7 @@ PBDLNode _$PBDLNodeFromJson(Map<String, dynamic> json) {
     json['type'] as String,
     json['style'] == null
         ? null
-        : PBStyle.fromJson(json['style'] as Map<String, dynamic>),
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     json['prototypeNodeUUID'] as String,
   )..pbdfType = json['pbdfType'] as String;
 }
