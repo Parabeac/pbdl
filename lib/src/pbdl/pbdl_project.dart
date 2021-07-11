@@ -35,11 +35,13 @@ class PBDLProject implements PBDLNodeFactory {
   /// Method that creates and returns a [PBDLProject] from a Sketch file `path`
   static Future<PBDLProject> fromSketch(String path) async {
     await SACInstaller.installAndRun();
+    // TODO: Open sketch file and interpret into PBDLProject
     return PBDLProject();
   }
 
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
   static Future<PBDLProject> fromFigma(String projectID, String key) async {
+    // TODO: Open figma project and interpret into PBDLProject
     return PBDLProject();
   }
 }
