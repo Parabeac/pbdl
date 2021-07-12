@@ -1,96 +1,97 @@
+import 'dart:io';
+import 'dart:convert';
+
 import 'package:parabeac_core/controllers/controller.dart';
-import 'package:parabeac_core/controllers/main_info.dart';
-import 'package:parabeac_core/input/figma/entities/layers/component.dart';
-import 'package:parabeac_core/input/figma/entities/layers/frame.dart';
-import 'package:parabeac_core/input/figma/helper/api_call_service.dart';
-import 'package:parabeac_core/input/figma/helper/figma_asset_processor.dart';
-import 'package:parabeac_core/input/figma/helper/figma_project.dart';
 import 'package:parabeac_core/input/helper/asset_processing_service.dart';
 import 'package:parabeac_core/input/helper/azure_asset_service.dart';
+
 import 'package:parabeac_core/input/helper/design_project.dart';
+import 'package:parabeac_core/input/sketch/helper/sketch_asset_processor.dart';
+import 'package:parabeac_core/input/sketch/helper/sketch_project.dart';
+import 'package:parabeac_core/input/sketch/services/input_design.dart';
 
-//responsive UI code
-class FigmaController extends Controller {
+import 'main_info.dart';
+import 'package:path/path.dart' as p;
+
+class SketchController extends Controller {
   @override
-  DesignType get designType => DesignType.FIGMA;
+  DesignType get designType => DesignType.SKETCH;
 
+  ///Converting the [fileAbsPath] sketch file to flutter
   @override
   void convertFile({
     DesignProject designProject,
     AssetProcessingService apService,
   }) async {
-    var jsonFigma = await _fetchFigmaFile();
-    if (jsonFigma == null) {
-      throw Error(); //todo: find correct error
-    }
-    AzureAssetService().projectUUID = MainInfo().figmaProjectID;
-    designProject ??= generateFigmaTree(jsonFigma, MainInfo().genProjectPath);
-    designProject = declareScaffolds(designProject);
+    var processInfo = MainInfo();
 
-    _sortPages(designProject);
-    super.convert(designProject, apService ?? FigmaAssetProcessor());
+    ///INTAKE
+    var ids = InputDesignService(processInfo.designFilePath,
+        jsonOnly: processInfo.exportPBDL);
+    designProject ??= generateSketchNodeTree(
+        ids, ids.metaFileJson['pagesAndArtboards'], processInfo.genProjectPath);
+
+    AzureAssetService().projectUUID = designProject.id;
+
+    super.convert(designProject, apService ?? SketchAssetProcessor());
   }
 
-  FigmaProject generateFigmaTree(var jsonFigma, var projectname) {
+  SketchProject generateSketchNodeTree(
+      InputDesignService ids, Map pagesAndArtboards, projectName) {
     try {
-      return FigmaProject(
-        projectname,
-        jsonFigma,
-        id: MainInfo().figmaProjectID,
-      );
+      return SketchProject(ids, pagesAndArtboards, projectName);
     } catch (e, stackTrace) {
-      print(e);
+      MainInfo().sentry.captureException(
+            exception: e,
+            stackTrace: stackTrace,
+          );
+      log.error(e.toString());
       return null;
     }
-  }
-
-  Future<dynamic> _fetchFigmaFile() => APICallService.makeAPICall(
-      'https://api.figma.com/v1/files/${MainInfo().figmaProjectID}',
-      MainInfo().figmaKey);
-
-  /// This method was required for Figma, so we could
-  /// detect which `FigmaFrame` were Scaffolds or Containers
-  FigmaProject declareScaffolds(FigmaProject tree) {
-    for (var page in tree.pages) {
-      for (var item in page.getPageItems()) {
-        if (item.designNode is FigmaFrame) {
-          (item.designNode as FigmaFrame).isScaffold = true;
-        }
-      }
-    }
-    return tree;
-  }
-
-  /// Sorts project's pages so that Components are processed last
-  void _sortPages(FigmaProject project) {
-    // Sort pages so that pages containing components are last
-    project.pages.sort((a, b) {
-      if (a.screens.any((screen) => screen.designNode is Component)) {
-        return 1;
-      } else if (b.screens.any((screen) => screen.designNode is Component)) {
-        return -1;
-      }
-      return 0;
-    });
-
-    // Within each page, ensure screens that are components go last
-    project.pages.forEach((page) {
-      page.screens.sort((a, b) {
-        if (a.designNode is Component) {
-          return 1;
-        } else if (b.designNode is Component) {
-          return -1;
-        }
-        return 0;
-      });
-    });
   }
 
   @override
   Future<void> setup() async {
     var processInfo = MainInfo();
-    if (processInfo.figmaKey == null || processInfo.figmaProjectID == null) {
-      throw Error(); //todo: place correct error
+    if (!processInfo.exportPBDL) {
+      if (!FileSystemEntity.isFileSync(processInfo.designFilePath)) {
+        throw Error();
+      }
+      InputDesignService(processInfo.designFilePath);
+      await checkSACVersion();
+    }
+    await super.setup();
+  }
+
+  Future<void> checkSACVersion() async {
+    /// Code is moved from `main.dart`
+    Process process;
+    if (!Platform.environment.containsKey('SAC_ENDPOINT')) {
+      var isSACupToDate = await Process.run(
+        './pb-scripts/check-git.sh',
+        [],
+        workingDirectory: MainInfo().cwd.path,
+      );
+
+      if (isSACupToDate.stdout
+          .contains('Sketch Asset Converter is behind master.')) {
+        log.warning(isSACupToDate.stdout);
+      } else {
+        log.info(isSACupToDate.stdout);
+      }
+
+      process = await Process.start('npm', ['run', 'prod'],
+          workingDirectory:
+              p.join(MainInfo().cwd.path, 'SketchAssetConverter'));
+
+      await for (var event in process.stdout.transform(utf8.decoder)) {
+        if (event.toLowerCase().contains('server is listening on port')) {
+          log.fine('Successfully started Sketch Asset Converter');
+          break;
+        }
+      }
+      var b = process?.kill();
+      print('buffer');
     }
   }
 }
