@@ -1,5 +1,6 @@
 import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
 import 'package:pbdl/src/input/figma/helper/figma_project.dart';
+import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -43,6 +44,8 @@ class PBDLProject implements PBDLNodeFactory {
   /// Method that creates and returns a [PBDLProject] from a Sketch file `path`
   static Future<PBDLProject> fromSketch(String path) async {
     await SACInstaller.installAndRun();
+
+    var sketchProject = await SketchController().convertFile(path);
 
     // TODO: Open sketch file and interpret into PBDLProject
     return PBDLProject();
