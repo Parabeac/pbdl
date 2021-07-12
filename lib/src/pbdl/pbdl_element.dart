@@ -1,7 +1,7 @@
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'design_element.g.dart';
+part 'pbdl_element.g.dart';
 
 @JsonSerializable()
 // TODO: Not sure why this class exists.
@@ -25,7 +25,7 @@ class PBDLElement extends PBDLNode {
         );
 
   factory PBDLElement.fromJson(Map<String, dynamic> json) =>
-      _$DesignElementFromJson(json);
+      _$PBDLElementFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$DesignElementToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLElementToJson(this);
 }

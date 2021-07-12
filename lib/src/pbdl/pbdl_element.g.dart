@@ -6,7 +6,7 @@ part of 'pbdl_element.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLElement _$DesignElementFromJson(Map<String, dynamic> json) {
+PBDLElement _$PBDLElementFromJson(Map<String, dynamic> json) {
   return PBDLElement(
     UUID: json['UUID'],
     name: json['name'],
@@ -18,7 +18,7 @@ PBDLElement _$DesignElementFromJson(Map<String, dynamic> json) {
   )..pbdfType = json['pbdfType'] as String;
 }
 
-Map<String, dynamic> _$DesignElementToJson(PBDLElement instance) =>
+Map<String, dynamic> _$PBDLElementToJson(PBDLElement instance) =>
     <String, dynamic>{
       'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,

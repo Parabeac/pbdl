@@ -1,34 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pbdl_shared_instance_node.dart';
+part of 'pbdl_shared_master_node.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLSharedInstanceNode _$PBSharedInstanceDesignNodeFromJson(
-    Map<String, dynamic> json) {
-  return PBDLSharedInstanceNode(
+PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
+  return PBDLSharedMasterNode(
     UUID: json['UUID'] as String,
-    overrideValues: (json['overrideValues'] as List)
-        ?.map((e) => e == null
-            ? null
-            : OverridableValue.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    overrideProperties: json['overrideProperties'],
     name: json['name'] as String,
     isVisible: json['isVisible'] as bool,
     boundaryRectangle: json['boundaryRectangle'],
     type: json['type'] as String,
     style: json['style'],
-    symbolID: json['symbolID'] as String,
     pbdfType: json['pbdfType'] as String,
+    symbolID: json['symbolID'] as String,
   )
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-    ..parameters = json['parameters'] as List;
+    ..overriadableProperties = json['overriadableProperties'] as List
+    ..children = json['children'] as List;
 }
 
-Map<String, dynamic> _$PBSharedInstanceDesignNodeToJson(
-        PBDLSharedInstanceNode instance) =>
+Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
+        PBDLSharedMasterNode instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,
@@ -38,7 +34,8 @@ Map<String, dynamic> _$PBSharedInstanceDesignNodeToJson(
       'style': instance.style,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'symbolID': instance.symbolID,
-      'parameters': instance.parameters,
+      'overriadableProperties': instance.overriadableProperties,
+      'overrideProperties': instance.overrideProperties,
       'pbdfType': instance.pbdfType,
-      'overrideValues': instance.overrideValues,
+      'children': instance.children,
     };

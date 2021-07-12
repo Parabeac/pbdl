@@ -6,7 +6,7 @@ part of 'pbdl_fill.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLFill _$PBFillFromJson(Map<String, dynamic> json) {
+PBDLFill _$PBDLFillFromJson(Map<String, dynamic> json) {
   return PBDLFill(
     json['color'] == null
         ? null
@@ -15,7 +15,7 @@ PBDLFill _$PBFillFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$PBFillToJson(PBDLFill instance) => <String, dynamic>{
+Map<String, dynamic> _$PBDLFillToJson(PBDLFill instance) => <String, dynamic>{
       'color': instance.color,
       'isEnabled': instance.isEnabled,
     };

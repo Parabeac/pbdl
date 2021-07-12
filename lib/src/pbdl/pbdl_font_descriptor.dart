@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'pb_font_descriptor.g.dart';
+part 'pbdl_font_descriptor.g.dart';
 
 @JsonSerializable()
 class PBDLFontDescriptor {
@@ -11,7 +11,7 @@ class PBDLFontDescriptor {
 
   @override
   factory PBDLFontDescriptor.fromJson(Map<String, dynamic> json) =>
-      _$PBFontDescriptorFromJson(json);
+      _$PBDLFontDescriptorFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PBFontDescriptorToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLFontDescriptorToJson(this);
 }

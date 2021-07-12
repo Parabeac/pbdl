@@ -5,7 +5,7 @@ import 'package:pbdl/src/pbdl/pbdl_vector.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'boolean_operation.g.dart';
+part 'pbdl_boolean_operation.g.dart';
 
 @JsonSerializable()
 class PBDLBooleanOperation extends PBDLVector
@@ -63,7 +63,7 @@ class PBDLBooleanOperation extends PBDLVector
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLBooleanOperation.fromJson(json);
   factory PBDLBooleanOperation.fromJson(Map<String, dynamic> json) =>
-      _$BooleanOperationFromJson(json);
+      _$PBDLBooleanOperationFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLBooleanOperationToJson(this);
 }

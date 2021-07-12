@@ -6,7 +6,7 @@ part of 'pbdl_oval.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLOval _$OvalFromJson(Map<String, dynamic> json) {
+PBDLOval _$PBDLOvalFromJson(Map<String, dynamic> json) {
   return PBDLOval(
     UUID: json['UUID'] as String,
     boundaryRectangle: json['boundaryRectangle'] == null
@@ -22,7 +22,7 @@ PBDLOval _$OvalFromJson(Map<String, dynamic> json) {
   )..prototypeNodeUUID = json['prototypeNodeUUID'] as String;
 }
 
-Map<String, dynamic> _$OvalToJson(PBDLOval instance) => <String, dynamic>{
+Map<String, dynamic> _$PBDLOvalToJson(PBDLOval instance) => <String, dynamic>{
       'pbdfType': instance.pbdfType,
       'boundaryRectangle': instance.boundaryRectangle,
       'UUID': instance.UUID,

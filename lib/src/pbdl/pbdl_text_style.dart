@@ -4,7 +4,7 @@ import 'package:pbdl/src/pbdl/pbdl_paragraph_style.dart';
 import 'pbdl_color.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'pb_text_style.g.dart';
+part 'pbdl_text_style.g.dart';
 
 @JsonSerializable()
 class PBDLTextStyle {
@@ -21,7 +21,7 @@ class PBDLTextStyle {
 
   @override
   factory PBDLTextStyle.fromJson(Map<String, dynamic> json) =>
-      _$PBTextStyleFromJson(json);
+      _$PBDLTextStyleFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PBTextStyleToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLTextStyleToJson(this);
 }

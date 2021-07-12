@@ -3,7 +3,7 @@ import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_group_node.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'pb_shared_master_node.g.dart';
+part 'pbdl_shared_master_node.g.dart';
 
 @JsonSerializable()
 class PBDLSharedMasterNode extends PBDLNode
@@ -67,9 +67,9 @@ class PBDLSharedMasterNode extends PBDLNode
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLSharedMasterNode.fromJson(json);
   factory PBDLSharedMasterNode.fromJson(Map<String, dynamic> json) =>
-      _$PBSharedMasterDesignNodeFromJson(json);
+      _$PBDLSharedMasterNodeFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PBSharedMasterDesignNodeToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLSharedMasterNodeToJson(this);
 
   ///Converting the [OverridableProperty] into [PBSharedParameterProp] to be processed in intermediate phase.
   // List<PBSharedParameterProp> _extractParameters() {

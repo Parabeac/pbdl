@@ -1,7 +1,7 @@
 import 'package:pbdl/src/pbdl/pbdl_color.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'pb_fill.g.dart';
+part 'pbdl_fill.g.dart';
 
 @JsonSerializable()
 class PBDLFill {
@@ -11,7 +11,7 @@ class PBDLFill {
 
   @override
   factory PBDLFill.fromJson(Map<String, dynamic> json) =>
-      _$PBFillFromJson(json);
+      _$PBDLFillFromJson(json);
 
-  Map<String, dynamic> toJson() => _$PBFillToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLFillToJson(this);
 }

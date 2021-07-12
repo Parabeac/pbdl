@@ -6,7 +6,7 @@ part of 'pbdl_style.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLStyle _$PBStyleFromJson(Map<String, dynamic> json) {
+PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
   return PBDLStyle(
     fills: (json['fills'] as List)
         ?.map((e) =>
@@ -30,7 +30,7 @@ PBDLStyle _$PBStyleFromJson(Map<String, dynamic> json) {
     ..hasShadow = json['hasShadow'] as bool;
 }
 
-Map<String, dynamic> _$PBStyleToJson(PBDLStyle instance) => <String, dynamic>{
+Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
       'backgroundColor': instance.backgroundColor,
       'fills': instance.fills,
       'borders': instance.borders,

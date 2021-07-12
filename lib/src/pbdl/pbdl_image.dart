@@ -5,7 +5,7 @@ import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_element.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'image.g.dart';
+part 'pbdl_image.g.dart';
 
 @JsonSerializable()
 class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {

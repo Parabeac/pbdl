@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'pb_border_options.g.dart';
+part 'pbdl_border_options.g.dart';
 
 @JsonSerializable()
 class PBDLBorderOptions {
@@ -17,7 +17,7 @@ class PBDLBorderOptions {
 
   @override
   factory PBDLBorderOptions.fromJson(Map<String, dynamic> json) =>
-      _$PBBorderOptionsFromJson(json);
+      _$PBDLBorderOptionsFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PBBorderOptionsToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLBorderOptionsToJson(this);
 }

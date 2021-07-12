@@ -5,7 +5,7 @@ import 'package:pbdl/src/pbdl/pbdl_text_style.dart';
 import 'pbdl_color.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'pb_style.g.dart';
+part 'pbdl_style.g.dart';
 
 @JsonSerializable()
 class PBDLStyle {
@@ -20,7 +20,7 @@ class PBDLStyle {
 
   @override
   factory PBDLStyle.fromJson(Map<String, dynamic> json) =>
-      _$PBStyleFromJson(json);
+      _$PBDLStyleFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PBStyleToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLStyleToJson(this);
 }

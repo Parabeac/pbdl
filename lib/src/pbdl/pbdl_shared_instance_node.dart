@@ -3,7 +3,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'pb_shared_instance_design_node.g.dart';
+part 'pbdl_shared_instance_node.g.dart';
 
 @JsonSerializable()
 class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
@@ -53,9 +53,9 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLSharedInstanceNode.fromJson(json);
   factory PBDLSharedInstanceNode.fromJson(Map<String, dynamic> json) =>
-      _$PBSharedInstanceDesignNodeFromJson(json);
+      _$PBDLSharedInstanceNodeFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PBSharedInstanceDesignNodeToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLSharedInstanceNodeToJson(this);
 
   ///Converting the [OverridableValue] into [PBSharedParameterValue] to be processed in intermediate phase.
   // List<PBSharedParameterValue> _extractParameters() {

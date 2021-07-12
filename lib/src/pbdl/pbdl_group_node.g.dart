@@ -6,7 +6,7 @@ part of 'pbdl_group_node.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLGroupNode _$GroupNodeFromJson(Map<String, dynamic> json) {
+PBDLGroupNode _$PBDLGroupNodeFromJson(Map<String, dynamic> json) {
   return PBDLGroupNode(
     UUID: json['UUID'] as String,
     boundaryRectangle: json['boundaryRectangle'] == null
@@ -24,7 +24,7 @@ PBDLGroupNode _$GroupNodeFromJson(Map<String, dynamic> json) {
     ..type = json['type'] as String;
 }
 
-Map<String, dynamic> _$GroupNodeToJson(PBDLGroupNode instance) =>
+Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>
     <String, dynamic>{
       'children': instance.children,
       'pbdfType': instance.pbdfType,

@@ -7,7 +7,7 @@ import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_group_node.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'artboard.g.dart';
+part 'pbdl_artboard.g.dart';
 
 @JsonSerializable()
 class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
@@ -60,7 +60,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLArtboard.fromJson(json);
   factory PBDLArtboard.fromJson(Map<String, dynamic> json) =>
-      _$PBArtboardFromJson(json);
+      _$PBDLArtboardFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PBArtboardToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLArtboardToJson(this);
 }

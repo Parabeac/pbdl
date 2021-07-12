@@ -6,7 +6,7 @@ part of 'pbdl_color.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLColor _$PBColorFromJson(Map<String, dynamic> json) {
+PBDLColor _$PBDLColorFromJson(Map<String, dynamic> json) {
   return PBDLColor(
     (json['alpha'] as num)?.toDouble(),
     (json['red'] as num)?.toDouble(),
@@ -15,7 +15,7 @@ PBDLColor _$PBColorFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$PBColorToJson(PBDLColor instance) => <String, dynamic>{
+Map<String, dynamic> _$PBDLColorToJson(PBDLColor instance) => <String, dynamic>{
       'alpha': instance.alpha,
       'red': instance.red,
       'green': instance.green,

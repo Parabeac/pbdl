@@ -6,7 +6,7 @@ part of 'pbdl_artboard.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLArtboard _$PBArtboardFromJson(Map<String, dynamic> json) {
+PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
   return PBDLArtboard(
     backgroundColor: json['backgroundColor'] == null
         ? null
@@ -18,17 +18,17 @@ PBDLArtboard _$PBArtboardFromJson(Map<String, dynamic> json) {
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'],
     name: json['name'],
+    prototypeNodeUUID: json['prototypeNodeUUID'],
     type: json['type'],
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..children = json['children'] as List
     ..pbdfType = json['pbdfType'] as String;
 }
 
-Map<String, dynamic> _$PBArtboardToJson(PBDLArtboard instance) =>
+Map<String, dynamic> _$PBDLArtboardToJson(PBDLArtboard instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,

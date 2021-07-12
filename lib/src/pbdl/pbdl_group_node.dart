@@ -4,7 +4,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'group_node.g.dart';
+part 'pbdl_group_node.g.dart';
 
 @JsonSerializable()
 class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
@@ -45,9 +45,9 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLGroupNode.fromJson(json);
   factory PBDLGroupNode.fromJson(Map<String, dynamic> json) =>
-      _$GroupNodeFromJson(json);
+      _$PBDLGroupNodeFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$GroupNodeToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLGroupNodeToJson(this);
 
   @override
   String UUID;

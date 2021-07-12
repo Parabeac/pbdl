@@ -6,7 +6,7 @@ part of 'pbdl_font_descriptor.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLFontDescriptor _$PBFontDescriptorFromJson(Map<String, dynamic> json) {
+PBDLFontDescriptor _$PBDLFontDescriptorFromJson(Map<String, dynamic> json) {
   return PBDLFontDescriptor(
     fontName: json['fontName'] as String,
     fontSize: json['fontSize'] as num,
@@ -14,7 +14,7 @@ PBDLFontDescriptor _$PBFontDescriptorFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$PBFontDescriptorToJson(PBDLFontDescriptor instance) =>
+Map<String, dynamic> _$PBDLFontDescriptorToJson(PBDLFontDescriptor instance) =>
     <String, dynamic>{
       'rawAttributes': instance.rawAttributes,
       'fontName': instance.fontName,

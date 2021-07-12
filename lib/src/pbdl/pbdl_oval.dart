@@ -5,7 +5,7 @@ import 'abstract_pbdl_node_factory.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 
-part 'oval.g.dart';
+part 'pbdl_oval.g.dart';
 
 @JsonSerializable()
 class PBDLOval implements PBDLNodeFactory, PBDLNode {
@@ -49,9 +49,10 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLOval.fromJson(json);
-  factory PBDLOval.fromJson(Map<String, dynamic> json) => _$OvalFromJson(json);
+  factory PBDLOval.fromJson(Map<String, dynamic> json) =>
+      _$PBDLOvalFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$OvalToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLOvalToJson(this);
 
   @override
   bool isVisible;
