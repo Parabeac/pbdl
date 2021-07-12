@@ -1,10 +1,12 @@
-// maybe we dont need this one anymore, or we might use it for PBDL
-
-import 'package:pbdl/src/pbdl/abstract_design_node_factory.dart';
+import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
+import 'package:pbdl/src/input/figma/helper/figma_project.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/util/main_info.dart';
 import 'package:pbdl/src/util/sketch/sac_installer.dart';
+
+import 'abstract_pbdl_node_factory.dart';
 
 part 'pbdl_project.g.dart';
 
@@ -16,10 +18,16 @@ class PBDLProject implements PBDLNodeFactory {
   @override
   String pbdfType = 'project';
 
+  String pngPath;
+
   PBDLProject({
     this.projectName,
     this.id,
-  });
+    this.pngPath,
+  }) {
+    MainInfo().projectName = projectName ?? 'temp';
+    MainInfo().pngPath = pngPath;
+  }
 
   List<PBDLPage> pages = [];
   List<PBDLPage> miscPages = [];
@@ -35,6 +43,7 @@ class PBDLProject implements PBDLNodeFactory {
   /// Method that creates and returns a [PBDLProject] from a Sketch file `path`
   static Future<PBDLProject> fromSketch(String path) async {
     await SACInstaller.installAndRun();
+
     // TODO: Open sketch file and interpret into PBDLProject
     return PBDLProject();
   }
@@ -42,6 +51,8 @@ class PBDLProject implements PBDLNodeFactory {
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
   static Future<PBDLProject> fromFigma(String projectID, String key) async {
     // TODO: Open figma project and interpret into PBDLProject
+
+    var figmaProject = await FigmaController().convertFile(projectID, key);
     return PBDLProject();
   }
 }

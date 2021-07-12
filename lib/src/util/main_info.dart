@@ -8,7 +8,7 @@ class MainInfo {
 
   /// Current working directory; contains the path from where the script was called
   Directory cwd; //move this one
- 
+
   /// API needed to do API callls
   String figmaKey; //move this one
 
@@ -17,9 +17,15 @@ class MainInfo {
 
   String sketchPath;
 
+  String projectName;
+
+  String pngPath;
+
   factory MainInfo() {
     return _singleton;
   }
 
   MainInfo._internal();
 }
+
+enum DesignType { SKETCH, FIGMA, PBDL, UNKNOWN }
