@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:archive/archive.dart';
 import 'package:path/path.dart';
 import '../helper/sketch_page.dart';
-import 'package:pbdl/src/constants/main_info.dart';
+import 'package:pbdl/src/util/main_info.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_page.dart';
 
 /// Takes Initial Design File and puts it into a tree in object format.
