@@ -1,62 +1,96 @@
 import 'package:parabeac_core/controllers/controller.dart';
+import 'package:parabeac_core/controllers/main_info.dart';
+import 'package:parabeac_core/input/figma/entities/layers/component.dart';
+import 'package:parabeac_core/input/figma/entities/layers/frame.dart';
+import 'package:parabeac_core/input/figma/helper/api_call_service.dart';
+import 'package:parabeac_core/input/figma/helper/figma_asset_processor.dart';
+import 'package:parabeac_core/input/figma/helper/figma_project.dart';
 import 'package:parabeac_core/input/helper/asset_processing_service.dart';
 import 'package:parabeac_core/input/helper/azure_asset_service.dart';
-
 import 'package:parabeac_core/input/helper/design_project.dart';
-import 'package:parabeac_core/input/sketch/helper/sketch_project.dart';
-import 'package:parabeac_core/input/sketch/services/input_design.dart';
-import 'package:pbdl/constants/main_info.dart';
-import 'package:quick_log/quick_log.dart';
 
-import 'main_info.dart';
-
-class SketchController{
-  ///SERVICE
+//responsive UI code
+class FigmaController extends Controller {
   @override
-  var log = Logger('SketchController');
+  DesignType get designType => DesignType.FIGMA;
 
-  ///Converting the [fileAbsPath] sketch file to flutter
   @override
-  void convertFile(
-    var fileAbsPath,
-    var projectPath,
-    var configurationPath,
-    var configType, {
-    bool jsonOnly = false,
-    DesignProject designProject,  //Ask Ivan
+  void convertFile({
+    DesignProject designProject,
     AssetProcessingService apService,
   }) async {
-    configure(configurationPath, configType);
+    var jsonFigma = await _fetchFigmaFile();
+    if (jsonFigma == null) {
+      throw Error(); //todo: find correct error
+    }
+    AzureAssetService().projectUUID = MainInfo().figmaProjectID;
+    designProject ??= generateFigmaTree(jsonFigma, MainInfo().genProjectPath);
+    designProject = declareScaffolds(designProject);
 
-    ///INTAKE
-    var ids = InputDesignService(fileAbsPath, jsonOnly: jsonOnly);
-    var sketchProject = generateSketchNodeTree(
-        ids, ids.metaFileJson['pagesAndArtboards'], projectPath);
-
-    AzureAssetService().projectUUID = sketchProject.id;
-
-    await super.convertFile(
-      fileAbsPath,
-      projectPath,
-      configurationPath,
-      configType,
-      designProject: sketchProject,
-      jsonOnly: jsonOnly,
-      apService: apService,
-    );
+    _sortPages(designProject);
+    super.convert(designProject, apService ?? FigmaAssetProcessor());
   }
 
-  SketchProject generateSketchNodeTree(
-      InputDesignService ids, Map pagesAndArtboards, projectName) {
+  FigmaProject generateFigmaTree(var jsonFigma, var projectname) {
     try {
-      return SketchProject(ids, pagesAndArtboards, projectName);
+      return FigmaProject(
+        projectname,
+        jsonFigma,
+        id: MainInfo().figmaProjectID,
+      );
     } catch (e, stackTrace) {
-      //MainInfo().sentry.captureException(
-            exception: e,
-            stackTrace: stackTrace,
-          );
-      log.error(e.toString());
+      print(e);
       return null;
+    }
+  }
+
+  Future<dynamic> _fetchFigmaFile() => APICallService.makeAPICall(
+      'https://api.figma.com/v1/files/${MainInfo().figmaProjectID}',
+      MainInfo().figmaKey);
+
+  /// This method was required for Figma, so we could
+  /// detect which `FigmaFrame` were Scaffolds or Containers
+  FigmaProject declareScaffolds(FigmaProject tree) {
+    for (var page in tree.pages) {
+      for (var item in page.getPageItems()) {
+        if (item.designNode is FigmaFrame) {
+          (item.designNode as FigmaFrame).isScaffold = true;
+        }
+      }
+    }
+    return tree;
+  }
+
+  /// Sorts project's pages so that Components are processed last
+  void _sortPages(FigmaProject project) {
+    // Sort pages so that pages containing components are last
+    project.pages.sort((a, b) {
+      if (a.screens.any((screen) => screen.designNode is Component)) {
+        return 1;
+      } else if (b.screens.any((screen) => screen.designNode is Component)) {
+        return -1;
+      }
+      return 0;
+    });
+
+    // Within each page, ensure screens that are components go last
+    project.pages.forEach((page) {
+      page.screens.sort((a, b) {
+        if (a.designNode is Component) {
+          return 1;
+        } else if (b.designNode is Component) {
+          return -1;
+        }
+        return 0;
+      });
+    });
+  }
+
+  @override
+  Future<void> setup() async {
+    var processInfo = MainInfo();
+    if (processInfo.figmaKey == null || processInfo.figmaProjectID == null) {
+      throw Error(); //todo: place correct error
     }
   }
 }
