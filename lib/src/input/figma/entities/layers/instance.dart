@@ -100,29 +100,24 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   String pbdfType = 'symbol_instance';
 
-  @override
   Map AddMasterSymbolName(String overrideName, List children) {
     // TODO: implement AddMasterSymbolName
     throw UnimplementedError();
   }
 
-  @override
   String FindName(String uuid, List children, Type type) {
     // TODO: implement FindName
     throw UnimplementedError();
   }
 
-  @override
   Map extractParameter(String overrideName) {
     // TODO: implement extractParameter
     throw UnimplementedError();
   }
 
-  @override
   // TODO: implement overrideValues
   List<FigmaOverridableValue> get overrideValues => throw UnimplementedError();
 
-  @override
   // TODO: implement typeToAbbreviation
   Map<Type, String> get typeToAbbreviation => throw UnimplementedError();
 }

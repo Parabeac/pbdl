@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'vector.dart';
+part of 'pbdl_vector.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -25,7 +25,7 @@ PBDLVector _$VectorFromJson(Map<String, dynamic> json) {
     pbdfType: json['pbdfType'] as String,
     style: json['style'] == null
         ? null
-        : PBStyle.fromJson(json['style'] as Map<String, dynamic>),
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
   )
     ..isVisible = json['isVisible'] as bool
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String

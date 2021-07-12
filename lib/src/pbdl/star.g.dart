@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'star.dart';
+part of 'pbdl_star.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Star _$StarFromJson(Map<String, dynamic> json) {
-  return Star(
+PBDLStar _$StarFromJson(Map<String, dynamic> json) {
+  return PBDLStar(
     UUID: json['UUID'] as String,
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
@@ -18,11 +18,11 @@ Star _$StarFromJson(Map<String, dynamic> json) {
     pbdfType: json['pbdfType'],
     style: json['style'] == null
         ? null
-        : PBStyle.fromJson(json['style'] as Map<String, dynamic>),
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
   )..prototypeNodeUUID = json['prototypeNodeUUID'] as String;
 }
 
-Map<String, dynamic> _$StarToJson(Star instance) => <String, dynamic>{
+Map<String, dynamic> _$StarToJson(PBDLStar instance) => <String, dynamic>{
       'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,
       'boundaryRectangle': instance.boundaryRectangle,

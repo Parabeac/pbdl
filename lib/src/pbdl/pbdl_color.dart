@@ -4,8 +4,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'color.g.dart';
 
 @JsonSerializable()
-class PBColor {
-  PBColor(
+class PBDLColor {
+  PBDLColor(
     this.alpha,
     this.red,
     this.green,
@@ -17,14 +17,14 @@ class PBColor {
   double green;
   double blue;
 
-  factory PBColor.fromJson(Map<String, dynamic> json) =>
+  factory PBDLColor.fromJson(Map<String, dynamic> json) =>
       _$PBColorFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBColorToJson(this);
 }
 
 mixin PBColorMixin {
-  String toHex(PBColor color) {
+  String toHex(PBDLColor color) {
     if (color != null) {
       int a, r, g, b;
       a = ((color.alpha ?? 0) * 255).round();

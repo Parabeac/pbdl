@@ -1,4 +1,4 @@
-import 'package:pbdl/src/pbdl/abstract_design_node_factory.dart';
+import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:json_annotation/json_annotation.dart';
 

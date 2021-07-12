@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pb_border_options.dart';
+part of 'pbdl_border_options.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBBorderOptions _$PBBorderOptionsFromJson(Map<String, dynamic> json) {
-  return PBBorderOptions(
+PBDLBorderOptions _$PBBorderOptionsFromJson(Map<String, dynamic> json) {
+  return PBDLBorderOptions(
     isEnabled: json['isEnabled'] as bool,
     dashPattern: json['dashPattern'] as List,
     lineCapStyle: json['lineCapStyle'] as int,
@@ -15,7 +15,7 @@ PBBorderOptions _$PBBorderOptionsFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$PBBorderOptionsToJson(PBBorderOptions instance) =>
+Map<String, dynamic> _$PBBorderOptionsToJson(PBDLBorderOptions instance) =>
     <String, dynamic>{
       'isEnabled': instance.isEnabled,
       'dashPattern': instance.dashPattern,

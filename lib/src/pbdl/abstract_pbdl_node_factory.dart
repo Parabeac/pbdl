@@ -2,41 +2,41 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/pbdl/pbdl_project.dart';
 import 'package:pbdl/src/pbdl/pbdl_screen.dart';
-import 'artboard.dart';
-import 'boolean_operation.dart';
-import 'group_node.dart';
-import 'image.dart';
-import 'oval.dart';
-import 'pb_shared_instance_design_node.dart';
-import 'pb_shared_master_node.dart';
-import 'polygon.dart';
-import 'rectangle.dart';
-import 'star.dart';
-import 'text.dart';
-import 'vector.dart';
+import 'pbdl_artboard.dart';
+import 'pbdl_boolean_operation.dart';
+import 'pbdl_group_node.dart';
+import 'pbdl_image.dart';
+import 'pbdl_oval.dart';
+import 'pbdl_shared_instance_node.dart';
+import 'pbdl_shared_master_node.dart';
+import 'pbdl_polygon.dart';
+import 'pbdl_rectangle.dart';
+import 'pbdl_star.dart';
+import 'pbdl_text.dart';
+import 'pbdl_vector.dart';
 
-class AbstractDesignNodeFactory {
+class AbstractPBDLNodeFactory {
   static final String DESIGN_CLASS_KEY = 'pbdfType';
 
   static final List<PBDLNodeFactory> _designNodes = [
-    PBArtboard(),
+    PBDLArtboard(),
     PBDLBooleanOperation(),
-    GroupNode(),
+    PBDLGroupNode(),
     PBDLImage(),
-    Oval(),
-    PBSharedInstanceDesignNode(),
-    PBSharedMasterDesignNode(),
-    Polygon(),
-    Rectangle(),
-    Star(),
-    Text(),
+    PBDLOval(),
+    PBDLSharedInstanceNode(),
+    PBDLSharedMasterNode(),
+    PBDLPolygon(),
+    PBDLRectangle(),
+    PBDLStar(),
+    PBDLText(),
     PBDLVector(),
     PBDLProject(),
     PBDLPage(),
     PBDLScreen(),
   ];
 
-  AbstractDesignNodeFactory();
+  AbstractPBDLNodeFactory();
 
   static PBDLNode getPBDLNode(Map<String, dynamic> json) {
     var className = json[DESIGN_CLASS_KEY];

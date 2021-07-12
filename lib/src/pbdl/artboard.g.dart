@@ -1,16 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'artboard.dart';
+part of 'pbdl_artboard.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBArtboard _$PBArtboardFromJson(Map<String, dynamic> json) {
-  return PBArtboard(
+PBDLArtboard _$PBArtboardFromJson(Map<String, dynamic> json) {
+  return PBDLArtboard(
     backgroundColor: json['backgroundColor'] == null
         ? null
-        : PBColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
+        : PBDLColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
     isFlowHome: json['isFlowHome'],
     UUID: json['UUID'],
     boundaryRectangle: json['boundaryRectangle'] == null
@@ -21,14 +21,14 @@ PBArtboard _$PBArtboardFromJson(Map<String, dynamic> json) {
     type: json['type'],
     style: json['style'] == null
         ? null
-        : PBStyle.fromJson(json['style'] as Map<String, dynamic>),
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
   )
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..children = json['children'] as List
     ..pbdfType = json['pbdfType'] as String;
 }
 
-Map<String, dynamic> _$PBArtboardToJson(PBArtboard instance) =>
+Map<String, dynamic> _$PBArtboardToJson(PBDLArtboard instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,

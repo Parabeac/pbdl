@@ -1,8 +1,8 @@
-import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
-import 'image.dart';
+import 'abstract_pbdl_node_factory.dart';
+import 'pbdl_image.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'vector.g.dart';
@@ -82,7 +82,7 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   String prototypeNodeUUID;
 
   @override
-  PBStyle style;
+  PBDLStyle style;
 
   @override
   String type;

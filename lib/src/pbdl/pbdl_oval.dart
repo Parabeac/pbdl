@@ -1,18 +1,22 @@
-import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'abstract_pbdl_node_factory.dart';
 
-import 'abstract_design_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'star.g.dart';
+part 'oval.g.dart';
 
 @JsonSerializable()
-class Star implements PBDLNodeFactory, PBDLNode {
+class PBDLOval implements PBDLNodeFactory, PBDLNode {
   @override
-  String pbdfType = 'star';
+  String pbdfType = 'oval';
 
-  Star({
+  var boundaryRectangle;
+
+  var UUID;
+
+  PBDLOval({
     bool edited,
     bool isClosed,
     pointRadiusBehaviour,
@@ -25,9 +29,9 @@ class Star implements PBDLNodeFactory, PBDLNode {
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    isVisible,
+    this.isVisible,
     layerListExpandedType,
-    name,
+    this.name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -39,21 +43,15 @@ class Star implements PBDLNodeFactory, PBDLNode {
     userInfo,
     maintainScrollPosition,
     type,
-    pbdfType,
+    this.pbdfType = 'oval',
     this.style,
   });
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) => Star.fromJson(json);
-  factory Star.fromJson(Map<String, dynamic> json) => _$StarFromJson(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLOval.fromJson(json);
+  factory PBDLOval.fromJson(Map<String, dynamic> json) => _$OvalFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$StarToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
+  Map<String, dynamic> toJson() => _$OvalToJson(this);
 
   @override
   bool isVisible;
@@ -65,7 +63,7 @@ class Star implements PBDLNodeFactory, PBDLNode {
   String prototypeNodeUUID;
 
   @override
-  PBStyle style;
+  PBDLStyle style;
 
   @override
   String type;

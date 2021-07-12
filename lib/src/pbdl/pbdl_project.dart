@@ -1,6 +1,6 @@
 // maybe we dont need this one anymore, or we might use it for PBDL
 
-import 'package:pbdl/src/pbdl/abstract_design_node_factory.dart';
+import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';

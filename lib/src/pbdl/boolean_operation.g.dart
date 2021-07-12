@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'boolean_operation.dart';
+part of 'pbdl_boolean_operation.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
@@ -24,7 +24,7 @@ PBDLBooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..style = json['style'] == null
         ? null
-        : PBStyle.fromJson(json['style'] as Map<String, dynamic>);
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$BooleanOperationToJson(PBDLBooleanOperation instance) =>

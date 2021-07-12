@@ -1,14 +1,14 @@
-import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
-import 'design_element.dart';
+import 'abstract_pbdl_node_factory.dart';
+import 'pbdl_element.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'image.g.dart';
 
 @JsonSerializable()
-class PBDLImage extends DesignElement implements PBDLNodeFactory, PBDLNode {
+class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   var style;
 

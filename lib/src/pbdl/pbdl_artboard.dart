@@ -1,23 +1,23 @@
-import 'package:pbdl/src/pbdl/color.dart';
-import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_color.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_flow.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
-import 'group_node.dart';
+import 'abstract_pbdl_node_factory.dart';
+import 'pbdl_group_node.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'artboard.g.dart';
 
 @JsonSerializable()
-class PBArtboard extends PBDLNode implements GroupNode, PBDLNodeFactory {
-  PBColor backgroundColor;
+class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
+  PBDLColor backgroundColor;
   @override
   var boundaryRectangle;
   var isFlowHome;
 
   var style;
-  PBArtboard(
+  PBDLArtboard(
       {this.backgroundColor,
       this.isFlowHome,
       hasClickThrough,
@@ -58,8 +58,8 @@ class PBArtboard extends PBDLNode implements GroupNode, PBDLNodeFactory {
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
-      PBArtboard.fromJson(json);
-  factory PBArtboard.fromJson(Map<String, dynamic> json) =>
+      PBDLArtboard.fromJson(json);
+  factory PBDLArtboard.fromJson(Map<String, dynamic> json) =>
       _$PBArtboardFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBArtboardToJson(this);

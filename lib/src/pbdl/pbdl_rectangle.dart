@@ -1,14 +1,14 @@
-import 'package:pbdl/src/pbdl/pb_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'abstract_design_node_factory.dart';
-import 'color.dart';
+import 'abstract_pbdl_node_factory.dart';
+import 'pbdl_color.dart';
 import 'pbdl_frame.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'rectangle.g.dart';
 
 @JsonSerializable()
-class Rectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
+class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'rectangle';
 
@@ -20,7 +20,7 @@ class Rectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
 
   var points;
 
-  Rectangle({
+  PBDLRectangle({
     this.fixedRadius,
     this.hasConvertedToNewRoundCorners,
     this.needsConvertionToNewRoundCorners,
@@ -56,8 +56,8 @@ class Rectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
-      Rectangle.fromJson(json);
-  factory Rectangle.fromJson(Map<String, dynamic> json) =>
+      PBDLRectangle.fromJson(json);
+  factory PBDLRectangle.fromJson(Map<String, dynamic> json) =>
       _$RectangleFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$RectangleToJson(this);
@@ -78,7 +78,7 @@ class Rectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
   String prototypeNodeUUID;
 
   @override
-  PBStyle style;
+  PBDLStyle style;
 
   @override
   String type;

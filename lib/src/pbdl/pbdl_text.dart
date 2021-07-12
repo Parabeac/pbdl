@@ -1,14 +1,14 @@
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
-import 'abstract_design_node_factory.dart';
-import 'design_element.dart';
+import 'abstract_pbdl_node_factory.dart';
+import 'pbdl_element.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'text.g.dart';
 
 @JsonSerializable()
-class Text extends DesignElement implements PBDLNodeFactory, PBDLNode {
+class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   var attributedString;
 
   var automaticallyDrawOnUnderlyingPath;
@@ -21,7 +21,7 @@ class Text extends DesignElement implements PBDLNodeFactory, PBDLNode {
 
   var glyphBounds;
 
-  Text({
+  PBDLText({
     UUID,
     booleanOperation,
     exportOptions,
@@ -66,8 +66,8 @@ class Text extends DesignElement implements PBDLNodeFactory, PBDLNode {
   String pbdfType = 'text';
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) => Text.fromJson(json);
-  factory Text.fromJson(Map<String, dynamic> json) => _$TextFromJson(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLText.fromJson(json);
+  factory PBDLText.fromJson(Map<String, dynamic> json) => _$TextFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$TextToJson(this);
 }
