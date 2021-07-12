@@ -6,8 +6,8 @@ part of 'vector.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Vector _$VectorFromJson(Map<String, dynamic> json) {
-  return Vector(
+PBDLVector _$VectorFromJson(Map<String, dynamic> json) {
+  return PBDLVector(
     name: json['name'] as String,
     type: json['type'] as String,
     layoutAlign: json['layoutAlign'],
@@ -32,7 +32,7 @@ Vector _$VectorFromJson(Map<String, dynamic> json) {
     ..imageReference = json['imageReference'] as String;
 }
 
-Map<String, dynamic> _$VectorToJson(Vector instance) => <String, dynamic>{
+Map<String, dynamic> _$VectorToJson(PBDLVector instance) => <String, dynamic>{
       'pbdfType': instance.pbdfType,
       'layoutAlign': instance.layoutAlign,
       'constraints': instance.constraints,

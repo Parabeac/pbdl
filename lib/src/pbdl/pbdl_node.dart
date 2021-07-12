@@ -13,8 +13,10 @@ class PBDLNode {
     this.boundaryRectangle,
     this.type,
     this.style,
-    this.prototypeNodeUUID,
-  );
+    this.prototypeNodeUUID, {
+    transitionDuration,
+    transitionEasing,
+  });
 
   String pbdfType;
   String UUID;
@@ -32,6 +34,4 @@ class PBDLNode {
 
   factory PBDLNode.fromJson(Map<String, dynamic> json) =>
       AbstractDesignNodeFactory.getPBDLNode(json);
-
-    
 }

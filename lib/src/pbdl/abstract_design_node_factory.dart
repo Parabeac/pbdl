@@ -20,7 +20,7 @@ class AbstractDesignNodeFactory {
 
   static final List<PBDLNodeFactory> _designNodes = [
     PBArtboard(),
-    BooleanOperation(),
+    PBDLBooleanOperation(),
     GroupNode(),
     PBDLImage(),
     Oval(),
@@ -30,7 +30,7 @@ class AbstractDesignNodeFactory {
     Rectangle(),
     Star(),
     Text(),
-    Vector(),
+    PBDLVector(),
     PBDLProject(),
     PBDLPage(),
     PBDLScreen(),

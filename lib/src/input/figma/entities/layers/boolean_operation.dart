@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/boolean_operation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
 import '../abstract_figma_node_factory.dart';
@@ -14,6 +15,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   Logger log;
 
   List children;
+
   String booleanOperation;
 
   @override
@@ -22,18 +24,24 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   @override
   var boundaryRectangle;
 
-  BooleanOperation(
-      {children,
-      booleanOperation,
-      type,
-      style,
-      boundaryRectangle,
-      UUID,
-      prototypeNodeUUID,
-      transitionDuration,
-      transitionEasing,
-      imageReference})
-      : super(
+  @override
+  String imageReference;
+
+  @override
+  String pbdfType = 'boolean_operation';
+
+  BooleanOperation({
+    children,
+    booleanOperation,
+    type,
+    style,
+    boundaryRectangle,
+    UUID,
+    prototypeNodeUUID,
+    transitionDuration,
+    transitionEasing,
+    imageReference,
+  }) : super(
             style: style,
             UUID: UUID,
             prototypeNodeUUID: prototypeNodeUUID,
@@ -53,19 +61,20 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() async {
+    return PBDLBooleanOperation(
+      children: children,
+      booleanOperation: booleanOperation,
+      type: type,
+      style: style,
+      boundaryRectangle: boundaryRectangle,
+      UUID: UUID,
+      prototypeNodeUUID: prototypeNodeUUID,
+      transitionDuration: transitionDuration,
+      transitionEasing: transitionEasing,
+      imageReference: imageReference,
+    );
     /*
-    imageReference = FigmaAssetProcessor().processImage(UUID);
-
-    return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext)); */
+    TODO: do we need this commented line?
+    imageReference = FigmaAssetProcessor().processImage(UUID);*/
   }
-
-  @override
-  String imageReference;
-
-  @override
-  Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'boolean_operation';
 }

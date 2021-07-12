@@ -8,7 +8,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'vector.g.dart';
 
 @JsonSerializable()
-class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
+class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   @override
   String pbdfType = 'vector';
 
@@ -28,7 +28,7 @@ class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
 
   var fillsList;
 
-  Vector({
+  PBDLVector({
     this.name,
     visible,
     this.type,
@@ -46,11 +46,26 @@ class Vector implements PBDLNodeFactory, PBDLNode, PBDLImage {
     this.UUID,
     this.pbdfType = 'vector',
     this.style,
-  });
+    prototypeNodeUUID,
+    transitionDuration,
+    transitionEasing,
+  }) : super(
+          UUID,
+          name,
+          visible,
+          boundaryRectangle,
+          type,
+          style,
+          prototypeNodeUUID,
+          transitionDuration: transitionDuration,
+          transitionEasing: transitionEasing,
+        );
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) => Vector.fromJson(json);
-  factory Vector.fromJson(Map<String, dynamic> json) => _$VectorFromJson(json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      PBDLVector.fromJson(json);
+  factory PBDLVector.fromJson(Map<String, dynamic> json) =>
+      _$VectorFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$VectorToJson(this);
 

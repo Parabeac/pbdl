@@ -44,11 +44,11 @@ class PBArtboard extends PBDLNode implements GroupNode, PBDLNodeFactory {
       clippingMaskMode,
       userInfo,
       maintainScrollPosition,
-      prototypeNode,
+      prototypeNodeUUID,
       type,
       this.style})
       : super(UUID, name, isVisible, boundaryRectangle, type, style,
-            prototypeNode);
+            prototypeNodeUUID);
 
   @override
   List children = [];

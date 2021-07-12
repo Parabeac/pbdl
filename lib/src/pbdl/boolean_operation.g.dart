@@ -6,8 +6,8 @@ part of 'boolean_operation.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
-  return BooleanOperation(
+PBDLBooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
+  return PBDLBooleanOperation(
     type: json['type'],
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
@@ -27,7 +27,7 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
         : PBStyle.fromJson(json['style'] as Map<String, dynamic>);
 }
 
-Map<String, dynamic> _$BooleanOperationToJson(BooleanOperation instance) =>
+Map<String, dynamic> _$BooleanOperationToJson(PBDLBooleanOperation instance) =>
     <String, dynamic>{
       'pbdfType': instance.pbdfType,
       'children': instance.children,

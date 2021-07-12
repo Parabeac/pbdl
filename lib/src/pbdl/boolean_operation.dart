@@ -3,35 +3,27 @@ import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_design_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'vector.dart';
 
 part 'boolean_operation.g.dart';
 
 @JsonSerializable()
-class BooleanOperation implements PBDLNodeFactory, PBDLNode {
-  @override
-  String pbdfType = 'boolean_operation';
+class PBDLBooleanOperation extends PBDLVector implements PBDLNodeFactory {
   List<PBDLNode> children = [];
+
+  String booleanOperation;
+
+  @override
+  String type;
 
   @override
   var boundaryRectangle;
 
-  BooleanOperation({
-    booleanOperation,
-    type,
-    PBDLFrame this.boundaryRectangle,
-    String UUID,
-    String this.name,
-    bool isVisible,
-    pbdfType,
-  });
+  // TODO: do we need this for this class? Ivans
+  String imageReference;
 
   @override
-  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
-      BooleanOperation.fromJson(json);
-  factory BooleanOperation.fromJson(Map<String, dynamic> json) =>
-      _$BooleanOperationFromJson(json);
-  @override
-  Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
+  String pbdfType = 'boolean_operation';
 
   @override
   String UUID;
@@ -46,8 +38,32 @@ class BooleanOperation implements PBDLNodeFactory, PBDLNode {
   PBStyle style;
 
   @override
-  String type;
+  bool isVisible;
+
+  PBDLBooleanOperation({
+    children,
+    booleanOperation,
+    type,
+    style,
+    PBDLFrame this.boundaryRectangle,
+    String UUID,
+    prototypeNodeUUID,
+    transitionDuration,
+    transitionEasing,
+    imageReference,
+  }) : super(
+          style: style,
+          UUID: UUID,
+          prototypeNodeUUID: prototypeNodeUUID,
+          transitionDuration: transitionDuration,
+          transitionEasing: transitionEasing,
+        );
 
   @override
-  bool isVisible;
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
+      PBDLBooleanOperation.fromJson(json);
+  factory PBDLBooleanOperation.fromJson(Map<String, dynamic> json) =>
+      _$BooleanOperationFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
 }

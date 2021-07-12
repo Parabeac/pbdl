@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pb_shared_master_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -101,7 +102,20 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   // }
 
   @override
-  Future<PBDLNode> interpretNode() {
+  Future<PBDLNode> interpretNode() async {
+    return PBSharedMasterDesignNode(
+      UUID: UUID,
+      overrideProperties: overriadableProperties, // TODO: extract them
+      name: name,
+      isVisible: isVisible,
+      boundaryRectangle: boundaryRectangle,
+      type: type,
+      style: style,
+      prototypeNode: prototypeNodeUUID,
+      pbdfType: pbdfType,
+      symbolID: symbolID,
+      isFlowHome: isFlowHome,
+    );
     /*
     var sym_master = PBSharedMasterNode(
       this,

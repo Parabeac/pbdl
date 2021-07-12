@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -69,14 +70,23 @@ class Canvas extends FigmaNode implements FigmaNodeFactory {
   var style;
 
   @override
-  Future<PBDLNode> interpretNode() {
+  Future<PBDLNode> interpretNode() async {
+    return PBArtboard(
+      backgroundColor: backgroundColor,
+      isFlowHome: false, // TODO: get it dynamically
+      UUID: UUID,
+      exportOptions: exportSettings,
+      boundaryRectangle: boundaryRectangle,
+      isVisible: isVisible,
+      name: name,
+      type: type,
+      style: style, // TODO:
+      prototypeNodeUUID: prototypeNodeUUID,
+    );
     /*
     assert(false, 'We don\'t product pages as Intermediate Nodes.');
     return null; */
   }
-
-  @override
-  Map<String, dynamic> toPBDF() => toJson();
 
   @override
   String pbdfType = 'artboard';
