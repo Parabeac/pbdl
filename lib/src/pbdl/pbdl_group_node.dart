@@ -39,6 +39,7 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
     maintainScrollPosition,
     this.pbdfType = 'group',
     this.style,
+    this.children,
   });
 
   @override
@@ -69,4 +70,7 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
+
+  @override
+  PBDLNode child;
 }

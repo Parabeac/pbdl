@@ -6,7 +6,7 @@ part of 'pbdl_vector.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLVector _$VectorFromJson(Map<String, dynamic> json) {
+PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
   return PBDLVector(
     name: json['name'] as String,
     type: json['type'] as String,
@@ -26,13 +26,18 @@ PBDLVector _$VectorFromJson(Map<String, dynamic> json) {
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
+    prototypeNodeUUID: json['prototypeNodeUUID'],
   )
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['isVisible'] as bool
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..imageReference = json['imageReference'] as String;
 }
 
-Map<String, dynamic> _$VectorToJson(PBDLVector instance) => <String, dynamic>{
+Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
+    <String, dynamic>{
+      'child': instance.child,
       'pbdfType': instance.pbdfType,
       'layoutAlign': instance.layoutAlign,
       'constraints': instance.constraints,

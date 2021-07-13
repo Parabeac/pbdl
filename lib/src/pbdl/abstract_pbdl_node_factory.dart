@@ -1,12 +1,12 @@
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_page.dart';
-import 'package:pbdl/src/pbdl/pbdl_project.dart';
-import 'package:pbdl/src/pbdl/pbdl_screen.dart';
 import 'pbdl_artboard.dart';
 import 'pbdl_boolean_operation.dart';
 import 'pbdl_group_node.dart';
 import 'pbdl_image.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'pbdl_oval.dart';
+import 'pbdl_page.dart';
+import 'pbdl_project.dart';
+import 'pbdl_screen.dart';
 import 'pbdl_shared_instance_node.dart';
 import 'pbdl_shared_master_node.dart';
 import 'pbdl_polygon.dart';
@@ -53,5 +53,5 @@ class AbstractPBDLNodeFactory {
 
 abstract class PBDLNodeFactory {
   String pbdfType;
-  dynamic createPBDLNode(Map<String, dynamic> json);
+  PBDLNode createPBDLNode(Map<String, dynamic> json);
 }

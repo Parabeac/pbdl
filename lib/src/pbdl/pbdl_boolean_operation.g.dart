@@ -19,6 +19,9 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
     prototypeNodeUUID: json['prototypeNodeUUID'],
     imageReference: json['imageReference'],
   )
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..layoutAlign = json['layoutAlign']
     ..constraints = json['constraints']
     ..size = json['size']
@@ -35,6 +38,7 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLBooleanOperationToJson(
         PBDLBooleanOperation instance) =>
     <String, dynamic>{
+      'child': instance.child,
       'layoutAlign': instance.layoutAlign,
       'constraints': instance.constraints,
       'size': instance.size,

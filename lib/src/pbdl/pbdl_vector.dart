@@ -5,7 +5,7 @@ import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_image.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'vector.g.dart';
+part 'pbdl_vector.g.dart';
 
 @JsonSerializable()
 class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
@@ -65,9 +65,9 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLVector.fromJson(json);
   factory PBDLVector.fromJson(Map<String, dynamic> json) =>
-      _$VectorFromJson(json);
+      _$PBDLVectorFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$VectorToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLVectorToJson(this);
 
   @override
   String UUID;

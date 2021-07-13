@@ -16,6 +16,7 @@ class PBDLNode {
     this.prototypeNodeUUID, {
     transitionDuration,
     transitionEasing,
+    this.child,
   });
 
   String pbdfType;
@@ -26,6 +27,7 @@ class PBDLNode {
   String type;
   PBDLStyle style;
   String prototypeNodeUUID;
+  PBDLNode child;
 
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLNode.fromJson(json);
 

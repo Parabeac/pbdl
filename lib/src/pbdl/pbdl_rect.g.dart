@@ -6,7 +6,7 @@ part of 'pbdl_rect.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLRect _$RectFromJson(Map<String, dynamic> json) {
+PBDLRect _$PBDLRectFromJson(Map<String, dynamic> json) {
   return PBDLRect(
     (json['x'] as num)?.toDouble(),
     (json['y'] as num)?.toDouble(),
@@ -15,7 +15,7 @@ PBDLRect _$RectFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$RectToJson(PBDLRect instance) => <String, dynamic>{
+Map<String, dynamic> _$PBDLRectToJson(PBDLRect instance) => <String, dynamic>{
       'x': instance.x,
       'y': instance.y,
       'width': instance.width,

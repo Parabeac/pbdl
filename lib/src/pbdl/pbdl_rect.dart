@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'rect.g.dart';
+part 'pbdl_rect.g.dart';
 
 @JsonSerializable()
 class PBDLRect {
@@ -17,7 +17,8 @@ class PBDLRect {
   double height;
 
   @override
-  factory PBDLRect.fromJson(Map<String, dynamic> json) => _$RectFromJson(json);
+  factory PBDLRect.fromJson(Map<String, dynamic> json) =>
+      _$PBDLRectFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RectToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLRectToJson(this);
 }

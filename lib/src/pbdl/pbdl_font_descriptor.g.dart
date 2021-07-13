@@ -11,6 +11,9 @@ PBDLFontDescriptor _$PBDLFontDescriptorFromJson(Map<String, dynamic> json) {
     fontName: json['fontName'] as String,
     fontSize: json['fontSize'] as num,
     rawAttributes: json['rawAttributes'] as Map<String, dynamic>,
+    fontStyle: json['fontStyle'] as String,
+    fontWeight: json['fontWeight'] as String,
+    letterSpacing: json['letterSpacing'] as num,
   );
 }
 
@@ -19,4 +22,7 @@ Map<String, dynamic> _$PBDLFontDescriptorToJson(PBDLFontDescriptor instance) =>
       'rawAttributes': instance.rawAttributes,
       'fontName': instance.fontName,
       'fontSize': instance.fontSize,
+      'fontWeight': instance.fontWeight,
+      'fontStyle': instance.fontStyle,
+      'letterSpacing': instance.letterSpacing,
     };

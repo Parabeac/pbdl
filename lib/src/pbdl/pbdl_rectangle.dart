@@ -5,7 +5,7 @@ import 'pbdl_color.dart';
 import 'pbdl_frame.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'rectangle.g.dart';
+part 'pbdl_rectangle.g.dart';
 
 @JsonSerializable()
 class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
@@ -52,15 +52,16 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
     this.type,
     this.pbdfType = 'rectangle',
     this.style,
+    this.child,
   });
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLRectangle.fromJson(json);
   factory PBDLRectangle.fromJson(Map<String, dynamic> json) =>
-      _$RectangleFromJson(json);
+      _$PBDLRectangleFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$RectangleToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLRectangleToJson(this);
 
   @override
   String UUID;
@@ -82,4 +83,7 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
+
+  @override
+  PBDLNode child;
 }

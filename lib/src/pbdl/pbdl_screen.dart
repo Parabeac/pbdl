@@ -1,11 +1,13 @@
-import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
+
+import 'abstract_pbdl_node_factory.dart';
 
 part 'pbdl_screen.g.dart';
 
 @JsonSerializable()
-class PBDLScreen implements PBDLNodeFactory {
+class PBDLScreen implements PBDLNodeFactory, PBDLNode {
   String id;
   String name;
   bool convert = true;
@@ -29,10 +31,28 @@ class PBDLScreen implements PBDLNodeFactory {
   String pbdfType = 'screen';
 
   @override
-  PBDLScreen createPBDLNode(Map<String, dynamic> json) =>
+  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLScreen.fromJson(json);
   factory PBDLScreen.fromJson(Map<String, dynamic> json) =>
       _$PBDLScreenFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLScreenToJson(this);
+
+  @override
+  String UUID;
+
+  @override
+  var boundaryRectangle;
+
+  @override
+  PBDLNode child;
+
+  @override
+  bool isVisible;
+
+  @override
+  String prototypeNodeUUID;
+
+  @override
+  PBDLStyle style;
 }

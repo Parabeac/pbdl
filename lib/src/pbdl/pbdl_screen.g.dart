@@ -17,7 +17,17 @@ PBDLScreen _$PBDLScreenFromJson(Map<String, dynamic> json) {
   )
     ..convert = json['convert'] as bool
     ..imageURI = json['imageURI'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..pbdfType = json['pbdfType'] as String
+    ..UUID = json['UUID'] as String
+    ..boundaryRectangle = json['boundaryRectangle']
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..isVisible = json['isVisible'] as bool
+    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
+    ..style = json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) =>
@@ -29,4 +39,10 @@ Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) =>
       'type': instance.type,
       'designNode': instance.designNode,
       'pbdfType': instance.pbdfType,
+      'UUID': instance.UUID,
+      'boundaryRectangle': instance.boundaryRectangle,
+      'child': instance.child,
+      'isVisible': instance.isVisible,
+      'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'style': instance.style,
     };

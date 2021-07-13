@@ -15,7 +15,11 @@ PBDLElement _$PBDLElementFromJson(Map<String, dynamic> json) {
     type: json['type'],
     style: json['style'],
     prototypeNodeUUID: json['prototypeNodeUUID'],
-  )..pbdfType = json['pbdfType'] as String;
+  )
+    ..pbdfType = json['pbdfType'] as String
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$PBDLElementToJson(PBDLElement instance) =>
@@ -28,4 +32,5 @@ Map<String, dynamic> _$PBDLElementToJson(PBDLElement instance) =>
       'type': instance.type,
       'style': instance.style,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'child': instance.child,
     };

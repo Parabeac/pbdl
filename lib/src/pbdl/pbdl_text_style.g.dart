@@ -16,10 +16,11 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLParagraphStyle.fromJson(
             json['paragraphStyle'] as Map<String, dynamic>),
-  )..fontDescriptor = json['fontDescriptor'] == null
-      ? null
-      : PBDLFontDescriptor.fromJson(
-          json['fontDescriptor'] as Map<String, dynamic>);
+    fontDescriptor: json['fontDescriptor'] == null
+        ? null
+        : PBDLFontDescriptor.fromJson(
+            json['fontDescriptor'] as Map<String, dynamic>),
+  );
 }
 
 Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>

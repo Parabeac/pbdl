@@ -45,6 +45,7 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
     type,
     this.pbdfType = 'oval',
     this.style,
+    this.child,
   });
 
   @override
@@ -68,4 +69,7 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
+
+  @override
+  PBDLNode child;
 }

@@ -5,7 +5,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'star.g.dart';
+part 'pbdl_star.g.dart';
 
 @JsonSerializable()
 class PBDLStar implements PBDLNodeFactory, PBDLNode {
@@ -41,13 +41,15 @@ class PBDLStar implements PBDLNodeFactory, PBDLNode {
     type,
     pbdfType,
     this.style,
+    this.child,
   });
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLStar.fromJson(json);
-  factory PBDLStar.fromJson(Map<String, dynamic> json) => _$StarFromJson(json);
+  factory PBDLStar.fromJson(Map<String, dynamic> json) =>
+      _$PBDLStarFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$StarToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLStarToJson(this);
 
   @override
   String UUID;
@@ -69,4 +71,7 @@ class PBDLStar implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
+
+  @override
+  PBDLNode child;
 }

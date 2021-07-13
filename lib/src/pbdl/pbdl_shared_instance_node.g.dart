@@ -24,6 +24,9 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
     pbdfType: json['pbdfType'] as String,
   )
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..parameters = json['parameters'] as List;
 }
 
@@ -37,6 +40,7 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
       'type': instance.type,
       'style': instance.style,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'child': instance.child,
       'symbolID': instance.symbolID,
       'parameters': instance.parameters,
       'pbdfType': instance.pbdfType,

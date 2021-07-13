@@ -17,6 +17,7 @@ class PBDLTextStyle {
     this.fontColor,
     this.weight,
     this.paragraphStyle,
+    this.fontDescriptor,
   });
 
   @override

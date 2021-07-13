@@ -15,19 +15,19 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
     backgroundColor: json['backgroundColor'] == null
         ? null
         : PBDLColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
-  )
-    ..borders = (json['borders'] as List)
+    borders: (json['borders'] as List)
         ?.map((e) =>
             e == null ? null : PBDLBorder.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..borderOptions = json['borderOptions'] == null
+        ?.toList(),
+    borderOptions: json['borderOptions'] == null
         ? null
         : PBDLBorderOptions.fromJson(
-            json['borderOptions'] as Map<String, dynamic>)
-    ..textStyle = json['textStyle'] == null
+            json['borderOptions'] as Map<String, dynamic>),
+    textStyle: json['textStyle'] == null
         ? null
-        : PBDLTextStyle.fromJson(json['textStyle'] as Map<String, dynamic>)
-    ..hasShadow = json['hasShadow'] as bool;
+        : PBDLTextStyle.fromJson(json['textStyle'] as Map<String, dynamic>),
+    hasShadow: json['hasShadow'] as bool,
+  );
 }
 
 Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{

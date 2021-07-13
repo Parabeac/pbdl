@@ -16,7 +16,14 @@ class PBDLStyle {
   PBDLTextStyle textStyle;
   bool hasShadow = false;
 
-  PBDLStyle({this.fills, this.backgroundColor});
+  PBDLStyle({
+    this.fills,
+    this.backgroundColor,
+    this.borders,
+    this.borderOptions,
+    this.textStyle,
+    this.hasShadow,
+  });
 
   @override
   factory PBDLStyle.fromJson(Map<String, dynamic> json) =>

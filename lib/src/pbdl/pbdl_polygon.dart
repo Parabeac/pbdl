@@ -4,7 +4,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'polygon.g.dart';
+part 'pbdl_polygon.g.dart';
 
 @JsonSerializable()
 class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
@@ -44,15 +44,16 @@ class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
     type,
     pbdfType,
     this.style,
+    this.child,
   });
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLPolygon.fromJson(json);
   factory PBDLPolygon.fromJson(Map<String, dynamic> json) =>
-      _$PolygonFromJson(json);
+      _$PBDLPolygonFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$PolygonToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLPolygonToJson(this);
 
   @override
   bool isVisible;
@@ -68,4 +69,7 @@ class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
 
   @override
   String type;
+
+  @override
+  PBDLNode child;
 }

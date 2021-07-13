@@ -6,7 +6,7 @@ part of 'pbdl_text.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLText _$TextFromJson(Map<String, dynamic> json) {
+PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
   return PBDLText(
     UUID: json['UUID'],
     boundaryRectangle: json['boundaryRectangle'] == null
@@ -26,10 +26,13 @@ PBDLText _$TextFromJson(Map<String, dynamic> json) {
     style: json['style'],
   )
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..content = json['content'] as String;
 }
 
-Map<String, dynamic> _$TextToJson(PBDLText instance) => <String, dynamic>{
+Map<String, dynamic> _$PBDLTextToJson(PBDLText instance) => <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
@@ -37,6 +40,7 @@ Map<String, dynamic> _$TextToJson(PBDLText instance) => <String, dynamic>{
       'type': instance.type,
       'style': instance.style,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'child': instance.child,
       'attributedString': instance.attributedString,
       'automaticallyDrawOnUnderlyingPath':
           instance.automaticallyDrawOnUnderlyingPath,

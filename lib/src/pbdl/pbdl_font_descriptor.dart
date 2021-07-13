@@ -4,10 +4,22 @@ part 'pbdl_font_descriptor.g.dart';
 
 @JsonSerializable()
 class PBDLFontDescriptor {
-  PBDLFontDescriptor({this.fontName, this.fontSize, this.rawAttributes});
+  PBDLFontDescriptor({
+    this.fontName,
+    this.fontSize,
+    this.rawAttributes,
+    this.fontStyle,
+    this.fontWeight,
+    this.letterSpacing,
+  });
   Map<String, dynamic> rawAttributes;
   String fontName;
   num fontSize;
+  String fontWeight;
+
+  String fontStyle;
+
+  num letterSpacing;
 
   @override
   factory PBDLFontDescriptor.fromJson(Map<String, dynamic> json) =>

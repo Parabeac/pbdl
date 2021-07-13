@@ -5,7 +5,7 @@ import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_element.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'text.g.dart';
+part 'pbdl_text.g.dart';
 
 @JsonSerializable()
 class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
@@ -67,7 +67,8 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLText.fromJson(json);
-  factory PBDLText.fromJson(Map<String, dynamic> json) => _$TextFromJson(json);
+  factory PBDLText.fromJson(Map<String, dynamic> json) =>
+      _$PBDLTextFromJson(json);
   @override
-  Map<String, dynamic> toJson() => _$TextToJson(this);
+  Map<String, dynamic> toJson() => _$PBDLTextToJson(this);
 }
