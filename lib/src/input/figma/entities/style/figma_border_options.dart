@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_border_options.dart';
 
 part 'figma_border_options.g.dart';
 
@@ -23,4 +24,13 @@ class FigmaBorderOptions {
 
   factory FigmaBorderOptions.fromJson(Map<String, dynamic> json) =>
       _$FigmaBorderOptionsFromJson(json);
+
+  PBDLBorderOptions interpretOptions() {
+    return PBDLBorderOptions(
+      isEnabled: isEnabled,
+      dashPattern: dashPattern,
+      lineCapStyle: lineCapStyle,
+      lineJoinStyle: lineJoinStyle,
+    );
+  }
 }

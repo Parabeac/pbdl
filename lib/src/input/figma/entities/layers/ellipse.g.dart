@@ -29,6 +29,9 @@ FigmaEllipse _$FigmaEllipseFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
   )
     ..UUID = json['id'] as String
+    ..child = json['child'] == null
+        ? null
+        : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
@@ -41,6 +44,7 @@ Map<String, dynamic> _$FigmaEllipseToJson(FigmaEllipse instance) =>
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'child': instance.child,
       'visible': instance.isVisible,
       'transitionNodeID': instance.prototypeNodeUUID,
       'transitionDuration': instance.transitionDuration,

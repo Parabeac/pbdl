@@ -22,6 +22,9 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
     ..name = json['name'] as String
     ..pluginData = json['pluginData']
     ..sharedPluginData = json['sharedPluginData']
+    ..child = json['child'] == null
+        ? null
+        : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
     ..layoutAlign = json['layoutAlign'] as String
     ..constraints = json['constraints']
@@ -40,6 +43,7 @@ Map<String, dynamic> _$BooleanOperationToJson(BooleanOperation instance) =>
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'child': instance.child,
       'visible': instance.isVisible,
       'transitionNodeID': instance.prototypeNodeUUID,
       'transitionDuration': instance.transitionDuration,

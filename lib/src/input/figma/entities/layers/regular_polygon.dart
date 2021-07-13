@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
@@ -62,12 +64,16 @@ class FigmaRegularPolygon extends FigmaVector
   Map<String, dynamic> toJson() => _$FigmaRegularPolygonToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    /*
-    imageReference = FigmaAssetProcessor().processImage(UUID);
-
-    return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext)); */
+  PBDLNode interpretNode() {
+    return PBDLImage(
+      imageReference: imageReference,
+      UUID: UUID,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      isVisible: isVisible,
+      name: name,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+    );
   }
 
   @override

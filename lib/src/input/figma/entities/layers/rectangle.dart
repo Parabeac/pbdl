@@ -1,5 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
@@ -15,29 +20,29 @@ class FigmaRectangle extends FigmaVector
     implements AbstractFigmaNodeFactory {
   @override
   String type = 'RECTANGLE';
-  FigmaRectangle(
-      {String name,
-      bool isVisible,
-      type,
-      pluginData,
-      sharedPluginData,
-      style,
-      layoutAlign,
-      constraints,
-      FigmaFrame boundaryRectangle,
-      size,
-      strokes,
-      strokeWeight,
-      strokeAlign,
-      styles,
-      this.cornerRadius,
-      this.rectangleCornerRadii,
-      this.points,
-      List fillsList,
-      String prototypeNodeUUID,
-      num transitionDuration,
-      String transitionEasing})
-      : super(
+  FigmaRectangle({
+    String name,
+    bool isVisible,
+    type,
+    pluginData,
+    sharedPluginData,
+    style,
+    layoutAlign,
+    constraints,
+    FigmaFrame boundaryRectangle,
+    size,
+    strokes,
+    strokeWeight,
+    strokeAlign,
+    styles,
+    this.cornerRadius,
+    this.rectangleCornerRadii,
+    this.points,
+    List fillsList,
+    String prototypeNodeUUID,
+    num transitionDuration,
+    String transitionEasing,
+  }) : super(
           name: name,
           visible: isVisible,
           type: type,
@@ -71,6 +76,10 @@ class FigmaRectangle extends FigmaVector
   List<double> rectangleCornerRadii;
 
   @override
+  @JsonKey(ignore: true)
+  FigmaStyle style;
+
+  @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaRectangle.fromJson(json);
     node.style = StyleExtractor().getStyle(json);
@@ -83,40 +92,38 @@ class FigmaRectangle extends FigmaVector
   Map<String, dynamic> toJson() => _$FigmaRectangleToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    /*
+  PBDLNode interpretNode() {
     var fillsMap =
         (fillsList == null || fillsList.isEmpty) ? {} : fillsList.first;
     if (fillsMap != null && fillsMap['type'] == 'IMAGE') {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
-      return Future.value(
-          InheritedBitmap(this, name, currentContext: currentContext));
+      return PBDLImage(
+        imageReference: imageReference,
+        UUID: UUID,
+        boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+        isVisible: isVisible,
+        name: name,
+        pbdfType: pbdfType,
+        style: style.interpretStyle(),
+      );
     }
-    FigmaBorder border;
-    for (var b in style?.borders?.reversed ?? []) {
-      if (b.isEnabled) {
-        border = b;
-      }
-    }
-    return Future.value(InheritedContainer(
-      this,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(boundaryRectangle.x + boundaryRectangle.width,
-          boundaryRectangle.y + boundaryRectangle.height),
-      name,
-      currentContext: currentContext,
-      isBackgroundVisible:
-          !fillsMap.containsKey('visible') || fillsMap['visible'],
-      borderInfo: {
-        'borderRadius': (style != null && style.borderOptions != null)
-            ? cornerRadius
-            : null,
-        'borderColorHex': style.borders != null && style.borders.isNotEmpty
-            ? toHex(style.borders[0].color)
-            : null
-      },
-    )); */
+    // FigmaBorder border;
+    // for (var b in style?.borders?.reversed ?? []) {
+    //   if (b.isEnabled) {
+    //     border = b;
+    //   }
+    // }
+    return PBDLRectangle(
+      UUID: UUID,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      isVisible: isVisible,
+      name: name,
+      type: type,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+      child: child.interpretNode(),
+    );
   }
 
   @override

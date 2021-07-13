@@ -19,6 +19,8 @@ class FigmaNode {
 
   var sharedPluginData;
 
+  FigmaNode child;
+
   @JsonKey(name: 'visible', defaultValue: true)
   bool isVisible;
 
@@ -41,10 +43,22 @@ class FigmaNode {
     this.transitionEasing,
   });
 
-  Future<PBDLNode> interpretNode() {}
+  PBDLNode interpretNode() {
+    return PBDLNode(
+      UUID,
+      name,
+      isVisible,
+      null,
+      type,
+      null,
+      prototypeNodeUUID,
+      child: child.interpretNode(),
+    );
+    // TODO: double check null properties are boundaryRectangle and style
+  }
 
   factory FigmaNode.fromJson(Map<String, dynamic> json) =>
-      _$FigmaNodeFromJson(json);
+      AbstractFigmaNodeFactory.getFigmaNode(json);
   @override
   Map<String, dynamic> toJson() => _$FigmaNodeToJson(this);
 }

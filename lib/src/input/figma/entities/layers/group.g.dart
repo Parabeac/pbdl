@@ -36,6 +36,9 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
   )
+    ..child = json['child'] == null
+        ? null
+        : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
@@ -47,6 +50,7 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'child': instance.child,
       'visible': instance.isVisible,
       'transitionNodeID': instance.prototypeNodeUUID,
       'transitionDuration': instance.transitionDuration,

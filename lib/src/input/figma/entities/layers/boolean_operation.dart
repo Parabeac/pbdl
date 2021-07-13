@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/pbdl/boolean_operation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/pbdl/pbdl_boolean_operation.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
 import '../abstract_figma_node_factory.dart';
@@ -60,21 +62,19 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() async {
+  PBDLNode interpretNode() {
+    imageReference = FigmaAssetProcessor().processImage(UUID);
     return PBDLBooleanOperation(
       children: children,
       booleanOperation: booleanOperation,
       type: type,
       style: style,
-      boundaryRectangle: boundaryRectangle,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
       UUID: UUID,
       prototypeNodeUUID: prototypeNodeUUID,
       transitionDuration: transitionDuration,
       transitionEasing: transitionEasing,
       imageReference: imageReference,
     );
-    /*
-    TODO: do we need this commented line?
-    imageReference = FigmaAssetProcessor().processImage(UUID);*/
   }
 }

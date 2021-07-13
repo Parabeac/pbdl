@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_fill.dart';
 
 import 'figma_color.dart';
 part 'figma_fill.g.dart';
@@ -14,4 +15,8 @@ class FigmaFill {
   Map<String, dynamic> toJson() => _$FigmaFillToJson(this);
   factory FigmaFill.fromJson(Map<String, dynamic> json) =>
       _$FigmaFillFromJson(json);
+
+  PBDLFill interpretFill() {
+    return PBDLFill(color.interpretColor());
+  }
 }

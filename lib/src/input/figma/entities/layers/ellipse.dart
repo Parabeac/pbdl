@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_oval.dart';
 import 'package:quick_log/quick_log.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -73,11 +76,17 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaEllipseToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() async {
-    /*
+  PBDLNode interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
-    return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext)); */
+    return PBDLOval(
+      UUID: UUID,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      isVisible: isVisible,
+      name: name,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+      type: type,
+    );
   }
 
   @override

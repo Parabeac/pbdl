@@ -21,6 +21,9 @@ FigmaSlice _$FigmaSliceFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
   )
     ..UUID = json['id'] as String
+    ..child = json['child'] == null
+        ? null
+        : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
     ..pbdfType = json['pbdfType'] as String;
 }
@@ -31,6 +34,7 @@ Map<String, dynamic> _$FigmaSliceToJson(FigmaSlice instance) =>
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'child': instance.child,
       'transitionNodeID': instance.prototypeNodeUUID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,

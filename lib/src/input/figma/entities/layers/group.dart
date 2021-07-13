@@ -1,4 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
 
@@ -91,8 +95,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() async {
-    /*
+  PBDLNode interpretNode() {
     if (areAllVectors()) {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
@@ -107,13 +110,31 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
 
       children.clear();
 
-      return Future.value(
-          InheritedBitmap(this, name, currentContext: currentContext));
+      return PBDLImage(
+        imageReference: imageReference,
+        UUID: UUID,
+        boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+        isVisible: isVisible,
+        name: name,
+        pbdfType: pbdfType,
+        style: style,
+      );
     }
-    return Future.value(TempGroupLayoutNode(this, currentContext, name,
-        topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
-        bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
-            boundaryRectangle.y + boundaryRectangle.height))); */
+    // TODO: what is the equivalent of TempGroupLayoutNode for PBDL
+    return PBDLGroupNode(
+      UUID: UUID,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      isVisible: isVisible,
+      name: name,
+      pbdfType: pbdfType,
+      style: style,
+      children: children,
+    );
+
+    // return Future.value(TempGroupLayoutNode(this, currentContext, name,
+    //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
+    //     bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
+    //         boundaryRectangle.y + boundaryRectangle.height)));
   }
 
   bool areAllVectors() {

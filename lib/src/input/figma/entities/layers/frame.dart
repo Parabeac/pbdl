@@ -1,4 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
@@ -111,46 +114,32 @@ class FigmaFrame extends FigmaNode
   Map<String, dynamic> toJson() => _$FigmaFrameToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    /*
+  PBDLNode interpretNode() {
     /// TODO: change `isHomeScreen` to its actual value
     if (isScaffold) {
-      return Future.value(InheritedScaffold(
-        this,
-        currentContext: currentContext,
-        name: name,
-        isHomeScreen: isFlowHome,
-      ));
-    } else {
-      var tempGroup = Group(
-        name: name,
-        isVisible: isVisible,
-        type: type,
-        pluginData: pluginData,
-        sharedPluginData: sharedPluginData,
-        boundaryRectangle: boundaryRectangle,
-        style: style,
-        fills: fills,
-        strokes: strokes,
-        strokeWeight: strokeWeight,
-        strokeAlign: strokeAlign,
-        cornerRadius: cornerRadius,
-        constraints: constraints,
-        layoutAlign: layoutAlign,
-        size: size,
-        horizontalPadding: horizontalPadding,
-        verticalPadding: verticalPadding,
-        itemSpacing: itemSpacing,
-        children: children,
+      return PBDLArtboard(
+        backgroundColor: backgroundColor.interpretColor(),
+        isFlowHome: false,
         UUID: UUID,
-        backgroundColor: backgroundColor,
+        boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+        isVisible: isVisible,
+        name: name,
+        type: type,
+        style: style.interpretStyle(),
         prototypeNodeUUID: prototypeNodeUUID,
-        transitionDuration: transitionDuration,
-        transitionEasing: transitionEasing,
+        children: children,
       );
-
-      return Future.value(tempGroup.interpretNode(currentContext)); */
-    // }
+    } else {
+      return PBDLGroupNode(
+        UUID: UUID,
+        boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+        isVisible: isVisible,
+        name: name,
+        pbdfType: pbdfType,
+        style: style,
+        children: children,
+      );
+    }
   }
 
   @override

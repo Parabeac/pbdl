@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
 import '../../helper/override_value.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
@@ -86,15 +88,20 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$InstanceToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    /// TODO: Check if `sharedParamValues` exits and pass to it, default to emptu for now
-    // var sym = PBSharedInstanceIntermediateNode(
-    //   this,
-    //   componentId,
-    //   sharedParamValues: [],
-    //   currentContext: currentContext,
-    // );
-    // return Future.value(sym);
+  PBDLNode interpretNode() {
+    return PBDLSharedInstanceNode(
+      UUID: UUID,
+      overrideValues:
+          overrideValues.map((e) => e.interpretOverridableValue()).toList(),
+      name: name,
+      isVisible: isVisible,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      type: type,
+      style: style,
+      prototypeNode: prototypeNodeUUID,
+      symbolID: symbolID,
+      pbdfType: pbdfType,
+    );
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/pbdl/pb_shared_master_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
@@ -102,13 +103,13 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   // }
 
   @override
-  Future<PBDLNode> interpretNode() async {
-    return PBSharedMasterDesignNode(
+  PBDLNode interpretNode() {
+    return PBDLSharedMasterNode(
       UUID: UUID,
       overrideProperties: overriadableProperties, // TODO: extract them
       name: name,
       isVisible: isVisible,
-      boundaryRectangle: boundaryRectangle,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
       type: type,
       style: style,
       prototypeNode: prototypeNodeUUID,

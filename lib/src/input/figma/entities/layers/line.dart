@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
 import 'frame.dart';
@@ -61,17 +63,16 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaLineToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    /*
-    return Future.value(InheritedContainer(
-      this,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(
-        boundaryRectangle.x + boundaryRectangle.width,
-        boundaryRectangle.y + boundaryRectangle.height,
-      ),
-      name,
-    )); */
+  PBDLNode interpretNode() {
+    return PBDLRectangle(
+      UUID: UUID,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      isVisible: isVisible,
+      name: name,
+      type: type,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+    );
   }
 
   @override

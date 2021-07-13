@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_text.dart';
 import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_style.dart';
@@ -61,6 +63,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   String content;
 
   @override
+  @JsonKey(ignore: true)
   FigmaStyle style;
 
   List<double> characterStyleOverrides;
@@ -80,19 +83,22 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaTextToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    /*
-    return Future.value(InheritedContainer(
-      this,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(boundaryRectangle.x + boundaryRectangle.width,
-          boundaryRectangle.y + boundaryRectangle.height),
-      name,
-      currentContext: currentContext,
-      isBackgroundVisible: style.backgroundColor != null,
-    )..addChild(
-        InheritedText(this, name, currentContext: currentContext),
-      )); */
+  PBDLNode interpretNode() {
+    return PBDLText(
+      UUID: UUID,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      isVisible: isVisible,
+      name: name,
+      attributedString: attributedString,
+      automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
+      dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
+      lineSpacingBehaviour: lineSpacingBehaviour,
+      textBehaviour: textBehaviour,
+      glyphBounds: glyphBounds,
+      type: type,
+      pbdfType: pbdfType,
+      style: style,
+    );
   }
 
   @override

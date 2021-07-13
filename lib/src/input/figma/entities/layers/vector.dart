@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/vector.dart';
+import 'package:pbdl/src/pbdl/pbdl_vector.dart';
 import 'package:quick_log/quick_log.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -84,7 +86,8 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaVectorToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() async {
+  PBDLNode interpretNode() {
+    imageReference = FigmaAssetProcessor().processImage(UUID);
     return PBDLVector(
       name: name,
       visible: isVisible,
@@ -93,7 +96,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       sharedPluginData: sharedPluginData,
       layoutAlign: layoutAlign,
       constraints: constraints,
-      boundaryRectangle: boundaryRectangle,
+      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
       size: size,
       strokes: strokes,
       strokeWeight: strokeWeight,
@@ -102,18 +105,11 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       fillsList: fillsList,
       UUID: UUID,
       pbdfType: pbdfType,
-      style: style, // TODO: convert
-      // We are going to need to have a class into Figma Style
-      // that returns a PBDL version of it
+      style: style.interpretStyle(),
       prototypeNodeUUID: prototypeNodeUUID,
       transitionDuration: transitionDuration,
       transitionEasing: transitionEasing,
     );
-    /*
-    imageReference = FigmaAssetProcessor().processImage(UUID);
-
-    return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext)); */
   }
 
   String imageReference;
