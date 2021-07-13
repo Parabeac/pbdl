@@ -46,8 +46,7 @@ class FigmaController {
   }
 
   Future<dynamic> _fetchFigmaFile() => APICallService.makeAPICall(
-      'https://api.figma.com/v1/files/${MainInfo().figmaProjectID}',
-      figmaAPIKey);
+      'https://api.figma.com/v1/files/$figmaProjectID', figmaAPIKey);
 
   /// This method was required for Figma, so we could
   /// detect which `FigmaFrame` were Scaffolds or Containers
