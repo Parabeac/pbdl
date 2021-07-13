@@ -1,3 +1,5 @@
+import 'package:pbdl/src/pbdl/pbdl_screen.dart';
+
 import '../entities/abstract_figma_node_factory.dart';
 import '../entities/layers/figma_node.dart';
 
@@ -42,5 +44,14 @@ class FigmaScreen {
     var result = <String, Object>{'azure_blob_uri': imageURI};
     result.addAll(figmaNode.toJson());
     return result;
+  }
+
+  PBDLScreen interpretNode() {
+    return PBDLScreen(
+      designNode: figmaNode.interpretNode(),
+      id: id,
+      name: name,
+      type: type,
+    );
   }
 }

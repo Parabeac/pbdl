@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:quick_log/quick_log.dart';
 import '../entities/abstract_figma_node_factory.dart';
 import 'figma_screen.dart';
@@ -59,4 +60,12 @@ class FigmaPage {
 
   @override
   String type;
+
+  PBDLPage interpretNode() {
+    return PBDLPage(
+      name: name,
+      id: id,
+      screens: screens.map((e) => e.interpretNode()).toList(),
+    );
+  }
 }

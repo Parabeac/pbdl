@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/sketch/entities/objects/override_value.dart';
 
 part 'override_value.g.dart';
 
@@ -18,4 +19,8 @@ class FigmaOverridableValue {
   factory FigmaOverridableValue.fromJson(Map<String, dynamic> json) =>
       _$FigmaOverridableValueFromJson(json);
   Map<String, dynamic> toJson() => _$FigmaOverridableValueToJson(this);
+
+  OverridableValue interpretOverridableValue() {
+    return OverridableValue(overrideName, UUID, value);
+  }
 }
