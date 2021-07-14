@@ -1,4 +1,5 @@
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_group_node.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -9,9 +10,11 @@ part 'pbdl_shared_master_node.g.dart';
 class PBDLSharedMasterNode extends PBDLNode
     implements PBDLNodeFactory, PBDLGroupNode {
   String symbolID;
-  List overriadableProperties;
 
-  var overrideProperties;
+  List<PBDLOverrideProperty> overrideProperties;
+
+  @override
+  List children = [];
 
   PBDLSharedMasterNode({
     String UUID,
@@ -91,7 +94,4 @@ class PBDLSharedMasterNode extends PBDLNode
   //   }
   //   return sharedParameters;
   // }
-
-  @override
-  List children = [];
 }

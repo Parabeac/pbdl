@@ -1,5 +1,6 @@
 import 'package:pbdl/src/input/sketch/entities/objects/override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -9,6 +10,8 @@ part 'pbdl_shared_instance_node.g.dart';
 class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   String symbolID;
   List parameters;
+
+  final List<PBDLOverrideValue> overrideValues;
 
   PBDLSharedInstanceNode(
       {String UUID,
@@ -76,5 +79,4 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   //   return sharedParameters;
   // }
 
-  final List<OverridableValue> overrideValues;
 }
