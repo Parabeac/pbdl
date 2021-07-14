@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_font_descriptor.dart';
 
 part 'font_descriptor.g.dart';
 
@@ -26,4 +27,15 @@ class FontDescriptor {
       _$FontDescriptorFromJson(json);
 
   Map<String, dynamic> toJson() => _$FontDescriptorToJson(this);
+
+  PBDLFontDescriptor interpretFontDescriptor() {
+    return PBDLFontDescriptor(
+      fontName: fontName,
+      fontSize: num.parse(fontName),
+      rawAttributes: rawAttributes,
+      fontStyle: fontStyle,
+      fontWeight: fontWeight,
+      letterSpacing: letterSpacing,
+    );
+  }
 }

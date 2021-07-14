@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_sketch_node_factory.dart';
@@ -33,8 +34,7 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   @JsonKey(name: 'frame')
   var boundaryRectangle;
 
-  @override
-  var backgroundColor;
+  Color backgroundColor;
 
   @override
   @JsonKey(name: 'do_objectID')
@@ -138,7 +138,38 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ArtboardToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
+  PBDLNode interpretNode() {
+    return PBDLArtboard(
+      backgroundColor: backgroundColor.interpretColor(),
+      isFlowHome: isFlowHome,
+      hasClickThrough: hasClickThrough,
+      groupLayout: groupLayout,
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle,
+      flow: flow.interpretFlow(),
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      prototypeNodeUUID: prototypeNodeUUID,
+      type: type,
+      style: style.interpretStyle(),
+      children: children,
+    );
     /*
     return Future.value(InheritedScaffold(
       this,

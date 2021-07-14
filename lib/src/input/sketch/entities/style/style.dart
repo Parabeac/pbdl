@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
 import 'blur.dart';
 import 'border.dart';
@@ -56,6 +57,17 @@ class Style {
 
   factory Style.fromJson(Map json) => _$StyleFromJson(json);
   Map<String, dynamic> toJson() => _$StyleToJson(this);
+
+  PBDLStyle interpretStyle() {
+    return PBDLStyle(
+      backgroundColor: backgroundColor.interpretColor(),
+      fills: fills.map((e) => e.interpretFill()).toList(),
+      borders: borders.map((e) => e.interpretBorder()).toList(),
+      borderOptions: borderOptions.interpretOptions(),
+      textStyle: textStyle.interpretTextStyle(),
+      hasShadow: hasShadow,
+    );
+  }
 
   @JsonKey(ignore: true)
   Color backgroundColor;

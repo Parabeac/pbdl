@@ -72,7 +72,7 @@ class SketchNode {
       this.style,
       this.maintainScrollPosition);
 
-  Future<PBDLNode> interpretNode() {}
+  PBDLNode interpretNode() {}
 
   factory SketchNode.fromJson(Map<String, dynamic> json) =>
       _$SketchNodeFromJson(json);

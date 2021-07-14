@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_sketch_node_factory.dart';
@@ -95,7 +96,32 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$BitmapToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
+  PBDLNode interpretNode() {
+    return PBDLImage(
+      imageReference: imageReference,
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle,
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      resizingType: resizingType,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMask,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+    );
     /*  var intermediateNode;
     intermediateNode = PBDenyListHelper().returnDenyListNodeIfExist(this);
     if (intermediateNode != null) {
