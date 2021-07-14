@@ -92,4 +92,7 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
 
   @override
   String imageReference;
+
+  @override
+  var image;
 }

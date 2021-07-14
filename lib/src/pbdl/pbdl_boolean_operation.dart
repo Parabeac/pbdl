@@ -23,6 +23,7 @@ class PBDLBooleanOperation extends PBDLVector
   var boundaryRectangle;
 
   // TODO: do we need this for this class? Ivans
+  @override
   String imageReference;
 
   @override
@@ -66,4 +67,7 @@ class PBDLBooleanOperation extends PBDLVector
       _$PBDLBooleanOperationFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLBooleanOperationToJson(this);
+
+  @override
+  var image;
 }

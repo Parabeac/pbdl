@@ -32,7 +32,8 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['isVisible'] as bool
-    ..imageReference = json['imageReference'] as String;
+    ..imageReference = json['imageReference'] as String
+    ..image = json['image'];
 }
 
 Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
@@ -55,4 +56,5 @@ Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
       'type': instance.type,
       'boundaryRectangle': instance.boundaryRectangle,
       'imageReference': instance.imageReference,
+      'image': instance.image,
     };

@@ -32,7 +32,8 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
     ..fillsList = json['fillsList']
     ..pbdfType = json['pbdfType'] as String
     ..name = json['name'] as String
-    ..isVisible = json['isVisible'] as bool;
+    ..isVisible = json['isVisible'] as bool
+    ..image = json['image'];
 }
 
 Map<String, dynamic> _$PBDLBooleanOperationToJson(
@@ -58,4 +59,5 @@ Map<String, dynamic> _$PBDLBooleanOperationToJson(
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'style': instance.style,
       'isVisible': instance.isVisible,
+      'image': instance.image,
     };
