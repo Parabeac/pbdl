@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_page.dart';
 
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
@@ -119,10 +120,12 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$PageToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    /*
-    assert(false, 'We don\'t product pages as Intermediate Nodes.');
-    return null; */
+  PBDLNode interpretNode() {
+    return PBDLPage(
+      name: name,
+      id: UUID,
+      screens: children.map((e) => e.interpretNode()).toList(),
+    );
   }
 
   @override

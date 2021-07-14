@@ -75,7 +75,7 @@ class SketchNode {
   PBDLNode interpretNode() {}
 
   factory SketchNode.fromJson(Map<String, dynamic> json) =>
-      _$SketchNodeFromJson(json);
+      AbstractSketchNodeFactory.getSketchNode(json);
   @override
   Map<String, dynamic> toJson() => _$SketchNodeToJson(this);
 }

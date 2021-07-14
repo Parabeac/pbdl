@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/general_helper/input_formatter.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
 import '../objects/override_property.dart';
@@ -176,7 +177,44 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   // }
 
   @override
-  Future<PBDLNode> interpretNode() {
+  PBDLNode interpretNode() {
+    return PBDLSharedMasterNode(
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle,
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+      type: type,
+      prototypeNode: prototypeNodeUUID,
+      symbolID: symbolID,
+      overrideProperties: overrideProperties,
+      isFlowHome: isFlowHome,
+      allowsOverrides: allowsOverrides,
+      hasBackgroundColor: hasBackgroundColor,
+      parameters: parameters,
+      resizesContent: resizesContent,
+      includeInCloudUpload: includeInCloudUpload,
+      includeBackgroundColorInExport: includeBackgroundColorInExport,
+      includeBackgroundColorInInstance: includeBackgroundColorInInstance,
+      presetDictionary: presetDictionary,
+    );
     /*
     var sym_master = PBSharedMasterNode(
       this,

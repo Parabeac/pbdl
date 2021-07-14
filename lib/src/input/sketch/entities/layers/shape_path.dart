@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
+import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_sketch_node_factory.dart';
@@ -113,11 +115,36 @@ class ShapePath extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ShapePathToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() async {
-    /*
-    var image = await SketchAssetProcessor()
+  PBDLNode interpretNode() {
+    var image = SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
 
+    return PBDLImage(
+      image: image, // TODO:
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle,
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+    );
+/*
     return Future.value(InheritedShapePath(this, name,
         currentContext: currentContext, image: image)); */
   }

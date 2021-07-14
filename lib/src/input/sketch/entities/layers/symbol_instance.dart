@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
 import '../objects/override_value.dart';
@@ -136,7 +137,37 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
   // }
 
   @override
-  Future<PBDLNode> interpretNode() {
+  PBDLNode interpretNode() {
+    return PBDLSharedInstanceNode(
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle,
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+      overrideValues: overrideValues,
+      type: type,
+      prototypeNode: prototypeNodeUUID,
+      symbolID: symbolID,
+      verticalSpacing: verticalSpacing,
+      horizontalSpacing: horizontalSpacing,
+    );
     /*
     var sym = PBSharedInstanceIntermediateNode(this, symbolID,
         sharedParamValues: _extractParameters(),
