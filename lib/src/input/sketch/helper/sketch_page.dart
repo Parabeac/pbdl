@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:quick_log/quick_log.dart';
 import 'sketch_screen.dart';
 
@@ -59,5 +60,13 @@ class SketchPage {
   }
 
   @override
-  String CLASS_NAME;
+  String CLASS_NAME = 'page';
+
+  PBDLPage interpretNode() {
+    return PBDLPage(
+      name: name,
+      id: id,
+      screens: screens.map((e) => e.interpretNode()).toList(),
+    );
+  }
 }

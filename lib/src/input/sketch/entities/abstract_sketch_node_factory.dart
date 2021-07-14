@@ -33,7 +33,7 @@ class AbstractSketchNodeFactory {
     SymbolMaster(),
     SketchText(),
     Star(),
-    Triangle()
+    Triangle(),
   ];
 
   AbstractSketchNodeFactory();

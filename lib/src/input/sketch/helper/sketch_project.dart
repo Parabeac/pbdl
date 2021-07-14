@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/general_helper/input_formatter.dart';
 import 'package:pbdl/src/input/sketch/entities/documents/document.dart';
 import 'package:pbdl/src/input/sketch/entities/layers/page.dart';
@@ -133,5 +134,13 @@ class SketchProject {
       sketchPages.add(pg);
     }
     return sketchPages;
+  }
+
+  PBDLProject interpretNode() {
+    return PBDLProject(
+      projectName: projectName,
+      id: id,
+      pages: pages.map((e) => e.interpretNode()).toList(),
+    );
   }
 }
