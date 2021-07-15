@@ -1,4 +1,5 @@
 import 'package:pbdl/src/input/sketch/entities/objects/override_value.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -10,12 +11,15 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   String symbolID;
   List parameters;
 
+  @override
+  PBDLFrame boundaryRectangle;
+
   PBDLSharedInstanceNode(
       {String UUID,
       this.overrideValues,
       String name,
       bool isVisible,
-      boundaryRectangle,
+      this.boundaryRectangle,
       String type,
       style,
       prototypeNode,

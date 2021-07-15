@@ -93,5 +93,5 @@ class PBDLSharedMasterNode extends PBDLNode
   // }
 
   @override
-  List children = [];
+  List<PBDLNode> children = [];
 }

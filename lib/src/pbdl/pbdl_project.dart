@@ -50,7 +50,7 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
     var sketchProject = await SketchController().convertFile(path);
 
     // TODO: Open sketch file and interpret into PBDLProject
-    return PBDLProject();
+    return sketchProject.interpretNode();
   }
 
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`

@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -23,7 +24,7 @@ class PBDLNode {
   String UUID;
   String name;
   bool isVisible;
-  var boundaryRectangle;
+  PBDLFrame boundaryRectangle;
   String type;
   PBDLStyle style;
   String prototypeNodeUUID;

@@ -8,7 +8,7 @@ part 'pbdl_group_node.g.dart';
 
 @JsonSerializable()
 class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
-  List children = [];
+  List<PBDLNode> children = [];
 
   @override
   String pbdfType = 'group';

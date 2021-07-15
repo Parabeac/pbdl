@@ -13,7 +13,7 @@ part 'pbdl_artboard.g.dart';
 class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
   PBDLColor backgroundColor;
   @override
-  var boundaryRectangle;
+  PBDLFrame boundaryRectangle;
   var isFlowHome;
 
   var style;
@@ -25,7 +25,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
     UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame this.boundaryRectangle,
+    this.boundaryRectangle,
     PBDLFlow flow,
     isFixedToViewport,
     isFlippedHorizontal,
@@ -59,7 +59,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
         );
 
   @override
-  List children = [];
+  List<PBDLNode> children = [];
 
   @override
   String pbdfType = 'artboard';
