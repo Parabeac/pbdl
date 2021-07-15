@@ -120,7 +120,44 @@ class Rectangle extends AbstractShapeLayer
   Map<String, dynamic> toJson() => _$RectangleToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
+  PBDLNode interpretNode() {
+    return PBDLRectangle(
+      fixedRadius: fixedRadius, 
+      hasConvertedToNewRoundCorners: hasConvertedToNewRoundCorners,
+      needsConvertionToNewRoundCorners: needsConvertionToNewRoundCorners,
+      edited: edited,
+      isClosed: isClosed,
+      pointRadiusBehaviour: pointRadiusBehaviour,
+      points: points,
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle,
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      resizingType: resizingType,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      type: type,
+      pbdfType: pbdfType,
+      style: style,
+      child: child,//solve
+    ); 
+    //Questions: Why is the first half white? Does it have to do with PBDLRectangle not being defined? 
+    //Why isn't PBDLRectangle defined?
+    
     /*
     Border border;
     for (var b in style.borders.reversed) {

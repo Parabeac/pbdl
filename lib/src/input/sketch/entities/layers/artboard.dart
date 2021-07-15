@@ -34,7 +34,8 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   @JsonKey(name: 'frame')
   var boundaryRectangle;
 
-  Color backgroundColor;
+  @override
+  var backgroundColor;
 
   @override
   @JsonKey(name: 'do_objectID')
@@ -138,37 +139,18 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ArtboardToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() async {
     return PBDLArtboard(
-      backgroundColor: backgroundColor.interpretColor(),
-      isFlowHome: isFlowHome,
-      hasClickThrough: hasClickThrough,
-      groupLayout: groupLayout,
+      backgroundColor: backgroundColor,
+      isFlowHome: false, // TODO: get it dynamically
       UUID: UUID,
-      booleanOperation: booleanOperation,
-      exportOptions: exportOptions,
+      exportOptions: exportSettings,
       boundaryRectangle: boundaryRectangle,
-      flow: flow.interpretFlow(),
-      isFixedToViewport: isFixedToViewport,
-      isFlippedHorizontal: isFlippedHorizontal,
-      isFlippedVertical: isFlippedVertical,
-      isLocked: isLocked,
       isVisible: isVisible,
-      layerListExpandedType: layerListExpandedType,
       name: name,
-      nameIsFixed: nameIsFixed,
-      resizingConstraint: resizingConstraint,
-      rotation: rotation,
-      sharedStyleID: sharedStyleID,
-      shouldBreakMaskChain: shouldBreakMaskChain,
-      hasClippingMask: hasClippingMask,
-      clippingMaskMode: clippingMaskMode,
-      userInfo: userInfo,
-      maintainScrollPosition: maintainScrollPosition,
-      prototypeNodeUUID: prototypeNodeUUID,
       type: type,
-      style: style.interpretStyle(),
-      children: children,
+      style: style, // TODO:
+      prototypeNodeUUID: prototypeNodeUUID,
     );
     /*
     return Future.value(InheritedScaffold(
@@ -177,7 +159,15 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       name: name,
       isHomeScreen: isFlowHome,
     )); */
+    
+    /*
+    assert(false, 'We don\'t product pages as Intermediate Nodes.');
+    return null; */
   }
+
+
+    
+  
 
   @override
   @JsonKey(ignore: true)

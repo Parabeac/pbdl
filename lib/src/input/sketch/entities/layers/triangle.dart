@@ -114,7 +114,12 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$TriangleToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() async {
+  PBDLNode interpretNode() {
+    return PBDLImage(
+      
+
+    );
+
     /*
     var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);

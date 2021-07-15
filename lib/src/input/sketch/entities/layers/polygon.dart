@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_polygon.dart';
 
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
@@ -114,7 +115,39 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$PolygonToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() async {
+  PBDLNode interpretNode() {
+    return PBDLPolygon(
+      edited: edited,
+      isClosed: isClosed,
+      pointRadiusBehaviour: pointRadiusBehaviour,
+      points: points,
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle,
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      resizingType: resizingType,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      type: type,
+      pbdfType: pbdfType
+      style: style, //Does it have to do with the 'this.' function ?
+      child: child, //what does 'this.' mean ?
+    );
+
     /*
     var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);

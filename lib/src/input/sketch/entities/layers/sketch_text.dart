@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_text.dart';
 
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
@@ -122,7 +123,41 @@ class SketchText extends SketchNode implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$SketchTextToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
+  PBDLNode interpretNode() {
+    return PBDLText(
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle,
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      resizingType: resizingType,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      maintainScrollPosition: maintainScrollPosition,
+      attributedString: attributedString,
+      automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
+      dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
+      lineSpacingBehaviour: lineSpacingBehaviour,
+      textBehaviour: textBehaviour,
+      glyphBounds: glyphBounds,
+      type: type,
+      pbdfType: pbdfType,
+      style: style,
+      //Do I include the properties under super() ?
+
+    );
+    
     // Future.value(InjectedContainer(
     //   Point(boundaryRectangle.x + boundaryRectangle.width,
     //       boundaryRectangle.y + boundaryRectangle.height),
