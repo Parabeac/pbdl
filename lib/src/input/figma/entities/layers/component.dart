@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -33,11 +34,9 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     horizontalPadding,
     verticalPadding,
     itemSpacing,
-    this.overrideProperties,
     List<FigmaNode> children,
     FigmaColor backgroundColor,
     this.symbolID,
-    this.overriadableProperties,
     String prototypeNodeUUID,
     num transitionDuration,
     String transitionEasing,
@@ -68,10 +67,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         ) {
     pbdfType = 'symbol_master';
   }
-
-  // make sure only store unique UUID overrides with Map
-  @override
-  var overrideProperties;
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
@@ -104,9 +99,27 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   @override
   PBDLNode interpretNode() {
+    /// Create Overidable Properties.
+    var overrideProperties = <PBDLOverrideProperty>[];
+    children.asMap().forEach((key, value) {
+      if (value is FigmaNode) {
+        overrideProperties.add(PBDLOverrideProperty(
+            value.UUID,
+            value.name,
+            value.isVisible,
+            value is FigmaFrame ? value.boundaryRectangle : null,
+            value.type,
+
+            /// Style
+            null,
+            value.prototypeNodeUUID,
+            [value.interpretNode()]));
+      }
+    });
+
     return PBDLSharedMasterNode(
       UUID: UUID,
-      overrideProperties: overriadableProperties, // TODO: extract them
+      overrideProperties: overrideProperties, // TODO: extract them
       name: name,
       isVisible: isVisible,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
@@ -130,9 +143,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     );
     return Future.value(sym_master); */
   }
-
-  @override
-  List overriadableProperties;
 
   @override
   String symbolID;
