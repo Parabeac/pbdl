@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_vector.dart';
@@ -25,7 +26,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
 
   @override
   @JsonKey(name: 'absoluteBoundingBox')
-  var boundaryRectangle;
+  FigmaRect boundaryRectangle;
 
   var size;
 
@@ -51,7 +52,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     FigmaStyle this.style,
     this.layoutAlign,
     this.constraints,
-    FigmaFrame this.boundaryRectangle,
+    this.boundaryRectangle,
     this.size,
     this.strokes,
     this.strokeWeight,
@@ -96,7 +97,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       sharedPluginData: sharedPluginData,
       layoutAlign: layoutAlign,
       constraints: constraints,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       size: size,
       strokes: strokes,
       strokeWeight: strokeWeight,
@@ -105,7 +106,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       fillsList: fillsList,
       UUID: UUID,
       pbdfType: pbdfType,
-      style: style.interpretStyle(),
+      style: style?.interpretStyle(),
       prototypeNodeUUID: prototypeNodeUUID,
       transitionDuration: transitionDuration,
       transitionEasing: transitionEasing,

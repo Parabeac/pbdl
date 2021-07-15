@@ -69,7 +69,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
       booleanOperation: booleanOperation,
       type: type,
       style: style,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       UUID: UUID,
       prototypeNodeUUID: prototypeNodeUUID,
       transitionDuration: transitionDuration,

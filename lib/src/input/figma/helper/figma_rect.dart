@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 
-part 'rect.g.dart';
+part 'figma_rect.g.dart';
 
 @JsonSerializable()
 class FigmaRect {
@@ -21,4 +22,13 @@ class FigmaRect {
       _$FigmaRectFromJson(json);
 
   Map<String, dynamic> toJson() => _$FigmaRectToJson(this);
+
+  PBDLFrame interpretFrame() {
+    return PBDLFrame(
+      x: x,
+      y: y,
+      width: width,
+      height: height,
+    );
+  }
 }

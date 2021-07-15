@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_oval.dart';
@@ -34,7 +35,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     style,
     layoutAlign,
     constraints,
-    FigmaFrame boundaryRectangle,
+    boundaryRectangle,
     size,
     this.fills,
     strokes,
@@ -53,7 +54,9 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle,
+          boundaryRectangle: boundaryRectangle != null
+              ? FigmaRect.fromJson(boundaryRectangle)
+              : null,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -80,11 +83,11 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return PBDLOval(
       UUID: UUID,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
       pbdfType: pbdfType,
-      style: style.interpretStyle(),
+      style: style?.interpretStyle(),
       type: type,
     );
   }

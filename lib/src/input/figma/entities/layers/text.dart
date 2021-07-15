@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text.dart';
@@ -24,7 +25,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       FigmaStyle this.style,
       layoutAlign,
       constraints,
-      FigmaFrame boundaryRectangle,
+      boundaryRectangle,
       size,
       fills,
       strokes,
@@ -46,7 +47,9 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle,
+          boundaryRectangle: boundaryRectangle != null
+              ? FigmaRect.fromJson(boundaryRectangle)
+              : null,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -86,7 +89,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   PBDLNode interpretNode() {
     return PBDLText(
       UUID: UUID,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
       attributedString: attributedString,
@@ -97,7 +100,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       glyphBounds: glyphBounds,
       type: type,
       pbdfType: pbdfType,
-      style: style,
+      style: style.interpretStyle(),
     );
   }
 

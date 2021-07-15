@@ -13,7 +13,10 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    boundaryRectangle: json['absoluteBoundingBox'],
+    boundaryRectangle: json['absoluteBoundingBox'] == null
+        ? null
+        : FigmaRect.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>),
     strokes: json['strokes'],
     strokeWeight: (json['strokeWeight'] as num)?.toDouble(),
     strokeAlign: json['strokeAlign'] as String,

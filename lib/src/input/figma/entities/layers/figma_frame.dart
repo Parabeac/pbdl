@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
@@ -8,17 +10,17 @@ import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
 
-part 'frame.g.dart';
+part 'figma_frame.g.dart';
 
 @JsonSerializable()
 class FigmaFrame extends FigmaNode
     with PBColorMixin
     implements FigmaNodeFactory {
   @JsonKey(name: 'absoluteBoundingBox')
-  var boundaryRectangle;
+  FigmaRect boundaryRectangle;
 
   @JsonKey(ignore: true)
-  var style;
+  FigmaStyle style;
 
   List<FigmaNode> children;
 
@@ -121,7 +123,7 @@ class FigmaFrame extends FigmaNode
         backgroundColor: backgroundColor.interpretColor(),
         isFlowHome: false,
         UUID: UUID,
-        boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
         isVisible: isVisible,
         name: name,
         type: type,
@@ -132,11 +134,11 @@ class FigmaFrame extends FigmaNode
     } else {
       return PBDLGroupNode(
         UUID: UUID,
-        boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
         isVisible: isVisible,
         name: name,
         pbdfType: pbdfType,
-        style: style,
+        style: style.interpretStyle(),
         children: children.map((e) => e.interpretNode()).toList(),
       );
     }

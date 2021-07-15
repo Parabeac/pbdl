@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
@@ -56,7 +57,9 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             type: type,
             pluginData: pluginData,
             sharedPluginData: sharedPluginData,
-            boundaryRectangle: boundaryRectangle,
+            boundaryRectangle: boundaryRectangle != null
+                ? FigmaRect.fromJson(boundaryRectangle)
+                : null,
             style: style,
             fills: fills,
             strokes: strokes,
@@ -92,10 +95,10 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     return PBDLSharedInstanceNode(
       UUID: UUID,
       overrideValues:
-          overrideValues.map((e) => e.interpretOverridableValue()).toList(),
+          overrideValues?.map((e) => e.interpretOverridableValue())?.toList(),
       name: name,
       isVisible: isVisible,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       type: type,
       style: style,
       prototypeNode: prototypeNodeUUID,
@@ -123,7 +126,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   }
 
   // TODO: implement overrideValues
-  List<FigmaOverridableValue> get overrideValues => throw UnimplementedError();
+  // List<FigmaOverridableValue> get overrideValues => overrideValues;
+  List<FigmaOverridableValue> overrideValues;
 
   // TODO: implement typeToAbbreviation
   Map<Type, String> get typeToAbbreviation => throw UnimplementedError();

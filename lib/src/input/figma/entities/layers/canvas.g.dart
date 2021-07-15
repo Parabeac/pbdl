@@ -29,7 +29,9 @@ Canvas _$CanvasFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
-    ..boundaryRectangle = json['boundaryRectangle']
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : FigmaRect.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
     ..pbdfType = json['pbdfType'] as String;
 }
 

@@ -23,7 +23,7 @@ class FigmaRegularPolygon extends FigmaVector
     style,
     layoutAlign,
     constraints,
-    FigmaFrame boundaryRectangle,
+    boundaryRectangle,
     size,
     fills,
     strokes,
@@ -68,7 +68,7 @@ class FigmaRegularPolygon extends FigmaVector
     return PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
       pbdfType: pbdfType,

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
@@ -47,7 +48,9 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          boundaryRectangle: boundaryRectangle,
+          boundaryRectangle: boundaryRectangle != null
+              ? FigmaRect.fromJson(boundaryRectangle)
+              : null,
           style: style,
           fills: fills,
           strokes: strokes,
@@ -109,7 +112,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       overrideProperties: overriadableProperties, // TODO: extract them
       name: name,
       isVisible: isVisible,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       type: type,
       style: style,
       prototypeNode: prototypeNodeUUID,

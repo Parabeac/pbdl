@@ -17,6 +17,6 @@ class FigmaFill {
       _$FigmaFillFromJson(json);
 
   PBDLFill interpretFill() {
-    return PBDLFill(color.interpretColor());
+    return PBDLFill(color?.interpretColor());
   }
 }

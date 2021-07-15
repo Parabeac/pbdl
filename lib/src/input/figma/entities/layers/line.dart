@@ -22,7 +22,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       style,
       layoutAlign,
       constraints,
-      FigmaFrame boundaryRectangle,
+      boundaryRectangle,
       size,
       fills,
       strokes,
@@ -66,7 +66,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   PBDLNode interpretNode() {
     return PBDLRectangle(
       UUID: UUID,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
       type: type,

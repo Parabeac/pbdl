@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -29,7 +30,7 @@ class FigmaRectangle extends FigmaVector
     style,
     layoutAlign,
     constraints,
-    FigmaFrame boundaryRectangle,
+    boundaryRectangle,
     size,
     strokes,
     strokeWeight,
@@ -51,7 +52,9 @@ class FigmaRectangle extends FigmaVector
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle,
+          boundaryRectangle: boundaryRectangle != null
+              ? FigmaRect.fromJson(boundaryRectangle)
+              : null,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -101,7 +104,7 @@ class FigmaRectangle extends FigmaVector
       return PBDLImage(
         imageReference: imageReference,
         UUID: UUID,
-        boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
         isVisible: isVisible,
         name: name,
         pbdfType: pbdfType,
@@ -116,13 +119,13 @@ class FigmaRectangle extends FigmaVector
     // }
     return PBDLRectangle(
       UUID: UUID,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
       type: type,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
-      child: child.interpretNode(),
+      child: child?.interpretNode(),
     );
   }
 

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
 
@@ -19,7 +20,7 @@ class FigmaNode {
 
   var sharedPluginData;
 
-  var boundaryRectangle;
+  FigmaRect boundaryRectangle;
 
   FigmaNode child;
 
