@@ -143,9 +143,8 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
       type: type,
-      pbdfType: pbdfType
-      style: style, //Does it have to do with the 'this.' function ?
-      child: child, //what does 'this.' mean ?
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
     );
 
     /*

@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
+import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_sketch_node_factory.dart';
@@ -115,14 +117,37 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
 
   @override
   PBDLNode interpretNode() {
+    var image = SketchAssetProcessor()
+        .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
     return PBDLImage(
-      
-
+      image: image,
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle,
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      resizingType: resizingType,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
     );
 
     /*
-    var image = await SketchAssetProcessor()
-        .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
+    
 
     return Future.value(InheritedTriangle(this, name,
         currentContext: currentContext, image: image)); */

@@ -143,8 +143,7 @@ class Star extends AbstractShapeLayer implements SketchNodeFactory {
       maintainScrollPosition: maintainScrollPosition,
       type: type,
       pbdfType: pbdfType,
-      style: style,//solve
-      child: child, //solve
+      style: style.interpretStyle(),
     );
     /*
     var image = await SketchAssetProcessor()

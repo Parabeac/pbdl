@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
@@ -122,7 +123,7 @@ class Rectangle extends AbstractShapeLayer
   @override
   PBDLNode interpretNode() {
     return PBDLRectangle(
-      fixedRadius: fixedRadius, 
+      fixedRadius: fixedRadius,
       hasConvertedToNewRoundCorners: hasConvertedToNewRoundCorners,
       needsConvertionToNewRoundCorners: needsConvertionToNewRoundCorners,
       edited: edited,
@@ -152,12 +153,11 @@ class Rectangle extends AbstractShapeLayer
       maintainScrollPosition: maintainScrollPosition,
       type: type,
       pbdfType: pbdfType,
-      style: style,
-      child: child,//solve
-    ); 
-    //Questions: Why is the first half white? Does it have to do with PBDLRectangle not being defined? 
+      style: style.interpretStyle(),
+    );
+    //Questions: Why is the first half white? Does it have to do with PBDLRectangle not being defined?
     //Why isn't PBDLRectangle defined?
-    
+
     /*
     Border border;
     for (var b in style.borders.reversed) {

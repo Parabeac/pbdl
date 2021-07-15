@@ -141,8 +141,7 @@ class Oval extends AbstractShapeLayer implements SketchNodeFactory {
       maintainScrollPosition: maintainScrollPosition,
       type: type,
       pbdfType: pbdfType,
-      style: style, //Does it have to do with the 'this.' function?
-      child: child, //Does it have to do with the 'this.' function?
+      style: style.interpretStyle(),
     );
     /*
     var image = await SketchAssetProcessor()
