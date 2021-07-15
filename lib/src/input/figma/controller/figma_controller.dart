@@ -33,16 +33,16 @@ class FigmaController {
 
   FigmaProject generateFigmaTree(
       var figmaProjectID, var jsonFigma, var projectName) {
-    try {
-      return FigmaProject(
-        projectName,
-        jsonFigma,
-        id: figmaProjectID,
-      );
-    } catch (e, stackTrace) {
-      print(e);
-      return null;
-    }
+    // try {
+    return FigmaProject(
+      projectName,
+      jsonFigma,
+      id: figmaProjectID,
+    );
+    // } catch (e, stackTrace) {
+    //   print(e);
+    //   return null;
+    // }
   }
 
   Future<dynamic> _fetchFigmaFile() => APICallService.makeAPICall(
