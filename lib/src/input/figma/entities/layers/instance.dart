@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
 import '../../helper/override_value.dart';
 import '../abstract_figma_node_factory.dart';
@@ -89,10 +90,26 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   @override
   PBDLNode interpretNode() {
+    var overrideValues = <PBDLOverrideValue>[];
+    children.asMap().forEach((key, value) {
+      if (value is FigmaNode) {
+        overrideValues.add(PBDLOverrideValue(
+            value.UUID,
+            value.name,
+            value.isVisible,
+            value is FigmaFrame ? value.boundaryRectangle : null,
+            value.type,
+
+            /// Style
+            null,
+            value.prototypeNodeUUID,
+            [value.interpretNode()]));
+      }
+    });
+
     return PBDLSharedInstanceNode(
       UUID: UUID,
-      overrideValues:
-          overrideValues.map((e) => e.interpretOverridableValue()).toList(),
+      overrideValues: overrideValues,
       name: name,
       isVisible: isVisible,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
