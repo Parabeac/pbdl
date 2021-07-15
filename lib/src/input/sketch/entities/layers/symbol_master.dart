@@ -1,6 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/symbol_node_mixin.dart';
 import 'package:pbdl/src/input/general_helper/input_formatter.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
+import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 import '../abstract_sketch_node_factory.dart';
 import '../objects/frame.dart';
 import '../objects/override_property.dart';
@@ -15,11 +18,11 @@ part 'symbol_master.g.dart';
 // title: Symbol Master Layer
 // description: A symbol master layer represents a reusable group of layers
 @JsonSerializable()
-class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
+class SymbolMaster extends AbstractGroupLayer
+    with SymbolNodeMixin
+    implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolMaster';
-  @override
-  var overrideValues;
   final Color backgroundColor;
   final bool hasBackgroundColor;
   final dynamic horizontalRulerData;
@@ -29,7 +32,6 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   final bool resizesContent;
   final dynamic verticalRulerData;
   final bool includeBackgroundColorInInstance;
-  @override
   String symbolID;
   final int changeIdentifier;
   final bool allowsOverrides;
@@ -43,7 +45,6 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @JsonKey(name: 'do_objectID')
   String UUID;
 
-  @override
   @JsonKey(name: '_class')
   String type;
 
@@ -51,14 +52,12 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
 
   Style _style;
 
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
 
   @override
   bool get isVisible => _isVisible;
 
-  @override
-  void set style(_style) => this._style = _style;
+  set style(_style) => this._style = _style;
 
   @override
   Style get style => _style;
@@ -66,6 +65,9 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   @JsonKey(name: 'layers')
   List children;
+
+  @JsonKey(ignore: true)
+  String pbdfType = 'symbol_master';
 
   SymbolMaster(
       {bool hasClickThrough,
@@ -143,7 +145,6 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
     }
   }
 
-  @override
   List parameters;
 
   @override
@@ -177,21 +178,61 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    /*
-    var sym_master = PBSharedMasterNode(
-      this,
-      symbolID,
-      name,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(boundaryRectangle.x + boundaryRectangle.width,
-          boundaryRectangle.y + boundaryRectangle.height),
-      overridableProperties: _extractParameters(),
-      currentContext: currentContext,
-    );
-    return Future.value(sym_master); */
-  }
+    var overrideProps = overrideProperties.map((element) {
+      var uuidTypeMap = extractParameter(element.overrideName);
+      return PBDLOverrideProperty(
+        uuidTypeMap['uuid'],
+        element.overrideName,
+        null,
+        null,
+        uuidTypeMap['type'],
+        null,
+        prototypeNodeUUID,
+        '', //TODO: we need to look up the default value of the symbol master
+      );
+    }).toList();
 
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'symbol_master';
+    return Future.value(PBDLSharedMasterNode(
+      UUID: UUID,
+      allowsOverrides: allowsOverrides,
+      overrideProperties: overrideProps,
+      booleanOperation: booleanOperation,
+      boundaryRectangle: boundaryRectangle,
+      changeIdentifier: changeIdentifier,
+      clippingMaskMode: clippingMaskMode,
+      exportOptions: exportOptions,
+      groupLayout: groupLayout,
+      hasBackgroundColor: hasBackgroundColor,
+      hasClickThrough: hasClickThrough,
+      hasClippingMask: hasClippingMask,
+      horizontalRulerData: horizontalRulerData,
+      includeBackgroundColorInExport: includeBackgroundColorInExport,
+      includeBackgroundColorInInstance: includeBackgroundColorInInstance,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      verticalRulerData: verticalRulerData,
+      pbdfType: pbdfType,
+      sharedStyleID: sharedStyleID,
+      symbolID: symbolID,
+      userInfo: userInfo,
+      type: type,
+      style: style,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      rotation: rotation,
+      resizingType: resizingType,
+      resizingConstraint: resizingConstraint,
+      resizesContent: resizesContent,
+      presetDictionary: presetDictionary,
+      maintainScrollPosition: maintainScrollPosition,
+      layerListExpandedType: layerListExpandedType,
+      isFlowHome: isFlowHome,
+      isFlippedVertical: isFlippedVertical,
+      isFlippedHorizontal: isFlippedHorizontal,
+      includeInCloudUpload: includeInCloudUpload,
+      isFixedToViewport: isFixedToViewport,
+      parameters: parameters,
+    ));
+  }
 }

@@ -6,6 +6,9 @@ class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
   /// List of [PBDLNode] that indicates what properties of this [PBDLOverrideProperty] are overridable
   List<PBDLNode> properties;
 
+  /// Value of the override property
+  var value;
+
   PBDLOverrideProperty(
     String UUID,
     String name,
@@ -14,7 +17,7 @@ class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
     String type,
     PBDLStyle style,
     String prototypeNodeUUID,
-    this.properties,
+    this.value,
   ) : super(
           UUID,
           name,
