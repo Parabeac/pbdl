@@ -17,7 +17,9 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
         ?.toList(),
     name: json['name'] as String,
     isVisible: json['isVisible'] as bool,
-    boundaryRectangle: json['boundaryRectangle'],
+    boundaryRectangle: json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     type: json['type'] as String,
     style: json['style'],
     symbolID: json['symbolID'] as String,
@@ -36,13 +38,13 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
       'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle,
       'type': instance.type,
       'style': instance.style,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child,
       'symbolID': instance.symbolID,
       'parameters': instance.parameters,
+      'boundaryRectangle': instance.boundaryRectangle,
       'pbdfType': instance.pbdfType,
       'overrideValues': instance.overrideValues,
     };

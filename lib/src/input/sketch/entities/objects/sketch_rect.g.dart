@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'sketch_frame.dart';
+part of 'sketch_rect.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SketchFrame _$FrameFromJson(Map<String, dynamic> json) {
-  return SketchFrame(
+SketchRect _$SketchRectFromJson(Map<String, dynamic> json) {
+  return SketchRect(
     classField: json['_class'] as String,
     constrainProportions: json['constrainProportions'] as bool,
     x: (json['x'] as num)?.toDouble(),
@@ -17,7 +17,8 @@ SketchFrame _$FrameFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$FrameToJson(SketchFrame instance) => <String, dynamic>{
+Map<String, dynamic> _$SketchRectToJson(SketchRect instance) =>
+    <String, dynamic>{
       '_class': instance.classField,
       'constrainProportions': instance.constrainProportions,
       'height': instance.height,

@@ -27,7 +27,9 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
             e == null ? null : SharedStyle.fromJson(e as Map<String, dynamic>))
         ?.toList()
     ..UUID = json['UUID'] as String
-    ..boundaryRectangle = json['boundaryRectangle']
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)

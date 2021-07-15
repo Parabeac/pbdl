@@ -23,7 +23,10 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..overriadableProperties = json['overriadableProperties'] as List
-    ..children = json['children'] as List;
+    ..children = (json['children'] as List)
+        ?.map((e) =>
+            e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
 Map<String, dynamic> _$PBDLSharedMasterNodeToJson(

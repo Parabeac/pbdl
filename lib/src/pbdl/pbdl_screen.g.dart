@@ -19,7 +19,9 @@ PBDLScreen _$PBDLScreenFromJson(Map<String, dynamic> json) {
     ..imageURI = json['imageURI'] as String
     ..pbdfType = json['pbdfType'] as String
     ..UUID = json['UUID'] as String
-    ..boundaryRectangle = json['boundaryRectangle']
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)

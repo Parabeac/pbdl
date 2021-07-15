@@ -1,5 +1,6 @@
 import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
 import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
 import 'package:json_annotation/json_annotation.dart';

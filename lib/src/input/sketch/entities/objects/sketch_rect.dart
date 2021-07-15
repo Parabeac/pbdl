@@ -1,16 +1,16 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 
-part 'frame.g.dart';
+part 'sketch_rect.g.dart';
 
 @JsonSerializable()
-class SketchFrame {
+class SketchRect {
   @JsonKey(name: '_class')
   final String classField;
   final bool constrainProportions;
   @override
   double height, width, x, y;
-  SketchFrame({
+  SketchRect({
     this.classField,
     this.constrainProportions,
     this.x,
@@ -18,9 +18,9 @@ class SketchFrame {
     this.width,
     this.height,
   });
-  factory SketchFrame.fromJson(Map<String, dynamic> json) =>
-      _$FrameFromJson(json);
-  Map<String, dynamic> toJson() => _$FrameToJson(this);
+  factory SketchRect.fromJson(Map<String, dynamic> json) =>
+      _$SketchRectFromJson(json);
+  Map<String, dynamic> toJson() => _$SketchRectToJson(this);
 
   PBDLFrame interpretFrame() {
     return PBDLFrame(
