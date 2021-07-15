@@ -1,4 +1,4 @@
-import '../objects/sketch_frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/style.dart';
 import 'sketch_node.dart';
 import 'flow.dart';

@@ -3,7 +3,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_polygon.dart';
 
 import '../abstract_sketch_node_factory.dart';
-import '../objects/sketch_frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/style.dart';
 import 'abstract_shape_layer.dart';
 import 'flow.dart';
@@ -52,7 +52,7 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
       this.UUID,
       booleanOperation,
       exportOptions,
-      SketchFrame this.boundaryRectangle,
+      SketchRect this.boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,

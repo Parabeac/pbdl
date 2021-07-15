@@ -1,7 +1,7 @@
 // title: Abstract Shape Layer
 // description: Abstract base layer for all shape layers
 
-import '../objects/sketch_frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/style.dart';
 import 'sketch_node.dart';
 import 'flow.dart';
@@ -20,7 +20,7 @@ abstract class AbstractShapeLayer extends SketchNode {
       UUID,
       booleanOperation,
       exportOptions,
-      SketchFrame boundaryRectangle,
+      SketchRect boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,
