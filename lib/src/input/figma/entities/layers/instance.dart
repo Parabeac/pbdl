@@ -22,7 +22,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   String symbolID;
 
   @override
-  List children;
+  List<FigmaNode> children;
   Instance(
       {name,
       isVisible,

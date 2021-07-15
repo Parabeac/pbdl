@@ -19,6 +19,8 @@ class FigmaNode {
 
   var sharedPluginData;
 
+  var boundaryRectangle;
+
   FigmaNode child;
 
   @JsonKey(name: 'visible', defaultValue: true)

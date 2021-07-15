@@ -16,7 +16,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   @JsonKey(ignore: true)
   Logger log;
 
-  List children;
+  List<FigmaNode> children;
 
   String booleanOperation;
 
@@ -65,7 +65,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   PBDLNode interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return PBDLBooleanOperation(
-      children: children,
+      children: children.map((e) => e.interpretNode()).toList(),
       booleanOperation: booleanOperation,
       type: type,
       style: style,

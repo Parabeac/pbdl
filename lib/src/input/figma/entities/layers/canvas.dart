@@ -82,7 +82,7 @@ class Canvas extends FigmaNode implements FigmaNodeFactory {
       type: type,
       style: style,
       prototypeNodeUUID: prototypeNodeUUID,
-      children: children,
+      children: children.map((e) => e.interpretNode()).toList(),
     );
     /*
     assert(false, 'We don\'t product pages as Intermediate Nodes.');

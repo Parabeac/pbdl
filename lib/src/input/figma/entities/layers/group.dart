@@ -128,7 +128,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       name: name,
       pbdfType: pbdfType,
       style: style,
-      children: children,
+      children: children.map((e) => e.interpretNode()).toList(),
     );
 
     // return Future.value(TempGroupLayoutNode(this, currentContext, name,

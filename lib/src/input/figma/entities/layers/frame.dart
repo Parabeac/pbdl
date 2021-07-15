@@ -20,7 +20,7 @@ class FigmaFrame extends FigmaNode
   @JsonKey(ignore: true)
   var style;
 
-  List children;
+  List<FigmaNode> children;
 
   @JsonKey(ignore: true)
   var fills;
@@ -127,7 +127,7 @@ class FigmaFrame extends FigmaNode
         type: type,
         style: style.interpretStyle(),
         prototypeNodeUUID: prototypeNodeUUID,
-        children: children,
+        children: children.map((e) => e.interpretNode()).toList(),
       );
     } else {
       return PBDLGroupNode(
@@ -137,7 +137,7 @@ class FigmaFrame extends FigmaNode
         name: name,
         pbdfType: pbdfType,
         style: style,
-        children: children,
+        children: children.map((e) => e.interpretNode()).toList(),
       );
     }
   }
