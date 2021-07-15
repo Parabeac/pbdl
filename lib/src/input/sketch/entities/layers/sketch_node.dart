@@ -21,7 +21,7 @@ class SketchNode {
   ///`boundaryRectangle` is not final because its going to change, just because some node contain an offset.
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  Frame boundaryRectangle;
   Flow flow;
   final bool isFixedToViewport;
   final bool isFlippedHorizontal;
@@ -30,6 +30,7 @@ class SketchNode {
   final bool isVisible;
   final dynamic layerListExpandedType;
   String name;
+  String type;
   final bool nameIsFixed;
   final dynamic resizingConstraint;
   final dynamic resizingType;

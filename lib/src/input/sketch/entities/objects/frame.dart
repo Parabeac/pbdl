@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 
 part 'frame.g.dart';
 
@@ -19,4 +20,15 @@ class Frame {
   });
   factory Frame.fromJson(Map<String, dynamic> json) => _$FrameFromJson(json);
   Map<String, dynamic> toJson() => _$FrameToJson(this);
+
+  PBDLFrame interpretFrame() {
+    return PBDLFrame(
+      classField: classField,
+      constrainProportions: constrainProportions,
+      x: x,
+      y: y,
+      width: width,
+      height: height,
+    );
+  }
 }

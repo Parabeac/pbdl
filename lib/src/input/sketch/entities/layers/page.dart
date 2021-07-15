@@ -42,7 +42,7 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'layers')
-  List children;
+  List<SketchNode> children;
 
   @override
   void set isVisible(bool _isVisible) => this._isVisible = _isVisible;

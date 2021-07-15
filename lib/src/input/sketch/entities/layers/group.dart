@@ -47,7 +47,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'layers')
-  List children;
+  List<SketchNode> children;
 
   Group(
       {bool hasClickThrough,
@@ -120,7 +120,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,
@@ -139,7 +139,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
       maintainScrollPosition: maintainScrollPosition,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
-      children: children,
+      children: children.map((e) => e.interpretNode()).toList(),
     );
     // Future.value(TempGroupLayoutNode(this, currentContext, name,
     //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),

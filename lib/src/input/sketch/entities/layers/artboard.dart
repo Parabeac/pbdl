@@ -16,7 +16,7 @@ part 'artboard.g.dart';
 class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   @JsonKey(name: 'layers')
-  List children;
+  List<SketchNode> children;
 
   @override
   String CLASS_NAME = 'artboard';
@@ -32,7 +32,7 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  Frame boundaryRectangle;
 
   Color backgroundColor;
 
@@ -75,11 +75,11 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       this.presetDictionary,
       hasClickThrough,
       groupLayout,
-      List<SketchNode> this.children,
+      this.children,
       this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      this.boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,
@@ -147,8 +147,8 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle,
-      flow: flow.interpretFlow(),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      flow: flow?.interpretFlow(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,
@@ -168,7 +168,7 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       prototypeNodeUUID: prototypeNodeUUID,
       type: type,
       style: style.interpretStyle(),
-      children: children,
+      children: children.map((e) => e.interpretNode()).toList(),
     );
     /*
     return Future.value(InheritedScaffold(

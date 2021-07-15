@@ -124,7 +124,7 @@ class ShapePath extends AbstractShapeLayer implements SketchNodeFactory {
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,

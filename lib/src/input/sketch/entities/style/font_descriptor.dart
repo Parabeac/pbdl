@@ -31,7 +31,7 @@ class FontDescriptor {
   PBDLFontDescriptor interpretFontDescriptor() {
     return PBDLFontDescriptor(
       fontName: fontName,
-      fontSize: num.parse(fontName),
+      fontSize: fontSize,
       rawAttributes: rawAttributes,
       fontStyle: fontStyle,
       fontWeight: fontWeight,

@@ -7,7 +7,7 @@ abstract class AbstractGroupLayer extends SketchNode {
   final bool hasClickThrough;
   final dynamic groupLayout;
   @override
-  final List children;
+  final List<SketchNode> children;
 
   AbstractGroupLayer(
       this.hasClickThrough,
@@ -16,7 +16,7 @@ abstract class AbstractGroupLayer extends SketchNode {
       UUID,
       booleanOperation,
       exportOptions,
-      Frame boundaryRectangle,
+      boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,

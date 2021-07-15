@@ -49,7 +49,7 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'layers')
-  List children;
+  List<SketchNode> children;
 
   ShapeGroup(
       {bool hasClickThrough,
@@ -127,7 +127,7 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,

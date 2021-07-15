@@ -128,7 +128,7 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,
@@ -153,11 +153,9 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       glyphBounds: glyphBounds,
       type: type,
       pbdfType: pbdfType,
-      style: style,
-      //Do I include the properties under super() ?
-
+      style: style.interpretStyle(),
     );
-    
+
     // Future.value(InjectedContainer(
     //   Point(boundaryRectangle.x + boundaryRectangle.width,
     //       boundaryRectangle.y + boundaryRectangle.height),
