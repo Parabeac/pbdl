@@ -4,7 +4,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
-import 'frame.dart';
+import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'line.g.dart';

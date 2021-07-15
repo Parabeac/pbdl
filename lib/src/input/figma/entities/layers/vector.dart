@@ -8,7 +8,7 @@ import 'package:quick_log/quick_log.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_style.dart';
 import 'figma_node.dart';
-import 'frame.dart';
+import 'figma_frame.dart';
 
 part 'vector.g.dart';
 

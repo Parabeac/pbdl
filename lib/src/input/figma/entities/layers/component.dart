@@ -6,7 +6,7 @@ import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
-import 'frame.dart';
+import 'figma_frame.dart';
 
 part 'component.g.dart';
 

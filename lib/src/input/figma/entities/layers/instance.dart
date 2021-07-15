@@ -6,7 +6,7 @@ import '../../helper/override_value.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
-import 'frame.dart';
+import 'figma_frame.dart';
 
 part 'instance.g.dart';
 

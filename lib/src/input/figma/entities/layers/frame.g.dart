@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'frame.dart';
+part of 'figma_frame.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
