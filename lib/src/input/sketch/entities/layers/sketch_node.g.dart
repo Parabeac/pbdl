@@ -13,7 +13,7 @@ SketchNode _$SketchNodeFromJson(Map<String, dynamic> json) {
     json['exportOptions'],
     json['frame'] == null
         ? null
-        : Frame.fromJson(json['frame'] as Map<String, dynamic>),
+        : SketchFrame.fromJson(json['frame'] as Map<String, dynamic>),
     json['flow'] == null
         ? null
         : Flow.fromJson(json['flow'] as Map<String, dynamic>),

@@ -3,7 +3,7 @@ import 'package:pbdl/src/input/general_helper/input_formatter.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_frame.dart';
 import '../objects/override_property.dart';
 import '../style/color.dart';
 import '../style/style.dart';
@@ -75,7 +75,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      SketchFrame this.boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,

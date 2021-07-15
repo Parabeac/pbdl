@@ -17,7 +17,7 @@ Star _$StarFromJson(Map<String, dynamic> json) {
     exportOptions: json['exportOptions'],
     boundaryRectangle: json['frame'] == null
         ? null
-        : Frame.fromJson(json['frame'] as Map<String, dynamic>),
+        : SketchFrame.fromJson(json['frame'] as Map<String, dynamic>),
     flow: json['flow'] == null
         ? null
         : Flow.fromJson(json['flow'] as Map<String, dynamic>),

@@ -3,7 +3,7 @@ import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_frame.dart';
 import '../style/color.dart';
 import '../style/style.dart';
 import 'abstract_group_layer.dart';
@@ -32,7 +32,7 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'frame')
-  Frame boundaryRectangle;
+  SketchFrame boundaryRectangle;
 
   Color backgroundColor;
 
@@ -108,7 +108,7 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
             UUID,
             booleanOperation,
             exportOptions,
-            boundaryRectangle as Frame,
+            boundaryRectangle as SketchFrame,
             flow,
             isFixedToViewport,
             isFlippedHorizontal,

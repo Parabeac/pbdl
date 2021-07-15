@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'frame.dart';
+part of 'sketch_frame.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Frame _$FrameFromJson(Map<String, dynamic> json) {
-  return Frame(
+SketchFrame _$FrameFromJson(Map<String, dynamic> json) {
+  return SketchFrame(
     classField: json['_class'] as String,
     constrainProportions: json['constrainProportions'] as bool,
     x: (json['x'] as num)?.toDouble(),
@@ -17,7 +17,7 @@ Frame _$FrameFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$FrameToJson(Frame instance) => <String, dynamic>{
+Map<String, dynamic> _$FrameToJson(SketchFrame instance) => <String, dynamic>{
       '_class': instance.classField,
       'constrainProportions': instance.constrainProportions,
       'height': instance.height,

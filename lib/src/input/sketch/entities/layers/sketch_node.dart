@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_frame.dart';
 import '../style/style.dart';
 import 'flow.dart';
 
@@ -21,7 +21,7 @@ class SketchNode {
   ///`boundaryRectangle` is not final because its going to change, just because some node contain an offset.
   @override
   @JsonKey(name: 'frame')
-  Frame boundaryRectangle;
+  SketchFrame boundaryRectangle;
   Flow flow;
   final bool isFixedToViewport;
   final bool isFlippedHorizontal;
@@ -52,7 +52,7 @@ class SketchNode {
       this.UUID,
       this.booleanOperation,
       this.exportOptions,
-      Frame this.boundaryRectangle,
+      SketchFrame this.boundaryRectangle,
       Flow this.flow,
       this.isFixedToViewport,
       this.isFlippedHorizontal,

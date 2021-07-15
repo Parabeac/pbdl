@@ -4,13 +4,13 @@ import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 part 'frame.g.dart';
 
 @JsonSerializable()
-class Frame {
+class SketchFrame {
   @JsonKey(name: '_class')
   final String classField;
   final bool constrainProportions;
   @override
   double height, width, x, y;
-  Frame({
+  SketchFrame({
     this.classField,
     this.constrainProportions,
     this.x,
@@ -18,7 +18,8 @@ class Frame {
     this.width,
     this.height,
   });
-  factory Frame.fromJson(Map<String, dynamic> json) => _$FrameFromJson(json);
+  factory SketchFrame.fromJson(Map<String, dynamic> json) =>
+      _$FrameFromJson(json);
   Map<String, dynamic> toJson() => _$FrameToJson(this);
 
   PBDLFrame interpretFrame() {

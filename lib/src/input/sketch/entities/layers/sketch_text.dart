@@ -3,7 +3,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text.dart';
 
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_frame.dart';
 import '../style/style.dart';
 import 'flow.dart';
 import 'sketch_node.dart';
@@ -59,7 +59,7 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       {this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      SketchFrame this.boundaryRectangle,
       Flow flow,
       bool isFixedToViewport,
       bool isFlippedHorizontal,
