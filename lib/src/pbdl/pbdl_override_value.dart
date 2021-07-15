@@ -1,10 +1,12 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
+@JsonSerializable()
 class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
-  ///List of [PBDLNode] that indicates what `values` this [PBDLOverrideValue] overrode
-  List<PBDLNode> values;
+  /// value of the override
+  var value;
 
   PBDLOverrideValue(
     String UUID,
@@ -14,7 +16,7 @@ class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
     String type,
     PBDLStyle style,
     String prototypeNodeUUID,
-    this.values,
+    this.value,
   ) : super(
           UUID,
           name,
@@ -23,7 +25,11 @@ class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
           type,
           style,
           prototypeNodeUUID,
-        ) {
-    values ??= [];
-  }
+        );
+
+  factory PBDLOverrideValue.fromJson(Map<String, dynamic> json) =>
+      _$PBDLOverridePropertyFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$PBDLOverrideValueToJson(this);
 }
