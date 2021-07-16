@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/symbol_node_mixin.dart';
 import 'package:pbdl/src/input/general_helper/input_formatter.dart';
+import 'package:pbdl/src/input/sketch/helper/overrides/sketch_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
@@ -18,9 +19,7 @@ part 'symbol_master.g.dart';
 // title: Symbol Master Layer
 // description: A symbol master layer represents a reusable group of layers
 @JsonSerializable()
-class SymbolMaster extends AbstractGroupLayer
-    with SymbolNodeMixin
-    implements SketchNodeFactory {
+class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolMaster';
   final Color backgroundColor;
@@ -177,20 +176,29 @@ class SymbolMaster extends AbstractGroupLayer
   // }
 
   @override
-  Future<PBDLNode> interpretNode() {
-    var overrideProps = overrideProperties.map((element) {
-      var uuidTypeMap = extractParameter(element.overrideName);
+  Future<PBDLNode> interpretNode() async {
+    var overrideProps =
+        await Future.wait(overrideProperties.map((element) async {
+      // Extract UUID and type from override name
+      var uuidTypeMap = SymbolNodeMixin.extractParameter(element.overrideName);
+      // Get the OverrideType of the element
+      var ovrType = SketchOverrideTypeFactory.getType(element);
+
+      // Find the child that contains the default value
+      var child = children.firstWhere(
+          (element) => (element as SketchNode).UUID == uuidTypeMap['uuid']);
+
       return PBDLOverrideProperty(
         uuidTypeMap['uuid'],
-        element.overrideName,
+        (child as SketchNode).name,
         null,
         null,
-        uuidTypeMap['type'],
+        ovrType.getPBDLType(), // Map SketchOverrideType to PBDLOverrideType
         null,
         prototypeNodeUUID,
-        '', //TODO: we need to look up the default value of the symbol master
+        await ovrType.getValue(child), // Get default value from child
       );
-    }).toList();
+    }));
 
     return Future.value(PBDLSharedMasterNode(
       UUID: UUID,
@@ -233,6 +241,7 @@ class SymbolMaster extends AbstractGroupLayer
       includeInCloudUpload: includeInCloudUpload,
       isFixedToViewport: isFixedToViewport,
       parameters: parameters,
+      children: children,
     ));
   }
 }

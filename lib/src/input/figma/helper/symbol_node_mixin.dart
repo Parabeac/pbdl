@@ -65,32 +65,12 @@ mixin SymbolNodeMixin {
   ///or the [SymbolMaster].
   ///The first element in the [List] is going to be the UUID, while
   ///the second element is going to be the [Type].
-  Map extractParameter(String overrideName) {
+  static Map extractParameter(String overrideName) {
     var properties = overrideName.split('_');
     assert(properties.length > 1,
         'The symbol ($overrideName) parameter does not contain sufficient data');
     var uuid = properties[0];
     var type = properties[1];
-
-    // switch (properties[1]) {
-    //   case 'stringValue':
-    //     type = String;
-    //     break;
-    //   case 'symbolID':
-    //     // type = PBSharedInstanceIntermediateNode;
-    //     break;
-    //   case 'image':
-    //     // type = InheritedBitmap;
-    //     break;
-    //   case 'textStyle':
-    //     // type = TextStyle;
-    //     break;
-    //   case 'style':
-    //     // type = Style;
-    //     break;
-    //   default:
-    //     type = String;
-    // }
 
     return {'type': type, 'uuid': uuid};
   }

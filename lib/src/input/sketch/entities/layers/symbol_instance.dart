@@ -15,9 +15,7 @@ part 'symbol_instance.g.dart';
 // title: Symbol Instance Layer
 // description: Symbol instance layers represent an instance of a symbol master
 @JsonSerializable()
-class SymbolInstance extends SketchNode
-    with SymbolNodeMixin
-    implements SketchNodeFactory {
+class SymbolInstance extends SketchNode implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolInstance';
   final List<OverridableValue> overrideValues;
@@ -144,7 +142,7 @@ class SymbolInstance extends SketchNode
   @override
   Future<PBDLNode> interpretNode() {
     var overrides = overrideValues.map((e) {
-      var uuidTypeMap = extractParameter(e.overrideName);
+      var uuidTypeMap = SymbolNodeMixin.extractParameter(e.overrideName);
 
       return PBDLOverrideValue(
         uuidTypeMap['uuid'],

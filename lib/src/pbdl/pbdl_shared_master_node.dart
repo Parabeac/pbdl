@@ -58,6 +58,7 @@ class PBDLSharedMasterNode extends PBDLNode
     bool includeInCloudUpload,
     bool isFlowHome,
     List parameters,
+    this.children,
   }) : super(UUID, name, isVisible, boundaryRectangle, type, style,
             prototypeNode) {
     pbdfType = 'symbol_master';
