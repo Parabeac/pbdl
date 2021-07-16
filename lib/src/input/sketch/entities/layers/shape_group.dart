@@ -123,7 +123,7 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
 
     PBDLImage(
-      image: image,
+      // image: image, // TODO: change to imageReference
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,

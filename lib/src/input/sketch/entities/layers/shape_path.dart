@@ -120,7 +120,7 @@ class ShapePath extends AbstractShapeLayer implements SketchNodeFactory {
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
 
     return PBDLImage(
-      image: image, // TODO:
+      // image: image, // TODO: change to imageReference
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,

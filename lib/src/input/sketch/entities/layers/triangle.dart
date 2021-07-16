@@ -120,7 +120,7 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
     var image = SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
     return PBDLImage(
-      image: image,
+      // image: image, // TODO: change to imageReference
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
