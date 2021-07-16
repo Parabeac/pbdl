@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_oval.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLOval implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'oval';

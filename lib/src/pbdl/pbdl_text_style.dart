@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_text_style.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLTextStyle {
   PBDLColor fontColor;
   String weight;

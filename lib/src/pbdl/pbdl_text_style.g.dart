@@ -25,8 +25,8 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
     <String, dynamic>{
-      'fontColor': instance.fontColor,
+      'fontColor': instance.fontColor?.toJson(),
       'weight': instance.weight,
-      'fontDescriptor': instance.fontDescriptor,
-      'paragraphStyle': instance.paragraphStyle,
+      'fontDescriptor': instance.fontDescriptor?.toJson(),
+      'paragraphStyle': instance.paragraphStyle?.toJson(),
     };

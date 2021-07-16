@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_image.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   var style;

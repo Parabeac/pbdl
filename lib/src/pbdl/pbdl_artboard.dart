@@ -9,14 +9,13 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_artboard.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
   PBDLColor backgroundColor;
   @override
   PBDLFrame boundaryRectangle;
   var isFlowHome;
 
-  var style;
   PBDLArtboard({
     this.backgroundColor,
     this.isFlowHome,
@@ -46,7 +45,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
     maintainScrollPosition,
     prototypeNodeUUID,
     type,
-    this.style,
+    PBDLStyle style,
     this.children,
   }) : super(
           UUID,

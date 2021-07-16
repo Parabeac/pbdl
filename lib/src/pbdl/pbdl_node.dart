@@ -5,7 +5,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_node.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLNode {
   PBDLNode(
     this.UUID,
@@ -32,7 +32,6 @@ class PBDLNode {
 
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLNode.fromJson(json);
 
-  @override
   Map<String, dynamic> toJson() => _$PBDLNodeToJson(this);
 
   factory PBDLNode.fromJson(Map<String, dynamic> json) =>

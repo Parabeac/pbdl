@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_polygon.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'polygon';

@@ -8,15 +8,17 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_page.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLPage implements PBDLNodeFactory, PBDLNode {
   @JsonKey(ignore: true)
   var log = Logger('DesignPage');
 
   String id;
   String imageURI;
+  @override
   String name;
   bool convert = true;
+
   List<PBDLScreen> screens = [];
 
   PBDLPage({
@@ -41,6 +43,7 @@ class PBDLPage implements PBDLNodeFactory, PBDLNode {
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLPage.fromJson(json);
   factory PBDLPage.fromJson(Map<String, dynamic> json) =>
       _$PBDLPageFromJson(json);
+
   @override
   Map<String, dynamic> toJson() => _$PBDLPageToJson(this);
 

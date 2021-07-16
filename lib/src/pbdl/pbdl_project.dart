@@ -13,7 +13,7 @@ import 'abstract_pbdl_node_factory.dart';
 
 part 'pbdl_project.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLProject implements PBDLNodeFactory, PBDLNode {
   String projectName;
   bool debug = false;
@@ -42,6 +42,7 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
       PBDLProject.fromJson(json);
   factory PBDLProject.fromJson(Map<String, dynamic> json) =>
       _$PBDLProjectFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$PBDLProjectToJson(this);
 
   /// Method that creates and returns a [PBDLProject] from a Sketch file `path`

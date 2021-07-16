@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_group_node.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
   List<PBDLNode> children = [];
 

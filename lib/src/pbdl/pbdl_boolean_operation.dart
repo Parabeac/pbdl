@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_boolean_operation.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLBooleanOperation extends PBDLVector
     implements PBDLNodeFactory, PBDLNode {
   @override

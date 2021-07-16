@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_style.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLStyle {
   PBDLColor backgroundColor;
   List<PBDLFill> fills;

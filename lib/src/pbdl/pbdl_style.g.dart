@@ -31,10 +31,10 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
-      'backgroundColor': instance.backgroundColor,
-      'fills': instance.fills,
-      'borders': instance.borders,
-      'borderOptions': instance.borderOptions,
-      'textStyle': instance.textStyle,
+      'backgroundColor': instance.backgroundColor?.toJson(),
+      'fills': instance.fills?.map((e) => e?.toJson())?.toList(),
+      'borders': instance.borders?.map((e) => e?.toJson())?.toList(),
+      'borderOptions': instance.borderOptions?.toJson(),
+      'textStyle': instance.textStyle?.toJson(),
       'hasShadow': instance.hasShadow,
     };

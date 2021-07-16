@@ -39,12 +39,13 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
       'name': instance.name,
       'isVisible': instance.isVisible,
       'type': instance.type,
-      'style': instance.style,
+      'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child,
+      'child': instance.child?.toJson(),
       'symbolID': instance.symbolID,
       'parameters': instance.parameters,
-      'boundaryRectangle': instance.boundaryRectangle,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'pbdfType': instance.pbdfType,
-      'overrideValues': instance.overrideValues,
+      'overrideValues':
+          instance.overrideValues?.map((e) => e?.toJson())?.toList(),
     };

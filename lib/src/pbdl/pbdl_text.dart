@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_text.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   var attributedString;
 

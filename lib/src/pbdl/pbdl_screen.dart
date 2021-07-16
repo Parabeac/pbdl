@@ -7,7 +7,7 @@ import 'abstract_pbdl_node_factory.dart';
 
 part 'pbdl_screen.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLScreen implements PBDLNodeFactory, PBDLNode {
   String id;
   String name;

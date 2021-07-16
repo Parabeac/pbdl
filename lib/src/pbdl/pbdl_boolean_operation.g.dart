@@ -39,7 +39,7 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLBooleanOperationToJson(
         PBDLBooleanOperation instance) =>
     <String, dynamic>{
-      'child': instance.child,
+      'child': instance.child?.toJson(),
       'layoutAlign': instance.layoutAlign,
       'constraints': instance.constraints,
       'size': instance.size,
@@ -49,15 +49,15 @@ Map<String, dynamic> _$PBDLBooleanOperationToJson(
       'styles': instance.styles,
       'fillsList': instance.fillsList,
       'pbdfType': instance.pbdfType,
-      'children': instance.children,
+      'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'booleanOperation': instance.booleanOperation,
       'type': instance.type,
-      'boundaryRectangle': instance.boundaryRectangle,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'imageReference': instance.imageReference,
       'UUID': instance.UUID,
       'name': instance.name,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'style': instance.style,
+      'style': instance.style?.toJson(),
       'isVisible': instance.isVisible,
       'image': instance.image,
     };

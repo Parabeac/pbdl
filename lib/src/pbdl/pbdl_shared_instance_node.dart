@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_shared_instance_node.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   String symbolID;
   List parameters;
