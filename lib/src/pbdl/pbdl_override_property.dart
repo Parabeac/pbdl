@@ -3,7 +3,7 @@ import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
-part 'pbdl_override_value.g.dart';
+part 'pbdl_override_property.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
@@ -29,9 +29,9 @@ class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
           prototypeNodeUUID,
         );
 
-  factory PBDLOverrideProperty.fromJSON(Map<String, dynamic> json) =>
+  factory PBDLOverrideProperty.fromJson(Map<String, dynamic> json) =>
       _$PBDLOverridePropertyFromJson(json);
 
   @override
-  Map<String, dynamic> toJson() => _$PBDLOverridePropertyToJSON(this);
+  Map<String, dynamic> toJson() => _$PBDLOverridePropertyToJson(this);
 }

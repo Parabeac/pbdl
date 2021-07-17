@@ -24,7 +24,6 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
     horizontalPadding: json['horizontalPadding'],
     verticalPadding: json['verticalPadding'],
     itemSpacing: json['itemSpacing'],
-    overrideProperties: json['overrideProperties'],
     children: (json['children'] as List)
         ?.map((e) =>
             e == null ? null : FigmaNode.fromJson(e as Map<String, dynamic>))
@@ -33,7 +32,6 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
     symbolID: json['symbolID'] as String,
-    overriadableProperties: json['overriadableProperties'] as List,
     prototypeNodeUUID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
@@ -74,8 +72,6 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
-      'overrideProperties': instance.overrideProperties,
-      'overriadableProperties': instance.overriadableProperties,
       'symbolID': instance.symbolID,
       'pbdfType': instance.pbdfType,
       'isFlowHome': instance.isFlowHome,

@@ -27,10 +27,32 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLTextStyle.fromJson(json['textStyle'] as Map<String, dynamic>),
     hasShadow: json['hasShadow'] as bool,
-  );
+  )
+    ..pbdfType = json['pbdfType'] as String
+    ..UUID = json['UUID'] as String
+    ..name = json['name'] as String
+    ..isVisible = json['isVisible'] as bool
+    ..boundaryRectangle = json['boundaryRectangle']
+    ..type = json['type'] as String
+    ..style = json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
+    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
+      'pbdfType': instance.pbdfType,
+      'UUID': instance.UUID,
+      'name': instance.name,
+      'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle,
+      'type': instance.type,
+      'style': instance.style,
+      'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'child': instance.child,
       'backgroundColor': instance.backgroundColor,
       'fills': instance.fills,
       'borders': instance.borders,

@@ -13,7 +13,7 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
     overrideValues: (json['overrideValues'] as List)
         ?.map((e) => e == null
             ? null
-            : OverridableValue.fromJson(e as Map<String, dynamic>))
+            : PBDLOverrideValue.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     name: json['name'] as String,
     isVisible: json['isVisible'] as bool,
@@ -43,6 +43,6 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
       'child': instance.child,
       'symbolID': instance.symbolID,
       'parameters': instance.parameters,
-      'pbdfType': instance.pbdfType,
       'overrideValues': instance.overrideValues,
+      'pbdfType': instance.pbdfType,
     };

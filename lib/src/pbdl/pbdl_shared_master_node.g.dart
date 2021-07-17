@@ -9,7 +9,11 @@ part of 'pbdl_shared_master_node.dart';
 PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
   return PBDLSharedMasterNode(
     UUID: json['UUID'] as String,
-    overrideProperties: json['overrideProperties'],
+    overrideProperties: (json['overrideProperties'] as List)
+        ?.map((e) => e == null
+            ? null
+            : PBDLOverrideProperty.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     name: json['name'] as String,
     isVisible: json['isVisible'] as bool,
     boundaryRectangle: json['boundaryRectangle'],
@@ -17,13 +21,12 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
     style: json['style'],
     pbdfType: json['pbdfType'] as String,
     symbolID: json['symbolID'] as String,
+    children: json['children'] as List,
   )
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..child = json['child'] == null
         ? null
-        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..overriadableProperties = json['overriadableProperties'] as List
-    ..children = json['children'] as List;
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
@@ -38,8 +41,7 @@ Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child,
       'symbolID': instance.symbolID,
-      'overriadableProperties': instance.overriadableProperties,
       'overrideProperties': instance.overrideProperties,
-      'pbdfType': instance.pbdfType,
       'children': instance.children,
+      'pbdfType': instance.pbdfType,
     };
