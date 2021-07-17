@@ -12,19 +12,15 @@ import 'figma_frame.dart';
 
 part 'instance.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   String type = 'INSTANCE';
 
-  @override
   List parameters;
 
-  @override
   String symbolID;
 
-  @override
-  List<FigmaNode> children;
   Instance(
       {name,
       isVisible,
@@ -45,7 +41,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       verticalPadding,
       itemSpacing,
       this.componentId,
-      List<FigmaNode> this.children,
+      List<FigmaNode> children,
       this.parameters,
       this.symbolID,
       FigmaColor backgroundColor,

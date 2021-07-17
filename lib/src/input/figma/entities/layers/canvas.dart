@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -9,15 +9,15 @@ import 'figma_node.dart';
 
 part 'canvas.g.dart';
 
-@JsonSerializable()
-class Canvas extends FigmaNode implements FigmaNodeFactory {
+@JsonSerializable(explicitToJson: true)
+class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
   @override
   String type = 'CANVAS';
 
   Canvas({
     this.name,
     this.type,
-    List<FigmaNode> this.children,
+    List<FigmaNode> children,
     this.backgroundColor,
     this.prototypeStartNodeID,
     this.prototypeDevice,
@@ -34,6 +34,7 @@ class Canvas extends FigmaNode implements FigmaNodeFactory {
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          children: children,
         ) {
     pbdfType = 'artboard';
   }
@@ -41,8 +42,6 @@ class Canvas extends FigmaNode implements FigmaNodeFactory {
 
   @override
   String name;
-
-  List<FigmaNode> children;
 
   dynamic backgroundColor;
 

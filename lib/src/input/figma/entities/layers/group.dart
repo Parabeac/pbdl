@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -16,7 +15,7 @@ import 'vector.dart';
 
 part 'group.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 
 /// Class that represents a Figma Group.
 /// The reason this class implements Image is because Groups can hold multiple vectors
@@ -103,7 +102,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
 
       var tempPrototypeID = childrenHavePrototypeNode();
       if (tempPrototypeID != null) {
-        this.prototypeNodeUUID = tempPrototypeID;
+        prototypeNodeUUID = tempPrototypeID;
       }
 
       if (children != null && children.isNotEmpty) {

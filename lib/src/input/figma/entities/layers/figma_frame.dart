@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
@@ -11,17 +12,16 @@ import 'figma_node.dart';
 
 part 'figma_frame.g.dart';
 
-@JsonSerializable()
-class FigmaFrame extends FigmaNode
+@JsonSerializable(explicitToJson: true)
+class FigmaFrame extends FigmaChildrenNode
     with PBColorMixin
     implements FigmaNodeFactory {
   @JsonKey(name: 'absoluteBoundingBox')
+  @override
   FigmaRect boundaryRectangle;
 
   @JsonKey(ignore: true)
   FigmaStyle style;
-
-  List<FigmaNode> children;
 
   @JsonKey(ignore: true)
   var fills;
@@ -76,7 +76,7 @@ class FigmaFrame extends FigmaNode
     this.horizontalPadding,
     this.verticalPadding,
     this.itemSpacing,
-    List<FigmaNode> this.children,
+    List<FigmaNode> children,
     String UUID,
     FigmaColor this.backgroundColor,
     String transitionNodeID,
@@ -93,6 +93,7 @@ class FigmaFrame extends FigmaNode
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          children: children,
         ) {
     pbdfType = 'group';
   }
