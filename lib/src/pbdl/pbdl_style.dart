@@ -1,6 +1,7 @@
 import 'package:pbdl/src/pbdl/pbdl_border.dart';
 import 'package:pbdl/src/pbdl/pbdl_border_options.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text_style.dart';
 import 'pbdl_color.dart';
