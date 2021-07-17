@@ -32,7 +32,9 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
     ..UUID = json['UUID'] as String
     ..name = json['name'] as String
     ..isVisible = json['isVisible'] as bool
-    ..boundaryRectangle = json['boundaryRectangle']
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
     ..type = json['type'] as String
     ..style = json['style'] == null
         ? null
@@ -48,15 +50,15 @@ Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'type': instance.type,
-      'style': instance.style,
+      'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child,
-      'backgroundColor': instance.backgroundColor,
-      'fills': instance.fills,
-      'borders': instance.borders,
-      'borderOptions': instance.borderOptions,
-      'textStyle': instance.textStyle,
+      'child': instance.child?.toJson(),
+      'backgroundColor': instance.backgroundColor?.toJson(),
+      'fills': instance.fills?.map((e) => e?.toJson())?.toList(),
+      'borders': instance.borders?.map((e) => e?.toJson())?.toList(),
+      'borderOptions': instance.borderOptions?.toJson(),
+      'textStyle': instance.textStyle?.toJson(),
       'hasShadow': instance.hasShadow,
     };

@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/color.dart';
 import '../style/style.dart';
 import 'abstract_shape_layer.dart';
@@ -60,7 +61,7 @@ class Rectangle extends AbstractShapeLayer
       this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      SketchRect this.boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,
@@ -121,6 +122,42 @@ class Rectangle extends AbstractShapeLayer
 
   @override
   Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLRectangle(
+      fixedRadius: fixedRadius,
+      hasConvertedToNewRoundCorners: hasConvertedToNewRoundCorners,
+      needsConvertionToNewRoundCorners: needsConvertionToNewRoundCorners,
+      edited: edited,
+      isClosed: isClosed,
+      pointRadiusBehaviour: pointRadiusBehaviour,
+      points: points,
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      resizingType: resizingType,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      type: type,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+    ));
+    //Questions: Why is the first half white? Does it have to do with PBDLRectangle not being defined?
+    //Why isn't PBDLRectangle defined?
+
     /*
     Border border;
     for (var b in style.borders.reversed) {

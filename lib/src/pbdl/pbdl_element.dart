@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_element.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 // TODO: Not sure why this class exists.
 class PBDLElement extends PBDLNode {
   PBDLElement({

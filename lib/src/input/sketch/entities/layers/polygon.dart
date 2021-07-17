@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_polygon.dart';
 
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/style.dart';
 import 'abstract_shape_layer.dart';
 import 'flow.dart';
@@ -51,7 +52,7 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
       this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      SketchRect this.boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,
@@ -114,7 +115,38 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$PolygonToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() async {
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLPolygon(
+      edited: edited,
+      isClosed: isClosed,
+      pointRadiusBehaviour: pointRadiusBehaviour,
+      points: points,
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      resizingType: resizingType,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      type: type,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+    ));
+
     /*
     var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);

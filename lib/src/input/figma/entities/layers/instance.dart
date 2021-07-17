@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
@@ -8,7 +8,7 @@ import '../../helper/override_value.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
-import 'frame.dart';
+import 'figma_frame.dart';
 
 part 'instance.g.dart';
 
@@ -24,7 +24,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   String symbolID;
 
   @override
-  List children;
+  List<FigmaNode> children;
   Instance(
       {name,
       isVisible,
@@ -58,7 +58,9 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             type: type,
             pluginData: pluginData,
             sharedPluginData: sharedPluginData,
-            boundaryRectangle: boundaryRectangle,
+            boundaryRectangle: boundaryRectangle != null
+                ? FigmaRect.fromJson(boundaryRectangle)
+                : null,
             style: style,
             fills: fills,
             strokes: strokes,
@@ -101,7 +103,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       overrideValues: overrideValues,
       name: name,
       isVisible: isVisible,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       type: type,
       style: style,
       prototypeNode: prototypeNodeUUID,
@@ -160,7 +162,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   }
 
   // TODO: implement overrideValues
-  List<FigmaOverridableValue> get overrideValues => throw UnimplementedError();
+  // List<FigmaOverridableValue> get overrideValues => overrideValues;
+  List<FigmaOverridableValue> overrideValues;
 
   // TODO: implement typeToAbbreviation
   Map<Type, String> get typeToAbbreviation => throw UnimplementedError();

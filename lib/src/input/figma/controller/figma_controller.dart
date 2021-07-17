@@ -1,7 +1,7 @@
 //Responsive UI code
 
 import 'package:pbdl/src/input/figma/entities/layers/component.dart';
-import 'package:pbdl/src/input/figma/entities/layers/frame.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
 import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
 import 'package:pbdl/src/input/figma/helper/azure_asset_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_project.dart';
@@ -33,16 +33,16 @@ class FigmaController {
 
   FigmaProject generateFigmaTree(
       var figmaProjectID, var jsonFigma, var projectName) {
-    try {
-      return FigmaProject(
-        projectName,
-        jsonFigma,
-        id: figmaProjectID,
-      );
-    } catch (e, stackTrace) {
-      print(e);
-      return null;
-    }
+    // try {
+    return FigmaProject(
+      projectName,
+      jsonFigma,
+      id: figmaProjectID,
+    );
+    // } catch (e, stackTrace) {
+    //   print(e);
+    //   return null;
+    // }
   }
 
   Future<dynamic> _fetchFigmaFile() => APICallService.makeAPICall(

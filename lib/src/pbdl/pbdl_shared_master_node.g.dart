@@ -21,7 +21,10 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
     style: json['style'],
     pbdfType: json['pbdfType'] as String,
     symbolID: json['symbolID'] as String,
-    children: json['children'] as List,
+    children: (json['children'] as List)
+        ?.map((e) =>
+            e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   )
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..child = json['child'] == null
@@ -35,13 +38,14 @@ Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
       'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'type': instance.type,
-      'style': instance.style,
+      'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child,
+      'child': instance.child?.toJson(),
       'symbolID': instance.symbolID,
-      'overrideProperties': instance.overrideProperties,
-      'children': instance.children,
+      'overrideProperties':
+          instance.overrideProperties?.map((e) => e?.toJson())?.toList(),
+      'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'pbdfType': instance.pbdfType,
     };

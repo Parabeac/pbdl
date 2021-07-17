@@ -1,5 +1,5 @@
+import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_node.dart';
-import 'package:pbdl/src/input/figma/entities/layers/frame.dart';
 import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type.dart';
 import 'package:pbdl/src/input/general_helper/overrides/pbdl_override_text_value.dart';

@@ -6,7 +6,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_shared_master_node.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLSharedMasterNode extends PBDLNode
     implements PBDLNodeFactory, PBDLGroupNode {
   String symbolID;
@@ -14,7 +14,7 @@ class PBDLSharedMasterNode extends PBDLNode
   List<PBDLOverrideProperty> overrideProperties;
 
   @override
-  List children = [];
+  List<PBDLNode> children = [];
 
   PBDLSharedMasterNode({
     String UUID,

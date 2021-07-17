@@ -15,10 +15,7 @@ FigmaRegularPolygon _$FigmaRegularPolygonFromJson(Map<String, dynamic> json) {
     style: json['style'],
     layoutAlign: json['layoutAlign'],
     constraints: json['constraints'],
-    boundaryRectangle: json['absoluteBoundingBox'] == null
-        ? null
-        : FigmaFrame.fromJson(
-            json['absoluteBoundingBox'] as Map<String, dynamic>),
+    boundaryRectangle: json['absoluteBoundingBox'],
     size: json['size'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],

@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/style.dart';
 import 'flow.dart';
 
@@ -21,7 +21,7 @@ class SketchNode {
   ///`boundaryRectangle` is not final because its going to change, just because some node contain an offset.
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  SketchRect boundaryRectangle;
   Flow flow;
   final bool isFixedToViewport;
   final bool isFlippedHorizontal;
@@ -30,6 +30,7 @@ class SketchNode {
   final bool isVisible;
   final dynamic layerListExpandedType;
   String name;
+  String type;
   final bool nameIsFixed;
   final dynamic resizingConstraint;
   final dynamic resizingType;
@@ -51,7 +52,7 @@ class SketchNode {
       this.UUID,
       this.booleanOperation,
       this.exportOptions,
-      Frame this.boundaryRectangle,
+      SketchRect this.boundaryRectangle,
       Flow this.flow,
       this.isFixedToViewport,
       this.isFlippedHorizontal,
@@ -75,7 +76,7 @@ class SketchNode {
   Future<PBDLNode> interpretNode() {}
 
   factory SketchNode.fromJson(Map<String, dynamic> json) =>
-      _$SketchNodeFromJson(json);
+      AbstractSketchNodeFactory.getSketchNode(json);
   @override
   Map<String, dynamic> toJson() => _$SketchNodeToJson(this);
 }

@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
@@ -8,7 +8,7 @@ import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
-import 'frame.dart';
+import 'figma_frame.dart';
 
 part 'component.g.dart';
 
@@ -47,7 +47,9 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          boundaryRectangle: boundaryRectangle,
+          boundaryRectangle: boundaryRectangle != null
+              ? FigmaRect.fromJson(boundaryRectangle)
+              : null,
           style: style,
           fills: fills,
           strokes: strokes,
@@ -113,7 +115,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       overrideProperties: props,
       name: name,
       isVisible: isVisible,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       type: type,
       style: style,
       prototypeNode: prototypeNodeUUID,

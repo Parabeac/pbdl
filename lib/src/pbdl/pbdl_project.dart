@@ -1,5 +1,6 @@
 import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
 import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -12,7 +13,7 @@ import 'abstract_pbdl_node_factory.dart';
 
 part 'pbdl_project.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLProject implements PBDLNodeFactory, PBDLNode {
   String projectName;
   bool debug = false;
@@ -41,6 +42,7 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
       PBDLProject.fromJson(json);
   factory PBDLProject.fromJson(Map<String, dynamic> json) =>
       _$PBDLProjectFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$PBDLProjectToJson(this);
 
   /// Method that creates and returns a [PBDLProject] from a Sketch file `path`
@@ -50,7 +52,7 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
     var sketchProject = await SketchController().convertFile(path);
 
     // TODO: Open sketch file and interpret into PBDLProject
-    return PBDLProject();
+    return sketchProject.interpretNode();
   }
 
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`

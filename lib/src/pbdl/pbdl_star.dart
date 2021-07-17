@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_star.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLStar implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'star';

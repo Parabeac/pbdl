@@ -19,7 +19,9 @@ PBDLScreen _$PBDLScreenFromJson(Map<String, dynamic> json) {
     ..imageURI = json['imageURI'] as String
     ..pbdfType = json['pbdfType'] as String
     ..UUID = json['UUID'] as String
-    ..boundaryRectangle = json['boundaryRectangle']
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
@@ -37,12 +39,12 @@ Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) =>
       'convert': instance.convert,
       'imageURI': instance.imageURI,
       'type': instance.type,
-      'designNode': instance.designNode,
+      'designNode': instance.designNode?.toJson(),
       'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,
-      'boundaryRectangle': instance.boundaryRectangle,
-      'child': instance.child,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'child': instance.child?.toJson(),
       'isVisible': instance.isVisible,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'style': instance.style,
+      'style': instance.style?.toJson(),
     };

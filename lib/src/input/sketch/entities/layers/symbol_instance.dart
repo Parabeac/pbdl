@@ -4,7 +4,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../objects/override_value.dart';
 import '../style/style.dart';
 import 'flow.dart';
@@ -58,7 +58,7 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       {this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      SketchRect this.boundaryRectangle,
       Flow flow,
       bool isFixedToViewport,
       bool isFlippedHorizontal,
@@ -160,7 +160,7 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       UUID: UUID,
       overrideValues: overrides,
       booleanOperation: booleanOperation,
-      boundaryRectangle: boundaryRectangle,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       clippingMaskMode: clippingMaskMode,
       exportOptions: exportOptions,
       hasClippingMask: hasClippingMask,
@@ -182,7 +182,7 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       scale: scale,
       sharedStyleID: sharedStyleID,
       shouldBreakMaskChain: shouldBreakMaskChain,
-      style: style,
+      style: style.interpretStyle(),
       symbolID: symbolID,
       type: type,
       userInfo: userInfo,

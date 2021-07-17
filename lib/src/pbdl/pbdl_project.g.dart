@@ -27,7 +27,9 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
             e == null ? null : SharedStyle.fromJson(e as Map<String, dynamic>))
         ?.toList()
     ..UUID = json['UUID'] as String
-    ..boundaryRectangle = json['boundaryRectangle']
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
@@ -47,15 +49,15 @@ Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
       'id': instance.id,
       'pbdfType': instance.pbdfType,
       'pngPath': instance.pngPath,
-      'pages': instance.pages,
-      'miscPages': instance.miscPages,
-      'sharedStyles': instance.sharedStyles,
+      'pages': instance.pages?.map((e) => e?.toJson())?.toList(),
+      'miscPages': instance.miscPages?.map((e) => e?.toJson())?.toList(),
+      'sharedStyles': instance.sharedStyles?.map((e) => e?.toJson())?.toList(),
       'UUID': instance.UUID,
-      'boundaryRectangle': instance.boundaryRectangle,
-      'child': instance.child,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'child': instance.child?.toJson(),
       'isVisible': instance.isVisible,
       'name': instance.name,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'style': instance.style,
+      'style': instance.style?.toJson(),
       'type': instance.type,
     };

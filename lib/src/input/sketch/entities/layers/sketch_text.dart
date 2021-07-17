@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_text.dart';
 
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/style.dart';
 import 'flow.dart';
 import 'sketch_node.dart';
@@ -58,7 +59,7 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       {this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      SketchRect this.boundaryRectangle,
       Flow flow,
       bool isFixedToViewport,
       bool isFlippedHorizontal,
@@ -123,6 +124,38 @@ class SketchText extends SketchNode implements SketchNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLText(
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      resizingType: resizingType,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      maintainScrollPosition: maintainScrollPosition,
+      attributedString: attributedString,
+      automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
+      dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
+      lineSpacingBehaviour: lineSpacingBehaviour,
+      textBehaviour: textBehaviour,
+      glyphBounds: glyphBounds,
+      type: type,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+    ));
+
     // Future.value(InjectedContainer(
     //   Point(boundaryRectangle.x + boundaryRectangle.width,
     //       boundaryRectangle.y + boundaryRectangle.height),

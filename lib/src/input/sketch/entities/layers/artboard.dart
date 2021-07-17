@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/color.dart';
 import '../style/style.dart';
 import 'abstract_group_layer.dart';
@@ -15,7 +16,7 @@ part 'artboard.g.dart';
 class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   @JsonKey(name: 'layers')
-  List children;
+  List<SketchNode> children;
 
   @override
   String CLASS_NAME = 'artboard';
@@ -31,10 +32,9 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'frame')
-  var boundaryRectangle;
+  SketchRect boundaryRectangle;
 
-  @override
-  var backgroundColor;
+  Color backgroundColor;
 
   @override
   @JsonKey(name: 'do_objectID')
@@ -75,11 +75,11 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       this.presetDictionary,
       hasClickThrough,
       groupLayout,
-      List<SketchNode> this.children,
+      this.children,
       this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      this.boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,
@@ -108,7 +108,7 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
             UUID,
             booleanOperation,
             exportOptions,
-            boundaryRectangle as Frame,
+            boundaryRectangle as SketchRect,
             flow,
             isFixedToViewport,
             isFlippedHorizontal,
@@ -138,7 +138,39 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ArtboardToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(PBDLArtboard(
+      backgroundColor: backgroundColor.interpretColor(),
+      isFlowHome: isFlowHome,
+      hasClickThrough: hasClickThrough,
+      groupLayout: groupLayout,
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      flow: flow?.interpretFlow(),
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      prototypeNodeUUID: prototypeNodeUUID,
+      type: type,
+      style: style.interpretStyle(),
+      children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList()),
+    ));
     /*
     return Future.value(InheritedScaffold(
       this,

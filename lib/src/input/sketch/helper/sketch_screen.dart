@@ -1,3 +1,5 @@
+import 'package:pbdl/src/pbdl/pbdl_screen.dart';
+
 import '../entities/abstract_sketch_node_factory.dart';
 import '../entities/layers/sketch_node.dart';
 
@@ -39,4 +41,13 @@ class SketchScreen {
 
   @override
   String CLASS_NAME;
+
+  Future<PBDLScreen> interpretNode() async {
+    return Future.value(PBDLScreen(
+      designNode: await designNode.interpretNode(),
+      id: id,
+      name: name,
+      type: type,
+    ));
+  }
 }

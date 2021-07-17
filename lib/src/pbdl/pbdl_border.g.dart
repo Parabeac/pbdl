@@ -21,6 +21,6 @@ Map<String, dynamic> _$PBDLBorderToJson(PBDLBorder instance) =>
     <String, dynamic>{
       'isEnabled': instance.isEnabled,
       'fillType': instance.fillType,
-      'color': instance.color,
+      'color': instance.color?.toJson(),
       'thickness': instance.thickness,
     };

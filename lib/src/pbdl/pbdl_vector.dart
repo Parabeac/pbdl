@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_vector.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   @override
   String pbdfType = 'vector';
@@ -92,4 +92,7 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
 
   @override
   String imageReference;
+
+  @override
+  var image;
 }

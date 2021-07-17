@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_text_style.dart';
 
 import 'color.dart';
 import 'font_descriptor.dart';
@@ -96,6 +97,15 @@ class TextStyle {
   factory TextStyle.fromJson(Map<String, dynamic> json) =>
       _$TextStyleFromJson(json);
   Map<String, dynamic> toJson() => _$TextStyleToJson(this);
+
+  PBDLTextStyle interpretTextStyle() {
+    return PBDLTextStyle(
+      fontColor: fontColor.interpretColor(),
+      weight: weight,
+      paragraphStyle: paragraphStyle.interpretParagraphStyle(),
+      fontDescriptor: fontDescriptor.interpretFontDescriptor(),
+    );
+  }
 
   @JsonKey(ignore: true)
   Color fontColor;

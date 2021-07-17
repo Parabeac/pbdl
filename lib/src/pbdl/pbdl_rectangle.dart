@@ -7,7 +7,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_rectangle.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
   @override
   String pbdfType = 'rectangle';

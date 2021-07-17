@@ -5,7 +5,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
-import 'frame.dart';
+import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'star.g.dart';
@@ -23,7 +23,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     style,
     layoutAlign,
     constraints,
-    FigmaFrame boundaryRectangle,
+    boundaryRectangle,
     size,
     fills,
     strokes,
@@ -68,7 +68,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
       pbdfType: pbdfType,

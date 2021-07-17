@@ -7,10 +7,16 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_image.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   var style;
+
+  /// [image] it is in case the Node give us the bytes of the image
+  var image;
+
+  /// [imageReference] is when we have the reference to the image instead
+  String imageReference;
 
   PBDLImage({
     this.imageReference,
@@ -37,6 +43,7 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     maintainScrollPosition,
     this.pbdfType = 'image',
     this.style,
+    this.image,
   }) : super(
           UUID: UUID,
           name: name,
@@ -44,8 +51,6 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           boundaryRectangle: boundaryRectangle,
           style: style,
         );
-
-  String imageReference;
 
   @override
   String pbdfType = 'image';

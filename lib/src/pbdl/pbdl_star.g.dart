@@ -28,11 +28,11 @@ PBDLStar _$PBDLStarFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLStarToJson(PBDLStar instance) => <String, dynamic>{
       'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,
-      'boundaryRectangle': instance.boundaryRectangle,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'isVisible': instance.isVisible,
       'name': instance.name,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'style': instance.style,
+      'style': instance.style?.toJson(),
       'type': instance.type,
-      'child': instance.child,
+      'child': instance.child?.toJson(),
     };

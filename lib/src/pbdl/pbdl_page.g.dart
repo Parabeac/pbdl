@@ -12,14 +12,16 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
     id: json['id'] as String,
     screens: (json['screens'] as List)
         ?.map((e) =>
-            e == null ? null : PBDLScreen.fromJson(e as Map<String, dynamic>))
+            e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   )
     ..imageURI = json['imageURI'] as String
     ..convert = json['convert'] as bool
     ..pbdfType = json['pbdfType'] as String
     ..UUID = json['UUID'] as String
-    ..boundaryRectangle = json['boundaryRectangle']
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
@@ -36,13 +38,13 @@ Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) => <String, dynamic>{
       'imageURI': instance.imageURI,
       'name': instance.name,
       'convert': instance.convert,
-      'screens': instance.screens,
+      'screens': instance.screens?.map((e) => e?.toJson())?.toList(),
       'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,
-      'boundaryRectangle': instance.boundaryRectangle,
-      'child': instance.child,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'child': instance.child?.toJson(),
       'isVisible': instance.isVisible,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'style': instance.style,
+      'style': instance.style?.toJson(),
       'type': instance.type,
     };

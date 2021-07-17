@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_border_options.dart';
 
 part 'border_options.g.dart';
 
@@ -23,4 +24,13 @@ class BorderOptions {
 
   factory BorderOptions.fromJson(Map json) => _$BorderOptionsFromJson(json);
   Map toJson() => _$BorderOptionsToJson(this);
+
+  PBDLBorderOptions interpretOptions() {
+    return PBDLBorderOptions(
+      isEnabled: isEnabled,
+      dashPattern: dashPattern,
+      lineCapStyle: lineCapStyle,
+      lineJoinStyle: lineJoinStyle,
+    );
+  }
 }

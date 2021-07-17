@@ -13,7 +13,7 @@ SketchNode _$SketchNodeFromJson(Map<String, dynamic> json) {
     json['exportOptions'],
     json['frame'] == null
         ? null
-        : Frame.fromJson(json['frame'] as Map<String, dynamic>),
+        : SketchRect.fromJson(json['frame'] as Map<String, dynamic>),
     json['flow'] == null
         ? null
         : Flow.fromJson(json['flow'] as Map<String, dynamic>),
@@ -37,7 +37,9 @@ SketchNode _$SketchNodeFromJson(Map<String, dynamic> json) {
         ? null
         : Style.fromJson(json['style'] as Map<String, dynamic>),
     json['maintainScrollPosition'] as bool,
-  )..prototypeNodeUUID = json['prototypeNodeUUID'] as String;
+  )
+    ..type = json['type'] as String
+    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String;
 }
 
 Map<String, dynamic> _$SketchNodeToJson(SketchNode instance) =>
@@ -54,6 +56,7 @@ Map<String, dynamic> _$SketchNodeToJson(SketchNode instance) =>
       'isVisible': instance.isVisible,
       'layerListExpandedType': instance.layerListExpandedType,
       'name': instance.name,
+      'type': instance.type,
       'nameIsFixed': instance.nameIsFixed,
       'resizingConstraint': instance.resizingConstraint,
       'resizingType': instance.resizingType,

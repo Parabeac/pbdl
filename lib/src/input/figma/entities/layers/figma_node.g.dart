@@ -17,9 +17,13 @@ FigmaNode _$FigmaNodeFromJson(Map<String, dynamic> json) {
     prototypeNodeUUID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
-  )..child = json['child'] == null
-      ? null
-      : FigmaNode.fromJson(json['child'] as Map<String, dynamic>);
+  )
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : FigmaRect.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
+    ..child = json['child'] == null
+        ? null
+        : FigmaNode.fromJson(json['child'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$FigmaNodeToJson(FigmaNode instance) => <String, dynamic>{
@@ -28,6 +32,7 @@ Map<String, dynamic> _$FigmaNodeToJson(FigmaNode instance) => <String, dynamic>{
       'type': instance.type,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'boundaryRectangle': instance.boundaryRectangle,
       'child': instance.child,
       'visible': instance.isVisible,
       'transitionNodeID': instance.prototypeNodeUUID,

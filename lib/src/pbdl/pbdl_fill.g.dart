@@ -16,6 +16,6 @@ PBDLFill _$PBDLFillFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PBDLFillToJson(PBDLFill instance) => <String, dynamic>{
-      'color': instance.color,
+      'color': instance.color?.toJson(),
       'isEnabled': instance.isEnabled,
     };

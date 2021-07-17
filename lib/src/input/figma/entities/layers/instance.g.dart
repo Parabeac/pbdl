@@ -45,7 +45,12 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..pbdfType = json['pbdfType'] as String
+    ..overrideValues = (json['overrideValues'] as List)
+        ?.map((e) => e == null
+            ? null
+            : FigmaOverridableValue.fromJson(e as Map<String, dynamic>))
+        ?.toList();
 }
 
 Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
@@ -79,4 +84,5 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'children': instance.children,
       'componentId': instance.componentId,
       'pbdfType': instance.pbdfType,
+      'overrideValues': instance.overrideValues,
     };

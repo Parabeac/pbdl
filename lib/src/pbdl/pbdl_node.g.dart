@@ -11,7 +11,9 @@ PBDLNode _$PBDLNodeFromJson(Map<String, dynamic> json) {
     json['UUID'] as String,
     json['name'] as String,
     json['isVisible'] as bool,
-    json['boundaryRectangle'],
+    json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     json['type'] as String,
     json['style'] == null
         ? null
@@ -28,9 +30,9 @@ Map<String, dynamic> _$PBDLNodeToJson(PBDLNode instance) => <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'type': instance.type,
-      'style': instance.style,
+      'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child,
+      'child': instance.child?.toJson(),
     };

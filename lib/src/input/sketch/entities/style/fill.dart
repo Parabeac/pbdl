@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_fill.dart';
 
 import 'color.dart';
 import 'context_settings.dart';
@@ -35,4 +36,8 @@ class Fill {
 
   factory Fill.fromJson(Map json) => _$FillFromJson(json);
   Map toJson() => _$FillToJson(this);
+
+  PBDLFill interpretFill() {
+    return PBDLFill(color.interpretColor());
+  }
 }

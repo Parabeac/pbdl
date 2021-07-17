@@ -23,7 +23,10 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
-    children: json['children'] as List,
+    children: (json['children'] as List)
+        ?.map((e) =>
+            e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   )
     ..child = json['child'] == null
         ? null
@@ -37,12 +40,12 @@ Map<String, dynamic> _$PBDLArtboardToJson(PBDLArtboard instance) =>
       'name': instance.name,
       'isVisible': instance.isVisible,
       'type': instance.type,
+      'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child,
-      'backgroundColor': instance.backgroundColor,
-      'boundaryRectangle': instance.boundaryRectangle,
+      'child': instance.child?.toJson(),
+      'backgroundColor': instance.backgroundColor?.toJson(),
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'isFlowHome': instance.isFlowHome,
-      'style': instance.style,
-      'children': instance.children,
+      'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'pbdfType': instance.pbdfType,
     };

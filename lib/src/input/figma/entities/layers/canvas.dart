@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -70,20 +71,24 @@ class Canvas extends FigmaNode implements FigmaNodeFactory {
   var style;
 
   @override
-  Future<PBDLNode> interpretNode() {
-    return Future.value(PBDLArtboard(
-      backgroundColor: backgroundColor,
-      isFlowHome: false, // TODO: get it dynamically
-      UUID: UUID,
-      exportOptions: exportSettings,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
-      isVisible: isVisible,
-      name: name,
-      type: type,
-      style: style,
-      prototypeNodeUUID: prototypeNodeUUID,
-      children: children,
-    ));
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(
+      PBDLArtboard(
+        backgroundColor: backgroundColor,
+        isFlowHome: false, // TODO: get it dynamically
+        UUID: UUID,
+        exportOptions: exportSettings,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        type: type,
+        style: style,
+        prototypeNodeUUID: prototypeNodeUUID,
+        children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList(),
+        ),
+      ),
+    );
     /*
     assert(false, 'We don\'t product pages as Intermediate Nodes.');
     return null; */

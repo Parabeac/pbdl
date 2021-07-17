@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
@@ -6,7 +7,7 @@ import 'abstract_pbdl_node_factory.dart';
 
 part 'pbdl_screen.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLScreen implements PBDLNodeFactory, PBDLNode {
   String id;
   String name;

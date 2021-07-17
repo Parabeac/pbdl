@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_font_descriptor.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLFontDescriptor {
   PBDLFontDescriptor({
     this.fontName,

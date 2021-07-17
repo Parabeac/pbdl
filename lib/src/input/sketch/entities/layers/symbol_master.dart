@@ -6,7 +6,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../objects/override_property.dart';
 import '../style/color.dart';
 import '../style/style.dart';
@@ -63,7 +63,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'layers')
-  List children;
+  List<SketchNode> children;
 
   @JsonKey(ignore: true)
   String pbdfType = 'symbol_master';
@@ -75,7 +75,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      SketchRect this.boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,
@@ -205,7 +205,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       allowsOverrides: allowsOverrides,
       overrideProperties: overrideProps,
       booleanOperation: booleanOperation,
-      boundaryRectangle: boundaryRectangle,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       changeIdentifier: changeIdentifier,
       clippingMaskMode: clippingMaskMode,
       exportOptions: exportOptions,
@@ -226,7 +226,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       symbolID: symbolID,
       userInfo: userInfo,
       type: type,
-      style: style,
+      style: style.interpretStyle(),
       shouldBreakMaskChain: shouldBreakMaskChain,
       rotation: rotation,
       resizingType: resizingType,
@@ -241,7 +241,8 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       includeInCloudUpload: includeInCloudUpload,
       isFixedToViewport: isFixedToViewport,
       parameters: parameters,
-      children: children,
+      children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList()),
     ));
   }
 }

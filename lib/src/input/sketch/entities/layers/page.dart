@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_page.dart';
 
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/style.dart';
 import 'abstract_group_layer.dart';
 import 'flow.dart';
@@ -41,7 +42,7 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'layers')
-  List children;
+  List<SketchNode> children;
 
   @override
   void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
@@ -62,7 +63,7 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
       this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      SketchRect this.boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,
@@ -119,10 +120,13 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$PageToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    /*
-    assert(false, 'We don\'t product pages as Intermediate Nodes.');
-    return null; */
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(PBDLPage(
+      name: name,
+      id: UUID,
+      screens:
+          await Future.wait(children.map((e) => e.interpretNode()).toList()),
+    ));
   }
 
   @override

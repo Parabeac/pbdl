@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../../helper/style_extractor.dart';
@@ -8,19 +9,19 @@ import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
 
-part 'frame.g.dart';
+part 'figma_frame.g.dart';
 
 @JsonSerializable()
 class FigmaFrame extends FigmaNode
     with PBColorMixin
     implements FigmaNodeFactory {
   @JsonKey(name: 'absoluteBoundingBox')
-  var boundaryRectangle;
+  FigmaRect boundaryRectangle;
 
   @JsonKey(ignore: true)
-  var style;
+  FigmaStyle style;
 
-  List children;
+  List<FigmaNode> children;
 
   @JsonKey(ignore: true)
   var fills;
@@ -114,31 +115,35 @@ class FigmaFrame extends FigmaNode
   Map<String, dynamic> toJson() => _$FigmaFrameToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
+  Future<PBDLNode> interpretNode() async {
     /// TODO: change `isHomeScreen` to its actual value
     if (isScaffold) {
-      return Future.value(PBDLArtboard(
-        backgroundColor: backgroundColor.interpretColor(),
-        isFlowHome: false,
-        UUID: UUID,
-        boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
-        isVisible: isVisible,
-        name: name,
-        type: type,
-        style: style.interpretStyle(),
-        prototypeNodeUUID: prototypeNodeUUID,
-        children: children,
-      ));
+      return Future.value(
+        PBDLArtboard(
+            backgroundColor: backgroundColor.interpretColor(),
+            isFlowHome: false,
+            UUID: UUID,
+            boundaryRectangle: boundaryRectangle.interpretFrame(),
+            isVisible: isVisible,
+            name: name,
+            type: type,
+            style: style.interpretStyle(),
+            prototypeNodeUUID: prototypeNodeUUID,
+            children: await Future.wait(
+                children.map((e) async => await e.interpretNode()).toList())),
+      );
     } else {
-      return Future.value(PBDLGroupNode(
-        UUID: UUID,
-        boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
-        isVisible: isVisible,
-        name: name,
-        pbdfType: pbdfType,
-        style: style,
-        children: children,
-      ));
+      return Future.value(
+        PBDLGroupNode(
+            UUID: UUID,
+            boundaryRectangle: boundaryRectangle.interpretFrame(),
+            isVisible: isVisible,
+            name: name,
+            pbdfType: pbdfType,
+            style: style.interpretStyle(),
+            children: await Future.wait(
+                children.map((e) async => await e.interpretNode()).toList())),
+      );
     }
   }
 

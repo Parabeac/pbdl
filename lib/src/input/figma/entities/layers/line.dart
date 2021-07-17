@@ -4,7 +4,7 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
-import 'frame.dart';
+import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'line.g.dart';
@@ -22,7 +22,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       style,
       layoutAlign,
       constraints,
-      FigmaFrame boundaryRectangle,
+      boundaryRectangle,
       size,
       fills,
       strokes,
@@ -66,7 +66,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() {
     return Future.value(PBDLRectangle(
       UUID: UUID,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
       type: type,

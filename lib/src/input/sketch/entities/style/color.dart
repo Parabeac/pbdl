@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:hex/hex.dart';
+import 'package:pbdl/src/pbdl/pbdl_color.dart';
 part 'color.g.dart';
 
 @JsonSerializable()
@@ -12,6 +13,10 @@ class Color {
 
   factory Color.fromJson(Map json) => _$ColorFromJson(json);
   Map toJson() => _$ColorToJson(this);
+
+  PBDLColor interpretColor() {
+    return PBDLColor(alpha, red, green, blue);
+  }
 }
 
 mixin PBColorMixin {

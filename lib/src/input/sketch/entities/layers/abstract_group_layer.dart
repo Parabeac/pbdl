@@ -1,4 +1,4 @@
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/style.dart';
 import 'sketch_node.dart';
 import 'flow.dart';
@@ -7,7 +7,7 @@ abstract class AbstractGroupLayer extends SketchNode {
   final bool hasClickThrough;
   final dynamic groupLayout;
   @override
-  final List children;
+  final List<SketchNode> children;
 
   AbstractGroupLayer(
       this.hasClickThrough,
@@ -16,7 +16,7 @@ abstract class AbstractGroupLayer extends SketchNode {
       UUID,
       booleanOperation,
       exportOptions,
-      Frame boundaryRectangle,
+      boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,

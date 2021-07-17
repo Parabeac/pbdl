@@ -1,8 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_sketch_node_factory.dart';
-import '../objects/frame.dart';
+import '../objects/sketch_rect.dart';
 import '../style/style.dart';
 import 'abstract_group_layer.dart';
 import 'flow.dart';
@@ -46,7 +47,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
 
   @override
   @JsonKey(name: 'layers')
-  List children;
+  List<SketchNode> children;
 
   Group(
       {bool hasClickThrough,
@@ -55,7 +56,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
       this.UUID,
       booleanOperation,
       exportOptions,
-      Frame this.boundaryRectangle,
+      SketchRect this.boundaryRectangle,
       Flow flow,
       isFixedToViewport,
       isFlippedHorizontal,
@@ -110,8 +111,37 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
   factory Group.fromJson(Map<String, dynamic> json) => _$GroupFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$GroupToJson(this);
+
   @override
-  Future<PBDLNode> interpretNode() {
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(PBDLGroupNode(
+      hasClickThrough: hasClickThrough,
+      groupLayout: groupLayout,
+      UUID: UUID,
+      booleanOperation: booleanOperation,
+      exportOptions: exportOptions,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      isFixedToViewport: isFixedToViewport,
+      isFlippedHorizontal: isFlippedHorizontal,
+      isFlippedVertical: isFlippedVertical,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      layerListExpandedType: layerListExpandedType,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      resizingConstraint: resizingConstraint,
+      rotation: rotation,
+      sharedStyleID: sharedStyleID,
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      hasClippingMask: hasClippingMask,
+      clippingMaskMode: clippingMaskMode,
+      userInfo: userInfo,
+      maintainScrollPosition: maintainScrollPosition,
+      pbdfType: pbdfType,
+      style: style.interpretStyle(),
+      children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList()),
+    ));
     // Future.value(TempGroupLayoutNode(this, currentContext, name,
     //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
     //     bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,

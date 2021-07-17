@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_paragraph_style.dart';
 
 part 'paragraph_style.g.dart';
 
@@ -13,4 +14,8 @@ class ParagraphStyle {
       _$ParagraphStyleFromJson(json);
 
   Map<String, dynamic> toJson() => _$ParagraphStyleToJson(this);
+
+  PBDLParagraphStyle interpretParagraphStyle() {
+    return PBDLParagraphStyle(alignment: alignment);
+  }
 }

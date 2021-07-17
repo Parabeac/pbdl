@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text.dart';
@@ -6,7 +7,7 @@ import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_style.dart';
 import 'figma_node.dart';
-import 'frame.dart';
+import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'text.g.dart';
@@ -24,7 +25,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       FigmaStyle this.style,
       layoutAlign,
       constraints,
-      FigmaFrame boundaryRectangle,
+      boundaryRectangle,
       size,
       fills,
       strokes,
@@ -46,7 +47,9 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle,
+          boundaryRectangle: boundaryRectangle != null
+              ? FigmaRect.fromJson(boundaryRectangle)
+              : null,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -84,21 +87,23 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    return Future.value(PBDLText(
-      UUID: UUID,
-      boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
-      isVisible: isVisible,
-      name: name,
-      attributedString: attributedString,
-      automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
-      dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
-      lineSpacingBehaviour: lineSpacingBehaviour,
-      textBehaviour: textBehaviour,
-      glyphBounds: glyphBounds,
-      type: type,
-      pbdfType: pbdfType,
-      style: style,
-    ));
+    return Future.value(
+      PBDLText(
+        UUID: UUID,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        attributedString: attributedString,
+        automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
+        dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
+        lineSpacingBehaviour: lineSpacingBehaviour,
+        textBehaviour: textBehaviour,
+        glyphBounds: glyphBounds,
+        type: type,
+        pbdfType: pbdfType,
+        style: style.interpretStyle(),
+      ),
+    );
   }
 
   @override

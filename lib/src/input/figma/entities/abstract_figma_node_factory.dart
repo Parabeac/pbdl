@@ -3,7 +3,7 @@ import 'layers/canvas.dart';
 import 'layers/component.dart';
 import 'layers/ellipse.dart';
 import 'layers/figma_node.dart';
-import 'layers/frame.dart';
+import 'layers/figma_frame.dart';
 import 'layers/group.dart';
 import 'layers/instance.dart';
 import 'layers/line.dart';
