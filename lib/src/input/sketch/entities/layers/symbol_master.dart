@@ -186,18 +186,21 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
 
       // Find the child that contains the default value
       var child = children.firstWhere(
-          (element) => (element as SketchNode).UUID == uuidTypeMap['uuid']);
+          (element) => element.UUID == uuidTypeMap['uuid'],
+          orElse: () => null);
 
-      return PBDLOverrideProperty(
-        uuidTypeMap['uuid'],
-        (child as SketchNode).name,
-        null,
-        null,
-        ovrType.getPBDLType(), // Map SketchOverrideType to PBDLOverrideType
-        null,
-        prototypeNodeUUID,
-        await ovrType.getValue(child), // Get default value from child
-      );
+      if (ovrType != null && child != null) {
+        return PBDLOverrideProperty(
+          uuidTypeMap['uuid'],
+          child.name,
+          null,
+          null,
+          ovrType.getPBDLType(), // Map SketchOverrideType to PBDLOverrideType
+          null,
+          prototypeNodeUUID,
+          await ovrType.getValue(child), // Get default value from child
+        );
+      }
     }));
 
     return Future.value(PBDLSharedMasterNode(

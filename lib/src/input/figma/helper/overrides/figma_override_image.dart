@@ -7,7 +7,15 @@ import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 class FigmaOverrideImage extends FigmaOverrideType {
   @override
   Future<PBDLOverrideProperty> getValue(FigmaNode node) {
-    throw UnimplementedError(); // TODO: implement this once we know what images will look like in PBDL
+    return Future.value(PBDLOverrideProperty(
+        node.UUID,
+        node.name,
+        node.isVisible,
+        node?.boundaryRectangle?.interpretFrame(),
+        getPBDLType(),
+        null,
+        node.prototypeNodeUUID,
+        'imgval')); // TODO: implement this once we know what images will look like in PBDL
   }
 
   @override

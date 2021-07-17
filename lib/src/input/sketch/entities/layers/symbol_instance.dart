@@ -148,7 +148,7 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
         uuidTypeMap['uuid'],
         name, //TODO: Get friendly name
         isVisible,
-        boundaryRectangle,
+        boundaryRectangle.interpretFrame(),
         uuidTypeMap['type'],
         null,
         prototypeNodeUUID,
