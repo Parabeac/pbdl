@@ -58,7 +58,7 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
     // TODO: Open figma project and interpret into PBDLProject
 
     var figmaProject = await FigmaController().convertFile(projectID, key);
-    return figmaProject.interpretNode();
+    return await figmaProject.interpretNode();
   }
 
   @override

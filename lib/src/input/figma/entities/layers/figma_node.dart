@@ -43,8 +43,8 @@ class FigmaNode {
     this.transitionEasing,
   });
 
-  PBDLNode interpretNode() {
-    return PBDLNode(
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(PBDLNode(
       UUID,
       name,
       isVisible,
@@ -52,9 +52,8 @@ class FigmaNode {
       type,
       null,
       prototypeNodeUUID,
-      child: child.interpretNode(),
-    );
-    // TODO: double check null properties are boundaryRectangle and style
+      child: await child.interpretNode(),
+    ));
   }
 
   factory FigmaNode.fromJson(Map<String, dynamic> json) =>

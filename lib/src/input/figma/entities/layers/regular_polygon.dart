@@ -64,8 +64,8 @@ class FigmaRegularPolygon extends FigmaVector
   Map<String, dynamic> toJson() => _$FigmaRegularPolygonToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLImage(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
@@ -73,7 +73,7 @@ class FigmaRegularPolygon extends FigmaVector
       name: name,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
+    ));
   }
 
   @override

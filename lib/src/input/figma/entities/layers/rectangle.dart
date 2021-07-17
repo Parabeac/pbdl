@@ -92,13 +92,13 @@ class FigmaRectangle extends FigmaVector
   Map<String, dynamic> toJson() => _$FigmaRectangleToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() async {
     var fillsMap =
         (fillsList == null || fillsList.isEmpty) ? {} : fillsList.first;
     if (fillsMap != null && fillsMap['type'] == 'IMAGE') {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
-      return PBDLImage(
+      return Future.value(PBDLImage(
         imageReference: imageReference,
         UUID: UUID,
         boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
@@ -106,7 +106,7 @@ class FigmaRectangle extends FigmaVector
         name: name,
         pbdfType: pbdfType,
         style: style.interpretStyle(),
-      );
+      ));
     }
     // FigmaBorder border;
     // for (var b in style?.borders?.reversed ?? []) {
@@ -114,7 +114,7 @@ class FigmaRectangle extends FigmaVector
     //     border = b;
     //   }
     // }
-    return PBDLRectangle(
+    return Future.value(PBDLRectangle(
       UUID: UUID,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
       isVisible: isVisible,
@@ -122,8 +122,8 @@ class FigmaRectangle extends FigmaVector
       type: type,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
-      child: child.interpretNode(),
-    );
+      child: await child.interpretNode(),
+    ));
   }
 
   @override

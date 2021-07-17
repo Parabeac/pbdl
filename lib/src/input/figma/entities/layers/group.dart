@@ -95,7 +95,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() {
     if (areAllVectors()) {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
@@ -110,7 +110,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
 
       children.clear();
 
-      return PBDLImage(
+      return Future.value(PBDLImage(
         imageReference: imageReference,
         UUID: UUID,
         boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
@@ -118,10 +118,10 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         name: name,
         pbdfType: pbdfType,
         style: style,
-      );
+      ));
     }
     // TODO: what is the equivalent of TempGroupLayoutNode for PBDL
-    return PBDLGroupNode(
+    return Future.value(PBDLGroupNode(
       UUID: UUID,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
       isVisible: isVisible,
@@ -129,7 +129,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       pbdfType: pbdfType,
       style: style,
       children: children,
-    );
+    ));
 
     // return Future.value(TempGroupLayoutNode(this, currentContext, name,
     //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),

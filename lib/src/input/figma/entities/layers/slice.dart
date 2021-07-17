@@ -63,8 +63,8 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaSliceToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLRectangle(
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(PBDLRectangle(
       UUID: UUID,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
       isVisible: isVisible,
@@ -72,8 +72,8 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
       type: type,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
-      child: child.interpretNode(),
-    );
+      child: await child.interpretNode(),
+    ));
   }
 
   @override

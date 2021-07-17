@@ -63,8 +63,8 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaLineToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLRectangle(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLRectangle(
       UUID: UUID,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
       isVisible: isVisible,
@@ -72,7 +72,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       type: type,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
+    ));
   }
 
   @override

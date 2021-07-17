@@ -83,8 +83,8 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaTextToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLText(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLText(
       UUID: UUID,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
       isVisible: isVisible,
@@ -98,7 +98,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       type: type,
       pbdfType: pbdfType,
       style: style,
-    );
+    ));
   }
 
   @override

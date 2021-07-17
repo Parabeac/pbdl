@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
@@ -89,25 +90,13 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$InstanceToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() async {
     var overrideValues = <PBDLOverrideValue>[];
-    children.asMap().forEach((key, value) {
-      if (value is FigmaNode) {
-        overrideValues.add(PBDLOverrideValue(
-            value.UUID,
-            value.name,
-            value.isVisible,
-            value is FigmaFrame ? value.boundaryRectangle : null,
-            value.type,
-
-            /// Style
-            null,
-            value.prototypeNodeUUID,
-            [value.interpretNode()]));
-      }
+    children.forEach((child) async {
+      overrideValues.addAll(await _traverseChildrenForOverrides(child));
     });
 
-    return PBDLSharedInstanceNode(
+    return Future.value(PBDLSharedInstanceNode(
       UUID: UUID,
       overrideValues: overrideValues,
       name: name,
@@ -118,7 +107,38 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       prototypeNode: prototypeNodeUUID,
       symbolID: symbolID,
       pbdfType: pbdfType,
-    );
+    ));
+  }
+
+  Future<List<PBDLOverrideValue>> _traverseChildrenForOverrides(
+      FigmaNode root) async {
+    var stack = [root];
+    var values = <PBDLOverrideValue>[];
+    while (stack.isNotEmpty) {
+      var current = stack.removeLast();
+
+      // Checks if `current` node should be an override property
+      var override = FigmaOverrideTypeFactory.getType(current);
+
+      if (override != null) {
+        // Create override value and add it to list
+        values.add(PBDLOverrideValue(
+            current.UUID.split(';').last, // Get UUID of node to replace
+            current.name,
+            current.isVisible,
+            null,
+            override.getPBDLType(),
+            null,
+            current.prototypeNodeUUID,
+            await current.interpretNode()));
+      }
+
+      // TODO: We need to check attributes that may have `children` or other properties
+      if (current.child != null) {
+        stack.add(current.child);
+      }
+    }
+    return Future.value(values);
   }
 
   @override

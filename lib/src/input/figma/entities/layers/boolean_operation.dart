@@ -62,9 +62,9 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
-    return PBDLBooleanOperation(
+    return Future.value(PBDLBooleanOperation(
       children: children,
       booleanOperation: booleanOperation,
       type: type,
@@ -75,6 +75,6 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
       transitionDuration: transitionDuration,
       transitionEasing: transitionEasing,
       imageReference: imageReference,
-    );
+    ));
   }
 }

@@ -12,7 +12,7 @@ class SketchOverrideTextStyle extends SketchOverrideType {
     if (node is! TextStyle) {
       return null;
     }
-    return Future.value((node as TextStyle).toJson());
+    return Future.value((node as TextStyle).toJson()); //TODO: TextStyle should have interpretNode function
   }
 
   @override

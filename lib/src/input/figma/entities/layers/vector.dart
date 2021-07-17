@@ -86,9 +86,9 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaVectorToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
-    return PBDLVector(
+    return Future.value(PBDLVector(
       name: name,
       visible: isVisible,
       type: type,
@@ -109,7 +109,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       prototypeNodeUUID: prototypeNodeUUID,
       transitionDuration: transitionDuration,
       transitionEasing: transitionEasing,
-    );
+    ));
   }
 
   String imageReference;

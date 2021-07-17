@@ -76,9 +76,9 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaEllipseToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
-    return PBDLOval(
+    return Future.value(PBDLOval(
       UUID: UUID,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
       isVisible: isVisible,
@@ -86,7 +86,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       pbdfType: pbdfType,
       style: style.interpretStyle(),
       type: type,
-    );
+    ));
   }
 
   @override

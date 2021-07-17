@@ -146,7 +146,7 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
 
       return PBDLOverrideValue(
         uuidTypeMap['uuid'],
-        name,
+        name, //TODO: Get friendly name
         isVisible,
         boundaryRectangle,
         uuidTypeMap['type'],

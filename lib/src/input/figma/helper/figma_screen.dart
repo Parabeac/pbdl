@@ -46,9 +46,9 @@ class FigmaScreen {
     return result;
   }
 
-  PBDLScreen interpretNode() {
+  Future<PBDLScreen> interpretNode() async {
     return PBDLScreen(
-      designNode: figmaNode.interpretNode(),
+      designNode: await figmaNode.interpretNode(),
       id: id,
       name: name,
       type: type,

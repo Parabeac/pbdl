@@ -1,11 +1,12 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
-class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
-  /// List of [PBDLNode] that indicates what properties of this [PBDLOverrideProperty] are overridable
-  List<PBDLNode> properties;
+part 'pbdl_override_value.g.dart';
 
+@JsonSerializable(explicitToJson: true)
+class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
   /// Value of the override property
   var value;
 
@@ -26,7 +27,11 @@ class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
           type,
           style,
           prototypeNodeUUID,
-        ) {
-    properties ??= [];
-  }
+        );
+
+  factory PBDLOverrideProperty.fromJSON(Map<String, dynamic> json) =>
+      _$PBDLOverridePropertyFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$PBDLOverridePropertyToJSON(this);
 }

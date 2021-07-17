@@ -54,11 +54,13 @@ class FigmaProject {
     return figmaPages;
   }
 
-  PBDLProject interpretNode() {
+  Future<PBDLProject> interpretNode() async {
+    var processedPages =
+        await Future.wait(pages.map((e) => e.interpretNode()).toList());
     return PBDLProject(
       projectName: projectName,
       id: id,
-      pages: pages.map((e) => e.interpretNode()).toList(),
+      pages: processedPages,
     );
   }
 }

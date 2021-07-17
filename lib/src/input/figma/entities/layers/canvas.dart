@@ -70,8 +70,8 @@ class Canvas extends FigmaNode implements FigmaNodeFactory {
   var style;
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLArtboard(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLArtboard(
       backgroundColor: backgroundColor,
       isFlowHome: false, // TODO: get it dynamically
       UUID: UUID,
@@ -83,7 +83,7 @@ class Canvas extends FigmaNode implements FigmaNodeFactory {
       style: style,
       prototypeNodeUUID: prototypeNodeUUID,
       children: children,
-    );
+    ));
     /*
     assert(false, 'We don\'t product pages as Intermediate Nodes.');
     return null; */

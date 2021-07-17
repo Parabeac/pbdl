@@ -64,8 +64,8 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaStarToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLImage(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
@@ -73,7 +73,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
       name: name,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
+    ));
   }
 
   @override

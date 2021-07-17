@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
@@ -98,28 +99,18 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   // }
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() async {
     /// Create Overidable Properties.
-    var overrideProperties = <PBDLOverrideProperty>[];
-    children.asMap().forEach((key, value) {
-      if (value is FigmaNode) {
-        overrideProperties.add(PBDLOverrideProperty(
-            value.UUID,
-            value.name,
-            value.isVisible,
-            value is FigmaFrame ? value.boundaryRectangle : null,
-            value.type,
+    var props = <PBDLOverrideProperty>[];
 
-            /// Style
-            null,
-            value.prototypeNodeUUID,
-            [value.interpretNode()]));
-      }
+    children.forEach((element) async {
+      var currProps = await _traverseChildrenForOverrides(element);
+      props.addAll(currProps);
     });
 
     return PBDLSharedMasterNode(
       UUID: UUID,
-      overrideProperties: overrideProperties, // TODO: extract them
+      overrideProperties: props,
       name: name,
       isVisible: isVisible,
       boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
@@ -144,7 +135,28 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     return Future.value(sym_master); */
   }
 
-  @override
+  Future<List<PBDLOverrideProperty>> _traverseChildrenForOverrides(
+      FigmaNode root) async {
+    var stack = [root];
+    var values = <PBDLOverrideProperty>[];
+    while (stack.isNotEmpty) {
+      var current = stack.removeLast();
+
+      // Checks if `current` node should be an override property
+      var override = FigmaOverrideTypeFactory.getType(current);
+
+      if (override != null) {
+        values.add(await override.getValue(current));
+      }
+
+      //TODO: Check for nodes that may have `children`
+      if (current.child != null) {
+        stack.add(current.child);
+      }
+    }
+    return Future.value(values);
+  }
+
   String symbolID;
 
   @override

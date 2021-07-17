@@ -114,10 +114,10 @@ class FigmaFrame extends FigmaNode
   Map<String, dynamic> toJson() => _$FigmaFrameToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() {
     /// TODO: change `isHomeScreen` to its actual value
     if (isScaffold) {
-      return PBDLArtboard(
+      return Future.value(PBDLArtboard(
         backgroundColor: backgroundColor.interpretColor(),
         isFlowHome: false,
         UUID: UUID,
@@ -128,9 +128,9 @@ class FigmaFrame extends FigmaNode
         style: style.interpretStyle(),
         prototypeNodeUUID: prototypeNodeUUID,
         children: children,
-      );
+      ));
     } else {
-      return PBDLGroupNode(
+      return Future.value(PBDLGroupNode(
         UUID: UUID,
         boundaryRectangle: PBDLFrame.fromJson(boundaryRectangle),
         isVisible: isVisible,
@@ -138,7 +138,7 @@ class FigmaFrame extends FigmaNode
         pbdfType: pbdfType,
         style: style,
         children: children,
-      );
+      ));
     }
   }
 
