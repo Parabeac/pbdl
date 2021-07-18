@@ -122,7 +122,6 @@ class FigmaRectangle extends FigmaVector
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      type: type,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
       child: await child?.interpretNode(),

@@ -8,11 +8,11 @@ import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type.dart';
 
 class FigmaOverrideTypeFactory {
   static final _overrideTypes = <FigmaOverrideType>[
+    FigmaOverrideTextValue(),
     FigmaOverrideImage(),
     FigmaOverrideStyle(),
     FigmaOverrideSymbolID(),
     FigmaOverrideTextStyle(),
-    FigmaOverrideTextValue(),
   ];
 
   /// Returns an [OverrideType] from a [FigmaNode] or `null` if node is not overridable.

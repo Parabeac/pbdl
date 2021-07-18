@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -100,7 +101,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       name: name,
       isVisible: isVisible,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
-      type: type,
       style: style,
       prototypeNode: prototypeNodeUUID,
       symbolID: symbolID,
@@ -131,9 +131,10 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             await current.interpretNode()));
       }
 
-      // TODO: We need to check attributes that may have `children` or other properties
       if (current.child != null) {
         stack.add(current.child);
+      } else if (current is FigmaChildrenNode && current.children != null) {
+        current.children.forEach(stack.add);
       }
     }
     return Future.value(values);

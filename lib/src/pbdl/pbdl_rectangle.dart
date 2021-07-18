@@ -49,7 +49,6 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.type,
     this.pbdfType = 'rectangle',
     this.style,
     this.child,
@@ -82,7 +81,7 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'rectangle';
 
   @override
   PBDLNode child;

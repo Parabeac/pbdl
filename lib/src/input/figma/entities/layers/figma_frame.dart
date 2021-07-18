@@ -127,7 +127,6 @@ class FigmaFrame extends FigmaChildrenNode
             boundaryRectangle: boundaryRectangle.interpretFrame(),
             isVisible: isVisible,
             name: name,
-            type: type,
             style: style.interpretStyle(),
             prototypeNodeUUID: prototypeNodeUUID,
             children: await Future.wait(

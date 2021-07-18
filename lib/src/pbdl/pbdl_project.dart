@@ -51,14 +51,11 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
 
     var sketchProject = await SketchController().convertFile(path);
 
-    // TODO: Open sketch file and interpret into PBDLProject
     return sketchProject.interpretNode();
   }
 
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
   static Future<PBDLProject> fromFigma(String projectID, String key) async {
-    // TODO: Open figma project and interpret into PBDLProject
-
     var figmaProject = await FigmaController().convertFile(projectID, key);
     return await figmaProject.interpretNode();
   }
@@ -85,5 +82,5 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'project';
 }

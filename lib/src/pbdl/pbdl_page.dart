@@ -66,5 +66,5 @@ class PBDLPage implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'page';
 }

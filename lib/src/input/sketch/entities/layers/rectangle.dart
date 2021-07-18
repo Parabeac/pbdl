@@ -151,7 +151,6 @@ class Rectangle extends AbstractShapeLayer
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      type: type,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));

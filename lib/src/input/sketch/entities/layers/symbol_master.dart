@@ -204,10 +204,6 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
     }));
     overrideProps.removeWhere((element) => element == null);
 
-    if (overrideProps.any((element) => element == null)) {
-      print('buffer');
-    }
-
     return Future.value(PBDLSharedMasterNode(
       UUID: UUID,
       allowsOverrides: allowsOverrides,
@@ -233,7 +229,6 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       sharedStyleID: sharedStyleID,
       symbolID: symbolID,
       userInfo: userInfo,
-      type: type,
       style: style.interpretStyle(),
       shouldBreakMaskChain: shouldBreakMaskChain,
       rotation: rotation,

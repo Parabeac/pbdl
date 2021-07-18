@@ -16,6 +16,9 @@ class PBDLTextStyle extends PBDLNode {
   PBDLFontDescriptor fontDescriptor;
   PBDLParagraphStyle paragraphStyle;
 
+  @override
+  final type = 'text_style';
+
   PBDLTextStyle({
     this.fontColor,
     this.weight,
@@ -26,7 +29,6 @@ class PBDLTextStyle extends PBDLNode {
           '',
           false,
           null,
-          '',
           null,
           '',
         );

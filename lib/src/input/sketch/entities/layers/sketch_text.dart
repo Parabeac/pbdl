@@ -151,7 +151,6 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       lineSpacingBehaviour: lineSpacingBehaviour,
       textBehaviour: textBehaviour,
       glyphBounds: glyphBounds,
-      type: type,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));

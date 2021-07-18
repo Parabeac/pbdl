@@ -41,7 +41,6 @@ class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    type,
     pbdfType,
     this.style,
     this.child,
@@ -68,7 +67,7 @@ class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'polygon';
 
   @override
   PBDLNode child;

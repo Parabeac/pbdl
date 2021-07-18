@@ -141,7 +141,6 @@ class Star extends AbstractShapeLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      type: type,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));

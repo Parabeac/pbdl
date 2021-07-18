@@ -19,4 +19,6 @@ class PBDLFrame {
   factory PBDLFrame.fromJson(Map<String, dynamic> json) =>
       _$PBDLFrameFromJson(json);
   Map<String, dynamic> toJson() => _$PBDLFrameToJson(this);
+
+  final type = 'frame';
 }

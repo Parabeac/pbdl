@@ -33,9 +33,9 @@ Map<String, dynamic> _$PBDLOverridePropertyToJson(
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'type': instance.type,
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
       'value': instance.value,
+      'type': instance.type,
     };

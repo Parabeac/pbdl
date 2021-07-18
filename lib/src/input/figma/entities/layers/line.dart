@@ -69,7 +69,6 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      type: type,
       pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));

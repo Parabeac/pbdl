@@ -55,8 +55,8 @@ class FigmaProject {
   }
 
   Future<PBDLProject> interpretNode() async {
-    var processedPages =
-        await Future.wait(pages.map((e) => e.interpretNode()).toList());
+    var processedPages = await Future.wait(
+        pages.map((e) async => await e.interpretNode()).toList());
     return PBDLProject(
       projectName: projectName,
       id: id,

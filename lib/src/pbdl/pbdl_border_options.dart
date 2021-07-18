@@ -8,6 +8,8 @@ class PBDLBorderOptions {
   List dashPattern;
   int lineCapStyle, lineJoinStyle;
 
+  final type = 'border_options';
+
   PBDLBorderOptions({
     this.isEnabled,
     this.dashPattern,

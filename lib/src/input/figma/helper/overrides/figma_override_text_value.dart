@@ -1,4 +1,3 @@
-import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type.dart';
@@ -7,7 +6,7 @@ import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 
 class FigmaOverrideTextValue extends FigmaOverrideType {
   @override
-  Future<PBDLOverrideProperty> getValue(FigmaNode node) {
+  Future<PBDLOverrideProperty> getValue(FigmaNode node) async {
     if (node is! FigmaText) {
       return null;
     }
@@ -15,9 +14,9 @@ class FigmaOverrideTextValue extends FigmaOverrideType {
         node.UUID,
         node.name,
         node.isVisible,
-        ((node as FigmaText).boundaryRectangle as FigmaFrame).interpretNode(),
+        (node as FigmaText).boundaryRectangle?.interpretFrame(),
         getPBDLType(),
-        (node as FigmaText).style.interpretStyle(),
+        (node as FigmaText).style?.interpretStyle(),
         null,
         (node as FigmaText).content));
   }

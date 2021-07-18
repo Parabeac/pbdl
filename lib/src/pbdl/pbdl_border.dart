@@ -9,6 +9,7 @@ class PBDLBorder {
   final double fillType;
   final PBDLColor color;
   final double thickness;
+  final type = 'border';
 
   PBDLBorder({
     this.isEnabled = true,

@@ -1,13 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text.dart';
 import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_style.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'text.g.dart';
@@ -99,7 +97,6 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         lineSpacingBehaviour: lineSpacingBehaviour,
         textBehaviour: textBehaviour,
         glyphBounds: glyphBounds,
-        type: type,
         pbdfType: pbdfType,
         style: style.interpretStyle(),
       ),

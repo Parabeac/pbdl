@@ -28,14 +28,14 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
-    ..type = json['type'] as String
     ..style = json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..child = json['child'] == null
         ? null
-        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
@@ -45,7 +45,6 @@ Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'type': instance.type,
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
@@ -53,4 +52,5 @@ Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
       'weight': instance.weight,
       'fontDescriptor': instance.fontDescriptor?.toJson(),
       'paragraphStyle': instance.paragraphStyle?.toJson(),
+      'type': instance.type,
     };

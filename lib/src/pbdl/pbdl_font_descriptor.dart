@@ -21,6 +21,8 @@ class PBDLFontDescriptor {
 
   num letterSpacing;
 
+  final type = 'font_descriptor';
+
   @override
   factory PBDLFontDescriptor.fromJson(Map<String, dynamic> json) =>
       _$PBDLFontDescriptorFromJson(json);

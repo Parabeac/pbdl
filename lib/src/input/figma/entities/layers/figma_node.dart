@@ -52,7 +52,6 @@ class FigmaNode {
       name,
       isVisible,
       null,
-      type,
       null,
       prototypeNodeUUID,
       child: await child.interpretNode(),

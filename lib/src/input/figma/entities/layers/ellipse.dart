@@ -88,7 +88,6 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       name: name,
       pbdfType: pbdfType,
       style: style?.interpretStyle(),
-      type: type,
     ));
   }
 

@@ -8,6 +8,7 @@ class PBDLFill {
   PBDLColor color;
   bool isEnabled;
   PBDLFill(this.color, [this.isEnabled = true]);
+  final type = 'fill';
 
   @override
   factory PBDLFill.fromJson(Map<String, dynamic> json) =>

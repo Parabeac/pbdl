@@ -18,7 +18,6 @@ PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'] as bool,
     name: json['name'] as String,
-    type: json['type'] as String,
     pbdfType: json['pbdfType'] as String,
     style: json['style'] == null
         ? null
@@ -26,7 +25,9 @@ PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
     child: json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>),
-  )..prototypeNodeUUID = json['prototypeNodeUUID'] as String;
+  )
+    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLRectangleToJson(PBDLRectangle instance) =>

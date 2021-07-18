@@ -58,12 +58,11 @@ class FigmaPage {
     return page;
   }
 
-  @override
   String type;
 
   Future<PBDLPage> interpretNode() async {
-    var resultScreens =
-        await Future.wait(screens.map((e) => e.interpretNode()).toList());
+    var resultScreens = await Future.wait(
+        screens.map((e) async => await e.interpretNode()).toList());
     return PBDLPage(
       name: name,
       id: id,

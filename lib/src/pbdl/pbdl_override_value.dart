@@ -10,12 +10,15 @@ class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
   /// value of the override
   var value;
 
+  @override
+  final type;
+
   PBDLOverrideValue(
     String UUID,
     String name,
     bool isVisible,
     boundaryRectangle,
-    String type,
+    this.type,
     PBDLStyle style,
     String prototypeNodeUUID,
     this.value,
@@ -24,7 +27,6 @@ class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
           name,
           isVisible,
           boundaryRectangle,
-          type,
           style,
           prototypeNodeUUID,
         );

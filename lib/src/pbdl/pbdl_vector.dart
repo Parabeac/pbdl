@@ -28,10 +28,12 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
 
   var fillsList;
 
+  @override
+  final type = 'vector';
+
   PBDLVector({
     this.name,
     visible,
-    this.type,
     pluginData,
     sharedPluginData,
     this.layoutAlign,
@@ -54,7 +56,6 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
           name,
           visible,
           boundaryRectangle,
-          type,
           style,
           prototypeNodeUUID,
           transitionDuration: transitionDuration,
@@ -83,9 +84,6 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
 
   @override
   PBDLStyle style;
-
-  @override
-  String type;
 
   @override
   var boundaryRectangle;

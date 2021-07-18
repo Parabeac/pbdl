@@ -79,5 +79,5 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   String prototypeNodeUUID;
 
   @override
-  String type;
+  String type = 'image';
 }

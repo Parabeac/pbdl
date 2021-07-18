@@ -12,7 +12,6 @@ class PBDLNode {
     this.name,
     this.isVisible,
     this.boundaryRectangle,
-    this.type,
     this.style,
     this.prototypeNodeUUID, {
     transitionDuration,

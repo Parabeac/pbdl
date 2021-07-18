@@ -32,6 +32,7 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
   @JsonKey(name: 'do_objectID')
   String UUID;
 
+  @override
   @JsonKey(name: '_class')
   String type;
 
@@ -184,7 +185,6 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       shouldBreakMaskChain: shouldBreakMaskChain,
       style: style.interpretStyle(),
       symbolID: symbolID,
-      type: type,
       userInfo: userInfo,
       verticalSpacing: verticalSpacing,
     ));

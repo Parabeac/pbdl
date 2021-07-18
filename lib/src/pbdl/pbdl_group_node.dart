@@ -69,7 +69,7 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'group_node';
 
   @override
   PBDLNode child;

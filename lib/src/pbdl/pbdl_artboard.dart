@@ -16,6 +16,9 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
   PBDLFrame boundaryRectangle;
   var isFlowHome;
 
+  @override
+  final type = 'artboard';
+
   PBDLArtboard({
     this.backgroundColor,
     this.isFlowHome,
@@ -44,7 +47,6 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
     userInfo,
     maintainScrollPosition,
     prototypeNodeUUID,
-    type,
     PBDLStyle style,
     this.children,
   }) : super(
@@ -52,7 +54,6 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
           name,
           isVisible,
           boundaryRectangle,
-          type,
           style,
           prototypeNodeUUID,
         );

@@ -47,7 +47,6 @@ class SketchScreen {
       designNode: await designNode.interpretNode(),
       id: id,
       name: name,
-      type: type,
     ));
   }
 }

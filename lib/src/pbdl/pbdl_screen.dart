@@ -13,7 +13,10 @@ class PBDLScreen implements PBDLNodeFactory, PBDLNode {
   String name;
   bool convert = true;
   String imageURI;
-  String type;
+
+  @override
+  String type = 'screen';
+  
   PBDLNode designNode;
 
   // Do we still need this?
@@ -23,7 +26,6 @@ class PBDLScreen implements PBDLNodeFactory, PBDLNode {
     PBDLNode designNode,
     this.id,
     this.name,
-    this.type,
   }) {
     this.designNode = designNode;
   }

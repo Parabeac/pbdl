@@ -42,7 +42,6 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    type,
     this.pbdfType = 'oval',
     this.style,
     this.child,
@@ -68,7 +67,7 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'oval';
 
   @override
   PBDLNode child;

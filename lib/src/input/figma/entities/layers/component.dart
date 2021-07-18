@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -105,10 +106,10 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     /// Create Overidable Properties.
     var props = <PBDLOverrideProperty>[];
 
-    children.forEach((element) async {
-      var currProps = await _traverseChildrenForOverrides(element);
+    for (var child in children) {
+      var currProps = await _traverseChildrenForOverrides(child);
       props.addAll(currProps);
-    });
+    }
 
     return PBDLSharedMasterNode(
       UUID: UUID,
@@ -116,7 +117,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       name: name,
       isVisible: isVisible,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
-      type: type,
       style: style,
       prototypeNode: prototypeNodeUUID,
       pbdfType: pbdfType,
@@ -151,9 +151,10 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         values.add(await override.getValue(current));
       }
 
-      //TODO: Check for nodes that may have `children`
       if (current.child != null) {
         stack.add(current.child);
+      } else if (current is FigmaChildrenNode && current.children != null) {
+        current.children.forEach(stack.add);
       }
     }
     return Future.value(values);

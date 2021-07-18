@@ -80,7 +80,6 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         boundaryRectangle: boundaryRectangle.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        type: type,
         style: style,
         prototypeNodeUUID: prototypeNodeUUID,
         children: await Future.wait(

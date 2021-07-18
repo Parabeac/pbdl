@@ -9,7 +9,6 @@ part of 'pbdl_vector.dart';
 PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
   return PBDLVector(
     name: json['name'] as String,
-    type: json['type'] as String,
     layoutAlign: json['layoutAlign'],
     constraints: json['constraints'],
     boundaryRectangle: json['boundaryRectangle'] == null
@@ -31,6 +30,7 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..type = json['type'] as String
     ..isVisible = json['isVisible'] as bool
     ..imageReference = json['imageReference'] as String
     ..image = json['image'];
@@ -48,12 +48,12 @@ Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
       'fillsList': instance.fillsList,
+      'type': instance.type,
       'UUID': instance.UUID,
       'isVisible': instance.isVisible,
       'name': instance.name,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'style': instance.style?.toJson(),
-      'type': instance.type,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'imageReference': instance.imageReference,
       'image': instance.image,

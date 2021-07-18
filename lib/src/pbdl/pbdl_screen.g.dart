@@ -13,10 +13,10 @@ PBDLScreen _$PBDLScreenFromJson(Map<String, dynamic> json) {
         : PBDLNode.fromJson(json['designNode'] as Map<String, dynamic>),
     id: json['id'] as String,
     name: json['name'] as String,
-    type: json['type'] as String,
   )
     ..convert = json['convert'] as bool
     ..imageURI = json['imageURI'] as String
+    ..type = json['type'] as String
     ..pbdfType = json['pbdfType'] as String
     ..UUID = json['UUID'] as String
     ..boundaryRectangle = json['boundaryRectangle'] == null

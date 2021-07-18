@@ -16,13 +16,15 @@ class PBDLSharedMasterNode extends PBDLNode
   @override
   List<PBDLNode> children = [];
 
+  @override
+  final type = 'shared_master';
+
   PBDLSharedMasterNode({
     String UUID,
     this.overrideProperties,
     String name,
     bool isVisible,
     boundaryRectangle,
-    String type,
     style,
     prototypeNode,
     bool hasClickThrough,
@@ -59,8 +61,7 @@ class PBDLSharedMasterNode extends PBDLNode
     bool isFlowHome,
     List parameters,
     this.children,
-  }) : super(UUID, name, isVisible, boundaryRectangle, type, style,
-            prototypeNode) {
+  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNode) {
     pbdfType = 'symbol_master';
   }
 

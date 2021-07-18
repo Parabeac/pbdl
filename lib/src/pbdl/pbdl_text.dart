@@ -21,6 +21,9 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
 
   var glyphBounds;
 
+  @override
+  final type = 'text';
+
   PBDLText({
     UUID,
     booleanOperation,
@@ -48,7 +51,6 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     this.lineSpacingBehaviour,
     this.textBehaviour,
     this.glyphBounds,
-    type,
     pbdfType = 'text',
     style,
   }) : super(
@@ -56,7 +58,6 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           name: name,
           isVisible: isVisible,
           boundaryRectangle: boundaryRectangle,
-          type: type,
           style: style,
         );
 

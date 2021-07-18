@@ -92,7 +92,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     return Future.value(PBDLVector(
       name: name,
       visible: isVisible,
-      type: type,
       pluginData: pluginData,
       sharedPluginData: sharedPluginData,
       layoutAlign: layoutAlign,

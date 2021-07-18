@@ -29,8 +29,8 @@ Map<String, dynamic> _$PBDLElementToJson(PBDLElement instance) =>
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'type': instance.type,
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
+      'type': instance.type,
     };

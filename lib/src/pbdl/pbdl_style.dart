@@ -18,6 +18,9 @@ class PBDLStyle extends PBDLNode {
   PBDLTextStyle textStyle;
   bool hasShadow = false;
 
+  @override
+  final type = 'style';
+
   PBDLStyle({
     this.fills,
     this.backgroundColor,
@@ -25,7 +28,7 @@ class PBDLStyle extends PBDLNode {
     this.borderOptions,
     this.textStyle,
     this.hasShadow,
-  }) : super('', '', false, null, '', null, '');
+  }) : super('', '', false, null, null, '');
 
   @override
   factory PBDLStyle.fromJson(Map<String, dynamic> json) =>
