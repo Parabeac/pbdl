@@ -1,8 +1,6 @@
-/// Support for doing something awesome.
+/// PBDL Package
 ///
-/// More dartdocs go here.
+/// Converts a design files to a PBDL project
 library pbdl;
 
-export 'src/pbdl/pbdl_project.dart';
-
-// TODO: Export any libraries intended for clients of this package.
+export 'src/pbdl.dart';

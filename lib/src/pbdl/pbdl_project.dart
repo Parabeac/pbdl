@@ -43,21 +43,6 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
   @override
   Map<String, dynamic> toJson() => _$PBDLProjectToJson(this);
 
-  /// Method that creates and returns a [PBDLProject] from a Sketch file `path`
-  static Future<PBDLProject> fromSketch(String path) async {
-    await SACInstaller.installAndRun();
-
-    var sketchProject = await SketchController().convertFile(path);
-
-    return sketchProject.interpretNode();
-  }
-
-  /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
-  static Future<PBDLProject> fromFigma(String projectID, String key) async {
-    var figmaProject = await FigmaController().convertFile(projectID, key);
-    return await figmaProject.interpretNode();
-  }
-
   @override
   String UUID;
 
