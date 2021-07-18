@@ -10,6 +10,7 @@ part 'pbdl_screen.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLScreen implements PBDLNodeFactory, PBDLNode {
   String id;
+  @override
   String name;
   bool convert = true;
   String imageURI;
@@ -29,9 +30,6 @@ class PBDLScreen implements PBDLNodeFactory, PBDLNode {
   }) {
     this.designNode = designNode;
   }
-
-  @override
-  String pbdfType = 'screen';
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

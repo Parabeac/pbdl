@@ -31,8 +31,7 @@ Canvas _$CanvasFromJson(Map<String, dynamic> json) {
     ..isVisible = json['visible'] as bool ?? true
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
-        : FigmaRect.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
-    ..pbdfType = json['pbdfType'] as String;
+        : FigmaRect.fromJson(json['boundaryRectangle'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$CanvasToJson(Canvas instance) => <String, dynamic>{
@@ -52,5 +51,4 @@ Map<String, dynamic> _$CanvasToJson(Canvas instance) => <String, dynamic>{
       'exportSettings': instance.exportSettings,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'transitionNodeID': instance.prototypeNodeUUID,
-      'pbdfType': instance.pbdfType,
     };

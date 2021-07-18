@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_vector.dart';
 import 'package:quick_log/quick_log.dart';
@@ -9,7 +8,6 @@ import 'package:quick_log/quick_log.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_style.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 
 part 'vector.g.dart';
 
@@ -74,7 +72,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
           transitionEasing: transitionEasing,
           prototypeNodeUUID: prototypeNodeUUID,
         ) {
-    pbdfType = 'vector';
     log = Logger(runtimeType.toString());
   }
 
@@ -104,7 +101,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       styles: styles,
       fillsList: fillsList,
       UUID: UUID,
-      pbdfType: pbdfType,
       style: style?.interpretStyle(),
       prototypeNodeUUID: prototypeNodeUUID,
       transitionDuration: transitionDuration,
@@ -114,9 +110,5 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
 
   String imageReference;
 
-  @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'vector';
 }

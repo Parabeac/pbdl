@@ -144,7 +144,6 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));
     /*
@@ -153,8 +152,4 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
     return InheritedShapeGroup(this, name,
         currentContext: currentContext, image: image); */
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'image';
 }

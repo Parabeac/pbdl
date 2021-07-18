@@ -141,7 +141,6 @@ class Star extends AbstractShapeLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));
     /*
@@ -151,8 +150,4 @@ class Star extends AbstractShapeLayer implements SketchNodeFactory {
     return Future.value(InheritedStar(this, name,
         currentContext: currentContext, image: image)); */
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'star';
 }

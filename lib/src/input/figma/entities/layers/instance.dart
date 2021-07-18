@@ -74,9 +74,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             backgroundColor: backgroundColor,
             prototypeNodeUUID: prototypeNodeUUID,
             transitionDuration: transitionDuration,
-            transitionEasing: transitionEasing) {
-    pbdfType = 'symbol_instance';
-  }
+            transitionEasing: transitionEasing);
 
   String componentId;
 
@@ -104,7 +102,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       style: style,
       prototypeNode: prototypeNodeUUID,
       symbolID: symbolID,
-      pbdfType: pbdfType,
     ));
   }
 
@@ -139,9 +136,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     }
     return Future.value(values);
   }
-
-  @override
-  String pbdfType = 'symbol_instance';
 
   Map AddMasterSymbolName(String overrideName, List children) {
     // TODO: implement AddMasterSymbolName

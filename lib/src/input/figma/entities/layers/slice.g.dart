@@ -27,8 +27,7 @@ FigmaSlice _$FigmaSliceFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..isVisible = json['visible'] as bool ?? true
-    ..pbdfType = json['pbdfType'] as String;
+    ..isVisible = json['visible'] as bool ?? true;
 }
 
 Map<String, dynamic> _$FigmaSliceToJson(FigmaSlice instance) =>
@@ -47,5 +46,4 @@ Map<String, dynamic> _$FigmaSliceToJson(FigmaSlice instance) =>
       'absoluteBoundingBox': instance.boundaryRectangle,
       'size': instance.size,
       'visible': instance.isVisible,
-      'pbdfType': instance.pbdfType,
     };

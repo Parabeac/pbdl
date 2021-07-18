@@ -21,7 +21,6 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
     styles: json['styles'],
     fillsList: json['fillsList'],
     UUID: json['UUID'] as String,
-    pbdfType: json['pbdfType'] as String,
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
@@ -39,7 +38,6 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
     <String, dynamic>{
       'child': instance.child?.toJson(),
-      'pbdfType': instance.pbdfType,
       'layoutAlign': instance.layoutAlign,
       'constraints': instance.constraints,
       'size': instance.size,

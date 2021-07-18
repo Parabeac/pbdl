@@ -94,9 +94,7 @@ class FigmaFrame extends FigmaChildrenNode
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
           children: children,
-        ) {
-    pbdfType = 'group';
-  }
+        );
   @JsonKey(ignore: true)
   List points;
 
@@ -139,7 +137,6 @@ class FigmaFrame extends FigmaChildrenNode
             boundaryRectangle: boundaryRectangle.interpretFrame(),
             isVisible: isVisible,
             name: name,
-            pbdfType: pbdfType,
             style: style.interpretStyle(),
             children: await Future.wait(
                 children.map((e) async => await e.interpretNode()).toList())),
@@ -150,9 +147,5 @@ class FigmaFrame extends FigmaChildrenNode
   @override
   String imageReference;
 
-  @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'group';
 }

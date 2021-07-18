@@ -170,21 +170,9 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList()),
     ));
-    /*
-    return Future.value(InheritedScaffold(
-      this,
-      currentContext: currentContext,
-      name: name,
-      isHomeScreen: isFlowHome,
-    )); */
   }
 
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'artboard';
-
-  @override
-  void set isFlowHome(_isFlowHome) {
+  set isFlowHome(_isFlowHome) {
     // TODO: implement isFlowHome
   }
 }

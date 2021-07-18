@@ -68,9 +68,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'symbol_master';
-  }
+        );
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
@@ -119,7 +117,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       style: style,
       prototypeNode: prototypeNodeUUID,
-      pbdfType: pbdfType,
       symbolID: symbolID,
       isFlowHome: isFlowHome,
     );
@@ -164,9 +161,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'symbol_master';
 
   @override
   var isFlowHome;

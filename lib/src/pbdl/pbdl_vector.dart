@@ -9,9 +9,6 @@ part 'pbdl_vector.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
-  @override
-  String pbdfType = 'vector';
-
   var layoutAlign;
 
   var constraints;
@@ -46,7 +43,6 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
     this.styles,
     this.fillsList,
     this.UUID,
-    this.pbdfType = 'vector',
     this.style,
     prototypeNodeUUID,
     transitionDuration,

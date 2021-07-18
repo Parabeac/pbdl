@@ -66,7 +66,6 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         ) {
-    pbdfType = 'oval';
     log = Logger(runtimeType.toString());
   }
 
@@ -86,14 +85,10 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      pbdfType: pbdfType,
       style: style?.interpretStyle(),
     ));
   }
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'oval';
 }

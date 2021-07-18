@@ -14,7 +14,6 @@ PBDLPolygon _$PBDLPolygonFromJson(Map<String, dynamic> json) {
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'],
     name: json['name'],
-    pbdfType: json['pbdfType'],
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
@@ -28,7 +27,6 @@ PBDLPolygon _$PBDLPolygonFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PBDLPolygonToJson(PBDLPolygon instance) =>
     <String, dynamic>{
-      'pbdfType': instance.pbdfType,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'UUID': instance.UUID,
       'isVisible': instance.isVisible,

@@ -18,8 +18,6 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
   String projectName;
   bool debug = false;
   String id;
-  @override
-  String pbdfType = 'project';
 
   String pngPath;
 

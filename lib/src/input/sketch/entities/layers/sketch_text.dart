@@ -151,7 +151,6 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       lineSpacingBehaviour: lineSpacingBehaviour,
       textBehaviour: textBehaviour,
       glyphBounds: glyphBounds,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));
 
@@ -167,40 +166,28 @@ class SketchText extends SketchNode implements SketchNodeFactory {
     //   ));
   }
 
-  @override
   @JsonKey(ignore: true)
   String content;
 
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'text';
-
-  @override
   var attributedString;
 
-  @override
-  void set automaticallyDrawOnUnderlyingPath(
-      _automaticallyDrawOnUnderlyingPath) {
+  set automaticallyDrawOnUnderlyingPath(_automaticallyDrawOnUnderlyingPath) {
     // TODO: implement automaticallyDrawOnUnderlyingPath
   }
 
-  @override
-  void set dontSynchroniseWithSymbol(_dontSynchroniseWithSymbol) {
+  set dontSynchroniseWithSymbol(_dontSynchroniseWithSymbol) {
     // TODO: implement dontSynchroniseWithSymbol
   }
 
-  @override
-  void set glyphBounds(_glyphBounds) {
+  set glyphBounds(_glyphBounds) {
     // TODO: implement glyphBounds
   }
 
-  @override
-  void set lineSpacingBehaviour(_lineSpacingBehaviour) {
+  set lineSpacingBehaviour(_lineSpacingBehaviour) {
     // TODO: implement lineSpacingBehaviour
   }
 
-  @override
-  void set textBehaviour(_textBehaviour) {
+  set textBehaviour(_textBehaviour) {
     // TODO: implement textBehaviour
   }
 }

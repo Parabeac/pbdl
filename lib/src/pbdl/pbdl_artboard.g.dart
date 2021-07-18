@@ -30,8 +30,7 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..type = json['type'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLArtboardToJson(PBDLArtboard instance) =>
@@ -47,5 +46,4 @@ Map<String, dynamic> _$PBDLArtboardToJson(PBDLArtboard instance) =>
       'isFlowHome': instance.isFlowHome,
       'type': instance.type,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'pbdfType': instance.pbdfType,
     };

@@ -151,7 +151,6 @@ class Rectangle extends AbstractShapeLayer
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));
     //Questions: Why is the first half white? Does it have to do with PBDLRectangle not being defined?
@@ -179,8 +178,4 @@ class Rectangle extends AbstractShapeLayer
       },
     )); */
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'rectangle';
 }

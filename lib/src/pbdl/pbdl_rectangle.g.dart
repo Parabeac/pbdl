@@ -18,7 +18,6 @@ PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'] as bool,
     name: json['name'] as String,
-    pbdfType: json['pbdfType'] as String,
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
@@ -32,7 +31,6 @@ PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PBDLRectangleToJson(PBDLRectangle instance) =>
     <String, dynamic>{
-      'pbdfType': instance.pbdfType,
       'hasConvertedToNewRoundCorners': instance.hasConvertedToNewRoundCorners,
       'fixedRadius': instance.fixedRadius,
       'needsConvertionToNewRoundCorners':

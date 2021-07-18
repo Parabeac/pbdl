@@ -36,7 +36,6 @@ class PBDLSharedMasterNode extends PBDLNode
     isFlippedVertical,
     isLocked,
     layerListExpandedType,
-    this.pbdfType,
     presetDictionary,
     bool allowsOverrides,
     nameIsFixed,
@@ -61,12 +60,7 @@ class PBDLSharedMasterNode extends PBDLNode
     bool isFlowHome,
     List parameters,
     this.children,
-  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNode) {
-    pbdfType = 'symbol_master';
-  }
-
-  @override
-  String pbdfType = 'symbol_master';
+  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNode);
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

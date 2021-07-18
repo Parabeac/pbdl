@@ -44,8 +44,7 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
-    ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..imageReference = json['imageReference'] as String;
 }
 
 Map<String, dynamic> _$FigmaFrameToJson(FigmaFrame instance) =>
@@ -76,5 +75,4 @@ Map<String, dynamic> _$FigmaFrameToJson(FigmaFrame instance) =>
       'isFlowHome': instance.isFlowHome,
       'fills': instance.fillsList,
       'imageReference': instance.imageReference,
-      'pbdfType': instance.pbdfType,
     };

@@ -42,7 +42,6 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String
     ..isFlowHome = json['isFlowHome'] as bool ?? false;
 }
 
@@ -73,6 +72,5 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'imageReference': instance.imageReference,
       'type': instance.type,
       'symbolID': instance.symbolID,
-      'pbdfType': instance.pbdfType,
       'isFlowHome': instance.isFlowHome,
     };

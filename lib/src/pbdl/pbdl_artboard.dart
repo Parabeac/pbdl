@@ -62,9 +62,6 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
   List<PBDLNode> children = [];
 
   @override
-  String pbdfType = 'artboard';
-
-  @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLArtboard.fromJson(json);
   factory PBDLArtboard.fromJson(Map<String, dynamic> json) =>

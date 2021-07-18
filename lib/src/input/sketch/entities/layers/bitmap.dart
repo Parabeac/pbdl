@@ -119,7 +119,6 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
       clippingMaskMode: clippingMask,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));
     /*  var intermediateNode;
@@ -139,7 +138,6 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
   @JsonKey(name: 'image')
   Map imageReferenceMap;
 
-  @override
   @JsonKey(ignore: true)
   String imageReference;
 
@@ -151,19 +149,13 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
 
   Style _style;
 
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
 
   @override
   bool get isVisible => _isVisible;
 
-  @override
-  void set style(_style) => this._style = _style;
+  set style(_style) => this._style = _style;
 
   @override
   Style get style => _style;
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'image';
 }

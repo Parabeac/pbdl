@@ -28,9 +28,6 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   @override
   String imageReference;
 
-  @override
-  String pbdfType = 'boolean_operation';
-
   BooleanOperation({
     children,
     booleanOperation,
@@ -49,7 +46,6 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing) {
     log = Logger(runtimeType.toString());
-    pbdfType = 'boolean_operation';
   }
 
   @override

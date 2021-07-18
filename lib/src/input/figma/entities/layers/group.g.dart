@@ -41,8 +41,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
-    ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..imageReference = json['imageReference'] as String;
 }
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
@@ -72,5 +71,4 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'fills': instance.fillsList,
       'type': instance.type,
       'imageReference': instance.imageReference,
-      'pbdfType': instance.pbdfType,
     };

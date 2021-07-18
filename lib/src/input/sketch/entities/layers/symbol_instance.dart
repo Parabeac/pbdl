@@ -52,9 +52,6 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
 
   List parameters;
 
-  @JsonKey(ignore: true)
-  String pbdfType = 'symbol_instance';
-
   SymbolInstance(
       {this.UUID,
       booleanOperation,
@@ -175,7 +172,6 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       maintainScrollPosition: maintainScrollPosition,
       name: name,
       nameIsFixed: nameIsFixed,
-      pbdfType: pbdfType,
       prototypeNode: null,
       resizingConstraint: resizingConstraint,
       resizingType: resizingType,

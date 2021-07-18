@@ -41,7 +41,6 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.pbdfType = 'image',
     this.style,
     this.image,
   }) : super(
@@ -51,9 +50,6 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           boundaryRectangle: boundaryRectangle,
           style: style,
         );
-
-  @override
-  String pbdfType = 'image';
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

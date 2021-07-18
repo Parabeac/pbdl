@@ -51,7 +51,6 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     this.lineSpacingBehaviour,
     this.textBehaviour,
     this.glyphBounds,
-    pbdfType = 'text',
     style,
   }) : super(
           UUID: UUID,
@@ -62,9 +61,6 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
         );
 
   String content;
-
-  @override
-  String pbdfType = 'text';
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLText.fromJson(json);

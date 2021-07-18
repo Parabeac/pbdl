@@ -29,22 +29,18 @@ class FigmaPage {
   }
 
   Map<String, dynamic> toJson() {
-    Map<String, dynamic> result = {};
-    result['pbdfType'] = pbdfType;
+    var result = <String, dynamic>{};
     result['id'] = id;
     result['name'] = name;
     result['convert'] = convert;
 
-    List<Map> tempScreens = [];
+    var tempScreens = <Map>[];
     for (var screen in screens) {
       tempScreens.add(screen.toJson());
     }
     result['screens'] = tempScreens;
     return result;
   }
-
-  @override
-  String pbdfType = 'design_page';
 
   factory FigmaPage.fromPBDF(Map<String, dynamic> json) {
     var page = FigmaPage(name: json['name'], id: json['id']);

@@ -81,11 +81,6 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
             prototypeNodeUUID: prototypeNodeUUID,
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing) {
-    if (areAllVectors()) {
-      pbdfType = 'image';
-    } else {
-      pbdfType = 'group';
-    }
     log = Logger(runtimeType.toString());
   }
 
@@ -118,7 +113,6 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           boundaryRectangle: boundaryRectangle.interpretFrame(),
           isVisible: isVisible,
           name: name,
-          pbdfType: pbdfType,
           style: style?.interpretStyle(),
         ),
       );
@@ -129,7 +123,6 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           boundaryRectangle: boundaryRectangle.interpretFrame(),
           isVisible: isVisible,
           name: name,
-          pbdfType: pbdfType,
           style: style?.interpretStyle(),
           children: await Future.wait(
               children.map((e) async => await e.interpretNode()).toList())),
@@ -185,7 +178,4 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     }
     return null;
   }
-
-  @override
-  String pbdfType = 'group';
 }

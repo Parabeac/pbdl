@@ -137,18 +137,9 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
       children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList()),
     ));
-    // Future.value(TempGroupLayoutNode(this, currentContext, name,
-    //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
-    //     bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
-    //         boundaryRectangle.y + boundaryRectangle.height)));
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'group';
 }

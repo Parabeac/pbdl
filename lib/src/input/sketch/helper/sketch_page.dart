@@ -29,22 +29,18 @@ class SketchPage {
 
   /// Parabeac Design File
   Map<String, dynamic> toJSON() {
-    Map<String, dynamic> result = {};
-    result['pbdfType'] = pbdfType;
+    var result = <String, dynamic>{};
     result['id'] = id;
     result['name'] = name;
     result['convert'] = convert;
 
-    List<Map> tempScreens = [];
+    var tempScreens = <Map>[];
     for (var screen in screens) {
       tempScreens.add(screen.toJson());
     }
     result['screens'] = tempScreens;
     return result;
   }
-
-  @override
-  String pbdfType = 'design_page';
 
   factory SketchPage.fromJson(Map<String, dynamic> json) {
     var page = SketchPage(name: json['name'], id: json['id']);

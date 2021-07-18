@@ -35,8 +35,7 @@ FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..imageReference = json['imageReference'] as String;
 }
 
 Map<String, dynamic> _$FigmaRectangleToJson(FigmaRectangle instance) =>
@@ -64,5 +63,4 @@ Map<String, dynamic> _$FigmaRectangleToJson(FigmaRectangle instance) =>
       'points': instance.points,
       'cornerRadius': instance.cornerRadius,
       'rectangleCornerRadii': instance.rectangleCornerRadii,
-      'pbdfType': instance.pbdfType,
     };

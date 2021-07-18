@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
@@ -10,7 +9,6 @@ import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'rectangle.g.dart';
@@ -64,14 +62,7 @@ class FigmaRectangle extends FigmaVector
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'rectangle';
-    var fillsMap =
-        (fillsList == null || fillsList.isEmpty) ? {} : fillsList.first;
-    if (fillsMap != null && fillsMap['type'] == 'IMAGE') {
-      pbdfType = 'image';
-    }
-  }
+        );
 
   List points;
   double cornerRadius;
@@ -107,7 +98,6 @@ class FigmaRectangle extends FigmaVector
         boundaryRectangle: boundaryRectangle.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        pbdfType: pbdfType,
         style: style.interpretStyle(),
       ));
     }
@@ -122,7 +112,6 @@ class FigmaRectangle extends FigmaVector
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
       child: await child?.interpretNode(),
     ));
@@ -130,7 +119,4 @@ class FigmaRectangle extends FigmaVector
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'rectangle';
 }

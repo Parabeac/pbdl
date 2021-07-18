@@ -14,7 +14,6 @@ PBDLOval _$PBDLOvalFromJson(Map<String, dynamic> json) {
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'] as bool,
     name: json['name'] as String,
-    pbdfType: json['pbdfType'] as String,
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
@@ -27,7 +26,6 @@ PBDLOval _$PBDLOvalFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PBDLOvalToJson(PBDLOval instance) => <String, dynamic>{
-      'pbdfType': instance.pbdfType,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'UUID': instance.UUID,
       'isVisible': instance.isVisible,

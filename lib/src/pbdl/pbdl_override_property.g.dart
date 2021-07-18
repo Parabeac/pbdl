@@ -18,17 +18,14 @@ PBDLOverrideProperty _$PBDLOverridePropertyFromJson(Map<String, dynamic> json) {
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     json['prototypeNodeUUID'] as String,
     json['value'],
-  )
-    ..pbdfType = json['pbdfType'] as String
-    ..child = json['child'] == null
-        ? null
-        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
+  )..child = json['child'] == null
+      ? null
+      : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$PBDLOverridePropertyToJson(
         PBDLOverrideProperty instance) =>
     <String, dynamic>{
-      'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,

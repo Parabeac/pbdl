@@ -51,9 +51,7 @@ class FigmaRegularPolygon extends FigmaVector
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'polygon';
-  }
+        );
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
@@ -71,7 +69,6 @@ class FigmaRegularPolygon extends FigmaVector
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));
   }
@@ -81,7 +78,4 @@ class FigmaRegularPolygon extends FigmaVector
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'polygon';
 }

@@ -30,7 +30,6 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
     ..strokeAlign = json['strokeAlign']
     ..styles = json['styles']
     ..fillsList = json['fillsList']
-    ..pbdfType = json['pbdfType'] as String
     ..name = json['name'] as String
     ..isVisible = json['isVisible'] as bool
     ..image = json['image'];
@@ -48,7 +47,6 @@ Map<String, dynamic> _$PBDLBooleanOperationToJson(
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
       'fillsList': instance.fillsList,
-      'pbdfType': instance.pbdfType,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'booleanOperation': instance.booleanOperation,
       'type': instance.type,

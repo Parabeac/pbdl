@@ -37,9 +37,6 @@ class PBDLPage implements PBDLNodeFactory, PBDLNode {
   }
 
   @override
-  String pbdfType = 'design_page';
-
-  @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLPage.fromJson(json);
   factory PBDLPage.fromJson(Map<String, dynamic> json) =>
       _$PBDLPageFromJson(json);

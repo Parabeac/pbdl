@@ -17,7 +17,6 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
         ?.toList(),
   )
     ..debug = json['debug'] as bool
-    ..pbdfType = json['pbdfType'] as String
     ..miscPages = (json['miscPages'] as List)
         ?.map((e) =>
             e == null ? null : PBDLPage.fromJson(e as Map<String, dynamic>))
@@ -47,7 +46,6 @@ Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
       'projectName': instance.projectName,
       'debug': instance.debug,
       'id': instance.id,
-      'pbdfType': instance.pbdfType,
       'pngPath': instance.pngPath,
       'pages': instance.pages?.map((e) => e?.toJson())?.toList(),
       'miscPages': instance.miscPages?.map((e) => e?.toJson())?.toList(),

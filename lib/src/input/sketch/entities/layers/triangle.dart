@@ -142,18 +142,7 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));
-
-    /*
-    
-
-    return Future.value(InheritedTriangle(this, name,
-        currentContext: currentContext, image: image)); */
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'triangle';
 }

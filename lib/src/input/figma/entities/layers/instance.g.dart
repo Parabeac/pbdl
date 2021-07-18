@@ -45,7 +45,6 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String
     ..overrideValues = (json['overrideValues'] as List)
         ?.map((e) => e == null
             ? null
@@ -83,7 +82,6 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'parameters': instance.parameters,
       'symbolID': instance.symbolID,
       'componentId': instance.componentId,
-      'pbdfType': instance.pbdfType,
       'overrideValues':
           instance.overrideValues?.map((e) => e?.toJson())?.toList(),
     };

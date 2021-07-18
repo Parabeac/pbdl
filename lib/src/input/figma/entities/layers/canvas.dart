@@ -35,9 +35,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
           children: children,
-        ) {
-    pbdfType = 'artboard';
-  }
+        );
   // Last two nulls are used for Figma plugins
 
   @override
@@ -87,11 +85,5 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         ),
       ),
     );
-    /*
-    assert(false, 'We don\'t product pages as Intermediate Nodes.');
-    return null; */
   }
-
-  @override
-  String pbdfType = 'artboard';
 }

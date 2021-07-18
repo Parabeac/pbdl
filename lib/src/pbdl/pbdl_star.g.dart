@@ -14,7 +14,6 @@ PBDLStar _$PBDLStarFromJson(Map<String, dynamic> json) {
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'],
     name: json['name'],
-    pbdfType: json['pbdfType'],
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
@@ -27,7 +26,6 @@ PBDLStar _$PBDLStarFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PBDLStarToJson(PBDLStar instance) => <String, dynamic>{
-      'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'isVisible': instance.isVisible,

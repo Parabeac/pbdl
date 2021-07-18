@@ -17,7 +17,6 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
   )
     ..imageURI = json['imageURI'] as String
     ..convert = json['convert'] as bool
-    ..pbdfType = json['pbdfType'] as String
     ..UUID = json['UUID'] as String
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
@@ -39,7 +38,6 @@ Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) => <String, dynamic>{
       'name': instance.name,
       'convert': instance.convert,
       'screens': instance.screens?.map((e) => e?.toJson())?.toList(),
-      'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'child': instance.child?.toJson(),

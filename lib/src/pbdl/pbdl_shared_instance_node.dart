@@ -18,42 +18,36 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   @override
   final type = 'shared_instance';
 
-  PBDLSharedInstanceNode(
-      {String UUID,
-      this.overrideValues,
-      String name,
-      bool isVisible,
-      this.boundaryRectangle,
-      style,
-      prototypeNode,
-      exportOptions,
-      booleanOperation,
-      bool isFixedToViewport,
-      bool isFlippedVertical,
-      bool isFlippedHorizontal,
-      bool isLocked,
-      layerListExpandedType,
-      bool nameIsFixed,
-      resizingConstraint,
-      resizingType,
-      num rotation,
-      sharedStyleID,
-      bool shouldBreakMaskChain,
-      bool hasClippingMask,
-      int clippingMaskMode,
-      userInfo,
-      bool maintainScrollPosition,
-      num scale,
-      this.symbolID,
-      num verticalSpacing,
-      num horizontalSpacing,
-      this.pbdfType})
-      : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNode) {
-    pbdfType = 'symbol_instance';
-  }
-
-  @override
-  String pbdfType = 'symbol_instance';
+  PBDLSharedInstanceNode({
+    String UUID,
+    this.overrideValues,
+    String name,
+    bool isVisible,
+    this.boundaryRectangle,
+    style,
+    prototypeNode,
+    exportOptions,
+    booleanOperation,
+    bool isFixedToViewport,
+    bool isFlippedVertical,
+    bool isFlippedHorizontal,
+    bool isLocked,
+    layerListExpandedType,
+    bool nameIsFixed,
+    resizingConstraint,
+    resizingType,
+    num rotation,
+    sharedStyleID,
+    bool shouldBreakMaskChain,
+    bool hasClippingMask,
+    int clippingMaskMode,
+    userInfo,
+    bool maintainScrollPosition,
+    num scale,
+    this.symbolID,
+    num verticalSpacing,
+    num horizontalSpacing,
+  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNode);
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

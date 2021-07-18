@@ -142,7 +142,6 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));
 
@@ -153,8 +152,4 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
     return Future.value(InheritedPolygon(this, name,
         currentContext: currentContext, image: image)); */
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'polygon';
 }

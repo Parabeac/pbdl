@@ -21,7 +21,6 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
     lineSpacingBehaviour: json['lineSpacingBehaviour'],
     textBehaviour: json['textBehaviour'],
     glyphBounds: json['glyphBounds'],
-    pbdfType: json['pbdfType'],
     style: json['style'],
   )
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
@@ -49,5 +48,4 @@ Map<String, dynamic> _$PBDLTextToJson(PBDLText instance) => <String, dynamic>{
       'glyphBounds': instance.glyphBounds,
       'type': instance.type,
       'content': instance.content,
-      'pbdfType': instance.pbdfType,
     };

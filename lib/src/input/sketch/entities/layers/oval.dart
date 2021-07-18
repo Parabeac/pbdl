@@ -139,18 +139,7 @@ class Oval extends AbstractShapeLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
     ));
-    /*
-    var image = await SketchAssetProcessor()
-        .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
-
-    return Future.value(InheritedOval(this, name, 
-        currentContext: currentContext, image: image)); */
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'oval';
 }

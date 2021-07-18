@@ -31,8 +31,7 @@ FigmaRegularPolygon _$FigmaRegularPolygonFromJson(Map<String, dynamic> json) {
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
     ..fillsList = json['fills'] as List
-    ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..imageReference = json['imageReference'] as String;
 }
 
 Map<String, dynamic> _$FigmaRegularPolygonToJson(
@@ -59,5 +58,4 @@ Map<String, dynamic> _$FigmaRegularPolygonToJson(
       'fills': instance.fillsList,
       'type': instance.type,
       'imageReference': instance.imageReference,
-      'pbdfType': instance.pbdfType,
     };

@@ -44,6 +44,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @JsonKey(name: 'do_objectID')
   String UUID;
 
+  @override
   @JsonKey(name: '_class')
   String type;
 
@@ -64,9 +65,6 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   @JsonKey(name: 'layers')
   List<SketchNode> children;
-
-  @JsonKey(ignore: true)
-  String pbdfType = 'symbol_master';
 
   SymbolMaster(
       {bool hasClickThrough,
@@ -225,7 +223,6 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       name: name,
       nameIsFixed: nameIsFixed,
       verticalRulerData: verticalRulerData,
-      pbdfType: pbdfType,
       sharedStyleID: sharedStyleID,
       symbolID: symbolID,
       userInfo: userInfo,

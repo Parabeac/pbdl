@@ -23,9 +23,6 @@ class SketchScreen {
     this.designNode = designNode;
   }
 
-  @override
-  String pbdfType = 'screen';
-
   factory SketchScreen.fromJson(Map<String, dynamic> json) {
     var screen = SketchScreen(name: json['name'], id: json['id']);
     if (json.containsKey('designNode') && (json['convert'] ?? true)) {

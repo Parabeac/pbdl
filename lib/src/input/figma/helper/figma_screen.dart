@@ -20,17 +20,6 @@ class FigmaScreen {
     this.type,
   });
 
-  @override
-  String pbdfType = 'screen';
-
-  // FigmaScreen createFigmaScreen(Map<String, dynamic> json) {
-  //   var screen = FigmaScreen(name: json['name'], id: json['id']);
-  //   if (json.containsKey('designNode') && (json['convert'] ?? true)) {
-  //     screen.figmaNode = FigmaNode.fromJson(json['designNode']);
-  //   }
-  //   return screen;
-  // }
-
   factory FigmaScreen.fromJson(Map<String, dynamic> json) {
     var screen = FigmaScreen(name: json['name'], id: json['id']);
     if (json.containsKey('designNode') && (json['convert'] ?? true)) {

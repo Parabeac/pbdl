@@ -56,9 +56,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'text';
-  }
+        );
 
   @JsonKey(name: 'characters')
   String content;
@@ -97,7 +95,6 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         lineSpacingBehaviour: lineSpacingBehaviour,
         textBehaviour: textBehaviour,
         glyphBounds: glyphBounds,
-        pbdfType: pbdfType,
         style: style.interpretStyle(),
       ),
     );
@@ -106,24 +103,15 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   Map<String, dynamic> toPBDF() => toJson();
 
-  @override
-  String pbdfType = 'text';
-
-  @override
   var attributedString;
 
-  @override
   var automaticallyDrawOnUnderlyingPath;
 
-  @override
   var dontSynchroniseWithSymbol;
 
-  @override
   var glyphBounds;
 
-  @override
   var lineSpacingBehaviour;
 
-  @override
   var textBehaviour;
 }

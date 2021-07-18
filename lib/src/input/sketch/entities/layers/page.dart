@@ -128,8 +128,4 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
           await Future.wait(children.map((e) => e.interpretNode()).toList()),
     ));
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'page';
 }

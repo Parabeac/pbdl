@@ -9,9 +9,6 @@ part 'pbdl_star.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLStar implements PBDLNodeFactory, PBDLNode {
-  @override
-  String pbdfType = 'star';
-
   PBDLStar({
     bool edited,
     bool isClosed,
@@ -38,7 +35,6 @@ class PBDLStar implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    pbdfType,
     this.style,
     this.child,
   });

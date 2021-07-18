@@ -36,8 +36,7 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
-    ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..imageReference = json['imageReference'] as String;
 }
 
 Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
@@ -63,5 +62,4 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'type': instance.type,
       'fills': instance.fillsList,
       'imageReference': instance.imageReference,
-      'pbdfType': instance.pbdfType,
     };
