@@ -12,9 +12,6 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   var style;
 
-  /// [image] it is in case the Node give us the bytes of the image
-  var image;
-
   /// [imageReference] is when we have the reference to the image instead
   String imageReference;
 
@@ -42,7 +39,6 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     userInfo,
     maintainScrollPosition,
     this.style,
-    this.image,
   }) : super(
           UUID: UUID,
           name: name,

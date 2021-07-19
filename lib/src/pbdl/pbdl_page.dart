@@ -13,7 +13,6 @@ class PBDLPage implements PBDLNodeFactory, PBDLNode {
   @JsonKey(ignore: true)
   var log = Logger('DesignPage');
 
-  String id;
   String imageURI;
   @override
   String name;
@@ -23,7 +22,7 @@ class PBDLPage implements PBDLNodeFactory, PBDLNode {
 
   PBDLPage({
     this.name,
-    this.id,
+    this.UUID,
     this.screens,
   });
 

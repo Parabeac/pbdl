@@ -5,6 +5,7 @@ import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
 import 'package:quick_log/quick_log.dart';
 import 'api_call_service.dart';
 import 'asset_processing_service.dart';
+import 'package:path/path.dart' as p;
 
 class FigmaAssetProcessor extends AssetProcessingService {
   FigmaAssetProcessor._internal();
@@ -77,17 +78,17 @@ class FigmaAssetProcessor extends AssetProcessingService {
           Map images = response['images'];
           // Download the images
           for (var entry in images.entries) {
-            if (entry?.value != null && entry?.value?.isNotEmpty) {
-              response = await http.get(entry.value).then((imageRes) async {
+            if (entry?.value != null && (entry?.value?.isNotEmpty ?? false)) {
+              response =
+                  await http.get(Uri.parse(entry.value)).then((imageRes) async {
                 // Check if the request was successful
                 if (imageRes == null || imageRes.statusCode != 200) {
                   log.error('Image ${entry.key} was not processed correctly');
                 }
 
                 if (writeAsFile) {
-                  var file = File(
-                      '${MainInfo().outputPath}pngs/${entry.key}.png'
-                          .replaceAll(':', '_'))
+                  var pngPath = p.join(MainInfo().pngPath, '${entry.key}.png');
+                  var file = File(pngPath.replaceAll(':', '_'))
                     ..createSync(recursive: true);
                   file.writeAsBytesSync(imageRes.bodyBytes);
                 } else {

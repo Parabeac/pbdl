@@ -61,7 +61,7 @@ class SketchPage {
   Future<PBDLPage> interpretNode() async {
     return Future.value(PBDLPage(
       name: name,
-      id: id,
+      UUID: id,
       screens:
           await Future.wait(screens.map((e) => e.interpretNode()).toList()),
     ));

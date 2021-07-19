@@ -123,7 +123,7 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
   Future<PBDLNode> interpretNode() async {
     return Future.value(PBDLPage(
       name: name,
-      id: UUID,
+      UUID: UUID,
       screens:
           await Future.wait(children.map((e) => e.interpretNode()).toList()),
     ));

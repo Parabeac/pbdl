@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:pbdl/src/util/main_info.dart';
+
 import 'azure_asset_service.dart';
 
 abstract class AssetProcessingService {
@@ -10,7 +12,7 @@ abstract class AssetProcessingService {
   AzureAssetService aaService = AzureAssetService();
 
   static String getImageName(String uuid) =>
-      ('images/' + uuid + '.png').replaceAll(':', '_');
+      MainInfo().pngPath.replaceAll(':', '_');
 
   Future<void> uploadToStorage(Uint8List img, String name) async {
     if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&

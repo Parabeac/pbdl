@@ -61,7 +61,7 @@ class FigmaPage {
         screens.map((e) async => await e.interpretNode()).toList());
     return PBDLPage(
       name: name,
-      id: id,
+      UUID: id,
       screens: resultScreens,
     );
   }

@@ -118,14 +118,15 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       if (override != null) {
         // Create override value and add it to list
         values.add(PBDLOverrideValue(
-            current.UUID.split(';').last, // Get UUID of node to replace
-            current.name,
-            current.isVisible,
-            null,
-            override.getPBDLType(),
-            null,
-            current.prototypeNodeUUID,
-            await current.interpretNode()));
+          current.UUID.split(';').last, // Get UUID of node to replace
+          current.name,
+          current.isVisible,
+          null,
+          override.getPBDLType(),
+          override.getPBDLStyle(current),
+          current.prototypeNodeUUID,
+          await override.getValue(current),
+        ));
       }
 
       if (current.child != null) {

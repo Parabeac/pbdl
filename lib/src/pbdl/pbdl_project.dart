@@ -1,12 +1,9 @@
-import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
-import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/util/main_info.dart';
-import 'package:pbdl/src/util/sketch/sac_installer.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import 'abstract_pbdl_node_factory.dart';
@@ -15,20 +12,17 @@ part 'pbdl_project.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLProject implements PBDLNodeFactory, PBDLNode {
-  String projectName;
   bool debug = false;
-  String id;
 
   String pngPath;
 
   PBDLProject({
-    this.projectName,
-    this.id,
-    this.pngPath,
+    this.name,
+    this.UUID,
     this.pages,
+    this.pngPath,
   }) {
-    MainInfo().projectName = projectName ?? 'temp';
-    MainInfo().pngPath = pngPath;
+    MainInfo().projectName = name ?? 'temp';
   }
 
   List<PBDLPage> pages = [];
