@@ -9,8 +9,6 @@ part 'pbdl_text.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
-  var attributedString;
-
   var automaticallyDrawOnUnderlyingPath;
 
   var dontSynchroniseWithSymbol;
@@ -45,13 +43,13 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     bool hasClippingMask,
     int clippingMaskMode,
     bool maintainScrollPosition,
-    this.attributedString,
     this.automaticallyDrawOnUnderlyingPath,
     this.dontSynchroniseWithSymbol,
     this.lineSpacingBehaviour,
     this.textBehaviour,
     this.glyphBounds,
     style,
+    this.content
   }) : super(
           UUID: UUID,
           name: name,

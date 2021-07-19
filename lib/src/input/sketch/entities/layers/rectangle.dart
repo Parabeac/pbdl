@@ -124,12 +124,9 @@ class Rectangle extends AbstractShapeLayer
   Future<PBDLNode> interpretNode() {
     return Future.value(PBDLRectangle(
       fixedRadius: fixedRadius,
-      hasConvertedToNewRoundCorners: hasConvertedToNewRoundCorners,
-      needsConvertionToNewRoundCorners: needsConvertionToNewRoundCorners,
       edited: edited,
       isClosed: isClosed,
       pointRadiusBehaviour: pointRadiusBehaviour,
-      points: points,
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,

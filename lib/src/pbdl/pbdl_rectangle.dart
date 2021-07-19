@@ -9,26 +9,17 @@ part 'pbdl_rectangle.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
-  var hasConvertedToNewRoundCorners;
-
-  var fixedRadius;
-
-  var needsConvertionToNewRoundCorners;
-
-  var points;
+  num fixedRadius;
 
   PBDLRectangle({
     this.fixedRadius,
-    this.hasConvertedToNewRoundCorners,
-    this.needsConvertionToNewRoundCorners,
     bool edited,
     bool isClosed,
     pointRadiusBehaviour,
-    List this.points,
     this.UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame this.boundaryRectangle,
+    this.boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,

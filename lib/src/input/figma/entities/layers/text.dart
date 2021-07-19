@@ -89,13 +89,13 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         boundaryRectangle: boundaryRectangle.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        attributedString: attributedString,
         automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
         dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
         lineSpacingBehaviour: lineSpacingBehaviour,
         textBehaviour: textBehaviour,
         glyphBounds: glyphBounds,
         style: style.interpretStyle(),
+        content: content,
       ),
     );
   }

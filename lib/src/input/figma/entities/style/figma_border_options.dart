@@ -28,9 +28,9 @@ class FigmaBorderOptions {
   PBDLBorderOptions interpretOptions() {
     return PBDLBorderOptions(
       isEnabled: isEnabled,
-      dashPattern: dashPattern,
-      lineCapStyle: lineCapStyle,
-      lineJoinStyle: lineJoinStyle,
+      dashPattern: dashPattern ?? [],
+      lineCapStyle: lineCapStyle ?? 0,
+      lineJoinStyle: lineJoinStyle ?? 0,
     );
   }
 }

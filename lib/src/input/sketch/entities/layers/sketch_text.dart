@@ -145,13 +145,13 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       hasClippingMask: hasClippingMask,
       clippingMaskMode: clippingMaskMode,
       maintainScrollPosition: maintainScrollPosition,
-      attributedString: attributedString,
       automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
       dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
       lineSpacingBehaviour: lineSpacingBehaviour,
       textBehaviour: textBehaviour,
       glyphBounds: glyphBounds,
       style: style.interpretStyle(),
+      content: content,
     ));
 
     // Future.value(InjectedContainer(

@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:path/path.dart' as p;
 
 import '../abstract_sketch_node_factory.dart';
 import '../objects/sketch_rect.dart';
@@ -97,6 +98,7 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
+    imageReference = p.absolute(imageReference);
     return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,

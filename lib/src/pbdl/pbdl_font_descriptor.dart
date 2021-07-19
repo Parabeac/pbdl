@@ -7,12 +7,10 @@ class PBDLFontDescriptor {
   PBDLFontDescriptor({
     this.fontName,
     this.fontSize,
-    this.rawAttributes,
     this.fontStyle,
     this.fontWeight,
     this.letterSpacing,
   });
-  Map<String, dynamic> rawAttributes;
   String fontName;
   num fontSize;
   String fontWeight;

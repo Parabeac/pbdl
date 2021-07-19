@@ -101,7 +101,7 @@ class TextStyle {
   PBDLTextStyle interpretTextStyle() {
     return PBDLTextStyle(
       fontColor: fontColor.interpretColor(),
-      weight: weight,
+      weight: fontDescriptor?.fontWeight?.replaceFirst('w', '') ?? '100',
       paragraphStyle: paragraphStyle.interpretParagraphStyle(),
       fontDescriptor: fontDescriptor.interpretFontDescriptor(),
     );
@@ -110,15 +110,9 @@ class TextStyle {
   @JsonKey(ignore: true)
   Color fontColor;
 
-  @override
   String fontFamily;
 
-  @override
   String fontSize;
 
-  @override
   String fontWeight;
-
-  @override
-  String weight;
 }

@@ -8,10 +8,7 @@ part of 'pbdl_rectangle.dart';
 
 PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
   return PBDLRectangle(
-    fixedRadius: json['fixedRadius'],
-    hasConvertedToNewRoundCorners: json['hasConvertedToNewRoundCorners'],
-    needsConvertionToNewRoundCorners: json['needsConvertionToNewRoundCorners'],
-    points: json['points'] as List,
+    fixedRadius: json['fixedRadius'] as num,
     UUID: json['UUID'] as String,
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
@@ -31,11 +28,7 @@ PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PBDLRectangleToJson(PBDLRectangle instance) =>
     <String, dynamic>{
-      'hasConvertedToNewRoundCorners': instance.hasConvertedToNewRoundCorners,
       'fixedRadius': instance.fixedRadius,
-      'needsConvertionToNewRoundCorners':
-          instance.needsConvertionToNewRoundCorners,
-      'points': instance.points,
       'UUID': instance.UUID,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'isVisible': instance.isVisible,

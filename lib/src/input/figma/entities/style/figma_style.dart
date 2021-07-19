@@ -17,15 +17,13 @@ class FigmaStyle {
   FigmaTextStyle textStyle;
 
   FigmaStyle({
-    FigmaColor this.backgroundColor,
-    List<FigmaBorder> this.borders,
-    List<FigmaFill> this.fills,
-    FigmaTextStyle this.textStyle,
-    FigmaBorderOptions this.borderOptions,
+    this.backgroundColor,
+    this.borders,
+    this.fills,
+    this.textStyle,
+    this.borderOptions,
   }) {
-    if (this.fills == null) {
-      this.fills = [];
-    }
+    fills ??= [];
   }
 
   FigmaBorderOptions borderOptions;
@@ -45,7 +43,6 @@ class FigmaStyle {
     );
   }
 
-  @override
   @JsonKey(ignore: true)
   bool hasShadow;
 }

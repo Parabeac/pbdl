@@ -115,12 +115,13 @@ class ShapePath extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ShapePathToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    var image = SketchAssetProcessor()
+  Future<PBDLNode> interpretNode() async {
+    var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
 
+    var ref = SketchAssetProcessor.writeImage(name, image);
+
     return Future.value(PBDLImage(
-      // image: image, // TODO: change to imageReference
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
@@ -142,6 +143,7 @@ class ShapePath extends AbstractShapeLayer implements SketchNodeFactory {
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
       style: style.interpretStyle(),
+      imageReference: ref,
     ));
 /*
     return Future.value(InheritedShapePath(this, name,

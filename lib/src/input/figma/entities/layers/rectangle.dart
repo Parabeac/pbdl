@@ -92,8 +92,7 @@ class FigmaRectangle extends FigmaVector
     if (fillsMap != null && fillsMap['type'] == 'IMAGE') {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
-      return Future.value(
-        PBDLImage(
+      return Future.value(PBDLImage(
         imageReference: imageReference,
         UUID: UUID,
         boundaryRectangle: boundaryRectangle.interpretFrame(),
@@ -102,12 +101,6 @@ class FigmaRectangle extends FigmaVector
         style: style.interpretStyle(),
       ));
     }
-    // FigmaBorder border;
-    // for (var b in style?.borders?.reversed ?? []) {
-    //   if (b.isEnabled) {
-    //     border = b;
-    //   }
-    // }
     return Future.value(PBDLRectangle(
       UUID: UUID,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
@@ -115,6 +108,7 @@ class FigmaRectangle extends FigmaVector
       name: name,
       style: style.interpretStyle(),
       child: await child?.interpretNode(),
+      fixedRadius: cornerRadius ?? 0,
     ));
   }
 
