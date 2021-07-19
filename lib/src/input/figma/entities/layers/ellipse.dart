@@ -1,14 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_oval.dart';
 import 'package:quick_log/quick_log.dart';
 
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'ellipse.g.dart';
@@ -80,12 +78,13 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
-    return Future.value(PBDLOval(
+    return Future.value(PBDLImage(
       UUID: UUID,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: style?.interpretStyle(),
+      imageReference: imageReference,
     ));
   }
 

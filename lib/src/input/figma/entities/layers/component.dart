@@ -105,33 +105,23 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     var props = <PBDLOverrideProperty>[];
 
     for (var child in children) {
-      var currProps = await _traverseChildrenForOverrides(child);
+      var currProps = await _traverseChildrenForOverrides(child)
+        ..removeWhere((element) => element.value == null);
       props.addAll(currProps);
     }
 
     return PBDLSharedMasterNode(
-      UUID: UUID,
-      overrideProperties: props,
-      name: name,
-      isVisible: isVisible,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      style: style,
-      prototypeNode: prototypeNodeUUID,
-      symbolID: symbolID,
-      isFlowHome: isFlowHome,
-    );
-    /*
-    var sym_master = PBSharedMasterNode(
-      this,
-      UUID,
-      name,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(boundaryRectangle.x + boundaryRectangle.width,
-          boundaryRectangle.y + boundaryRectangle.height),
-      overridableProperties: _extractParameters() ?? [],
-      currentContext: currentContext,
-    );
-    return Future.value(sym_master); */
+        UUID: UUID,
+        overrideProperties: props,
+        name: name,
+        isVisible: isVisible,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        style: style,
+        prototypeNode: prototypeNodeUUID,
+        symbolID: symbolID,
+        isFlowHome: isFlowHome,
+        children: await Future.wait(
+            children.map((e) async => await e.interpretNode()).toList()));
   }
 
   Future<List<PBDLOverrideProperty>> _traverseChildrenForOverrides(

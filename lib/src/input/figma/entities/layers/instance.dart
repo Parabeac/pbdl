@@ -90,7 +90,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() async {
     var overrideValues = <PBDLOverrideValue>[];
     children.forEach((child) async {
-      overrideValues.addAll(await _traverseChildrenForOverrides(child));
+      var currVals = await _traverseChildrenForOverrides(child)..removeWhere((element) => element.value == null);
+      overrideValues.addAll(currVals);
     });
 
     return Future.value(PBDLSharedInstanceNode(

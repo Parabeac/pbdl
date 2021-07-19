@@ -17,7 +17,7 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
 
   PBDLImage({
     this.imageReference,
-    UUID,
+    String UUID,
     booleanOperation,
     exportOptions,
     PBDLFrame boundaryRectangle,
@@ -25,9 +25,9 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    isVisible,
+    bool isVisible,
     layerListExpandedType,
-    name,
+    String name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -54,21 +54,6 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
       _$PBDLImageFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLImageToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
 
   @override
   String type = 'image';
