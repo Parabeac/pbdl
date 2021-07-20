@@ -9,48 +9,33 @@ part 'pbdl_text.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
-  var automaticallyDrawOnUnderlyingPath;
-
-  var dontSynchroniseWithSymbol;
-
-  var lineSpacingBehaviour;
-
-  var textBehaviour;
-
-  var glyphBounds;
-
   @override
   final type = 'text';
 
-  PBDLText({
-    UUID,
-    booleanOperation,
-    exportOptions,
-    PBDLFrame boundaryRectangle,
-    bool isFixedToViewport,
-    bool isFlippedHorizontal,
-    bool isFlippedVertical,
-    bool isLocked,
-    bool isVisible,
-    layerListExpandedType,
-    name,
-    bool nameIsFixed,
-    resizingConstraint,
-    resizingType,
-    double rotation,
-    sharedStyleID,
-    bool shouldBreakMaskChain,
-    bool hasClippingMask,
-    int clippingMaskMode,
-    bool maintainScrollPosition,
-    this.automaticallyDrawOnUnderlyingPath,
-    this.dontSynchroniseWithSymbol,
-    this.lineSpacingBehaviour,
-    this.textBehaviour,
-    this.glyphBounds,
-    style,
-    this.content
-  }) : super(
+  PBDLText(
+      {UUID,
+      booleanOperation,
+      exportOptions,
+      PBDLFrame boundaryRectangle,
+      bool isFixedToViewport,
+      bool isFlippedHorizontal,
+      bool isFlippedVertical,
+      bool isLocked,
+      bool isVisible,
+      layerListExpandedType,
+      name,
+      bool nameIsFixed,
+      resizingConstraint,
+      resizingType,
+      double rotation,
+      sharedStyleID,
+      bool shouldBreakMaskChain,
+      bool hasClippingMask,
+      int clippingMaskMode,
+      bool maintainScrollPosition,
+      style,
+      this.content})
+      : super(
           UUID: UUID,
           name: name,
           isVisible: isVisible,

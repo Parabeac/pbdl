@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/symbol_node_mixin.dart';
+import 'package:pbdl/src/input/sketch/helper/overrides/sketch_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
@@ -142,16 +143,16 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
     var overrides = overrideValues.map((e) {
       var uuidTypeMap = SymbolNodeMixin.extractParameter(e.overrideName);
 
-      return PBDLOverrideValue(
-        uuidTypeMap['uuid'],
-        name, //TODO: Get friendly name
-        isVisible,
-        boundaryRectangle.interpretFrame(),
-        uuidTypeMap['type'],
-        null,
-        prototypeNodeUUID,
-        e.value,
-      );
+      var ovrVal = SketchOverrideTypeFactory.getType(e);
+
+      if (ovrVal != null) {
+        return PBDLOverrideValue(
+          uuidTypeMap['uuid'],
+          name, //TODO: Get friendly name
+          ovrVal.getPBDLType(),
+          e.value,
+        );
+      }
     }).toList();
 
     return Future.value(PBDLSharedInstanceNode(

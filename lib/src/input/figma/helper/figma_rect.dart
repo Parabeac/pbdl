@@ -29,6 +29,7 @@ class FigmaRect {
       y: y,
       width: width,
       height: height,
+      constrainProportions: false,
     );
   }
 }

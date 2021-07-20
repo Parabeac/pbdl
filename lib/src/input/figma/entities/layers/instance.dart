@@ -20,8 +20,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   List parameters;
 
-  String symbolID;
-
   Instance(
       {name,
       isVisible,
@@ -44,7 +42,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       this.componentId,
       List<FigmaNode> children,
       this.parameters,
-      this.symbolID,
       FigmaColor backgroundColor,
       String prototypeNodeUUID,
       num transitionDuration,
@@ -90,7 +87,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() async {
     var overrideValues = <PBDLOverrideValue>[];
     children.forEach((child) async {
-      var currVals = await _traverseChildrenForOverrides(child)..removeWhere((element) => element.value == null);
+      var currVals = await _traverseChildrenForOverrides(child)
+        ..removeWhere((element) => element.value == null);
       overrideValues.addAll(currVals);
     });
 
@@ -102,7 +100,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       style: style,
       prototypeNode: prototypeNodeUUID,
-      symbolID: symbolID,
+      symbolID: componentId,
     ));
   }
 
@@ -121,11 +119,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         values.add(PBDLOverrideValue(
           current.UUID.split(';').last, // Get UUID of node to replace
           current.name,
-          current.isVisible,
-          null,
           override.getPBDLType(),
-          override.getPBDLStyle(current),
-          current.prototypeNodeUUID,
           await override.getValue(current),
         ));
       }

@@ -40,6 +40,7 @@ class FigmaStyle {
       borders: borders.map((e) => e.interpretBorder()).toList(),
       borderOptions: borderOptions?.interpretOptions(),
       textStyle: textStyle?.interpretTextStyle(),
+      hasShadow: false,
     );
   }
 

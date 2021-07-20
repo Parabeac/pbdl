@@ -30,7 +30,6 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
             e == null ? null : FigmaNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     parameters: json['parameters'] as List,
-    symbolID: json['symbolID'] as String,
     backgroundColor: json['backgroundColor'] == null
         ? null
         : FigmaColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
@@ -80,7 +79,6 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'imageReference': instance.imageReference,
       'type': instance.type,
       'parameters': instance.parameters,
-      'symbolID': instance.symbolID,
       'componentId': instance.componentId,
       'overrideValues':
           instance.overrideValues?.map((e) => e?.toJson())?.toList(),

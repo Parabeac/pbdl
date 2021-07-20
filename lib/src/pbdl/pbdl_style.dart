@@ -19,6 +19,30 @@ class PBDLStyle extends PBDLNode {
   bool hasShadow = false;
 
   @override
+  @JsonKey(ignore: true)
+  PBDLStyle style;
+
+  @override
+  @JsonKey(ignore: true)
+  String UUID;
+
+  @override
+  @JsonKey(ignore: true)
+  String name;
+
+  @override
+  @JsonKey(ignore: true)
+  PBDLFrame boundaryRectangle;
+
+  @override
+  @JsonKey(ignore: true)
+  String prototypeNodeUUID;
+
+  @override
+  @JsonKey(ignore: true)
+  var child;
+
+  @override
   final type = 'style';
 
   PBDLStyle({
@@ -28,7 +52,7 @@ class PBDLStyle extends PBDLNode {
     this.borderOptions,
     this.textStyle,
     this.hasShadow,
-  }) : super('', '', false, null, null, '');
+  }) : super('', '', true, null, null, '');
 
   @override
   factory PBDLStyle.fromJson(Map<String, dynamic> json) =>

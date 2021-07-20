@@ -17,15 +17,10 @@ class SketchText extends SketchNode implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'text';
 
-  @override
   final bool automaticallyDrawOnUnderlyingPath;
-  @override
   final bool dontSynchroniseWithSymbol;
-  @override
   final dynamic lineSpacingBehaviour;
-  @override
   final dynamic textBehaviour;
-  @override
   final dynamic glyphBounds;
 
   @override
@@ -145,11 +140,6 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       hasClippingMask: hasClippingMask,
       clippingMaskMode: clippingMaskMode,
       maintainScrollPosition: maintainScrollPosition,
-      automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
-      dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
-      lineSpacingBehaviour: lineSpacingBehaviour,
-      textBehaviour: textBehaviour,
-      glyphBounds: glyphBounds,
       style: style.interpretStyle(),
       content: content,
     ));

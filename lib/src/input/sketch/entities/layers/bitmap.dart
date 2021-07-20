@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:path/path.dart' as p;
+import 'package:pbdl/src/util/main_info.dart';
 
 import '../abstract_sketch_node_factory.dart';
 import '../objects/sketch_rect.dart';
@@ -98,7 +99,7 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    imageReference = p.absolute(imageReference);
+    imageReference = p.join(MainInfo().pngPath, p.basename(imageReference));
     return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
@@ -123,18 +124,6 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
       maintainScrollPosition: maintainScrollPosition,
       style: style.interpretStyle(),
     ));
-    /*  var intermediateNode;
-    intermediateNode = PBDenyListHelper().returnDenyListNodeIfExist(this);
-    if (intermediateNode != null) {
-      return intermediateNode;
-    }
-    intermediateNode = PBPluginListHelper().returnAllowListNodeIfExists(this);
-    if (intermediateNode != null) {
-      return intermediateNode;
-    }
-    return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext));
-         */
   }
 
   @JsonKey(name: 'image')

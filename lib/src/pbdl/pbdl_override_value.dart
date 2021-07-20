@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
+import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
@@ -13,22 +14,34 @@ class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
   @override
   final type;
 
+  @override
+  @JsonKey(ignore: true)
+  bool isVisible;
+
+  @override
+  @JsonKey(ignore: true)
+  PBDLFrame boundaryRectangle;
+
+  @override
+  @JsonKey(ignore: true)
+  PBDLStyle style;
+
+  @override
+  @JsonKey(ignore: true)
+  String prototypeNodeUUID;
+
   PBDLOverrideValue(
     String UUID,
     String name,
-    bool isVisible,
-    boundaryRectangle,
     this.type,
-    PBDLStyle style,
-    String prototypeNodeUUID,
     this.value,
   ) : super(
           UUID,
           name,
-          isVisible,
-          boundaryRectangle,
-          style,
-          prototypeNodeUUID,
+          true,
+          null,
+          null,
+          null,
         );
 
   factory PBDLOverrideValue.fromJson(Map<String, dynamic> json) =>

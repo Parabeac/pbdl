@@ -10,7 +10,7 @@ class FigmaOverrideSymbolID extends FigmaOverrideType {
     if (node is! Instance) {
       return Future.value(null);
     }
-    return Future.value((node as Instance).symbolID);
+    return Future.value((node as Instance).componentId);
   }
 
   @override

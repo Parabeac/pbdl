@@ -68,5 +68,6 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
   String type = 'group_node';
 
   @override
+  @JsonKey(ignore: true)
   PBDLNode child;
 }

@@ -138,11 +138,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         var overrideProp = PBDLOverrideProperty(
           current.UUID,
           current.name,
-          current.isVisible,
-          current.boundaryRectangle?.interpretFrame(),
           override.getPBDLType(),
-          override.getPBDLStyle(current),
-          prototypeNodeUUID,
           await override.getValue(current),
         );
         values.add(overrideProp);

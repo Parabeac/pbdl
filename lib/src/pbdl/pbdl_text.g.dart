@@ -14,12 +14,6 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'] as bool,
     name: json['name'],
-    automaticallyDrawOnUnderlyingPath:
-        json['automaticallyDrawOnUnderlyingPath'],
-    dontSynchroniseWithSymbol: json['dontSynchroniseWithSymbol'],
-    lineSpacingBehaviour: json['lineSpacingBehaviour'],
-    textBehaviour: json['textBehaviour'],
-    glyphBounds: json['glyphBounds'],
     style: json['style'],
     content: json['content'] as String,
   )
@@ -38,12 +32,6 @@ Map<String, dynamic> _$PBDLTextToJson(PBDLText instance) => <String, dynamic>{
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
-      'automaticallyDrawOnUnderlyingPath':
-          instance.automaticallyDrawOnUnderlyingPath,
-      'dontSynchroniseWithSymbol': instance.dontSynchroniseWithSymbol,
-      'lineSpacingBehaviour': instance.lineSpacingBehaviour,
-      'textBehaviour': instance.textBehaviour,
-      'glyphBounds': instance.glyphBounds,
       'type': instance.type,
       'content': instance.content,
     };

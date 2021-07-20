@@ -76,7 +76,8 @@ class PBDL {
     } else {
       MainInfo().outputPath = p.join(Directory.current.path, 'pbdl_out');
     }
-    MainInfo().pngPath = p.absolute(p.join(MainInfo().outputPath, 'assets'));
+    MainInfo().pngPath =
+        p.absolute(p.join(MainInfo().outputPath, 'assets', 'images'));
   }
 
   /// Method that exports a `.json` file representing the [PBDLProject]
