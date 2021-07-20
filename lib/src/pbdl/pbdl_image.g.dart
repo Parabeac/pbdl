@@ -18,8 +18,8 @@ PBDLImage _$PBDLImageFromJson(Map<String, dynamic> json) {
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
+    prototypeNodeUUID: json['prototypeNodeUUID'] as String,
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
@@ -31,9 +31,9 @@ Map<String, dynamic> _$PBDLImageToJson(PBDLImage instance) => <String, dynamic>{
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
       'style': instance.style?.toJson(),
       'imageReference': instance.imageReference,
+      'prototypeNodeUUID': instance.prototypeNodeUUID,
       'type': instance.type,
     };

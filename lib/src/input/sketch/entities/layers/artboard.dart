@@ -165,7 +165,7 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      prototypeNodeUUID: prototypeNodeUUID,
+      prototypeNodeUUID: flow?.destinationArtboardID,
       style: style.interpretStyle(),
       children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList()),

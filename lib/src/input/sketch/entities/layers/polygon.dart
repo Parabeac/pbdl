@@ -33,75 +33,74 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
 
   Style _style;
 
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
 
   @override
   bool get isVisible => _isVisible;
 
-  @override
-  void set style(_style) => this._style = _style;
+  set style(_style) => this._style = _style;
 
   @override
   Style get style => _style;
-  Polygon(
-      {bool edited,
-      bool isClosed,
-      pointRadiusBehaviour,
-      List points,
-      this.UUID,
-      booleanOperation,
-      exportOptions,
-      SketchRect this.boundaryRectangle,
-      Flow flow,
-      isFixedToViewport,
-      isFlippedHorizontal,
-      isFlippedVertical,
-      isLocked,
-      isVisible,
-      layerListExpandedType,
-      name,
-      nameIsFixed,
-      resizingConstraint,
-      resizingType,
-      rotation,
-      sharedStyleID,
-      shouldBreakMaskChain,
-      hasClippingMask,
-      clippingMaskMode,
-      userInfo,
-      Style style,
-      maintainScrollPosition})
-      : _isVisible = isVisible,
+  Polygon({
+    bool edited,
+    bool isClosed,
+    pointRadiusBehaviour,
+    List points,
+    this.UUID,
+    booleanOperation,
+    exportOptions,
+    SketchRect this.boundaryRectangle,
+    Flow flow,
+    isFixedToViewport,
+    isFlippedHorizontal,
+    isFlippedVertical,
+    isLocked,
+    isVisible,
+    layerListExpandedType,
+    name,
+    nameIsFixed,
+    resizingConstraint,
+    resizingType,
+    rotation,
+    sharedStyleID,
+    shouldBreakMaskChain,
+    hasClippingMask,
+    clippingMaskMode,
+    userInfo,
+    Style style,
+    maintainScrollPosition,
+  })  : _isVisible = isVisible,
         _style = style,
         super(
-            edited,
-            isClosed,
-            pointRadiusBehaviour,
-            points,
-            UUID,
-            booleanOperation,
-            exportOptions,
-            boundaryRectangle,
-            flow,
-            isFixedToViewport,
-            isFlippedHorizontal,
-            isFlippedVertical,
-            isLocked,
-            isVisible,
-            layerListExpandedType,
-            name,
-            nameIsFixed,
-            resizingConstraint,
-            resizingType,
-            rotation,
-            sharedStyleID,
-            shouldBreakMaskChain,
-            hasClippingMask,
-            clippingMaskMode,
-            userInfo,
-            style,
-            maintainScrollPosition);
+          edited,
+          isClosed,
+          pointRadiusBehaviour,
+          points,
+          UUID,
+          booleanOperation,
+          exportOptions,
+          boundaryRectangle,
+          flow,
+          isFixedToViewport,
+          isFlippedHorizontal,
+          isFlippedVertical,
+          isLocked,
+          isVisible,
+          layerListExpandedType,
+          name,
+          nameIsFixed,
+          resizingConstraint,
+          resizingType,
+          rotation,
+          sharedStyleID,
+          shouldBreakMaskChain,
+          hasClippingMask,
+          clippingMaskMode,
+          userInfo,
+          style,
+          maintainScrollPosition,
+        );
 
   @override
   SketchNode createSketchNode(Map<String, dynamic> json) {
@@ -143,6 +142,7 @@ class Polygon extends AbstractShapeLayer implements SketchNodeFactory {
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
       style: style.interpretStyle(),
+      prototypeNodeUUID: flow?.destinationArtboardID,
     ));
 
     /*

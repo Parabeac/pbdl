@@ -142,18 +142,8 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       maintainScrollPosition: maintainScrollPosition,
       style: style.interpretStyle(),
       content: content,
+      prototypeNodeUUID: flow?.destinationArtboardID,
     ));
-
-    // Future.value(InjectedContainer(
-    //   Point(boundaryRectangle.x + boundaryRectangle.width,
-    //       boundaryRectangle.y + boundaryRectangle.height),
-    //   Point(boundaryRectangle.x, boundaryRectangle.y),
-    //   name,
-    //   Uuid().v4(),
-    //   currentContext: currentContext,
-    // )..addChild(
-    //     InheritedText(this, name, currentContext: currentContext),
-    //   ));
   }
 
   @JsonKey(ignore: true)

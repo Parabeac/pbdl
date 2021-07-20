@@ -15,31 +15,35 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   /// [imageReference] is when we have the reference to the image instead
   String imageReference;
 
-  PBDLImage({
-    this.imageReference,
-    String UUID,
-    booleanOperation,
-    exportOptions,
-    PBDLFrame boundaryRectangle,
-    isFixedToViewport,
-    isFlippedHorizontal,
-    isFlippedVertical,
-    isLocked,
-    bool isVisible,
-    layerListExpandedType,
-    String name,
-    nameIsFixed,
-    resizingConstraint,
-    resizingType,
-    num rotation,
-    sharedStyleID,
-    shouldBreakMaskChain,
-    hasClippingMask,
-    clippingMaskMode,
-    userInfo,
-    maintainScrollPosition,
-    this.style,
-  }) : super(
+  @override
+  String prototypeNodeUUID;
+
+  PBDLImage(
+      {this.imageReference,
+      String UUID,
+      booleanOperation,
+      exportOptions,
+      PBDLFrame boundaryRectangle,
+      isFixedToViewport,
+      isFlippedHorizontal,
+      isFlippedVertical,
+      isLocked,
+      bool isVisible,
+      layerListExpandedType,
+      String name,
+      nameIsFixed,
+      resizingConstraint,
+      resizingType,
+      num rotation,
+      sharedStyleID,
+      shouldBreakMaskChain,
+      hasClippingMask,
+      clippingMaskMode,
+      userInfo,
+      maintainScrollPosition,
+      this.style,
+      this.prototypeNodeUUID})
+      : super(
           UUID: UUID,
           name: name,
           isVisible: isVisible,

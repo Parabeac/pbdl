@@ -173,7 +173,6 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       maintainScrollPosition: maintainScrollPosition,
       name: name,
       nameIsFixed: nameIsFixed,
-      prototypeNode: null,
       resizingConstraint: resizingConstraint,
       resizingType: resizingType,
       rotation: rotation,
@@ -184,6 +183,7 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       symbolID: symbolID,
       userInfo: userInfo,
       verticalSpacing: verticalSpacing,
+      prototypeNodeUUID: flow?.destinationArtboardID,
     ));
   }
 }

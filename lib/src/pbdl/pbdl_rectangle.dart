@@ -39,6 +39,7 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
     maintainScrollPosition,
     this.style,
     this.child,
+    this.prototypeNodeUUID,
   });
 
   @override

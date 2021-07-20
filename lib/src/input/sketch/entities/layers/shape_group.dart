@@ -147,6 +147,7 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
       maintainScrollPosition: maintainScrollPosition,
       style: style.interpretStyle(),
       imageReference: ref,
+      prototypeNodeUUID: flow?.destinationArtboardID,
     ));
     /*
     

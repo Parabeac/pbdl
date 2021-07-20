@@ -37,9 +37,7 @@ SketchNode _$SketchNodeFromJson(Map<String, dynamic> json) {
         ? null
         : Style.fromJson(json['style'] as Map<String, dynamic>),
     json['maintainScrollPosition'] as bool,
-  )
-    ..type = json['type'] as String
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String;
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$SketchNodeToJson(SketchNode instance) =>
@@ -68,5 +66,4 @@ Map<String, dynamic> _$SketchNodeToJson(SketchNode instance) =>
       'userInfo': instance.userInfo,
       'style': instance.style,
       'maintainScrollPosition': instance.maintainScrollPosition,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
     };

@@ -99,7 +99,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       isVisible: isVisible,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       style: style,
-      prototypeNode: prototypeNodeUUID,
+      prototypeNodeUUID: prototypeNodeUUID,
       symbolID: componentId,
     ));
   }

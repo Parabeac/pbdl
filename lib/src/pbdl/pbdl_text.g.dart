@@ -16,8 +16,8 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
     name: json['name'],
     style: json['style'],
     content: json['content'] as String,
+    prototypeNodeUUID: json['prototypeNodeUUID'] as String,
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)

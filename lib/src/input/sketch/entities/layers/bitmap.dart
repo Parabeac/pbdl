@@ -123,6 +123,7 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
       style: style.interpretStyle(),
+      prototypeNodeUUID: flow?.destinationArtboardID,
     ));
   }
 

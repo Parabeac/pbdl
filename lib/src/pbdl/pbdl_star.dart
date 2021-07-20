@@ -37,6 +37,7 @@ class PBDLStar implements PBDLNodeFactory, PBDLNode {
     maintainScrollPosition,
     this.style,
     this.child,
+    this.prototypeNodeUUID,
   });
 
   @override

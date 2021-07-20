@@ -9,7 +9,6 @@ part 'pbdl_oval.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLOval implements PBDLNodeFactory, PBDLNode {
-
   @override
   var boundaryRectangle;
 
@@ -44,6 +43,7 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
     maintainScrollPosition,
     this.style,
     this.child,
+    this.prototypeNodeUUID,
   });
 
   @override

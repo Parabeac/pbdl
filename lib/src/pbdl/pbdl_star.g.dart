@@ -20,9 +20,8 @@ PBDLStar _$PBDLStarFromJson(Map<String, dynamic> json) {
     child: json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>),
-  )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-    ..type = json['type'] as String;
+    prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLStarToJson(PBDLStar instance) => <String, dynamic>{

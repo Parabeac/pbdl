@@ -140,6 +140,7 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
       style: style.interpretStyle(),
       children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList()),
+      prototypeNodeUUID: flow?.destinationArtboardID,
     ));
   }
 }

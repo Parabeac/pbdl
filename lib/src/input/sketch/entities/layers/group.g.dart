@@ -44,7 +44,6 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
         : Style.fromJson(json['style'] as Map<String, dynamic>),
     maintainScrollPosition: json['maintainScrollPosition'],
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..CLASS_NAME = json['CLASS_NAME'] as String
     ..imageReference = json['_ref'] as String
     ..type = json['_class'] as String;
@@ -70,7 +69,6 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'clippingMaskMode': instance.clippingMaskMode,
       'userInfo': instance.userInfo,
       'maintainScrollPosition': instance.maintainScrollPosition,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
       'hasClickThrough': instance.hasClickThrough,
       'groupLayout': instance.groupLayout,
       'CLASS_NAME': instance.CLASS_NAME,

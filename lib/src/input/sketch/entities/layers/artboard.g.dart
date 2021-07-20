@@ -58,7 +58,6 @@ Artboard _$ArtboardFromJson(Map<String, dynamic> json) {
         : Style.fromJson(json['style'] as Map<String, dynamic>),
     maintainScrollPosition: json['maintainScrollPosition'],
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..CLASS_NAME = json['CLASS_NAME'] as String
     ..type = json['_class'] as String;
 }
@@ -83,7 +82,6 @@ Map<String, dynamic> _$ArtboardToJson(Artboard instance) => <String, dynamic>{
       'clippingMaskMode': instance.clippingMaskMode,
       'userInfo': instance.userInfo,
       'maintainScrollPosition': instance.maintainScrollPosition,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
       'hasClickThrough': instance.hasClickThrough,
       'groupLayout': instance.groupLayout,
       'layers': instance.children,

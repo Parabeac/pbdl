@@ -21,9 +21,8 @@ PBDLGroupNode _$PBDLGroupNodeFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-  )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-    ..type = json['type'] as String;
+    prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>

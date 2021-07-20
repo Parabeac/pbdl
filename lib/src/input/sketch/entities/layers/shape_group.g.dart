@@ -45,7 +45,6 @@ ShapeGroup _$ShapeGroupFromJson(Map<String, dynamic> json) {
     maintainScrollPosition: json['maintainScrollPosition'],
     windingRule: json['windingRule'],
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..CLASS_NAME = json['CLASS_NAME'] as String
     ..type = json['_class'] as String;
 }
@@ -71,7 +70,6 @@ Map<String, dynamic> _$ShapeGroupToJson(ShapeGroup instance) =>
       'clippingMaskMode': instance.clippingMaskMode,
       'userInfo': instance.userInfo,
       'maintainScrollPosition': instance.maintainScrollPosition,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
       'hasClickThrough': instance.hasClickThrough,
       'groupLayout': instance.groupLayout,
       'CLASS_NAME': instance.CLASS_NAME,

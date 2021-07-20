@@ -25,7 +25,6 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     bool isVisible,
     this.boundaryRectangle,
     style,
-    prototypeNode,
     exportOptions,
     booleanOperation,
     bool isFixedToViewport,
@@ -47,7 +46,15 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     this.symbolID,
     num verticalSpacing,
     num horizontalSpacing,
-  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNode);
+    String prototypeNodeUUID,
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -56,24 +63,4 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
       _$PBDLSharedInstanceNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLSharedInstanceNodeToJson(this);
-
-  ///Converting the [OverridableValue] into [PBSharedParameterValue] to be processed in intermediate phase.
-  // List<PBSharedParameterValue> _extractParameters() {
-  //   Set<String> ovrNames = {};
-  //   List<PBSharedParameterValue> sharedParameters = [];
-  //   for (var overrideValue in overrideValues) {
-  //     if (!ovrNames.contains(overrideValue.overrideName)) {
-  //       var properties = extractParameter(overrideValue.overrideName);
-  //       sharedParameters.add(PBSharedParameterValue(
-  //           properties['type'],
-  //           overrideValue.value,
-  //           properties['uuid'],
-  //           overrideValue.overrideName));
-  //       ovrNames.add(overrideValue.overrideName);
-  //     }
-  //   }
-
-  //   return sharedParameters;
-  // }
-
 }

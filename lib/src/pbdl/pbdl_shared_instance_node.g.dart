@@ -22,8 +22,8 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     style: json['style'],
     symbolID: json['symbolID'] as String,
+    prototypeNodeUUID: json['prototypeNodeUUID'] as String,
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)

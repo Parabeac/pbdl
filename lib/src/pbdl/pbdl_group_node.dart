@@ -36,6 +36,7 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
     maintainScrollPosition,
     this.style,
     this.children,
+    this.prototypeNodeUUID,
   });
 
   @override

@@ -12,36 +12,37 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   final type = 'text';
 
-  PBDLText(
-      {UUID,
-      booleanOperation,
-      exportOptions,
-      PBDLFrame boundaryRectangle,
-      bool isFixedToViewport,
-      bool isFlippedHorizontal,
-      bool isFlippedVertical,
-      bool isLocked,
-      bool isVisible,
-      layerListExpandedType,
-      name,
-      bool nameIsFixed,
-      resizingConstraint,
-      resizingType,
-      double rotation,
-      sharedStyleID,
-      bool shouldBreakMaskChain,
-      bool hasClippingMask,
-      int clippingMaskMode,
-      bool maintainScrollPosition,
-      style,
-      this.content})
-      : super(
-          UUID: UUID,
-          name: name,
-          isVisible: isVisible,
-          boundaryRectangle: boundaryRectangle,
-          style: style,
-        );
+  PBDLText({
+    UUID,
+    booleanOperation,
+    exportOptions,
+    PBDLFrame boundaryRectangle,
+    bool isFixedToViewport,
+    bool isFlippedHorizontal,
+    bool isFlippedVertical,
+    bool isLocked,
+    bool isVisible,
+    layerListExpandedType,
+    name,
+    bool nameIsFixed,
+    resizingConstraint,
+    resizingType,
+    double rotation,
+    sharedStyleID,
+    bool shouldBreakMaskChain,
+    bool hasClippingMask,
+    int clippingMaskMode,
+    bool maintainScrollPosition,
+    style,
+    this.content,
+    String prototypeNodeUUID,
+  }) : super(
+            UUID: UUID,
+            name: name,
+            isVisible: isVisible,
+            boundaryRectangle: boundaryRectangle,
+            style: style,
+            prototypeNodeUUID: prototypeNodeUUID);
 
   String content;
 
