@@ -18,7 +18,7 @@ Canvas _$CanvasFromJson(Map<String, dynamic> json) {
     prototypeStartNodeID: json['prototypeStartNodeID'],
     prototypeDevice: json['prototypeDevice'],
     exportSettings: json['exportSettings'],
-    prototypeNodeUUID: json['transitionNodeID'] as String,
+    transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
   )
@@ -40,6 +40,7 @@ Map<String, dynamic> _$CanvasToJson(Canvas instance) => <String, dynamic>{
       'sharedPluginData': instance.sharedPluginData,
       'child': instance.child?.toJson(),
       'visible': instance.isVisible,
+      'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
@@ -50,5 +51,4 @@ Map<String, dynamic> _$CanvasToJson(Canvas instance) => <String, dynamic>{
       'prototypeDevice': instance.prototypeDevice,
       'exportSettings': instance.exportSettings,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'transitionNodeID': instance.prototypeNodeUUID,
     };

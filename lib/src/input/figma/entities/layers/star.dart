@@ -28,7 +28,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     strokeWeight,
     strokeAlign,
     styles,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -46,7 +46,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         );
@@ -67,6 +67,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
       isVisible: isVisible,
       name: name,
       style: style.interpretStyle(),
+      prototypeNodeUUID: transitionNodeID,
     ));
   }
 

@@ -33,7 +33,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       this.content,
       this.characterStyleOverrides,
       this.styleOverrideTable,
-      String prototypeNodeUUID,
+      String transitionNodeID,
       num transitionDuration,
       String transitionEasing})
       : super(
@@ -53,7 +53,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         );
@@ -91,6 +91,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         name: name,
         style: style.interpretStyle(),
         content: content,
+        prototypeNodeUUID: transitionNodeID,
       ),
     );
   }

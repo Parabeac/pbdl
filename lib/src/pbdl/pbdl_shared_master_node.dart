@@ -26,7 +26,7 @@ class PBDLSharedMasterNode extends PBDLNode
     bool isVisible,
     boundaryRectangle,
     style,
-    prototypeNode,
+    String prototypeNodeUUID,
     bool hasClickThrough,
     groupLayout,
     booleanOperation,
@@ -60,7 +60,14 @@ class PBDLSharedMasterNode extends PBDLNode
     bool isFlowHome,
     List parameters,
     this.children,
-  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNode);
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -69,25 +76,4 @@ class PBDLSharedMasterNode extends PBDLNode
       _$PBDLSharedMasterNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLSharedMasterNodeToJson(this);
-
-  ///Converting the [OverridableProperty] into [PBSharedParameterProp] to be processed in intermediate phase.
-  // List<PBSharedParameterProp> _extractParameters() {
-  //   Set<String> ovrNames = {};
-  //   List<PBSharedParameterProp> sharedParameters = [];
-  //   for (var prop in overrideProperties) {
-  //     if (!ovrNames.contains(prop.overrideName)) {
-  //       var properties = AddMasterSymbolName(prop.overrideName, children);
-  //       sharedParameters.add(PBSharedParameterProp(
-  //           properties['name'],
-  //           properties['type'],
-  //           null,
-  //           prop.canOverride,
-  //           prop.overrideName,
-  //           properties['uuid'],
-  //           properties['default_value']));
-  //       ovrNames.add(prop.overrideName);
-  //     }
-  //   }
-  //   return sharedParameters;
-  // }
 }

@@ -35,9 +35,9 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
     backgroundColor: json['backgroundColor'] == null
         ? null
         : FigmaColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
+    transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
-    prototypeNodeUUID: json['transitionNodeID'] as String,
   )
     ..child = json['child'] == null
         ? null
@@ -55,7 +55,7 @@ Map<String, dynamic> _$FigmaFrameToJson(FigmaFrame instance) =>
       'sharedPluginData': instance.sharedPluginData,
       'child': instance.child?.toJson(),
       'visible': instance.isVisible,
-      'transitionNodeID': instance.prototypeNodeUUID,
+      'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),

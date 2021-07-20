@@ -43,7 +43,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       List<FigmaNode> children,
       this.parameters,
       FigmaColor backgroundColor,
-      String prototypeNodeUUID,
+      String transitionNodeID,
       num transitionDuration,
       String transitionEasing})
       : super(
@@ -69,7 +69,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             itemSpacing: itemSpacing,
             children: children,
             backgroundColor: backgroundColor,
-            prototypeNodeUUID: prototypeNodeUUID,
+            transitionNodeID: transitionNodeID,
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing);
 
@@ -99,7 +99,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       isVisible: isVisible,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       style: style,
-      prototypeNodeUUID: prototypeNodeUUID,
+      prototypeNodeUUID: transitionNodeID,
       symbolID: componentId,
     ));
   }

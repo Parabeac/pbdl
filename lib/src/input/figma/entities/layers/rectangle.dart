@@ -38,7 +38,7 @@ class FigmaRectangle extends FigmaVector
     this.rectangleCornerRadii,
     this.points,
     List fillsList,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -59,7 +59,7 @@ class FigmaRectangle extends FigmaVector
           strokeAlign: strokeAlign,
           styles: styles,
           fillsList: fillsList,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         );
@@ -99,6 +99,7 @@ class FigmaRectangle extends FigmaVector
         isVisible: isVisible,
         name: name,
         style: style.interpretStyle(),
+        prototypeNodeUUID: transitionNodeID,
       ));
     }
     return Future.value(PBDLRectangle(
@@ -109,6 +110,7 @@ class FigmaRectangle extends FigmaVector
       style: style.interpretStyle(),
       child: await child?.interpretNode(),
       fixedRadius: cornerRadius ?? 0,
+      prototypeNodeUUID: transitionNodeID,
     ));
   }
 

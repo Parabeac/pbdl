@@ -51,7 +51,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       List<FigmaNode> children,
       String UUID,
       FigmaColor backgroundColor,
-      String prototypeNodeUUID,
+      String transitionNodeID,
       num transitionDuration,
       String transitionEasing})
       : super(
@@ -78,7 +78,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
             children: children,
             UUID: UUID,
             backgroundColor: backgroundColor,
-            prototypeNodeUUID: prototypeNodeUUID,
+            transitionNodeID: transitionNodeID,
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing) {
     log = Logger(runtimeType.toString());
@@ -97,7 +97,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
 
       var tempPrototypeID = childrenHavePrototypeNode();
       if (tempPrototypeID != null) {
-        prototypeNodeUUID = tempPrototypeID;
+        transitionNodeID = tempPrototypeID;
       }
 
       if (children != null && children.isNotEmpty) {
@@ -114,24 +114,23 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           isVisible: isVisible,
           name: name,
           style: style?.interpretStyle(),
+          prototypeNodeUUID: transitionNodeID,
         ),
       );
     }
     return Future.value(
       PBDLGroupNode(
-          UUID: UUID,
-          boundaryRectangle: boundaryRectangle.interpretFrame(),
-          isVisible: isVisible,
-          name: name,
-          style: style?.interpretStyle(),
-          children: await Future.wait(
-              children.map((e) async => await e.interpretNode()).toList())),
+        UUID: UUID,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        style: style?.interpretStyle(),
+        prototypeNodeUUID: transitionNodeID,
+        children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList(),
+        ),
+      ),
     );
-
-    // return Future.value(TempGroupLayoutNode(this, currentContext, name,
-    //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
-    //     bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
-    //         boundaryRectangle.y + boundaryRectangle.height)));
   }
 
   bool areAllVectors() {
@@ -172,8 +171,8 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   String childrenHavePrototypeNode() {
     for (child in children) {
-      if (child.prototypeNodeUUID != null) {
-        return child.prototypeNodeUUID;
+      if (child.transitionNodeID != null) {
+        return child.transitionNodeID;
       }
     }
     return null;

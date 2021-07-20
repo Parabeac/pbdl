@@ -40,7 +40,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     strokeWeight,
     strokeAlign,
     styles,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -60,7 +60,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         ) {
@@ -85,6 +85,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       name: name,
       style: style?.interpretStyle(),
       imageReference: imageReference,
+      prototypeNodeUUID: transitionNodeID,
     ));
   }
 

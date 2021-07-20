@@ -1,6 +1,5 @@
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:quick_log/quick_log.dart';
-import '../entities/abstract_figma_node_factory.dart';
 import 'figma_screen.dart';
 
 class FigmaPage {
@@ -9,6 +8,7 @@ class FigmaPage {
   String id;
   String imageURI;
   String name;
+
   bool convert = true;
   List<FigmaScreen> screens = [];
 

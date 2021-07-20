@@ -22,7 +22,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
     this.prototypeStartNodeID,
     this.prototypeDevice,
     this.exportSettings,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -31,7 +31,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
           type,
           null,
           null,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
           children: children,
@@ -52,6 +52,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
   Canvas createSketchNode(Map<String, dynamic> json) => Canvas.fromJson(json);
   factory Canvas.fromJson(Map<String, dynamic> json) => _$CanvasFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$CanvasToJson(this);
 
   @override
@@ -60,10 +61,6 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
   @override
   var boundaryRectangle;
 
-  @override
-  String prototypeNodeUUID;
-
-  @override
   @JsonKey(ignore: true)
   var style;
 
@@ -79,7 +76,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         isVisible: isVisible,
         name: name,
         style: style,
-        prototypeNodeUUID: prototypeNodeUUID,
+        prototypeNodeUUID: transitionNodeID,
         children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList(),
         ),

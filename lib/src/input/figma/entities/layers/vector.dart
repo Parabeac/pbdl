@@ -60,7 +60,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     String UUID,
     num transitionDuration,
     String transitionEasing,
-    String prototypeNodeUUID,
+    String transitionNodeID,
   }) : super(
           name,
           visible,
@@ -70,7 +70,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
           UUID: UUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
         ) {
     log = Logger(runtimeType.toString());
   }
@@ -93,6 +93,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       isVisible: isVisible,
       name: name,
       style: style?.interpretStyle(),
+      prototypeNodeUUID: transitionNodeID,
     ));
   }
 

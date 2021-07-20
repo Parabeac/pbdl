@@ -39,7 +39,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
     this.constraints,
     this.boundaryRectangle,
     this.size,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -48,7 +48,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
           type,
           pluginData,
           sharedPluginData,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         );
@@ -70,6 +70,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
       name: name,
       style: style.interpretStyle(),
       child: await child.interpretNode(),
+      prototypeNodeUUID: transitionNodeID,
     ));
   }
 

@@ -1,10 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'regular_polygon.g.dart';
@@ -30,7 +28,7 @@ class FigmaRegularPolygon extends FigmaVector
     strokeWeight,
     strokeAlign,
     styles,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -48,7 +46,7 @@ class FigmaRegularPolygon extends FigmaVector
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         );
@@ -70,6 +68,7 @@ class FigmaRegularPolygon extends FigmaVector
       isVisible: isVisible,
       name: name,
       style: style.interpretStyle(),
+      prototypeNodeUUID: transitionNodeID,
     ));
   }
 

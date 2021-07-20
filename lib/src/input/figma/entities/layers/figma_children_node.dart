@@ -10,7 +10,7 @@ class FigmaChildrenNode extends FigmaNode {
     pluginData,
     sharedPluginData, {
     String UUID,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
     this.children,
@@ -21,7 +21,7 @@ class FigmaChildrenNode extends FigmaNode {
           pluginData,
           sharedPluginData,
           UUID: UUID,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         );

@@ -28,7 +28,7 @@ class FigmaNode {
   bool isVisible;
 
   @JsonKey(name: 'transitionNodeID')
-  String prototypeNodeUUID;
+  String transitionNodeID;
   @JsonKey()
   num transitionDuration;
   @JsonKey()
@@ -41,7 +41,7 @@ class FigmaNode {
     this.pluginData,
     this.sharedPluginData, {
     this.UUID,
-    this.prototypeNodeUUID,
+    this.transitionNodeID,
     this.transitionDuration,
     this.transitionEasing,
   });
@@ -53,7 +53,7 @@ class FigmaNode {
       isVisible,
       null,
       null,
-      prototypeNodeUUID,
+      transitionNodeID,
       child: await child.interpretNode(),
     ));
   }

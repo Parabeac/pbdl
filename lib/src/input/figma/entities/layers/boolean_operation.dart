@@ -35,14 +35,14 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     style,
     boundaryRectangle,
     UUID,
-    prototypeNodeUUID,
+    String transitionNodeID,
     transitionDuration,
     transitionEasing,
     imageReference,
   }) : super(
             style: style,
             UUID: UUID,
-            prototypeNodeUUID: prototypeNodeUUID,
+            transitionNodeID: transitionNodeID,
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing) {
     log = Logger(runtimeType.toString());
@@ -66,7 +66,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
       style: style,
       boundaryRectangle: boundaryRectangle?.interpretFrame(),
       UUID: UUID,
-      prototypeNodeUUID: prototypeNodeUUID,
+      prototypeNodeUUID: transitionNodeID,
       transitionDuration: transitionDuration,
       transitionEasing: transitionEasing,
       imageReference: imageReference,

@@ -18,13 +18,13 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
     isVisible: json['isVisible'] as bool,
     boundaryRectangle: json['boundaryRectangle'],
     style: json['style'],
+    prototypeNodeUUID: json['prototypeNodeUUID'] as String,
     symbolID: json['symbolID'] as String,
     children: (json['children'] as List)
         ?.map((e) =>
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)

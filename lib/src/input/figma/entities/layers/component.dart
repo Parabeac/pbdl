@@ -39,7 +39,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     List<FigmaNode> children,
     FigmaColor backgroundColor,
     this.symbolID,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -65,7 +65,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           itemSpacing: itemSpacing,
           children: children,
           backgroundColor: backgroundColor,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         );
@@ -77,27 +77,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       _$ComponentFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$ComponentToJson(this);
-
-  // List<PBSharedParameterProp> _extractParameters() {
-  //   Set<String> ovrNames = {};
-  //   List<PBSharedParameterProp> sharedParameters = [];
-  //   overrideProperties ??= [];
-  //   for (var prop in overrideProperties) {
-  //     if (!ovrNames.contains(prop.overrideName)) {
-  //       var properties = extractParameter(prop.overrideName);
-  //       sharedParameters.add(PBSharedParameterProp(
-  //           name,
-  //           properties['type'],
-  //           null,
-  //           prop.canOverride,
-  //           prop.overrideName,
-  //           properties['uuid'],
-  //           properties['default_value']));
-  //       ovrNames.add(prop.overrideName);
-  //     }
-  //   }
-  //   return sharedParameters;
-  // }
 
   @override
   Future<PBDLNode> interpretNode() async {
@@ -117,7 +96,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         isVisible: isVisible,
         boundaryRectangle: boundaryRectangle.interpretFrame(),
         style: style,
-        prototypeNode: prototypeNodeUUID,
+        prototypeNodeUUID: transitionNodeID,
         symbolID: symbolID,
         isFlowHome: isFlowHome,
         children: await Future.wait(

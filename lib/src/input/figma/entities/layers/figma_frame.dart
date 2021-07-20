@@ -78,11 +78,10 @@ class FigmaFrame extends FigmaChildrenNode
     this.itemSpacing,
     List<FigmaNode> children,
     String UUID,
-    FigmaColor this.backgroundColor,
+    this.backgroundColor,
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-    String prototypeNodeUUID,
   }) : super(
           name,
           isVisible,
@@ -90,7 +89,7 @@ class FigmaFrame extends FigmaChildrenNode
           pluginData,
           sharedPluginData,
           UUID: UUID,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
           children: children,
@@ -115,7 +114,6 @@ class FigmaFrame extends FigmaChildrenNode
 
   @override
   Future<PBDLNode> interpretNode() async {
-    /// TODO: change `isHomeScreen` to its actual value
     if (isScaffold) {
       return Future.value(
         PBDLArtboard(
@@ -126,7 +124,7 @@ class FigmaFrame extends FigmaChildrenNode
             isVisible: isVisible,
             name: name,
             style: style.interpretStyle(),
-            prototypeNodeUUID: prototypeNodeUUID,
+            prototypeNodeUUID: transitionNodeID,
             children: await Future.wait(
                 children.map((e) async => await e.interpretNode()).toList())),
       );
@@ -138,13 +136,13 @@ class FigmaFrame extends FigmaChildrenNode
             isVisible: isVisible,
             name: name,
             style: style.interpretStyle(),
+            prototypeNodeUUID: transitionNodeID,
             children: await Future.wait(
                 children.map((e) async => await e.interpretNode()).toList())),
       );
     }
   }
 
-  @override
   String imageReference;
 
   Map<String, dynamic> toPBDF() => toJson();
