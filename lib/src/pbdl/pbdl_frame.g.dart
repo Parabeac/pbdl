@@ -8,7 +8,6 @@ part of 'pbdl_frame.dart';
 
 PBDLFrame _$PBDLFrameFromJson(Map<String, dynamic> json) {
   return PBDLFrame(
-    classField: json['type'] as String,
     constrainProportions: json['constrainProportions'] as bool,
     x: (json['x'] as num)?.toDouble(),
     y: (json['y'] as num)?.toDouble(),
@@ -18,7 +17,6 @@ PBDLFrame _$PBDLFrameFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
-      'type': instance.classField,
       'constrainProportions': instance.constrainProportions,
       'height': instance.height,
       'width': instance.width,

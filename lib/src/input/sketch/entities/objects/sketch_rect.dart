@@ -24,7 +24,6 @@ class SketchRect {
 
   PBDLFrame interpretFrame() {
     return PBDLFrame(
-      classField: classField,
       constrainProportions: constrainProportions,
       x: x,
       y: y,
