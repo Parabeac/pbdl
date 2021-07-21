@@ -13,7 +13,7 @@ PBDLFrame _$PBDLFrameFromJson(Map<String, dynamic> json) {
     y: (json['y'] as num)?.toDouble(),
     width: (json['width'] as num)?.toDouble(),
     height: (json['height'] as num)?.toDouble(),
-  );
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
@@ -22,4 +22,5 @@ Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
       'width': instance.width,
       'x': instance.x,
       'y': instance.y,
+      'type': instance.type,
     };
