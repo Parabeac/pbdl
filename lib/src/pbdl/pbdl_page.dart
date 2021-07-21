@@ -13,17 +13,16 @@ class PBDLPage implements PBDLNodeFactory, PBDLNode {
   @JsonKey(ignore: true)
   var log = Logger('DesignPage');
 
-  String id;
   String imageURI;
   @override
   String name;
   bool convert = true;
 
-  List<PBDLScreen> screens = [];
+  List<PBDLNode> screens = [];
 
   PBDLPage({
     this.name,
-    this.id,
+    this.UUID,
     this.screens,
   });
 
@@ -35,9 +34,6 @@ class PBDLPage implements PBDLNodeFactory, PBDLNode {
     log.info('We encountered a page that has ${screens.length} page items.');
     return screens;
   }
-
-  @override
-  String pbdfType = 'design_page';
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLPage.fromJson(json);
@@ -66,5 +62,5 @@ class PBDLPage implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'page';
 }

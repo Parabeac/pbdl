@@ -17,15 +17,13 @@ class FigmaStyle {
   FigmaTextStyle textStyle;
 
   FigmaStyle({
-    FigmaColor this.backgroundColor,
-    List<FigmaBorder> this.borders,
-    List<FigmaFill> this.fills,
-    FigmaTextStyle this.textStyle,
-    FigmaBorderOptions this.borderOptions,
+    this.backgroundColor,
+    this.borders,
+    this.fills,
+    this.textStyle,
+    this.borderOptions,
   }) {
-    if (this.fills == null) {
-      this.fills = [];
-    }
+    fills ??= [];
   }
 
   FigmaBorderOptions borderOptions;
@@ -42,10 +40,10 @@ class FigmaStyle {
       borders: borders.map((e) => e.interpretBorder()).toList(),
       borderOptions: borderOptions?.interpretOptions(),
       textStyle: textStyle?.interpretTextStyle(),
+      hasShadow: false,
     );
   }
 
-  @override
   @JsonKey(ignore: true)
   bool hasShadow;
 }

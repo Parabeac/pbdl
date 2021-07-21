@@ -32,7 +32,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
     backgroundColor: json['backgroundColor'] == null
         ? null
         : FigmaColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
-    prototypeNodeUUID: json['transitionNodeID'] as String,
+    transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
   )
@@ -41,8 +41,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
-    ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..imageReference = json['imageReference'] as String;
 }
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
@@ -50,13 +49,13 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
-      'child': instance.child,
+      'child': instance.child?.toJson(),
       'visible': instance.isVisible,
-      'transitionNodeID': instance.prototypeNodeUUID,
+      'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
-      'absoluteBoundingBox': instance.boundaryRectangle,
-      'children': instance.children,
+      'children': instance.children?.map((e) => e?.toJson())?.toList(),
+      'absoluteBoundingBox': instance.boundaryRectangle?.toJson(),
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
@@ -67,10 +66,9 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'horizontalPadding': instance.horizontalPadding,
       'verticalPadding': instance.verticalPadding,
       'itemSpacing': instance.itemSpacing,
-      'backgroundColor': instance.backgroundColor,
+      'backgroundColor': instance.backgroundColor?.toJson(),
       'isFlowHome': instance.isFlowHome,
       'fills': instance.fillsList,
       'type': instance.type,
       'imageReference': instance.imageReference,
-      'pbdfType': instance.pbdfType,
     };

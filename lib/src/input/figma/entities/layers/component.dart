@@ -1,7 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -34,12 +36,10 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     horizontalPadding,
     verticalPadding,
     itemSpacing,
-    this.overrideProperties,
     List<FigmaNode> children,
     FigmaColor backgroundColor,
     this.symbolID,
-    this.overriadableProperties,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -65,16 +65,10 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           itemSpacing: itemSpacing,
           children: children,
           backgroundColor: backgroundColor,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'symbol_master';
-  }
-
-  // make sure only store unique UUID overrides with Map
-  @override
-  var overrideProperties;
+        );
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
@@ -84,67 +78,64 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   Map<String, dynamic> toJson() => _$ComponentToJson(this);
 
-  // List<PBSharedParameterProp> _extractParameters() {
-  //   Set<String> ovrNames = {};
-  //   List<PBSharedParameterProp> sharedParameters = [];
-  //   overrideProperties ??= [];
-  //   for (var prop in overrideProperties) {
-  //     if (!ovrNames.contains(prop.overrideName)) {
-  //       var properties = extractParameter(prop.overrideName);
-  //       sharedParameters.add(PBSharedParameterProp(
-  //           name,
-  //           properties['type'],
-  //           null,
-  //           prop.canOverride,
-  //           prop.overrideName,
-  //           properties['uuid'],
-  //           properties['default_value']));
-  //       ovrNames.add(prop.overrideName);
-  //     }
-  //   }
-  //   return sharedParameters;
-  // }
-
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() async {
+    /// Create Overidable Properties.
+    var props = <PBDLOverrideProperty>[];
+
+    for (var child in children) {
+      var currProps = await _traverseChildrenForOverrides(child)
+        ..removeWhere((element) => element.value == null);
+      props.addAll(currProps);
+    }
+
     return PBDLSharedMasterNode(
-      UUID: UUID,
-      overrideProperties: overriadableProperties, // TODO: extract them
-      name: name,
-      isVisible: isVisible,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      type: type,
-      style: style,
-      prototypeNode: prototypeNodeUUID,
-      pbdfType: pbdfType,
-      symbolID: symbolID,
-      isFlowHome: isFlowHome,
-    );
-    /*
-    var sym_master = PBSharedMasterNode(
-      this,
-      UUID,
-      name,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(boundaryRectangle.x + boundaryRectangle.width,
-          boundaryRectangle.y + boundaryRectangle.height),
-      overridableProperties: _extractParameters() ?? [],
-      currentContext: currentContext,
-    );
-    return Future.value(sym_master); */
+        UUID: UUID,
+        overrideProperties: props,
+        name: name,
+        isVisible: isVisible,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        style: style,
+        prototypeNodeUUID: transitionNodeID,
+        symbolID: symbolID,
+        isFlowHome: isFlowHome,
+        children: await Future.wait(
+            children.map((e) async => await e.interpretNode()).toList()));
   }
 
-  @override
-  List overriadableProperties;
+  Future<List<PBDLOverrideProperty>> _traverseChildrenForOverrides(
+      FigmaNode root) async {
+    var stack = [root];
+    var values = <PBDLOverrideProperty>[];
+    while (stack.isNotEmpty) {
+      var current = stack.removeLast();
 
-  @override
+      // Checks if `current` node should be an override property
+      var override = FigmaOverrideTypeFactory.getType(current);
+
+      if (override != null) {
+        var overrideProp = PBDLOverrideProperty(
+          current.UUID,
+          current.name,
+          override.getPBDLType(),
+          await override.getValue(current),
+        );
+        values.add(overrideProp);
+      }
+
+      if (current.child != null) {
+        stack.add(current.child);
+      } else if (current is FigmaChildrenNode && current.children != null) {
+        current.children.forEach(stack.add);
+      }
+    }
+    return Future.value(values);
+  }
+
   String symbolID;
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'symbol_master';
 
   @override
   var isFlowHome;

@@ -14,7 +14,7 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
     style: json['style'],
     boundaryRectangle: json['absoluteBoundingBox'],
     UUID: json['id'],
-    prototypeNodeUUID: json['transitionNodeID'],
+    transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'],
     transitionEasing: json['transitionEasing'],
     imageReference: json['imageReference'],
@@ -33,8 +33,7 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
     ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
     ..strokeAlign = json['strokeAlign'] as String
     ..styles = json['styles']
-    ..fillsList = json['fills'] as List
-    ..pbdfType = json['pbdfType'] as String;
+    ..fillsList = json['fills'] as List;
 }
 
 Map<String, dynamic> _$BooleanOperationToJson(BooleanOperation instance) =>
@@ -45,7 +44,7 @@ Map<String, dynamic> _$BooleanOperationToJson(BooleanOperation instance) =>
       'sharedPluginData': instance.sharedPluginData,
       'child': instance.child,
       'visible': instance.isVisible,
-      'transitionNodeID': instance.prototypeNodeUUID,
+      'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
@@ -62,5 +61,4 @@ Map<String, dynamic> _$BooleanOperationToJson(BooleanOperation instance) =>
       'type': instance.type,
       'absoluteBoundingBox': instance.boundaryRectangle,
       'imageReference': instance.imageReference,
-      'pbdfType': instance.pbdfType,
     };

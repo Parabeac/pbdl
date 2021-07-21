@@ -9,16 +9,14 @@ part of 'pbdl_page.dart';
 PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
   return PBDLPage(
     name: json['name'] as String,
-    id: json['id'] as String,
+    UUID: json['UUID'] as String,
     screens: (json['screens'] as List)
         ?.map((e) =>
-            e == null ? null : PBDLScreen.fromJson(e as Map<String, dynamic>))
+            e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   )
     ..imageURI = json['imageURI'] as String
     ..convert = json['convert'] as bool
-    ..pbdfType = json['pbdfType'] as String
-    ..UUID = json['UUID'] as String
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
@@ -34,12 +32,10 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) => <String, dynamic>{
-      'id': instance.id,
       'imageURI': instance.imageURI,
       'name': instance.name,
       'convert': instance.convert,
       'screens': instance.screens?.map((e) => e?.toJson())?.toList(),
-      'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'child': instance.child?.toJson(),

@@ -22,6 +22,9 @@ class FigmaController {
       throw Error(); //todo: find correct error
     }
     AzureAssetService().projectUUID = figmaProjectID;
+    MainInfo().projectName = jsonFigma['name'];
+    MainInfo().figmaKey = key;
+    MainInfo().figmaProjectID = projectID;
     figmaProject ??=
         generateFigmaTree(figmaProjectID, jsonFigma, MainInfo().projectName);
     figmaProject = declareScaffolds(figmaProject);

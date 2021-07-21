@@ -9,29 +9,17 @@ part 'pbdl_rectangle.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
-  @override
-  String pbdfType = 'rectangle';
-
-  var hasConvertedToNewRoundCorners;
-
-  var fixedRadius;
-
-  var needsConvertionToNewRoundCorners;
-
-  var points;
+  num fixedRadius;
 
   PBDLRectangle({
     this.fixedRadius,
-    this.hasConvertedToNewRoundCorners,
-    this.needsConvertionToNewRoundCorners,
     bool edited,
     bool isClosed,
     pointRadiusBehaviour,
-    List this.points,
     this.UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame this.boundaryRectangle,
+    this.boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
@@ -49,10 +37,9 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.type,
-    this.pbdfType = 'rectangle',
     this.style,
     this.child,
+    this.prototypeNodeUUID,
   });
 
   @override
@@ -82,7 +69,7 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'rectangle';
 
   @override
   PBDLNode child;

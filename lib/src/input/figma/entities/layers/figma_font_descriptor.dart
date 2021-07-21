@@ -26,7 +26,6 @@ class FigmaFontDescriptor {
     return PBDLFontDescriptor(
       fontName: fontName,
       fontSize: fontSize,
-      rawAttributes: rawAttributes,
       fontStyle: fontStyle,
       fontWeight: fontWeight,
       letterSpacing: letterSpacing,

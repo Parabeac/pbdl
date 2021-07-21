@@ -30,11 +30,10 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
             e == null ? null : FigmaNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     parameters: json['parameters'] as List,
-    symbolID: json['symbolID'] as String,
     backgroundColor: json['backgroundColor'] == null
         ? null
         : FigmaColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
-    prototypeNodeUUID: json['transitionNodeID'] as String,
+    transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
   )
@@ -45,7 +44,6 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String
     ..overrideValues = (json['overrideValues'] as List)
         ?.map((e) => e == null
             ? null
@@ -58,12 +56,13 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
-      'child': instance.child,
+      'child': instance.child?.toJson(),
       'visible': instance.isVisible,
-      'transitionNodeID': instance.prototypeNodeUUID,
+      'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
-      'absoluteBoundingBox': instance.boundaryRectangle,
+      'children': instance.children?.map((e) => e?.toJson())?.toList(),
+      'absoluteBoundingBox': instance.boundaryRectangle?.toJson(),
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
@@ -74,15 +73,13 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'horizontalPadding': instance.horizontalPadding,
       'verticalPadding': instance.verticalPadding,
       'itemSpacing': instance.itemSpacing,
-      'backgroundColor': instance.backgroundColor,
+      'backgroundColor': instance.backgroundColor?.toJson(),
       'isFlowHome': instance.isFlowHome,
       'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
       'parameters': instance.parameters,
-      'symbolID': instance.symbolID,
-      'children': instance.children,
       'componentId': instance.componentId,
-      'pbdfType': instance.pbdfType,
-      'overrideValues': instance.overrideValues,
+      'overrideValues':
+          instance.overrideValues?.map((e) => e?.toJson())?.toList(),
     };

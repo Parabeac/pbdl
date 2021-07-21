@@ -4,7 +4,7 @@ part 'pbdl_frame.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLFrame {
-  @JsonKey(name: '_class')
+  @JsonKey(name: 'type')
   final String classField;
   final bool constrainProportions;
   double height, width, x, y;
@@ -19,4 +19,6 @@ class PBDLFrame {
   factory PBDLFrame.fromJson(Map<String, dynamic> json) =>
       _$PBDLFrameFromJson(json);
   Map<String, dynamic> toJson() => _$PBDLFrameToJson(this);
+
+  final type = 'frame';
 }

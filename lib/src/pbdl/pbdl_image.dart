@@ -12,48 +12,44 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   var style;
 
-  /// [image] it is in case the Node give us the bytes of the image
-  var image;
-
   /// [imageReference] is when we have the reference to the image instead
   String imageReference;
 
-  PBDLImage({
-    this.imageReference,
-    UUID,
-    booleanOperation,
-    exportOptions,
-    PBDLFrame boundaryRectangle,
-    isFixedToViewport,
-    isFlippedHorizontal,
-    isFlippedVertical,
-    isLocked,
-    isVisible,
-    layerListExpandedType,
-    name,
-    nameIsFixed,
-    resizingConstraint,
-    resizingType,
-    num rotation,
-    sharedStyleID,
-    shouldBreakMaskChain,
-    hasClippingMask,
-    clippingMaskMode,
-    userInfo,
-    maintainScrollPosition,
-    this.pbdfType = 'image',
-    this.style,
-    this.image,
-  }) : super(
+  @override
+  String prototypeNodeUUID;
+
+  PBDLImage(
+      {this.imageReference,
+      String UUID,
+      booleanOperation,
+      exportOptions,
+      PBDLFrame boundaryRectangle,
+      isFixedToViewport,
+      isFlippedHorizontal,
+      isFlippedVertical,
+      isLocked,
+      bool isVisible,
+      layerListExpandedType,
+      String name,
+      nameIsFixed,
+      resizingConstraint,
+      resizingType,
+      num rotation,
+      sharedStyleID,
+      shouldBreakMaskChain,
+      hasClippingMask,
+      clippingMaskMode,
+      userInfo,
+      maintainScrollPosition,
+      this.style,
+      this.prototypeNodeUUID})
+      : super(
           UUID: UUID,
           name: name,
           isVisible: isVisible,
           boundaryRectangle: boundaryRectangle,
           style: style,
         );
-
-  @override
-  String pbdfType = 'image';
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -64,20 +60,5 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   Map<String, dynamic> toJson() => _$PBDLImageToJson(this);
 
   @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  String type;
+  String type = 'image';
 }

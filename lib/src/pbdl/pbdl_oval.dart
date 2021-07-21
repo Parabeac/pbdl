@@ -10,10 +10,9 @@ part 'pbdl_oval.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLOval implements PBDLNodeFactory, PBDLNode {
   @override
-  String pbdfType = 'oval';
-
   var boundaryRectangle;
 
+  @override
   var UUID;
 
   PBDLOval({
@@ -42,10 +41,9 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    type,
-    this.pbdfType = 'oval',
     this.style,
     this.child,
+    this.prototypeNodeUUID,
   });
 
   @override
@@ -68,7 +66,7 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'oval';
 
   @override
   PBDLNode child;

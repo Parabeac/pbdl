@@ -12,15 +12,12 @@ class PBDLNode {
     this.name,
     this.isVisible,
     this.boundaryRectangle,
-    this.type,
     this.style,
     this.prototypeNodeUUID, {
     transitionDuration,
     transitionEasing,
     this.child,
   });
-
-  String pbdfType;
   String UUID;
   String name;
   bool isVisible;

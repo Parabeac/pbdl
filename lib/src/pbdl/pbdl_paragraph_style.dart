@@ -7,6 +7,8 @@ class PBDLParagraphStyle {
   PBDLParagraphStyle({this.alignment});
   int alignment;
 
+  final type = 'paragraph_style';
+
   factory PBDLParagraphStyle.fromJson(Map<String, dynamic> json) =>
       _$PBDLParagraphStyleFromJson(json);
   @override

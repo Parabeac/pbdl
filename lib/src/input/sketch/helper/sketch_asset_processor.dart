@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 import 'asset_processing_service.dart';
+import 'package:path/path.dart' as p;
 
 class SketchAssetProcessor extends AssetProcessingService {
   final svg_convertion_endpoint =
@@ -55,10 +56,11 @@ class SketchAssetProcessor extends AssetProcessingService {
         var bodyMap = jsonDecode(response.body);
         log.error(bodyMap['error']);
       }
+
       return response?.bodyBytes;
     } catch (e) {
       var imageErr = File(
-              '${MainInfo().cwd.path}/lib/input/assets/image-conversion-error.png')
+              '${MainInfo().cwd.path}/lib/src/input/assets/image-conversion-error.png')
           .readAsBytesSync();
       // await MainInfo().sentry.captureException(exception: e);
       log.error(e.toString());
@@ -73,5 +75,15 @@ class SketchAssetProcessor extends AssetProcessingService {
           entry.key, uuids[entry.key]['width'], uuids[entry.key]['height']);
       await super.uploadToStorage(image, entry.key);
     }
+  }
+
+  /// Writes image `bytes` to output png path using `name` as filename.
+  static String writeImage(String name, Uint8List bytes) {
+    if (!Platform.environment.containsKey('SAC_ENDPOINT')) {
+      var path = p.join(MainInfo().pngPath, '$name.png');
+      File(path).writeAsBytesSync(bytes);
+      return path;
+    }
+    return '';
   }
 }

@@ -5,7 +5,7 @@ part 'pbdl_flow.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLFlow {
   String nodeID;
-  String type;
+  String type = 'flow';
 
   final String classField;
   String destinationArtboardID;

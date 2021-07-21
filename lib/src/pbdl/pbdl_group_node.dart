@@ -10,9 +10,6 @@ part 'pbdl_group_node.g.dart';
 class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
   List<PBDLNode> children = [];
 
-  @override
-  String pbdfType = 'group';
-
   PBDLGroupNode({
     bool hasClickThrough,
     groupLayout,
@@ -37,9 +34,9 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.pbdfType = 'group',
     this.style,
     this.children,
+    this.prototypeNodeUUID,
   });
 
   @override
@@ -69,8 +66,9 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'group_node';
 
   @override
+  @JsonKey(ignore: true)
   PBDLNode child;
 }

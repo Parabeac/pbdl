@@ -1,8 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../../helper/style_extractor.dart';
@@ -12,17 +12,16 @@ import 'figma_node.dart';
 
 part 'figma_frame.g.dart';
 
-@JsonSerializable()
-class FigmaFrame extends FigmaNode
+@JsonSerializable(explicitToJson: true)
+class FigmaFrame extends FigmaChildrenNode
     with PBColorMixin
     implements FigmaNodeFactory {
   @JsonKey(name: 'absoluteBoundingBox')
+  @override
   FigmaRect boundaryRectangle;
 
   @JsonKey(ignore: true)
   FigmaStyle style;
-
-  List<FigmaNode> children;
 
   @JsonKey(ignore: true)
   var fills;
@@ -77,13 +76,12 @@ class FigmaFrame extends FigmaNode
     this.horizontalPadding,
     this.verticalPadding,
     this.itemSpacing,
-    List<FigmaNode> this.children,
+    List<FigmaNode> children,
     String UUID,
-    FigmaColor this.backgroundColor,
+    this.backgroundColor,
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-    String prototypeNodeUUID,
   }) : super(
           name,
           isVisible,
@@ -91,12 +89,11 @@ class FigmaFrame extends FigmaNode
           pluginData,
           sharedPluginData,
           UUID: UUID,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'group';
-  }
+          children: children,
+        );
   @JsonKey(ignore: true)
   List points;
 
@@ -116,40 +113,37 @@ class FigmaFrame extends FigmaNode
   Map<String, dynamic> toJson() => _$FigmaFrameToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    /// TODO: change `isHomeScreen` to its actual value
+  Future<PBDLNode> interpretNode() async {
     if (isScaffold) {
-      return PBDLArtboard(
-        backgroundColor: backgroundColor.interpretColor(),
-        isFlowHome: false,
-        UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
-        isVisible: isVisible,
-        name: name,
-        type: type,
-        style: style.interpretStyle(),
-        prototypeNodeUUID: prototypeNodeUUID,
-        children: children.map((e) => e.interpretNode()).toList(),
+      return Future.value(
+        PBDLArtboard(
+            backgroundColor: backgroundColor.interpretColor(),
+            isFlowHome: false,
+            UUID: UUID,
+            boundaryRectangle: boundaryRectangle.interpretFrame(),
+            isVisible: isVisible,
+            name: name,
+            style: style.interpretStyle(),
+            prototypeNodeUUID: transitionNodeID,
+            children: await Future.wait(
+                children.map((e) async => await e.interpretNode()).toList())),
       );
     } else {
-      return PBDLGroupNode(
-        UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
-        isVisible: isVisible,
-        name: name,
-        pbdfType: pbdfType,
-        style: style.interpretStyle(),
-        children: children.map((e) => e.interpretNode()).toList(),
+      return Future.value(
+        PBDLGroupNode(
+            UUID: UUID,
+            boundaryRectangle: boundaryRectangle.interpretFrame(),
+            isVisible: isVisible,
+            name: name,
+            style: style.interpretStyle(),
+            prototypeNodeUUID: transitionNodeID,
+            children: await Future.wait(
+                children.map((e) async => await e.interpretNode()).toList())),
       );
     }
   }
 
-  @override
   String imageReference;
 
-  @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'group';
 }

@@ -17,6 +17,8 @@ class PBDLColor {
   double green;
   double blue;
 
+  final type = 'color';
+
   factory PBDLColor.fromJson(Map<String, dynamic> json) =>
       _$PBDLColorFromJson(json);
   @override

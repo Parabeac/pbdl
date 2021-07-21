@@ -1,11 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'star.g.dart';
@@ -30,7 +28,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     strokeWeight,
     strokeAlign,
     styles,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -48,13 +46,10 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'star';
-  }
-
+        );
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
       FigmaStar.fromJson(json);
@@ -64,21 +59,18 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaStarToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLImage(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
+      prototypeNodeUUID: transitionNodeID,
+    ));
   }
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'star';
 }

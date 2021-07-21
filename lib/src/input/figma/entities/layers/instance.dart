@@ -1,7 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
 import '../../helper/override_value.dart';
 import '../abstract_figma_node_factory.dart';
@@ -11,19 +13,13 @@ import 'figma_frame.dart';
 
 part 'instance.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   String type = 'INSTANCE';
 
-  @override
   List parameters;
 
-  @override
-  String symbolID;
-
-  @override
-  List<FigmaNode> children;
   Instance(
       {name,
       isVisible,
@@ -44,11 +40,10 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       verticalPadding,
       itemSpacing,
       this.componentId,
-      List<FigmaNode> this.children,
+      List<FigmaNode> children,
       this.parameters,
-      this.symbolID,
       FigmaColor backgroundColor,
-      String prototypeNodeUUID,
+      String transitionNodeID,
       num transitionDuration,
       String transitionEasing})
       : super(
@@ -74,11 +69,9 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             itemSpacing: itemSpacing,
             children: children,
             backgroundColor: backgroundColor,
-            prototypeNodeUUID: prototypeNodeUUID,
+            transitionNodeID: transitionNodeID,
             transitionDuration: transitionDuration,
-            transitionEasing: transitionEasing) {
-    pbdfType = 'symbol_instance';
-  }
+            transitionEasing: transitionEasing);
 
   String componentId;
 
@@ -91,24 +84,54 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$InstanceToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLSharedInstanceNode(
+  Future<PBDLNode> interpretNode() async {
+    var overrideValues = <PBDLOverrideValue>[];
+    children.forEach((child) async {
+      var currVals = await _traverseChildrenForOverrides(child)
+        ..removeWhere((element) => element.value == null);
+      overrideValues.addAll(currVals);
+    });
+
+    return Future.value(PBDLSharedInstanceNode(
       UUID: UUID,
-      overrideValues:
-          overrideValues?.map((e) => e.interpretOverridableValue())?.toList(),
+      overrideValues: overrideValues,
       name: name,
       isVisible: isVisible,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
-      type: type,
       style: style,
-      prototypeNode: prototypeNodeUUID,
-      symbolID: symbolID,
-      pbdfType: pbdfType,
-    );
+      prototypeNodeUUID: transitionNodeID,
+      symbolID: componentId,
+    ));
   }
 
-  @override
-  String pbdfType = 'symbol_instance';
+  Future<List<PBDLOverrideValue>> _traverseChildrenForOverrides(
+      FigmaNode root) async {
+    var stack = [root];
+    var values = <PBDLOverrideValue>[];
+    while (stack.isNotEmpty) {
+      var current = stack.removeLast();
+
+      // Checks if `current` node should be an override property
+      var override = FigmaOverrideTypeFactory.getType(current);
+
+      if (override != null) {
+        // Create override value and add it to list
+        values.add(PBDLOverrideValue(
+          current.UUID.split(';').last, // Get UUID of node to replace
+          current.name,
+          override.getPBDLType(),
+          await override.getValue(current),
+        ));
+      }
+
+      if (current.child != null) {
+        stack.add(current.child);
+      } else if (current is FigmaChildrenNode && current.children != null) {
+        current.children.forEach(stack.add);
+      }
+    }
+    return Future.value(values);
+  }
 
   Map AddMasterSymbolName(String overrideName, List children) {
     // TODO: implement AddMasterSymbolName

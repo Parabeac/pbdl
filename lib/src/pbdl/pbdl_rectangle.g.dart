@@ -8,35 +8,26 @@ part of 'pbdl_rectangle.dart';
 
 PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
   return PBDLRectangle(
-    fixedRadius: json['fixedRadius'],
-    hasConvertedToNewRoundCorners: json['hasConvertedToNewRoundCorners'],
-    needsConvertionToNewRoundCorners: json['needsConvertionToNewRoundCorners'],
-    points: json['points'] as List,
+    fixedRadius: json['fixedRadius'] as num,
     UUID: json['UUID'] as String,
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'] as bool,
     name: json['name'] as String,
-    type: json['type'] as String,
-    pbdfType: json['pbdfType'] as String,
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     child: json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>),
-  )..prototypeNodeUUID = json['prototypeNodeUUID'] as String;
+    prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLRectangleToJson(PBDLRectangle instance) =>
     <String, dynamic>{
-      'pbdfType': instance.pbdfType,
-      'hasConvertedToNewRoundCorners': instance.hasConvertedToNewRoundCorners,
       'fixedRadius': instance.fixedRadius,
-      'needsConvertionToNewRoundCorners':
-          instance.needsConvertionToNewRoundCorners,
-      'points': instance.points,
       'UUID': instance.UUID,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'isVisible': instance.isVisible,

@@ -27,14 +27,18 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLTextStyle.fromJson(json['textStyle'] as Map<String, dynamic>),
     hasShadow: json['hasShadow'] as bool,
-  );
+  )
+    ..isVisible = json['isVisible'] as bool
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
+      'isVisible': instance.isVisible,
       'backgroundColor': instance.backgroundColor?.toJson(),
       'fills': instance.fills?.map((e) => e?.toJson())?.toList(),
       'borders': instance.borders?.map((e) => e?.toJson())?.toList(),
       'borderOptions': instance.borderOptions?.toJson(),
       'textStyle': instance.textStyle?.toJson(),
       'hasShadow': instance.hasShadow,
+      'type': instance.type,
     };

@@ -1,6 +1,5 @@
 import 'package:pbdl/src/pbdl/pbdl_screen.dart';
 
-import '../entities/abstract_figma_node_factory.dart';
 import '../entities/layers/figma_node.dart';
 
 class FigmaScreen {
@@ -21,17 +20,6 @@ class FigmaScreen {
     this.type,
   });
 
-  @override
-  String pbdfType = 'screen';
-
-  // FigmaScreen createFigmaScreen(Map<String, dynamic> json) {
-  //   var screen = FigmaScreen(name: json['name'], id: json['id']);
-  //   if (json.containsKey('designNode') && (json['convert'] ?? true)) {
-  //     screen.figmaNode = FigmaNode.fromJson(json['designNode']);
-  //   }
-  //   return screen;
-  // }
-
   factory FigmaScreen.fromJson(Map<String, dynamic> json) {
     var screen = FigmaScreen(name: json['name'], id: json['id']);
     if (json.containsKey('designNode') && (json['convert'] ?? true)) {
@@ -46,12 +34,11 @@ class FigmaScreen {
     return result;
   }
 
-  PBDLScreen interpretNode() {
+  Future<PBDLScreen> interpretNode() async {
     return PBDLScreen(
-      designNode: figmaNode.interpretNode(),
+      designNode: await figmaNode.interpretNode(),
       id: id,
       name: name,
-      type: type,
     );
   }
 }

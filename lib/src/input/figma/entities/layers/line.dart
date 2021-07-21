@@ -29,7 +29,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       strokeWeight,
       strokeAlign,
       styles,
-      String prototypeNodeUUID,
+      String transitionNodeID,
       num transitionDuration,
       String transitionEasing})
       : super(
@@ -47,12 +47,10 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'image';
-  }
+        );
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
@@ -63,21 +61,17 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaLineToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLRectangle(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLRectangle(
       UUID: UUID,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      type: type,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
+      prototypeNodeUUID: transitionNodeID,
+    ));
   }
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'image';
 }

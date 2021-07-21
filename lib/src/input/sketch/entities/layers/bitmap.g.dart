@@ -42,7 +42,6 @@ Bitmap _$BitmapFromJson(Map<String, dynamic> json) {
     maintainScrollPosition: json['maintainScrollPosition'],
     imageReferenceMap: json['image'] as Map<String, dynamic>,
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..CLASS_NAME = json['CLASS_NAME'] as String
     ..type = json['_class'] as String;
 }
@@ -67,7 +66,6 @@ Map<String, dynamic> _$BitmapToJson(Bitmap instance) => <String, dynamic>{
       'clippingMaskMode': instance.clippingMaskMode,
       'userInfo': instance.userInfo,
       'maintainScrollPosition': instance.maintainScrollPosition,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
       'CLASS_NAME': instance.CLASS_NAME,
       'fillReplacesImage': instance.fillReplacesImage,
       'intendedDPI': instance.intendedDPI,

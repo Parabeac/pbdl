@@ -18,7 +18,7 @@ Canvas _$CanvasFromJson(Map<String, dynamic> json) {
     prototypeStartNodeID: json['prototypeStartNodeID'],
     prototypeDevice: json['prototypeDevice'],
     exportSettings: json['exportSettings'],
-    prototypeNodeUUID: json['transitionNodeID'] as String,
+    transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
   )
@@ -31,26 +31,24 @@ Canvas _$CanvasFromJson(Map<String, dynamic> json) {
     ..isVisible = json['visible'] as bool ?? true
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
-        : FigmaRect.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
-    ..pbdfType = json['pbdfType'] as String;
+        : FigmaRect.fromJson(json['boundaryRectangle'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$CanvasToJson(Canvas instance) => <String, dynamic>{
       'id': instance.UUID,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
-      'child': instance.child,
+      'child': instance.child?.toJson(),
       'visible': instance.isVisible,
+      'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'type': instance.type,
       'name': instance.name,
-      'children': instance.children,
       'backgroundColor': instance.backgroundColor,
       'prototypeStartNodeID': instance.prototypeStartNodeID,
       'prototypeDevice': instance.prototypeDevice,
       'exportSettings': instance.exportSettings,
-      'boundaryRectangle': instance.boundaryRectangle,
-      'transitionNodeID': instance.prototypeNodeUUID,
-      'pbdfType': instance.pbdfType,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
     };

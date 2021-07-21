@@ -80,7 +80,6 @@ class SketchController {
         }
       }
       var b = process?.kill();
-      print('buffer');
     }
   }
 }

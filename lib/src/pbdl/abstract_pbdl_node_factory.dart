@@ -16,9 +16,9 @@ import 'pbdl_text.dart';
 import 'pbdl_vector.dart';
 
 class AbstractPBDLNodeFactory {
-  static final String DESIGN_CLASS_KEY = 'pbdfType';
+  static final String DESIGN_CLASS_KEY = 'type';
 
-  static final List<PBDLNodeFactory> _designNodes = [
+  static final List<PBDLNode> _designNodes = [
     PBDLArtboard(),
     PBDLBooleanOperation(),
     PBDLGroupNode(),
@@ -42,7 +42,7 @@ class AbstractPBDLNodeFactory {
     var className = json[DESIGN_CLASS_KEY];
     if (className != null) {
       for (var designNode in _designNodes) {
-        if (designNode.pbdfType == className) {
+        if (designNode.type == className) {
           return designNode.createPBDLNode(json);
         }
       }
@@ -52,6 +52,5 @@ class AbstractPBDLNodeFactory {
 }
 
 abstract class PBDLNodeFactory {
-  String pbdfType;
   PBDLNode createPBDLNode(Map<String, dynamic> json);
 }

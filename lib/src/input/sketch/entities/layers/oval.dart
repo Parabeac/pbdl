@@ -113,8 +113,8 @@ class Oval extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$OvalToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLOval(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLOval(
       edited: edited,
       isClosed: isClosed,
       pointRadiusBehaviour: pointRadiusBehaviour,
@@ -139,19 +139,8 @@ class Oval extends AbstractShapeLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      type: type,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
-    /*
-    var image = await SketchAssetProcessor()
-        .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
-
-    return Future.value(InheritedOval(this, name, 
-        currentContext: currentContext, image: image)); */
+      prototypeNodeUUID: flow?.destinationArtboardID,
+    ));
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'oval';
 }

@@ -24,7 +24,6 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
     horizontalPadding: json['horizontalPadding'],
     verticalPadding: json['verticalPadding'],
     itemSpacing: json['itemSpacing'],
-    overrideProperties: json['overrideProperties'],
     children: (json['children'] as List)
         ?.map((e) =>
             e == null ? null : FigmaNode.fromJson(e as Map<String, dynamic>))
@@ -33,8 +32,7 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
     symbolID: json['symbolID'] as String,
-    overriadableProperties: json['overriadableProperties'] as List,
-    prototypeNodeUUID: json['transitionNodeID'] as String,
+    transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
   )
@@ -44,7 +42,6 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String
     ..isFlowHome = json['isFlowHome'] as bool ?? false;
 }
 
@@ -55,11 +52,11 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'sharedPluginData': instance.sharedPluginData,
       'child': instance.child,
       'visible': instance.isVisible,
-      'transitionNodeID': instance.prototypeNodeUUID,
+      'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
-      'absoluteBoundingBox': instance.boundaryRectangle,
       'children': instance.children,
+      'absoluteBoundingBox': instance.boundaryRectangle,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
@@ -74,9 +71,6 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
-      'overrideProperties': instance.overrideProperties,
-      'overriadableProperties': instance.overriadableProperties,
       'symbolID': instance.symbolID,
-      'pbdfType': instance.pbdfType,
       'isFlowHome': instance.isFlowHome,
     };

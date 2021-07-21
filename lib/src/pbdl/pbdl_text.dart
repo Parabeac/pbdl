@@ -9,17 +9,8 @@ part 'pbdl_text.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
-  var attributedString;
-
-  var automaticallyDrawOnUnderlyingPath;
-
-  var dontSynchroniseWithSymbol;
-
-  var lineSpacingBehaviour;
-
-  var textBehaviour;
-
-  var glyphBounds;
+  @override
+  final type = 'text';
 
   PBDLText({
     UUID,
@@ -42,28 +33,18 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     bool hasClippingMask,
     int clippingMaskMode,
     bool maintainScrollPosition,
-    this.attributedString,
-    this.automaticallyDrawOnUnderlyingPath,
-    this.dontSynchroniseWithSymbol,
-    this.lineSpacingBehaviour,
-    this.textBehaviour,
-    this.glyphBounds,
-    type,
-    pbdfType = 'text',
     style,
+    this.content,
+    String prototypeNodeUUID,
   }) : super(
-          UUID: UUID,
-          name: name,
-          isVisible: isVisible,
-          boundaryRectangle: boundaryRectangle,
-          type: type,
-          style: style,
-        );
+            UUID: UUID,
+            name: name,
+            isVisible: isVisible,
+            boundaryRectangle: boundaryRectangle,
+            style: style,
+            prototypeNodeUUID: prototypeNodeUUID);
 
   String content;
-
-  @override
-  String pbdfType = 'text';
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLText.fromJson(json);

@@ -116,11 +116,12 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$TriangleToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    var image = SketchAssetProcessor()
+  Future<PBDLNode> interpretNode() async {
+    var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
-    return PBDLImage(
-      // image: image, // TODO: change to imageReference
+
+    var ref = SketchAssetProcessor.writeImage(name, image);
+    return Future.value(PBDLImage(
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
@@ -142,18 +143,9 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
-
-    /*
-    
-
-    return Future.value(InheritedTriangle(this, name,
-        currentContext: currentContext, image: image)); */
+      imageReference: ref,
+      prototypeNodeUUID: flow?.destinationArtboardID,
+    ));
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'triangle';
 }

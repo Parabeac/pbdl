@@ -1,4 +1,5 @@
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_group_node.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -9,9 +10,14 @@ part 'pbdl_shared_master_node.g.dart';
 class PBDLSharedMasterNode extends PBDLNode
     implements PBDLNodeFactory, PBDLGroupNode {
   String symbolID;
-  List overriadableProperties;
 
-  var overrideProperties;
+  List<PBDLOverrideProperty> overrideProperties;
+
+  @override
+  List<PBDLNode> children = [];
+
+  @override
+  final type = 'shared_master';
 
   PBDLSharedMasterNode({
     String UUID,
@@ -19,9 +25,8 @@ class PBDLSharedMasterNode extends PBDLNode
     String name,
     bool isVisible,
     boundaryRectangle,
-    String type,
     style,
-    prototypeNode,
+    String prototypeNodeUUID,
     bool hasClickThrough,
     groupLayout,
     booleanOperation,
@@ -31,7 +36,6 @@ class PBDLSharedMasterNode extends PBDLNode
     isFlippedVertical,
     isLocked,
     layerListExpandedType,
-    this.pbdfType,
     presetDictionary,
     bool allowsOverrides,
     nameIsFixed,
@@ -55,13 +59,15 @@ class PBDLSharedMasterNode extends PBDLNode
     bool includeInCloudUpload,
     bool isFlowHome,
     List parameters,
-  }) : super(UUID, name, isVisible, boundaryRectangle, type, style,
-            prototypeNode) {
-    pbdfType = 'symbol_master';
-  }
-
-  @override
-  String pbdfType = 'symbol_master';
+    this.children,
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -70,28 +76,4 @@ class PBDLSharedMasterNode extends PBDLNode
       _$PBDLSharedMasterNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLSharedMasterNodeToJson(this);
-
-  ///Converting the [OverridableProperty] into [PBSharedParameterProp] to be processed in intermediate phase.
-  // List<PBSharedParameterProp> _extractParameters() {
-  //   Set<String> ovrNames = {};
-  //   List<PBSharedParameterProp> sharedParameters = [];
-  //   for (var prop in overrideProperties) {
-  //     if (!ovrNames.contains(prop.overrideName)) {
-  //       var properties = AddMasterSymbolName(prop.overrideName, children);
-  //       sharedParameters.add(PBSharedParameterProp(
-  //           properties['name'],
-  //           properties['type'],
-  //           null,
-  //           prop.canOverride,
-  //           prop.overrideName,
-  //           properties['uuid'],
-  //           properties['default_value']));
-  //       ovrNames.add(prop.overrideName);
-  //     }
-  //   }
-  //   return sharedParameters;
-  // }
-
-  @override
-  List<PBDLNode> children = [];
 }

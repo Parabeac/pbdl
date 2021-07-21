@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/symbol_node_mixin.dart';
+import 'package:pbdl/src/input/sketch/helper/overrides/sketch_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
 import '../abstract_sketch_node_factory.dart';
 import '../objects/sketch_rect.dart';
@@ -18,7 +21,6 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
   String CLASS_NAME = 'symbolInstance';
   final List<OverridableValue> overrideValues;
   final double scale;
-  @override
   String symbolID;
   final double verticalSpacing;
   final double horizontalSpacing;
@@ -39,17 +41,17 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
 
   Style _style;
 
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
 
   @override
   bool get isVisible => _isVisible;
 
-  @override
-  void set style(_style) => this._style = _style;
+  set style(_style) => this._style = _style;
 
   @override
   Style get style => _style;
+
+  List parameters;
 
   SymbolInstance(
       {this.UUID,
@@ -137,48 +139,51 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
   // }
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLSharedInstanceNode(
+  Future<PBDLNode> interpretNode() {
+    var overrides = overrideValues.map((e) {
+      var uuidTypeMap = SymbolNodeMixin.extractParameter(e.overrideName);
+
+      var ovrVal = SketchOverrideTypeFactory.getType(e);
+
+      if (ovrVal != null) {
+        return PBDLOverrideValue(
+          uuidTypeMap['uuid'],
+          name, //TODO: Get friendly name
+          ovrVal.getPBDLType(),
+          e.value,
+        );
+      }
+    }).toList();
+
+    return Future.value(PBDLSharedInstanceNode(
       UUID: UUID,
+      overrideValues: overrides,
       booleanOperation: booleanOperation,
-      exportOptions: exportOptions,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
+      clippingMaskMode: clippingMaskMode,
+      exportOptions: exportOptions,
+      hasClippingMask: hasClippingMask,
+      horizontalSpacing: horizontalSpacing,
       isFixedToViewport: isFixedToViewport,
       isFlippedHorizontal: isFlippedHorizontal,
       isFlippedVertical: isFlippedVertical,
       isLocked: isLocked,
       isVisible: isVisible,
       layerListExpandedType: layerListExpandedType,
+      maintainScrollPosition: maintainScrollPosition,
       name: name,
       nameIsFixed: nameIsFixed,
       resizingConstraint: resizingConstraint,
+      resizingType: resizingType,
       rotation: rotation,
+      scale: scale,
       sharedStyleID: sharedStyleID,
       shouldBreakMaskChain: shouldBreakMaskChain,
-      hasClippingMask: hasClippingMask,
-      clippingMaskMode: clippingMaskMode,
-      userInfo: userInfo,
-      maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-      overrideValues: overrideValues,
-      type: type,
-      prototypeNode: prototypeNodeUUID,
       symbolID: symbolID,
+      userInfo: userInfo,
       verticalSpacing: verticalSpacing,
-      horizontalSpacing: horizontalSpacing,
-    );
-    /*
-    var sym = PBSharedInstanceIntermediateNode(this, symbolID,
-        sharedParamValues: _extractParameters(),
-        currentContext: currentContext);
-    return Future.value(sym); */
+      prototypeNodeUUID: flow?.destinationArtboardID,
+    ));
   }
-
-  @override
-  List parameters;
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'symbol_instance';
 }

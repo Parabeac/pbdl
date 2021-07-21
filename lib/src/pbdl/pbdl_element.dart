@@ -6,6 +6,8 @@ part 'pbdl_element.g.dart';
 @JsonSerializable(explicitToJson: true)
 // TODO: Not sure why this class exists.
 class PBDLElement extends PBDLNode {
+  @override
+  final type = 'element';
   PBDLElement({
     UUID,
     name,
@@ -19,7 +21,6 @@ class PBDLElement extends PBDLNode {
           name,
           isVisible,
           boundaryRectangle,
-          type,
           style,
           prototypeNodeUUID,
         );

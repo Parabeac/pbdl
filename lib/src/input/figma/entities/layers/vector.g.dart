@@ -30,14 +30,13 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
     UUID: json['id'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
-    prototypeNodeUUID: json['transitionNodeID'] as String,
+    transitionNodeID: json['transitionNodeID'] as String,
   )
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
-    ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..imageReference = json['imageReference'] as String;
 }
 
 Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
@@ -48,7 +47,7 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'sharedPluginData': instance.sharedPluginData,
       'child': instance.child,
       'visible': instance.isVisible,
-      'transitionNodeID': instance.prototypeNodeUUID,
+      'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
@@ -63,5 +62,4 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'type': instance.type,
       'fills': instance.fillsList,
       'imageReference': instance.imageReference,
-      'pbdfType': instance.pbdfType,
     };

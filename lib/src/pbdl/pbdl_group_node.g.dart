@@ -14,7 +14,6 @@ PBDLGroupNode _$PBDLGroupNodeFromJson(Map<String, dynamic> json) {
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'] as bool,
     name: json['name'] as String,
-    pbdfType: json['pbdfType'] as String,
     style: json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
@@ -22,18 +21,13 @@ PBDLGroupNode _$PBDLGroupNodeFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-  )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-    ..type = json['type'] as String
-    ..child = json['child'] == null
-        ? null
-        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
+    prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>
     <String, dynamic>{
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'pbdfType': instance.pbdfType,
       'UUID': instance.UUID,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'isVisible': instance.isVisible,
@@ -41,5 +35,4 @@ Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'style': instance.style?.toJson(),
       'type': instance.type,
-      'child': instance.child?.toJson(),
     };

@@ -2,6 +2,7 @@ import 'package:pbdl/src/input/figma/entities/layers/canvas.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
 import 'package:pbdl/src/input/figma/helper/figma_page.dart';
 import 'package:pbdl/src/pbdl/pbdl_project.dart';
+import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 import '../entities/layers/canvas.dart';
 import 'figma_page.dart';
@@ -54,11 +55,14 @@ class FigmaProject {
     return figmaPages;
   }
 
-  PBDLProject interpretNode() {
+  Future<PBDLProject> interpretNode() async {
+    var processedPages = await Future.wait(
+        pages.map((e) async => await e.interpretNode()).toList());
     return PBDLProject(
-      projectName: projectName,
-      id: id,
-      pages: pages.map((e) => e.interpretNode()).toList(),
+      name: projectName,
+      UUID: id,
+      pages: processedPages,
+      pngPath: MainInfo().pngPath,
     );
   }
 }

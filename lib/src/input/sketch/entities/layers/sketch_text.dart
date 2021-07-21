@@ -17,15 +17,10 @@ class SketchText extends SketchNode implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'text';
 
-  @override
   final bool automaticallyDrawOnUnderlyingPath;
-  @override
   final bool dontSynchroniseWithSymbol;
-  @override
   final dynamic lineSpacingBehaviour;
-  @override
   final dynamic textBehaviour;
-  @override
   final dynamic glyphBounds;
 
   @override
@@ -123,8 +118,8 @@ class SketchText extends SketchNode implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$SketchTextToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLText(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLText(
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
@@ -145,63 +140,34 @@ class SketchText extends SketchNode implements SketchNodeFactory {
       hasClippingMask: hasClippingMask,
       clippingMaskMode: clippingMaskMode,
       maintainScrollPosition: maintainScrollPosition,
-      attributedString: attributedString,
-      automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
-      dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
-      lineSpacingBehaviour: lineSpacingBehaviour,
-      textBehaviour: textBehaviour,
-      glyphBounds: glyphBounds,
-      type: type,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
-
-    // Future.value(InjectedContainer(
-    //   Point(boundaryRectangle.x + boundaryRectangle.width,
-    //       boundaryRectangle.y + boundaryRectangle.height),
-    //   Point(boundaryRectangle.x, boundaryRectangle.y),
-    //   name,
-    //   Uuid().v4(),
-    //   currentContext: currentContext,
-    // )..addChild(
-    //     InheritedText(this, name, currentContext: currentContext),
-    //   ));
+      content: content,
+      prototypeNodeUUID: flow?.destinationArtboardID,
+    ));
   }
 
-  @override
   @JsonKey(ignore: true)
   String content;
 
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'text';
-
-  @override
   var attributedString;
 
-  @override
-  void set automaticallyDrawOnUnderlyingPath(
-      _automaticallyDrawOnUnderlyingPath) {
+  set automaticallyDrawOnUnderlyingPath(_automaticallyDrawOnUnderlyingPath) {
     // TODO: implement automaticallyDrawOnUnderlyingPath
   }
 
-  @override
-  void set dontSynchroniseWithSymbol(_dontSynchroniseWithSymbol) {
+  set dontSynchroniseWithSymbol(_dontSynchroniseWithSymbol) {
     // TODO: implement dontSynchroniseWithSymbol
   }
 
-  @override
-  void set glyphBounds(_glyphBounds) {
+  set glyphBounds(_glyphBounds) {
     // TODO: implement glyphBounds
   }
 
-  @override
-  void set lineSpacingBehaviour(_lineSpacingBehaviour) {
+  set lineSpacingBehaviour(_lineSpacingBehaviour) {
     // TODO: implement lineSpacingBehaviour
   }
 
-  @override
-  void set textBehaviour(_textBehaviour) {
+  set textBehaviour(_textBehaviour) {
     // TODO: implement textBehaviour
   }
 }

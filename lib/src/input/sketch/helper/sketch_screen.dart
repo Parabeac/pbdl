@@ -23,9 +23,6 @@ class SketchScreen {
     this.designNode = designNode;
   }
 
-  @override
-  String pbdfType = 'screen';
-
   factory SketchScreen.fromJson(Map<String, dynamic> json) {
     var screen = SketchScreen(name: json['name'], id: json['id']);
     if (json.containsKey('designNode') && (json['convert'] ?? true)) {
@@ -42,12 +39,11 @@ class SketchScreen {
   @override
   String CLASS_NAME;
 
-  PBDLScreen interpretNode() {
-    return PBDLScreen(
-      designNode: designNode.interpretNode(),
+  Future<PBDLScreen> interpretNode() async {
+    return Future.value(PBDLScreen(
+      designNode: await designNode.interpretNode(),
       id: id,
       name: name,
-      type: type,
-    );
+    ));
   }
 }

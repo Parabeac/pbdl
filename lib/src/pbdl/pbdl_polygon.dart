@@ -9,10 +9,9 @@ part 'pbdl_polygon.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
   @override
-  String pbdfType = 'polygon';
-
   var boundaryRectangle;
 
+  @override
   var UUID;
 
   PBDLPolygon({
@@ -41,10 +40,9 @@ class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    type,
-    pbdfType,
     this.style,
     this.child,
+    this.prototypeNodeUUID,
   });
 
   @override
@@ -68,7 +66,7 @@ class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type;
+  String type = 'polygon';
 
   @override
   PBDLNode child;

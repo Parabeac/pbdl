@@ -25,6 +25,7 @@ class Rectangle extends AbstractShapeLayer
   final bool hasConvertedToNewRoundCorners;
   final bool needsConvertionToNewRoundCorners;
   @JsonKey(name: 'frame')
+  @override
   var boundaryRectangle;
   @override
   @JsonKey(name: 'do_objectID')
@@ -38,79 +39,78 @@ class Rectangle extends AbstractShapeLayer
 
   Style _style;
 
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
 
   @override
   bool get isVisible => _isVisible;
 
-  @override
-  void set style(_style) => this._style = _style;
+  set style(_style) => this._style = _style;
 
   @override
   Style get style => _style;
 
-  Rectangle(
-      {this.fixedRadius,
-      this.hasConvertedToNewRoundCorners,
-      this.needsConvertionToNewRoundCorners,
-      bool edited,
-      bool isClosed,
-      pointRadiusBehaviour,
-      List points,
-      this.UUID,
-      booleanOperation,
-      exportOptions,
-      SketchRect this.boundaryRectangle,
-      Flow flow,
-      isFixedToViewport,
-      isFlippedHorizontal,
-      isFlippedVertical,
-      isLocked,
-      isVisible,
-      layerListExpandedType,
-      name,
-      nameIsFixed,
-      resizingConstraint,
-      resizingType,
-      rotation,
-      sharedStyleID,
-      shouldBreakMaskChain,
-      hasClippingMask,
-      clippingMaskMode,
-      userInfo,
-      Style style,
-      maintainScrollPosition})
-      : _isVisible = isVisible,
+  Rectangle({
+    this.fixedRadius,
+    this.hasConvertedToNewRoundCorners,
+    this.needsConvertionToNewRoundCorners,
+    bool edited,
+    bool isClosed,
+    pointRadiusBehaviour,
+    List points,
+    this.UUID,
+    booleanOperation,
+    exportOptions,
+    SketchRect this.boundaryRectangle,
+    Flow flow,
+    isFixedToViewport,
+    isFlippedHorizontal,
+    isFlippedVertical,
+    isLocked,
+    isVisible,
+    layerListExpandedType,
+    name,
+    nameIsFixed,
+    resizingConstraint,
+    resizingType,
+    rotation,
+    sharedStyleID,
+    shouldBreakMaskChain,
+    hasClippingMask,
+    clippingMaskMode,
+    userInfo,
+    Style style,
+    maintainScrollPosition,
+  })  : _isVisible = isVisible,
         _style = style,
         super(
-            edited,
-            isClosed,
-            pointRadiusBehaviour,
-            points,
-            UUID,
-            booleanOperation,
-            exportOptions,
-            boundaryRectangle,
-            flow,
-            isFixedToViewport,
-            isFlippedHorizontal,
-            isFlippedVertical,
-            isLocked,
-            isVisible,
-            layerListExpandedType,
-            name,
-            nameIsFixed,
-            resizingConstraint,
-            resizingType,
-            rotation,
-            sharedStyleID,
-            shouldBreakMaskChain,
-            hasClippingMask,
-            clippingMaskMode,
-            userInfo,
-            style,
-            maintainScrollPosition);
+          edited,
+          isClosed,
+          pointRadiusBehaviour,
+          points,
+          UUID,
+          booleanOperation,
+          exportOptions,
+          boundaryRectangle,
+          flow,
+          isFixedToViewport,
+          isFlippedHorizontal,
+          isFlippedVertical,
+          isLocked,
+          isVisible,
+          layerListExpandedType,
+          name,
+          nameIsFixed,
+          resizingConstraint,
+          resizingType,
+          rotation,
+          sharedStyleID,
+          shouldBreakMaskChain,
+          hasClippingMask,
+          clippingMaskMode,
+          userInfo,
+          style,
+          maintainScrollPosition,
+        );
   @override
   SketchNode createSketchNode(Map<String, dynamic> json) =>
       Rectangle.fromJson(json);
@@ -121,67 +121,34 @@ class Rectangle extends AbstractShapeLayer
   Map<String, dynamic> toJson() => _$RectangleToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLRectangle(
-      fixedRadius: fixedRadius,
-      hasConvertedToNewRoundCorners: hasConvertedToNewRoundCorners,
-      needsConvertionToNewRoundCorners: needsConvertionToNewRoundCorners,
-      edited: edited,
-      isClosed: isClosed,
-      pointRadiusBehaviour: pointRadiusBehaviour,
-      points: points,
-      UUID: UUID,
-      booleanOperation: booleanOperation,
-      exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isFixedToViewport: isFixedToViewport,
-      isFlippedHorizontal: isFlippedHorizontal,
-      isFlippedVertical: isFlippedVertical,
-      isLocked: isLocked,
-      isVisible: isVisible,
-      layerListExpandedType: layerListExpandedType,
-      name: name,
-      nameIsFixed: nameIsFixed,
-      resizingConstraint: resizingConstraint,
-      resizingType: resizingType,
-      rotation: rotation,
-      sharedStyleID: sharedStyleID,
-      shouldBreakMaskChain: shouldBreakMaskChain,
-      hasClippingMask: hasClippingMask,
-      clippingMaskMode: clippingMaskMode,
-      userInfo: userInfo,
-      maintainScrollPosition: maintainScrollPosition,
-      type: type,
-      pbdfType: pbdfType,
-      style: style.interpretStyle(),
-    );
-    //Questions: Why is the first half white? Does it have to do with PBDLRectangle not being defined?
-    //Why isn't PBDLRectangle defined?
-
-    /*
-    Border border;
-    for (var b in style.borders.reversed) {
-      if (b.isEnabled) {
-        border = b;
-      }
-    }
-    return Future.value(InheritedContainer(
-      this,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(boundaryRectangle.x + boundaryRectangle.width,
-          boundaryRectangle.y + boundaryRectangle.height),
-      name,
-      currentContext: currentContext,
-      borderInfo: {
-        'borderRadius':
-            style.borderOptions.isEnabled ? points[0]['cornerRadius'] : null,
-        'borderColorHex': border != null ? toHex(border.color) : null,
-        'borderThickness': border != null ? border.thickness : null
-      },
-    )); */
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLRectangle(
+        fixedRadius: fixedRadius,
+        edited: edited,
+        isClosed: isClosed,
+        pointRadiusBehaviour: pointRadiusBehaviour,
+        UUID: UUID,
+        booleanOperation: booleanOperation,
+        exportOptions: exportOptions,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        isFixedToViewport: isFixedToViewport,
+        isFlippedHorizontal: isFlippedHorizontal,
+        isFlippedVertical: isFlippedVertical,
+        isLocked: isLocked,
+        isVisible: isVisible,
+        layerListExpandedType: layerListExpandedType,
+        name: name,
+        nameIsFixed: nameIsFixed,
+        resizingConstraint: resizingConstraint,
+        resizingType: resizingType,
+        rotation: rotation,
+        sharedStyleID: sharedStyleID,
+        shouldBreakMaskChain: shouldBreakMaskChain,
+        hasClippingMask: hasClippingMask,
+        clippingMaskMode: clippingMaskMode,
+        userInfo: userInfo,
+        maintainScrollPosition: maintainScrollPosition,
+        style: style.interpretStyle(),
+        prototypeNodeUUID: flow?.destinationArtboardID));
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'rectangle';
 }

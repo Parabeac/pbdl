@@ -21,7 +21,7 @@ FigmaStar _$FigmaStarFromJson(Map<String, dynamic> json) {
     strokeWeight: json['strokeWeight'],
     strokeAlign: json['strokeAlign'],
     styles: json['styles'],
-    prototypeNodeUUID: json['transitionNodeID'] as String,
+    transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
   )
@@ -31,8 +31,7 @@ FigmaStar _$FigmaStarFromJson(Map<String, dynamic> json) {
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
     ..fillsList = json['fills'] as List
-    ..imageReference = json['imageReference'] as String
-    ..pbdfType = json['pbdfType'] as String;
+    ..imageReference = json['imageReference'] as String;
 }
 
 Map<String, dynamic> _$FigmaStarToJson(FigmaStar instance) => <String, dynamic>{
@@ -42,7 +41,7 @@ Map<String, dynamic> _$FigmaStarToJson(FigmaStar instance) => <String, dynamic>{
       'sharedPluginData': instance.sharedPluginData,
       'child': instance.child,
       'visible': instance.isVisible,
-      'transitionNodeID': instance.prototypeNodeUUID,
+      'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
@@ -57,5 +56,4 @@ Map<String, dynamic> _$FigmaStarToJson(FigmaStar instance) => <String, dynamic>{
       'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
-      'pbdfType': instance.pbdfType,
     };

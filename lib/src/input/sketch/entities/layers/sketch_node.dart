@@ -43,17 +43,12 @@ class SketchNode {
   final Style style;
   final bool maintainScrollPosition;
 
-  @override
-  set prototypeNodeUUID(String id) => flow?.destinationArtboardID ??= id;
-  @override
-  String get prototypeNodeUUID => flow?.destinationArtboardID;
-
   SketchNode(
       this.UUID,
       this.booleanOperation,
       this.exportOptions,
-      SketchRect this.boundaryRectangle,
-      Flow this.flow,
+      this.boundaryRectangle,
+      this.flow,
       this.isFixedToViewport,
       this.isFlippedHorizontal,
       this.isFlippedVertical,
@@ -73,7 +68,7 @@ class SketchNode {
       this.style,
       this.maintainScrollPosition);
 
-  PBDLNode interpretNode() {}
+  Future<PBDLNode> interpretNode() {}
 
   factory SketchNode.fromJson(Map<String, dynamic> json) =>
       AbstractSketchNodeFactory.getSketchNode(json);

@@ -7,12 +7,10 @@ class PBDLFontDescriptor {
   PBDLFontDescriptor({
     this.fontName,
     this.fontSize,
-    this.rawAttributes,
     this.fontStyle,
     this.fontWeight,
     this.letterSpacing,
   });
-  Map<String, dynamic> rawAttributes;
   String fontName;
   num fontSize;
   String fontWeight;
@@ -20,6 +18,8 @@ class PBDLFontDescriptor {
   String fontStyle;
 
   num letterSpacing;
+
+  final type = 'font_descriptor';
 
   @override
   factory PBDLFontDescriptor.fromJson(Map<String, dynamic> json) =>

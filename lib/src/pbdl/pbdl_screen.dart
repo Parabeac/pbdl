@@ -10,10 +10,14 @@ part 'pbdl_screen.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLScreen implements PBDLNodeFactory, PBDLNode {
   String id;
+  @override
   String name;
   bool convert = true;
   String imageURI;
-  String type;
+
+  @override
+  String type = 'screen';
+  
   PBDLNode designNode;
 
   // Do we still need this?
@@ -23,13 +27,9 @@ class PBDLScreen implements PBDLNodeFactory, PBDLNode {
     PBDLNode designNode,
     this.id,
     this.name,
-    this.type,
   }) {
     this.designNode = designNode;
   }
-
-  @override
-  String pbdfType = 'screen';
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

@@ -113,8 +113,8 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$GroupToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLGroupNode(
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(PBDLGroupNode(
       hasClickThrough: hasClickThrough,
       groupLayout: groupLayout,
       UUID: UUID,
@@ -137,17 +137,10 @@ class Group extends AbstractGroupLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-      children: children.map((e) => e.interpretNode()).toList(),
-    );
-    // Future.value(TempGroupLayoutNode(this, currentContext, name,
-    //     topLeftCorner: Point(boundaryRectangle.x, boundaryRectangle.y),
-    //     bottomRightCorner: Point(boundaryRectangle.x + boundaryRectangle.width,
-    //         boundaryRectangle.y + boundaryRectangle.height)));
+      children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList()),
+      prototypeNodeUUID: flow?.destinationArtboardID,
+    ));
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'group';
 }

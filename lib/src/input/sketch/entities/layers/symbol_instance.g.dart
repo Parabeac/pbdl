@@ -47,7 +47,6 @@ SymbolInstance _$SymbolInstanceFromJson(Map<String, dynamic> json) {
     verticalSpacing: (json['verticalSpacing'] as num)?.toDouble(),
     horizontalSpacing: (json['horizontalSpacing'] as num)?.toDouble(),
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..CLASS_NAME = json['CLASS_NAME'] as String
     ..type = json['_class'] as String
     ..parameters = json['parameters'] as List;
@@ -74,7 +73,6 @@ Map<String, dynamic> _$SymbolInstanceToJson(SymbolInstance instance) =>
       'clippingMaskMode': instance.clippingMaskMode,
       'userInfo': instance.userInfo,
       'maintainScrollPosition': instance.maintainScrollPosition,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
       'CLASS_NAME': instance.CLASS_NAME,
       'overrideValues': instance.overrideValues,
       'scale': instance.scale,

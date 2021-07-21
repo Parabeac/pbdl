@@ -138,8 +138,8 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ArtboardToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLArtboard(
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(PBDLArtboard(
       backgroundColor: backgroundColor.interpretColor(),
       isFlowHome: isFlowHome,
       hasClickThrough: hasClickThrough,
@@ -165,26 +165,14 @@ class Artboard extends AbstractGroupLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      prototypeNodeUUID: prototypeNodeUUID,
-      type: type,
+      prototypeNodeUUID: flow?.destinationArtboardID,
       style: style.interpretStyle(),
-      children: children.map((e) => e.interpretNode()).toList(),
-    );
-    /*
-    return Future.value(InheritedScaffold(
-      this,
-      currentContext: currentContext,
-      name: name,
-      isHomeScreen: isFlowHome,
-    )); */
+      children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList()),
+    ));
   }
 
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'artboard';
-
-  @override
-  void set isFlowHome(_isFlowHome) {
+  set isFlowHome(_isFlowHome) {
     // TODO: implement isFlowHome
   }
 }

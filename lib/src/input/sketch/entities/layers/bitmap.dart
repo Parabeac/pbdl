@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:path/path.dart' as p;
+import 'package:pbdl/src/util/main_info.dart';
 
 import '../abstract_sketch_node_factory.dart';
 import '../objects/sketch_rect.dart';
@@ -96,8 +98,9 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$BitmapToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLImage(
+  Future<PBDLNode> interpretNode() {
+    imageReference = p.join(MainInfo().pngPath, p.basename(imageReference));
+    return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
       booleanOperation: booleanOperation,
@@ -119,27 +122,14 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
       clippingMaskMode: clippingMask,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
-    /*  var intermediateNode;
-    intermediateNode = PBDenyListHelper().returnDenyListNodeIfExist(this);
-    if (intermediateNode != null) {
-      return intermediateNode;
-    }
-    intermediateNode = PBPluginListHelper().returnAllowListNodeIfExists(this);
-    if (intermediateNode != null) {
-      return intermediateNode;
-    }
-    return Future.value(
-        InheritedBitmap(this, name, currentContext: currentContext));
-         */
+      prototypeNodeUUID: flow?.destinationArtboardID,
+    ));
   }
 
   @JsonKey(name: 'image')
   Map imageReferenceMap;
 
-  @override
   @JsonKey(ignore: true)
   String imageReference;
 
@@ -151,19 +141,13 @@ class Bitmap extends SketchNode implements SketchNodeFactory {
 
   Style _style;
 
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
 
   @override
   bool get isVisible => _isVisible;
 
-  @override
-  void set style(_style) => this._style = _style;
+  set style(_style) => this._style = _style;
 
   @override
   Style get style => _style;
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'image';
 }

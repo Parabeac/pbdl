@@ -118,12 +118,13 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$ShapeGroupToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    var image = SketchAssetProcessor()
+  Future<PBDLNode> interpretNode() async {
+    var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
 
-    PBDLImage(
-      // image: image, // TODO: change to imageReference
+    var ref = SketchAssetProcessor.writeImage(name, image);
+
+    return Future.value(PBDLImage(
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
@@ -144,17 +145,14 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
+      imageReference: ref,
+      prototypeNodeUUID: flow?.destinationArtboardID,
+    ));
     /*
     
 
     return InheritedShapeGroup(this, name,
         currentContext: currentContext, image: image); */
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'image';
 }

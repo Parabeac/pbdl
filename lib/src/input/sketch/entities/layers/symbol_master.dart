@@ -1,6 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/symbol_node_mixin.dart';
 import 'package:pbdl/src/input/general_helper/input_formatter.dart';
+import 'package:pbdl/src/input/sketch/helper/overrides/sketch_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 import '../abstract_sketch_node_factory.dart';
 import '../objects/sketch_rect.dart';
@@ -19,8 +22,6 @@ part 'symbol_master.g.dart';
 class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   String CLASS_NAME = 'symbolMaster';
-  @override
-  var overrideValues;
   final Color backgroundColor;
   final bool hasBackgroundColor;
   final dynamic horizontalRulerData;
@@ -30,7 +31,6 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   final bool resizesContent;
   final dynamic verticalRulerData;
   final bool includeBackgroundColorInInstance;
-  @override
   String symbolID;
   final int changeIdentifier;
   final bool allowsOverrides;
@@ -52,14 +52,12 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
 
   Style _style;
 
-  @override
-  void set isVisible(bool _isVisible) => this._isVisible = _isVisible;
+  set isVisible(bool _isVisible) => this._isVisible = _isVisible;
 
   @override
   bool get isVisible => _isVisible;
 
-  @override
-  void set style(_style) => this._style = _style;
+  set style(_style) => this._style = _style;
 
   @override
   Style get style => _style;
@@ -144,7 +142,6 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
     }
   }
 
-  @override
   List parameters;
 
   @override
@@ -177,59 +174,71 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   // }
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLSharedMasterNode(
+  Future<PBDLNode> interpretNode() async {
+    var overrideProps =
+        await Future.wait(overrideProperties.map((element) async {
+      // Extract UUID and type from override name
+      var uuidTypeMap = SymbolNodeMixin.extractParameter(element.overrideName);
+      // Get the OverrideType of the element
+      var ovrType = SketchOverrideTypeFactory.getType(element);
+
+      // Find the child that contains the default value
+      var child = children.firstWhere(
+          (element) => element.UUID == uuidTypeMap['uuid'],
+          orElse: () => null);
+
+      if (ovrType != null && child != null) {
+        return PBDLOverrideProperty(
+          uuidTypeMap['uuid'],
+          child.name,
+          ovrType.getPBDLType(), // Map SketchOverrideType to PBDLOverrideType
+          await ovrType.getValue(child), // Get default value from child
+        );
+      }
+    }));
+    overrideProps.removeWhere((element) => element == null);
+
+    return Future.value(PBDLSharedMasterNode(
       UUID: UUID,
-      booleanOperation: booleanOperation,
-      exportOptions: exportOptions,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isFixedToViewport: isFixedToViewport,
-      isFlippedHorizontal: isFlippedHorizontal,
-      isFlippedVertical: isFlippedVertical,
-      isLocked: isLocked,
-      isVisible: isVisible,
-      layerListExpandedType: layerListExpandedType,
-      name: name,
-      nameIsFixed: nameIsFixed,
-      resizingConstraint: resizingConstraint,
-      rotation: rotation,
-      sharedStyleID: sharedStyleID,
-      shouldBreakMaskChain: shouldBreakMaskChain,
-      hasClippingMask: hasClippingMask,
-      clippingMaskMode: clippingMaskMode,
-      userInfo: userInfo,
-      maintainScrollPosition: maintainScrollPosition,
-      pbdfType: pbdfType,
-      style: style.interpretStyle(),
-      type: type,
-      prototypeNode: prototypeNodeUUID,
-      symbolID: symbolID,
-      overrideProperties: overrideProperties,
-      isFlowHome: isFlowHome,
       allowsOverrides: allowsOverrides,
+      overrideProperties: overrideProps,
+      booleanOperation: booleanOperation,
+      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      changeIdentifier: changeIdentifier,
+      clippingMaskMode: clippingMaskMode,
+      exportOptions: exportOptions,
+      groupLayout: groupLayout,
       hasBackgroundColor: hasBackgroundColor,
-      parameters: parameters,
-      resizesContent: resizesContent,
-      includeInCloudUpload: includeInCloudUpload,
+      hasClickThrough: hasClickThrough,
+      hasClippingMask: hasClippingMask,
+      horizontalRulerData: horizontalRulerData,
       includeBackgroundColorInExport: includeBackgroundColorInExport,
       includeBackgroundColorInInstance: includeBackgroundColorInInstance,
+      isLocked: isLocked,
+      isVisible: isVisible,
+      name: name,
+      nameIsFixed: nameIsFixed,
+      verticalRulerData: verticalRulerData,
+      sharedStyleID: sharedStyleID,
+      symbolID: symbolID,
+      userInfo: userInfo,
+      style: style.interpretStyle(),
+      shouldBreakMaskChain: shouldBreakMaskChain,
+      rotation: rotation,
+      resizingType: resizingType,
+      resizingConstraint: resizingConstraint,
+      resizesContent: resizesContent,
       presetDictionary: presetDictionary,
-    );
-    /*
-    var sym_master = PBSharedMasterNode(
-      this,
-      symbolID,
-      name,
-      Point(boundaryRectangle.x, boundaryRectangle.y),
-      Point(boundaryRectangle.x + boundaryRectangle.width,
-          boundaryRectangle.y + boundaryRectangle.height),
-      overridableProperties: _extractParameters(),
-      currentContext: currentContext,
-    );
-    return Future.value(sym_master); */
+      maintainScrollPosition: maintainScrollPosition,
+      layerListExpandedType: layerListExpandedType,
+      isFlowHome: isFlowHome,
+      isFlippedVertical: isFlippedVertical,
+      isFlippedHorizontal: isFlippedHorizontal,
+      includeInCloudUpload: includeInCloudUpload,
+      isFixedToViewport: isFixedToViewport,
+      parameters: parameters,
+      children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList()),
+    ));
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'symbol_master';
 }

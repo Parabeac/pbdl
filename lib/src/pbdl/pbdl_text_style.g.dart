@@ -20,13 +20,21 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLFontDescriptor.fromJson(
             json['fontDescriptor'] as Map<String, dynamic>),
-  );
+  )
+    ..isVisible = json['isVisible'] as bool
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
     <String, dynamic>{
+      'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'fontColor': instance.fontColor?.toJson(),
       'weight': instance.weight,
       'fontDescriptor': instance.fontDescriptor?.toJson(),
       'paragraphStyle': instance.paragraphStyle?.toJson(),
+      'type': instance.type,
     };

@@ -1,14 +1,12 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_oval.dart';
 import 'package:quick_log/quick_log.dart';
 
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'ellipse.g.dart';
@@ -42,7 +40,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     strokeWeight,
     strokeAlign,
     styles,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -62,11 +60,10 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
         ) {
-    pbdfType = 'oval';
     log = Logger(runtimeType.toString());
   }
 
@@ -79,22 +76,19 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaEllipseToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
-    return PBDLOval(
+    return Future.value(PBDLImage(
       UUID: UUID,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      pbdfType: pbdfType,
       style: style?.interpretStyle(),
-      type: type,
-    );
+      imageReference: imageReference,
+      prototypeNodeUUID: transitionNodeID,
+    ));
   }
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'oval';
 }

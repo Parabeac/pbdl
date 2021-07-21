@@ -44,7 +44,6 @@ Page _$PageFromJson(Map<String, dynamic> json) {
         : Style.fromJson(json['style'] as Map<String, dynamic>),
     maintainScrollPosition: json['maintainScrollPosition'],
   )
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..CLASS_NAME = json['CLASS_NAME'] as String
     ..includeInCloudUpload = json['includeInCloudUpload']
     ..horizontalRulerData = json['horizontalRulerData']
@@ -74,7 +73,6 @@ Map<String, dynamic> _$PageToJson(Page instance) => <String, dynamic>{
       'clippingMaskMode': instance.clippingMaskMode,
       'userInfo': instance.userInfo,
       'maintainScrollPosition': instance.maintainScrollPosition,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
       'hasClickThrough': instance.hasClickThrough,
       'groupLayout': instance.groupLayout,
       'CLASS_NAME': instance.CLASS_NAME,

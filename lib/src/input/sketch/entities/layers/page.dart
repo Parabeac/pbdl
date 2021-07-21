@@ -120,15 +120,12 @@ class Page extends AbstractGroupLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$PageToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLPage(
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(PBDLPage(
       name: name,
-      id: UUID,
-      screens: children.map((e) => e.interpretNode()).toList(),
-    );
+      UUID: UUID,
+      screens:
+          await Future.wait(children.map((e) => e.interpretNode()).toList()),
+    ));
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'page';
 }

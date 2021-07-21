@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/general_helper/input_formatter.dart';
 import 'package:pbdl/src/input/sketch/entities/documents/document.dart';
 import 'package:pbdl/src/input/sketch/entities/layers/page.dart';
@@ -8,6 +7,8 @@ import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_page.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_screen.dart';
 import 'package:pbdl/src/input/sketch/services/input_design.dart';
+import 'package:pbdl/src/pbdl/pbdl_project.dart';
+import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:archive/archive.dart';
 import 'package:recase/recase.dart';
@@ -23,9 +24,7 @@ class SketchProject {
   var log = Logger('SketchNodeTree');
   SketchPage rootScreen;
 
-  @override
   String projectName;
-  @override
   bool debug = false;
 
   String id;
@@ -50,7 +49,7 @@ class SketchProject {
 
   List<SharedStyle> _setSharedStyles() {
     try {
-      List<SharedStyle> sharedStyles = [];
+      var sharedStyles = <SharedStyle>[];
       var jsonData = _ids.documentFile;
       var doc = Document.fromJson(jsonData);
       if (doc.layerStyles != null) {
@@ -74,7 +73,7 @@ class SketchProject {
       }
 
       return sharedStyles;
-    } catch (e, stackTrace) {
+    } catch (e) {
       //MainInfo().sentry.captureException(
       //   exception: e,
       //   stackTrace: stackTrace,
@@ -136,11 +135,12 @@ class SketchProject {
     return sketchPages;
   }
 
-  PBDLProject interpretNode() {
-    return PBDLProject(
-      projectName: projectName,
-      id: id,
-      pages: pages.map((e) => e.interpretNode()).toList(),
-    );
+  Future<PBDLProject> interpretNode() async {
+    return Future.value(PBDLProject(
+      name: projectName,
+      UUID: id,
+      pages: await Future.wait(pages.map((e) => e.interpretNode()).toList()),
+      pngPath: MainInfo().pngPath,
+    ));
   }
 }

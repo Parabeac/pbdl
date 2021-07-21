@@ -1,13 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text.dart';
 import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_style.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'text.g.dart';
@@ -35,7 +33,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       this.content,
       this.characterStyleOverrides,
       this.styleOverrideTable,
-      String prototypeNodeUUID,
+      String transitionNodeID,
       num transitionDuration,
       String transitionEasing})
       : super(
@@ -55,12 +53,10 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'text';
-  }
+        );
 
   @JsonKey(name: 'characters')
   String content;
@@ -86,45 +82,32 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaTextToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLText(
-      UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      attributedString: attributedString,
-      automaticallyDrawOnUnderlyingPath: automaticallyDrawOnUnderlyingPath,
-      dontSynchroniseWithSymbol: dontSynchroniseWithSymbol,
-      lineSpacingBehaviour: lineSpacingBehaviour,
-      textBehaviour: textBehaviour,
-      glyphBounds: glyphBounds,
-      type: type,
-      pbdfType: pbdfType,
-      style: style.interpretStyle(),
+  Future<PBDLNode> interpretNode() {
+    return Future.value(
+      PBDLText(
+        UUID: UUID,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        style: style.interpretStyle(),
+        content: content,
+        prototypeNodeUUID: transitionNodeID,
+      ),
     );
   }
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
 
-  @override
-  String pbdfType = 'text';
-
-  @override
   var attributedString;
 
-  @override
   var automaticallyDrawOnUnderlyingPath;
 
-  @override
   var dontSynchroniseWithSymbol;
 
-  @override
   var glyphBounds;
 
-  @override
   var lineSpacingBehaviour;
 
-  @override
   var textBehaviour;
 }

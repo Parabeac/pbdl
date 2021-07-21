@@ -10,14 +10,12 @@ part 'pbdl_boolean_operation.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLBooleanOperation extends PBDLVector
     implements PBDLNodeFactory, PBDLNode {
-  @override
-  String pbdfType = 'boolean_operation';
   List<PBDLNode> children = [];
 
   String booleanOperation;
 
   @override
-  String type;
+  String type = 'boolean_operation';
 
   @override
   var boundaryRectangle;

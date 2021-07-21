@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/pbdl/pbdl_boolean_operation.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
 import '../abstract_figma_node_factory.dart';
@@ -29,9 +28,6 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   @override
   String imageReference;
 
-  @override
-  String pbdfType = 'boolean_operation';
-
   BooleanOperation({
     children,
     booleanOperation,
@@ -39,18 +35,17 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     style,
     boundaryRectangle,
     UUID,
-    prototypeNodeUUID,
+    String transitionNodeID,
     transitionDuration,
     transitionEasing,
     imageReference,
   }) : super(
             style: style,
             UUID: UUID,
-            prototypeNodeUUID: prototypeNodeUUID,
+            transitionNodeID: transitionNodeID,
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing) {
     log = Logger(runtimeType.toString());
-    pbdfType = 'boolean_operation';
   }
 
   @override
@@ -62,19 +57,19 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$BooleanOperationToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
-    return PBDLBooleanOperation(
-      children: children.map((e) => e.interpretNode()).toList(),
+    return Future.value(PBDLBooleanOperation(
+      children: children,
       booleanOperation: booleanOperation,
       type: type,
       style: style,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: boundaryRectangle?.interpretFrame(),
       UUID: UUID,
-      prototypeNodeUUID: prototypeNodeUUID,
+      prototypeNodeUUID: transitionNodeID,
       transitionDuration: transitionDuration,
       transitionEasing: transitionEasing,
       imageReference: imageReference,
-    );
+    ));
   }
 }

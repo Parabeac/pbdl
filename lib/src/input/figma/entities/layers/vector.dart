@@ -1,15 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_vector.dart';
 import 'package:quick_log/quick_log.dart';
 
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_style.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 
 part 'vector.g.dart';
 
@@ -62,7 +60,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     String UUID,
     num transitionDuration,
     String transitionEasing,
-    String prototypeNodeUUID,
+    String transitionNodeID,
   }) : super(
           name,
           visible,
@@ -72,9 +70,8 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
           UUID: UUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
         ) {
-    pbdfType = 'vector';
     log = Logger(runtimeType.toString());
   }
 
@@ -87,37 +84,20 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaVectorToJson(this);
 
   @override
-  PBDLNode interpretNode() {
+  Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
-    return PBDLVector(
-      name: name,
-      visible: isVisible,
-      type: type,
-      pluginData: pluginData,
-      sharedPluginData: sharedPluginData,
-      layoutAlign: layoutAlign,
-      constraints: constraints,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      size: size,
-      strokes: strokes,
-      strokeWeight: strokeWeight,
-      strokeAlign: strokeAlign,
-      styles: styles,
-      fillsList: fillsList,
+    return Future.value(PBDLImage(
       UUID: UUID,
-      pbdfType: pbdfType,
+      imageReference: imageReference,
+      boundaryRectangle: boundaryRectangle?.interpretFrame(),
+      isVisible: isVisible,
+      name: name,
       style: style?.interpretStyle(),
-      prototypeNodeUUID: prototypeNodeUUID,
-      transitionDuration: transitionDuration,
-      transitionEasing: transitionEasing,
-    );
+      prototypeNodeUUID: transitionNodeID,
+    ));
   }
 
   String imageReference;
 
-  @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'vector';
 }

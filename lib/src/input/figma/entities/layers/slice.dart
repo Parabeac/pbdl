@@ -39,7 +39,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
     this.constraints,
     this.boundaryRectangle,
     this.size,
-    String prototypeNodeUUID,
+    String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
   }) : super(
@@ -48,12 +48,10 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
           type,
           pluginData,
           sharedPluginData,
-          prototypeNodeUUID: prototypeNodeUUID,
+          transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-        ) {
-    pbdfType = 'image';
-  }
+        );
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
@@ -64,29 +62,23 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaSliceToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLRectangle(
+  Future<PBDLNode> interpretNode() async {
+    return Future.value(PBDLRectangle(
       UUID: UUID,
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      type: type,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-      child: child.interpretNode(),
-    );
+      child: await child.interpretNode(),
+      prototypeNodeUUID: transitionNodeID,
+    ));
   }
 
   @override
   bool isVisible;
 
-  @override
   @JsonKey(ignore: true)
   var style;
 
-  @override
   Map<String, dynamic> toPBDF() => toJson();
-
-  @override
-  String pbdfType = 'image';
 }

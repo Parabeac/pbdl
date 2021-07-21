@@ -114,8 +114,8 @@ class Star extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$StarToJson(this);
 
   @override
-  PBDLNode interpretNode() {
-    return PBDLStar(
+  Future<PBDLNode> interpretNode() {
+    return Future.value(PBDLStar(
       edited: edited,
       isClosed: isClosed,
       pointRadiusBehaviour: pointRadiusBehaviour,
@@ -141,10 +141,9 @@ class Star extends AbstractShapeLayer implements SketchNodeFactory {
       clippingMaskMode: clippingMaskMode,
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
-      type: type,
-      pbdfType: pbdfType,
       style: style.interpretStyle(),
-    );
+      prototypeNodeUUID: flow?.destinationArtboardID,
+    ));
     /*
     var image = await SketchAssetProcessor()
         .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
@@ -152,8 +151,4 @@ class Star extends AbstractShapeLayer implements SketchNodeFactory {
     return Future.value(InheritedStar(this, name,
         currentContext: currentContext, image: image)); */
   }
-
-  @override
-  @JsonKey(ignore: true)
-  String pbdfType = 'star';
 }
