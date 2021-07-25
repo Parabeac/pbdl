@@ -4,3 +4,4 @@
 library pbdl;
 
 export 'src/pbdl.dart';
+export 'src/pbdl/pbdl_nodes_export.dart';
