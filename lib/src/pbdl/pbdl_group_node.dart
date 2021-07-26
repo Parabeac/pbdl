@@ -66,7 +66,7 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
   PBDLStyle style;
 
   @override
-  String type = 'group_node';
+  String type = 'group';
 
   @override
   @JsonKey(ignore: true)
