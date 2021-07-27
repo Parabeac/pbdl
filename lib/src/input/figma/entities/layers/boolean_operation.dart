@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
@@ -20,31 +21,31 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   String booleanOperation;
 
   @override
-  String type = 'BOOLEAN_OPERATION';
+  final String type = 'BOOLEAN_OPERATION';
 
   @override
-  var boundaryRectangle;
+  FigmaRect boundaryRectangle;
 
   @override
   String imageReference;
 
   BooleanOperation({
-    children,
-    booleanOperation,
-    type,
+    this.children,
+    this.booleanOperation,
     style,
-    boundaryRectangle,
+    this.boundaryRectangle,
     UUID,
     String transitionNodeID,
     transitionDuration,
     transitionEasing,
     imageReference,
   }) : super(
-            style: style,
-            UUID: UUID,
-            transitionNodeID: transitionNodeID,
-            transitionDuration: transitionDuration,
-            transitionEasing: transitionEasing) {
+          style: style,
+          UUID: UUID,
+          transitionNodeID: transitionNodeID,
+          transitionDuration: transitionDuration,
+          transitionEasing: transitionEasing,
+        ) {
     log = Logger(runtimeType.toString());
   }
 
