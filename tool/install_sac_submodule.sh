@@ -1,5 +1,8 @@
 # Script to verify that SAC was pulled and pointing to master 
-# This script is intended to be run from the root directory of the PBDL package.
+#
+# This script assumes the first argument passed to it is the path to root of PBDL directory
+
+cd $1
 
 parentCom=`git rev-parse HEAD`
 

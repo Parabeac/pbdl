@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # This script installs Sketch Asset Converter's dependencies
+#
+# This script assumes the first argument passed to it is the path to root of PBDL directory
+
+cd $1
 
 spin()
 {
