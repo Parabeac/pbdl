@@ -84,7 +84,6 @@ class SACInstaller {
         break;
       }
     }
-    // process.kill();
     return exitCode;
   }
 }
