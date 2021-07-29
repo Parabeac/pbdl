@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'package:quick_log/quick_log.dart';
 
 class SACInstaller {
+  static Process process;
+
   static final Logger _log = Logger('SACInstaller');
 
   /// Since pbdl may be run as a git submodule, the path may change.
@@ -64,7 +66,7 @@ class SACInstaller {
   }
 
   static Future<int> _runSAC() async {
-    var process = await Process.start(
+    process = await Process.start(
       'npm',
       ['run', 'prod'],
       workingDirectory: p.join(pathToPBDL, 'SketchAssetConverter'),
@@ -82,7 +84,7 @@ class SACInstaller {
         break;
       }
     }
-    process?.kill();
+    // process.kill();
     return exitCode;
   }
 }
