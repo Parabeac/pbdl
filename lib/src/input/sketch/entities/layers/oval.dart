@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_oval.dart';
 import '../abstract_sketch_node_factory.dart';
 import '../objects/sketch_rect.dart';
 import '../style/style.dart';
@@ -113,12 +114,12 @@ class Oval extends AbstractShapeLayer implements SketchNodeFactory {
   Map<String, dynamic> toJson() => _$OvalToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
-    return Future.value(PBDLOval(
-      edited: edited,
-      isClosed: isClosed,
-      pointRadiusBehaviour: pointRadiusBehaviour,
-      points: points,
+  Future<PBDLNode> interpretNode() async {
+    var image = await SketchAssetProcessor()
+        .processImage(UUID, boundaryRectangle.width, boundaryRectangle.height);
+
+    var ref = SketchAssetProcessor.writeImage(name, image);
+    return PBDLImage(
       UUID: UUID,
       booleanOperation: booleanOperation,
       exportOptions: exportOptions,
@@ -140,7 +141,8 @@ class Oval extends AbstractShapeLayer implements SketchNodeFactory {
       userInfo: userInfo,
       maintainScrollPosition: maintainScrollPosition,
       style: style.interpretStyle(),
+      imageReference: ref,
       prototypeNodeUUID: flow?.destinationArtboardID,
-    ));
+    );
   }
 }
