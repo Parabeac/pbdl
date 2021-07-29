@@ -37,6 +37,8 @@ class PBDL {
       _writePbdlJson(pbdlProject);
     }
 
+    SACInstaller.process.kill();
+
     return pbdlProject;
   }
 
