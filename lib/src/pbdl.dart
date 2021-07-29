@@ -71,13 +71,11 @@ class PBDL {
     MainInfo().projectName = projectName;
     MainInfo().cwd = Directory.current;
     if (outputPath != null && outputPath.isNotEmpty) {
-      MainInfo().outputPath =
-          p.normalize(p.absolute(p.join(outputPath, 'pbdl_out')));
+      MainInfo().outputPath = p.normalize(p.absolute(p.join(outputPath)));
     } else {
-      MainInfo().outputPath = p.join(Directory.current.path, 'pbdl_out');
+      MainInfo().outputPath = p.join(Directory.current.path);
     }
-    MainInfo().pngPath =
-        p.absolute(p.join(MainInfo().outputPath, 'assets', 'images'));
+    MainInfo().pngPath = p.absolute(p.join(MainInfo().outputPath, 'images'));
   }
 
   /// Method that exports a `.json` file representing the [PBDLProject]
