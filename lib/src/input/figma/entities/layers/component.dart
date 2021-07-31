@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
+import 'package:pbdl/src/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
@@ -71,8 +72,14 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         );
 
   @override
-  FigmaNode createFigmaNode(Map<String, dynamic> json) =>
-      Component.fromJson(json);
+  FigmaNode createFigmaNode(Map<String, dynamic> json) {
+    var component = Component.fromJson(json);
+
+    component.style = StyleExtractor().getStyle(json);
+
+    return component;
+  }
+
   factory Component.fromJson(Map<String, dynamic> json) =>
       _$ComponentFromJson(json);
   @override
@@ -95,7 +102,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         name: name,
         isVisible: isVisible,
         boundaryRectangle: boundaryRectangle.interpretFrame(),
-        style: style,
+        style: style.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         symbolID: UUID,
         isFlowHome: isFlowHome,
