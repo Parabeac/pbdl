@@ -32,7 +32,7 @@ class StyleExtractor {
         textStyle = _getTextStyle(json);
       }
 
-      List<FigmaBorder> borders = [];
+      var borders = <FigmaBorder>[];
 
       var strokes = json['strokes'];
 
@@ -41,7 +41,7 @@ class StyleExtractor {
       var visible = strokes.isNotEmpty ? strokes[0]['visible'] : false;
 
       var figmaBorder = FigmaBorder(
-        isEnabled: visible ?? false,
+        isEnabled: visible ?? true,
         fillType: strokes.isNotEmpty ? strokes[0]['opacity'] : 1.0,
         color: strokes.isNotEmpty
             ? _getColor(strokes[0]['color'])
