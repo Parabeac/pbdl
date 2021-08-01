@@ -53,7 +53,7 @@ class StyleExtractor {
 
       borderOptions = FigmaBorderOptions(
         json['strokeDashes'],
-        tempVisible ?? false,
+        tempVisible ?? true,
         json['strokeCap'],
         json['strokeJoin'],
       );
