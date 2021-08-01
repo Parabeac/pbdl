@@ -1,3 +1,4 @@
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/general_helper/overrides/pbdl_override_text_style.dart';
 import 'package:pbdl/src/input/sketch/entities/layers/sketch_node.dart';
 import 'package:pbdl/src/input/sketch/entities/style/text_style.dart';
@@ -8,11 +9,11 @@ class SketchOverrideTextStyle extends SketchOverrideType {
   final String TYPE_NAME = 'textStyle';
 
   @override
-  Future<Map<String, dynamic>> getValue(SketchNode node) {
+  Future<PBDLTextStyle> getValue(SketchNode node) {
     if (node is! TextStyle) {
       return null;
     }
-    return Future.value((node as TextStyle).toJson()); //TODO: TextStyle should have interpretNode function
+    return Future.value((node as TextStyle).interpretTextStyle());
   }
 
   @override

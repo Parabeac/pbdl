@@ -183,9 +183,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       var ovrType = SketchOverrideTypeFactory.getType(element);
 
       // Find the child that contains the default value
-      var child = children.firstWhere(
-          (element) => element.UUID == uuidTypeMap['uuid'],
-          orElse: () => null);
+      var child = _traverseChildrenForOverride(uuidTypeMap['uuid']);
 
       if (ovrType != null && child != null) {
         return PBDLOverrideProperty(
@@ -240,5 +238,23 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList()),
     ));
+  }
+
+  /// Searches `children` for a [SketchNode] with given `UUID`
+  SketchNode _traverseChildrenForOverride(String UUID) {
+    var stack = children;
+
+    while (stack.isNotEmpty) {
+      var current = stack.removeLast();
+
+      if (current.UUID == UUID) {
+        return current;
+      }
+
+      if (current is AbstractGroupLayer) {
+        current.children.forEach(stack.add);
+      }
+    }
+    return null;
   }
 }
