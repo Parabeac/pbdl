@@ -1,3 +1,4 @@
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/sketch/entities/layers/sketch_node.dart';
 
 abstract class SketchOverrideType {
@@ -7,7 +8,7 @@ abstract class SketchOverrideType {
   /// Method that takes in a [SketchNode] and returns the override value.
   ///
   /// For instance, if we have a `stringValue`, we may need to look at the `attributedString` attribute of `node`.
-  Future<dynamic> getValue(SketchNode node);
+  Future<PBDLNode> getValue(SketchNode node);
 
   String getPBDLType();
 }

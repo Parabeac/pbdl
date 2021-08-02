@@ -9,7 +9,7 @@ part 'pbdl_override_property.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
   /// Value of the override property
-  var value;
+  PBDLNode value;
 
   @override
   final type;
