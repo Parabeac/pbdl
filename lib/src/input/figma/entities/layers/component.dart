@@ -16,6 +16,9 @@ part 'component.g.dart';
 
 @JsonSerializable()
 class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
+  /// Map that keeps track of override properties repeated names.
+  @JsonKey(ignore: true)
+  var repeatNames = <String, int>{};
   @override
   String type = 'COMPONENT';
   Component({
@@ -121,6 +124,16 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       var override = FigmaOverrideTypeFactory.getType(current);
 
       if (override != null) {
+        // Check `current.name` for name collisions
+        if (repeatNames.containsKey(current.name)) {
+          repeatNames[current.name]++;
+
+          current.name =
+              '${current.name}${repeatNames[current.name].toString()}';
+        } else {
+          repeatNames[current.name] = 1;
+        }
+
         var overrideProp = PBDLOverrideProperty(
           current.UUID,
           current.name,
