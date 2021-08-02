@@ -1,3 +1,4 @@
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type.dart';
@@ -6,11 +7,11 @@ import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
 /// Map used to prevent duplicates when referencing override images
-final _uuidToRef = <String, String>{};
+final _uuidToRef = <String, PBDLImage>{};
 
 class FigmaOverrideImage extends FigmaOverrideType {
   @override
-  Future<String> getValue(FigmaNode node) async {
+  Future<PBDLNode> getValue(FigmaNode node) async {
     if (!matches(node)) {
       return null;
     }
@@ -22,8 +23,7 @@ class FigmaOverrideImage extends FigmaOverrideType {
     if (interpretedNode is! PBDLImage) {
       return null;
     }
-    _uuidToRef[interpretedNode.UUID] =
-        (interpretedNode as PBDLImage).imageReference;
+    _uuidToRef[interpretedNode.UUID] = interpretedNode as PBDLImage;
     return Future.value(_uuidToRef[interpretedNode.UUID]);
   }
 
