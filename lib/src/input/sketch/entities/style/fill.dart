@@ -38,6 +38,9 @@ class Fill {
   Map toJson() => _$FillToJson(this);
 
   PBDLFill interpretFill() {
-    return PBDLFill(color.interpretColor());
+    return PBDLFill(
+      color.interpretColor(),
+      isEnabled
+    );
   }
 }
