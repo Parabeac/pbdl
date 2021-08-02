@@ -1,3 +1,5 @@
+import 'package:pbdl/src/input/sketch/services/positional_cleansing_service.dart';
+
 import 'layers/artboard.dart';
 import 'layers/bitmap.dart';
 import 'layers/group.dart';
@@ -39,11 +41,19 @@ class AbstractSketchNodeFactory {
   AbstractSketchNodeFactory();
 
   static SketchNode getSketchNode(Map<String, dynamic> json) {
+    var _cleansingService = PositionalCleansingService();
     var className = json[SKETCH_CLASS_KEY];
     if (className != null) {
       for (var sketchNode in _sketchNodes) {
         if (sketchNode.CLASS_NAME == className) {
-          return sketchNode.createSketchNode(json);
+          var node = sketchNode.createSketchNode(json);
+          // Run positional cleansing after artboard or master is done generating
+          if (node is Artboard) {
+            node = _cleansingService.eliminateOffset(node);
+          } else if (node is SymbolMaster) {
+            node = _cleansingService.eliminateOffset(node);
+          }
+          return node;
         }
       }
     }
