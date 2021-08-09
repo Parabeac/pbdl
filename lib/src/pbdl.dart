@@ -27,6 +27,8 @@ class PBDL {
       projectName: p.basename(sketchPath).replaceFirst('.sketch', ''),
     );
 
+    MainInfo().sketchPath = sketchPath;
+
     await SACInstaller.installAndRun();
 
     var sketchProject = await SketchController().convertFile(sketchPath);
