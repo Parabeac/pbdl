@@ -7,7 +7,7 @@ import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
 class FigmaOverrideSymbolID extends FigmaOverrideType {
   @override
-  Future<PBDLNode> getValue(FigmaNode node) async {
+  Future<PBDLNode> getProperty(FigmaNode node) async {
     if (node is! Instance) {
       return Future.value(null);
     }
@@ -26,5 +26,13 @@ class FigmaOverrideSymbolID extends FigmaOverrideType {
       return null;
     }
     return (node as Instance).style?.interpretStyle();
+  }
+
+  @override
+  Future<String> getValue(FigmaNode node) async {
+    if (node is Instance) {
+      return node.componentId;
+    }
+    return '';
   }
 }

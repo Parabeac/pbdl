@@ -6,7 +6,12 @@ abstract class FigmaOverrideType {
   /// Method that takes in a [FigmaNode] and returns the override value.
   ///
   /// For instance, if we have a `stringValue`, we may need to look at the `attributedString` attribute of `node`.
-  Future<PBDLNode> getValue(FigmaNode node);
+  Future<PBDLNode> getProperty(FigmaNode node);
+
+  /// Method that takes in a [FigmaNode] and returns the override value.
+  ///
+  /// For instance, if we have a `stringValue`, we may need to look at the `attributedString` attribute of `node`.
+  Future<String> getValue(FigmaNode node);
 
   /// Get the type of this override in PBDL
   String getPBDLType();

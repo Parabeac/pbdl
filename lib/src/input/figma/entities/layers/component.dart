@@ -138,7 +138,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           current.UUID,
           current.name,
           override.getPBDLType(),
-          await override.getValue(current),
+          await override.getProperty(current),
         );
         values.add(overrideProp);
       }

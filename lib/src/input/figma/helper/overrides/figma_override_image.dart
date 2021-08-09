@@ -11,7 +11,7 @@ final _uuidToRef = <String, PBDLImage>{};
 
 class FigmaOverrideImage extends FigmaOverrideType {
   @override
-  Future<PBDLNode> getValue(FigmaNode node) async {
+  Future<PBDLNode> getProperty(FigmaNode node) async {
     if (!matches(node)) {
       return null;
     }
@@ -39,5 +39,15 @@ class FigmaOverrideImage extends FigmaOverrideType {
       return null;
     }
     return (node as FigmaVector).style?.interpretStyle();
+  }
+
+  @override
+  Future<String> getValue(FigmaNode node) async {
+    var pbdlNode = await getProperty(node);
+
+    if (pbdlNode != null && pbdlNode is PBDLImage) {
+      return pbdlNode.imageReference;
+    }
+    return '';
   }
 }

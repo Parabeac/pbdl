@@ -7,7 +7,7 @@ import 'package:pbdl/src/pbdl/pbdl_text_style.dart';
 
 class FigmaOverrideTextStyle extends FigmaOverrideType {
   @override
-  Future<PBDLTextStyle> getValue(FigmaNode node) {
+  Future<PBDLTextStyle> getProperty(FigmaNode node) {
     if (node is! FigmaTextStyle) {
       return null;
     }
@@ -22,4 +22,9 @@ class FigmaOverrideTextStyle extends FigmaOverrideType {
 
   @override
   PBDLStyle getPBDLStyle(FigmaNode node) => null;
+
+  @override
+  Future<String> getValue(FigmaNode node) async {
+    return '';
+  }
 }
