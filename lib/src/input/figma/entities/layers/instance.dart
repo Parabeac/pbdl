@@ -111,6 +111,11 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     while (stack.isNotEmpty) {
       var current = stack.removeLast();
 
+      // Do not add child instance overrides to current instance
+      if (current is Instance) {
+        continue;
+      }
+
       // Checks if `current` node should be an override property
       var override = FigmaOverrideTypeFactory.getType(current);
 

@@ -148,9 +148,9 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       if (ovrVal != null) {
         return PBDLOverrideValue(
           uuidTypeMap['uuid'],
-          name, //TODO: Get friendly name
+          null, // Cannot assign name since it requires searching for master node
           ovrVal.getPBDLType(),
-          e.value,
+          ovrVal.getValue(e),
         );
       }
     }).toList();

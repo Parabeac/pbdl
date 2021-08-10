@@ -1,3 +1,4 @@
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type.dart';
@@ -6,11 +7,11 @@ import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
 class FigmaOverrideTextValue extends FigmaOverrideType {
   @override
-  Future<String> getValue(FigmaNode node) async {
+  Future<PBDLText> getProperty(FigmaNode node) async {
     if (node is! FigmaText) {
       return null;
     }
-    return Future.value((node as FigmaText).content);
+    return await (node as FigmaText).interpretNode();
   }
 
   @override
@@ -25,5 +26,13 @@ class FigmaOverrideTextValue extends FigmaOverrideType {
       return null;
     }
     return (node as FigmaText).style?.interpretStyle();
+  }
+
+  @override
+  Future<String> getValue(FigmaNode node) async {
+    if (node is FigmaText) {
+      return node.content;
+    }
+    return '';
   }
 }

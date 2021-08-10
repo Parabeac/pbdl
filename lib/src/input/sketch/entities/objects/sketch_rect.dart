@@ -8,7 +8,6 @@ class SketchRect {
   @JsonKey(name: '_class')
   final String classField;
   final bool constrainProportions;
-  @override
   double height, width, x, y;
   SketchRect({
     this.classField,
