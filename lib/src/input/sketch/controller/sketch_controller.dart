@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:path/path.dart' as p;
-import 'package:pbdl/src/input/sketch/helper/azure_asset_service.dart';
+import 'package:pbdl/src/input/general_helper/azure_asset_service.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_project.dart';
 import 'package:pbdl/src/input/sketch/services/input_design.dart';
 import 'package:pbdl/src/util/main_info.dart';

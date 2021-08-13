@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
+import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
-import 'asset_processing_service.dart';
 import 'package:path/path.dart' as p;
 
 class SketchAssetProcessor extends AssetProcessingService {
