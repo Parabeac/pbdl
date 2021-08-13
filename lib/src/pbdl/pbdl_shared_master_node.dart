@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'abstract_pbdl_node_factory.dart';
@@ -66,8 +67,8 @@ class PBDLSharedMasterNode extends PBDLNode
           UUID,
           name,
           isVisible,
-          boundaryRectangle,
-          style,
+          PBDLFrame.getFrame(boundaryRectangle),
+          PBDLStyle.getStyle(style),
           prototypeNodeUUID,
         );
 
