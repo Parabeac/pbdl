@@ -4,8 +4,10 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_element.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:meta/meta.dart';
 
 part 'pbdl_image.g.dart';
+
 
 @JsonSerializable(explicitToJson: true)
 class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
