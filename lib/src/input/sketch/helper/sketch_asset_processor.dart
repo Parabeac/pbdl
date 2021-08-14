@@ -77,10 +77,23 @@ class SketchAssetProcessor extends AssetProcessingService {
     }
   }
 
+  static Map<String, int> imageNames = {};
+
+  static String _getImageName(String name) {
+    if (!imageNames.containsKey(name)) {
+      imageNames[name] = 0;
+      return name;
+    } else {
+      var imageNumber = ++imageNames[name];
+      return name + '_$imageNumber';
+    }
+  }
+
   /// Writes image `bytes` to output png path using `name` as filename.
   static String writeImage(String name, Uint8List bytes) {
     if (!Platform.environment.containsKey('SAC_ENDPOINT')) {
-      var path = p.join(MainInfo().pngPath, '$name.png');
+      var checkedName = _getImageName(name);
+      var path = p.join(MainInfo().pngPath, '$checkedName.png');
       File(path).writeAsBytesSync(bytes);
       return path;
     }
