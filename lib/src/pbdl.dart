@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:meta/meta.dart';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
@@ -43,7 +44,8 @@ class PBDL {
       _writePbdlJson(pbdlProject);
     }
 
-    if (Platform.environment.containsKey(AzureAssetService.KEY_NAME)) {
+    if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
+        exportPbdlJson) {
       _jsonToAzure(pbdlProject, SketchAssetProcessor());
     }
 
@@ -68,12 +70,16 @@ class PBDL {
     var figmaProject = await FigmaController().convertFile(projectID, key);
     var pbdlProject = await figmaProject.interpretNode();
 
-    await FigmaAssetProcessor().processImageQueue(writeAsFile: true);
+    await FigmaAssetProcessor().processImageQueue(
+        writeAsFile:
+            !Platform.environment.containsKey(AzureAssetService.KEY_NAME));
     if (exportPbdlJson) {
       _writePbdlJson(pbdlProject);
     }
 
-    if (Platform.environment.containsKey(AzureAssetService.KEY_NAME)) {
+    // In order to upload the JSON file, the export PBDL to JSON flag must be on
+    if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
+        exportPbdlJson) {
       _jsonToAzure(pbdlProject, FigmaAssetProcessor());
     }
 
@@ -102,10 +108,10 @@ class PBDL {
   }
 
   static void _jsonToAzure(
-      PBDLProject project, AssetProcessingService apService) {
-    // var uuids = processRootNodeUUIDs(project, apService);
+      PBDLProject project, AssetProcessingService apService) async {
+    var uuids = processRootNodeUUIDs(project, apService);
     // Process rootnode UUIDs
-    // await apService.processRootElements(uuids);
+    await apService.processRootElements(uuids);
     project.name = MainInfo().projectName;
     var projectJson = project.toJson();
     projectJson['azure_container_uri'] = AzureAssetService().getContainerUri();
@@ -122,6 +128,34 @@ class PBDL {
     } else {
       return '$path/';
     }
+  }
+
+  /// Iterates through the [project] and returns a list of the UUIDs of the
+  /// rootNodes
+  static Map<String, Map> processRootNodeUUIDs(
+      PBDLProject project, AssetProcessingService apService) {
+    var result = <String, Map>{};
+
+    for (var page in project.pages) {
+      for (PBDLScreen screen in page.screens) {
+        screen.imageURI = AzureAssetService().getImageURI('${screen.id}.png');
+        result[screen.id] = {
+          'width': screen.designNode.boundaryRectangle.width,
+          'height': screen.designNode.boundaryRectangle.height
+        };
+      }
+    }
+
+    for (var page in project.miscPages) {
+      for (PBDLScreen screen in page.screens) {
+        result[screen.id] = {
+          'width': screen.designNode.boundaryRectangle.width,
+          'height': screen.designNode.boundaryRectangle.height
+        };
+      }
+    }
+
+    return result;
   }
 
   /// Method that exports a `.json` file representing the [PBDLProject]
