@@ -25,6 +25,9 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
+    ..constraints = json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
     ..type = json['type'] as String;
 }
 
@@ -32,6 +35,7 @@ Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
     <String, dynamic>{
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'constraints': instance.constraints?.toJson(),
       'fontColor': instance.fontColor?.toJson(),
       'weight': instance.weight,
       'fontDescriptor': instance.fontDescriptor?.toJson(),

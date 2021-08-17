@@ -10,7 +10,9 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
   return PBDLVector(
     name: json['name'] as String,
     layoutAlign: json['layoutAlign'],
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
@@ -39,7 +41,7 @@ Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
     <String, dynamic>{
       'child': instance.child?.toJson(),
       'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
+      'constraints': instance.constraints?.toJson(),
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,

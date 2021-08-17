@@ -22,17 +22,22 @@ PBDLGroupNode _$PBDLGroupNodeFromJson(Map<String, dynamic> json) {
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
-  )..type = json['type'] as String;
+  )
+    ..constraints = json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>
     <String, dynamic>{
-      'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'UUID': instance.UUID,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'isVisible': instance.isVisible,
       'name': instance.name,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'style': instance.style?.toJson(),
+      'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'constraints': instance.constraints?.toJson(),
+      'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'type': instance.type,
     };

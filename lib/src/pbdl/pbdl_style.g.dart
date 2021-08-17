@@ -29,11 +29,15 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
     hasShadow: json['hasShadow'] as bool,
   )
     ..isVisible = json['isVisible'] as bool
+    ..constraints = json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
     ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
       'isVisible': instance.isVisible,
+      'constraints': instance.constraints?.toJson(),
       'backgroundColor': instance.backgroundColor?.toJson(),
       'fills': instance.fills?.map((e) => e?.toJson())?.toList(),
       'borders': instance.borders?.map((e) => e?.toJson())?.toList(),

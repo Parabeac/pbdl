@@ -21,8 +21,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   String type = 'SLICE';
 
   String layoutAlign;
-
-  var constraints;
+  
 
   @override
   @JsonKey(name: 'absoluteBoundingBox')
@@ -37,7 +36,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
     pluginData,
     sharedPluginData,
     this.layoutAlign,
-    this.constraints,
+    FigmaConstraints constraints,
     this.boundaryRectangle,
     this.size,
     String transitionNodeID,

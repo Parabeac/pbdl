@@ -23,7 +23,9 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..layoutAlign = json['layoutAlign']
-    ..constraints = json['constraints']
+    ..constraints = json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
     ..size = json['size']
     ..strokes = json['strokes']
     ..strokeWeight = json['strokeWeight']
@@ -40,7 +42,7 @@ Map<String, dynamic> _$PBDLBooleanOperationToJson(
     <String, dynamic>{
       'child': instance.child?.toJson(),
       'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
+      'constraints': instance.constraints?.toJson(),
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
