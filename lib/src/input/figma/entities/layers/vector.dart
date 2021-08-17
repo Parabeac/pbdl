@@ -70,6 +70,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
           transitionNodeID: transitionNodeID,
+          constraints: constraints,
         ) {
     log = Logger(runtimeType.toString());
   }
@@ -86,15 +87,14 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
-      UUID: UUID,
-      imageReference: imageReference,
-      boundaryRectangle: boundaryRectangle?.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      style: style?.interpretStyle(),
-      prototypeNodeUUID: transitionNodeID,
-      constraints: constraints?.interpret()
-    ));
+        UUID: UUID,
+        imageReference: imageReference,
+        boundaryRectangle: boundaryRectangle?.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        style: style?.interpretStyle(),
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret()));
   }
 
   String imageReference;

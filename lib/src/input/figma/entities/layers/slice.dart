@@ -21,7 +21,6 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   String type = 'SLICE';
 
   String layoutAlign;
-  
 
   @override
   @JsonKey(name: 'absoluteBoundingBox')
@@ -51,6 +50,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          constraints: constraints,
         );
 
   @override
@@ -64,15 +64,14 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   @override
   Future<PBDLNode> interpretNode() async {
     return Future.value(PBDLRectangle(
-      UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      style: style.interpretStyle(),
-      child: await child.interpretNode(),
-      prototypeNodeUUID: transitionNodeID,
-      constraints: constraints?.interpret()
-    ));
+        UUID: UUID,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        style: style.interpretStyle(),
+        child: await child.interpretNode(),
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret()));
   }
 
   @override
