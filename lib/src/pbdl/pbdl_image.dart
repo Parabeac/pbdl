@@ -33,7 +33,7 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
       layerListExpandedType,
       String name,
       nameIsFixed,
-      resizingConstraint,
+      PBDLConstraints constraints,
       resizingType,
       num rotation,
       sharedStyleID,
@@ -50,6 +50,7 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           isVisible: isVisible,
           boundaryRectangle: boundaryRectangle,
           style: style,
+          constraints: constraints
         );
 
   @override

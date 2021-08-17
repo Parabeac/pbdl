@@ -71,6 +71,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
       style: style.interpretStyle(),
       child: await child.interpretNode(),
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret()
     ));
   }
 

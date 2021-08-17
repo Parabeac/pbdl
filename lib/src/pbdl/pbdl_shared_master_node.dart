@@ -55,7 +55,7 @@ class PBDLSharedMasterNode extends PBDLNode
     maintainScrollPosition,
     bool includeBackgroundColorInExport,
     int changeIdentifier,
-    String this.symbolID,
+    this.symbolID,
     bool includeBackgroundColorInInstance,
     verticalRulerData,
     bool resizesContent,

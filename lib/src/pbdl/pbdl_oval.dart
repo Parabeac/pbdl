@@ -10,18 +10,13 @@ part 'pbdl_oval.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLOval extends PBDLNode implements PBDLNodeFactory {
-  @override
-  var boundaryRectangle;
-
-  @override
-  var UUID;
 
   PBDLOval({
     bool edited,
     bool isClosed,
     pointRadiusBehaviour,
     List points,
-    this.UUID,
+    String UUID,
     booleanOperation,
     exportOptions,
     PBDLFrame boundaryRectangle,
@@ -33,7 +28,7 @@ class PBDLOval extends PBDLNode implements PBDLNodeFactory {
     layerListExpandedType,
     String name,
     nameIsFixed,
-    resizingConstraint,
+    PBDLConstraints constraints,
     resizingType,
     rotation,
     sharedStyleID,
@@ -45,7 +40,8 @@ class PBDLOval extends PBDLNode implements PBDLNodeFactory {
     PBDLStyle style,
     this.child,
     String prototypeNodeUUID,
-  }): super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID);
+  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
+            constraints: constraints);
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLOval.fromJson(json);

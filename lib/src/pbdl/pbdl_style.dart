@@ -21,26 +21,6 @@ class PBDLStyle extends PBDLNode {
 
   @override
   @JsonKey(ignore: true)
-  PBDLStyle style;
-
-  @override
-  @JsonKey(ignore: true)
-  String UUID;
-
-  @override
-  @JsonKey(ignore: true)
-  String name;
-
-  @override
-  @JsonKey(ignore: true)
-  PBDLFrame boundaryRectangle;
-
-  @override
-  @JsonKey(ignore: true)
-  String prototypeNodeUUID;
-
-  @override
-  @JsonKey(ignore: true)
   var child;
 
   @override

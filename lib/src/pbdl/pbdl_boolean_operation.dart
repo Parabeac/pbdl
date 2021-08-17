@@ -51,12 +51,14 @@ class PBDLBooleanOperation extends PBDLVector
     transitionDuration,
     transitionEasing,
     imageReference,
+    PBDLConstraints constraints
   }) : super(
           style: style,
           UUID: UUID,
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          constraints: constraints
         );
 
   @override

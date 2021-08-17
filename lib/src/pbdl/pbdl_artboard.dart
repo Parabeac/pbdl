@@ -38,7 +38,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
     layerListExpandedType,
     name,
     nameIsFixed,
-    resizingConstraint,
+    PBDLConstraints constraints,
     resizingType,
     rotation,
     sharedStyleID,

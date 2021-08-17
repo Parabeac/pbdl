@@ -69,6 +69,7 @@ class FigmaRegularPolygon extends FigmaVector
       name: name,
       style: style.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret()
     ));
   }
 

@@ -9,12 +9,6 @@ part 'pbdl_polygon.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLPolygon extends PBDLNode implements PBDLNodeFactory {
-  @override
-  var boundaryRectangle;
-
-  @override
-  var UUID;
-
   PBDLPolygon({
     bool edited,
     bool isClosed,
@@ -44,7 +38,8 @@ class PBDLPolygon extends PBDLNode implements PBDLNodeFactory {
     PBDLStyle style,
     this.child,
     String prototypeNodeUUID,
-  }): super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID);
+  }) : super(
+            UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID);
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

@@ -109,6 +109,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         style: style.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         symbolID: UUID,
+        resizingConstraint: constraints?.interpret(),
         isFlowHome: isFlowHome,
         children: await Future.wait(
             children.map((e) async => await e.interpretNode()).toList()));

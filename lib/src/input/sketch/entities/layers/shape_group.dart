@@ -137,7 +137,7 @@ class ShapeGroup extends AbstractGroupLayer implements SketchNodeFactory {
       layerListExpandedType: layerListExpandedType,
       name: name,
       nameIsFixed: nameIsFixed,
-      resizingConstraint: resizingConstraint,
+      constraints: resizingConstraint,
       rotation: rotation,
       sharedStyleID: sharedStyleID,
       shouldBreakMaskChain: shouldBreakMaskChain,

@@ -3,6 +3,7 @@ import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_figma_node_factory.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'vector.dart';
 
@@ -20,7 +21,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     sharedPluginData,
     style,
     layoutAlign,
-    constraints,
+    FigmaConstraints constraints,
     boundaryRectangle,
     size,
     fills,
@@ -68,6 +69,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
       name: name,
       style: style.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret()
     ));
   }
 

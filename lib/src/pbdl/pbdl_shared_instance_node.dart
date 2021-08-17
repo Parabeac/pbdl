@@ -13,8 +13,6 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   List parameters;
 
   final List<PBDLOverrideValue> overrideValues;
-  @override
-  PBDLFrame boundaryRectangle;
 
   @override
   final type = 'shared_instance';
@@ -24,7 +22,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     this.overrideValues,
     String name,
     bool isVisible,
-    this.boundaryRectangle,
+    PBDLFrame boundaryRectangle,
     style,
     exportOptions,
     booleanOperation,
@@ -48,6 +46,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     num verticalSpacing,
     num horizontalSpacing,
     String prototypeNodeUUID,
+    PBDLConstraints constraints,
   }) : super(
           UUID,
           name,
@@ -55,6 +54,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
           boundaryRectangle,
           style,
           prototypeNodeUUID,
+          constraints: constraints,
         );
 
   @override

@@ -17,6 +17,7 @@ class PBDLElement extends PBDLNode {
     type,
     style,
     prototypeNodeUUID,
+    PBDLConstraints constraints
   }) : super(
           UUID,
           name,
@@ -24,6 +25,7 @@ class PBDLElement extends PBDLNode {
           boundaryRectangle,
           style,
           prototypeNodeUUID,
+          constraints: constraints
         );
 
   factory PBDLElement.fromJson(Map<String, dynamic> json) =>

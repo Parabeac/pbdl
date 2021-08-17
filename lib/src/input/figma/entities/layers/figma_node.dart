@@ -59,6 +59,7 @@ class FigmaNode {
       null,
       transitionNodeID,
       child: await child.interpretNode(),
+      constraints: constraints?.interpret()
     ));
   }
 

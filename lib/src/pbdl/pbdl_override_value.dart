@@ -15,22 +15,6 @@ class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
   @override
   final type;
 
-  @override
-  @JsonKey(ignore: true)
-  bool isVisible;
-
-  @override
-  @JsonKey(ignore: true)
-  PBDLFrame boundaryRectangle;
-
-  @override
-  @JsonKey(ignore: true)
-  PBDLStyle style;
-
-  @override
-  @JsonKey(ignore: true)
-  String prototypeNodeUUID;
-
   PBDLOverrideValue(
     String UUID,
     String name,

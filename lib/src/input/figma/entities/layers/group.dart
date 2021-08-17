@@ -115,6 +115,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           isVisible: isVisible,
           name: name,
           style: style?.interpretStyle(),
+          constraints: constraints?.interpret(),
           prototypeNodeUUID: transitionNodeID,
         ),
       );
@@ -127,6 +128,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         name: name,
         style: style?.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
         children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList(),
         ),

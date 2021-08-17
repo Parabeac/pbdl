@@ -1,3 +1,4 @@
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
@@ -26,7 +27,7 @@ class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
     layerListExpandedType,
     String name,
     nameIsFixed,
-    resizingConstraint,
+    PBDLConstraints constraints,
     resizingType,
     rotation,
     sharedStyleID,
@@ -38,7 +39,7 @@ class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
     PBDLStyle style,
     this.children,
     String prototypeNodeUUID,
-  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID);
+  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID, constraints: constraints);
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

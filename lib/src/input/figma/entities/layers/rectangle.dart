@@ -26,7 +26,7 @@ class FigmaRectangle extends FigmaVector
     type,
     pluginData,
     sharedPluginData,
-    style,
+    FigmaStyle style,
     layoutAlign,
     FigmaConstraints constraints,
     boundaryRectangle,
@@ -71,10 +71,6 @@ class FigmaRectangle extends FigmaVector
   List<double> rectangleCornerRadii;
 
   @override
-  @JsonKey(ignore: true)
-  FigmaStyle style;
-
-  @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaRectangle.fromJson(json);
     node.style = StyleExtractor().getStyle(json);
@@ -101,6 +97,7 @@ class FigmaRectangle extends FigmaVector
         name: name,
         style: style.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret()
       ));
     }
     return Future.value(PBDLRectangle(
@@ -112,6 +109,7 @@ class FigmaRectangle extends FigmaVector
       child: await child?.interpretNode(),
       fixedRadius: cornerRadius ?? 0,
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret()
     ));
   }
 

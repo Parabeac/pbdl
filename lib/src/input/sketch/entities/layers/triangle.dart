@@ -134,7 +134,7 @@ class Triangle extends AbstractShapeLayer implements SketchNodeFactory {
       layerListExpandedType: layerListExpandedType,
       name: name,
       nameIsFixed: nameIsFixed,
-      resizingConstraint: resizingConstraint,
+      constraints: resizingConstraint,
       resizingType: resizingType,
       rotation: rotation,
       sharedStyleID: sharedStyleID,

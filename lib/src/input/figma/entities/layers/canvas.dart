@@ -78,6 +78,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         name: name,
         style: style,
         prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
         children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList(),
         ),

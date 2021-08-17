@@ -12,8 +12,6 @@ part 'pbdl_vector.g.dart';
 class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   var layoutAlign;
 
-  var constraints;
-
   var size;
 
   var strokes;
@@ -30,34 +28,28 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   final type = 'vector';
 
   PBDLVector({
-    this.name,
+    String name,
     visible,
     pluginData,
     sharedPluginData,
     this.layoutAlign,
-    this.constraints,
-    PBDLFrame this.boundaryRectangle,
+    PBDLConstraints constraints,
+    PBDLFrame boundaryRectangle,
     this.size,
     this.strokes,
     this.strokeWeight,
     this.strokeAlign,
     this.styles,
     this.fillsList,
-    this.UUID,
-    this.style,
+    String UUID,
+    PBDLStyle style,
     prototypeNodeUUID,
     transitionDuration,
     transitionEasing,
-  }) : super(
-          UUID,
-          name,
-          visible,
-          boundaryRectangle,
-          style,
-          prototypeNodeUUID,
-          transitionDuration: transitionDuration,
-          transitionEasing: transitionEasing,
-        );
+  }) : super(UUID, name, visible, boundaryRectangle, style, prototypeNodeUUID,
+            transitionDuration: transitionDuration,
+            transitionEasing: transitionEasing,
+            constraints: constraints);
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -66,24 +58,6 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
       _$PBDLVectorFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLVectorToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  PBDLStyle style;
-
-  @override
-  var boundaryRectangle;
 
   @override
   String imageReference;

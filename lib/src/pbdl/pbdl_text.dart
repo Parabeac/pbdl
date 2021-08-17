@@ -13,6 +13,8 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   final type = 'text';
 
+  String content;
+
   PBDLText({
     UUID,
     booleanOperation,
@@ -37,15 +39,16 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     style,
     this.content,
     String prototypeNodeUUID,
+    PBDLConstraints constraints,
   }) : super(
-            UUID: UUID,
-            name: name,
-            isVisible: isVisible,
-            boundaryRectangle: boundaryRectangle,
-            style: style,
-            prototypeNodeUUID: prototypeNodeUUID);
-
-  String content;
+          UUID: UUID,
+          name: name,
+          isVisible: isVisible,
+          boundaryRectangle: boundaryRectangle,
+          style: style,
+          prototypeNodeUUID: prototypeNodeUUID,
+          constraints: constraints,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLText.fromJson(json);

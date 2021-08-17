@@ -21,7 +21,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       String type,
       pluginData,
       sharedPluginData,
-      FigmaStyle this.style,
+      FigmaStyle style,
       layoutAlign,
       FigmaConstraints constraints,
       boundaryRectangle,
@@ -62,10 +62,6 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   @JsonKey(name: 'characters')
   String content;
 
-  @override
-  @JsonKey(ignore: true)
-  FigmaStyle style;
-
   List<double> characterStyleOverrides;
 
   Map styleOverrideTable;
@@ -93,6 +89,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         style: style.interpretStyle(),
         content: content,
         prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
       ),
     );
   }

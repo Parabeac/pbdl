@@ -9,7 +9,9 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pbdl_rectangle.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PBDLRectangle extends PBDLNode with PBColorMixin  implements PBDLNodeFactory {
+class PBDLRectangle extends PBDLNode
+    with PBColorMixin
+    implements PBDLNodeFactory {
   num fixedRadius;
 
   PBDLRectangle({
@@ -41,7 +43,16 @@ class PBDLRectangle extends PBDLNode with PBColorMixin  implements PBDLNodeFacto
     PBDLStyle style,
     this.child,
     String prototypeNodeUUID,
-  }):super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID);
+    PBDLConstraints constraints,
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+          constraints: constraints,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
