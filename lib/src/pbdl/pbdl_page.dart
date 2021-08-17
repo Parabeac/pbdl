@@ -15,8 +15,6 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
   var log = Logger('DesignPage');
 
   String imageURI;
-  @override
-  String name;
   bool convert = true;
 
   List<PBDLNode> screens = [];

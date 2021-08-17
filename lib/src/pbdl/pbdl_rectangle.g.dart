@@ -22,11 +22,10 @@ PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
-  )
-    ..constraints = json['constraints'] == null
+    constraints: json['constraints'] == null
         ? null
-        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..type = json['type'] as String;
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLRectangleToJson(PBDLRectangle instance) =>

@@ -12,6 +12,9 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
     type: json['type'] as String,
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
+    style: json['style'] == null
+        ? null
+        : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
     layoutAlign: json['layoutAlign'],
     constraints: json['constraints'] == null
         ? null
@@ -59,6 +62,7 @@ Map<String, dynamic> _$FigmaTextToJson(FigmaText instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'style': instance.style,
       'layoutAlign': instance.layoutAlign,
       'absoluteBoundingBox': instance.boundaryRectangle,
       'size': instance.size,

@@ -23,13 +23,13 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
     style: json['style'],
     symbolID: json['symbolID'] as String,
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
   )
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..constraints = json['constraints'] == null
-        ? null
-        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
     ..parameters = json['parameters'] as List
     ..type = json['type'] as String;
 }
@@ -40,6 +40,7 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
       'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
@@ -48,6 +49,5 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
       'parameters': instance.parameters,
       'overrideValues':
           instance.overrideValues?.map((e) => e?.toJson())?.toList(),
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'type': instance.type,
     };

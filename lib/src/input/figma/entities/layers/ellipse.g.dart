@@ -14,8 +14,14 @@ FigmaEllipse _$FigmaEllipseFromJson(Map<String, dynamic> json) {
     sharedPluginData: json['sharedPluginData'],
     style: json['style'],
     layoutAlign: json['layoutAlign'],
-    constraints: json['constraints'],
-    boundaryRectangle: json['absoluteBoundingBox'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
+    boundaryRectangle: json['absoluteBoundingBox'] == null
+        ? null
+        : FigmaRect.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>),
     size: json['size'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],

@@ -17,13 +17,13 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
     style: json['style'],
     content: json['content'] as String,
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
   )
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..constraints = json['constraints'] == null
-        ? null
-        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
     ..type = json['type'] as String;
 }
 

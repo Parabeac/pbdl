@@ -30,13 +30,13 @@ PBDLPolygon _$PBDLPolygonFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PBDLPolygonToJson(PBDLPolygon instance) =>
     <String, dynamic>{
+      'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'constraints': instance.constraints?.toJson(),
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'UUID': instance.UUID,
       'type': instance.type,
       'child': instance.child?.toJson(),
     };

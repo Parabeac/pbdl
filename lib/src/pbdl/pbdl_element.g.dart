@@ -15,13 +15,12 @@ PBDLElement _$PBDLElementFromJson(Map<String, dynamic> json) {
     type: json['type'],
     style: json['style'],
     prototypeNodeUUID: json['prototypeNodeUUID'],
-  )
-    ..child = json['child'] == null
+    constraints: json['constraints'] == null
         ? null
-        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..constraints = json['constraints'] == null
-        ? null
-        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>);
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
+  )..child = json['child'] == null
+      ? null
+      : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$PBDLElementToJson(PBDLElement instance) =>

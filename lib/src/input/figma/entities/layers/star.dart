@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
@@ -22,7 +23,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     style,
     layoutAlign,
     FigmaConstraints constraints,
-    boundaryRectangle,
+    FigmaRect boundaryRectangle,
     size,
     fills,
     strokes,
@@ -67,7 +68,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style.interpretStyle(),
+      style: style?.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret()
     ));
