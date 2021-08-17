@@ -54,6 +54,13 @@ class PBDLStyle extends PBDLNode {
     this.hasShadow,
   }) : super('', '', true, null, null, '');
 
+  static PBDLStyle getStyle(dynamic style) {
+    if (style is Map) {
+      return PBDLStyle.fromJson(style);
+    }
+    return style;
+  }
+
   @override
   factory PBDLStyle.fromJson(Map<String, dynamic> json) =>
       _$PBDLStyleFromJson(json);

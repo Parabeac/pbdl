@@ -1,3 +1,4 @@
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
@@ -52,7 +53,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
           name,
           isVisible,
           boundaryRectangle,
-          style,
+          PBDLStyle.getStyle(style),
           prototypeNodeUUID,
         );
 

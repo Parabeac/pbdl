@@ -49,8 +49,8 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           UUID: UUID,
           name: name,
           isVisible: isVisible,
-          boundaryRectangle: boundaryRectangle,
-          style: style,
+          boundaryRectangle: PBDLFrame.getFrame(boundaryRectangle),
+          style: PBDLStyle.getStyle(style),
         );
 
   @override

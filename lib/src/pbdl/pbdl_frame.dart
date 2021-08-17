@@ -16,6 +16,13 @@ class PBDLFrame {
     this.height,
   });
 
+  static PBDLFrame getFrame(dynamic boundaryRectangle) {
+    if (boundaryRectangle is Map) {
+      return PBDLFrame.fromJson(boundaryRectangle);
+    }
+    return boundaryRectangle;
+  }
+
   factory PBDLFrame.fromJson(Map<String, dynamic> json) =>
       _$PBDLFrameFromJson(json);
   Map<String, dynamic> toJson() => _$PBDLFrameToJson(this);

@@ -1,3 +1,4 @@
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
@@ -41,7 +42,7 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
             name: name,
             isVisible: isVisible,
             boundaryRectangle: boundaryRectangle,
-            style: style,
+            style: PBDLStyle.getStyle(style),
             prototypeNodeUUID: prototypeNodeUUID);
 
   String content;

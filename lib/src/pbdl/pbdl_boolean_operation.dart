@@ -51,7 +51,7 @@ class PBDLBooleanOperation extends PBDLVector
     transitionEasing,
     imageReference,
   }) : super(
-          style: style,
+          style: PBDLStyle.getStyle(style),
           UUID: UUID,
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
