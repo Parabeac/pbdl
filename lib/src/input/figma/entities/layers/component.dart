@@ -9,6 +9,7 @@ import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'figma_frame.dart';
 
@@ -34,7 +35,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     strokeWeight,
     strokeAlign,
     cornerRadius,
-    constraints,
+    FigmaConstraints constraints,
     layoutAlign,
     size,
     horizontalPadding,

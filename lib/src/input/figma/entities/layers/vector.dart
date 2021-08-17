@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -19,8 +20,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   FigmaStyle style;
 
   String layoutAlign;
-
-  var constraints;
 
   @override
   @JsonKey(name: 'absoluteBoundingBox')
@@ -47,9 +46,9 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     String type,
     pluginData,
     sharedPluginData,
-    FigmaStyle this.style,
+    this.style,
     this.layoutAlign,
-    this.constraints,
+    FigmaConstraints constraints,
     this.boundaryRectangle,
     this.size,
     this.strokes,

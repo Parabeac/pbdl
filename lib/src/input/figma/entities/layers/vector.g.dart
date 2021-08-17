@@ -16,7 +16,10 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
     layoutAlign: json['layoutAlign'] as String,
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
     boundaryRectangle: json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
@@ -45,6 +48,7 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints,
       'child': instance.child,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
@@ -52,7 +56,6 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
       'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
       'absoluteBoundingBox': instance.boundaryRectangle,
       'size': instance.size,
       'strokes': instance.strokes,

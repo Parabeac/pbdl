@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
@@ -27,7 +28,7 @@ class FigmaRectangle extends FigmaVector
     sharedPluginData,
     style,
     layoutAlign,
-    constraints,
+    FigmaConstraints constraints,
     boundaryRectangle,
     size,
     strokes,

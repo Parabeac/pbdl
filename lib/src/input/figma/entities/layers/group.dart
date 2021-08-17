@@ -8,6 +8,7 @@ import 'package:quick_log/quick_log.dart';
 import '../../helper/figma_rect.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'figma_frame.dart';
 import 'text.dart';
@@ -42,7 +43,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       strokeWeight,
       strokeAlign,
       cornerRadius,
-      constraints,
+      FigmaConstraints constraints,
       layoutAlign,
       size,
       horizontalPadding,

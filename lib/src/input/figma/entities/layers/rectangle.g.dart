@@ -14,7 +14,10 @@ FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
     layoutAlign: json['layoutAlign'],
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
     boundaryRectangle: json['absoluteBoundingBox'],
     size: json['size'],
     strokes: json['strokes'],
@@ -44,13 +47,13 @@ Map<String, dynamic> _$FigmaRectangleToJson(FigmaRectangle instance) =>
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints,
       'child': instance.child,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
       'absoluteBoundingBox': instance.boundaryRectangle,
       'size': instance.size,
       'strokes': instance.strokes,

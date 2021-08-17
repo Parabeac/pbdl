@@ -18,7 +18,10 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
     strokeWeight: json['strokeWeight'],
     strokeAlign: json['strokeAlign'],
     cornerRadius: json['cornerRadius'],
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
     layoutAlign: json['layoutAlign'],
     size: json['size'],
     horizontalPadding: json['horizontalPadding'],
@@ -49,6 +52,7 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints?.toJson(),
       'child': instance.child?.toJson(),
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
@@ -60,7 +64,6 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'cornerRadius': instance.cornerRadius,
-      'constraints': instance.constraints,
       'layoutAlign': instance.layoutAlign,
       'size': instance.size,
       'horizontalPadding': instance.horizontalPadding,

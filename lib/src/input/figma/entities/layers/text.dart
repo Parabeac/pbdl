@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text.dart';
@@ -22,7 +23,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       sharedPluginData,
       FigmaStyle this.style,
       layoutAlign,
-      constraints,
+      FigmaConstraints constraints,
       boundaryRectangle,
       size,
       fills,
