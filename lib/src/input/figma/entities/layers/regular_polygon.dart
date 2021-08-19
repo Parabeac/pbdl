@@ -5,6 +5,7 @@ import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'vector.dart';
 
@@ -22,7 +23,7 @@ class FigmaRegularPolygon extends FigmaVector
     pluginData,
     sharedPluginData,
     layoutAlign,
-    constraints,
+    FigmaConstraints constraints,
     boundaryRectangle,
     size,
     fills,
