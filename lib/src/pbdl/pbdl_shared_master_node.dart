@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'abstract_pbdl_node_factory.dart';
@@ -55,7 +56,7 @@ class PBDLSharedMasterNode extends PBDLNode
     maintainScrollPosition,
     bool includeBackgroundColorInExport,
     int changeIdentifier,
-    String this.symbolID,
+    this.symbolID,
     bool includeBackgroundColorInInstance,
     verticalRulerData,
     bool resizesContent,

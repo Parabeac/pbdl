@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -32,11 +33,11 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     sharedPluginData,
     style,
     layoutAlign,
-    constraints,
-    boundaryRectangle,
+    FigmaConstraints constraints,
+    FigmaRect boundaryRectangle,
     size,
     this.fills,
-    strokes,
+    strokes, 
     strokeWeight,
     strokeAlign,
     styles,
@@ -52,9 +53,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle != null
-              ? FigmaRect.fromJson(boundaryRectangle)
-              : null,
+          boundaryRectangle: boundaryRectangle,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -85,6 +84,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       name: name,
       style: style?.interpretStyle(),
       imageReference: imageReference,
+      constraints: constraints?.interpret(),
       prototypeNodeUUID: transitionNodeID,
     ));
   }

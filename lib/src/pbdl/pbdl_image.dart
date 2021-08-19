@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -34,7 +35,7 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
       layerListExpandedType,
       String name,
       nameIsFixed,
-      resizingConstraint,
+      PBDLConstraints constraints,
       resizingType,
       num rotation,
       sharedStyleID,
@@ -49,8 +50,9 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           UUID: UUID,
           name: name,
           isVisible: isVisible,
-          boundaryRectangle: PBDLFrame.getFrame(boundaryRectangle),
-          style: PBDLStyle.getStyle(style),
+          boundaryRectangle: boundaryRectangle,
+          style: style,
+          constraints: constraints
         );
 
   @override

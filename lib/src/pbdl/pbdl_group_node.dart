@@ -1,3 +1,5 @@
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -7,25 +9,25 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pbdl_group_node.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
+class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
   List<PBDLNode> children = [];
 
   PBDLGroupNode({
     bool hasClickThrough,
     groupLayout,
-    this.UUID,
+    String UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame this.boundaryRectangle,
+    PBDLFrame boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    this.isVisible,
+    bool isVisible,
     layerListExpandedType,
-    this.name,
+    String name,
     nameIsFixed,
-    resizingConstraint,
+    PBDLConstraints constraints,
     resizingType,
     rotation,
     sharedStyleID,
@@ -34,10 +36,10 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.style,
+    PBDLStyle style,
     this.children,
-    this.prototypeNodeUUID,
-  });
+    String prototypeNodeUUID,
+  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID, constraints: constraints);
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -46,24 +48,6 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
       _$PBDLGroupNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLGroupNodeToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  PBDLStyle style;
 
   @override
   String type = 'group';

@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'abstract_pbdl_node_factory.dart';
@@ -7,6 +8,15 @@ part 'pbdl_node.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLNode {
+  String UUID;
+  String name;
+  bool isVisible;
+  PBDLFrame boundaryRectangle;
+  String type;
+  PBDLStyle style;
+  String prototypeNodeUUID;
+  PBDLNode child;
+  PBDLConstraints constraints;
   PBDLNode(
     this.UUID,
     this.name,
@@ -17,15 +27,8 @@ class PBDLNode {
     transitionDuration,
     transitionEasing,
     this.child,
+    this.constraints
   });
-  String UUID;
-  String name;
-  bool isVisible;
-  PBDLFrame boundaryRectangle;
-  String type;
-  PBDLStyle style;
-  String prototypeNodeUUID;
-  PBDLNode child;
 
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLNode.fromJson(json);
 

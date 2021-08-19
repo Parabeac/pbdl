@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -69,6 +70,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
       booleanOperation: booleanOperation,
       prototypeNodeUUID: transitionNodeID,
       imageReference: imageReference,
+      constraints: constraints?.interpret()
     ));
   }
 }

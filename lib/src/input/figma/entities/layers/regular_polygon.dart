@@ -72,6 +72,7 @@ class FigmaRegularPolygon extends FigmaVector
       isVisible: isVisible,
       name: name,
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret()
     ));
   }
 

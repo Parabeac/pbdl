@@ -1,4 +1,5 @@
 import 'package:pbdl/src/pbdl/pbdl_color.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_flow.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
@@ -37,7 +38,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
     layerListExpandedType,
     name,
     nameIsFixed,
-    resizingConstraint,
+    PBDLConstraints constraints,
     resizingType,
     rotation,
     sharedStyleID,

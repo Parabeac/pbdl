@@ -18,6 +18,9 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
         : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'],
     name: json['name'],
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'],
     style: json['style'] == null
         ? null
@@ -41,6 +44,7 @@ Map<String, dynamic> _$PBDLArtboardToJson(PBDLArtboard instance) =>
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
       'backgroundColor': instance.backgroundColor?.toJson(),
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'isFlowHome': instance.isFlowHome,

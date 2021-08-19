@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -21,8 +22,6 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
 
   String layoutAlign;
 
-  var constraints;
-
   @override
   @JsonKey(name: 'absoluteBoundingBox')
   var boundaryRectangle;
@@ -36,7 +35,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
     pluginData,
     sharedPluginData,
     this.layoutAlign,
-    this.constraints,
+    FigmaConstraints constraints,
     this.boundaryRectangle,
     this.size,
     String transitionNodeID,
@@ -51,6 +50,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          constraints: constraints,
         );
 
   @override
@@ -64,14 +64,14 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   @override
   Future<PBDLNode> interpretNode() async {
     return Future.value(PBDLRectangle(
-      UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      style: style.interpretStyle(),
-      child: await child.interpretNode(),
-      prototypeNodeUUID: transitionNodeID,
-    ));
+        UUID: UUID,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        style: style.interpretStyle(),
+        child: await child.interpretNode(),
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret()));
   }
 
   @override

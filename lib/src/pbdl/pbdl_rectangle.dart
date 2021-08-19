@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
@@ -8,7 +9,9 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pbdl_rectangle.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
+class PBDLRectangle extends PBDLNode
+    with PBColorMixin
+    implements PBDLNodeFactory {
   num fixedRadius;
 
   PBDLRectangle({
@@ -16,17 +19,17 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
     bool edited,
     bool isClosed,
     pointRadiusBehaviour,
-    this.UUID,
+    String UUID,
     booleanOperation,
     exportOptions,
-    this.boundaryRectangle,
+    PBDLFrame boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    this.isVisible,
+    bool isVisible,
     layerListExpandedType,
-    this.name,
+    String name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -37,10 +40,19 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.style,
+    PBDLStyle style,
     this.child,
-    this.prototypeNodeUUID,
-  });
+    String prototypeNodeUUID,
+    PBDLConstraints constraints,
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+          constraints: constraints,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -49,24 +61,6 @@ class PBDLRectangle with PBColorMixin implements PBDLNodeFactory, PBDLNode {
       _$PBDLRectangleFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLRectangleToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  PBDLStyle style;
 
   @override
   String type = 'rectangle';

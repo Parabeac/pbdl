@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:quick_log/quick_log.dart';
@@ -8,23 +9,21 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_page.g.dart';
 
-@JsonSerializable(explicitToJson: true)
-class PBDLPage implements PBDLNodeFactory, PBDLNode {
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
+class PBDLPage extends PBDLNode implements PBDLNodeFactory {
   @JsonKey(ignore: true)
   var log = Logger('DesignPage');
 
   String imageURI;
-  @override
-  String name;
   bool convert = true;
 
   List<PBDLNode> screens = [];
 
   PBDLPage({
-    this.name,
-    this.UUID,
+    String name,
+    String UUID,
     this.screens,
-  });
+  }): super(UUID, name, true, null, null, null);
 
   void addScreen(PBDLScreen item) {
     screens.add(item);
@@ -42,24 +41,6 @@ class PBDLPage implements PBDLNodeFactory, PBDLNode {
 
   @override
   Map<String, dynamic> toJson() => _$PBDLPageToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
-
-  @override
-  PBDLNode child;
-
-  @override
-  bool isVisible;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  PBDLStyle style;
 
   @override
   String type = 'page';

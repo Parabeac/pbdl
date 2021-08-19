@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -8,31 +9,26 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pbdl_oval.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PBDLOval implements PBDLNodeFactory, PBDLNode {
-  @override
-  var boundaryRectangle;
-
-  @override
-  var UUID;
+class PBDLOval extends PBDLNode implements PBDLNodeFactory {
 
   PBDLOval({
     bool edited,
     bool isClosed,
     pointRadiusBehaviour,
     List points,
-    this.UUID,
+    String UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame this.boundaryRectangle,
+    PBDLFrame boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    this.isVisible,
+    bool isVisible,
     layerListExpandedType,
-    this.name,
+    String name,
     nameIsFixed,
-    resizingConstraint,
+    PBDLConstraints constraints,
     resizingType,
     rotation,
     sharedStyleID,
@@ -41,10 +37,11 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.style,
+    PBDLStyle style,
     this.child,
-    this.prototypeNodeUUID,
-  });
+    String prototypeNodeUUID,
+  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
+            constraints: constraints);
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLOval.fromJson(json);
@@ -52,18 +49,6 @@ class PBDLOval implements PBDLNodeFactory, PBDLNode {
       _$PBDLOvalFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLOvalToJson(this);
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  PBDLStyle style;
 
   @override
   String type = 'oval';

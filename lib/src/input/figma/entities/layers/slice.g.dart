@@ -13,7 +13,10 @@ FigmaSlice _$FigmaSliceFromJson(Map<String, dynamic> json) {
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
     layoutAlign: json['layoutAlign'] as String,
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
     boundaryRectangle: json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
@@ -36,13 +39,13 @@ Map<String, dynamic> _$FigmaSliceToJson(FigmaSlice instance) =>
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints,
       'child': instance.child,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'type': instance.type,
       'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
       'absoluteBoundingBox': instance.boundaryRectangle,
       'size': instance.size,
       'visible': instance.isVisible,

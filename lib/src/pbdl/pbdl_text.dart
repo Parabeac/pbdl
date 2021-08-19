@@ -1,4 +1,4 @@
-import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
@@ -12,6 +12,8 @@ part 'pbdl_text.g.dart';
 class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   final type = 'text';
+
+  String content;
 
   PBDLText({
     UUID,
@@ -37,15 +39,16 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     style,
     this.content,
     String prototypeNodeUUID,
+    PBDLConstraints constraints,
   }) : super(
-            UUID: UUID,
-            name: name,
-            isVisible: isVisible,
-            boundaryRectangle: boundaryRectangle,
-            style: PBDLStyle.getStyle(style),
-            prototypeNodeUUID: prototypeNodeUUID);
-
-  String content;
+          UUID: UUID,
+          name: name,
+          isVisible: isVisible,
+          boundaryRectangle: boundaryRectangle,
+          style: style,
+          prototypeNodeUUID: prototypeNodeUUID,
+          constraints: constraints,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLText.fromJson(json);

@@ -16,6 +16,20 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
         ?.toList(),
     pngPath: json['pngPath'] as String,
   )
+    ..isVisible = json['isVisible'] as bool
+    ..boundaryRectangle = json['boundaryRectangle'] == null
+        ? null
+        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
+    ..style = json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
+    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..constraints = json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
     ..debug = json['debug'] as bool
     ..miscPages = (json['miscPages'] as List)
         ?.map((e) =>
@@ -25,33 +39,23 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : SharedStyle.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..boundaryRectangle = json['boundaryRectangle'] == null
-        ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
-    ..child = json['child'] == null
-        ? null
-        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..isVisible = json['isVisible'] as bool
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-    ..style = json['style'] == null
-        ? null
-        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
     ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
     <String, dynamic>{
+      'UUID': instance.UUID,
+      'name': instance.name,
+      'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'style': instance.style?.toJson(),
+      'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
       'debug': instance.debug,
       'pngPath': instance.pngPath,
       'pages': instance.pages?.map((e) => e?.toJson())?.toList(),
       'miscPages': instance.miscPages?.map((e) => e?.toJson())?.toList(),
       'sharedStyles': instance.sharedStyles?.map((e) => e?.toJson())?.toList(),
-      'UUID': instance.UUID,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'child': instance.child?.toJson(),
-      'isVisible': instance.isVisible,
-      'name': instance.name,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'style': instance.style?.toJson(),
       'type': instance.type,
     };

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -77,6 +78,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         name: name,
         style: style,
         prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
         children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList(),
         ),

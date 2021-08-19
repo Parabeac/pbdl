@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -50,12 +51,14 @@ class PBDLBooleanOperation extends PBDLVector
     transitionDuration,
     transitionEasing,
     imageReference,
+    PBDLConstraints constraints
   }) : super(
           style: PBDLStyle.getStyle(style),
           UUID: UUID,
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          constraints: constraints
         );
 
   @override
