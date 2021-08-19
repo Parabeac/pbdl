@@ -138,8 +138,8 @@ class PBDL {
 
     for (var page in project.pages) {
       for (PBDLScreen screen in page.screens) {
-        screen.imageURI = AzureAssetService().getImageURI('${screen.id}.png');
-        result[screen.id] = {
+        screen.imageURI = AzureAssetService().getImageURI('${screen.UUID}.png');
+        result[screen.UUID] = {
           'width': screen.designNode.boundaryRectangle.width,
           'height': screen.designNode.boundaryRectangle.height
         };
@@ -148,7 +148,7 @@ class PBDL {
 
     for (var page in project.miscPages) {
       for (PBDLScreen screen in page.screens) {
-        result[screen.id] = {
+        result[screen.UUID] = {
           'width': screen.designNode.boundaryRectangle.width,
           'height': screen.designNode.boundaryRectangle.height
         };
