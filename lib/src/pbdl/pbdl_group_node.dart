@@ -10,6 +10,9 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pbdl_group_node.g.dart';
 
 @JsonSerializable(explicitToJson: true)
+/// This is essentially a folder used to organize the [PBDLNodes] inside. This tends to 
+/// provide no value, unless it comes with extra metadata that could interpret this group into
+/// other usefull objects.
 class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
   List<PBDLNode> children = [];
 
