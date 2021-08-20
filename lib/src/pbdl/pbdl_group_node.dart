@@ -1,4 +1,5 @@
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
@@ -18,7 +19,7 @@ class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
     String UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,

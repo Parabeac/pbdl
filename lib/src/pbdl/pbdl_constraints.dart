@@ -7,6 +7,15 @@ part 'pbdl_constraints.g.dart';
 /// Each property must be set, potentially use https://pub.dev/packages/meta to make these named parameters required.
 @JsonSerializable()
 class PBDLConstraints {
+  /// - If all the pins are `false` thats just means is going to scale normally.
+  /// - If there is a pin value that is `true` we are going to use the constant value for that
+  /// attribute instead of the scaling value(using media query).
+  bool pinLeft;
+  bool pinRight;
+  bool pinTop;
+  bool pinBottom;
+  bool fixedHeight;
+  bool fixedWidth;
   PBDLConstraints(
       {this.pinLeft,
       this.pinRight,
@@ -15,19 +24,15 @@ class PBDLConstraints {
       this.fixedHeight,
       this.fixedWidth});
 
-  /// - If all the pins are `false` thats just means is going to scale normally.
-  /// - If there is a pin value that is `true` we are going to use the constant value for that
-  /// attribute instead of the scaling value(using media query).
-  bool pinLeft;
-  bool pinRight;
-  bool pinTop;
-  bool pinBottom;
+  factory PBDLConstraints.defaultConstraints() => PBDLConstraints(
+      pinLeft: false,
+      pinBottom: false,
+      pinRight: false,
+      pinTop: false,
+      fixedHeight: false,
+      fixedWidth: false);
+  factory PBDLConstraints.fromJson(Map<String, dynamic> json) =>
+      _$PBDLConstraintsFromJson(json);
 
-  bool fixedHeight;
-  bool fixedWidth;
-
-  factory PBDLConstraints.fromJson(Map<String, dynamic> json) => _$PBDLConstraintsFromJson(json);
-
-  Map<String,dynamic> toJson() => _$PBDLConstraintsToJson(this);
-
+  Map<String, dynamic> toJson() => _$PBDLConstraintsToJson(this);
 }

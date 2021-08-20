@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
@@ -45,7 +46,7 @@ class PBDLBooleanOperation extends PBDLVector
     booleanOperation,
     type,
     style,
-    PBDLFrame this.boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     String UUID,
     prototypeNodeUUID,
     transitionDuration,

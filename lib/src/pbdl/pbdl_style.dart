@@ -1,5 +1,6 @@
 import 'package:pbdl/src/pbdl/pbdl_border.dart';
 import 'package:pbdl/src/pbdl/pbdl_border_options.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';

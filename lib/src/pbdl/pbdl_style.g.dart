@@ -33,7 +33,8 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>)
     ..style = json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)

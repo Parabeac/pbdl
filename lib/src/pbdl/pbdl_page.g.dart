@@ -18,7 +18,8 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>)
     ..style = json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
@@ -37,6 +38,7 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) {
   final val = <String, dynamic>{
     'UUID': instance.UUID,
+    'name': instance.name,
     'isVisible': instance.isVisible,
     'boundaryRectangle': instance.boundaryRectangle?.toJson(),
     'style': instance.style?.toJson(),
@@ -52,7 +54,6 @@ Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) {
   }
 
   writeNotNull('imageURI', instance.imageURI);
-  writeNotNull('name', instance.name);
   writeNotNull('convert', instance.convert);
   writeNotNull('screens', instance.screens?.map((e) => e?.toJson())?.toList());
   writeNotNull('type', instance.type);

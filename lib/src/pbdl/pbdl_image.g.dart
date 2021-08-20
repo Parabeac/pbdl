@@ -12,7 +12,8 @@ PBDLImage _$PBDLImageFromJson(Map<String, dynamic> json) {
     UUID: json['UUID'] as String,
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'] as bool,
     name: json['name'] as String,
     constraints: json['constraints'] == null

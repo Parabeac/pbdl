@@ -15,7 +15,8 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     size: json['size'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],

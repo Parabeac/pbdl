@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
@@ -14,7 +15,7 @@ part 'pbdl_artboard.g.dart';
 class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
   PBDLColor backgroundColor;
   @override
-  PBDLFrame boundaryRectangle;
+  PBDLBoundaryBox boundaryRectangle;
   var isFlowHome;
 
   @override
