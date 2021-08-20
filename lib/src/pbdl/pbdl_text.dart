@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -19,7 +20,7 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     bool isFixedToViewport,
     bool isFlippedHorizontal,
     bool isFlippedVertical,

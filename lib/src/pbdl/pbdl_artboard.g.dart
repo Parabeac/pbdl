@@ -15,7 +15,8 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
     UUID: json['UUID'],
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'],
     name: json['name'],
     constraints: json['constraints'] == null

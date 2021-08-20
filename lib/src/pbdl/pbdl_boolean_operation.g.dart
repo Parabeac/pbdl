@@ -14,7 +14,8 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
     style: json['style'],
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     UUID: json['UUID'] as String,
     prototypeNodeUUID: json['prototypeNodeUUID'],
     imageReference: json['imageReference'],

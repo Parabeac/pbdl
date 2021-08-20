@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -21,7 +22,7 @@ class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
 
   @override
   @JsonKey(ignore: true)
-  PBDLFrame boundaryRectangle;
+  PBDLBoundaryBox boundaryRectangle;
 
   @override
   @JsonKey(ignore: true)

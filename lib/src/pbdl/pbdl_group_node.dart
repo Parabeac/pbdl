@@ -1,4 +1,5 @@
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
@@ -9,6 +10,9 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pbdl_group_node.g.dart';
 
 @JsonSerializable(explicitToJson: true)
+/// This is essentially a folder used to organize the [PBDLNodes] inside. This tends to 
+/// provide no value, unless it comes with extra metadata that could interpret this group into
+/// other usefull objects.
 class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
   List<PBDLNode> children = [];
 
@@ -18,7 +22,7 @@ class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
     String UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,

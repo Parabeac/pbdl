@@ -1,6 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
@@ -14,8 +17,7 @@ import 'figma_node.dart';
 part 'figma_frame.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class FigmaFrame extends FigmaChildrenNode
-    with PBColorMixin
+class FigmaFrame extends FigmaChildrenNode with PBColorMixin
     implements FigmaNodeFactory {
   @JsonKey(name: 'absoluteBoundingBox')
   @override
@@ -34,7 +36,6 @@ class FigmaFrame extends FigmaChildrenNode
   String strokeAlign;
 
   double cornerRadius;
-
 
   String layoutAlign;
 
@@ -82,19 +83,13 @@ class FigmaFrame extends FigmaChildrenNode
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-  }) : super(
-          name,
-          isVisible,
-          type,
-          pluginData,
-          sharedPluginData,
-          UUID: UUID,
-          transitionNodeID: transitionNodeID,
-          transitionDuration: transitionDuration,
-          transitionEasing: transitionEasing,
-          children: children,
-          constraints: constraints
-        );
+  }) : super(name, isVisible, type, pluginData, sharedPluginData,
+            UUID: UUID,
+            transitionNodeID: transitionNodeID,
+            transitionDuration: transitionDuration,
+            transitionEasing: transitionEasing,
+            children: children,
+            constraints: constraints);
   @JsonKey(ignore: true)
   List points;
 
@@ -132,7 +127,7 @@ class FigmaFrame extends FigmaChildrenNode
       );
     } else {
       return Future.value(
-        PBDLGroupNode(
+        PBDLFrame(
             UUID: UUID,
             boundaryRectangle: boundaryRectangle.interpretFrame(),
             isVisible: isVisible,

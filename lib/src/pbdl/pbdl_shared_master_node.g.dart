@@ -16,7 +16,10 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
         ?.toList(),
     name: json['name'] as String,
     isVisible: json['isVisible'] as bool,
-    boundaryRectangle: json['boundaryRectangle'],
+    boundaryRectangle: json['boundaryRectangle'] == null
+        ? null
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     style: json['style'],
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
     symbolID: json['symbolID'] as String,
