@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -33,7 +34,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       strokeWeight,
       strokeAlign,
       cornerRadius,
-      constraints,
+      FigmaConstraints constraints,
       layoutAlign,
       size,
       horizontalPadding,
@@ -100,6 +101,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       boundaryRectangle: boundaryRectangle.interpretFrame(),
       style: style,
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret(),
       symbolID: componentId,
     ));
   }

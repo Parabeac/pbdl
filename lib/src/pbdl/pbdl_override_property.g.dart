@@ -14,9 +14,13 @@ PBDLOverrideProperty _$PBDLOverridePropertyFromJson(Map<String, dynamic> json) {
     json['value'] == null
         ? null
         : PBDLNode.fromJson(json['value'] as Map<String, dynamic>),
-  )..child = json['child'] == null
-      ? null
-      : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
+  )
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..constraints = json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$PBDLOverridePropertyToJson(
@@ -25,6 +29,7 @@ Map<String, dynamic> _$PBDLOverridePropertyToJson(
       'UUID': instance.UUID,
       'name': instance.name,
       'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
       'value': instance.value?.toJson(),
       'type': instance.type,
     };

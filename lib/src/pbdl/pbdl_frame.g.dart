@@ -8,19 +8,35 @@ part of 'pbdl_frame.dart';
 
 PBDLFrame _$PBDLFrameFromJson(Map<String, dynamic> json) {
   return PBDLFrame(
-    constrainProportions: json['constrainProportions'] as bool,
-    x: (json['x'] as num)?.toDouble(),
-    y: (json['y'] as num)?.toDouble(),
-    width: (json['width'] as num)?.toDouble(),
-    height: (json['height'] as num)?.toDouble(),
+    UUID: json['UUID'] as String,
+    boundaryRectangle: json['boundaryRectangle'] == null
+        ? null
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
+    isVisible: json['isVisible'] as bool,
+    name: json['name'] as String,
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
+    style: json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
+    children: (json['children'] as List)
+        ?.map((e) =>
+            e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    prototypeNodeUUID: json['prototypeNodeUUID'] as String,
   )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
-      'constrainProportions': instance.constrainProportions,
-      'height': instance.height,
-      'width': instance.width,
-      'x': instance.x,
-      'y': instance.y,
+      'UUID': instance.UUID,
+      'name': instance.name,
+      'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'style': instance.style?.toJson(),
+      'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'constraints': instance.constraints?.toJson(),
+      'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'type': instance.type,
     };

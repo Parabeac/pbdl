@@ -37,7 +37,7 @@ class FigmaScreen {
   Future<PBDLScreen> interpretNode() async {
     return PBDLScreen(
       designNode: await figmaNode.interpretNode(),
-      id: id,
+      UUID: id,
       name: name,
     );
   }

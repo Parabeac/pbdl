@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -19,8 +20,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   FigmaStyle style;
 
   String layoutAlign;
-
-  var constraints;
 
   @override
   @JsonKey(name: 'absoluteBoundingBox')
@@ -47,9 +46,9 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     String type,
     pluginData,
     sharedPluginData,
-    FigmaStyle this.style,
+    this.style,
     this.layoutAlign,
-    this.constraints,
+    FigmaConstraints constraints,
     this.boundaryRectangle,
     this.size,
     this.strokes,
@@ -71,6 +70,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
           transitionNodeID: transitionNodeID,
+          constraints: constraints,
         ) {
     log = Logger(runtimeType.toString());
   }
@@ -87,14 +87,14 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
-      UUID: UUID,
-      imageReference: imageReference,
-      boundaryRectangle: boundaryRectangle?.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      style: style?.interpretStyle(),
-      prototypeNodeUUID: transitionNodeID,
-    ));
+        UUID: UUID,
+        imageReference: imageReference,
+        boundaryRectangle: boundaryRectangle?.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        style: style?.interpretStyle(),
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret()));
   }
 
   String imageReference;

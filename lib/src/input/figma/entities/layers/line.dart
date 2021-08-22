@@ -69,6 +69,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       name: name,
       style: style.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret()
     ));
   }
 

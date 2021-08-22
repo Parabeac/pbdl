@@ -1,4 +1,5 @@
-import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
@@ -13,11 +14,13 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   final type = 'text';
 
+  String content;
+
   PBDLText({
     UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     bool isFixedToViewport,
     bool isFlippedHorizontal,
     bool isFlippedVertical,
@@ -37,15 +40,16 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     style,
     this.content,
     String prototypeNodeUUID,
+    PBDLConstraints constraints,
   }) : super(
-            UUID: UUID,
-            name: name,
-            isVisible: isVisible,
-            boundaryRectangle: boundaryRectangle,
-            style: PBDLStyle.getStyle(style),
-            prototypeNodeUUID: prototypeNodeUUID);
-
-  String content;
+          UUID: UUID,
+          name: name,
+          isVisible: isVisible,
+          boundaryRectangle: boundaryRectangle,
+          style: style,
+          prototypeNodeUUID: prototypeNodeUUID,
+          constraints: constraints,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLText.fromJson(json);

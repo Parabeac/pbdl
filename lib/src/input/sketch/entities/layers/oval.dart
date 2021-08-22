@@ -132,7 +132,7 @@ class Oval extends AbstractShapeLayer implements SketchNodeFactory {
       layerListExpandedType: layerListExpandedType,
       name: name + '_${SketchAssetProcessor.imageNames[name]}',
       nameIsFixed: nameIsFixed,
-      resizingConstraint: resizingConstraint,
+      constraints: resizingConstraint,
       rotation: rotation,
       sharedStyleID: sharedStyleID,
       shouldBreakMaskChain: shouldBreakMaskChain,

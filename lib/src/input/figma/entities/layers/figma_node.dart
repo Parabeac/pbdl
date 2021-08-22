@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
@@ -21,6 +22,8 @@ class FigmaNode {
   var sharedPluginData;
 
   FigmaRect boundaryRectangle;
+  
+  final FigmaConstraints constraints;
 
   FigmaNode child;
 
@@ -44,6 +47,7 @@ class FigmaNode {
     this.transitionNodeID,
     this.transitionDuration,
     this.transitionEasing,
+    this.constraints
   });
 
   Future<PBDLNode> interpretNode() async {
@@ -55,6 +59,7 @@ class FigmaNode {
       null,
       transitionNodeID,
       child: await child.interpretNode(),
+      constraints: constraints?.interpret()
     ));
   }
 

@@ -6,6 +6,7 @@ import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_figma_node_factory.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'vector.dart';
 
@@ -22,8 +23,8 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     pluginData,
     sharedPluginData,
     layoutAlign,
-    constraints,
-    boundaryRectangle,
+    FigmaConstraints constraints,
+    FigmaRect boundaryRectangle,
     size,
     fills,
     strokes,
@@ -41,9 +42,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
           sharedPluginData: sharedPluginData,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle == null
-              ? null
-              : FigmaRect.fromJson(boundaryRectangle),
+          boundaryRectangle: boundaryRectangle,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -65,13 +64,14 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
-      imageReference: imageReference,
-      UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      prototypeNodeUUID: transitionNodeID,
-    ));
+        imageReference: imageReference,
+        UUID: UUID,
+        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        style: style?.interpretStyle(),
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret()));
   }
 
   @override

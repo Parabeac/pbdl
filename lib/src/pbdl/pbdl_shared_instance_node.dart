@@ -1,7 +1,9 @@
-import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
+import '../../pbdl.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -13,8 +15,6 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   List parameters;
 
   final List<PBDLOverrideValue> overrideValues;
-  @override
-  PBDLFrame boundaryRectangle;
 
   @override
   final type = 'shared_instance';
@@ -24,7 +24,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     this.overrideValues,
     String name,
     bool isVisible,
-    this.boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     style,
     exportOptions,
     booleanOperation,
@@ -48,6 +48,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     num verticalSpacing,
     num horizontalSpacing,
     String prototypeNodeUUID,
+    PBDLConstraints constraints,
   }) : super(
           UUID,
           name,
@@ -55,6 +56,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
           boundaryRectangle,
           PBDLStyle.getStyle(style),
           prototypeNodeUUID,
+          constraints: constraints,
         );
 
   @override

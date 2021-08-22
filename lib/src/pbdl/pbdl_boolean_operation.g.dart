@@ -14,16 +14,19 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
     style: json['style'],
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     UUID: json['UUID'] as String,
     prototypeNodeUUID: json['prototypeNodeUUID'],
     imageReference: json['imageReference'],
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
   )
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..layoutAlign = json['layoutAlign']
-    ..constraints = json['constraints']
     ..size = json['size']
     ..strokes = json['strokes']
     ..strokeWeight = json['strokeWeight']
@@ -39,8 +42,8 @@ Map<String, dynamic> _$PBDLBooleanOperationToJson(
         PBDLBooleanOperation instance) =>
     <String, dynamic>{
       'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
       'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,

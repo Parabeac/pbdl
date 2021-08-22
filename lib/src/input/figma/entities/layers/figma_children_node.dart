@@ -1,3 +1,4 @@
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_node.dart';
 
 class FigmaChildrenNode extends FigmaNode {
@@ -13,6 +14,7 @@ class FigmaChildrenNode extends FigmaNode {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
+    FigmaConstraints constraints,
     this.children,
   }) : super(
           name,
@@ -24,5 +26,6 @@ class FigmaChildrenNode extends FigmaNode {
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          constraints: constraints
         );
 }

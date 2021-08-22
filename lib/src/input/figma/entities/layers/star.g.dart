@@ -13,8 +13,14 @@ FigmaStar _$FigmaStarFromJson(Map<String, dynamic> json) {
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
     layoutAlign: json['layoutAlign'],
-    constraints: json['constraints'],
-    boundaryRectangle: json['absoluteBoundingBox'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
+    boundaryRectangle: json['absoluteBoundingBox'] == null
+        ? null
+        : FigmaRect.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>),
     size: json['size'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],
@@ -41,6 +47,7 @@ Map<String, dynamic> _$FigmaStarToJson(FigmaStar instance) => <String, dynamic>{
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints,
       'child': instance.child,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
@@ -48,7 +55,6 @@ Map<String, dynamic> _$FigmaStarToJson(FigmaStar instance) => <String, dynamic>{
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
       'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
       'absoluteBoundingBox': instance.boundaryRectangle,
       'size': instance.size,
       'strokes': instance.strokes,

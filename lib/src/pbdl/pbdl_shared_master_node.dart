@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'abstract_pbdl_node_factory.dart';
@@ -27,7 +29,7 @@ class PBDLSharedMasterNode extends PBDLNode
     this.overrideProperties,
     String name,
     bool isVisible,
-    boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     style,
     String prototypeNodeUUID,
     bool hasClickThrough,
@@ -55,7 +57,7 @@ class PBDLSharedMasterNode extends PBDLNode
     maintainScrollPosition,
     bool includeBackgroundColorInExport,
     int changeIdentifier,
-    String this.symbolID,
+    this.symbolID,
     bool includeBackgroundColorInInstance,
     verticalRulerData,
     bool resizesContent,
@@ -67,7 +69,7 @@ class PBDLSharedMasterNode extends PBDLNode
           UUID,
           name,
           isVisible,
-          PBDLFrame.getFrame(boundaryRectangle),
+          boundaryRectangle,
           PBDLStyle.getStyle(style),
           prototypeNodeUUID,
         );

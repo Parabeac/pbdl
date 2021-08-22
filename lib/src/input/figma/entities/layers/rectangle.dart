@@ -1,13 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/pbdl/pbdl_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
-import '../style/figma_color.dart';
 import 'figma_node.dart';
 import 'vector.dart';
 
@@ -25,9 +26,9 @@ class FigmaRectangle extends FigmaVector
     type,
     pluginData,
     sharedPluginData,
-    style,
+    FigmaStyle style,
     layoutAlign,
-    constraints,
+    FigmaConstraints constraints,
     boundaryRectangle,
     size,
     strokes,
@@ -70,10 +71,6 @@ class FigmaRectangle extends FigmaVector
   List<double> rectangleCornerRadii;
 
   @override
-  @JsonKey(ignore: true)
-  FigmaStyle style;
-
-  @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaRectangle.fromJson(json);
     node.style = StyleExtractor().getStyle(json);
@@ -100,6 +97,7 @@ class FigmaRectangle extends FigmaVector
         name: name,
         style: style.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret()
       ));
     }
     return Future.value(PBDLRectangle(
@@ -111,6 +109,7 @@ class FigmaRectangle extends FigmaVector
       child: await child?.interpretNode(),
       fixedRadius: cornerRadius ?? 0,
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret()
     ));
   }
 

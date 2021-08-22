@@ -13,7 +13,10 @@ FigmaRegularPolygon _$FigmaRegularPolygonFromJson(Map<String, dynamic> json) {
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
     layoutAlign: json['layoutAlign'],
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
     boundaryRectangle: json['absoluteBoundingBox'],
     size: json['size'],
     strokes: json['strokes'],
@@ -43,6 +46,7 @@ Map<String, dynamic> _$FigmaRegularPolygonToJson(
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints,
       'child': instance.child,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
@@ -50,7 +54,6 @@ Map<String, dynamic> _$FigmaRegularPolygonToJson(
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
       'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
       'absoluteBoundingBox': instance.boundaryRectangle,
       'size': instance.size,
       'strokes': instance.strokes,

@@ -13,7 +13,8 @@ PBDLNode _$PBDLNodeFromJson(Map<String, dynamic> json) {
     json['isVisible'] as bool,
     json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
@@ -21,6 +22,9 @@ PBDLNode _$PBDLNodeFromJson(Map<String, dynamic> json) {
     child: json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>),
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
   )..type = json['type'] as String;
 }
 
@@ -33,4 +37,5 @@ Map<String, dynamic> _$PBDLNodeToJson(PBDLNode instance) => <String, dynamic>{
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
     };

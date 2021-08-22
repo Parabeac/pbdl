@@ -1,3 +1,5 @@
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
@@ -11,17 +13,17 @@ import 'abstract_pbdl_node_factory.dart';
 part 'pbdl_project.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PBDLProject implements PBDLNodeFactory, PBDLNode {
+class PBDLProject extends PBDLNode implements PBDLNodeFactory {
   bool debug = false;
 
   String pngPath;
 
   PBDLProject({
-    this.name,
-    this.UUID,
+    String name,
+    String UUID,
     this.pages,
     this.pngPath,
-  }) {
+  }) : super(UUID, name, true, null, null, null){
     MainInfo().projectName = name ?? 'temp';
   }
 
@@ -36,27 +38,6 @@ class PBDLProject implements PBDLNodeFactory, PBDLNode {
       _$PBDLProjectFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLProjectToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
-
-  @override
-  PBDLNode child;
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  PBDLStyle style;
 
   @override
   String type = 'project';
