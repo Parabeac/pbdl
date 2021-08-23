@@ -13,7 +13,6 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    boundaryRectangle: json['absoluteBoundingBox'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],
     strokeAlign: json['strokeAlign'],
@@ -44,6 +43,10 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
+        ? null
+        : FigmaRect.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>)
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
@@ -66,7 +69,7 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'absoluteBoundingBox': instance.boundaryRectangle?.toJson(),
+      'absoluteBoundingBox': instance.absoluteBoundingBox?.toJson(),
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,

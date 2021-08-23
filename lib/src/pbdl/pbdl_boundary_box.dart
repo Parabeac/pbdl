@@ -7,13 +7,14 @@ part 'pbdl_boundary_box.g.dart';
 class PBDLBoundaryBox {
   final bool constrainProportions;
   PBDLConstraints constraints;
-  double height, width, x, y;
+  double height, width, x, y, z;
   String type = 'boundaryBox';
 
   PBDLBoundaryBox(
       {this.constrainProportions,
       this.x,
       this.y,
+      this.z,
       this.width,
       this.height,
       this.constraints});

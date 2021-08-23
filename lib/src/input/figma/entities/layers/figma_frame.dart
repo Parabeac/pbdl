@@ -19,9 +19,9 @@ part 'figma_frame.g.dart';
 @JsonSerializable(explicitToJson: true)
 class FigmaFrame extends FigmaChildrenNode with PBColorMixin
     implements FigmaNodeFactory {
-  @JsonKey(name: 'absoluteBoundingBox')
+  @JsonKey()
   @override
-  FigmaRect boundaryRectangle;
+  FigmaRect absoluteBoundingBox;
 
   @JsonKey(ignore: true)
   FigmaStyle style;
@@ -64,7 +64,7 @@ class FigmaFrame extends FigmaChildrenNode with PBColorMixin
     type,
     pluginData,
     sharedPluginData,
-    this.boundaryRectangle,
+    this.absoluteBoundingBox,
     this.style,
     this.fills,
     this.strokes,
@@ -116,7 +116,7 @@ class FigmaFrame extends FigmaChildrenNode with PBColorMixin
             backgroundColor: backgroundColor.interpretColor(),
             isFlowHome: false,
             UUID: UUID,
-            boundaryRectangle: boundaryRectangle.interpretFrame(),
+            boundaryRectangle: absoluteBoundingBox.interpretFrame(),
             isVisible: isVisible,
             name: name,
             style: style.interpretStyle(),
@@ -129,7 +129,7 @@ class FigmaFrame extends FigmaChildrenNode with PBColorMixin
       return Future.value(
         PBDLFrame(
             UUID: UUID,
-            boundaryRectangle: boundaryRectangle.interpretFrame(),
+            boundaryRectangle: absoluteBoundingBox.interpretFrame(),
             isVisible: isVisible,
             name: name,
             style: style.interpretStyle(),

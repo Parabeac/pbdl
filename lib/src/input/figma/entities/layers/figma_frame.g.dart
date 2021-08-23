@@ -13,7 +13,7 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    boundaryRectangle: json['absoluteBoundingBox'] == null
+    absoluteBoundingBox: json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>),
@@ -63,7 +63,7 @@ Map<String, dynamic> _$FigmaFrameToJson(FigmaFrame instance) =>
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'absoluteBoundingBox': instance.boundaryRectangle?.toJson(),
+      'absoluteBoundingBox': instance.absoluteBoundingBox?.toJson(),
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,

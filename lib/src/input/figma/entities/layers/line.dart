@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
@@ -41,7 +42,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle,
+          absoluteBoundingBox: boundaryRectangle,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -64,7 +65,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() {
     return Future.value(PBDLRectangle(
       UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: style.interpretStyle(),

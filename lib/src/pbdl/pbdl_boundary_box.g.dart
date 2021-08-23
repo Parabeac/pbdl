@@ -11,6 +11,7 @@ PBDLBoundaryBox _$PBDLBoundaryBoxFromJson(Map<String, dynamic> json) {
     constrainProportions: json['constrainProportions'] as bool,
     x: (json['x'] as num)?.toDouble(),
     y: (json['y'] as num)?.toDouble(),
+    z: (json['z'] as num)?.toDouble(),
     width: (json['width'] as num)?.toDouble(),
     height: (json['height'] as num)?.toDouble(),
     constraints: json['constraints'] == null
@@ -27,5 +28,6 @@ Map<String, dynamic> _$PBDLBoundaryBoxToJson(PBDLBoundaryBox instance) =>
       'width': instance.width,
       'x': instance.x,
       'y': instance.y,
+      'z': instance.z,
       'type': instance.type,
     };

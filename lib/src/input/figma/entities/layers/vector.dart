@@ -22,8 +22,8 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   String layoutAlign;
 
   @override
-  @JsonKey(name: 'absoluteBoundingBox')
-  FigmaRect boundaryRectangle;
+  @JsonKey()
+  FigmaRect absoluteBoundingBox;
 
   var size;
 
@@ -49,7 +49,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     this.style,
     this.layoutAlign,
     FigmaConstraints constraints,
-    this.boundaryRectangle,
+    this.absoluteBoundingBox,
     this.size,
     this.strokes,
     this.strokeWeight,
@@ -89,7 +89,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     return Future.value(PBDLImage(
         UUID: UUID,
         imageReference: imageReference,
-        boundaryRectangle: boundaryRectangle?.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style?.interpretStyle(),

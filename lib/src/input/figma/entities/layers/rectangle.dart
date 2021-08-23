@@ -51,7 +51,7 @@ class FigmaRectangle extends FigmaVector
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle != null
+          absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
           size: size,
@@ -92,7 +92,7 @@ class FigmaRectangle extends FigmaVector
       return Future.value(PBDLImage(
         imageReference: imageReference,
         UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style.interpretStyle(),
@@ -102,7 +102,7 @@ class FigmaRectangle extends FigmaVector
     }
     return Future.value(PBDLRectangle(
       UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: style.interpretStyle(),
