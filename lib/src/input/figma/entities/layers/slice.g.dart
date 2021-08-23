@@ -17,7 +17,7 @@ FigmaSlice _$FigmaSliceFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
-    boundaryRectangle: json['absoluteBoundingBox'] == null
+    absoluteBoundingBox: json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>),
@@ -46,7 +46,7 @@ Map<String, dynamic> _$FigmaSliceToJson(FigmaSlice instance) =>
       'transitionEasing': instance.transitionEasing,
       'type': instance.type,
       'layoutAlign': instance.layoutAlign,
-      'absoluteBoundingBox': instance.boundaryRectangle,
+      'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'visible': instance.isVisible,
     };

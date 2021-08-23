@@ -15,7 +15,6 @@ FigmaLine _$FigmaLineFromJson(Map<String, dynamic> json) {
     style: json['style'],
     layoutAlign: json['layoutAlign'],
     constraints: json['constraints'],
-    boundaryRectangle: json['absoluteBoundingBox'],
     size: json['size'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],
@@ -30,6 +29,10 @@ FigmaLine _$FigmaLineFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
+    ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
+        ? null
+        : FigmaRect.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>)
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String;
 }
@@ -47,7 +50,7 @@ Map<String, dynamic> _$FigmaLineToJson(FigmaLine instance) => <String, dynamic>{
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
       'layoutAlign': instance.layoutAlign,
-      'absoluteBoundingBox': instance.boundaryRectangle,
+      'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,

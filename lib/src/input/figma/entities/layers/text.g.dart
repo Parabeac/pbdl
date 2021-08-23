@@ -20,7 +20,6 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
-    boundaryRectangle: json['absoluteBoundingBox'],
     size: json['size'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],
@@ -40,6 +39,10 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
+    ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
+        ? null
+        : FigmaRect.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>)
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
     ..attributedString = json['attributedString']
@@ -64,7 +67,7 @@ Map<String, dynamic> _$FigmaTextToJson(FigmaText instance) => <String, dynamic>{
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
       'layoutAlign': instance.layoutAlign,
-      'absoluteBoundingBox': instance.boundaryRectangle,
+      'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,

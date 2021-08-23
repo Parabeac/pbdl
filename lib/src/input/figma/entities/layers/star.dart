@@ -42,7 +42,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
           sharedPluginData: sharedPluginData,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle,
+          absoluteBoundingBox: boundaryRectangle,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -66,7 +66,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     return Future.value(PBDLImage(
         imageReference: imageReference,
         UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style?.interpretStyle(),

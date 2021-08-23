@@ -54,7 +54,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             type: type,
             pluginData: pluginData,
             sharedPluginData: sharedPluginData,
-            boundaryRectangle: boundaryRectangle != null
+            absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
             style: style,
@@ -99,7 +99,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       overrideValues: overrideValues,
       name: name,
       isVisible: isVisible,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       style: style,
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret(),

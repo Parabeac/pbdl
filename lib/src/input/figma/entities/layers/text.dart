@@ -46,7 +46,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle != null
+          absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
           size: size,
@@ -83,7 +83,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
     return Future.value(
       PBDLText(
         UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style.interpretStyle(),

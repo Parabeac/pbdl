@@ -25,7 +25,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   final String type = 'BOOLEAN_OPERATION';
 
   @override
-  FigmaRect boundaryRectangle;
+  FigmaRect absoluteBoundingBox;
 
   @override
   String imageReference;
@@ -34,7 +34,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     this.children,
     this.booleanOperation,
     style,
-    this.boundaryRectangle,
+    this.absoluteBoundingBox,
     UUID,
     String transitionNodeID,
     transitionDuration,
@@ -63,7 +63,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
       UUID: UUID,
-      boundaryRectangle: boundaryRectangle?.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: style?.interpretStyle(),

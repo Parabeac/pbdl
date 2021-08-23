@@ -53,7 +53,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle,
+          absoluteBoundingBox: boundaryRectangle,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -79,7 +79,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
       UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: style?.interpretStyle(),

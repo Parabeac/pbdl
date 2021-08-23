@@ -60,7 +60,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
   FigmaNode createFigmaNode(Map<String, dynamic> json) => Canvas.fromJson(json);
 
   @override
-  var boundaryRectangle;
+  var absoluteBoundingBox;
 
   @JsonKey(ignore: true)
   var style;
@@ -73,7 +73,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         isFlowHome: false, // TODO: get it dynamically
         UUID: UUID,
         exportOptions: exportSettings,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style,
