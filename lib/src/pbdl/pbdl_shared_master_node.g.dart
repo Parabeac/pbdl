@@ -28,6 +28,7 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   )
+    ..designUUID = json['designUUID'] as String
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
@@ -41,6 +42,7 @@ Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
         PBDLSharedMasterNode instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
+      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),

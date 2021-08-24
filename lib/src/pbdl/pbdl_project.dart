@@ -23,7 +23,7 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
     String UUID,
     this.pages,
     this.pngPath,
-  }) : super(UUID, name, true, null, null, null){
+  }) : super(UUID, name, true, null, null, null) {
     MainInfo().projectName = name ?? 'temp';
   }
 
@@ -41,4 +41,15 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
 
   @override
   String type = 'project';
+
+  @override
+  void sortByUUID() {
+    /// Sort [PBDLPage]s within this [PBDLProject]
+    pages.sort();
+    miscPages.sort();
+
+    /// Ensure all [pages] sort their [screens]
+    pages.forEach((page) => page.sortByUUID());
+    miscPages.forEach((page) => page.sortByUUID());
+  }
 }

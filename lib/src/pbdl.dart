@@ -163,6 +163,7 @@ class PBDL {
   static void _writePbdlJson(
     PBDLProject project,
   ) {
+    project.sortByUUID();
     var fileName = project.name;
     var outputPath = p.join(MainInfo().outputPath, '$fileName.json');
     if (File(outputPath).existsSync()) {

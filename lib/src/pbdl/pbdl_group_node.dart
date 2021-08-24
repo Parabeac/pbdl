@@ -10,7 +10,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pbdl_group_node.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-/// This is essentially a folder used to organize the [PBDLNodes] inside. This tends to 
+
+/// This is essentially a folder used to organize the [PBDLNodes] inside. This tends to
 /// provide no value, unless it comes with extra metadata that could interpret this group into
 /// other usefull objects.
 class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
@@ -43,7 +44,8 @@ class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
     PBDLStyle style,
     this.children,
     String prototypeNodeUUID,
-  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID, constraints: constraints);
+  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
+            constraints: constraints);
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -59,4 +61,13 @@ class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
   @override
   @JsonKey(ignore: true)
   PBDLNode child;
+
+  @override
+  void sortByUUID() {
+    /// Sort `children` within this [PBDLGroupNode]
+    children.sort();
+
+    /// Make each `child` sort its own children, if applicable
+    children.forEach((child) => child.sortByUUID());
+  }
 }
