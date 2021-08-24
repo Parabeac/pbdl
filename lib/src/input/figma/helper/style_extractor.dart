@@ -60,13 +60,12 @@ class StyleExtractor {
 
       borders.add(figmaBorder);
 
-      List<FigmaFill> fills = [];
+      var fills = <FigmaFill>[];
 
-      var fill = FigmaFill(
-        _getColor(json['fills'].isNotEmpty ? json['fills'][0]['color'] : null),
-      );
+      var fill = (json['fills'] as List)
+          .firstWhere((fill) => fill.containsKey('color'), orElse: () => null);
 
-      fills.add(fill);
+      fills.add(FigmaFill(_getColor(fill == null ? null : fill['color'])));
 
       return FigmaStyle(
         backgroundColor: bgColor,

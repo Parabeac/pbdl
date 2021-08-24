@@ -90,27 +90,25 @@ class FigmaRectangle extends FigmaVector
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
       return Future.value(PBDLImage(
-        imageReference: imageReference,
+          imageReference: imageReference,
+          UUID: UUID,
+          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+          isVisible: isVisible,
+          name: name,
+          style: style.interpretStyle(),
+          prototypeNodeUUID: transitionNodeID,
+          constraints: constraints?.interpret()));
+    }
+    return Future.value(PBDLRectangle(
         UUID: UUID,
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style.interpretStyle(),
+        child: await child?.interpretNode(),
+        fixedRadius: cornerRadius ?? 0,
         prototypeNodeUUID: transitionNodeID,
-        constraints: constraints?.interpret()
-      ));
-    }
-    return Future.value(PBDLRectangle(
-      UUID: UUID,
-      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      style: style.interpretStyle(),
-      child: await child?.interpretNode(),
-      fixedRadius: cornerRadius ?? 0,
-      prototypeNodeUUID: transitionNodeID,
-      constraints: constraints?.interpret()
-    ));
+        constraints: constraints?.interpret()));
   }
 
   @override
