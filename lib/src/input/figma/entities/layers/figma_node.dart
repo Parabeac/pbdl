@@ -21,7 +21,7 @@ class FigmaNode {
 
   var sharedPluginData;
 
-  FigmaRect boundaryRectangle;
+  FigmaRect absoluteBoundingBox;
   
   final FigmaConstraints constraints;
 

@@ -58,7 +58,7 @@ class FigmaPage {
 
   Future<PBDLPage> interpretNode() async {
     var resultScreens = await Future.wait(
-        screens.map((e) async => await e.interpretNode()).toList());
+        screens.map((e) async => await e?.interpretNode())?.toList());
     return PBDLPage(
       name: name,
       UUID: id,

@@ -15,6 +15,7 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   )
+    ..designUUID = json['designUUID'] as String
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
@@ -38,6 +39,7 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) {
   final val = <String, dynamic>{
     'UUID': instance.UUID,
+    'designUUID': instance.designUUID,
     'name': instance.name,
     'isVisible': instance.isVisible,
     'boundaryRectangle': instance.boundaryRectangle?.toJson(),

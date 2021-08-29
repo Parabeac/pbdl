@@ -14,7 +14,7 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
         ?.toList(),
     booleanOperation: json['booleanOperation'] as String,
     style: json['style'],
-    boundaryRectangle: json['absoluteBoundingBox'] == null
+    absoluteBoundingBox: json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>),
@@ -63,6 +63,6 @@ Map<String, dynamic> _$BooleanOperationToJson(BooleanOperation instance) =>
       'children': instance.children,
       'booleanOperation': instance.booleanOperation,
       'type': instance.type,
-      'absoluteBoundingBox': instance.boundaryRectangle,
+      'absoluteBoundingBox': instance.absoluteBoundingBox,
       'imageReference': instance.imageReference,
     };

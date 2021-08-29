@@ -42,7 +42,7 @@ class FigmaRegularPolygon extends FigmaVector
           sharedPluginData: sharedPluginData,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle == null
+          absoluteBoundingBox: boundaryRectangle == null
               ? null
               : FigmaRect.fromJson(boundaryRectangle),
           size: size,
@@ -69,7 +69,7 @@ class FigmaRegularPolygon extends FigmaVector
     return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
       prototypeNodeUUID: transitionNodeID,

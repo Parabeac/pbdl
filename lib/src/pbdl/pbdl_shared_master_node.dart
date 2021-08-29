@@ -81,4 +81,13 @@ class PBDLSharedMasterNode extends PBDLNode
       _$PBDLSharedMasterNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLSharedMasterNodeToJson(this);
+
+  @override
+  void sortByUUID() {
+    /// Sort list of [PBDLOverrideProperty] by UUID
+    overrideProperties.sort();
+
+    /// Ensure each `property` sorts its elements
+    overrideProperties.forEach((property) => property.sortByUUID());
+  }
 }

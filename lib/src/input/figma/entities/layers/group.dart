@@ -61,7 +61,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
             type: type,
             pluginData: pluginData,
             sharedPluginData: sharedPluginData,
-            boundaryRectangle: boundaryRectangle != null
+            absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
             style: style,
@@ -102,7 +102,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       }
 
       if (children != null && children.isNotEmpty) {
-        boundaryRectangle = fitFrame();
+        absoluteBoundingBox = fitFrame();
       }
 
       children.clear();
@@ -111,7 +111,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         PBDLImage(
           imageReference: imageReference,
           UUID: UUID,
-          boundaryRectangle: boundaryRectangle.interpretFrame(),
+          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
           isVisible: isVisible,
           name: name,
           style: style?.interpretStyle(),
@@ -123,7 +123,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     return Future.value(
       PBDLGroupNode(
         UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style?.interpretStyle(),
@@ -155,8 +155,8 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     var heights = [];
     var widths = [];
     for (var child in children) {
-      heights.add(child.boundaryRectangle.height);
-      widths.add(child.boundaryRectangle.width);
+      heights.add(child.absoluteBoundingBox.height);
+      widths.add(child.absoluteBoundingBox.width);
     }
 
     if (heights.every((element) => element == heights[0]) &&
@@ -164,11 +164,11 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       return FigmaRect(
         height: heights[0],
         width: widths[0],
-        x: boundaryRectangle.x,
-        y: boundaryRectangle.y,
+        x: absoluteBoundingBox.x,
+        y: absoluteBoundingBox.y,
       );
     } else {
-      return boundaryRectangle;
+      return absoluteBoundingBox;
     }
   }
 

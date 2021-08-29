@@ -66,4 +66,13 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
       _$PBDLSharedInstanceNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLSharedInstanceNodeToJson(this);
+
+  @override
+  void sortByUUID() {
+    /// Sort [PBDLOverrideValue] by UUID
+    overrideValues.sort();
+
+    /// Ensure each `value` sorts its elements
+    overrideValues.forEach((value) => value.sortByUUID());
+  }
 }

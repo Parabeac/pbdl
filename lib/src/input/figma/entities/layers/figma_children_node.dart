@@ -16,16 +16,14 @@ class FigmaChildrenNode extends FigmaNode {
     String transitionEasing,
     FigmaConstraints constraints,
     this.children,
-  }) : super(
-          name,
-          isVisible,
-          type,
-          pluginData,
-          sharedPluginData,
-          UUID: UUID,
-          transitionNodeID: transitionNodeID,
-          transitionDuration: transitionDuration,
-          transitionEasing: transitionEasing,
-          constraints: constraints
-        );
+  }) : super(name, isVisible, type, pluginData, sharedPluginData,
+            UUID: UUID,
+            transitionNodeID: transitionNodeID,
+            transitionDuration: transitionDuration,
+            transitionEasing: transitionEasing,
+            constraints: constraints) {
+    for (var i = 0; i < (children?.length ?? 0); i++) {
+      children[i]?.absoluteBoundingBox?.z = i * 1.0;
+    }
+  }
 }

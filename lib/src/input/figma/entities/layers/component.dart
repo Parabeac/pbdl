@@ -53,7 +53,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          boundaryRectangle: boundaryRectangle != null
+          absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
           style: style,
@@ -105,7 +105,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         overrideProperties: props,
         name: name,
         isVisible: isVisible,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         style: style.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         symbolID: UUID,
@@ -141,7 +141,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           current.name,
           override.getPBDLType(),
           await override.getProperty(current),
-        );
+        )..constraints = current.constraints?.interpret();
         values.add(overrideProp);
       }
 

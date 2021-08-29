@@ -20,7 +20,7 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
-    boundaryRectangle: json['absoluteBoundingBox'] == null
+    absoluteBoundingBox: json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>),
@@ -56,7 +56,7 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
       'layoutAlign': instance.layoutAlign,
-      'absoluteBoundingBox': instance.boundaryRectangle,
+      'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,

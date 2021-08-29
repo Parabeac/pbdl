@@ -51,7 +51,7 @@ class FigmaRectangle extends FigmaVector
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle != null
+          absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
           size: size,
@@ -90,27 +90,25 @@ class FigmaRectangle extends FigmaVector
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
       return Future.value(PBDLImage(
-        imageReference: imageReference,
+          imageReference: imageReference,
+          UUID: UUID,
+          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+          isVisible: isVisible,
+          name: name,
+          style: style.interpretStyle(),
+          prototypeNodeUUID: transitionNodeID,
+          constraints: constraints?.interpret()));
+    }
+    return Future.value(PBDLRectangle(
         UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style.interpretStyle(),
+        child: await child?.interpretNode(),
+        fixedRadius: cornerRadius ?? 0,
         prototypeNodeUUID: transitionNodeID,
-        constraints: constraints?.interpret()
-      ));
-    }
-    return Future.value(PBDLRectangle(
-      UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      style: style.interpretStyle(),
-      child: await child?.interpretNode(),
-      fixedRadius: cornerRadius ?? 0,
-      prototypeNodeUUID: transitionNodeID,
-      constraints: constraints?.interpret()
-    ));
+        constraints: constraints?.interpret()));
   }
 
   @override

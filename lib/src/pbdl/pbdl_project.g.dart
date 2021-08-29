@@ -16,6 +16,7 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
         ?.toList(),
     pngPath: json['pngPath'] as String,
   )
+    ..designUUID = json['designUUID'] as String
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
@@ -46,6 +47,7 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
+      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),

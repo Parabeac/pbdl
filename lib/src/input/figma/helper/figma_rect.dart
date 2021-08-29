@@ -9,12 +9,14 @@ class FigmaRect {
   FigmaRect({
     this.x,
     this.y,
+    this.z,
     this.width,
     this.height,
   });
 
   double x;
   double y;
+  double z;
   double width;
   double height;
 
@@ -28,6 +30,7 @@ class FigmaRect {
     return PBDLBoundaryBox(
       x: x,
       y: y,
+      z: z,
       width: width,
       height: height,
       constrainProportions: false,

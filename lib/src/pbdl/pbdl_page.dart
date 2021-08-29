@@ -24,7 +24,7 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
     String name,
     String UUID,
     this.screens,
-  }): super(UUID, name, true, null, null, null);
+  }) : super(UUID, name, true, null, null, null);
 
   void addScreen(PBDLScreen item) {
     screens.add(item);
@@ -45,4 +45,13 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
 
   @override
   String type = 'page';
+
+  @override
+  void sortByUUID() {
+    /// Sort [PBDLNode] `Screens` within this [PBDLPage]
+    screens.sort();
+
+    /// Ensure each `screen` sorts its elements
+    screens.forEach((screen) => screen.sortByUUID());
+  }
 }

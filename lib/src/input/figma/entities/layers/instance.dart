@@ -3,6 +3,7 @@ import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
@@ -53,7 +54,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             type: type,
             pluginData: pluginData,
             sharedPluginData: sharedPluginData,
-            boundaryRectangle: boundaryRectangle != null
+            absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
             style: style,
@@ -98,7 +99,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       overrideValues: overrideValues,
       name: name,
       isVisible: isVisible,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       style: style,
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret(),
@@ -128,7 +129,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           current.name,
           override.getPBDLType(),
           await override.getValue(current),
-        ));
+        )..constraints = current.constraints?.interpret());
       }
 
       if (current.child != null) {

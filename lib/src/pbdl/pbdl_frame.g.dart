@@ -26,11 +26,14 @@ PBDLFrame _$PBDLFrameFromJson(Map<String, dynamic> json) {
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
-  )..type = json['type'] as String;
+  )
+    ..designUUID = json['designUUID'] as String
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
       'UUID': instance.UUID,
+      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
