@@ -53,6 +53,10 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
             UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
             constraints: constraints);
 
+  @override
+  PBDLFrame createPBDLNode(Map<String, dynamic> json) =>
+      PBDLFrame.fromJson(json);
+
   static PBDLFrame getFrame(dynamic boundaryRectangle) {
     if (boundaryRectangle is Map) {
       return PBDLFrame.fromJson(boundaryRectangle);
