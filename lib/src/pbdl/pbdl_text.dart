@@ -2,6 +2,7 @@ import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_element.dart';
@@ -37,7 +38,7 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     bool hasClippingMask,
     int clippingMaskMode,
     bool maintainScrollPosition,
-    style,
+    PBDLStyle style,
     this.content,
     String prototypeNodeUUID,
     PBDLConstraints constraints,

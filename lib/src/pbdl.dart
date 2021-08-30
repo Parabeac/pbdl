@@ -64,6 +64,7 @@ class PBDL {
 
     /// [bool] that indicates whether the pbdl file will be written to the `outputPath`
     bool exportPbdlJson = false,
+    String projectName,
   }) async {
     _setupMainInfo(outputPath);
 
@@ -74,7 +75,7 @@ class PBDL {
         writeAsFile:
             !Platform.environment.containsKey(AzureAssetService.KEY_NAME));
     if (exportPbdlJson) {
-      _writePbdlJson(pbdlProject);
+      _writePbdlJson(pbdlProject, fileName: projectName);
     }
 
     // In order to upload the JSON file, the export PBDL to JSON flag must be on
@@ -161,10 +162,11 @@ class PBDL {
   /// Method that exports a `.json` file representing the [PBDLProject]
   /// onto the `outputPath` with which PBDL was initialized.
   static void _writePbdlJson(
-    PBDLProject project,
-  ) {
+    PBDLProject project, {
+    String fileName,
+  }) {
     project.sortByUUID();
-    var fileName = project.name;
+    fileName ??= project.name;
     var outputPath = p.join(MainInfo().outputPath, '$fileName.json');
     if (File(outputPath).existsSync()) {
       outputPath = p.join(MainInfo().outputPath,

@@ -15,7 +15,9 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
             json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'] as bool,
     name: json['name'],
-    style: json['style'],
+    style: json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     content: json['content'] as String,
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
     constraints: json['constraints'] == null
