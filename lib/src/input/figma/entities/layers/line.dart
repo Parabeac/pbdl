@@ -19,7 +19,6 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       String type,
       pluginData,
       sharedPluginData,
-      style,
       layoutAlign,
       FigmaConstraints constraints,
       boundaryRectangle,
@@ -38,7 +37,6 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
           absoluteBoundingBox: boundaryRectangle,
@@ -67,7 +65,6 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret()
     ));
