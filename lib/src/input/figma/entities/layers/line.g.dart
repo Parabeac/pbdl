@@ -14,7 +14,10 @@ FigmaLine _$FigmaLineFromJson(Map<String, dynamic> json) {
     sharedPluginData: json['sharedPluginData'],
     style: json['style'],
     layoutAlign: json['layoutAlign'],
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
     size: json['size'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],

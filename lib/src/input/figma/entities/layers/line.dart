@@ -1,11 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../abstract_figma_node_factory.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'line.g.dart';
@@ -22,7 +21,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       sharedPluginData,
       style,
       layoutAlign,
-      constraints,
+      FigmaConstraints constraints,
       boundaryRectangle,
       size,
       fills,
