@@ -26,15 +26,12 @@ PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
     constraints: json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
-  )
-    ..designUUID = json['designUUID'] as String
-    ..type = json['type'] as String;
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLRectangleToJson(PBDLRectangle instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
-      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),

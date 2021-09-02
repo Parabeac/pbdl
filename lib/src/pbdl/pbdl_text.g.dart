@@ -24,7 +24,6 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
   )
-    ..designUUID = json['designUUID'] as String
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
@@ -33,7 +32,6 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PBDLTextToJson(PBDLText instance) => <String, dynamic>{
       'UUID': instance.UUID,
-      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),

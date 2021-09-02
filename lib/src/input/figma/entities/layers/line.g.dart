@@ -31,6 +31,9 @@ FigmaLine _$FigmaLineFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
+    ..style = json['style'] == null
+        ? null
+        : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>)
     ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
@@ -50,6 +53,7 @@ Map<String, dynamic> _$FigmaLineToJson(FigmaLine instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'style': instance.style,
       'layoutAlign': instance.layoutAlign,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,

@@ -31,7 +31,6 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
   )
-    ..designUUID = json['designUUID'] as String
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
@@ -41,7 +40,6 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLArtboardToJson(PBDLArtboard instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
-      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'style': instance.style?.toJson(),

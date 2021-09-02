@@ -25,14 +25,11 @@ PBDLOval _$PBDLOvalFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
-  )
-    ..designUUID = json['designUUID'] as String
-    ..type = json['type'] as String;
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLOvalToJson(PBDLOval instance) => <String, dynamic>{
       'UUID': instance.UUID,
-      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),

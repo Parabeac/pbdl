@@ -29,7 +29,6 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
     hasShadow: json['hasShadow'] as bool,
   )
     ..UUID = json['UUID'] as String
-    ..designUUID = json['designUUID'] as String
     ..name = json['name'] as String
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
@@ -48,7 +47,6 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
       'UUID': instance.UUID,
-      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),

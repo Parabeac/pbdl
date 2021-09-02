@@ -13,7 +13,6 @@ PBDLOverrideValue _$PBDLOverrideValueFromJson(Map<String, dynamic> json) {
     json['type'] as String,
     json['value'],
   )
-    ..designUUID = json['designUUID'] as String
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
@@ -34,7 +33,6 @@ PBDLOverrideValue _$PBDLOverrideValueFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLOverrideValueToJson(PBDLOverrideValue instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
-      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle,

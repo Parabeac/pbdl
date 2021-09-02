@@ -1,9 +1,7 @@
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:quick_log/quick_log.dart';
-import 'package:uuid/uuid.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -13,9 +11,6 @@ part 'pbdl_node.g.dart';
 class PBDLNode implements Comparable<PBDLNode> {
   /// [UUID] that is inherited from the design node
   String UUID;
-
-  /// [UUID] generated independently for every node
-  String designUUID;
 
   @JsonKey(ignore: true)
   Logger logger;
@@ -32,7 +27,6 @@ class PBDLNode implements Comparable<PBDLNode> {
       this.style, this.prototypeNodeUUID,
       {transitionDuration, transitionEasing, this.child, this.constraints}) {
     logger = Logger(runtimeType.toString());
-    designUUID ??= Uuid().v4();
   }
 
   /// Method that sorts the [PBDLProject]'s nodes based on [UUID].
@@ -44,8 +38,7 @@ class PBDLNode implements Comparable<PBDLNode> {
     }
   }
 
-  PBDLNode createPBDLNode(Map<String, dynamic> json) =>
-      PBDLNode.fromJson(json)..designUUID ??= Uuid().v4();
+  PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLNode.fromJson(json);
 
   Map<String, dynamic> toJson() => _$PBDLNodeToJson(this);
 

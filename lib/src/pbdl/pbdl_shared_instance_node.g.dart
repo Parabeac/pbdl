@@ -28,7 +28,6 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
   )
-    ..designUUID = json['designUUID'] as String
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
@@ -40,7 +39,6 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
         PBDLSharedInstanceNode instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
-      'designUUID': instance.designUUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
