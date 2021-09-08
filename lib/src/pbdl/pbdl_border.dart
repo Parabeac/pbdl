@@ -18,8 +18,9 @@ class PBDLBorder {
     this.thickness,
   });
 
-  factory PBDLBorder.fromJson(Map<String, dynamic> json) =>
-      _$PBDLBorderFromJson(json);
+  factory PBDLBorder.fromJson(Map<String, dynamic> json) {
+    return _$PBDLBorderFromJson(json);
+  }
   @override
   Map<String, dynamic> toJson() => _$PBDLBorderToJson(this);
 }
