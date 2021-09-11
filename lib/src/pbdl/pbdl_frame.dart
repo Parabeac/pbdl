@@ -22,35 +22,40 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
   @JsonKey(ignore: true)
   PBDLNode child;
 
-  PBDLFrame(
-      {bool hasClickThrough,
-      groupLayout,
-      String UUID,
-      booleanOperation,
-      exportOptions,
-      PBDLBoundaryBox boundaryRectangle,
-      isFixedToViewport,
-      isFlippedHorizontal,
-      isFlippedVertical,
-      isLocked,
-      bool isVisible,
-      layerListExpandedType,
-      String name,
-      nameIsFixed,
-      PBDLConstraints constraints,
-      resizingType,
-      rotation,
-      sharedStyleID,
-      shouldBreakMaskChain,
-      hasClippingMask,
-      clippingMaskMode,
-      userInfo,
-      maintainScrollPosition,
-      PBDLStyle style,
-      this.children,
-      String prototypeNodeUUID})
-      : super(
-            UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
+  num fixedRadius;
+
+  Map background;
+
+  PBDLFrame({
+    bool hasClickThrough,
+    groupLayout,
+    String UUID,
+    booleanOperation,
+    exportOptions,
+    PBDLBoundaryBox boundaryRectangle,
+    isFixedToViewport,
+    isFlippedHorizontal,
+    isFlippedVertical,
+    isLocked,
+    bool isVisible,
+    layerListExpandedType,
+    String name,
+    nameIsFixed,
+    PBDLConstraints constraints,
+    resizingType,
+    rotation,
+    sharedStyleID,
+    shouldBreakMaskChain,
+    hasClippingMask,
+    clippingMaskMode,
+    userInfo,
+    maintainScrollPosition,
+    PBDLStyle style,
+    this.children,
+    String prototypeNodeUUID,
+    this.fixedRadius,
+    this.background,
+  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
             constraints: constraints);
 
   @override

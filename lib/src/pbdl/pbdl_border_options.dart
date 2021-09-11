@@ -7,6 +7,7 @@ class PBDLBorderOptions {
   bool isEnabled;
   List dashPattern;
   int lineCapStyle, lineJoinStyle;
+  num cornerRadius;
 
   final type = 'border_options';
 
@@ -15,6 +16,7 @@ class PBDLBorderOptions {
     this.dashPattern,
     this.lineCapStyle,
     this.lineJoinStyle,
+    this.cornerRadius,
   });
 
   @override

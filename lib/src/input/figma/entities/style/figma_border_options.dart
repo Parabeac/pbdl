@@ -13,11 +13,14 @@ class FigmaBorderOptions {
 
   int lineJoinStyle;
 
+  num cornerRadius;
+
   FigmaBorderOptions(
     this.dashPattern,
     this.isEnabled,
     this.lineCapStyle,
     this.lineJoinStyle,
+    this.cornerRadius,
   );
 
   Map<String, dynamic> toJson() => _$FigmaBorderOptionsToJson(this);
@@ -31,6 +34,7 @@ class FigmaBorderOptions {
       dashPattern: dashPattern ?? [],
       lineCapStyle: lineCapStyle ?? 0,
       lineJoinStyle: lineJoinStyle ?? 0,
+      cornerRadius: cornerRadius ?? 0,
     );
   }
 }

@@ -15,14 +15,10 @@ class StyleExtractor {
     if (json != null) {
       var bgColor;
       // Check if color exists in fills
-      if (json['fills'] != null && json['fills'].isNotEmpty) {
-        // Check if color should be visible
-        if (!json['fills'][0].containsKey('visible') ||
-            !json['fills'][0]['visible']) {
-          bgColor = _getColor(null);
-        } else {
-          bgColor = _getColor(json['background'][0]['color']);
-        }
+      if (json['background'] != null &&
+          json['background'].isNotEmpty &&
+          (json['background'][0]['visible'] ?? true)) {
+        bgColor = _getColor(json['background'][0]['color']);
       } else {
         bgColor = _getColor(null);
       }
@@ -56,6 +52,7 @@ class StyleExtractor {
         tempVisible ?? true,
         json['strokeCap'],
         json['strokeJoin'],
+        json['cornerRadius'],
       );
 
       borders.add(figmaBorder);

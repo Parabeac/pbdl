@@ -17,7 +17,8 @@ import 'figma_node.dart';
 part 'figma_frame.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class FigmaFrame extends FigmaChildrenNode with PBColorMixin
+class FigmaFrame extends FigmaChildrenNode
+    with PBColorMixin
     implements FigmaNodeFactory {
   @JsonKey()
   @override
@@ -128,15 +129,18 @@ class FigmaFrame extends FigmaChildrenNode with PBColorMixin
     } else {
       return Future.value(
         PBDLFrame(
-            UUID: UUID,
-            boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-            isVisible: isVisible,
-            name: name,
-            style: style.interpretStyle(),
-            prototypeNodeUUID: transitionNodeID,
-            constraints: constraints?.interpret(),
-            children: await Future.wait(
-                children.map((e) async => await e.interpretNode()).toList())),
+          UUID: UUID,
+          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+          isVisible: isVisible,
+          name: name,
+          style: style.interpretStyle(),
+          prototypeNodeUUID: transitionNodeID,
+          constraints: constraints?.interpret(),
+          children: await Future.wait(
+              children.map((e) async => await e.interpretNode()).toList()),
+          fixedRadius: cornerRadius,
+          background: style?.interpretStyle()?.backgroundColor?.toJson(),
+        ),
       );
     }
   }
