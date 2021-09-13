@@ -1,4 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_border.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -54,21 +57,24 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
       FigmaLine.fromJson(json);
-  factory FigmaLine.fromJson(Map<String, dynamic> json) =>
-      _$FigmaLineFromJson(json);
+  factory FigmaLine.fromJson(Map<String, dynamic> json) {
+    return _$FigmaLineFromJson(json);
+  }
   @override
   Map<String, dynamic> toJson() => _$FigmaLineToJson(this);
 
   @override
   Future<PBDLNode> interpretNode() {
+    var tempStyle = FigmaStyle(
+        fills: [FigmaFill.fromJson(fillsList[0])], borders: [FigmaBorder()]);
     return Future.value(PBDLRectangle(
-      UUID: UUID,
-      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      prototypeNodeUUID: transitionNodeID,
-      constraints: constraints?.interpret()
-    ));
+        style: tempStyle.interpretStyle(),
+        UUID: UUID,
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret()));
   }
 
   @override
