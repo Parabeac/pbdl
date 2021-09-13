@@ -11,7 +11,7 @@ PBDLFill _$PBDLFillFromJson(Map<String, dynamic> json) {
     json['color'] == null
         ? null
         : PBDLColor.fromJson(json['color'] as Map<String, dynamic>),
-    json['isEnabled'] as bool,
+    json['isEnabled'] as bool ?? true,
   );
 }
 

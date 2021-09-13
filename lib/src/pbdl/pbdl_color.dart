@@ -6,16 +6,16 @@ part 'pbdl_color.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLColor {
   PBDLColor(
-    this.alpha,
-    this.red,
-    this.green,
-    this.blue,
+    this.a,
+    this.r,
+    this.g,
+    this.b,
   );
 
-  double alpha;
-  double red;
-  double green;
-  double blue;
+  double a;
+  double r;
+  double g;
+  double b;
 
   final type = 'color';
 
@@ -29,10 +29,10 @@ mixin PBColorMixin {
   String toHex(PBDLColor color) {
     if (color != null) {
       int a, r, g, b;
-      a = ((color.alpha ?? 0) * 255).round();
-      r = ((color.red ?? 0) * 255).round();
-      g = ((color.green ?? 0) * 255).round();
-      b = ((color.blue ?? 0) * 255).round();
+      a = ((color.a ?? 0) * 255).round();
+      r = ((color.r ?? 0) * 255).round();
+      g = ((color.g ?? 0) * 255).round();
+      b = ((color.b ?? 0) * 255).round();
       return '0x' + HEX.encode([a, r, g, b]);
     } else {
       return '0x' + HEX.encode([0, 0, 0, 0]);
