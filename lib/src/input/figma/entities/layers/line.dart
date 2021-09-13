@@ -65,10 +65,24 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    var tempStyle = FigmaStyle(
-        fills: [FigmaFill.fromJson(fillsList[0])], borders: [FigmaBorder()]);
+    var tempStyle = fillsList.isNotEmpty
+        ? FigmaStyle(
+            fills: [FigmaFill.fromJson(fillsList[0])], borders: [FigmaBorder()])
+        : FigmaStyle(fills: [
+            FigmaFill.fromJson({
+              'isEnabled': true,
+              'color': {
+                'a': 1.0,
+                'r': 0.0,
+                'g': 0.0,
+                'b': 0.0,
+              }
+            })
+          ], borders: [
+            FigmaBorder()
+          ]);
     return Future.value(PBDLRectangle(
-        style: tempStyle.interpretStyle(),
+        style: tempStyle?.interpretStyle(),
         UUID: UUID,
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
