@@ -3,8 +3,11 @@ import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/layers/text.dart';
+import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
@@ -17,7 +20,8 @@ import 'figma_node.dart';
 part 'figma_frame.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class FigmaFrame extends FigmaChildrenNode with PBColorMixin
+class FigmaFrame extends FigmaChildrenNode
+    with PBColorMixin
     implements FigmaNodeFactory {
   @JsonKey()
   @override
@@ -126,22 +130,95 @@ class FigmaFrame extends FigmaChildrenNode with PBColorMixin
                 children.map((e) async => await e.interpretNode()).toList())),
       );
     } else {
-      return Future.value(
-        PBDLFrame(
+      if (areAllVectors()) {
+        imageReference = FigmaAssetProcessor().processImage(UUID);
+
+        var tempPrototypeID = childrenHavePrototypeNode();
+        if (tempPrototypeID != null) {
+          transitionNodeID = tempPrototypeID;
+        }
+
+        if (children != null && children.isNotEmpty) {
+          absoluteBoundingBox = fitFrame();
+        }
+
+        children.clear();
+
+        return Future.value(
+          PBDLImage(
+            imageReference: imageReference,
             UUID: UUID,
             boundaryRectangle: absoluteBoundingBox.interpretFrame(),
             isVisible: isVisible,
             name: name,
-            style: style.interpretStyle(),
-            prototypeNodeUUID: transitionNodeID,
+            style: style?.interpretStyle(),
             constraints: constraints?.interpret(),
-            children: await Future.wait(
-                children.map((e) async => await e.interpretNode()).toList())),
-      );
+            prototypeNodeUUID: transitionNodeID,
+          ),
+        );
+      } else {
+        return Future.value(
+          PBDLFrame(
+              UUID: UUID,
+              boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+              isVisible: isVisible,
+              name: name,
+              style: style.interpretStyle(),
+              prototypeNodeUUID: transitionNodeID,
+              constraints: constraints?.interpret(),
+              children: await Future.wait(
+                  children.map((e) async => await e.interpretNode()).toList())),
+        );
+      }
     }
   }
 
   String imageReference;
 
   Map<String, dynamic> toPBDF() => toJson();
+
+  bool areAllVectors() {
+    if (children == null) {
+      return false;
+    }
+    for (var child in children) {
+      if (child is! FigmaVector) {
+        return false;
+      }
+      if (child is FigmaText) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  String childrenHavePrototypeNode() {
+    for (child in children) {
+      if (child.transitionNodeID != null) {
+        return child.transitionNodeID;
+      }
+    }
+    return null;
+  }
+
+  FigmaRect fitFrame() {
+    var heights = [];
+    var widths = [];
+    for (var child in children) {
+      heights.add(child.absoluteBoundingBox.height);
+      widths.add(child.absoluteBoundingBox.width);
+    }
+
+    if (heights.every((element) => element == heights[0]) &&
+        widths.every((element) => element == widths[0])) {
+      return FigmaRect(
+        height: heights[0],
+        width: widths[0],
+        x: absoluteBoundingBox.x,
+        y: absoluteBoundingBox.y,
+      );
+    } else {
+      return absoluteBoundingBox;
+    }
+  }
 }

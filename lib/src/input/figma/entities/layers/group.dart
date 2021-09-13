@@ -135,49 +135,4 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       ),
     );
   }
-
-  bool areAllVectors() {
-    if (children == null) {
-      return false;
-    }
-    for (var child in children) {
-      if (child is! FigmaVector) {
-        return false;
-      }
-      if (child is FigmaText) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  FigmaRect fitFrame() {
-    var heights = [];
-    var widths = [];
-    for (var child in children) {
-      heights.add(child.absoluteBoundingBox.height);
-      widths.add(child.absoluteBoundingBox.width);
-    }
-
-    if (heights.every((element) => element == heights[0]) &&
-        widths.every((element) => element == widths[0])) {
-      return FigmaRect(
-        height: heights[0],
-        width: widths[0],
-        x: absoluteBoundingBox.x,
-        y: absoluteBoundingBox.y,
-      );
-    } else {
-      return absoluteBoundingBox;
-    }
-  }
-
-  String childrenHavePrototypeNode() {
-    for (child in children) {
-      if (child.transitionNodeID != null) {
-        return child.transitionNodeID;
-      }
-    }
-    return null;
-  }
 }
