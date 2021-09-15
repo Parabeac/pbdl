@@ -10,6 +10,7 @@ class FigmaFill {
 
   FigmaFill(this.color, [this.isEnabled = true]);
 
+  @JsonKey(defaultValue: true)
   bool isEnabled;
 
   Map<String, dynamic> toJson() => _$FigmaFillToJson(this);
