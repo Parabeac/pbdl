@@ -17,7 +17,7 @@ class AzureAssetService {
 
   String get projectUUID => _projectUUID.toLowerCase();
 
-  static const KEY_NAME = 'STORAGE_CONNECTION_STRING';
+  static const KEY_NAME = 'AZURE_STORAGE_CONNECTION_STRING';
 
   String getImageURI(String imageName) => getContainerUri() + '/${imageName}';
 
