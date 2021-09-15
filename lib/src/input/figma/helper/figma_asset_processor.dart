@@ -86,12 +86,11 @@ class FigmaAssetProcessor extends AssetProcessingService {
                   log.error('Image ${entry.key} was not processed correctly');
                 }
 
-                if (writeAsFile) {
-                  var pngPath = p.join(MainInfo().pngPath, '${entry.key}.png');
-                  var file = File(pngPath.replaceAll(':', '_'))
-                    ..createSync(recursive: true);
-                  file.writeAsBytesSync(imageRes.bodyBytes);
-                } else {
+                var pngPath = p.join(MainInfo().pngPath, '${entry.key}.png');
+                var file = File(pngPath.replaceAll(':', '_'))
+                  ..createSync(recursive: true);
+                file.writeAsBytesSync(imageRes.bodyBytes);
+                if (!writeAsFile) {
                   await super.uploadToStorage(imageRes.bodyBytes, entry.key);
                 }
                 // TODO: Only print out when verbose flag is active
