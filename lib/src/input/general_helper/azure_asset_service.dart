@@ -63,7 +63,8 @@ class AzureAssetService {
 
   Future<http.StreamedResponse> putBlob(
           String container, String filename, Uint8List bodyBytes) async =>
-      await _putRequestBlob('/${container}/${filename}', bodyBytes);
+      await _putRequestBlob(
+          '/$container/${filename.replaceFirst(':', '_')}', bodyBytes);
 
   Future<Uint8List> downloadImage(String uuid) async {
     var storage = AzureStorage.parse(Platform.environment[KEY_NAME]);
