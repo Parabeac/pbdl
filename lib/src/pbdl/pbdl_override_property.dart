@@ -44,7 +44,9 @@ class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
           null,
           null,
           null,
-        );
+        ) {
+    this.name = 'ovr' + name;
+  }
 
   factory PBDLOverrideProperty.fromJson(Map<String, dynamic> json) =>
       _$PBDLOverridePropertyFromJson(json);
