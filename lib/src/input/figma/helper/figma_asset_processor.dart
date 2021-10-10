@@ -63,12 +63,12 @@ class FigmaAssetProcessor extends AssetProcessingService {
   Future<dynamic> _processImages(List<String> uuids,
       {bool writeAsFile = true}) async {
     // Call Figma API to get Image link
-    return Future(() async {
-      List<List<String>> uuidsChunks = _listToChunks(uuids, 50);
+    List<List<String>> uuidsChunks = _listToChunks(uuids, 50);
 
-      for (var list in uuidsChunks) {
+    return Future(() async {
+      uuidsChunks.forEach((chunk) async {
         var response = await APICallService.makeAPICall(
-            'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${list.join(',')}&use_absolute_bounds=true',
+            'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${chunk.join(',')}&use_absolute_bounds=true',
             MainInfo().figmaKey);
 
         if (response != null &&
@@ -103,8 +103,10 @@ class FigmaAssetProcessor extends AssetProcessingService {
             }
           }
           return response;
+        } else {
+          throw Exception('Image did not generate');
         }
-      }
+      });
     });
   }
 
