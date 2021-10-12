@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/helper/component_linker_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
@@ -94,17 +96,34 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       overrideValues.addAll(currVals);
     });
 
-    return Future.value(PBDLSharedInstanceNode(
-      UUID: UUID,
-      overrideValues: overrideValues,
-      name: name,
-      isVisible: isVisible,
-      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-      style: style,
-      prototypeNodeUUID: transitionNodeID,
-      constraints: constraints?.interpret(),
-      symbolID: componentId,
-    ));
+    if (ComponentLinkerService().skeletonComponents.contains(componentId) &&
+        ComponentLinkerService().components.contains(componentId)) {
+      return Future.value(PBDLSharedInstanceNode(
+        UUID: UUID,
+        overrideValues: overrideValues,
+        name: name,
+        isVisible: isVisible,
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        style: style,
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
+        symbolID: componentId,
+      ));
+    } else {
+      return PBDLSharedMasterNode(
+          UUID: UUID,
+          overrideProperties: null,
+          name: name,
+          isVisible: isVisible,
+          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+          style: style?.interpretStyle(),
+          prototypeNodeUUID: transitionNodeID,
+          symbolID: UUID,
+          resizingConstraint: constraints?.interpret(),
+          isFlowHome: isFlowHome,
+          children: await Future.wait(
+              children.map((e) async => await e.interpretNode()).toList()));
+    }
   }
 
   Future<List<PBDLOverrideValue>> _traverseChildrenForOverrides(
