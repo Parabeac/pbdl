@@ -2,10 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
-import 'package:pbdl/src/input/figma/helper/component_linker_service.dart';
+import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
-import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
@@ -14,7 +13,6 @@ import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
 import 'figma_frame.dart';
-
 part 'instance.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -96,8 +94,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       overrideValues.addAll(currVals);
     });
 
-    if (ComponentLinkerService().skeletonComponents.contains(componentId) &&
-        ComponentLinkerService().localComponents.contains(componentId)) {
+    if (ComponentCacheService().localComponents.contains(componentId)) {
       return Future.value(PBDLSharedInstanceNode(
         UUID: UUID,
         overrideValues: overrideValues,
@@ -119,7 +116,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           style: style?.interpretStyle(),
           prototypeNodeUUID: transitionNodeID,
           symbolID: UUID,
-          resizingConstraint: constraints?.interpret(),
+          constraints: constraints.interpret(),
           isFlowHome: isFlowHome,
           children: await Future.wait(
               children.map((e) async => await e.interpretNode()).toList()));
