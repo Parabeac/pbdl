@@ -1,3 +1,4 @@
+/// This class is in charge of caching the components IDs
 class ComponentCacheService {
   static final ComponentCacheService _singleton =
       ComponentCacheService._internal();
@@ -7,5 +8,7 @@ class ComponentCacheService {
 
   ComponentCacheService._internal();
 
+  /// List that stores the symbol IDs of
+  /// all the components on the file
   List<String> localComponents = [];
 }

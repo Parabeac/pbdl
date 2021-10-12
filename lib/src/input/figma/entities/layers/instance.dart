@@ -94,6 +94,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       overrideValues.addAll(currVals);
     });
 
+    /// If the component is not a local component
+    /// then the instance must become a component aka [PBDLSharedMasterNode]
     if (ComponentCacheService().localComponents.contains(componentId)) {
       return Future.value(PBDLSharedInstanceNode(
         UUID: UUID,
