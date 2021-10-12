@@ -190,7 +190,8 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
           uuidTypeMap['uuid'],
           overrideChild.name,
           ovrType.getPBDLType(), // Map SketchOverrideType to PBDLOverrideType
-          await ovrType.getProperty(overrideChild), // Get default value from child
+          await ovrType
+              .getProperty(overrideChild), // Get default value from child
         );
       }
     }));
@@ -224,7 +225,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       shouldBreakMaskChain: shouldBreakMaskChain,
       rotation: rotation,
       resizingType: resizingType,
-      resizingConstraint: resizingConstraint,
+      constraints: resizingConstraint,
       resizesContent: resizesContent,
       presetDictionary: presetDictionary,
       maintainScrollPosition: maintainScrollPosition,

@@ -22,6 +22,7 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
             json['boundaryRectangle'] as Map<String, dynamic>),
     style: json['style'],
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+    constraints: json['constraints'],
     symbolID: json['symbolID'] as String,
     children: (json['children'] as List)
         ?.map((e) =>
@@ -31,9 +32,6 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..constraints = json['constraints'] == null
-        ? null
-        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
     ..type = json['type'] as String;
 }
 
