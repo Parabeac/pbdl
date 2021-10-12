@@ -97,7 +97,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     });
 
     if (ComponentLinkerService().skeletonComponents.contains(componentId) &&
-        ComponentLinkerService().components.contains(componentId)) {
+        ComponentLinkerService().localComponents.contains(componentId)) {
       return Future.value(PBDLSharedInstanceNode(
         UUID: UUID,
         overrideValues: overrideValues,

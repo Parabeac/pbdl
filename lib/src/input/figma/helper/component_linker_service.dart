@@ -10,5 +10,5 @@ class ComponentLinkerService {
   /// List stores components on the Figma file
   List<String> skeletonComponents = [];
 
-  List<String> components = [];
+  List<String> localComponents = [];
 }

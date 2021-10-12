@@ -87,7 +87,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   factory Component.fromJson(Map<String, dynamic> json) {
     if (json['id'] != null) {
-      ComponentLinkerService().components.add(json['id']);
+      ComponentLinkerService().localComponents.add(json['id']);
     }
     return _$ComponentFromJson(json);
   }
