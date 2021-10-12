@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
+import 'package:pbdl/src/input/figma/helper/component_linker_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/input/figma/helper/style_extractor.dart';
@@ -84,8 +85,12 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     return component;
   }
 
-  factory Component.fromJson(Map<String, dynamic> json) =>
-      _$ComponentFromJson(json);
+  factory Component.fromJson(Map<String, dynamic> json) {
+    if (json['id'] != null) {
+      ComponentLinkerService().components.add(json['id']);
+    }
+    return _$ComponentFromJson(json);
+  }
   @override
   Map<String, dynamic> toJson() => _$ComponentToJson(this);
 
