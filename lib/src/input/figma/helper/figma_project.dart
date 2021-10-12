@@ -5,7 +5,6 @@ import 'package:pbdl/src/pbdl/pbdl_project.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 import '../entities/layers/canvas.dart';
-import 'component_linker_service.dart';
 import 'figma_page.dart';
 import 'figma_screen.dart';
 
@@ -29,7 +28,6 @@ class FigmaProject {
     this.figmaJson, {
     this.id,
   }) : super() {
-    _saveComponentsIDs(figmaJson['components']);
     pages.addAll(_setConventionalPages(figmaJson['document']['children']));
   }
 
@@ -66,11 +64,5 @@ class FigmaProject {
       pages: processedPages,
       pngPath: MainInfo().pngPath,
     );
-  }
-
-  void _saveComponentsIDs(Map<String, dynamic> components) {
-    components.forEach((key, value) {
-      ComponentLinkerService().skeletonComponents.add(key);
-    });
   }
 }
