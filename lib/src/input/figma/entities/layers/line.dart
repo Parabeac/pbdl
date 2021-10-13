@@ -83,7 +83,10 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
           ]);
 
     /// Added thickness as the height for [PBDLRectangle]
+    /// and substracted to the y axis, so it can still fit
+    /// on the frame
     absoluteBoundingBox.height = strokeWeight;
+    absoluteBoundingBox.y -= strokeWeight;
     return Future.value(PBDLRectangle(
         style: tempStyle?.interpretStyle(),
         UUID: UUID,
