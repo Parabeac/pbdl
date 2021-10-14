@@ -79,8 +79,9 @@ class FigmaAssetProcessor extends AssetProcessingService {
           // Download the images
           for (var entry in images.entries) {
             if (entry?.value != null && (entry?.value?.isNotEmpty ?? false)) {
-              response =
-                  await http.get(Uri.parse(entry.value)).then((imageRes) async {
+              try {
+                var imageRes = await http.get(Uri.parse(entry.value));
+
                 // Check if the request was successful
                 if (imageRes == null || imageRes.statusCode != 200) {
                   log.error('Image ${entry.key} was not processed correctly');
@@ -94,12 +95,9 @@ class FigmaAssetProcessor extends AssetProcessingService {
                 } else {
                   await super.uploadToStorage(imageRes.bodyBytes, entry.key);
                 }
-                // TODO: Only print out when verbose flag is active
-                // log.debug('File written to following path ${file.path}');
-              }).catchError((e) {
-                //MainInfo().sentry.captureException(exception: e);
-                log.error(e.toString());
-              });
+              } catch (e) {
+                log.error(e);
+              }
             }
           }
           return response;

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
+import 'package:pbdl/src/input/figma/entities/layers/instance.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/input/figma/helper/style_extractor.dart';
@@ -145,7 +146,11 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         values.add(overrideProp);
       }
 
-      if (current.child != null) {
+      // We do not want to process children of instance as override properties
+      // since Instances have their own overrides
+      if (current is Instance) {
+        continue;
+      } else if (current.child != null) {
         stack.add(current.child);
       } else if (current is FigmaChildrenNode && current.children != null) {
         current.children.forEach(stack.add);
