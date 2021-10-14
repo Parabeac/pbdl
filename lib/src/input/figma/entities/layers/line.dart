@@ -17,25 +17,25 @@ part 'line.g.dart';
 class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String type = 'LINE';
-  FigmaLine(
-      {String name,
-      bool visible,
-      String type,
-      pluginData,
-      sharedPluginData,
-      layoutAlign,
-      FigmaConstraints constraints,
-      boundaryRectangle,
-      size,
-      fills,
-      strokes,
-      strokeWeight,
-      strokeAlign,
-      styles,
-      String transitionNodeID,
-      num transitionDuration,
-      String transitionEasing})
-      : super(
+  FigmaLine({
+    String name,
+    bool visible,
+    String type,
+    pluginData,
+    sharedPluginData,
+    layoutAlign,
+    FigmaConstraints constraints,
+    boundaryRectangle,
+    size,
+    fills,
+    strokes,
+    strokeWeight,
+    strokeAlign,
+    styles,
+    String transitionNodeID,
+    num transitionDuration,
+    String transitionEasing,
+  }) : super(
           name: name,
           visible: visible,
           type: type,
@@ -81,6 +81,12 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
           ], borders: [
             FigmaBorder()
           ]);
+
+    /// Added thickness as the height for [PBDLRectangle]
+    /// and substracted to the y axis, so it can still fit
+    /// on the frame
+    absoluteBoundingBox.height = strokeWeight;
+    absoluteBoundingBox.y -= strokeWeight;
     return Future.value(PBDLRectangle(
         style: tempStyle?.interpretStyle(),
         UUID: UUID,

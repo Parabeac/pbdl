@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
+import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/input/figma/helper/style_extractor.dart';
@@ -84,8 +85,13 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     return component;
   }
 
-  factory Component.fromJson(Map<String, dynamic> json) =>
-      _$ComponentFromJson(json);
+  factory Component.fromJson(Map<String, dynamic> json) {
+    /// Save component ID to the cache
+    if (json['id'] != null) {
+      ComponentCacheService().localComponents.add(json['id']);
+    }
+    return _$ComponentFromJson(json);
+  }
   @override
   Map<String, dynamic> toJson() => _$ComponentToJson(this);
 
@@ -109,7 +115,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         style: style.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         symbolID: UUID,
-        resizingConstraint: constraints?.interpret(),
+        constraints: constraints?.interpret(),
         isFlowHome: isFlowHome,
         children: await Future.wait(
             children.map((e) async => await e.interpretNode()).toList()));
