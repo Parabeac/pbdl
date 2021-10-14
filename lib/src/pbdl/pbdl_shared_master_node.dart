@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
@@ -44,7 +42,7 @@ class PBDLSharedMasterNode extends PBDLNode
     presetDictionary,
     bool allowsOverrides,
     nameIsFixed,
-    resizingConstraint,
+    constraints,
     resizingType,
     horizontalRulerData,
     bool hasBackgroundColor,
@@ -72,6 +70,7 @@ class PBDLSharedMasterNode extends PBDLNode
           boundaryRectangle,
           PBDLStyle.getStyle(style),
           prototypeNodeUUID,
+          constraints: constraints,
         );
 
   @override
