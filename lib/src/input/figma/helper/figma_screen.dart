@@ -9,6 +9,7 @@ class FigmaScreen {
   String imageURI;
   String type;
   FigmaNode figmaNode;
+  bool isVisible;
 
   // Do we still need this?
   // DesignPage parentPage;
@@ -18,6 +19,7 @@ class FigmaScreen {
     this.id,
     this.name,
     this.type,
+    this.isVisible,
   });
 
   factory FigmaScreen.fromJson(Map<String, dynamic> json) {
@@ -39,6 +41,7 @@ class FigmaScreen {
       designNode: await figmaNode?.interpretNode(),
       UUID: id,
       name: name,
+      isVisible: isVisible,
     );
   }
 }

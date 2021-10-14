@@ -48,6 +48,7 @@ class FigmaProject {
           figmaNode: layer,
           id: layer.UUID,
           name: layer.name,
+          isVisible: layer.isVisible,
         ));
       }
       figmaPages.add(pg);

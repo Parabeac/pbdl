@@ -16,8 +16,11 @@ class PBDLScreen extends PBDLNode implements PBDLNodeFactory {
 
   @override
   String type = 'screen';
-  
+
   PBDLNode designNode;
+
+  @override
+  bool isVisible;
 
   // Do we still need this?
   // DesignPage parentPage;
@@ -26,15 +29,17 @@ class PBDLScreen extends PBDLNode implements PBDLNodeFactory {
     PBDLNode designNode,
     String UUID,
     String name,
-  }): super(UUID, name, true, null, null, null) {
+    this.isVisible,
+  }) : super(UUID, name, isVisible, null, null, null) {
     this.designNode = designNode;
   }
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
       PBDLScreen.fromJson(json);
-  factory PBDLScreen.fromJson(Map<String, dynamic> json) =>
-      _$PBDLScreenFromJson(json);
+  factory PBDLScreen.fromJson(Map<String, dynamic> json) {
+    return _$PBDLScreenFromJson(json);
+  }
   @override
   Map<String, dynamic> toJson() => _$PBDLScreenToJson(this);
 }
