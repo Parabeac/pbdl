@@ -8,6 +8,9 @@ import 'api_call_service.dart';
 import 'package:path/path.dart' as p;
 
 class FigmaAssetProcessor extends AssetProcessingService {
+  /// Variable that represents how many images per request we are processing
+  final IMAGE_REQ_LIMIT = 50;
+
   FigmaAssetProcessor._internal();
 
   static final FigmaAssetProcessor _instance = FigmaAssetProcessor._internal();
@@ -35,20 +38,15 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// Creates separate API requests from `uuidQueue` to speed up
   /// the image downloading process.
   Future<void> processImageQueue({bool writeAsFile = true}) async {
-    List<List<String>> uuidLists;
-    if (_uuidQueue.length >= 8) {
-      // Split uuids into 8 lists to create separate API requests to figma
-      uuidLists = List.generate(8, (_) => []);
-      for (var i = 0; i < _uuidQueue.length; i++) {
-        uuidLists[i % 8].add(_uuidQueue[i]);
-      }
-    } else {
-      uuidLists = [_uuidQueue];
+    var chunks = <List<String>>[];
+    for (var i = 0; i < _uuidQueue.length; i += IMAGE_REQ_LIMIT) {
+      chunks.add(_uuidQueue.sublist(
+          i, i + IMAGE_REQ_LIMIT > _uuidQueue.length ? _uuidQueue.length : i + IMAGE_REQ_LIMIT));
     }
 
     // Process images in separate queues
     var futures = <Future>[];
-    for (var uuidList in uuidLists) {
+    for (var uuidList in chunks) {
       futures.add(_processImages(uuidList, writeAsFile: writeAsFile));
     }
 
@@ -62,49 +60,46 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// otherwise.
   Future<dynamic> _processImages(List<String> uuids,
       {bool writeAsFile = true}) async {
-    // Call Figma API to get Image link
-    List<List<String>> uuidsChunks = _listToChunks(uuids, 50);
-
     return Future(() async {
-      uuidsChunks.forEach((chunk) async {
-        var response = await APICallService.makeAPICall(
-            'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${chunk.join(',')}&use_absolute_bounds=true',
-            MainInfo().figmaKey);
+      var response = await APICallService.makeAPICall(
+          'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&use_absolute_bounds=true',
+          MainInfo().figmaKey);
 
-        if (response != null &&
-            response.containsKey('images') &&
-            response['images'] != null &&
-            response['images'].values.isNotEmpty) {
-          Map images = response['images'];
-          // Download the images
-          for (var entry in images.entries) {
-            if (entry?.value != null && (entry?.value?.isNotEmpty ?? false)) {
-              try {
-                var imageRes = await http.get(Uri.parse(entry.value));
-
-                // Check if the request was successful
-                if (imageRes == null || imageRes.statusCode != 200) {
-                  log.error('Image ${entry.key} was not processed correctly');
-                }
-
-                if (writeAsFile) {
-                  var pngPath = p.join(MainInfo().pngPath, '${entry.key}.png');
-                  var file = File(pngPath.replaceAll(':', '_'))
-                    ..createSync(recursive: true);
-                  file.writeAsBytesSync(imageRes.bodyBytes);
-                } else {
-                  await super.uploadToStorage(imageRes.bodyBytes, entry.key);
-                }
-              } catch (e) {
-                log.error(e);
+      if (response != null &&
+          response.containsKey('images') &&
+          response['images'] != null &&
+          response['images'].values.isNotEmpty) {
+        Map images = response['images'];
+        // Download the images
+        for (var entry in images.entries) {
+          if (entry?.value != null && (entry?.value?.isNotEmpty ?? false)) {
+            response =
+                await http.get(Uri.parse(entry.value)).then((imageRes) async {
+              // Check if the request was successful
+              if (imageRes == null || imageRes.statusCode != 200) {
+                log.error('Image ${entry.key} was not processed correctly');
               }
-            }
+
+              if (writeAsFile) {
+                var pngPath = p.join(MainInfo().pngPath, '${entry.key}.png');
+                var file = File(pngPath.replaceAll(':', '_'))
+                  ..createSync(recursive: true);
+                file.writeAsBytesSync(imageRes.bodyBytes);
+              } else {
+                await super.uploadToStorage(imageRes.bodyBytes, entry.key);
+              }
+              // TODO: Only print out when verbose flag is active
+              // log.debug('File written to following path ${file.path}');
+            }).catchError((e) {
+              //MainInfo().sentry.captureException(exception: e);
+              log.error(e.toString());
+            });
           }
-          return response;
-        } else {
-          throw Exception('Image did not generate');
         }
-      });
+        return response;
+      } else {
+        throw Exception('Image did not generate');
+      }
     });
   }
 
