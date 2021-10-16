@@ -13,6 +13,7 @@ import '../style/figma_color.dart';
 import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'figma_frame.dart';
+import 'instance.dart';
 
 part 'component.g.dart';
 
@@ -151,7 +152,11 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         values.add(overrideProp);
       }
 
-      if (current.child != null) {
+      // We do not want to process children of instance as override properties
+      // since Instances have their own overrides
+      if (current is Instance) {
+        continue;
+      } else if (current.child != null) {
         stack.add(current.child);
       } else if (current is FigmaChildrenNode && current.children != null) {
         current.children.forEach(stack.add);

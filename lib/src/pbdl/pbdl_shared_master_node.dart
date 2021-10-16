@@ -70,7 +70,9 @@ class PBDLSharedMasterNode extends PBDLNode
           boundaryRectangle,
           PBDLStyle.getStyle(style),
           prototypeNodeUUID,
-          constraints: constraints,
+          constraints: (constraints is! Map)
+              ? constraints
+              : PBDLConstraints.fromJson(constraints),
         );
 
   @override
