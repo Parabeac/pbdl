@@ -36,10 +36,11 @@ class PBInputFormatter {
     result = removeFirstDigits(result);
     result = result.trim();
     var spaceChar = (spaceToUnderscore) ? '_' : '';
-    result = result.replaceAll(r'[\s\./_+?]+', spaceChar);
+    result = result.replaceAll(r'[\s\./_+-?]+', spaceChar);
     result = result.replaceAll(RegExp(r'\s+'), spaceChar);
     result = (destroyDigits) ? result.replaceAll(RegExp(r'\d+'), '') : result;
     result = result.replaceAll(' ', '').replaceAll(RegExp(r'[^\s\w]'), '');
+    result = result.replaceAll(RegExp(r'[^a-zA-Z\d\s:]'), '');
     return result;
   }
 
