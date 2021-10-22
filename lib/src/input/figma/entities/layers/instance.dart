@@ -109,7 +109,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         symbolID: componentId,
       ));
     } else {
-      return PBDLSharedMasterNode(
+      ComponentCacheService().localComponents.add(componentId);
+      return Future.value(PBDLSharedMasterNode(
           UUID: UUID,
           overrideProperties: null,
           name: name,
@@ -117,11 +118,11 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           boundaryRectangle: absoluteBoundingBox.interpretFrame(),
           style: style?.interpretStyle(),
           prototypeNodeUUID: transitionNodeID,
-          symbolID: UUID,
+          symbolID: componentId,
           constraints: constraints.interpret(),
           isFlowHome: isFlowHome,
           children: await Future.wait(
-              children.map((e) async => await e.interpretNode()).toList()));
+              children.map((e) async => await e.interpretNode()).toList())));
     }
   }
 
