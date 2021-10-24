@@ -22,6 +22,8 @@ class FigmaChildrenNode extends FigmaNode {
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing,
             constraints: constraints) {
+    // Remove elements that are [null], which are unsupported nodes
+    children?.removeWhere((element) => element == null);
     for (var i = 0; i < (children?.length ?? 0); i++) {
       children[i]?.absoluteBoundingBox?.z = i * 1.0;
     }

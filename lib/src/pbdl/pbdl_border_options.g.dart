@@ -11,7 +11,7 @@ PBDLBorderOptions _$PBDLBorderOptionsFromJson(Map<String, dynamic> json) {
     isEnabled: json['isEnabled'] as bool,
     dashPattern: json['dashPattern'] as List,
     lineCapStyle: json['lineCapStyle'] as int,
-    lineJoinStyle: json['lineJoinStyle'] as int,
+    lineJoinStyle: json['lineJoinStyle'] as String,
     cornerRadius: json['cornerRadius'] as num,
   );
 }

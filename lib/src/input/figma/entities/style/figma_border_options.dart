@@ -11,7 +11,7 @@ class FigmaBorderOptions {
 
   int lineCapStyle;
 
-  int lineJoinStyle;
+  String lineJoinStyle;
 
   num cornerRadius;
 
@@ -33,7 +33,7 @@ class FigmaBorderOptions {
       isEnabled: isEnabled,
       dashPattern: dashPattern ?? [],
       lineCapStyle: lineCapStyle ?? 0,
-      lineJoinStyle: lineJoinStyle ?? 0,
+      lineJoinStyle: lineJoinStyle ?? 'Miter',
       cornerRadius: cornerRadius ?? 0,
     );
   }
