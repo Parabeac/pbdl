@@ -27,7 +27,7 @@ class AbstractFigmaNodeFactory {
     Instance(),
     FigmaLine(),
     FigmaRectangle(),
-    FigmaSlice(),
+    // FigmaSlice(),  
     FigmaStar(),
     FigmaText(),
     FigmaVector(),
