@@ -192,7 +192,6 @@ class FigmaFrame extends FigmaChildrenNode
             return false;
           }
         }
-        return false;
       }
     }
     return true;
