@@ -3,6 +3,7 @@ import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/layers/group.dart';
 import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
@@ -182,10 +183,15 @@ class FigmaFrame extends FigmaChildrenNode
       return false;
     }
     for (var child in children) {
-      if (child is! FigmaVector) {
+      if (child is FigmaText) {
         return false;
       }
-      if (child is FigmaText) {
+      if (child is! FigmaVector) {
+        if (child is FigmaFrame || child is Group) {
+          if (!(child as FigmaFrame).areAllVectors()) {
+            return false;
+          }
+        }
         return false;
       }
     }
