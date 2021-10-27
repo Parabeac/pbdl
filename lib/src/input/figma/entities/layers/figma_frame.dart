@@ -187,11 +187,7 @@ class FigmaFrame extends FigmaChildrenNode
         return false;
       }
       if (child is! FigmaVector) {
-        if (child is FigmaFrame || child is Group) {
-          if (!(child as FigmaFrame).areAllVectors()) {
-            return false;
-          }
-        }
+        return false;
       }
     }
     return true;
