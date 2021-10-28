@@ -8,10 +8,10 @@ import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
 part 'pbdl_override_value.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
   /// value of the override
-  var value;
+  PBDLNode value;
 
   @override
   final type;

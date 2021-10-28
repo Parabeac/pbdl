@@ -11,7 +11,9 @@ PBDLOverrideValue _$PBDLOverrideValueFromJson(Map<String, dynamic> json) {
     json['UUID'] as String,
     json['name'] as String,
     json['type'] as String,
-    json['value'],
+    json['value'] == null
+        ? null
+        : PBDLNode.fromJson(json['value'] as Map<String, dynamic>),
   )
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
@@ -35,11 +37,11 @@ Map<String, dynamic> _$PBDLOverrideValueToJson(PBDLOverrideValue instance) =>
       'UUID': instance.UUID,
       'name': instance.name,
       'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle,
-      'style': instance.style,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child,
-      'constraints': instance.constraints,
-      'value': instance.value,
+      'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
+      'value': instance.value?.toJson(),
       'type': instance.type,
     };

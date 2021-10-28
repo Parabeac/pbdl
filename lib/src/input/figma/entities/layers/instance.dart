@@ -147,7 +147,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           current.UUID.split(';').last, // Get UUID of node to replace
           current.name,
           override.getPBDLType(),
-          await override.getValue(current),
+          await override.getProperty(current),
         )..constraints = current.constraints?.interpret());
       }
 
