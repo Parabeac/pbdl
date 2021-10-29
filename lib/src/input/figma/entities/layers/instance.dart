@@ -148,6 +148,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           current.name,
           override.getPBDLType(),
           await override.getProperty(current),
+          await override.getValue(current),
         )..constraints = current.constraints?.interpret());
       }
 
