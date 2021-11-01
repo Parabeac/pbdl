@@ -183,10 +183,7 @@ class FigmaFrame extends FigmaChildrenNode
       return false;
     }
     for (var child in children) {
-      if (child is FigmaText) {
-        return false;
-      }
-      if (child is! FigmaVector) {
+      if (child is FigmaText || child is! FigmaVector) {
         return false;
       }
     }
