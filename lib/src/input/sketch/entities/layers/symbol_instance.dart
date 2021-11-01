@@ -119,14 +119,14 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
   @override
   Map<String, dynamic> toJson() => _$SymbolInstanceToJson(this);
 
-  ///Converting the [OverridableValue] into [PBSharedParameterValue] to be processed in intermediate phase.
-  // List<PBSharedParameterValue> _extractParameters() {
+  ///Converting the [OverridableValue] into [PBInstanceOverride] to be processed in intermediate phase.
+  // List<PBInstanceOverride> _extractParameters() {
   //   Set<String> ovrNames = {};
-  //   List<PBSharedParameterValue> sharedParameters = [];
+  //   List<PBInstanceOverride> sharedParameters = [];
   //   for (var overrideValue in overrideValues) {
   //     if (!ovrNames.contains(overrideValue.overrideName)) {
   //       var properties = extractParameter(overrideValue.overrideName);
-  //       sharedParameters.add(PBSharedParameterValue(
+  //       sharedParameters.add(PBInstanceOverride(
   //           properties['type'],
   //           overrideValue.value,
   //           properties['uuid'],
@@ -146,12 +146,13 @@ class SymbolInstance extends SketchNode implements SketchNodeFactory {
       var ovrVal = SketchOverrideTypeFactory.getType(e);
 
       if (ovrVal != null) {
-        return PBDLOverrideValue(
-          uuidTypeMap['uuid'],
-          null, // Cannot assign name since it requires searching for master node
-          ovrVal.getPBDLType(),
-          ovrVal.getValue(e),
-        );
+        // TODO: update when support for Sketch hits
+        // return PBDLOverrideValue(
+        //   uuidTypeMap['uuid'],
+        //   null, // Cannot assign name since it requires searching for master node
+        //   ovrVal.getPBDLType(),
+        //   ovrVal.getValue(e),
+        // );
       }
     }).toList();
 
