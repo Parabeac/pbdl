@@ -87,9 +87,7 @@ class FigmaAssetProcessor extends AssetProcessingService {
               var file = File(pngPath.replaceAll(':', '_'))
                 ..createSync(recursive: true);
               file.writeAsBytesSync(imageRes.bodyBytes);
-              if (!writeAsFile) {
-                await super.uploadToStorage(imageRes.bodyBytes, entry.key);
-              }
+
               // TODO: Only print out when verbose flag is active
               // log.debug('File written to following path ${file.path}');
             }).catchError((e) {
