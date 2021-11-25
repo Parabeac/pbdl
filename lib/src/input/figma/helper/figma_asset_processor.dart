@@ -41,7 +41,10 @@ class FigmaAssetProcessor extends AssetProcessingService {
     var chunks = <List<String>>[];
     for (var i = 0; i < _uuidQueue.length; i += IMAGE_REQ_LIMIT) {
       chunks.add(_uuidQueue.sublist(
-          i, i + IMAGE_REQ_LIMIT > _uuidQueue.length ? _uuidQueue.length : i + IMAGE_REQ_LIMIT));
+          i,
+          i + IMAGE_REQ_LIMIT > _uuidQueue.length
+              ? _uuidQueue.length
+              : i + IMAGE_REQ_LIMIT));
     }
 
     // Process images in separate queues
@@ -80,12 +83,11 @@ class FigmaAssetProcessor extends AssetProcessingService {
                 log.error('Image ${entry.key} was not processed correctly');
               }
 
-              if (writeAsFile) {
-                var pngPath = p.join(MainInfo().pngPath, '${entry.key}.png');
-                var file = File(pngPath.replaceAll(':', '_'))
-                  ..createSync(recursive: true);
-                file.writeAsBytesSync(imageRes.bodyBytes);
-              } else {
+              var pngPath = p.join(MainInfo().pngPath, '${entry.key}.png');
+              var file = File(pngPath.replaceAll(':', '_'))
+                ..createSync(recursive: true);
+              file.writeAsBytesSync(imageRes.bodyBytes);
+              if (!writeAsFile) {
                 await super.uploadToStorage(imageRes.bodyBytes, entry.key);
               }
               // TODO: Only print out when verbose flag is active
