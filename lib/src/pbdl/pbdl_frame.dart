@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/pbdl/pbdl_auto_layout_options.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 
@@ -25,6 +26,9 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
   num fixedRadius;
 
   Map background;
+
+  @JsonKey(ignore: true)
+  PBDLAutoLayoutOptions autoLayoutOptions;
 
   PBDLFrame({
     bool hasClickThrough,
@@ -55,8 +59,11 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
     String prototypeNodeUUID,
     this.fixedRadius,
     this.background,
+    this.autoLayoutOptions,
   }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
-            constraints: constraints);
+            constraints: constraints) {
+    print('Fabi');
+  }
 
   @override
   PBDLFrame createPBDLNode(Map<String, dynamic> json) =>
