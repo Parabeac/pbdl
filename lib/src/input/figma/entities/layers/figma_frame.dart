@@ -110,7 +110,7 @@ class FigmaFrame extends FigmaChildrenNode
     var node = FigmaFrame.fromJson(json);
     node.style = StyleExtractor().getStyle(json);
     if (json.containsKey('layoutMode')) {
-      autoLayoutOptions = FigmaAutoLayoutOptions.fromJson(json);
+      node.autoLayoutOptions = FigmaAutoLayoutOptions.fromJson(json);
     }
     return node;
   }
@@ -174,6 +174,7 @@ class FigmaFrame extends FigmaChildrenNode
               style: style.interpretStyle(),
               prototypeNodeUUID: transitionNodeID,
               constraints: constraints?.interpret(),
+              autoLayoutOptions: autoLayoutOptions?.interpretOptions(),
               children: await Future.wait(
                   children.map((e) async => await e.interpretNode()).toList())),
         );
