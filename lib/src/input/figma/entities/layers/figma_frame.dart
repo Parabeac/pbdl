@@ -6,6 +6,7 @@ import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/layers/group.dart';
 import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
@@ -63,6 +64,9 @@ class FigmaFrame extends FigmaChildrenNode
   @JsonKey(defaultValue: false)
   var isFlowHome = false;
 
+  @JsonKey(ignore: true)
+  FigmaAutoLayoutOptions autoLayoutOptions;
+
   FigmaFrame({
     name,
     isVisible,
@@ -105,6 +109,9 @@ class FigmaFrame extends FigmaChildrenNode
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaFrame.fromJson(json);
     node.style = StyleExtractor().getStyle(json);
+    if (json.containsKey('layoutMode')) {
+      autoLayoutOptions = FigmaAutoLayoutOptions.fromJson(json);
+    }
     return node;
   }
 
