@@ -27,7 +27,7 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
 
   Map background;
 
-  @JsonKey(ignore: true)
+  @JsonKey()
   PBDLAutoLayoutOptions autoLayoutOptions;
 
   PBDLFrame({
@@ -62,7 +62,17 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
     this.autoLayoutOptions,
   }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
             constraints: constraints) {
-    print('Fabi');
+    if (autoLayoutOptions != null) {
+      switch (autoLayoutOptions.orientation) {
+        case Orientation.HORIZONTAL:
+          type = 'row';
+          break;
+        case Orientation.VERTICAL:
+          type = 'col';
+          break;
+        default:
+      }
+    }
   }
 
   @override
@@ -78,5 +88,6 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
 
   factory PBDLFrame.fromJson(Map<String, dynamic> json) =>
       _$PBDLFrameFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$PBDLFrameToJson(this);
 }

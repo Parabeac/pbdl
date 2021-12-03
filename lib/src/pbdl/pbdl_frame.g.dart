@@ -28,6 +28,10 @@ PBDLFrame _$PBDLFrameFromJson(Map<String, dynamic> json) {
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
     fixedRadius: json['fixedRadius'] as num,
     background: json['background'] as Map<String, dynamic>,
+    autoLayoutOptions: json['autoLayoutOptions'] == null
+        ? null
+        : PBDLAutoLayoutOptions.fromJson(
+            json['autoLayoutOptions'] as Map<String, dynamic>),
   )..type = json['type'] as String;
 }
 
@@ -43,4 +47,5 @@ Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
       'type': instance.type,
       'fixedRadius': instance.fixedRadius,
       'background': instance.background,
+      'autoLayoutOptions': instance.autoLayoutOptions?.toJson(),
     };
