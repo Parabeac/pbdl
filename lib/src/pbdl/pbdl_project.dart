@@ -24,7 +24,7 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
     this.pages,
     this.pngPath,
   }) : super(UUID, name, true, null, null, null) {
-    MainInfo().projectName = name ?? 'temp';
+    MainInfo().projectName = name ?? 'foo';
   }
 
   List<PBDLPage> pages = [];

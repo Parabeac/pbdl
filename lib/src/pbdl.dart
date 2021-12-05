@@ -89,7 +89,7 @@ class PBDL {
 
   static void _setupMainInfo(
     String outputPath, {
-    String projectName = 'temp',
+    String projectName = 'foo',
   }) {
     MainInfo().projectName = projectName;
     MainInfo().cwd = Directory.current;
