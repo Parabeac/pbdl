@@ -27,6 +27,8 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
     constraints: json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
+    layoutMainAxisSizing: json['layoutMainAxisSizing'],
+    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
   )
     ..child = json['child'] == null
         ? null
@@ -39,6 +41,10 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
         PBDLSharedInstanceNode instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
@@ -52,3 +58,8 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
           instance.overrideValues?.map((e) => e?.toJson())?.toList(),
       'type': instance.type,
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

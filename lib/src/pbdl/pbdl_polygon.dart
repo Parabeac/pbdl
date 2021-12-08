@@ -39,8 +39,18 @@ class PBDLPolygon extends PBDLNode implements PBDLNodeFactory {
     PBDLStyle style,
     this.child,
     String prototypeNodeUUID,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
   }) : super(
-            UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID);
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

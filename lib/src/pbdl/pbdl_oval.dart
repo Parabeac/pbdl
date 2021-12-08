@@ -11,7 +11,6 @@ part 'pbdl_oval.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLOval extends PBDLNode implements PBDLNodeFactory {
-
   PBDLOval({
     bool edited,
     bool isClosed,
@@ -41,8 +40,19 @@ class PBDLOval extends PBDLNode implements PBDLNodeFactory {
     PBDLStyle style,
     this.child,
     String prototypeNodeUUID,
-  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
-            constraints: constraints);
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLOval.fromJson(json);

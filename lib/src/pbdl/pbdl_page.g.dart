@@ -14,6 +14,8 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    layoutMainAxisSizing: json['layoutMainAxisSizing'],
+    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
   )
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
@@ -38,6 +40,10 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) {
   final val = <String, dynamic>{
     'UUID': instance.UUID,
+    'layoutMainAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+    'layoutCrossAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
     'name': instance.name,
     'isVisible': instance.isVisible,
     'boundaryRectangle': instance.boundaryRectangle?.toJson(),
@@ -59,3 +65,8 @@ Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) {
   writeNotNull('type', instance.type);
   return val;
 }
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

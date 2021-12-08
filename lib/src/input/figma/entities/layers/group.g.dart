@@ -41,6 +41,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..layoutGrow = json['layoutGrow'] as num
     ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
@@ -57,6 +58,8 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'sharedPluginData': instance.sharedPluginData,
       'constraints': instance.constraints?.toJson(),
       'child': instance.child?.toJson(),
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
@@ -67,7 +70,6 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'cornerRadius': instance.cornerRadius,
-      'layoutAlign': instance.layoutAlign,
       'size': instance.size,
       'horizontalPadding': instance.horizontalPadding,
       'verticalPadding': instance.verticalPadding,

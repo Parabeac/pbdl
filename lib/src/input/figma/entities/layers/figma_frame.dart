@@ -43,8 +43,6 @@ class FigmaFrame extends FigmaChildrenNode
 
   double cornerRadius;
 
-  String layoutAlign;
-
   var size;
 
   double horizontalPadding;
@@ -81,7 +79,8 @@ class FigmaFrame extends FigmaChildrenNode
     this.strokeAlign,
     this.cornerRadius,
     FigmaConstraints constraints,
-    this.layoutAlign,
+    layoutAlign,
+    layoutGrow,
     this.size,
     this.horizontalPadding,
     this.verticalPadding,
@@ -98,7 +97,10 @@ class FigmaFrame extends FigmaChildrenNode
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing,
             children: children,
-            constraints: constraints);
+            constraints: constraints,
+            layoutAlign: layoutAlign,
+            layoutGrow: layoutGrow);
+
   @JsonKey(ignore: true)
   List points;
 
@@ -175,6 +177,8 @@ class FigmaFrame extends FigmaChildrenNode
               prototypeNodeUUID: transitionNodeID,
               constraints: constraints?.interpret(),
               autoLayoutOptions: autoLayoutOptions?.interpretOptions(),
+              layoutMainAxisSizing: getAlignSizing(layoutAlign),
+              layoutCrossAxisSizing: getGrowSizing(layoutGrow),
               children: await Future.wait(
                   children.map((e) async => await e.interpretNode()).toList())),
         );

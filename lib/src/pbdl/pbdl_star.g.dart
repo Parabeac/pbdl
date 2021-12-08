@@ -22,6 +22,8 @@ PBDLStar _$PBDLStarFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+    layoutMainAxisSizing: json['layoutMainAxisSizing'],
+    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
   )
     ..constraints = json['constraints'] == null
         ? null
@@ -31,6 +33,10 @@ PBDLStar _$PBDLStarFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PBDLStarToJson(PBDLStar instance) => <String, dynamic>{
       'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
@@ -40,3 +46,8 @@ Map<String, dynamic> _$PBDLStarToJson(PBDLStar instance) => <String, dynamic>{
       'type': instance.type,
       'child': instance.child?.toJson(),
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

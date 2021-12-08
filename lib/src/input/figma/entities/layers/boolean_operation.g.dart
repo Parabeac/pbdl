@@ -30,8 +30,9 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..isVisible = json['visible'] as bool ?? true
     ..layoutAlign = json['layoutAlign'] as String
+    ..layoutGrow = json['layoutGrow'] as num
+    ..isVisible = json['visible'] as bool ?? true
     ..size = json['size']
     ..strokes = json['strokes']
     ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
@@ -48,12 +49,13 @@ Map<String, dynamic> _$BooleanOperationToJson(BooleanOperation instance) =>
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
       'child': instance.child,
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
-      'layoutAlign': instance.layoutAlign,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,

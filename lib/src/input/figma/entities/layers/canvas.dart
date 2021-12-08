@@ -26,17 +26,15 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-  }) : super(
-          name,
-          true,
-          type,
-          null,
-          null,
-          transitionNodeID: transitionNodeID,
-          transitionDuration: transitionDuration,
-          transitionEasing: transitionEasing,
-          children: children,
-        );
+    layoutAlign,
+    layoutGrow,
+  }) : super(name, true, type, null, null,
+            transitionNodeID: transitionNodeID,
+            transitionDuration: transitionDuration,
+            transitionEasing: transitionEasing,
+            children: children,
+            layoutAlign: layoutAlign,
+            layoutGrow: layoutGrow);
   // Last two nulls are used for Figma plugins
 
   @override
@@ -79,6 +77,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         style: style,
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
+
         children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList(),
         ),

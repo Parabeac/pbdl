@@ -12,6 +12,9 @@ class PBDLNode implements Comparable<PBDLNode> {
   /// [UUID] that is inherited from the design node
   String UUID;
 
+  ParentLayoutSizing layoutMainAxisSizing;
+  ParentLayoutSizing layoutCrossAxisSizing;
+
   @JsonKey(ignore: true)
   Logger logger;
   String name;
@@ -25,7 +28,12 @@ class PBDLNode implements Comparable<PBDLNode> {
   PBDLConstraints constraints;
   PBDLNode(this.UUID, this.name, this.isVisible, this.boundaryRectangle,
       this.style, this.prototypeNodeUUID,
-      {transitionDuration, transitionEasing, this.child, this.constraints}) {
+      {transitionDuration,
+      transitionEasing,
+      this.child,
+      this.constraints,
+      this.layoutMainAxisSizing,
+      this.layoutCrossAxisSizing}) {
     logger = Logger(runtimeType.toString());
   }
 
@@ -49,3 +57,5 @@ class PBDLNode implements Comparable<PBDLNode> {
   @override
   int compareTo(PBDLNode other) => UUID.compareTo(other.UUID);
 }
+
+enum ParentLayoutSizing { INHERIT, STRETCH }

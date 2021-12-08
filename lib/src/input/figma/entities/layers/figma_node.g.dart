@@ -21,6 +21,8 @@ FigmaNode _$FigmaNodeFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
+    layoutAlign: json['layoutAlign'] as String,
+    layoutGrow: json['layoutGrow'] as num,
   )
     ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
         ? null
@@ -40,6 +42,8 @@ Map<String, dynamic> _$FigmaNodeToJson(FigmaNode instance) => <String, dynamic>{
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'constraints': instance.constraints,
       'child': instance.child,
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
