@@ -54,9 +54,7 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
-        ) {
-    print('Fabi');
-  }
+        ) {}
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLText.fromJson(json);
