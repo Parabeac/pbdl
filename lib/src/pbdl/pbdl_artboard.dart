@@ -62,7 +62,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
           prototypeNodeUUID,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
-        );
+        ) {}
 
   @override
   List<PBDLNode> children = [];

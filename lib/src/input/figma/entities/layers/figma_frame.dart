@@ -99,7 +99,7 @@ class FigmaFrame extends FigmaChildrenNode
             children: children,
             constraints: constraints,
             layoutAlign: layoutAlign,
-            layoutGrow: layoutGrow);
+            layoutGrow: layoutGrow) {}
 
   @JsonKey(ignore: true)
   List points;
@@ -136,6 +136,8 @@ class FigmaFrame extends FigmaChildrenNode
             style: style.interpretStyle(),
             prototypeNodeUUID: transitionNodeID,
             constraints: constraints?.interpret(),
+            layoutMainAxisSizing: getAlignSizing(layoutAlign),
+            layoutCrossAxisSizing: getGrowSizing(layoutGrow),
             children: await Future.wait(
                 children.map((e) async => await e.interpretNode()).toList())),
       );

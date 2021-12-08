@@ -45,8 +45,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     pluginData,
     sharedPluginData,
     this.style,
-    layoutAlign,
-    layoutGrow,
     FigmaConstraints constraints,
     this.absoluteBoundingBox,
     this.size,
@@ -59,6 +57,8 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     num transitionDuration,
     String transitionEasing,
     String transitionNodeID,
+    layoutAlign,
+    layoutGrow,
   }) : super(
           name,
           visible,
