@@ -64,14 +64,17 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
-        imageReference: imageReference,
-        UUID: UUID,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-        isVisible: isVisible,
-        name: name,
-        style: style?.interpretStyle(),
-        prototypeNodeUUID: transitionNodeID,
-        constraints: constraints?.interpret()));
+      imageReference: imageReference,
+      UUID: UUID,
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+      isVisible: isVisible,
+      name: name,
+      style: style?.interpretStyle(),
+      prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret(),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+    ));
   }
 
   @override

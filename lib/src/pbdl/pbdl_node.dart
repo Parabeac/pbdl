@@ -26,14 +26,20 @@ class PBDLNode implements Comparable<PBDLNode> {
   PBDLNode child;
   @JsonKey()
   PBDLConstraints constraints;
-  PBDLNode(this.UUID, this.name, this.isVisible, this.boundaryRectangle,
-      this.style, this.prototypeNodeUUID,
-      {transitionDuration,
-      transitionEasing,
-      this.child,
-      this.constraints,
-      this.layoutMainAxisSizing,
-      this.layoutCrossAxisSizing}) {
+  PBDLNode(
+    this.UUID,
+    this.name,
+    this.isVisible,
+    this.boundaryRectangle,
+    this.style,
+    this.prototypeNodeUUID, {
+    transitionDuration,
+    transitionEasing,
+    this.child,
+    this.constraints,
+    this.layoutMainAxisSizing,
+    this.layoutCrossAxisSizing,
+  }) {
     logger = Logger(runtimeType.toString());
   }
 

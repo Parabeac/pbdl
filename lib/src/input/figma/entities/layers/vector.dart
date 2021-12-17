@@ -88,14 +88,17 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
-        UUID: UUID,
-        imageReference: imageReference,
-        boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
-        isVisible: isVisible,
-        name: name,
-        style: style?.interpretStyle(),
-        prototypeNodeUUID: transitionNodeID,
-        constraints: constraints?.interpret()));
+      UUID: UUID,
+      imageReference: imageReference,
+      boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
+      isVisible: isVisible,
+      name: name,
+      style: style?.interpretStyle(),
+      prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret(),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+    ));
   }
 
   String imageReference;

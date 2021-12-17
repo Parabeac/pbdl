@@ -66,8 +66,8 @@ class FigmaNode {
       transitionNodeID,
       child: await child.interpretNode(),
       constraints: constraints?.interpret(),
-      layoutMainAxisSizing: getAlignSizing(layoutAlign),
-      layoutCrossAxisSizing: getGrowSizing(layoutGrow),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
     ));
   }
 

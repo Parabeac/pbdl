@@ -10,7 +10,6 @@ import 'package:meta/meta.dart';
 
 part 'pbdl_image.g.dart';
 
-
 @JsonSerializable(explicitToJson: true)
 class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
@@ -22,38 +21,42 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
   String prototypeNodeUUID;
 
-  PBDLImage(
-      {this.imageReference,
-      String UUID,
-      booleanOperation,
-      exportOptions,
-      PBDLBoundaryBox boundaryRectangle,
-      isFixedToViewport,
-      isFlippedHorizontal,
-      isFlippedVertical,
-      isLocked,
-      bool isVisible,
-      layerListExpandedType,
-      String name,
-      nameIsFixed,
-      PBDLConstraints constraints,
-      resizingType,
-      num rotation,
-      sharedStyleID,
-      shouldBreakMaskChain,
-      hasClippingMask,
-      clippingMaskMode,
-      userInfo,
-      maintainScrollPosition,
-      this.style,
-      this.prototypeNodeUUID})
-      : super(
+  PBDLImage({
+    this.imageReference,
+    String UUID,
+    booleanOperation,
+    exportOptions,
+    PBDLBoundaryBox boundaryRectangle,
+    isFixedToViewport,
+    isFlippedHorizontal,
+    isFlippedVertical,
+    isLocked,
+    bool isVisible,
+    layerListExpandedType,
+    String name,
+    nameIsFixed,
+    PBDLConstraints constraints,
+    resizingType,
+    num rotation,
+    sharedStyleID,
+    shouldBreakMaskChain,
+    hasClippingMask,
+    clippingMaskMode,
+    userInfo,
+    maintainScrollPosition,
+    this.style,
+    this.prototypeNodeUUID,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
+  }) : super(
           UUID: UUID,
           name: name,
           isVisible: isVisible,
           boundaryRectangle: boundaryRectangle,
           style: style,
-          constraints: constraints
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
 
   @override

@@ -37,7 +37,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     FigmaRect boundaryRectangle,
     size,
     this.fills,
-    strokes, 
+    strokes,
     strokeWeight,
     strokeAlign,
     styles,
@@ -86,6 +86,8 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       imageReference: imageReference,
       constraints: constraints?.interpret(),
       prototypeNodeUUID: transitionNodeID,
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
     ));
   }
 

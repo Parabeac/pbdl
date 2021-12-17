@@ -107,6 +107,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         symbolID: componentId,
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
       ));
     } else {
       ComponentCacheService().localComponents.add(componentId);
@@ -121,6 +123,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           symbolID: componentId,
           constraints: constraints.interpret(),
           isFlowHome: isFlowHome,
+          layoutMainAxisSizing: getGrowSizing(layoutGrow),
+          layoutCrossAxisSizing: getAlignSizing(layoutAlign),
           children: await Future.wait(
               children.map((e) async => await e.interpretNode()).toList())));
     }

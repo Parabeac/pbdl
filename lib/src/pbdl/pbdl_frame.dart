@@ -62,10 +62,17 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
     this.autoLayoutOptions,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
-  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
-            constraints: constraints,
-            layoutMainAxisSizing: layoutMainAxisSizing,
-            layoutCrossAxisSizing: layoutCrossAxisSizing) {
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
+        ) {
     if (autoLayoutOptions != null) {
       switch (autoLayoutOptions.orientation) {
         case Orientation.HORIZONTAL:
