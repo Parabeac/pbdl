@@ -64,7 +64,8 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() async {
-    return Future.value(PBDLRectangle(
+    return Future.value(
+      PBDLRectangle(
         UUID: UUID,
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
@@ -72,7 +73,11 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
         style: style.interpretStyle(),
         child: await child.interpretNode(),
         prototypeNodeUUID: transitionNodeID,
-        constraints: constraints?.interpret()));
+        constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      ),
+    );
   }
 
   @override

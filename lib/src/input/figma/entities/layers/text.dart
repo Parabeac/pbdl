@@ -92,8 +92,8 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         content: content,
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
-        layoutMainAxisSizing: getAlignSizing(layoutAlign),
-        layoutCrossAxisSizing: getGrowSizing(layoutGrow),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
       ),
     );
   }

@@ -99,7 +99,8 @@ class FigmaRectangle extends FigmaVector
           prototypeNodeUUID: transitionNodeID,
           constraints: constraints?.interpret()));
     }
-    return Future.value(PBDLRectangle(
+    return Future.value(
+      PBDLRectangle(
         UUID: UUID,
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
@@ -108,7 +109,11 @@ class FigmaRectangle extends FigmaVector
         child: await child?.interpretNode(),
         fixedRadius: cornerRadius ?? 0,
         prototypeNodeUUID: transitionNodeID,
-        constraints: constraints?.interpret()));
+        constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      ),
+    );
   }
 
   @override
