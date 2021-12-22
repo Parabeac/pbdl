@@ -15,8 +15,6 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
     style: json['style'] == null
         ? null
         : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
-    layoutAlign: json['layoutAlign'],
-    layoutGrow: json['layoutGrow'],
     constraints: json['constraints'] == null
         ? null
         : FigmaConstraints.fromJson(
@@ -35,6 +33,8 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
     transitionNodeID: json['transitionNodeID'] as String,
+    layoutAlign: json['layoutAlign'],
+    layoutGrow: json['layoutGrow'],
   )
     ..child = json['child'] == null
         ? null

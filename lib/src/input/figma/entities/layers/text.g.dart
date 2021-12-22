@@ -15,7 +15,6 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
     style: json['style'] == null
         ? null
         : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
-    layoutAlign: json['layoutAlign'],
     constraints: json['constraints'] == null
         ? null
         : FigmaConstraints.fromJson(
@@ -33,12 +32,13 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
+    layoutAlign: json['layoutAlign'],
+    layoutGrow: json['layoutGrow'],
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..layoutGrow = json['layoutGrow'] as num
     ..isVisible = json['visible'] as bool ?? true
     ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
         ? null

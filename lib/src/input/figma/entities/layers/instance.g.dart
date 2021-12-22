@@ -22,6 +22,7 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
     layoutAlign: json['layoutAlign'],
+    layoutGrow: json['layoutGrow'],
     size: json['size'],
     horizontalPadding: json['horizontalPadding'],
     verticalPadding: json['verticalPadding'],
@@ -43,7 +44,6 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..layoutGrow = json['layoutGrow'] as num
     ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
