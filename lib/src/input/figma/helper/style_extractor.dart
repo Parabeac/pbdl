@@ -84,7 +84,13 @@ class StyleExtractor {
     var alignment = _getAlignment(json['style']['textAlignHorizontal']);
 
     return FigmaTextStyle(
-      fontColor: fontColor,
+      fontColor: fontColor ??
+          FigmaColor(
+            alpha: 1,
+            red: 0,
+            green: 0,
+            blue: 0,
+          ),
       fontDescriptor: fontDescriptor,
       weight: '${json['style']['fontWeight']}',
       paragraphStyle: FigmaParagraphStyle(alignment: alignment.index),
@@ -128,12 +134,7 @@ class StyleExtractor {
         red: json['r'],
       );
     } else {
-      return FigmaColor(
-        alpha: 1,
-        blue: 1,
-        green: 1,
-        red: 1,
-      );
+      return null;
     }
   }
 }
