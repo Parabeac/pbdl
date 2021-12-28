@@ -128,7 +128,12 @@ class StyleExtractor {
         red: json['r'],
       );
     } else {
-      return null;
+      return FigmaColor(
+        alpha: 1,
+        blue: 1,
+        green: 1,
+        red: 1,
+      );
     }
   }
 }
