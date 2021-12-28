@@ -16,12 +16,22 @@ class FigmaChildrenNode extends FigmaNode {
     String transitionEasing,
     FigmaConstraints constraints,
     this.children,
-  }) : super(name, isVisible, type, pluginData, sharedPluginData,
-            UUID: UUID,
-            transitionNodeID: transitionNodeID,
-            transitionDuration: transitionDuration,
-            transitionEasing: transitionEasing,
-            constraints: constraints) {
+    layoutAlign,
+    layoutGrow,
+  }) : super(
+          name,
+          isVisible,
+          type,
+          pluginData,
+          sharedPluginData,
+          UUID: UUID,
+          transitionNodeID: transitionNodeID,
+          transitionDuration: transitionDuration,
+          transitionEasing: transitionEasing,
+          constraints: constraints,
+          layoutAlign: layoutAlign,
+          layoutGrow: layoutGrow,
+        ) {
     // Remove elements that are [null], which are unsupported nodes
     children?.removeWhere((element) => element == null);
     for (var i = 0; i < (children?.length ?? 0); i++) {

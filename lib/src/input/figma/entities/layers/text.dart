@@ -22,7 +22,6 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       pluginData,
       sharedPluginData,
       FigmaStyle style,
-      layoutAlign,
       FigmaConstraints constraints,
       boundaryRectangle,
       size,
@@ -36,7 +35,9 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       this.styleOverrideTable,
       String transitionNodeID,
       num transitionDuration,
-      String transitionEasing})
+      String transitionEasing,
+      layoutAlign,
+      layoutGrow})
       : super(
           name: name,
           visible: visible,
@@ -44,7 +45,6 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
           style: style,
-          layoutAlign: layoutAlign,
           constraints: constraints,
           absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
@@ -57,6 +57,8 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          layoutAlign: layoutAlign,
+          layoutGrow: layoutGrow,
         );
 
   @JsonKey(name: 'characters')
@@ -90,6 +92,8 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         content: content,
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
       ),
     );
   }

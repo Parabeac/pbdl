@@ -15,6 +15,10 @@ PBDLScreen _$PBDLScreenFromJson(Map<String, dynamic> json) {
     name: json['name'] as String,
     isVisible: json['isVisible'] as bool,
   )
+    ..layoutMainAxisSizing = _$enumDecodeNullable(
+        _$ParentLayoutSizingEnumMap, json['layoutMainAxisSizing'])
+    ..layoutCrossAxisSizing = _$enumDecodeNullable(
+        _$ParentLayoutSizingEnumMap, json['layoutCrossAxisSizing'])
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
         : PBDLBoundaryBox.fromJson(
@@ -37,6 +41,10 @@ PBDLScreen _$PBDLScreenFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'name': instance.name,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'style': instance.style?.toJson(),
@@ -49,3 +57,40 @@ Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) =>
       'designNode': instance.designNode?.toJson(),
       'isVisible': instance.isVisible,
     };
+
+T _$enumDecode<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    throw ArgumentError('A value must be provided. Supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+
+  final value = enumValues.entries
+      .singleWhere((e) => e.value == source, orElse: () => null)
+      ?.key;
+
+  if (value == null && unknownValue == null) {
+    throw ArgumentError('`$source` is not one of the supported values: '
+        '${enumValues.values.join(', ')}');
+  }
+  return value ?? unknownValue;
+}
+
+T _$enumDecodeNullable<T>(
+  Map<T, dynamic> enumValues,
+  dynamic source, {
+  T unknownValue,
+}) {
+  if (source == null) {
+    return null;
+  }
+  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
+}
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

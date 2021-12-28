@@ -117,6 +117,8 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           style: style?.interpretStyle(),
           constraints: constraints?.interpret(),
           prototypeNodeUUID: transitionNodeID,
+          layoutMainAxisSizing: getGrowSizing(layoutGrow),
+          layoutCrossAxisSizing: getAlignSizing(layoutAlign),
         ),
       );
     }
@@ -129,6 +131,8 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         style: style?.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
         children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList(),
         ),

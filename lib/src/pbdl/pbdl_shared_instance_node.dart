@@ -49,6 +49,8 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     num horizontalSpacing,
     String prototypeNodeUUID,
     PBDLConstraints constraints,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
   }) : super(
           UUID,
           name,
@@ -57,6 +59,8 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
           PBDLStyle.getStyle(style),
           prototypeNodeUUID,
           constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
 
   @override

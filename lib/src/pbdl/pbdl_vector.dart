@@ -47,10 +47,21 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
     prototypeNodeUUID,
     transitionDuration,
     transitionEasing,
-  }) : super(UUID, name, visible, boundaryRectangle, style, prototypeNodeUUID,
-            transitionDuration: transitionDuration,
-            transitionEasing: transitionEasing,
-            constraints: constraints);
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
+  }) : super(
+          UUID,
+          name,
+          visible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+          transitionDuration: transitionDuration,
+          transitionEasing: transitionEasing,
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

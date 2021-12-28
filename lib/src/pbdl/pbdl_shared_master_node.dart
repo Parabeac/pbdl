@@ -63,6 +63,8 @@ class PBDLSharedMasterNode extends PBDLNode
     bool isFlowHome,
     List parameters,
     this.children,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
   }) : super(
           UUID,
           name,
@@ -73,6 +75,8 @@ class PBDLSharedMasterNode extends PBDLNode
           constraints: (constraints is! Map)
               ? constraints
               : PBDLConstraints.fromJson(constraints),
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
 
   @override

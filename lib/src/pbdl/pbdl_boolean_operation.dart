@@ -52,14 +52,18 @@ class PBDLBooleanOperation extends PBDLVector
     transitionDuration,
     transitionEasing,
     imageReference,
-    PBDLConstraints constraints
+    PBDLConstraints constraints,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
   }) : super(
           style: PBDLStyle.getStyle(style),
           UUID: UUID,
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
-          constraints: constraints
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
 
   @override

@@ -70,7 +70,9 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
       booleanOperation: booleanOperation,
       prototypeNodeUUID: transitionNodeID,
       imageReference: imageReference,
-      constraints: constraints?.interpret()
+      constraints: constraints?.interpret(),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
     ));
   }
 }

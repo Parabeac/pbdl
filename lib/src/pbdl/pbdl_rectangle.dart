@@ -45,6 +45,8 @@ class PBDLRectangle extends PBDLNode
     this.child,
     String prototypeNodeUUID,
     PBDLConstraints constraints,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
   }) : super(
           UUID,
           name,
@@ -53,6 +55,8 @@ class PBDLRectangle extends PBDLNode
           style,
           prototypeNodeUUID,
           constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
 
   @override

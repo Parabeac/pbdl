@@ -22,6 +22,8 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
     constraints: json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
+    layoutMainAxisSizing: json['layoutMainAxisSizing'],
+    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
   )
     ..child = json['child'] == null
         ? null
@@ -41,6 +43,10 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLBooleanOperationToJson(
         PBDLBooleanOperation instance) =>
     <String, dynamic>{
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
       'layoutAlign': instance.layoutAlign,
@@ -62,3 +68,8 @@ Map<String, dynamic> _$PBDLBooleanOperationToJson(
       'isVisible': instance.isVisible,
       'image': instance.image,
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

@@ -118,6 +118,8 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         symbolID: UUID,
         constraints: constraints?.interpret(),
         isFlowHome: isFlowHome,
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
         children: await Future.wait(
             children.map((e) async => await e.interpretNode()).toList()));
   }

@@ -26,12 +26,18 @@ PBDLGroupNode _$PBDLGroupNodeFromJson(Map<String, dynamic> json) {
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+    layoutMainAxisSizing: json['layoutMainAxisSizing'],
+    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
   )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
@@ -41,3 +47,8 @@ Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'type': instance.type,
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

@@ -24,7 +24,18 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
     String name,
     String UUID,
     this.screens,
-  }) : super(UUID, name, true, null, null, null);
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
+  }) : super(
+          UUID,
+          name,
+          true,
+          null,
+          null,
+          null,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
+        );
 
   void addScreen(PBDLScreen item) {
     screens.add(item);

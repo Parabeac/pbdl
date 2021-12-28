@@ -28,11 +28,21 @@ PBDLFrame _$PBDLFrameFromJson(Map<String, dynamic> json) {
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
     fixedRadius: json['fixedRadius'] as num,
     background: json['background'] as Map<String, dynamic>,
+    autoLayoutOptions: json['autoLayoutOptions'] == null
+        ? null
+        : PBDLAutoLayoutOptions.fromJson(
+            json['autoLayoutOptions'] as Map<String, dynamic>),
+    layoutMainAxisSizing: json['layoutMainAxisSizing'],
+    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
   )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
       'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
@@ -43,4 +53,10 @@ Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
       'type': instance.type,
       'fixedRadius': instance.fixedRadius,
       'background': instance.background,
+      'autoLayoutOptions': instance.autoLayoutOptions?.toJson(),
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

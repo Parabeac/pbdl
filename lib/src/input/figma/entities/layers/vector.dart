@@ -19,8 +19,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
 
   FigmaStyle style;
 
-  String layoutAlign;
-
   @override
   @JsonKey()
   FigmaRect absoluteBoundingBox;
@@ -47,7 +45,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     pluginData,
     sharedPluginData,
     this.style,
-    this.layoutAlign,
     FigmaConstraints constraints,
     this.absoluteBoundingBox,
     this.size,
@@ -60,6 +57,8 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     num transitionDuration,
     String transitionEasing,
     String transitionNodeID,
+    layoutAlign,
+    layoutGrow,
   }) : super(
           name,
           visible,
@@ -71,6 +70,8 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
           transitionEasing: transitionEasing,
           transitionNodeID: transitionNodeID,
           constraints: constraints,
+          layoutAlign: layoutAlign,
+          layoutGrow: layoutGrow,
         ) {
     log = Logger(runtimeType.toString());
   }
@@ -87,14 +88,17 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
-        UUID: UUID,
-        imageReference: imageReference,
-        boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
-        isVisible: isVisible,
-        name: name,
-        style: style?.interpretStyle(),
-        prototypeNodeUUID: transitionNodeID,
-        constraints: constraints?.interpret()));
+      UUID: UUID,
+      imageReference: imageReference,
+      boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
+      isVisible: isVisible,
+      name: name,
+      style: style?.interpretStyle(),
+      prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret(),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+    ));
   }
 
   String imageReference;

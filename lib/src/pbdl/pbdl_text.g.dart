@@ -23,6 +23,8 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
     constraints: json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
+    layoutMainAxisSizing: json['layoutMainAxisSizing'],
+    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
   )
     ..child = json['child'] == null
         ? null
@@ -32,6 +34,10 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$PBDLTextToJson(PBDLText instance) => <String, dynamic>{
       'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
@@ -42,3 +48,8 @@ Map<String, dynamic> _$PBDLTextToJson(PBDLText instance) => <String, dynamic>{
       'type': instance.type,
       'content': instance.content,
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

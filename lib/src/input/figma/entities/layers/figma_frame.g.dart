@@ -25,7 +25,8 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
-    layoutAlign: json['layoutAlign'] as String,
+    layoutAlign: json['layoutAlign'],
+    layoutGrow: json['layoutGrow'],
     size: json['size'],
     horizontalPadding: (json['horizontalPadding'] as num)?.toDouble(),
     verticalPadding: (json['verticalPadding'] as num)?.toDouble(),
@@ -58,6 +59,8 @@ Map<String, dynamic> _$FigmaFrameToJson(FigmaFrame instance) =>
       'sharedPluginData': instance.sharedPluginData,
       'constraints': instance.constraints?.toJson(),
       'child': instance.child?.toJson(),
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
@@ -68,7 +71,6 @@ Map<String, dynamic> _$FigmaFrameToJson(FigmaFrame instance) =>
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'cornerRadius': instance.cornerRadius,
-      'layoutAlign': instance.layoutAlign,
       'size': instance.size,
       'horizontalPadding': instance.horizontalPadding,
       'verticalPadding': instance.verticalPadding,

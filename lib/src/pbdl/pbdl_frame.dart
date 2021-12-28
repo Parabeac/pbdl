@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/pbdl/pbdl_auto_layout_options.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 
@@ -25,6 +26,9 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
   num fixedRadius;
 
   Map background;
+
+  @JsonKey()
+  PBDLAutoLayoutOptions autoLayoutOptions;
 
   PBDLFrame({
     bool hasClickThrough,
@@ -55,8 +59,32 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
     String prototypeNodeUUID,
     this.fixedRadius,
     this.background,
-  }) : super(UUID, name, isVisible, boundaryRectangle, style, prototypeNodeUUID,
-            constraints: constraints);
+    this.autoLayoutOptions,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
+        ) {
+    if (autoLayoutOptions != null) {
+      switch (autoLayoutOptions.orientation) {
+        case Orientation.HORIZONTAL:
+          type = 'row';
+          break;
+        case Orientation.VERTICAL:
+          type = 'col';
+          break;
+        default:
+      }
+    }
+  }
 
   @override
   PBDLFrame createPBDLNode(Map<String, dynamic> json) =>
@@ -71,5 +99,6 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
 
   factory PBDLFrame.fromJson(Map<String, dynamic> json) =>
       _$PBDLFrameFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$PBDLFrameToJson(this);
 }

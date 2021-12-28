@@ -6,6 +6,7 @@ import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/layers/group.dart';
 import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
@@ -42,8 +43,6 @@ class FigmaFrame extends FigmaChildrenNode
 
   double cornerRadius;
 
-  String layoutAlign;
-
   var size;
 
   double horizontalPadding;
@@ -63,6 +62,9 @@ class FigmaFrame extends FigmaChildrenNode
   @JsonKey(defaultValue: false)
   var isFlowHome = false;
 
+  @JsonKey(ignore: true)
+  FigmaAutoLayoutOptions autoLayoutOptions;
+
   FigmaFrame({
     name,
     isVisible,
@@ -77,7 +79,8 @@ class FigmaFrame extends FigmaChildrenNode
     this.strokeAlign,
     this.cornerRadius,
     FigmaConstraints constraints,
-    this.layoutAlign,
+    layoutAlign,
+    layoutGrow,
     this.size,
     this.horizontalPadding,
     this.verticalPadding,
@@ -94,7 +97,10 @@ class FigmaFrame extends FigmaChildrenNode
             transitionDuration: transitionDuration,
             transitionEasing: transitionEasing,
             children: children,
-            constraints: constraints);
+            constraints: constraints,
+            layoutAlign: layoutAlign,
+            layoutGrow: layoutGrow) {}
+
   @JsonKey(ignore: true)
   List points;
 
@@ -105,6 +111,9 @@ class FigmaFrame extends FigmaChildrenNode
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaFrame.fromJson(json);
     node.style = StyleExtractor().getStyle(json);
+    if (json.containsKey('layoutMode')) {
+      node.autoLayoutOptions = FigmaAutoLayoutOptions.fromJson(json);
+    }
     return node;
   }
 
@@ -127,6 +136,8 @@ class FigmaFrame extends FigmaChildrenNode
             style: style.interpretStyle(),
             prototypeNodeUUID: transitionNodeID,
             constraints: constraints?.interpret(),
+            layoutMainAxisSizing: getAlignSizing(layoutAlign),
+            layoutCrossAxisSizing: getGrowSizing(layoutGrow),
             children: await Future.wait(
                 children.map((e) async => await e.interpretNode()).toList())),
       );
@@ -167,6 +178,9 @@ class FigmaFrame extends FigmaChildrenNode
               style: style.interpretStyle(),
               prototypeNodeUUID: transitionNodeID,
               constraints: constraints?.interpret(),
+              autoLayoutOptions: autoLayoutOptions?.interpretOptions(),
+              layoutMainAxisSizing: getAlignSizing(layoutAlign),
+              layoutCrossAxisSizing: getGrowSizing(layoutGrow),
               children: await Future.wait(
                   children.map((e) async => await e.interpretNode()).toList())),
         );

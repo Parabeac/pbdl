@@ -42,6 +42,8 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     this.content,
     String prototypeNodeUUID,
     PBDLConstraints constraints,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
   }) : super(
           UUID: UUID,
           name: name,
@@ -50,7 +52,9 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           style: style,
           prototypeNodeUUID: prototypeNodeUUID,
           constraints: constraints,
-        );
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
+        ) {}
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLText.fromJson(json);

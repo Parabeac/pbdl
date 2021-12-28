@@ -30,6 +30,7 @@ FigmaRegularPolygon _$FigmaRegularPolygonFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..layoutGrow = json['layoutGrow'] as num
     ..isVisible = json['visible'] as bool ?? true
     ..style = json['style'] == null
         ? null
@@ -51,12 +52,13 @@ Map<String, dynamic> _$FigmaRegularPolygonToJson(
       'sharedPluginData': instance.sharedPluginData,
       'constraints': instance.constraints,
       'child': instance.child,
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
-      'layoutAlign': instance.layoutAlign,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,

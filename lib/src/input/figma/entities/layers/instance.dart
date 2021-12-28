@@ -22,33 +22,34 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   List parameters;
 
-  Instance(
-      {name,
-      isVisible,
-      type,
-      pluginData,
-      sharedPluginData,
-      boundaryRectangle,
-      style,
-      fills,
-      strokes,
-      strokeWeight,
-      strokeAlign,
-      cornerRadius,
-      FigmaConstraints constraints,
-      layoutAlign,
-      size,
-      horizontalPadding,
-      verticalPadding,
-      itemSpacing,
-      this.componentId,
-      List<FigmaNode> children,
-      this.parameters,
-      FigmaColor backgroundColor,
-      String transitionNodeID,
-      num transitionDuration,
-      String transitionEasing})
-      : super(
+  Instance({
+    name,
+    isVisible,
+    type,
+    pluginData,
+    sharedPluginData,
+    boundaryRectangle,
+    style,
+    fills,
+    strokes,
+    strokeWeight,
+    strokeAlign,
+    cornerRadius,
+    FigmaConstraints constraints,
+    layoutAlign,
+    layoutGrow,
+    size,
+    horizontalPadding,
+    verticalPadding,
+    itemSpacing,
+    this.componentId,
+    List<FigmaNode> children,
+    this.parameters,
+    FigmaColor backgroundColor,
+    String transitionNodeID,
+    num transitionDuration,
+    String transitionEasing,
+  }) : super(
             name: name,
             isVisible: isVisible,
             type: type,
@@ -65,6 +66,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             cornerRadius: cornerRadius,
             constraints: constraints,
             layoutAlign: layoutAlign,
+            layoutGrow: layoutGrow,
             size: size,
             horizontalPadding: horizontalPadding,
             verticalPadding: verticalPadding,
@@ -107,6 +109,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         symbolID: componentId,
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
       ));
     } else {
       ComponentCacheService().localComponents.add(componentId);
@@ -121,6 +125,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           symbolID: componentId,
           constraints: constraints.interpret(),
           isFlowHome: isFlowHome,
+          layoutMainAxisSizing: getGrowSizing(layoutGrow),
+          layoutCrossAxisSizing: getAlignSizing(layoutAlign),
           children: await Future.wait(
               children.map((e) async => await e.interpretNode()).toList())));
     }
