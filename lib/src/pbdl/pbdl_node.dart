@@ -64,4 +64,9 @@ class PBDLNode implements Comparable<PBDLNode> {
   int compareTo(PBDLNode other) => UUID.compareTo(other.UUID);
 }
 
-enum ParentLayoutSizing { INHERIT, STRETCH }
+enum ParentLayoutSizing {
+  @JsonValue('INHERIT')
+  INHERIT,
+  @JsonValue('STRETCH')
+  STRETCH,
+}
