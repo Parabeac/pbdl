@@ -72,7 +72,19 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
-        );
+        ) {
+    if (autoLayoutOptions != null) {
+      switch (autoLayoutOptions.orientation) {
+        case Orientation.HORIZONTAL:
+          type = 'row';
+          break;
+        case Orientation.VERTICAL:
+          type = 'col';
+          break;
+        default:
+      }
+    }
+  }
 
   @override
   PBDLFrame createPBDLNode(Map<String, dynamic> json) {
@@ -102,7 +114,6 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
 
 @JsonSerializable(explicitToJson: true)
 class PBDLRow extends PBDLFrame {
-
   PBDLRow();
 
   @override
@@ -116,7 +127,6 @@ class PBDLRow extends PBDLFrame {
 
 @JsonSerializable(explicitToJson: true)
 class PBDLCol extends PBDLFrame {
-
   PBDLCol();
 
   @override
