@@ -30,8 +30,10 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    layoutMainAxisSizing: json['layoutMainAxisSizing'],
-    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
+    layoutMainAxisSizing:
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
+    layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
+        json['layoutCrossAxisSizing'] as String),
   )
     ..child = json['child'] == null
         ? null

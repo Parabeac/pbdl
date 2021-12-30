@@ -23,8 +23,10 @@ PBDLImage _$PBDLImageFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
-    layoutMainAxisSizing: json['layoutMainAxisSizing'],
-    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
+    layoutMainAxisSizing:
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
+    layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
+        json['layoutCrossAxisSizing'] as String),
   )
     ..child = json['child'] == null
         ? null

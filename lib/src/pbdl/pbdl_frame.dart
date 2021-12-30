@@ -72,23 +72,20 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
-        ) {
-    if (autoLayoutOptions != null) {
-      switch (autoLayoutOptions.orientation) {
-        case Orientation.HORIZONTAL:
-          type = 'row';
-          break;
-        case Orientation.VERTICAL:
-          type = 'col';
-          break;
-        default:
-      }
-    }
-  }
+        );
 
   @override
-  PBDLFrame createPBDLNode(Map<String, dynamic> json) =>
-      PBDLFrame.fromJson(json);
+  PBDLFrame createPBDLNode(Map<String, dynamic> json) {
+    if (json['autoLayoutOptions'] != null &&
+        json['autoLayoutOptions'].containsKey('orientation')) {
+      if (json['autoLayoutOptions']['orientation'] == 'VERTICAL') {
+        return PBDLCol.fromJson(json);
+      } else if (json['autoLayoutOptions']['orientation'] == 'HORIZONTAL') {
+        return PBDLRow.fromJson(json);
+      }
+    }
+    return PBDLFrame.fromJson(json);
+  }
 
   static PBDLFrame getFrame(dynamic boundaryRectangle) {
     if (boundaryRectangle is Map) {
@@ -101,4 +98,32 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
       _$PBDLFrameFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLFrameToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PBDLRow extends PBDLFrame {
+
+  PBDLRow();
+
+  @override
+  String type = 'row';
+
+  factory PBDLRow.fromJson(Map<String, dynamic> json) =>
+      _$PBDLRowFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PBDLRowToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class PBDLCol extends PBDLFrame {
+
+  PBDLCol();
+
+  @override
+  String type = 'col';
+
+  factory PBDLCol.fromJson(Map<String, dynamic> json) =>
+      _$PBDLColFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$PBDLColToJson(this);
 }

@@ -1,3 +1,4 @@
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
@@ -12,7 +13,9 @@ class PBDLNode implements Comparable<PBDLNode> {
   /// [UUID] that is inherited from the design node
   String UUID;
 
+  @JsonKey(fromJson: parentLayoutFromString)
   ParentLayoutSizing layoutMainAxisSizing;
+  @JsonKey(fromJson: parentLayoutFromString)
   ParentLayoutSizing layoutCrossAxisSizing;
 
   @JsonKey(ignore: true)
@@ -62,6 +65,16 @@ class PBDLNode implements Comparable<PBDLNode> {
   /// Compares `this` [PBDLNode] to `other` based on `UUID` to make it simpler to sort elements
   @override
   int compareTo(PBDLNode other) => UUID.compareTo(other.UUID);
+
+  static ParentLayoutSizing parentLayoutFromString(String value) {
+    for (var enumVal in ParentLayoutSizing.values) {
+      if (enumVal.toString().split('.')[1] == value) {
+        return enumVal;
+      }
+    }
+
+    return ParentLayoutSizing.INHERIT;
+  }
 }
 
 enum ParentLayoutSizing {

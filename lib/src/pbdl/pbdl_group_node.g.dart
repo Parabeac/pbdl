@@ -26,8 +26,10 @@ PBDLGroupNode _$PBDLGroupNodeFromJson(Map<String, dynamic> json) {
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
-    layoutMainAxisSizing: json['layoutMainAxisSizing'],
-    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
+    layoutMainAxisSizing:
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
+    layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
+        json['layoutCrossAxisSizing'] as String),
   )..type = json['type'] as String;
 }
 

@@ -22,8 +22,10 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
     constraints: json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
-    layoutMainAxisSizing: json['layoutMainAxisSizing'],
-    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
+    layoutMainAxisSizing:
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
+    layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
+        json['layoutCrossAxisSizing'] as String),
   )
     ..child = json['child'] == null
         ? null

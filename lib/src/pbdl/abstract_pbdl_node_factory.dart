@@ -37,6 +37,8 @@ class AbstractPBDLNodeFactory {
     PBDLPage(),
     PBDLScreen(),
     PBDLFrame(),
+    PBDLRow(),
+    PBDLCol(),
   ];
 
   AbstractPBDLNodeFactory();

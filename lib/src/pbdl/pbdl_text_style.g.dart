@@ -22,10 +22,10 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
             json['fontDescriptor'] as Map<String, dynamic>),
   )
     ..UUID = json['UUID'] as String
-    ..layoutMainAxisSizing = _$enumDecodeNullable(
-        _$ParentLayoutSizingEnumMap, json['layoutMainAxisSizing'])
-    ..layoutCrossAxisSizing = _$enumDecodeNullable(
-        _$ParentLayoutSizingEnumMap, json['layoutCrossAxisSizing'])
+    ..layoutMainAxisSizing =
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
+    ..layoutCrossAxisSizing =
+        PBDLNode.parentLayoutFromString(json['layoutCrossAxisSizing'] as String)
     ..name = json['name'] as String
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
@@ -65,38 +65,6 @@ Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
       'paragraphStyle': instance.paragraphStyle?.toJson(),
       'type': instance.type,
     };
-
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
-}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',

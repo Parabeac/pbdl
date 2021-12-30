@@ -28,8 +28,10 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'],
-    layoutMainAxisSizing: json['layoutMainAxisSizing'],
-    layoutCrossAxisSizing: json['layoutCrossAxisSizing'],
+    layoutMainAxisSizing:
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
+    layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
+        json['layoutCrossAxisSizing'] as String),
   )
     ..isVisible = json['isVisible'] as bool
     ..child = json['child'] == null
