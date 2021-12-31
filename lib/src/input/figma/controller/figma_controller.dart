@@ -57,7 +57,7 @@ class FigmaController {
     for (var page in tree.pages) {
       for (var item in page.getPageItems()) {
         if (item.figmaNode is FigmaFrame) {
-          (item.figmaNode as FigmaFrame).isScaffold = true;
+          (item.figmaNode as FigmaFrame).isRoot = true;
         }
       }
     }

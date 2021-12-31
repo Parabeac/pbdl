@@ -4,6 +4,7 @@ import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/input/figma/helper/style_extractor.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
@@ -24,6 +25,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   var repeatNames = <String, int>{};
   @override
   String type = 'COMPONENT';
+
   Component({
     name,
     isVisible,
@@ -116,7 +118,9 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         style: style.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         symbolID: UUID,
-        constraints: constraints?.interpret(),
+        constraints: isRoot
+            ? PBDLConstraints.defaultConstraints()
+            : constraints?.interpret(),
         isFlowHome: isFlowHome,
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),

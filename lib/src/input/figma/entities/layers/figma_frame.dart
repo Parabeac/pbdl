@@ -57,7 +57,7 @@ class FigmaFrame extends FigmaChildrenNode
   String type = 'FRAME';
 
   @JsonKey(ignore: true)
-  bool isScaffold = false;
+  bool isRoot = false;
 
   @JsonKey(defaultValue: false)
   var isFlowHome = false;
@@ -124,7 +124,7 @@ class FigmaFrame extends FigmaChildrenNode
 
   @override
   Future<PBDLNode> interpretNode() async {
-    if (isScaffold) {
+    if (isRoot) {
       return Future.value(
         PBDLArtboard(
             backgroundColor: backgroundColor.interpretColor(),
