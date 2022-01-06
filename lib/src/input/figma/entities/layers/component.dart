@@ -1,13 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
-import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
 
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
@@ -145,7 +143,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
 
           current.name =
               '${current.name}${repeatNames[current.name].toString()}';
-        } else {
+        } else if (current is! Instance) {
           repeatNames[current.name] = 1;
         }
 
