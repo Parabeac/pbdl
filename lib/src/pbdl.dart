@@ -6,10 +6,10 @@ import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
-import 'package:pbdl/src/pbdl/pbdl_project.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:pbdl/src/util/sketch/sac_installer.dart';
 import 'package:path/path.dart' as p;
+import 'package:sentry/sentry.dart';
 
 import 'dart:convert';
 
@@ -17,6 +17,9 @@ import 'input/general_helper/asset_processing_service.dart';
 import 'input/general_helper/azure_asset_service.dart';
 
 class PBDL {
+  static Future<void> initSentry() async => await Sentry.init((p0) => p0.dsn =
+      'https://6e011ce0d8cd4b7fb0ff284a23c5cb37@o433482.ingest.sentry.io/5388747');
+
   /// Method that creates and returns a [PBDLProject] from a Sketch file `path`
   static Future<PBDLProject> fromSketch(
     String sketchPath, {
@@ -27,31 +30,36 @@ class PBDL {
     /// [bool] that indicates whether the pbdl file will be written to the `outputPath`
     bool exportPbdlJson = false,
   }) async {
-    _setupMainInfo(
-      outputPath,
-      projectName: p.basename(sketchPath).replaceFirst('.sketch', ''),
-    );
+    try {
+      await initSentry();
+      _setupMainInfo(
+        outputPath,
+        projectName: p.basename(sketchPath).replaceFirst('.sketch', ''),
+      );
 
-    MainInfo().sketchPath = sketchPath;
+      MainInfo().sketchPath = sketchPath;
 
-    await SACInstaller.installAndRun();
+      await SACInstaller.installAndRun();
 
-    var sketchProject = await SketchController().convertFile(sketchPath);
+      var sketchProject = await SketchController().convertFile(sketchPath);
 
-    var pbdlProject = await sketchProject.interpretNode();
+      var pbdlProject = await sketchProject.interpretNode();
 
-    if (exportPbdlJson) {
-      _writePbdlJson(pbdlProject);
+      if (exportPbdlJson) {
+        _writePbdlJson(pbdlProject);
+      }
+
+      if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
+          exportPbdlJson) {
+        _jsonToAzure(pbdlProject, SketchAssetProcessor());
+      }
+
+      SACInstaller.process.kill();
+
+      return pbdlProject;
+    } catch (e, stackTrace) {
+      await Sentry.captureException(e, stackTrace: stackTrace);
     }
-
-    if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
-        exportPbdlJson) {
-      _jsonToAzure(pbdlProject, SketchAssetProcessor());
-    }
-
-    SACInstaller.process.kill();
-
-    return pbdlProject;
   }
 
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
@@ -66,25 +74,30 @@ class PBDL {
     bool exportPbdlJson = false,
     String projectName,
   }) async {
-    _setupMainInfo(outputPath);
+    try {
+      await initSentry();
+      _setupMainInfo(outputPath);
 
-    var figmaProject = await FigmaController().convertFile(projectID, key);
-    var pbdlProject = await figmaProject.interpretNode();
+      var figmaProject = await FigmaController().convertFile(projectID, key);
+      var pbdlProject = await figmaProject.interpretNode();
 
-    await FigmaAssetProcessor().processImageQueue(
-        writeAsFile:
-            !Platform.environment.containsKey(AzureAssetService.KEY_NAME));
-    if (exportPbdlJson) {
-      _writePbdlJson(pbdlProject, fileName: projectName);
+      await FigmaAssetProcessor().processImageQueue(
+          writeAsFile:
+              !Platform.environment.containsKey(AzureAssetService.KEY_NAME));
+      if (exportPbdlJson) {
+        _writePbdlJson(pbdlProject, fileName: projectName);
+      }
+
+      // In order to upload the JSON file, the export PBDL to JSON flag must be on
+      if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
+          exportPbdlJson) {
+        _jsonToAzure(pbdlProject, FigmaAssetProcessor());
+      }
+
+      return pbdlProject;
+    } catch (e, stackTrace) {
+      await Sentry.captureException(e, stackTrace: stackTrace);
     }
-
-    // In order to upload the JSON file, the export PBDL to JSON flag must be on
-    if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
-        exportPbdlJson) {
-      _jsonToAzure(pbdlProject, FigmaAssetProcessor());
-    }
-
-    return pbdlProject;
   }
 
   static void _setupMainInfo(

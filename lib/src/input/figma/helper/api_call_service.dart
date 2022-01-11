@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:http2/http2.dart';
 import 'package:quick_log/quick_log.dart';
+import 'package:sentry/sentry.dart';
 
 import 'api_exceptions.dart';
 
@@ -70,7 +71,8 @@ class APICallService {
 
       await transport.finish();
       return decoded_data;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      await Sentry.captureException(e, stackTrace: stackTrace);
       print(e);
     }
   }
