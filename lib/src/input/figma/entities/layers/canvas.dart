@@ -1,11 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
-import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 import '../abstract_figma_node_factory.dart';
+import 'component.dart';
 import 'figma_node.dart';
 
 part 'canvas.g.dart';
@@ -14,6 +14,10 @@ part 'canvas.g.dart';
 class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
   @override
   String type = 'CANVAS';
+
+  @override
+  @JsonKey(ignore: true)
+  List<FigmaNode> children;
 
   Canvas({
     this.name,
@@ -50,7 +54,6 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
 
   Canvas createSketchNode(Map<String, dynamic> json) => Canvas.fromJson(json);
   factory Canvas.fromJson(Map<String, dynamic> json) => _$CanvasFromJson(json);
-
   @override
   Map<String, dynamic> toJson() => _$CanvasToJson(this);
 
@@ -79,10 +82,23 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
-        children: await Future.wait(
-          children.map((e) async => await e.interpretNode()).toList(),
-        ),
+        children: await _interpretNodes(children),
       ),
     );
+  }
+
+  Future<List<PBDLNode>> _interpretNodes(List<FigmaNode> children) async {
+    var processedChildren = <PBDLNode>[];
+
+    for (var child in children) {
+      //TODO: Change to FigmaComponentSet
+      // Process only Components of ComponentSet
+      if (child is Component) {
+        processedChildren.addAll(await _interpretNodes(child.children));
+      } else {
+        processedChildren.add(await child.interpretNode());
+      }
+    }
+    return processedChildren;
   }
 }
