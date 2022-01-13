@@ -32,6 +32,8 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
+    sharedNodeSetID: json['sharedNodeSetID'] as String,
+    componentSetName: json['componentSetName'] as String,
   )
     ..child = json['child'] == null
         ? null
@@ -59,6 +61,8 @@ Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
           instance.overrideProperties?.map((e) => e?.toJson())?.toList(),
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'type': instance.type,
+      'componentSetName': instance.componentSetName,
+      'sharedNodeSetID': instance.sharedNodeSetID,
     };
 
 const _$ParentLayoutSizingEnumMap = {

@@ -24,6 +24,10 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   String type = 'COMPONENT';
 
+  String componentSetId;
+
+  String componentSetName;
+
   Component({
     name,
     isVisible,
@@ -49,6 +53,8 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
+    this.componentSetId,
+    this.componentSetName,
   }) : super(
           name: name,
           isVisible: isVisible,
@@ -108,22 +114,25 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     }
 
     return PBDLSharedMasterNode(
-        UUID: UUID,
-        overrideProperties: props,
-        name: name,
-        isVisible: isVisible,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-        style: style.interpretStyle(),
-        prototypeNodeUUID: transitionNodeID,
-        symbolID: UUID,
-        constraints: isRoot
-            ? PBDLConstraints.defaultConstraints()
-            : constraints?.interpret(),
-        isFlowHome: isFlowHome,
-        layoutMainAxisSizing: getGrowSizing(layoutGrow),
-        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
-        children: await Future.wait(
-            children.map((e) async => await e.interpretNode()).toList()));
+      UUID: UUID,
+      overrideProperties: props,
+      name: name,
+      isVisible: isVisible,
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+      style: style.interpretStyle(),
+      prototypeNodeUUID: transitionNodeID,
+      symbolID: UUID,
+      constraints: isRoot
+          ? PBDLConstraints.defaultConstraints()
+          : constraints?.interpret(),
+      isFlowHome: isFlowHome,
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList()),
+      sharedNodeSetID: componentSetId,
+      componentSetName: componentSetName,
+    );
   }
 
   Future<List<PBDLOverrideProperty>> _traverseChildrenForOverrides(
