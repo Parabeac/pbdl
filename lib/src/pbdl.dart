@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:meta/meta.dart';
@@ -6,10 +7,10 @@ import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
-import 'package:pbdl/src/pbdl/pbdl_project.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:pbdl/src/util/sketch/sac_installer.dart';
 import 'package:path/path.dart' as p;
+import 'package:sentry/sentry.dart';
 
 import 'dart:convert';
 
@@ -27,31 +28,43 @@ class PBDL {
     /// [bool] that indicates whether the pbdl file will be written to the `outputPath`
     bool exportPbdlJson = false,
   }) async {
-    _setupMainInfo(
-      outputPath,
-      projectName: p.basename(sketchPath).replaceFirst('.sketch', ''),
-    );
+    return await runZonedGuarded(() async {
+      await Sentry.init(
+        (p0) => p0.dsn =
+            'https://6e011ce0d8cd4b7fb0ff284a23c5cb37@o433482.ingest.sentry.io/5388747',
+      );
 
-    MainInfo().sketchPath = sketchPath;
+      _setupMainInfo(
+        outputPath,
+        projectName: p.basename(sketchPath).replaceFirst('.sketch', ''),
+      );
 
-    await SACInstaller.installAndRun();
+      MainInfo().sketchPath = sketchPath;
 
-    var sketchProject = await SketchController().convertFile(sketchPath);
+      await SACInstaller.installAndRun();
 
-    var pbdlProject = await sketchProject.interpretNode();
+      var sketchProject = await SketchController().convertFile(sketchPath);
 
-    if (exportPbdlJson) {
-      _writePbdlJson(pbdlProject);
-    }
+      var pbdl = await sketchProject.interpretNode();
 
-    if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
-        exportPbdlJson) {
-      _jsonToAzure(pbdlProject, SketchAssetProcessor());
-    }
+      if (exportPbdlJson) {
+        _writePbdlJson(pbdl);
+      }
 
-    SACInstaller.process.kill();
+      if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
+          exportPbdlJson) {
+        _jsonToAzure(pbdl, SketchAssetProcessor());
+      }
 
-    return pbdlProject;
+      SACInstaller.process.kill();
+
+      await Sentry.close();
+
+      return pbdl;
+    }, (error, stackTrace) async {
+      await Sentry.captureException(error, stackTrace: stackTrace);
+      await Sentry.close();
+    });
   }
 
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
@@ -66,25 +79,35 @@ class PBDL {
     bool exportPbdlJson = false,
     String projectName,
   }) async {
-    _setupMainInfo(outputPath);
+    return await runZonedGuarded(() async {
+      await Sentry.init(
+        (p0) => p0.dsn =
+            'https://6e011ce0d8cd4b7fb0ff284a23c5cb37@o433482.ingest.sentry.io/5388747',
+      );
+      _setupMainInfo(outputPath);
 
-    var figmaProject = await FigmaController().convertFile(projectID, key);
-    var pbdlProject = await figmaProject.interpretNode();
+      var figmaProject = await FigmaController().convertFile(projectID, key);
+      var pbdl = await figmaProject.interpretNode();
 
-    await FigmaAssetProcessor().processImageQueue(
-        writeAsFile:
-            !Platform.environment.containsKey(AzureAssetService.KEY_NAME));
-    if (exportPbdlJson) {
-      _writePbdlJson(pbdlProject, fileName: projectName);
-    }
+      await FigmaAssetProcessor().processImageQueue(
+          writeAsFile:
+              !Platform.environment.containsKey(AzureAssetService.KEY_NAME));
+      if (exportPbdlJson) {
+        _writePbdlJson(pbdl, fileName: projectName);
+      }
 
-    // In order to upload the JSON file, the export PBDL to JSON flag must be on
-    if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
-        exportPbdlJson) {
-      _jsonToAzure(pbdlProject, FigmaAssetProcessor());
-    }
+      // In order to upload the JSON file, the export PBDL to JSON flag must be on
+      if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
+          exportPbdlJson) {
+        _jsonToAzure(pbdl, FigmaAssetProcessor());
+      }
 
-    return pbdlProject;
+      await Sentry.close();
+      return pbdl;
+    }, (error, stackTrace) async {
+      await Sentry.captureException(error, stackTrace: stackTrace);
+      await Sentry.close();
+    });
   }
 
   static void _setupMainInfo(
