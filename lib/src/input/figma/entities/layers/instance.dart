@@ -98,7 +98,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
     /// If the component is not a local component
     /// then the instance must become a component aka [PBDLSharedMasterNode]
-    if (ComponentCacheService().localComponents.contains(componentId)) {
+    if (ComponentCacheService().localComponents.containsKey(componentId)) {
       return Future.value(PBDLSharedInstanceNode(
         UUID: UUID,
         overrideValues: overrideValues,
@@ -111,9 +111,10 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         symbolID: componentId,
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+        sharedNodeSetID: ComponentCacheService().getComponentSetId(componentId),
       ));
     } else {
-      ComponentCacheService().localComponents.add(componentId);
+      ComponentCacheService().localComponents[componentId] = toJson();
       return Future.value(PBDLSharedMasterNode(
           UUID: UUID,
           overrideProperties: null,

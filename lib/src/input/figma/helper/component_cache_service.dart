@@ -10,5 +10,14 @@ class ComponentCacheService {
 
   /// List that stores the symbol IDs of
   /// all the components on the file
-  List<String> localComponents = [];
+  Map<String, Map> localComponents = {};
+
+  /// Get compoennt set id, to pass it to its instances
+  String getComponentSetId(String symbolID) {
+    if (localComponents.containsKey(symbolID)) {
+      return localComponents[symbolID]['componentSetId'];
+    } else {
+      return null;
+    }
+  }
 }
