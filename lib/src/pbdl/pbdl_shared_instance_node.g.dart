@@ -31,6 +31,7 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
+    sharedNodeSetID: json['sharedNodeSetID'] as String,
   )
     ..child = json['child'] == null
         ? null
@@ -58,6 +59,7 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
       'parameters': instance.parameters,
       'overrideValues':
           instance.overrideValues?.map((e) => e?.toJson())?.toList(),
+      'sharedNodeSetID': instance.sharedNodeSetID,
       'type': instance.type,
     };
 

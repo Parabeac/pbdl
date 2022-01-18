@@ -1,6 +1,7 @@
 import 'layers/boolean_operation.dart';
 import 'layers/canvas.dart';
 import 'layers/component.dart';
+import 'layers/component_set.dart';
 import 'layers/ellipse.dart';
 import 'layers/figma_node.dart';
 import 'layers/figma_frame.dart';
@@ -27,11 +28,12 @@ class AbstractFigmaNodeFactory {
     Instance(),
     FigmaLine(),
     FigmaRectangle(),
-    // FigmaSlice(),  
+    // FigmaSlice(),
     FigmaStar(),
     FigmaText(),
     FigmaVector(),
     FigmaRegularPolygon(),
+    FigmaComponentSet(),
   ];
 
   AbstractFigmaNodeFactory();

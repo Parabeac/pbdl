@@ -16,6 +16,8 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
 
   final List<PBDLOverrideValue> overrideValues;
 
+  String sharedNodeSetID;
+
   @override
   final type = 'shared_instance';
 
@@ -51,6 +53,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     PBDLConstraints constraints,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
+    this.sharedNodeSetID,
   }) : super(
           UUID,
           name,

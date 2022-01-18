@@ -37,6 +37,8 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
+    componentSetId: json['componentSetId'] as String,
+    componentSetName: json['componentSetName'] as String,
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null
@@ -79,6 +81,8 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
+      'componentSetId': instance.componentSetId,
+      'componentSetName': instance.componentSetName,
       'symbolID': instance.symbolID,
       'isFlowHome': instance.isFlowHome,
     };
