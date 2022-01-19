@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -7,7 +8,7 @@ import '../abstract_figma_node_factory.dart';
 part 'figma_node.g.dart';
 
 @JsonSerializable(nullable: true)
-class FigmaNode {
+class FigmaNode extends FigmaBaseNode {
   @JsonKey(
     name: 'id',
   )
@@ -56,6 +57,7 @@ class FigmaNode {
     this.layoutGrow,
   });
 
+  @override
   Future<PBDLNode> interpretNode() async {
     return Future.value(PBDLNode(
       UUID,

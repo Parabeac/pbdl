@@ -1,12 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
+import '../../../../../pbdl.dart';
 import 'figma_color.dart';
 import 'fill_type/fill_type.dart';
 
 part 'figma_fill.g.dart';
 
 @JsonSerializable()
-class FigmaFill {
+class FigmaFill implements FigmaBaseNode {
   FigmaColor color;
 
   BlendMode blendMode;
@@ -26,6 +28,12 @@ class FigmaFill {
       color?.interpretColor(),
       isEnabled,
     );
+  }
+
+  @override
+  Future<PBDLNode> interpretNode() {
+    // TODO: implement interpretNode
+    throw UnimplementedError();
   }
 }
 
@@ -47,13 +55,3 @@ enum BlendMode {
   COLOR,
   LUMINOSITY,
 }
-// enum FillType {
-//   SOLID,
-//   LINEAR,
-//   RADIAL,
-//   ANGULAR,
-//   DIAMOND,
-//   IMAGE,
-// }
-
-// abstract class FillType {}

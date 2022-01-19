@@ -1,13 +1,18 @@
 import 'dart:math';
 
 abstract class FillType {
-  GradientType type;
-
-  // TODO: determine type of list
-  List<Point> stops;
+  FillTypeEnum type;
 }
 
-enum GradientType {
+class ImageFillType implements FillType {
+  // String that identifies the ID of the image
+  String imageRef;
+
+  @override
+  FillTypeEnum type;
+}
+
+enum FillTypeEnum {
   SOLID,
   LINEAR,
   RADIAL,

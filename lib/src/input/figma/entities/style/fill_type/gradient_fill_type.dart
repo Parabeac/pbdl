@@ -4,13 +4,11 @@ import '../figma_color.dart';
 import 'fill_type.dart';
 
 class GradientFillType implements FillType {
-  List<Point> gradientHandlePosition;
+  List<GradientStop> gradientStops;
+  List<Point> gradientHandlePositions;
 
   @override
-  List<Point> stops;
-
-  @override
-  GradientType type;
+  FillTypeEnum type;
 }
 
 class GradientStop {
