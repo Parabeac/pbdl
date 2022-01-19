@@ -1,14 +1,17 @@
 import 'dart:math';
 
-import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
+abstract class FillType {
+  GradientType type;
 
-abstract class FillType {}
-
-class GradientFillType extends FillType {
-  List<GradientStop> gradientStops;
+  // TODO: determine type of list
+  List<Point> stops;
 }
 
-class GradientStop {
-  FigmaColor color;
-  num position;
+enum GradientType {
+  SOLID,
+  LINEAR,
+  RADIAL,
+  ANGULAR,
+  DIAMOND,
+  IMAGE,
 }

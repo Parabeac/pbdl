@@ -1,7 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
-
 import 'figma_color.dart';
+import 'fill_type/fill_type.dart';
+
 part 'figma_fill.g.dart';
 
 @JsonSerializable()
@@ -46,13 +47,13 @@ enum BlendMode {
   COLOR,
   LUMINOSITY,
 }
-// enum FillType { SOLID, LINEAR,
+// enum FillType {
+//   SOLID,
+//   LINEAR,
 //   RADIAL,
 //   ANGULAR,
 //   DIAMOND,
 //   IMAGE,
 // }
 
-abstract class FillType {}
-
-
+// abstract class FillType {}
