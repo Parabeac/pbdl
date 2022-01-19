@@ -5,7 +5,7 @@ part 'figma_color.g.dart';
 
 @JsonSerializable()
 class FigmaColor {
-  @JsonKey(name: 'a')
+  @JsonKey(name: 'opacity')
   double alpha;
 
   @JsonKey(name: 'b')

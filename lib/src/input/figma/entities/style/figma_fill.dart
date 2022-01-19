@@ -8,6 +8,9 @@ part 'figma_fill.g.dart';
 class FigmaFill {
   FigmaColor color;
 
+  BlendMode blendMode;
+  FillType fillType;
+
   FigmaFill(this.color, [this.isEnabled = true]);
 
   @JsonKey(defaultValue: true)
@@ -24,3 +27,32 @@ class FigmaFill {
     );
   }
 }
+
+enum BlendMode {
+  NORMAL,
+  DARKEN,
+  MULTIPLY,
+  COLOR_BURN,
+  LIGHTEN,
+  SCREEN,
+  COLOR_DODGE,
+  OVERLAY,
+  SOFT_LIGHT,
+  HARD_LIGHT,
+  DIFFERENCE,
+  EXCLUSION,
+  HUE,
+  SATURATION,
+  COLOR,
+  LUMINOSITY,
+}
+// enum FillType { SOLID, LINEAR,
+//   RADIAL,
+//   ANGULAR,
+//   DIAMOND,
+//   IMAGE,
+// }
+
+abstract class FillType {}
+
+
