@@ -9,13 +9,14 @@ part of 'fill_type.dart';
 ImageFillType _$ImageFillTypeFromJson(Map<String, dynamic> json) {
   return ImageFillType(
     imageRef: json['imageRef'] as String,
-    type: json['type'] as String,
     blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
     visible: json['visible'] as bool,
     opacity: json['opacity'] as num,
-  )..color = json['color'] == null
-      ? null
-      : FigmaColor.fromJson(json['color'] as Map<String, dynamic>);
+  )
+    ..type = json['type'] as String
+    ..color = json['color'] == null
+        ? null
+        : FigmaColor.fromJson(json['color'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$ImageFillTypeToJson(ImageFillType instance) =>
@@ -81,13 +82,14 @@ const _$BlendModeEnumMap = {
 
 SolidFillType _$SolidFillTypeFromJson(Map<String, dynamic> json) {
   return SolidFillType(
-    type: json['type'] as String,
     blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
     visible: json['visible'] as bool,
     opacity: json['opacity'] as num,
-  )..color = json['color'] == null
-      ? null
-      : FigmaColor.fromJson(json['color'] as Map<String, dynamic>);
+  )
+    ..type = json['type'] as String
+    ..color = json['color'] == null
+        ? null
+        : FigmaColor.fromJson(json['color'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$SolidFillTypeToJson(SolidFillType instance) =>

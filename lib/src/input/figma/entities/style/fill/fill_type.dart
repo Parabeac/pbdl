@@ -14,7 +14,7 @@ class ImageFillType implements FigmaFill {
   String imageRef;
 
   @override
-  String type;
+  String type = 'IMAGE';
 
   @override
   BlendMode blendMode;
@@ -30,7 +30,6 @@ class ImageFillType implements FigmaFill {
 
   ImageFillType({
     this.imageRef,
-    this.type,
     this.blendMode,
     this.visible,
     this.opacity,
@@ -55,7 +54,7 @@ class ImageFillType implements FigmaFill {
 @JsonSerializable()
 class SolidFillType implements FigmaFill {
   @override
-  String type;
+  String type = 'SOLID';
 
   @override
   FigmaColor color;
@@ -70,7 +69,6 @@ class SolidFillType implements FigmaFill {
   num opacity;
 
   SolidFillType({
-    this.type,
     this.blendMode,
     this.visible,
     this.opacity,

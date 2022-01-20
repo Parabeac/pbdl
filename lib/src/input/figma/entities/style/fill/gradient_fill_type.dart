@@ -31,7 +31,6 @@ class GradientFillType implements FigmaFill {
   GradientFillType({
     this.gradientStops,
     this.gradientHandlePositions,
-    this.type,
     this.blendMode,
     this.visible,
     this.opacity,

@@ -14,13 +14,14 @@ GradientFillType _$GradientFillTypeFromJson(Map<String, dynamic> json) {
         ?.toList(),
     gradientHandlePositions: GradientFillType._pointsFromJson(
         json['gradientHandlePositions'] as List<Map<dynamic, dynamic>>),
-    type: json['type'] as String,
     blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
     visible: json['visible'] as bool,
     opacity: json['opacity'] as num,
-  )..color = json['color'] == null
-      ? null
-      : FigmaColor.fromJson(json['color'] as Map<String, dynamic>);
+  )
+    ..color = json['color'] == null
+        ? null
+        : FigmaColor.fromJson(json['color'] as Map<String, dynamic>)
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$GradientFillTypeToJson(GradientFillType instance) =>
