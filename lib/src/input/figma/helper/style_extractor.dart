@@ -62,7 +62,7 @@ class StyleExtractor {
       var fill = (json['fills'] as List)
           .firstWhere((fill) => fill.containsKey('color'), orElse: () => null);
 
-      fills.add(FigmaFill(_getColor(fill == null ? null : fill['color'])));
+      // fills.add(FigmaFill(_getColor(fill == null ? null : fill['color'])));
 
       return FigmaStyle(
         backgroundColor: bgColor,
