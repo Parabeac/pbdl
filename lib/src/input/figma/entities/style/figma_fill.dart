@@ -1,40 +1,54 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
+import 'package:pbdl/src/input/figma/entities/style/fill/figma_fill_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
 import '../../../../../pbdl.dart';
 import 'figma_color.dart';
-import 'fill_type/fill_type.dart';
 
 part 'figma_fill.g.dart';
 
 @JsonSerializable()
-class FigmaFill implements FigmaBaseNode {
+class FigmaFill {
   FigmaColor color;
 
+  num opacity;
   BlendMode blendMode;
-  FillType fillType;
+  String type;
 
-  FigmaFill(this.color, [this.isEnabled = true]);
+  FigmaFill(
+    this.opacity,
+    this.blendMode,
+    this.type, [
+    this.visible = true,
+  ]);
 
   @JsonKey(defaultValue: true)
-  bool isEnabled;
+  bool visible;
 
-  Map<String, dynamic> toJson() => _$FigmaFillToJson(this);
+  Map<String, dynamic> toJson() {}
+  FigmaFill createFigmaFill(Map<String, dynamic> json) =>
+      FigmaFill.fromJson(json);
   factory FigmaFill.fromJson(Map<String, dynamic> json) =>
-      _$FigmaFillFromJson(json);
+      FigmaFillFactory.getFill(json);
 
   PBDLFill interpretFill() {
     return PBDLFill(
       color?.interpretColor(),
-      isEnabled,
+      visible,
     );
   }
 
-  @override
-  Future<PBDLNode> interpretNode() {
-    // TODO: implement interpretNode
-    throw UnimplementedError();
-  }
+  // Future<PBDLStyle> interpretStyle() async {
+  //   var interpretedFills = await Future.wait(
+  //       fills.map((e) async => await e.interpretNode()).toList());
+  //   return PBDLStyle(
+  //     backgroundColor: backgroundColor?.interpretColor(),
+  //     fills: interpretedFills,
+  //     borders: borders.map((e) => e.interpretBorder()).toList(),
+  //     borderOptions: borderOptions?.interpretOptions(),
+  //     textStyle: textStyle?.interpretTextStyle(),
+  //     hasShadow: false,
+  //   );
+  // }
 }
 
 enum BlendMode {

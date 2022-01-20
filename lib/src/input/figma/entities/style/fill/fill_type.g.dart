@@ -1,28 +1,31 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'figma_fill.dart';
+part of 'fill_type.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-FigmaFill _$FigmaFillFromJson(Map<String, dynamic> json) {
-  return FigmaFill(
-    json['opacity'] as num,
-    _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
-    json['type'] as String,
-    json['visible'] as bool ?? true,
+ImageFillType _$ImageFillTypeFromJson(Map<String, dynamic> json) {
+  return ImageFillType(
+    imageRef: json['imageRef'] as String,
+    type: json['type'] as String,
+    blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
+    visible: json['visible'] as bool,
+    opacity: json['opacity'] as num,
   )..color = json['color'] == null
       ? null
       : FigmaColor.fromJson(json['color'] as Map<String, dynamic>);
 }
 
-Map<String, dynamic> _$FigmaFillToJson(FigmaFill instance) => <String, dynamic>{
-      'color': instance.color,
-      'opacity': instance.opacity,
-      'blendMode': _$BlendModeEnumMap[instance.blendMode],
+Map<String, dynamic> _$ImageFillTypeToJson(ImageFillType instance) =>
+    <String, dynamic>{
+      'imageRef': instance.imageRef,
       'type': instance.type,
+      'blendMode': _$BlendModeEnumMap[instance.blendMode],
       'visible': instance.visible,
+      'opacity': instance.opacity,
+      'color': instance.color,
     };
 
 T _$enumDecode<T>(
@@ -75,3 +78,23 @@ const _$BlendModeEnumMap = {
   BlendMode.COLOR: 'COLOR',
   BlendMode.LUMINOSITY: 'LUMINOSITY',
 };
+
+SolidFillType _$SolidFillTypeFromJson(Map<String, dynamic> json) {
+  return SolidFillType(
+    type: json['type'] as String,
+    blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
+    visible: json['visible'] as bool,
+    opacity: json['opacity'] as num,
+  )..color = json['color'] == null
+      ? null
+      : FigmaColor.fromJson(json['color'] as Map<String, dynamic>);
+}
+
+Map<String, dynamic> _$SolidFillTypeToJson(SolidFillType instance) =>
+    <String, dynamic>{
+      'type': instance.type,
+      'color': instance.color,
+      'blendMode': _$BlendModeEnumMap[instance.blendMode],
+      'visible': instance.visible,
+      'opacity': instance.opacity,
+    };

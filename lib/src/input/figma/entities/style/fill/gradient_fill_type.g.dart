@@ -1,28 +1,38 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'figma_fill.dart';
+part of 'gradient_fill_type.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-FigmaFill _$FigmaFillFromJson(Map<String, dynamic> json) {
-  return FigmaFill(
-    json['opacity'] as num,
-    _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
-    json['type'] as String,
-    json['visible'] as bool ?? true,
+GradientFillType _$GradientFillTypeFromJson(Map<String, dynamic> json) {
+  return GradientFillType(
+    gradientStops: (json['gradientStops'] as List)
+        ?.map((e) =>
+            e == null ? null : GradientStop.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    gradientHandlePositions: GradientFillType._pointsFromJson(
+        json['gradientHandlePositions'] as List<Map<dynamic, dynamic>>),
+    type: json['type'] as String,
+    blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
+    visible: json['visible'] as bool,
+    opacity: json['opacity'] as num,
   )..color = json['color'] == null
       ? null
       : FigmaColor.fromJson(json['color'] as Map<String, dynamic>);
 }
 
-Map<String, dynamic> _$FigmaFillToJson(FigmaFill instance) => <String, dynamic>{
+Map<String, dynamic> _$GradientFillTypeToJson(GradientFillType instance) =>
+    <String, dynamic>{
+      'gradientStops': instance.gradientStops,
+      'gradientHandlePositions':
+          GradientFillType._pointsToJson(instance.gradientHandlePositions),
       'color': instance.color,
-      'opacity': instance.opacity,
-      'blendMode': _$BlendModeEnumMap[instance.blendMode],
       'type': instance.type,
+      'blendMode': _$BlendModeEnumMap[instance.blendMode],
       'visible': instance.visible,
+      'opacity': instance.opacity,
     };
 
 T _$enumDecode<T>(
@@ -75,3 +85,18 @@ const _$BlendModeEnumMap = {
   BlendMode.COLOR: 'COLOR',
   BlendMode.LUMINOSITY: 'LUMINOSITY',
 };
+
+GradientStop _$GradientStopFromJson(Map<String, dynamic> json) {
+  return GradientStop(
+    color: json['color'] == null
+        ? null
+        : FigmaColor.fromJson(json['color'] as Map<String, dynamic>),
+    position: json['position'] as num,
+  );
+}
+
+Map<String, dynamic> _$GradientStopToJson(GradientStop instance) =>
+    <String, dynamic>{
+      'color': instance.color,
+      'position': instance.position,
+    };
