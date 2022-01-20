@@ -45,26 +45,34 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
     ..type = json['type'] as String;
 }
 
-Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
-    <String, dynamic>{
-      'UUID': instance.UUID,
-      'layoutMainAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
-      'layoutCrossAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-      'name': instance.name,
-      'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'style': instance.style?.toJson(),
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child?.toJson(),
-      'constraints': instance.constraints?.toJson(),
-      'fontColor': instance.fontColor?.toJson(),
-      'weight': instance.weight,
-      'fontDescriptor': instance.fontDescriptor?.toJson(),
-      'paragraphStyle': instance.paragraphStyle?.toJson(),
-      'type': instance.type,
-    };
+Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('UUID', instance.UUID);
+  writeNotNull('layoutMainAxisSizing',
+      _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing]);
+  writeNotNull('layoutCrossAxisSizing',
+      _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing]);
+  writeNotNull('name', instance.name);
+  writeNotNull('isVisible', instance.isVisible);
+  writeNotNull('boundaryRectangle', instance.boundaryRectangle?.toJson());
+  writeNotNull('style', instance.style?.toJson());
+  writeNotNull('prototypeNodeUUID', instance.prototypeNodeUUID);
+  writeNotNull('child', instance.child?.toJson());
+  writeNotNull('constraints', instance.constraints?.toJson());
+  val['fontColor'] = instance.fontColor?.toJson();
+  val['weight'] = instance.weight;
+  val['fontDescriptor'] = instance.fontDescriptor?.toJson();
+  val['paragraphStyle'] = instance.paragraphStyle?.toJson();
+  val['type'] = instance.type;
+  return val;
+}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',
