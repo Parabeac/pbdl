@@ -23,9 +23,11 @@ class GradientFillType implements FigmaFill {
   BlendMode blendMode;
 
   @override
+  @JsonKey(defaultValue: true)
   bool visible;
 
   @override
+  @JsonKey(defaultValue: 100)
   num opacity;
 
   GradientFillType({
@@ -36,7 +38,7 @@ class GradientFillType implements FigmaFill {
     this.opacity,
   });
 
-  static List<Point> _pointsFromJson(List<Map> points) {
+  static List<Point> _pointsFromJson(List points) {
     var objPoints = <Point>[];
     for (var point in points) {
       objPoints.add(Point(point['x'], point['y']));

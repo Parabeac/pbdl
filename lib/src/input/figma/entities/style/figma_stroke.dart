@@ -11,6 +11,9 @@ class FigmaStroke {
 
   FigmaColor color;
 
+  @JsonKey(defaultValue: true)
+  bool visible;
+
   FigmaStroke({
     this.blendMode,
     this.type,

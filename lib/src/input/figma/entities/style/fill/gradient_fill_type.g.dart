@@ -13,10 +13,10 @@ GradientFillType _$GradientFillTypeFromJson(Map<String, dynamic> json) {
             e == null ? null : GradientStop.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     gradientHandlePositions: GradientFillType._pointsFromJson(
-        json['gradientHandlePositions'] as List<Map<dynamic, dynamic>>),
+        json['gradientHandlePositions'] as List),
     blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
-    visible: json['visible'] as bool,
-    opacity: json['opacity'] as num,
+    visible: json['visible'] as bool ?? true,
+    opacity: json['opacity'] as num ?? 100,
   )
     ..color = json['color'] == null
         ? null

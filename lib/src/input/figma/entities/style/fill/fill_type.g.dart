@@ -10,8 +10,8 @@ ImageFillType _$ImageFillTypeFromJson(Map<String, dynamic> json) {
   return ImageFillType(
     imageRef: json['imageRef'] as String,
     blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
-    visible: json['visible'] as bool,
-    opacity: json['opacity'] as num,
+    visible: json['visible'] as bool ?? true,
+    opacity: json['opacity'] as num ?? 100,
   )
     ..type = json['type'] as String
     ..color = json['color'] == null
@@ -83,8 +83,8 @@ const _$BlendModeEnumMap = {
 SolidFillType _$SolidFillTypeFromJson(Map<String, dynamic> json) {
   return SolidFillType(
     blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
-    visible: json['visible'] as bool,
-    opacity: json['opacity'] as num,
+    visible: json['visible'] as bool ?? true,
+    opacity: json['opacity'] as num ?? 100,
   )
     ..type = json['type'] as String
     ..color = json['color'] == null

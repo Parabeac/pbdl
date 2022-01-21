@@ -13,7 +13,7 @@ FigmaStroke _$FigmaStrokeFromJson(Map<String, dynamic> json) {
     color: json['color'] == null
         ? null
         : FigmaColor.fromJson(json['color'] as Map<String, dynamic>),
-  );
+  )..visible = json['visible'] as bool ?? true;
 }
 
 Map<String, dynamic> _$FigmaStrokeToJson(FigmaStroke instance) =>
@@ -21,4 +21,5 @@ Map<String, dynamic> _$FigmaStrokeToJson(FigmaStroke instance) =>
       'blendMode': instance.blendMode,
       'type': instance.type,
       'color': instance.color,
+      'visible': instance.visible,
     };

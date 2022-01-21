@@ -10,16 +10,18 @@ part 'figma_fill.g.dart';
 class FigmaFill {
   FigmaColor color;
 
+  @JsonKey(defaultValue: 100)
   num opacity;
+
   BlendMode blendMode;
   String type;
 
   FigmaFill(
     this.opacity,
     this.blendMode,
-    this.type, [
-    this.visible = true,
-  ]);
+    this.type,
+    this.visible,
+  );
 
   @JsonKey(defaultValue: true)
   bool visible;

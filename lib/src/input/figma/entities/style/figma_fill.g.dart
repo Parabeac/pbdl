@@ -8,7 +8,7 @@ part of 'figma_fill.dart';
 
 FigmaFill _$FigmaFillFromJson(Map<String, dynamic> json) {
   return FigmaFill(
-    json['opacity'] as num,
+    json['opacity'] as num ?? 100,
     _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
     json['type'] as String,
     json['visible'] as bool ?? true,

@@ -20,9 +20,11 @@ class ImageFillType implements FigmaFill {
   BlendMode blendMode;
 
   @override
+  @JsonKey(defaultValue: true)
   bool visible;
 
   @override
+  @JsonKey(defaultValue: 100)
   num opacity;
 
   @override
@@ -63,9 +65,11 @@ class SolidFillType implements FigmaFill {
   BlendMode blendMode;
 
   @override
+  @JsonKey(defaultValue: true)
   bool visible;
 
   @override
+  @JsonKey(defaultValue: 100)
   num opacity;
 
   SolidFillType({
