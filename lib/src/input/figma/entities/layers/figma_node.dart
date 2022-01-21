@@ -73,23 +73,19 @@ class FigmaNode extends FigmaBaseNode {
   static FigmaStyleProperty figmaStylePropertyFromJson(Map json) {
     var listFills = <FigmaFill>[];
 
-    var listStrokes = <FigmaStroke>[];
-
     var listEffects = <FigmaEffect>[];
 
     for (var fill in json['fills']) {
       listFills.add(FigmaFill.fromJson(fill));
     }
 
-    for (var stroke in json['strokes']) {
-      listStrokes.add(FigmaStroke.fromJson(stroke));
-    }
+    var figmaStroke = FigmaStroke.fromJson(json);
 
     for (var effect in json['effects']) {
       listEffects.add(FigmaEffect.fromJson(effect));
     }
 
-    var property = FigmaStyleProperty(listFills, listStrokes, listEffects);
+    var property = FigmaStyleProperty(listFills, figmaStroke, listEffects);
 
     return property;
   }

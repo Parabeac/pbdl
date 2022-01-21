@@ -65,9 +65,8 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    var tempStyle = fillsList.isNotEmpty
-        ? FigmaStyle(
-            fills: [FigmaFill.fromJson(fillsList[0])], borders: [FigmaBorder()])
+    var tempStyle = fills.isNotEmpty
+        ? FigmaStyle(fills: fills, borders: [FigmaBorder()])
         : FigmaStyle(fills: [
             FigmaFill.fromJson({
               'isEnabled': true,

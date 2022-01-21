@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
@@ -18,6 +19,9 @@ part 'rectangle.g.dart';
 class FigmaRectangle extends FigmaVector
     with PBColorMixin
     implements AbstractFigmaNodeFactory {
+  @override
+  List<FigmaFill> fills;
+
   @override
   String type = 'RECTANGLE';
   FigmaRectangle({
@@ -38,7 +42,7 @@ class FigmaRectangle extends FigmaVector
     this.cornerRadius,
     this.rectangleCornerRadii,
     this.points,
-    List fillsList,
+    this.fills,
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
@@ -48,7 +52,6 @@ class FigmaRectangle extends FigmaVector
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
           absoluteBoundingBox: boundaryRectangle != null
@@ -59,7 +62,7 @@ class FigmaRectangle extends FigmaVector
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          fillsList: fillsList,
+          fills: fills,
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
@@ -73,7 +76,7 @@ class FigmaRectangle extends FigmaVector
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaRectangle.fromJson(json);
-    node.style = StyleExtractor().getStyle(json);
+    // node.style = StyleExtractor().getStyle(json);
     return node;
   }
 
@@ -84,9 +87,8 @@ class FigmaRectangle extends FigmaVector
 
   @override
   Future<PBDLNode> interpretNode() async {
-    var fillsMap =
-        (fillsList == null || fillsList.isEmpty) ? {} : fillsList.first;
-    if (fillsMap != null && fillsMap['type'] == 'IMAGE') {
+    var fillsMap = (fills == null || fills.isEmpty) ? null : fills.first;
+    if (fillsMap != null && fillsMap.type == 'IMAGE') {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
       return Future.value(PBDLImage(
@@ -95,7 +97,7 @@ class FigmaRectangle extends FigmaVector
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: style.interpretStyle(),
+        // style: style.interpretStyle(),  TODO: fix
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
@@ -108,7 +110,7 @@ class FigmaRectangle extends FigmaVector
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: style.interpretStyle(),
+        // style: style.interpretStyle(),  TODO: fix
         child: await child?.interpretNode(),
         fixedRadius: cornerRadius ?? 0,
         prototypeNodeUUID: transitionNodeID,

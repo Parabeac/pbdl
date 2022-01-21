@@ -14,7 +14,7 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
     sharedPluginData: json['sharedPluginData'],
     style: json['style'] == null
         ? null
-        : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
+        : FigmaTextStyle.fromJson(json['style'] as Map<String, dynamic>),
     constraints: json['constraints'] == null
         ? null
         : FigmaConstraints.fromJson(
@@ -34,6 +34,10 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
     layoutAlign: json['layoutAlign'],
     layoutGrow: json['layoutGrow'],
+    fills: (json['fills'] as List)
+        ?.map((e) =>
+            e == null ? null : FigmaFill.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null
@@ -44,7 +48,6 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
-    ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
     ..attributedString = json['attributedString']
     ..automaticallyDrawOnUnderlyingPath =
@@ -68,15 +71,15 @@ Map<String, dynamic> _$FigmaTextToJson(FigmaText instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
-      'style': instance.style,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
-      'fills': instance.fillsList,
       'imageReference': instance.imageReference,
+      'style': instance.style,
+      'fills': instance.fills,
       'type': instance.type,
       'characters': instance.content,
       'characterStyleOverrides': instance.characterStyleOverrides,

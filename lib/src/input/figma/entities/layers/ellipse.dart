@@ -50,7 +50,6 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
           absoluteBoundingBox: boundaryRectangle,
@@ -82,7 +81,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style?.interpretStyle(),
+      // style: style?.interpretStyle(),  TODO: fix
       imageReference: imageReference,
       constraints: constraints?.interpret(),
       prototypeNodeUUID: transitionNodeID,

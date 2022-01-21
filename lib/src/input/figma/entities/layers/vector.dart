@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -17,8 +18,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   @JsonKey(ignore: true)
   Logger log;
 
-  FigmaStyle style;
-
   @override
   @JsonKey()
   FigmaRect absoluteBoundingBox;
@@ -32,11 +31,11 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   String strokeAlign;
 
   var styles;
+
   @override
   String type = 'VECTOR';
 
-  @JsonKey(name: 'fills')
-  List fillsList;
+  List<FigmaFill> fills;
 
   FigmaVector({
     String name,
@@ -44,7 +43,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     String type,
     pluginData,
     sharedPluginData,
-    this.style,
     FigmaConstraints constraints,
     this.absoluteBoundingBox,
     this.size,
@@ -52,7 +50,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     this.strokeWeight,
     this.strokeAlign,
     this.styles,
-    this.fillsList,
+    this.fills,
     String UUID,
     num transitionDuration,
     String transitionEasing,
@@ -93,7 +91,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style?.interpretStyle(),
+      // style: style?.interpretStyle(), // TODO: Fix
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),

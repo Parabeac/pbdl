@@ -12,7 +12,6 @@ FigmaEllipse _$FigmaEllipseFromJson(Map<String, dynamic> json) {
     type: json['type'] as String,
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    style: json['style'],
     layoutAlign: json['layoutAlign'],
     constraints: json['constraints'] == null
         ? null
@@ -37,7 +36,6 @@ FigmaEllipse _$FigmaEllipseFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
-    ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String;
 }
 
@@ -55,14 +53,12 @@ Map<String, dynamic> _$FigmaEllipseToJson(FigmaEllipse instance) =>
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
-      'style': instance.style,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
-      'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
     };

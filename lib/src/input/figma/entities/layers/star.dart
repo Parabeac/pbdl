@@ -69,7 +69,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style?.interpretStyle(),
+      // style: style?.interpretStyle(),  TODO: fix
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),

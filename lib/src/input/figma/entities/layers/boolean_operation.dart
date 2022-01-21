@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -41,7 +42,6 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     transitionEasing,
     imageReference,
   }) : super(
-          style: style,
           UUID: UUID,
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
@@ -66,7 +66,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
       boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style?.interpretStyle(),
+      // style: style?.interpretStyle(),  TODO: fix
       booleanOperation: booleanOperation,
       prototypeNodeUUID: transitionNodeID,
       imageReference: imageReference,

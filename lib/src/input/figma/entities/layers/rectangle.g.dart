@@ -13,9 +13,6 @@ FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    style: json['style'] == null
-        ? null
-        : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
     layoutAlign: json['layoutAlign'],
     constraints: json['constraints'] == null
         ? null
@@ -31,7 +28,10 @@ FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
         ?.map((e) => (e as num)?.toDouble())
         ?.toList(),
     points: json['points'] as List,
-    fillsList: json['fills'] as List,
+    fills: (json['fills'] as List)
+        ?.map((e) =>
+            e == null ? null : FigmaFill.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
@@ -62,15 +62,14 @@ Map<String, dynamic> _$FigmaRectangleToJson(FigmaRectangle instance) =>
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
-      'style': instance.style,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
-      'fills': instance.fillsList,
       'imageReference': instance.imageReference,
+      'fills': instance.fills,
       'type': instance.type,
       'points': instance.points,
       'cornerRadius': instance.cornerRadius,
