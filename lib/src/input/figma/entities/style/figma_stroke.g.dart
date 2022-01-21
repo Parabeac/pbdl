@@ -8,18 +8,25 @@ part of 'figma_stroke.dart';
 
 FigmaStroke _$FigmaStrokeFromJson(Map<String, dynamic> json) {
   return FigmaStroke(
-    blendMode: json['blendMode'] as String,
-    type: json['type'] as String,
-    color: json['color'] == null
-        ? null
-        : FigmaColor.fromJson(json['color'] as Map<String, dynamic>),
-  )..visible = json['visible'] as bool ?? true;
+    strokes: (json['strokes'] as List)
+        ?.map((e) => e == null
+            ? null
+            : FigmaListStroke.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    strokeWeight: json['strokeWeight'] as num,
+    strokeAlign: json['strokeAlign'] as String,
+    strokeJoin: json['strokeJoin'] as String,
+    strokeDashes: json['strokeDashes'] as List,
+    cornerRadius: json['cornerRadius'] as num,
+  );
 }
 
 Map<String, dynamic> _$FigmaStrokeToJson(FigmaStroke instance) =>
     <String, dynamic>{
-      'blendMode': instance.blendMode,
-      'type': instance.type,
-      'color': instance.color,
-      'visible': instance.visible,
+      'strokes': instance.strokes,
+      'strokeWeight': instance.strokeWeight,
+      'strokeAlign': instance.strokeAlign,
+      'strokeJoin': instance.strokeJoin,
+      'strokeDashes': instance.strokeDashes,
+      'cornerRadius': instance.cornerRadius,
     };

@@ -12,10 +12,9 @@ FigmaStyleProperty _$FigmaStylePropertyFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : FigmaFill.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    (json['strokes'] as List)
-        ?.map((e) =>
-            e == null ? null : FigmaStroke.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    json['stroke'] == null
+        ? null
+        : FigmaStroke.fromJson(json['stroke'] as Map<String, dynamic>),
     (json['effects'] as List)
         ?.map((e) =>
             e == null ? null : FigmaEffect.fromJson(e as Map<String, dynamic>))
@@ -26,6 +25,6 @@ FigmaStyleProperty _$FigmaStylePropertyFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$FigmaStylePropertyToJson(FigmaStyleProperty instance) =>
     <String, dynamic>{
       'fills': instance.fills,
-      'strokes': instance.strokes,
+      'stroke': instance.stroke,
       'effects': instance.effects,
     };

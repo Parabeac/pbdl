@@ -8,12 +8,12 @@ part 'figma_style_property.g.dart';
 @JsonSerializable()
 class FigmaStyleProperty {
   List<FigmaFill> fills;
-  List<FigmaStroke> strokes;
+  FigmaStroke stroke;
   List<FigmaEffect> effects;
 
   FigmaStyleProperty(
     this.fills,
-    this.strokes,
+    this.stroke,
     this.effects,
   );
 

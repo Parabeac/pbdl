@@ -1,23 +1,30 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_list_stroke.dart';
 
 part 'figma_stroke.g.dart';
 
 @JsonSerializable()
 class FigmaStroke {
-  String blendMode;
+  List<FigmaListStroke> strokes;
 
-  String type;
+  num strokeWeight;
 
-  FigmaColor color;
+  String strokeAlign;
 
-  @JsonKey(defaultValue: true)
-  bool visible;
+  String strokeJoin;
+
+  List strokeDashes;
+
+  num cornerRadius;
 
   FigmaStroke({
-    this.blendMode,
-    this.type,
-    this.color,
+    this.strokes,
+    this.strokeWeight,
+    this.strokeAlign,
+    this.strokeJoin,
+    this.strokeDashes,
+    this.cornerRadius,
   });
 
   Map<String, dynamic> toJson() => _$FigmaStrokeToJson(this);
