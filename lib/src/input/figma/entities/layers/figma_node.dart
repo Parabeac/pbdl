@@ -1,6 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_effect.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_stroke.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
@@ -57,6 +61,39 @@ class FigmaNode extends FigmaBaseNode {
     this.layoutGrow,
   });
 
+  @JsonKey(ignore: true)
+  FigmaStyleProperty figmaStyleProperty;
+
+  static Map figmaStylePropertyToJson(FigmaStyleProperty property) {
+    var map = {};
+    // TODO: implement
+    return map;
+  }
+
+  static FigmaStyleProperty figmaStylePropertyFromJson(Map json) {
+    var listFills = <FigmaFill>[];
+
+    var listStrokes = <FigmaStroke>[];
+
+    var listEffects = <FigmaEffect>[];
+
+    for (var fill in json['fills']) {
+      listFills.add(FigmaFill.fromJson(fill));
+    }
+
+    for (var stroke in json['strokes']) {
+      listStrokes.add(FigmaStroke.fromJson(stroke));
+    }
+
+    for (var effect in json['effects']) {
+      listEffects.add(FigmaEffect.fromJson(effect));
+    }
+
+    var property = FigmaStyleProperty(listFills, listStrokes, listEffects);
+
+    return property;
+  }
+
   @override
   Future<PBDLNode> interpretNode() async {
     return Future.value(PBDLNode(
@@ -91,8 +128,10 @@ class FigmaNode extends FigmaBaseNode {
     }
   }
 
-  factory FigmaNode.fromJson(Map<String, dynamic> json) =>
-      AbstractFigmaNodeFactory.getFigmaNode(json);
+  factory FigmaNode.fromJson(Map<String, dynamic> json) {
+    return AbstractFigmaNodeFactory.getFigmaNode(json)
+      ..figmaStyleProperty = figmaStylePropertyFromJson(json);
+  }
   @override
   Map<String, dynamic> toJson() => _$FigmaNodeToJson(this);
 }
