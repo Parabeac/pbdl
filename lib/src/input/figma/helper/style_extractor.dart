@@ -57,19 +57,21 @@ class StyleExtractor {
 
       borders.add(figmaBorder);
 
-      var fills = <FigmaFill>[];
+      //TODO: Figma Style will no longer have fills
 
-      var fill = (json['fills'] as List)
-          .firstWhere((fill) => fill.containsKey('color'), orElse: () => null);
+      // var fills = <FigmaFill>[];
 
-      fills.add(FigmaFill.fromJson(fill));
+      // var fill = (json['fills'] as List)
+      //     .firstWhere((fill) => fill.containsKey('color'), orElse: () => null);
+
+      // fills.add(FigmaFill.fromJson(fill));
 
       return FigmaStyle(
         backgroundColor: bgColor,
         borders: borders,
         textStyle: textStyle,
         borderOptions: borderOptions,
-        fills: fills,
+        fills: [],
       );
     } else {
       return null;
@@ -84,17 +86,17 @@ class StyleExtractor {
     var alignment = _getAlignment(json['style']['textAlignHorizontal']);
 
     return FigmaTextStyle(
-      fontColor: fontColor ??
-          FigmaColor(
-            alpha: 1,
-            red: 0,
-            green: 0,
-            blue: 0,
-          ),
-      fontDescriptor: fontDescriptor,
-      weight: '${json['style']['fontWeight']}',
-      paragraphStyle: FigmaParagraphStyle(alignment: alignment.index),
-    );
+        // fontColor: fontColor ??
+        //     FigmaColor(
+        //       alpha: 1,
+        //       red: 0,
+        //       green: 0,
+        //       blue: 0,
+        //     ),
+        // fontDescriptor: fontDescriptor,
+        // weight: '${json['style']['fontWeight']}',
+        // paragraphStyle: FigmaParagraphStyle(alignment: alignment.index),
+        );
   }
 
   ALIGNMENT _getAlignment(String align) {
