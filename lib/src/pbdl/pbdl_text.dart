@@ -13,7 +13,7 @@ part 'pbdl_text.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
-  final type = 'text';
+  final pbdlType = 'text';
 
   String content;
 

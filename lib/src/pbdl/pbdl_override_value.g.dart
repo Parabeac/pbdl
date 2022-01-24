@@ -53,7 +53,7 @@ Map<String, dynamic> _$PBDLOverrideValueToJson(PBDLOverrideValue instance) =>
       'constraints': instance.constraints?.toJson(),
       'value': instance.value?.toJson(),
       'valueName': instance.valueName,
-      'type': instance.type,
+      'type': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

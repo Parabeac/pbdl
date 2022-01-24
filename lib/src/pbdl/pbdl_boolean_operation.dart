@@ -17,7 +17,7 @@ class PBDLBooleanOperation extends PBDLVector
   String booleanOperation;
 
   @override
-  String type = 'boolean_operation';
+  String pbdlType = 'boolean_operation';
 
   @override
   var boundaryRectangle;

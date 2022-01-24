@@ -16,7 +16,7 @@ class PBDLSharedMasterNode extends PBDLNode
   List<PBDLNode> children = [];
 
   @override
-  final type = 'shared_master';
+  final pbdlType = 'shared_master';
 
   String componentSetName;
 

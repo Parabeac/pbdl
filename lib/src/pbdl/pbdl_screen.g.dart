@@ -35,7 +35,7 @@ PBDLScreen _$PBDLScreenFromJson(Map<String, dynamic> json) {
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
     ..convert = json['convert'] as bool
     ..imageURI = json['imageURI'] as String
-    ..type = json['type'] as String;
+    ..pbdlType = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) =>
@@ -53,7 +53,7 @@ Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) =>
       'constraints': instance.constraints?.toJson(),
       'convert': instance.convert,
       'imageURI': instance.imageURI,
-      'type': instance.type,
+      'type': instance.pbdlType,
       'designNode': instance.designNode?.toJson(),
       'isVisible': instance.isVisible,
     };

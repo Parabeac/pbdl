@@ -68,5 +68,5 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   Map<String, dynamic> toJson() => _$PBDLImageToJson(this);
 
   @override
-  String type = 'image';
+  String pbdlType = 'image';
 }

@@ -60,7 +60,7 @@ Map<String, dynamic> _$PBDLBooleanOperationToJson(
       'fillsList': instance.fillsList,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'booleanOperation': instance.booleanOperation,
-      'type': instance.type,
+      'type': instance.pbdlType,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'imageReference': instance.imageReference,
       'UUID': instance.UUID,

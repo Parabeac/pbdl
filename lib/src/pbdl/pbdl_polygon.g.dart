@@ -30,7 +30,7 @@ PBDLPolygon _$PBDLPolygonFromJson(Map<String, dynamic> json) {
     ..constraints = json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..type = json['type'] as String;
+    ..pbdlType = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLPolygonToJson(PBDLPolygon instance) =>
@@ -46,7 +46,7 @@ Map<String, dynamic> _$PBDLPolygonToJson(PBDLPolygon instance) =>
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'constraints': instance.constraints?.toJson(),
-      'type': instance.type,
+      'type': instance.pbdlType,
       'child': instance.child?.toJson(),
     };
 

@@ -41,7 +41,7 @@ Map<String, dynamic> _$PBDLElementToJson(PBDLElement instance) =>
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
-      'type': instance.type,
+      'type': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

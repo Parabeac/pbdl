@@ -15,7 +15,7 @@ class PBDLScreen extends PBDLNode implements PBDLNodeFactory {
   String imageURI;
 
   @override
-  String type = 'screen';
+  String pbdlType = 'screen';
 
   PBDLNode designNode;
 

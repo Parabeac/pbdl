@@ -36,7 +36,7 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
     ..imageURI = json['imageURI'] as String
     ..convert = json['convert'] as bool
-    ..type = json['type'] as String;
+    ..pbdlType = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) {
@@ -64,7 +64,7 @@ Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) {
   writeNotNull('imageURI', instance.imageURI);
   writeNotNull('convert', instance.convert);
   writeNotNull('screens', instance.screens?.map((e) => e?.toJson())?.toList());
-  writeNotNull('type', instance.type);
+  writeNotNull('type', instance.pbdlType);
   return val;
 }
 

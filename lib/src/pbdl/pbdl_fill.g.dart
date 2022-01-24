@@ -34,7 +34,7 @@ PBDLFill _$PBDLFillFromJson(Map<String, dynamic> json) {
     ..constraints = json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..type = json['type'] as String;
+    ..pbdlType = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLFillToJson(PBDLFill instance) => <String, dynamic>{
@@ -52,7 +52,7 @@ Map<String, dynamic> _$PBDLFillToJson(PBDLFill instance) => <String, dynamic>{
       'constraints': instance.constraints?.toJson(),
       'color': instance.color?.toJson(),
       'isEnabled': instance.isEnabled,
-      'type': instance.type,
+      'type': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

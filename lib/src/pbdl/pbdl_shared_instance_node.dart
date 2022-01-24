@@ -19,7 +19,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   String sharedNodeSetID;
 
   @override
-  final type = 'shared_instance';
+  final pbdlType = 'shared_instance';
 
   PBDLSharedInstanceNode({
     String UUID,

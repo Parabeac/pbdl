@@ -46,7 +46,7 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
     ..constraints = json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..type = json['type'] as String;
+    ..pbdlType = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
@@ -67,7 +67,7 @@ Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
       'borderOptions': instance.borderOptions?.toJson(),
       'textStyle': instance.textStyle?.toJson(),
       'hasShadow': instance.hasShadow,
-      'type': instance.type,
+      'type': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

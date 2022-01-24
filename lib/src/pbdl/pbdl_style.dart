@@ -25,7 +25,7 @@ class PBDLStyle extends PBDLNode {
   var child;
 
   @override
-  final type = 'style';
+  final pbdlType = 'style';
 
   PBDLStyle({
     this.fills,

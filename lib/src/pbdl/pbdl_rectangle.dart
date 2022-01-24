@@ -68,7 +68,7 @@ class PBDLRectangle extends PBDLNode
   Map<String, dynamic> toJson() => _$PBDLRectangleToJson(this);
 
   @override
-  String type = 'rectangle';
+  String pbdlType = 'rectangle';
 
   @override
   PBDLNode child;

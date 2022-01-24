@@ -26,7 +26,7 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   var fillsList;
 
   @override
-  final type = 'vector';
+  final pbdlType = 'vector';
 
   PBDLVector({
     String name,

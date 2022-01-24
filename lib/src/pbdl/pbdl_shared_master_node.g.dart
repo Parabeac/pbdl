@@ -38,7 +38,7 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..type = json['type'] as String;
+    ..pbdlType = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
@@ -60,7 +60,7 @@ Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
       'overrideProperties':
           instance.overrideProperties?.map((e) => e?.toJson())?.toList(),
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'type': instance.type,
+      'type': instance.pbdlType,
       'componentSetName': instance.componentSetName,
       'sharedNodeSetID': instance.sharedNodeSetID,
     };

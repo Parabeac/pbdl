@@ -19,7 +19,7 @@ class PBDLTextStyle extends PBDLNode {
   PBDLParagraphStyle paragraphStyle;
 
   @override
-  final type = 'text_style';
+  final pbdlType = 'text_style';
 
   PBDLTextStyle({
     this.fontColor,

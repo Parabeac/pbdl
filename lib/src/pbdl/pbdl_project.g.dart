@@ -44,7 +44,7 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : SharedStyle.fromJson(e as Map<String, dynamic>))
         ?.toList()
-    ..type = json['type'] as String;
+    ..pbdlType = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
@@ -66,7 +66,7 @@ Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
       'pages': instance.pages?.map((e) => e?.toJson())?.toList(),
       'miscPages': instance.miscPages?.map((e) => e?.toJson())?.toList(),
       'sharedStyles': instance.sharedStyles?.map((e) => e?.toJson())?.toList(),
-      'type': instance.type,
+      'type': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

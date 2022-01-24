@@ -15,7 +15,8 @@ class PBDLFill extends PBDLNode {
   //TODO: Fix constructor
   PBDLFill(this.color, [this.isEnabled = true])
       : super('', '', false, null, null, '');
-  final type = 'fill';
+  @override
+  final pbdlType = 'fill';
 
   @override
   factory PBDLFill.fromJson(Map<String, dynamic> json) =>
