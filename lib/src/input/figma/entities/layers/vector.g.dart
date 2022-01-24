@@ -25,10 +25,6 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
     strokeWeight: (json['strokeWeight'] as num)?.toDouble(),
     strokeAlign: json['strokeAlign'] as String,
     styles: json['styles'],
-    fills: (json['fills'] as List)
-        ?.map((e) =>
-            e == null ? null : FigmaFill.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
     UUID: json['id'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
@@ -64,6 +60,5 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
       'type': instance.type,
-      'fills': instance.fills,
       'imageReference': instance.imageReference,
     };

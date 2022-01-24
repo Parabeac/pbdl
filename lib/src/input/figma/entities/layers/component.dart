@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
@@ -36,7 +37,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     sharedPluginData,
     boundaryRectangle,
     style,
-    fills,
     strokes,
     strokeWeight,
     strokeAlign,
@@ -65,7 +65,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
           style: style,
-          fills: fills,
           strokes: strokes,
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
@@ -85,9 +84,13 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
-    var component = Component.fromJson(json);
+    var component = Component.fromJson(json)
+      ..figmaStyleProperty = FigmaNode.figmaStylePropertyFromJson(json);
 
-    component.style = StyleExtractor().getStyle(json);
+    // component.style = StyleExtractor().getStyle(json);
+
+    /// IF figmaStyleProperty already have the fills
+    /// do we still need a fills field?
 
     return component;
   }

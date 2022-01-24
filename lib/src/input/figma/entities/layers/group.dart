@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -38,7 +39,6 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       sharedPluginData,
       boundaryRectangle,
       style,
-      fills,
       strokes,
       strokeWeight,
       strokeAlign,
@@ -65,7 +65,6 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
             style: style,
-            fills: fills,
             strokes: strokes,
             strokeWeight: strokeWeight,
             strokeAlign: strokeAlign,

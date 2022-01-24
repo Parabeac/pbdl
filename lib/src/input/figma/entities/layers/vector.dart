@@ -35,8 +35,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   @override
   String type = 'VECTOR';
 
-  List<FigmaFill> fills;
-
   FigmaVector({
     String name,
     bool visible,
@@ -50,7 +48,6 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     this.strokeWeight,
     this.strokeAlign,
     this.styles,
-    this.fills,
     String UUID,
     num transitionDuration,
     String transitionEasing,

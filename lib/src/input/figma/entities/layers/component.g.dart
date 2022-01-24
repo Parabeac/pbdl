@@ -49,7 +49,6 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
-    ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
     ..isFlowHome = json['isFlowHome'] as bool ?? false;
 }
@@ -78,7 +77,6 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'verticalPadding': instance.verticalPadding,
       'itemSpacing': instance.itemSpacing,
       'backgroundColor': instance.backgroundColor,
-      'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
       'componentSetId': instance.componentSetId,

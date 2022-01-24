@@ -47,7 +47,6 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
     ..isFlowHome = json['isFlowHome'] as bool ?? false
-    ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String;
 }
 
@@ -76,7 +75,6 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'itemSpacing': instance.itemSpacing,
       'backgroundColor': instance.backgroundColor?.toJson(),
       'isFlowHome': instance.isFlowHome,
-      'fills': instance.fillsList,
       'type': instance.type,
       'imageReference': instance.imageReference,
     };

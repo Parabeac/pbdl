@@ -8,6 +8,7 @@ import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
@@ -31,9 +32,6 @@ class FigmaFrame extends FigmaChildrenNode
 
   @JsonKey(ignore: true)
   FigmaStyle style;
-
-  @JsonKey(ignore: true)
-  var fills;
 
   var strokes;
 
@@ -73,7 +71,6 @@ class FigmaFrame extends FigmaChildrenNode
     sharedPluginData,
     this.absoluteBoundingBox,
     this.style,
-    this.fills,
     this.strokes,
     this.strokeWeight,
     this.strokeAlign,
@@ -103,9 +100,6 @@ class FigmaFrame extends FigmaChildrenNode
 
   @JsonKey(ignore: true)
   List points;
-
-  @JsonKey(name: 'fills')
-  List fillsList;
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {

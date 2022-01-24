@@ -26,7 +26,6 @@ class FigmaRegularPolygon extends FigmaVector
     FigmaConstraints constraints,
     boundaryRectangle,
     size,
-    fills,
     strokes,
     strokeWeight,
     strokeAlign,

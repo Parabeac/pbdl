@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
@@ -30,7 +31,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     sharedPluginData,
     boundaryRectangle,
     style,
-    fills,
     strokes,
     strokeWeight,
     strokeAlign,
@@ -59,7 +59,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
             style: style,
-            fills: fills,
             strokes: strokes,
             strokeWeight: strokeWeight,
             strokeAlign: strokeAlign,

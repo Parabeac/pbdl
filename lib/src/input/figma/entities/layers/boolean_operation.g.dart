@@ -37,10 +37,6 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
     ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
     ..strokeAlign = json['strokeAlign'] as String
     ..styles = json['styles']
-    ..fills = (json['fills'] as List)
-        ?.map((e) =>
-            e == null ? null : FigmaFill.fromJson(e as Map<String, dynamic>))
-        ?.toList()
     ..type = json['type'] as String;
 }
 
@@ -62,7 +58,6 @@ Map<String, dynamic> _$BooleanOperationToJson(BooleanOperation instance) =>
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
-      'fills': instance.fills,
       'children': instance.children,
       'booleanOperation': instance.booleanOperation,
       'type': instance.type,

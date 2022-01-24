@@ -27,7 +27,6 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
     FigmaConstraints constraints,
     boundaryRectangle,
     size,
-    fills,
     strokes,
     strokeWeight,
     strokeAlign,
@@ -65,8 +64,8 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    var tempStyle = fills.isNotEmpty
-        ? FigmaStyle(fills: fills, borders: [FigmaBorder()])
+    var tempStyle = figmaStyleProperty.fills.isNotEmpty
+        ? FigmaStyle(fills: figmaStyleProperty.fills, borders: [FigmaBorder()])
         : FigmaStyle(fills: [
             FigmaFill.fromJson({
               'isEnabled': true,

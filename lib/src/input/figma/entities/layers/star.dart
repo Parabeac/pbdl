@@ -26,7 +26,6 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     FigmaConstraints constraints,
     FigmaRect boundaryRectangle,
     size,
-    fills,
     strokes,
     strokeWeight,
     strokeAlign,

@@ -20,9 +20,6 @@ class FigmaRectangle extends FigmaVector
     with PBColorMixin
     implements AbstractFigmaNodeFactory {
   @override
-  List<FigmaFill> fills;
-
-  @override
   String type = 'RECTANGLE';
   FigmaRectangle({
     String name,
@@ -42,7 +39,6 @@ class FigmaRectangle extends FigmaVector
     this.cornerRadius,
     this.rectangleCornerRadii,
     this.points,
-    this.fills,
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
@@ -62,7 +58,6 @@ class FigmaRectangle extends FigmaVector
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
           styles: styles,
-          fills: fills,
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
@@ -87,8 +82,10 @@ class FigmaRectangle extends FigmaVector
 
   @override
   Future<PBDLNode> interpretNode() async {
-    var fillsMap = (fills == null || fills.isEmpty) ? null : fills.first;
-    if (fillsMap != null && fillsMap.type == 'IMAGE') {
+    var tempFill =
+        figmaStyleProperty.fills.firstWhere((fill) => fill.type == 'IMAGE');
+
+    if (tempFill != null) {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
       return Future.value(PBDLImage(

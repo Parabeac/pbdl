@@ -18,7 +18,6 @@ FigmaLine _$FigmaLineFromJson(Map<String, dynamic> json) {
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
     size: json['size'],
-    fills: json['fills'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],
     strokeAlign: json['strokeAlign'],
@@ -59,7 +58,6 @@ Map<String, dynamic> _$FigmaLineToJson(FigmaLine instance) => <String, dynamic>{
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
-      'fills': instance.fills,
       'imageReference': instance.imageReference,
       'type': instance.type,
     };

@@ -28,10 +28,6 @@ FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
         ?.map((e) => (e as num)?.toDouble())
         ?.toList(),
     points: json['points'] as List,
-    fills: (json['fills'] as List)
-        ?.map((e) =>
-            e == null ? null : FigmaFill.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
@@ -69,7 +65,6 @@ Map<String, dynamic> _$FigmaRectangleToJson(FigmaRectangle instance) =>
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
       'imageReference': instance.imageReference,
-      'fills': instance.fills,
       'type': instance.type,
       'points': instance.points,
       'cornerRadius': instance.cornerRadius,
