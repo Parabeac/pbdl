@@ -64,7 +64,6 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
             absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
-            style: style,
             strokes: strokes,
             strokeWeight: strokeWeight,
             strokeAlign: strokeAlign,
@@ -113,7 +112,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           boundaryRectangle: absoluteBoundingBox.interpretFrame(),
           isVisible: isVisible,
           name: name,
-          style: style?.interpretStyle(),
+          style: figmaStyleProperty?.interpretStyle(),
           constraints: constraints?.interpret(),
           prototypeNodeUUID: transitionNodeID,
           layoutMainAxisSizing: getGrowSizing(layoutGrow),
@@ -127,7 +126,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: style?.interpretStyle(),
+        style: figmaStyleProperty?.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),

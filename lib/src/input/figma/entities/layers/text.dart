@@ -5,9 +5,7 @@ import 'package:pbdl/src/input/figma/entities/style/figma_text_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text.dart';
-import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
-import '../style/figma_style.dart';
 import 'figma_node.dart';
 import 'vector.dart';
 
@@ -94,7 +92,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        // style: style.interpretStyle(), TODO: Fix style
+        style: figmaStyleProperty.interpretStyle(),
         content: content,
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),

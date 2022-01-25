@@ -1,11 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
-import 'package:pbdl/src/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -64,7 +62,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
-          style: style,
           strokes: strokes,
           strokeWeight: strokeWeight,
           strokeAlign: strokeAlign,
@@ -122,7 +119,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       name: name,
       isVisible: isVisible,
       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-      style: style.interpretStyle(),
+      style: figmaStyleProperty.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
       symbolID: UUID,
       constraints: isRoot

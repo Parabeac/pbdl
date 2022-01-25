@@ -8,7 +8,6 @@ import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
 
 import '../abstract_figma_node_factory.dart';
-import '../style/figma_style.dart';
 import 'figma_node.dart';
 
 part 'vector.g.dart';
@@ -88,7 +87,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      // style: style?.interpretStyle(), // TODO: Fix
+      style: figmaStyleProperty?.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),

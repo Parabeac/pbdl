@@ -85,7 +85,8 @@ class FigmaNode extends FigmaBaseNode {
       listEffects.add(FigmaEffect.fromJson(effect));
     }
 
-    var property = FigmaStyleProperty(listFills, figmaStroke, listEffects);
+    var property = FigmaStyleProperty(
+        fills: listFills, stroke: figmaStroke, effects: listEffects);
 
     return property;
   }

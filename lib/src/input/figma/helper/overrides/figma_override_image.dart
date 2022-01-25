@@ -38,7 +38,7 @@ class FigmaOverrideImage extends FigmaOverrideType {
     if (!matches(node)) {
       return null;
     }
-    // return (node as FigmaVector).style?.interpretStyle();  TODO: fix
+    return (node as FigmaVector).figmaStyleProperty?.interpretStyle();
   }
 
   @override

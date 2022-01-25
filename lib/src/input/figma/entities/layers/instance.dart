@@ -58,7 +58,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
-            style: style,
             strokes: strokes,
             strokeWeight: strokeWeight,
             strokeAlign: strokeAlign,
@@ -104,7 +103,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         name: name,
         isVisible: isVisible,
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-        style: style,
+        style: figmaStyleProperty,
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         symbolID: componentId,
@@ -120,7 +119,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           name: name,
           isVisible: isVisible,
           boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-          style: style?.interpretStyle(),
+          style: figmaStyleProperty?.interpretStyle(),
           prototypeNodeUUID: transitionNodeID,
           symbolID: componentId,
           constraints: constraints.interpret(),

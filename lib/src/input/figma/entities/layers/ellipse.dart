@@ -81,7 +81,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      // style: style?.interpretStyle(),  TODO: fix
+      style: figmaStyleProperty?.interpretStyle(),
       imageReference: imageReference,
       constraints: constraints?.interpret(),
       prototypeNodeUUID: transitionNodeID,
