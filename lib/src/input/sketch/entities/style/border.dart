@@ -37,10 +37,10 @@ class Border {
 
   PBDLBorder interpretBorder() {
     return PBDLBorder(
-      isEnabled: isEnabled,
-      fillType: fillType,
-      color: color?.interpretColor(),
-      thickness: thickness,
-    );
+        // isEnabled: isEnabled,
+        // fillType: fillType,
+        // color: color?.interpretColor(),
+        // thickness: thickness,
+        );
   }
 }

@@ -60,13 +60,13 @@ class Style {
 
   PBDLStyle interpretStyle() {
     return PBDLStyle(
-      backgroundColor: backgroundColor?.interpretColor(),
-      fills: fills.map((e) => e.interpretFill()).toList(),
-      borders: borders.map((e) => e.interpretBorder()).toList(),
-      borderOptions: borderOptions.interpretOptions(),
-      textStyle: textStyle?.interpretTextStyle(),
-      hasShadow: hasShadow,
-    );
+        // backgroundColor: backgroundColor?.interpretColor(),
+        // fills: fills.map((e) => e.interpretFill()).toList(),
+        // borders: borders.map((e) => e.interpretBorder()).toList(),
+        // borderOptions: borderOptions.interpretOptions(),
+        // textStyle: textStyle?.interpretTextStyle(),
+        // hasShadow: hasShadow,
+        );
   }
 
   @JsonKey(ignore: true)
