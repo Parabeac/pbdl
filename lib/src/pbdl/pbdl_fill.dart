@@ -8,15 +8,28 @@ import '../../pbdl.dart';
 part 'pbdl_fill.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PBDLFill extends PBDLNode {
+class PBDLFill {
   PBDLColor color;
+
+  @JsonKey(defaultValue: 100)
+  num opacity;
+
+  String blendMode;
+
+  String type;
+
   @JsonKey(defaultValue: true)
-  bool isEnabled;
-  //TODO: Fix constructor
-  PBDLFill(this.color, [this.isEnabled = true])
-      : super('', '', false, null, null, '');
-  @override
+  bool visible;
+
   final pbdlType = 'fill';
+
+  PBDLFill({
+    this.opacity,
+    this.blendMode,
+    this.type,
+    this.visible,
+    this.color,
+  });
 
   @override
   factory PBDLFill.fromJson(Map<String, dynamic> json) =>
@@ -24,3 +37,22 @@ class PBDLFill extends PBDLNode {
 
   Map<String, dynamic> toJson() => _$PBDLFillToJson(this);
 }
+
+// enum BlendMode {
+//   NORMAL,
+//   DARKEN,
+//   MULTIPLY,
+//   COLOR_BURN,
+//   LIGHTEN,
+//   SCREEN,
+//   COLOR_DODGE,
+//   OVERLAY,
+//   SOFT_LIGHT,
+//   HARD_LIGHT,
+//   DIFFERENCE,
+//   EXCLUSION,
+//   HUE,
+//   SATURATION,
+//   COLOR,
+//   LUMINOSITY,
+// }
