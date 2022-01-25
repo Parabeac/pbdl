@@ -29,7 +29,7 @@ class FigmaStyleProperty {
       fills: fills.map((fill) => fill.interpretFill()).toList(),
       borderOptions: stroke.interpretStroke(),
       effects: effects.map((effect) => effect.interpretEffect()).toList(),
-      textStyle: textStyle.interpretTextStyle(),
+      textStyle: textStyle?.interpretTextStyle(),
     );
   }
 }

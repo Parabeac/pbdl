@@ -34,7 +34,7 @@ class FigmaEffect {
       type: type,
       visible: visible,
       radius: radius,
-      color: color.interpretColor(),
+      color: color?.interpretColor(),
       blendMode: blendMode,
       offset: offset,
       showShadowBehindNode: showShadowBehindNode,
