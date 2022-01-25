@@ -8,19 +8,19 @@ part of 'pbdl_border.dart';
 
 PBDLBorder _$PBDLBorderFromJson(Map<String, dynamic> json) {
   return PBDLBorder(
-    isEnabled: json['isEnabled'] as bool,
-    fillType: (json['fillType'] as num)?.toDouble(),
+    blendMode: json['blendMode'] as String,
+    type: json['type'] as String,
     color: json['color'] == null
         ? null
         : PBDLColor.fromJson(json['color'] as Map<String, dynamic>),
-    thickness: (json['thickness'] as num)?.toDouble(),
+    visible: json['visible'] as bool ?? true,
   );
 }
 
 Map<String, dynamic> _$PBDLBorderToJson(PBDLBorder instance) =>
     <String, dynamic>{
-      'isEnabled': instance.isEnabled,
-      'fillType': instance.fillType,
+      'blendMode': instance.blendMode,
+      'type': instance.type,
       'color': instance.color?.toJson(),
-      'thickness': instance.thickness,
+      'visible': instance.visible,
     };
