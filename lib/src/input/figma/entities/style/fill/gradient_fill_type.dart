@@ -66,8 +66,13 @@ class GradientFillType implements FigmaFill {
 
   @override
   PBDLFill interpretFill() {
-    // TODO: implement interpretFill
-    throw UnimplementedError();
+    return PBDLFill(
+      opacity: opacity,
+      blendMode: blendMode,
+      type: type,
+      visible: visible,
+      color: color?.interpretColor(),
+    );
   }
 }
 
