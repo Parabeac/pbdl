@@ -2,6 +2,7 @@ import 'package:pbdl/src/pbdl/pbdl_border.dart';
 import 'package:pbdl/src/pbdl/pbdl_border_options.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
+import 'package:pbdl/src/pbdl/pbdl_effect.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -13,27 +14,20 @@ part 'pbdl_style.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLStyle extends PBDLNode {
-  PBDLColor backgroundColor;
   List<PBDLFill> fills;
-  List<PBDLBorder> borders;
   PBDLBorderOptions borderOptions;
-  PBDLTextStyle textStyle;
-  bool hasShadow = false;
+  List<PBDLEffect> effects;
 
-  @override
-  @JsonKey(ignore: true)
-  var child;
+  PBDLTextStyle textStyle;
 
   @override
   final pbdlType = 'style';
 
   PBDLStyle({
     this.fills,
-    this.backgroundColor,
-    this.borders,
     this.borderOptions,
     this.textStyle,
-    this.hasShadow,
+    this.effects,
   }) : super('', '', true, null, null, '');
 
   static PBDLStyle getStyle(dynamic style) {
