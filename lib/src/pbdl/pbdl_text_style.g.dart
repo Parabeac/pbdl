@@ -42,7 +42,7 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
     ..constraints = json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..pbdlType = json['type'] as String;
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
@@ -63,7 +63,7 @@ Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
       'weight': instance.weight,
       'fontDescriptor': instance.fontDescriptor?.toJson(),
       'paragraphStyle': instance.paragraphStyle?.toJson(),
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

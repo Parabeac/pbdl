@@ -37,7 +37,7 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..pbdlType = json['type'] as String
+    ..pbdlType = json['pbdlType'] as String
     ..imageReference = json['imageReference'] as String
     ..image = json['image'];
 }
@@ -63,7 +63,7 @@ Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
       'fillsList': instance.fillsList,
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
       'imageReference': instance.imageReference,
       'image': instance.image,
     };

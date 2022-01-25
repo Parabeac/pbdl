@@ -37,7 +37,7 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..parameters = json['parameters'] as List
-    ..pbdlType = json['type'] as String;
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
@@ -60,7 +60,7 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
       'overrideValues':
           instance.overrideValues?.map((e) => e?.toJson())?.toList(),
       'sharedNodeSetID': instance.sharedNodeSetID,
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

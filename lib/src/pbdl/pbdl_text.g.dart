@@ -31,7 +31,7 @@ PBDLText _$PBDLTextFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..pbdlType = json['type'] as String;
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLTextToJson(PBDLText instance) => <String, dynamic>{
@@ -47,7 +47,7 @@ Map<String, dynamic> _$PBDLTextToJson(PBDLText instance) => <String, dynamic>{
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
       'content': instance.content,
     };
 

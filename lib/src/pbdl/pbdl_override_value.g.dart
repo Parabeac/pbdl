@@ -10,7 +10,7 @@ PBDLOverrideValue _$PBDLOverrideValueFromJson(Map<String, dynamic> json) {
   return PBDLOverrideValue(
     json['UUID'] as String,
     json['name'] as String,
-    json['type'] as String,
+    json['pbdlType'] as String,
     json['value'] == null
         ? null
         : PBDLNode.fromJson(json['value'] as Map<String, dynamic>),
@@ -53,7 +53,7 @@ Map<String, dynamic> _$PBDLOverrideValueToJson(PBDLOverrideValue instance) =>
       'constraints': instance.constraints?.toJson(),
       'value': instance.value?.toJson(),
       'valueName': instance.valueName,
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

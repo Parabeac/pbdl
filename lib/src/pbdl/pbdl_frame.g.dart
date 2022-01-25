@@ -36,7 +36,7 @@ PBDLFrame _$PBDLFrameFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
-  )..pbdlType = json['type'] as String;
+  )..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
@@ -52,7 +52,7 @@ Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'constraints': instance.constraints?.toJson(),
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
       'fixedRadius': instance.fixedRadius,
       'background': instance.background,
       'autoLayoutOptions': instance.autoLayoutOptions?.toJson(),
@@ -93,7 +93,7 @@ PBDLRow _$PBDLRowFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLAutoLayoutOptions.fromJson(
             json['autoLayoutOptions'] as Map<String, dynamic>)
-    ..pbdlType = json['type'] as String;
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLRowToJson(PBDLRow instance) => <String, dynamic>{
@@ -112,7 +112,7 @@ Map<String, dynamic> _$PBDLRowToJson(PBDLRow instance) => <String, dynamic>{
       'fixedRadius': instance.fixedRadius,
       'background': instance.background,
       'autoLayoutOptions': instance.autoLayoutOptions?.toJson(),
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
     };
 
 PBDLCol _$PBDLColFromJson(Map<String, dynamic> json) {
@@ -145,7 +145,7 @@ PBDLCol _$PBDLColFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLAutoLayoutOptions.fromJson(
             json['autoLayoutOptions'] as Map<String, dynamic>)
-    ..pbdlType = json['type'] as String;
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLColToJson(PBDLCol instance) => <String, dynamic>{
@@ -164,5 +164,5 @@ Map<String, dynamic> _$PBDLColToJson(PBDLCol instance) => <String, dynamic>{
       'fixedRadius': instance.fixedRadius,
       'background': instance.background,
       'autoLayoutOptions': instance.autoLayoutOptions?.toJson(),
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
     };

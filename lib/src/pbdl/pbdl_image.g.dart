@@ -31,7 +31,7 @@ PBDLImage _$PBDLImageFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..pbdlType = json['type'] as String;
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLImageToJson(PBDLImage instance) => <String, dynamic>{
@@ -48,7 +48,7 @@ Map<String, dynamic> _$PBDLImageToJson(PBDLImage instance) => <String, dynamic>{
       'style': instance.style?.toJson(),
       'imageReference': instance.imageReference,
       'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

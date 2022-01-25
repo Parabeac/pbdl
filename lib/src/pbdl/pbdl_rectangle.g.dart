@@ -30,7 +30,7 @@ PBDLRectangle _$PBDLRectangleFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
-  )..pbdlType = json['type'] as String;
+  )..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLRectangleToJson(PBDLRectangle instance) =>
@@ -47,7 +47,7 @@ Map<String, dynamic> _$PBDLRectangleToJson(PBDLRectangle instance) =>
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'constraints': instance.constraints?.toJson(),
       'fixedRadius': instance.fixedRadius,
-      'type': instance.pbdlType,
+      'pbdlType': instance.pbdlType,
       'child': instance.child?.toJson(),
     };
 
