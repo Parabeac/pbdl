@@ -13,18 +13,20 @@ class FigmaFill {
   @JsonKey(defaultValue: 100)
   num opacity;
 
-  BlendMode blendMode;
+  String blendMode;
+
   String type;
+
+  @JsonKey(defaultValue: true)
+  bool visible;
 
   FigmaFill(
     this.opacity,
     this.blendMode,
     this.type,
     this.visible,
+    this.color,
   );
-
-  @JsonKey(defaultValue: true)
-  bool visible;
 
   Map<String, dynamic> toJson() {}
   FigmaFill createFigmaFill(Map<String, dynamic> json) =>
@@ -34,8 +36,11 @@ class FigmaFill {
 
   PBDLFill interpretFill() {
     return PBDLFill(
-      color?.interpretColor(),
-      visible,
+      opacity: opacity,
+      blendMode: blendMode,
+      type: type,
+      visible: visible,
+      color: color.interpretColor(),
     );
   }
 
@@ -53,21 +58,21 @@ class FigmaFill {
   // }
 }
 
-enum BlendMode {
-  NORMAL,
-  DARKEN,
-  MULTIPLY,
-  COLOR_BURN,
-  LIGHTEN,
-  SCREEN,
-  COLOR_DODGE,
-  OVERLAY,
-  SOFT_LIGHT,
-  HARD_LIGHT,
-  DIFFERENCE,
-  EXCLUSION,
-  HUE,
-  SATURATION,
-  COLOR,
-  LUMINOSITY,
-}
+// enum BlendMode {
+//   NORMAL,
+//   DARKEN,
+//   MULTIPLY,
+//   COLOR_BURN,
+//   LIGHTEN,
+//   SCREEN,
+//   COLOR_DODGE,
+//   OVERLAY,
+//   SOFT_LIGHT,
+//   HARD_LIGHT,
+//   DIFFERENCE,
+//   EXCLUSION,
+//   HUE,
+//   SATURATION,
+//   COLOR,
+//   LUMINOSITY,
+// }

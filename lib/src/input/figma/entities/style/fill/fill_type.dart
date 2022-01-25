@@ -17,7 +17,7 @@ class ImageFillType implements FigmaFill {
   String type = 'IMAGE';
 
   @override
-  BlendMode blendMode;
+  String blendMode;
 
   @override
   @JsonKey(defaultValue: true)
@@ -62,7 +62,7 @@ class SolidFillType implements FigmaFill {
   FigmaColor color;
 
   @override
-  BlendMode blendMode;
+  String blendMode;
 
   @override
   @JsonKey(defaultValue: true)

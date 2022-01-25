@@ -14,7 +14,7 @@ GradientFillType _$GradientFillTypeFromJson(Map<String, dynamic> json) {
         ?.toList(),
     gradientHandlePositions: GradientFillType._pointsFromJson(
         json['gradientHandlePositions'] as List),
-    blendMode: _$enumDecodeNullable(_$BlendModeEnumMap, json['blendMode']),
+    blendMode: json['blendMode'] as String,
     visible: json['visible'] as bool ?? true,
     opacity: json['opacity'] as num ?? 100,
   )
@@ -31,61 +31,10 @@ Map<String, dynamic> _$GradientFillTypeToJson(GradientFillType instance) =>
           GradientFillType._pointsToJson(instance.gradientHandlePositions),
       'color': instance.color,
       'type': instance.type,
-      'blendMode': _$BlendModeEnumMap[instance.blendMode],
+      'blendMode': instance.blendMode,
       'visible': instance.visible,
       'opacity': instance.opacity,
     };
-
-T _$enumDecode<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    throw ArgumentError('A value must be provided. Supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-
-  final value = enumValues.entries
-      .singleWhere((e) => e.value == source, orElse: () => null)
-      ?.key;
-
-  if (value == null && unknownValue == null) {
-    throw ArgumentError('`$source` is not one of the supported values: '
-        '${enumValues.values.join(', ')}');
-  }
-  return value ?? unknownValue;
-}
-
-T _$enumDecodeNullable<T>(
-  Map<T, dynamic> enumValues,
-  dynamic source, {
-  T unknownValue,
-}) {
-  if (source == null) {
-    return null;
-  }
-  return _$enumDecode<T>(enumValues, source, unknownValue: unknownValue);
-}
-
-const _$BlendModeEnumMap = {
-  BlendMode.NORMAL: 'NORMAL',
-  BlendMode.DARKEN: 'DARKEN',
-  BlendMode.MULTIPLY: 'MULTIPLY',
-  BlendMode.COLOR_BURN: 'COLOR_BURN',
-  BlendMode.LIGHTEN: 'LIGHTEN',
-  BlendMode.SCREEN: 'SCREEN',
-  BlendMode.COLOR_DODGE: 'COLOR_DODGE',
-  BlendMode.OVERLAY: 'OVERLAY',
-  BlendMode.SOFT_LIGHT: 'SOFT_LIGHT',
-  BlendMode.HARD_LIGHT: 'HARD_LIGHT',
-  BlendMode.DIFFERENCE: 'DIFFERENCE',
-  BlendMode.EXCLUSION: 'EXCLUSION',
-  BlendMode.HUE: 'HUE',
-  BlendMode.SATURATION: 'SATURATION',
-  BlendMode.COLOR: 'COLOR',
-  BlendMode.LUMINOSITY: 'LUMINOSITY',
-};
 
 GradientStop _$GradientStopFromJson(Map<String, dynamic> json) {
   return GradientStop(

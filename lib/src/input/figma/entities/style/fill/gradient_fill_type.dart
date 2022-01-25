@@ -20,7 +20,7 @@ class GradientFillType implements FigmaFill {
   String type;
 
   @override
-  BlendMode blendMode;
+  String blendMode;
 
   @override
   @JsonKey(defaultValue: true)

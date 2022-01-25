@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_effect.dart';
 
 import 'figma_color.dart';
 
@@ -6,7 +7,7 @@ part 'figma_effect.g.dart';
 
 @JsonSerializable()
 class FigmaEffect {
-  EffectType type;
+  String type;
   bool visible;
   num radius;
   FigmaColor color;
@@ -27,11 +28,23 @@ class FigmaEffect {
   Map<String, dynamic> toJson() => _$FigmaEffectToJson(this);
   factory FigmaEffect.fromJson(Map<String, dynamic> json) =>
       _$FigmaEffectFromJson(json);
+
+  PBDLEffect interpretEffect() {
+    return PBDLEffect(
+      type: type,
+      visible: visible,
+      radius: radius,
+      color: color.interpretColor(),
+      blendMode: blendMode,
+      offset: offset,
+      showShadowBehindNode: showShadowBehindNode,
+    );
+  }
 }
 
-enum EffectType {
-  LAYER_BLUR,
-  DROP_SHADOW,
-  INNER_SHADOW,
-  BACKGROUND_BLUR,
-}
+// enum EffectType {
+//   LAYER_BLUR,
+//   DROP_SHADOW,
+//   INNER_SHADOW,
+//   BACKGROUND_BLUR,
+// }
