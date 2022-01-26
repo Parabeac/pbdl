@@ -12,11 +12,10 @@ ImageFillType _$ImageFillTypeFromJson(Map<String, dynamic> json) {
     blendMode: json['blendMode'] as String,
     visible: json['visible'] as bool ?? true,
     opacity: json['opacity'] as num ?? 100,
-  )
-    ..type = json['type'] as String
-    ..color = json['color'] == null
+    color: json['color'] == null
         ? null
-        : FigmaColor.fromJson(json['color'] as Map<String, dynamic>);
+        : FigmaColor.fromJson(json['color'] as Map<String, dynamic>),
+  )..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$ImageFillTypeToJson(ImageFillType instance) =>

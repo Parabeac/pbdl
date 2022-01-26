@@ -35,6 +35,7 @@ class ImageFillType implements FigmaFill {
     this.blendMode,
     this.visible,
     this.opacity,
+    this.color,
   });
 
   @override
@@ -48,8 +49,14 @@ class ImageFillType implements FigmaFill {
 
   @override
   PBDLFill interpretFill() {
-    // TODO: implement interpretFill
-    throw UnimplementedError();
+    return PBDLFill(
+      opacity: opacity,
+      blendMode: blendMode,
+      type: type,
+      isEnabled: visible,
+      color: color?.interpretColor(),
+      imageRef: imageRef,
+    );
   }
 }
 
@@ -94,7 +101,7 @@ class SolidFillType implements FigmaFill {
       opacity: opacity,
       blendMode: blendMode,
       type: type,
-      visible: visible,
+      isEnabled: visible,
       color: color.interpretColor(),
     );
   }
