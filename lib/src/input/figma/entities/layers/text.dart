@@ -16,9 +16,6 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
   FigmaTextStyle style;
 
   @override
-  List<FigmaFill> fills;
-
-  @override
   String type = 'TEXT';
   FigmaText({
     String name,
@@ -42,7 +39,6 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
     String transitionEasing,
     layoutAlign,
     layoutGrow,
-    this.fills,
   }) : super(
           name: name,
           visible: visible,
@@ -92,7 +88,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: figmaStyleProperty.interpretStyle(),
+        style: figmaStyleProperty.interpretStyle(style),
         content: content,
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),

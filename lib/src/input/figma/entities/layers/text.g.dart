@@ -34,10 +34,6 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
     layoutAlign: json['layoutAlign'],
     layoutGrow: json['layoutGrow'],
-    fills: (json['fills'] as List)
-        ?.map((e) =>
-            e == null ? null : FigmaFill.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null
@@ -79,7 +75,6 @@ Map<String, dynamic> _$FigmaTextToJson(FigmaText instance) => <String, dynamic>{
       'styles': instance.styles,
       'imageReference': instance.imageReference,
       'style': instance.style,
-      'fills': instance.fills,
       'type': instance.type,
       'characters': instance.content,
       'characterStyleOverrides': instance.characterStyleOverrides,
