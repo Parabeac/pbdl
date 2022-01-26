@@ -89,10 +89,27 @@ class FigmaTextStyle {
 
   PBDLTextStyle interpretTextStyle() {
     return PBDLTextStyle(
-        // fontColor: fontColor.interpretColor(),
-        // weight: weight,
-        // paragraphStyle: paragraphStyle.interpretParagraphStyle(),
-        // fontDescriptor: fontDescriptor.interpretFontDescriptor(), TODO: Fix
-        );
+      fontFamily: fontFamily,
+      fontPostScriptName: fontPostScriptName,
+      paragraphSpacing: paragraphSpacing,
+      paragraphIndent: paragraphIndent,
+      listSpacing: listSpacing,
+      italics: italics,
+      fontWeight: fontWeight,
+      fontSize: fontSize,
+      textCase: textCase,
+      textDecoration: textDecoration,
+      textAutoResize: textAutoResize,
+      textAlignHorizontal: textAlignHorizontal,
+      textAlignVertical: textAlignVertical,
+      letterSpacing: letterSpacing,
+      fills: fills?.map((fill) => fill.interpretFill())?.toList(),
+      hyperLink: hyperLink,
+      opentypeFlags: opentypeFlags,
+      lineHeightPx: lineHeightPx,
+      lineHeightPercent: lineHeightPercent,
+      lineHeightPercentFontSize: lineHeightPercentFontSize,
+      lineHeightUnit: lineHeightUnit,
+    );
   }
 }
