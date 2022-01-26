@@ -72,7 +72,7 @@ class PBDLSharedMasterNode extends PBDLNode
           name,
           isVisible,
           boundaryRectangle,
-          PBDLStyle.getStyle(style),
+          style,
           prototypeNodeUUID,
           constraints: (constraints is! Map)
               ? constraints

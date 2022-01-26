@@ -11,17 +11,19 @@ PBDLFill _$PBDLFillFromJson(Map<String, dynamic> json) {
     opacity: json['opacity'] as num ?? 100,
     blendMode: json['blendMode'] as String,
     type: json['type'] as String,
-    visible: json['visible'] as bool ?? true,
+    isEnabled: json['isEnabled'] as bool ?? true,
     color: json['color'] == null
         ? null
         : PBDLColor.fromJson(json['color'] as Map<String, dynamic>),
+    imageRef: json['imageRef'] as String,
   );
 }
 
 Map<String, dynamic> _$PBDLFillToJson(PBDLFill instance) => <String, dynamic>{
+      'imageRef': instance.imageRef,
       'color': instance.color?.toJson(),
       'opacity': instance.opacity,
       'blendMode': instance.blendMode,
       'type': instance.type,
-      'visible': instance.visible,
+      'isEnabled': instance.isEnabled,
     };

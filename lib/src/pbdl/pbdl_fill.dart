@@ -7,6 +7,9 @@ part 'pbdl_fill.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLFill {
+  // String that tidentifies the ID of the image
+  String imageRef;
+
   PBDLColor color;
 
   @JsonKey(defaultValue: 100)
@@ -17,7 +20,7 @@ class PBDLFill {
   String type;
 
   @JsonKey(defaultValue: true)
-  bool visible;
+  bool isEnabled;
 
   final pbdlType = 'fill';
 
@@ -25,8 +28,9 @@ class PBDLFill {
     this.opacity,
     this.blendMode,
     this.type,
-    this.visible,
+    this.isEnabled,
     this.color,
+    this.imageRef,
   });
 
   @override

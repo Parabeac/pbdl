@@ -39,7 +39,7 @@ class FigmaFill {
       opacity: opacity,
       blendMode: blendMode,
       type: type,
-      visible: visible,
+      isEnabled: visible,
       color: color.interpretColor(),
     );
   }

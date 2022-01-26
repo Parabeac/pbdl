@@ -1,3 +1,4 @@
+import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_border.dart';
 import 'package:pbdl/src/pbdl/pbdl_border_options.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
@@ -34,7 +35,7 @@ class PBDLStyle extends PBDLNode {
     if (style is Map) {
       return PBDLStyle.fromJson(style);
     }
-    return style;
+    return (style as FigmaStyleProperty).interpretStyle();
   }
 
   @override
