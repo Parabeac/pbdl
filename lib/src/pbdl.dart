@@ -22,13 +22,20 @@ class PBDL {
   static Future<PBDLProject> fromSketch(
     String sketchPath, {
 
-    /// Absolute path to where pngs and JSON will be exported
+    /// Absolute path to where JSON will be exported
     @required String outputPath,
+
+    /// Absolute path to where pngs will be exported.
+    /// If [null], will have the same path as `outputPath`
+    String pngPath,
 
     /// [bool] that indicates whether the pbdl file will be written to the `outputPath`
     bool exportPbdlJson = false,
   }) async {
     return await runZonedGuarded(() async {
+      if (pngPath == null || pngPath.isEmpty) {
+        pngPath = outputPath;
+      }
       await Sentry.init(
         (p0) => p0.dsn =
             'https://6e011ce0d8cd4b7fb0ff284a23c5cb37@o433482.ingest.sentry.io/5388747',
@@ -36,6 +43,7 @@ class PBDL {
 
       _setupMainInfo(
         outputPath,
+        pngPath,
         projectName: p.basename(sketchPath).replaceFirst('.sketch', ''),
       );
 
@@ -72,19 +80,26 @@ class PBDL {
     String projectID,
     String key, {
 
-    /// Absolute path to where pngs and JSON will be exported
+    /// Absolute path to where JSON will be exported
     @required String outputPath,
+
+    /// Absolute path to where pngs will be exported.
+    /// If [null], will have the same path as `outputPath`
+    String pngPath,
 
     /// [bool] that indicates whether the pbdl file will be written to the `outputPath`
     bool exportPbdlJson = false,
     String projectName,
   }) async {
     return await runZonedGuarded(() async {
+      if (pngPath == null || pngPath.isEmpty) {
+        pngPath = outputPath;
+      }
       await Sentry.init(
         (p0) => p0.dsn =
             'https://6e011ce0d8cd4b7fb0ff284a23c5cb37@o433482.ingest.sentry.io/5388747',
       );
-      _setupMainInfo(outputPath);
+      _setupMainInfo(outputPath, pngPath);
 
       var figmaProject = await FigmaController().convertFile(projectID, key);
       var pbdl = await figmaProject.interpretNode();
@@ -111,17 +126,23 @@ class PBDL {
   }
 
   static void _setupMainInfo(
-    String outputPath, {
+    String outputPath,
+    String pngPath, {
     String projectName = 'foo',
   }) {
     MainInfo().projectName = projectName;
     MainInfo().cwd = Directory.current;
-    if (outputPath != null && outputPath.isNotEmpty) {
-      MainInfo().outputPath = p.normalize(p.absolute(p.join(outputPath)));
-    } else {
-      MainInfo().outputPath = p.join(Directory.current.path);
+    MainInfo().outputPath = _normalizedPath(outputPath);
+    MainInfo().pngPath = _normalizedPath(pngPath);
+  }
+
+  /// Normalizes `absPath` if non-null and non-empty.
+  /// Otherwise, returns current path
+  static String _normalizedPath(String absPath) {
+    if (absPath != null && absPath.isNotEmpty) {
+      return p.normalize(p.absolute(p.join(absPath)));
     }
-    MainInfo().pngPath = p.absolute(p.join(MainInfo().outputPath, 'images'));
+    return p.join(Directory.current.path);
   }
 
   /// Method that creates and returns a [PBDLProject] from json file
