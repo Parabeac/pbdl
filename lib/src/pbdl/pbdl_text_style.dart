@@ -1,13 +1,9 @@
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
-import 'package:pbdl/src/pbdl/pbdl_font_descriptor.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_paragraph_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
-import 'pbdl_color.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_text_style.g.dart';

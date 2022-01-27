@@ -1,14 +1,11 @@
 import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
-import 'package:pbdl/src/pbdl/pbdl_border.dart';
 import 'package:pbdl/src/pbdl/pbdl_border_options.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_effect.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text_style.dart';
-import 'pbdl_color.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_style.g.dart';
