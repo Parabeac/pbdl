@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -31,31 +32,36 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   String imageReference;
 
-  Group(
-      {name,
-      isVisible,
-      type,
-      pluginData,
-      sharedPluginData,
-      boundaryRectangle,
-      style,
-      strokes,
-      strokeWeight,
-      strokeAlign,
-      cornerRadius,
-      FigmaConstraints constraints,
-      layoutAlign,
-      size,
-      horizontalPadding,
-      verticalPadding,
-      itemSpacing,
-      List<FigmaNode> children,
-      String UUID,
-      FigmaColor backgroundColor,
-      String transitionNodeID,
-      num transitionDuration,
-      String transitionEasing})
-      : super(
+  @override
+  @JsonKey(ignore: false)
+  FigmaStyleProperty figmaStyleProperty;
+
+  Group({
+    name,
+    isVisible,
+    type,
+    pluginData,
+    sharedPluginData,
+    boundaryRectangle,
+    style,
+    strokes,
+    strokeWeight,
+    strokeAlign,
+    cornerRadius,
+    FigmaConstraints constraints,
+    layoutAlign,
+    size,
+    horizontalPadding,
+    verticalPadding,
+    itemSpacing,
+    List<FigmaNode> children,
+    String UUID,
+    FigmaColor backgroundColor,
+    String transitionNodeID,
+    num transitionDuration,
+    String transitionEasing,
+    figmaStyleProperty,
+  }) : super(
             name: name,
             isVisible: isVisible,
             type: type,
