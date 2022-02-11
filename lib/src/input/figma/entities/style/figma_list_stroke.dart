@@ -25,7 +25,7 @@ class FigmaListStroke {
     return PBDLBorder(
       blendMode: blendMode,
       type: type,
-      color: color.interpretColor(),
+      color: color?.interpretColor(),
       visible: visible,
     );
   }

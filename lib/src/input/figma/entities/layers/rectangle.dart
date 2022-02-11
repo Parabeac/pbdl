@@ -81,13 +81,14 @@ class FigmaRectangle extends FigmaVector
     var tempFill;
 
     try {
-      tempFill =
-          figmaStyleProperty.fills.firstWhere((fill) => fill.type == 'IMAGE');
+      tempFill = figmaStyleProperty.fills.length == 1
+          ? figmaStyleProperty.fills.first.type == 'IMAGE'
+          : null;
     } catch (e) {
       tempFill = null;
     }
 
-    if (tempFill != null) {
+    if (tempFill != null && tempFill) {
       imageReference = FigmaAssetProcessor().processImage(UUID);
 
       return Future.value(PBDLImage(
