@@ -8,6 +8,7 @@ import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.da
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
@@ -126,7 +127,7 @@ class FigmaFrame extends FigmaChildrenNode
     } else {
       if (areAllVectors()) {
         imageReference =
-            FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+            FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
 
         var tempPrototypeID = childrenHavePrototypeNode();
         if (tempPrototypeID != null) {
@@ -145,7 +146,7 @@ class FigmaFrame extends FigmaChildrenNode
             UUID: UUID,
             boundaryRectangle: absoluteBoundingBox.interpretFrame(),
             isVisible: isVisible,
-            name: name,
+            name: AssetProcessingService.getImageName(name),
             style: figmaStyleProperty?.interpretStyle(),
             constraints: constraints?.interpret(),
             prototypeNodeUUID: transitionNodeID,

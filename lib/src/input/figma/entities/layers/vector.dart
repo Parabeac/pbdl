@@ -3,6 +3,7 @@ import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
@@ -102,7 +103,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     }
 
     imageReference =
-        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
 
     if (absoluteBoundingBox != null) {
       if (absoluteBoundingBox.height == 0.0) {
@@ -118,7 +119,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       imageReference: imageReference,
       boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
-      name: name,
+      name: AssetProcessingService.getImageName(name),
       style: figmaStyleProperty?.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret(),

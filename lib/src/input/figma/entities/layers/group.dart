@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -99,7 +100,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() async {
     if (areAllVectors()) {
       imageReference =
-          FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+          FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
 
       var tempPrototypeID = childrenHavePrototypeNode();
       if (tempPrototypeID != null) {
@@ -118,7 +119,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           UUID: UUID,
           boundaryRectangle: absoluteBoundingBox.interpretFrame(),
           isVisible: isVisible,
-          name: name,
+          name: AssetProcessingService.getImageName(name),
           style: figmaStyleProperty?.interpretStyle(),
           constraints: constraints?.interpret(),
           prototypeNodeUUID: transitionNodeID,
