@@ -125,7 +125,8 @@ class FigmaFrame extends FigmaChildrenNode
       );
     } else {
       if (areAllVectors()) {
-        imageReference = FigmaAssetProcessor().processImage(UUID);
+        imageReference =
+            FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
 
         var tempPrototypeID = childrenHavePrototypeNode();
         if (tempPrototypeID != null) {

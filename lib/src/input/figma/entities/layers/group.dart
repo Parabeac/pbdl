@@ -98,7 +98,8 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   Future<PBDLNode> interpretNode() async {
     if (areAllVectors()) {
-      imageReference = FigmaAssetProcessor().processImage(UUID);
+      imageReference =
+          FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
 
       var tempPrototypeID = childrenHavePrototypeNode();
       if (tempPrototypeID != null) {

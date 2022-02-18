@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 import 'package:http2/http2.dart';
+import 'package:pbdl/src/input/figma/entities/figma_key.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:sentry/sentry.dart';
 
@@ -13,7 +14,10 @@ class APICallService {
   static String HTTP_STATUS_KEY = ':status';
 
   /// Makes a GET call to figma using `url` and `token`
-  static Future<dynamic> makeAPICall(String url, String token) async {
+  static Future<dynamic> makeAPICall(
+    String url,
+    FigmaKey key,
+  ) async {
     var uri = Uri.parse(url);
 
     /// The following request must be done using http2. The reason is
@@ -35,7 +39,9 @@ class APICallService {
               ':path', uri.path + (uri.query.isEmpty ? '' : '?${uri.query}')),
           Header.ascii(':scheme', uri.scheme),
           Header.ascii(':authority', uri.host),
-          Header.ascii('x-figma-token', token),
+          key.type == FIGMA_KEY_TYPE.PERSONAL_ACCESS_TOKEN
+              ? Header.ascii('x-figma-token', key.keyStr)
+              : Header.ascii('authorization', key.keyStr),
         ],
         endStream: true,
       );

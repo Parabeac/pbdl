@@ -1,5 +1,6 @@
 //Responsive UI code
 
+import 'package:pbdl/src/input/figma/entities/figma_key.dart';
 import 'package:pbdl/src/input/figma/entities/layers/component.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
 import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
@@ -11,11 +12,14 @@ class FigmaController {
   DesignType get designType => DesignType.FIGMA;
 
   String figmaProjectID;
-  String figmaAPIKey;
+  FigmaKey figmaAPIKey;
 
-  Future<FigmaProject> convertFile(String projectID, String key) async {
+  Future<FigmaProject> convertFile(
+    String projectID,
+    FigmaKey figmaKey,
+  ) async {
     figmaProjectID = projectID;
-    figmaAPIKey = key;
+    figmaAPIKey = figmaKey;
     FigmaProject figmaProject;
     var jsonFigma = await _fetchFigmaFile();
     if (jsonFigma == null) {
@@ -23,7 +27,7 @@ class FigmaController {
     }
     AzureAssetService().projectUUID = figmaProjectID;
     MainInfo().projectName = jsonFigma['name'];
-    MainInfo().figmaKey = key;
+    MainInfo().figmaKey = figmaKey;
     MainInfo().figmaProjectID = projectID;
     figmaProject ??=
         generateFigmaTree(figmaProjectID, jsonFigma, MainInfo().projectName);

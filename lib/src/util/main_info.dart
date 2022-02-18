@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:pbdl/src/input/figma/entities/figma_key.dart';
+
 class MainInfo {
   static final MainInfo _singleton = MainInfo._internal();
 
@@ -9,8 +11,8 @@ class MainInfo {
   /// Current working directory; contains the path from where the script was called
   Directory cwd;
 
-  /// API needed to do API callls
-  String figmaKey;
+  /// APIkey needed to do API calls
+  FigmaKey figmaKey;
 
   /// Project ID on Figma
   String figmaProjectID;

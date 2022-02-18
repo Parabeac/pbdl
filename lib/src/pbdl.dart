@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:meta/meta.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
+import 'package:pbdl/src/input/figma/entities/figma_key.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
@@ -77,8 +78,9 @@ class PBDL {
 
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
   static Future<PBDLProject> fromFigma(
-    String projectID,
-    String key, {
+    String projectID, {
+    String key,
+    String oauthKey,
 
     /// Absolute path to where JSON will be exported
     @required String outputPath,
@@ -100,8 +102,8 @@ class PBDL {
             'https://6e011ce0d8cd4b7fb0ff284a23c5cb37@o433482.ingest.sentry.io/5388747',
       );
       _setupMainInfo(outputPath, pngPath);
-
-      var figmaProject = await FigmaController().convertFile(projectID, key);
+      var figmaKey = FigmaKey(personalAccessToken: key, oAuthToken: oauthKey);
+      var figmaProject = await FigmaController().convertFile(projectID, figmaKey);
       var pbdl = await figmaProject.interpretNode();
 
       await FigmaAssetProcessor().processImageQueue(
