@@ -86,7 +86,18 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    imageReference = FigmaAssetProcessor().processImage(UUID);
+    imageReference =
+        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+
+    if (absoluteBoundingBox != null) {
+      if (absoluteBoundingBox.height == 0.0) {
+        absoluteBoundingBox.height = strokeWeight;
+      }
+      if (absoluteBoundingBox.width == 0.0) {
+        absoluteBoundingBox.width = strokeWeight;
+      }
+    }
+
     return Future.value(PBDLImage(
       UUID: UUID,
       imageReference: imageReference,
