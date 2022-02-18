@@ -87,7 +87,8 @@ class FigmaRectangle extends FigmaVector
     var fillsMap =
         (fillsList == null || fillsList.isEmpty) ? {} : fillsList.first;
     if (fillsMap != null && fillsMap['type'] == 'IMAGE') {
-      imageReference = FigmaAssetProcessor().processImage(UUID);
+      imageReference =
+          FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
 
       return Future.value(PBDLImage(
         imageReference: imageReference,
