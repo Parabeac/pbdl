@@ -19,10 +19,19 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
     isVisible: json['isVisible'] as bool,
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     style: json['style'],
     symbolID: json['symbolID'] as String,
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
+    layoutMainAxisSizing:
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
+    layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
+        json['layoutCrossAxisSizing'] as String),
+    sharedNodeSetID: json['sharedNodeSetID'] as String,
   )
     ..child = json['child'] == null
         ? null
@@ -35,15 +44,26 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
         PBDLSharedInstanceNode instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'name': instance.name,
       'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
       'symbolID': instance.symbolID,
       'parameters': instance.parameters,
       'overrideValues':
           instance.overrideValues?.map((e) => e?.toJson())?.toList(),
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'sharedNodeSetID': instance.sharedNodeSetID,
       'type': instance.type,
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

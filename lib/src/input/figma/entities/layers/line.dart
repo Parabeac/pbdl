@@ -1,10 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_border.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../abstract_figma_node_factory.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
-import 'figma_frame.dart';
 import 'vector.dart';
 
 part 'line.g.dart';
@@ -13,35 +17,33 @@ part 'line.g.dart';
 class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   String type = 'LINE';
-  FigmaLine(
-      {String name,
-      bool visible,
-      String type,
-      pluginData,
-      sharedPluginData,
-      style,
-      layoutAlign,
-      constraints,
-      boundaryRectangle,
-      size,
-      fills,
-      strokes,
-      strokeWeight,
-      strokeAlign,
-      styles,
-      String transitionNodeID,
-      num transitionDuration,
-      String transitionEasing})
-      : super(
+  FigmaLine({
+    String name,
+    bool visible,
+    String type,
+    pluginData,
+    sharedPluginData,
+    layoutAlign,
+    FigmaConstraints constraints,
+    boundaryRectangle,
+    size,
+    fills,
+    strokes,
+    strokeWeight,
+    strokeAlign,
+    styles,
+    String transitionNodeID,
+    num transitionDuration,
+    String transitionEasing,
+  }) : super(
           name: name,
           visible: visible,
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle,
+          absoluteBoundingBox: boundaryRectangle,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -55,21 +57,49 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) =>
       FigmaLine.fromJson(json);
-  factory FigmaLine.fromJson(Map<String, dynamic> json) =>
-      _$FigmaLineFromJson(json);
+  factory FigmaLine.fromJson(Map<String, dynamic> json) {
+    return _$FigmaLineFromJson(json);
+  }
   @override
   Map<String, dynamic> toJson() => _$FigmaLineToJson(this);
 
   @override
   Future<PBDLNode> interpretNode() {
-    return Future.value(PBDLRectangle(
-      UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      style: style.interpretStyle(),
-      prototypeNodeUUID: transitionNodeID,
-    ));
+    var tempStyle = fillsList.isNotEmpty
+        ? FigmaStyle(
+            fills: [FigmaFill.fromJson(fillsList[0])], borders: [FigmaBorder()])
+        : FigmaStyle(fills: [
+            FigmaFill.fromJson({
+              'isEnabled': true,
+              'color': {
+                'a': 1.0,
+                'r': 0.0,
+                'g': 0.0,
+                'b': 0.0,
+              }
+            })
+          ], borders: [
+            FigmaBorder()
+          ]);
+
+    /// Added thickness as the height for [PBDLRectangle]
+    /// and substracted to the y axis, so it can still fit
+    /// on the frame
+    absoluteBoundingBox.height = strokeWeight;
+    absoluteBoundingBox.y -= strokeWeight;
+    return Future.value(
+      PBDLRectangle(
+        style: tempStyle?.interpretStyle(),
+        UUID: UUID,
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      ),
+    );
   }
 
   @override

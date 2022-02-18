@@ -13,7 +13,7 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    boundaryRectangle: json['absoluteBoundingBox'] == null
+    absoluteBoundingBox: json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>),
@@ -21,8 +21,12 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
     strokeWeight: (json['strokeWeight'] as num)?.toDouble(),
     strokeAlign: json['strokeAlign'] as String,
     cornerRadius: (json['cornerRadius'] as num)?.toDouble(),
-    constraints: json['constraints'],
-    layoutAlign: json['layoutAlign'] as String,
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
+    layoutAlign: json['layoutAlign'],
+    layoutGrow: json['layoutGrow'],
     size: json['size'],
     horizontalPadding: (json['horizontalPadding'] as num)?.toDouble(),
     verticalPadding: (json['verticalPadding'] as num)?.toDouble(),
@@ -53,19 +57,20 @@ Map<String, dynamic> _$FigmaFrameToJson(FigmaFrame instance) =>
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints?.toJson(),
       'child': instance.child?.toJson(),
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'absoluteBoundingBox': instance.boundaryRectangle?.toJson(),
+      'absoluteBoundingBox': instance.absoluteBoundingBox?.toJson(),
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'cornerRadius': instance.cornerRadius,
-      'constraints': instance.constraints,
-      'layoutAlign': instance.layoutAlign,
       'size': instance.size,
       'horizontalPadding': instance.horizontalPadding,
       'verticalPadding': instance.verticalPadding,

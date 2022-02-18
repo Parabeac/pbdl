@@ -17,10 +17,17 @@ FigmaNode _$FigmaNodeFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
-  )
-    ..boundaryRectangle = json['boundaryRectangle'] == null
+    constraints: json['constraints'] == null
         ? null
-        : FigmaRect.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
+    layoutAlign: json['layoutAlign'] as String,
+    layoutGrow: json['layoutGrow'] as num,
+  )
+    ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
+        ? null
+        : FigmaRect.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>)
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>);
@@ -32,8 +39,11 @@ Map<String, dynamic> _$FigmaNodeToJson(FigmaNode instance) => <String, dynamic>{
       'type': instance.type,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
-      'boundaryRectangle': instance.boundaryRectangle,
+      'absoluteBoundingBox': instance.absoluteBoundingBox,
+      'constraints': instance.constraints,
       'child': instance.child,
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,

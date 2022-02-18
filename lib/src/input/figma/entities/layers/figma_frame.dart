@@ -1,10 +1,15 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/layers/rectangle.dart';
+import 'package:pbdl/src/input/figma/entities/layers/text.dart';
+import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
-import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
@@ -16,9 +21,9 @@ part 'figma_frame.g.dart';
 class FigmaFrame extends FigmaChildrenNode
     with PBColorMixin
     implements FigmaNodeFactory {
-  @JsonKey(name: 'absoluteBoundingBox')
+  @JsonKey()
   @override
-  FigmaRect boundaryRectangle;
+  FigmaRect absoluteBoundingBox;
 
   @JsonKey(ignore: true)
   FigmaStyle style;
@@ -34,10 +39,6 @@ class FigmaFrame extends FigmaChildrenNode
 
   double cornerRadius;
 
-  var constraints;
-
-  String layoutAlign;
-
   var size;
 
   double horizontalPadding;
@@ -52,10 +53,13 @@ class FigmaFrame extends FigmaChildrenNode
   String type = 'FRAME';
 
   @JsonKey(ignore: true)
-  bool isScaffold = false;
+  bool isRoot = false;
 
   @JsonKey(defaultValue: false)
   var isFlowHome = false;
+
+  @JsonKey(ignore: true)
+  FigmaAutoLayoutOptions autoLayoutOptions;
 
   FigmaFrame({
     name,
@@ -63,15 +67,16 @@ class FigmaFrame extends FigmaChildrenNode
     type,
     pluginData,
     sharedPluginData,
-    this.boundaryRectangle,
+    this.absoluteBoundingBox,
     this.style,
     this.fills,
     this.strokes,
     this.strokeWeight,
     this.strokeAlign,
     this.cornerRadius,
-    this.constraints,
-    this.layoutAlign,
+    FigmaConstraints constraints,
+    layoutAlign,
+    layoutGrow,
     this.size,
     this.horizontalPadding,
     this.verticalPadding,
@@ -82,18 +87,16 @@ class FigmaFrame extends FigmaChildrenNode
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-  }) : super(
-          name,
-          isVisible,
-          type,
-          pluginData,
-          sharedPluginData,
-          UUID: UUID,
-          transitionNodeID: transitionNodeID,
-          transitionDuration: transitionDuration,
-          transitionEasing: transitionEasing,
-          children: children,
-        );
+  }) : super(name, isVisible, type, pluginData, sharedPluginData,
+            UUID: UUID,
+            transitionNodeID: transitionNodeID,
+            transitionDuration: transitionDuration,
+            transitionEasing: transitionEasing,
+            children: children,
+            constraints: constraints,
+            layoutAlign: layoutAlign,
+            layoutGrow: layoutGrow) {}
+
   @JsonKey(ignore: true)
   List points;
 
@@ -104,6 +107,9 @@ class FigmaFrame extends FigmaChildrenNode
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaFrame.fromJson(json);
     node.style = StyleExtractor().getStyle(json);
+    if (json.containsKey('layoutMode')) {
+      node.autoLayoutOptions = FigmaAutoLayoutOptions.fromJson(json);
+    }
     return node;
   }
 
@@ -114,36 +120,115 @@ class FigmaFrame extends FigmaChildrenNode
 
   @override
   Future<PBDLNode> interpretNode() async {
-    if (isScaffold) {
+    if (isRoot) {
       return Future.value(
         PBDLArtboard(
             backgroundColor: backgroundColor.interpretColor(),
             isFlowHome: false,
             UUID: UUID,
-            boundaryRectangle: boundaryRectangle.interpretFrame(),
+            boundaryRectangle: absoluteBoundingBox.interpretFrame(),
             isVisible: isVisible,
             name: name,
             style: style.interpretStyle(),
             prototypeNodeUUID: transitionNodeID,
+            constraints: constraints?.interpret(),
+            layoutMainAxisSizing: getAlignSizing(layoutAlign),
+            layoutCrossAxisSizing: getGrowSizing(layoutGrow),
             children: await Future.wait(
                 children.map((e) async => await e.interpretNode()).toList())),
       );
     } else {
-      return Future.value(
-        PBDLGroupNode(
+      if (areAllVectors()) {
+        imageReference = FigmaAssetProcessor().processImage(UUID);
+
+        var tempPrototypeID = childrenHavePrototypeNode();
+        if (tempPrototypeID != null) {
+          transitionNodeID = tempPrototypeID;
+        }
+
+        if (children != null && children.isNotEmpty) {
+          absoluteBoundingBox = fitFrame();
+        }
+
+        children.clear();
+
+        return Future.value(
+          PBDLImage(
+            imageReference: imageReference,
             UUID: UUID,
-            boundaryRectangle: boundaryRectangle.interpretFrame(),
+            boundaryRectangle: absoluteBoundingBox.interpretFrame(),
             isVisible: isVisible,
             name: name,
-            style: style.interpretStyle(),
+            style: style?.interpretStyle(),
+            constraints: constraints?.interpret(),
             prototypeNodeUUID: transitionNodeID,
-            children: await Future.wait(
-                children.map((e) async => await e.interpretNode()).toList())),
-      );
+          ),
+        );
+      } else {
+        return Future.value(
+          PBDLFrame(
+              UUID: UUID,
+              boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+              isVisible: isVisible,
+              name: name,
+              style: style.interpretStyle(),
+              prototypeNodeUUID: transitionNodeID,
+              constraints: constraints?.interpret(),
+              autoLayoutOptions: autoLayoutOptions?.interpretOptions(),
+              layoutMainAxisSizing: getAlignSizing(layoutAlign),
+              layoutCrossAxisSizing: getGrowSizing(layoutGrow),
+              children: await Future.wait(
+                  children.map((e) async => await e.interpretNode()).toList())),
+        );
+      }
     }
   }
 
   String imageReference;
 
   Map<String, dynamic> toPBDF() => toJson();
+
+  bool areAllVectors() {
+    if (children == null) {
+      return false;
+    }
+    for (var child in children) {
+      if (child is FigmaText ||
+          child is! FigmaVector ||
+          child is FigmaRectangle) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  String childrenHavePrototypeNode() {
+    for (child in children) {
+      if (child.transitionNodeID != null) {
+        return child.transitionNodeID;
+      }
+    }
+    return null;
+  }
+
+  FigmaRect fitFrame() {
+    var heights = [];
+    var widths = [];
+    for (var child in children) {
+      heights.add(child.absoluteBoundingBox.height);
+      widths.add(child.absoluteBoundingBox.width);
+    }
+
+    if (heights.every((element) => element == heights[0]) &&
+        widths.every((element) => element == widths[0])) {
+      return FigmaRect(
+        height: heights[0],
+        width: widths[0],
+        x: absoluteBoundingBox.x,
+        y: absoluteBoundingBox.y,
+      );
+    } else {
+      return absoluteBoundingBox;
+    }
+  }
 }

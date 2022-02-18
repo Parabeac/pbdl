@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 
 part 'figma_rect.g.dart';
@@ -8,12 +9,14 @@ class FigmaRect {
   FigmaRect({
     this.x,
     this.y,
+    this.z,
     this.width,
     this.height,
   });
 
   double x;
   double y;
+  double z;
   double width;
   double height;
 
@@ -23,10 +26,11 @@ class FigmaRect {
 
   Map<String, dynamic> toJson() => _$FigmaRectToJson(this);
 
-  PBDLFrame interpretFrame() {
-    return PBDLFrame(
+  PBDLBoundaryBox interpretFrame() {
+    return PBDLBoundaryBox(
       x: x,
       y: y,
+      z: z,
       width: width,
       height: height,
       constrainProportions: false,

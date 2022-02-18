@@ -1,3 +1,5 @@
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_font_descriptor.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -18,26 +20,6 @@ class PBDLTextStyle extends PBDLNode {
 
   @override
   final type = 'text_style';
-
-  @override
-  @JsonKey(ignore: true)
-  String prototypeNodeUUID;
-
-  @override
-  @JsonKey(ignore: true)
-  String UUID;
-
-  @override
-  @JsonKey(ignore: true)
-  String name;
-
-  @override
-  @JsonKey(ignore: true)
-  PBDLNode child;
-
-  @override
-  @JsonKey(ignore: true)
-  PBDLStyle style;
 
   PBDLTextStyle({
     this.fontColor,

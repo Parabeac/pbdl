@@ -1,3 +1,5 @@
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -7,29 +9,23 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pbdl_polygon.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
-  @override
-  var boundaryRectangle;
-
-  @override
-  var UUID;
-
+class PBDLPolygon extends PBDLNode implements PBDLNodeFactory {
   PBDLPolygon({
     bool edited,
     bool isClosed,
     pointRadiusBehaviour,
     List points,
-    this.UUID,
+    String UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame this.boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    isVisible,
+    bool isVisible,
     layerListExpandedType,
-    name,
+    String name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -40,10 +36,21 @@ class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.style,
+    PBDLStyle style,
     this.child,
-    this.prototypeNodeUUID,
-  });
+    String prototypeNodeUUID,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -52,18 +59,6 @@ class PBDLPolygon implements PBDLNodeFactory, PBDLNode {
       _$PBDLPolygonFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLPolygonToJson(this);
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  PBDLStyle style;
 
   @override
   String type = 'polygon';

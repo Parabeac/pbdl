@@ -1,9 +1,6 @@
-import 'dart:convert';
-
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
-import 'abstract_pbdl_node_factory.dart';
-import 'pbdl_group_node.dart';
+import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_shared_master_node.g.dart';
@@ -21,12 +18,16 @@ class PBDLSharedMasterNode extends PBDLNode
   @override
   final type = 'shared_master';
 
+  String componentSetName;
+
+  String sharedNodeSetID;
+
   PBDLSharedMasterNode({
     String UUID,
     this.overrideProperties,
     String name,
     bool isVisible,
-    boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     style,
     String prototypeNodeUUID,
     bool hasClickThrough,
@@ -41,7 +42,7 @@ class PBDLSharedMasterNode extends PBDLNode
     presetDictionary,
     bool allowsOverrides,
     nameIsFixed,
-    resizingConstraint,
+    constraints,
     resizingType,
     horizontalRulerData,
     bool hasBackgroundColor,
@@ -54,7 +55,7 @@ class PBDLSharedMasterNode extends PBDLNode
     maintainScrollPosition,
     bool includeBackgroundColorInExport,
     int changeIdentifier,
-    String this.symbolID,
+    this.symbolID,
     bool includeBackgroundColorInInstance,
     verticalRulerData,
     bool resizesContent,
@@ -62,13 +63,22 @@ class PBDLSharedMasterNode extends PBDLNode
     bool isFlowHome,
     List parameters,
     this.children,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
+    this.sharedNodeSetID,
+    this.componentSetName,
   }) : super(
           UUID,
           name,
           isVisible,
           boundaryRectangle,
-          style,
+          PBDLStyle.getStyle(style),
           prototypeNodeUUID,
+          constraints: (constraints is! Map)
+              ? constraints
+              : PBDLConstraints.fromJson(constraints),
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
 
   @override
@@ -78,4 +88,13 @@ class PBDLSharedMasterNode extends PBDLNode
       _$PBDLSharedMasterNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLSharedMasterNodeToJson(this);
+
+  @override
+  void sortByUUID() {
+    /// Sort list of [PBDLOverrideProperty] by UUID
+    overrideProperties.sort();
+
+    /// Ensure each `property` sorts its elements
+    overrideProperties.forEach((property) => property.sortByUUID());
+  }
 }

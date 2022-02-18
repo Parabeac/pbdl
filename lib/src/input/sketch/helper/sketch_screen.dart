@@ -42,7 +42,7 @@ class SketchScreen {
   Future<PBDLScreen> interpretNode() async {
     return Future.value(PBDLScreen(
       designNode: await designNode.interpretNode(),
-      id: id,
+      UUID: id,
       name: name,
     ));
   }

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -18,13 +19,9 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
 
   FigmaStyle style;
 
-  String layoutAlign;
-
-  var constraints;
-
   @override
-  @JsonKey(name: 'absoluteBoundingBox')
-  FigmaRect boundaryRectangle;
+  @JsonKey()
+  FigmaRect absoluteBoundingBox;
 
   var size;
 
@@ -47,10 +44,9 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     String type,
     pluginData,
     sharedPluginData,
-    FigmaStyle this.style,
-    this.layoutAlign,
-    this.constraints,
-    this.boundaryRectangle,
+    this.style,
+    FigmaConstraints constraints,
+    this.absoluteBoundingBox,
     this.size,
     this.strokes,
     this.strokeWeight,
@@ -61,6 +57,8 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     num transitionDuration,
     String transitionEasing,
     String transitionNodeID,
+    layoutAlign,
+    layoutGrow,
   }) : super(
           name,
           visible,
@@ -71,6 +69,9 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
           transitionNodeID: transitionNodeID,
+          constraints: constraints,
+          layoutAlign: layoutAlign,
+          layoutGrow: layoutGrow,
         ) {
     log = Logger(runtimeType.toString());
   }
@@ -89,11 +90,14 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     return Future.value(PBDLImage(
       UUID: UUID,
       imageReference: imageReference,
-      boundaryRectangle: boundaryRectangle?.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: style?.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret(),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
     ));
   }
 

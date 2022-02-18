@@ -23,9 +23,9 @@ class PositionalCleansingService {
 
   void _eliminateOffsetChildren(List children, SketchNode parent) =>
       children.forEach((child) {
-        child.boundaryRectangle.x =
-            (parent.boundaryRectangle.x + child.boundaryRectangle.x);
-        child.boundaryRectangle.y =
-            (parent.boundaryRectangle.y + child.boundaryRectangle.y);
+        child.absoluteBoundingBox.x =
+            (parent.boundaryRectangle.x + child.absoluteBoundingBox.x);
+        child.absoluteBoundingBox.y =
+            (parent.boundaryRectangle.y + child.absoluteBoundingBox.y);
       });
 }

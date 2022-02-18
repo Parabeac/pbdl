@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
@@ -20,9 +21,15 @@ class FigmaNode {
 
   var sharedPluginData;
 
-  FigmaRect boundaryRectangle;
+  FigmaRect absoluteBoundingBox;
+
+  final FigmaConstraints constraints;
 
   FigmaNode child;
+
+  String layoutAlign;
+
+  num layoutGrow;
 
   @JsonKey(name: 'visible', defaultValue: true)
   bool isVisible;
@@ -44,6 +51,9 @@ class FigmaNode {
     this.transitionNodeID,
     this.transitionDuration,
     this.transitionEasing,
+    this.constraints,
+    this.layoutAlign,
+    this.layoutGrow,
   });
 
   Future<PBDLNode> interpretNode() async {
@@ -55,7 +65,28 @@ class FigmaNode {
       null,
       transitionNodeID,
       child: await child.interpretNode(),
+      constraints: constraints?.interpret(),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
     ));
+  }
+
+  ParentLayoutSizing getAlignSizing(String layoutAlign) {
+    if (layoutAlign == 'STRETCH') {
+      return ParentLayoutSizing.STRETCH;
+    } else {
+      return ParentLayoutSizing.INHERIT;
+    }
+  }
+
+  ParentLayoutSizing getGrowSizing(num layoutGrow) {
+    if (layoutGrow == 0.0) {
+      return ParentLayoutSizing.INHERIT;
+    } else if (layoutGrow == 1.0) {
+      return ParentLayoutSizing.STRETCH;
+    } else {
+      return ParentLayoutSizing.INHERIT;
+    }
   }
 
   factory FigmaNode.fromJson(Map<String, dynamic> json) =>

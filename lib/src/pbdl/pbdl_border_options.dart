@@ -6,7 +6,9 @@ part 'pbdl_border_options.g.dart';
 class PBDLBorderOptions {
   bool isEnabled;
   List dashPattern;
-  int lineCapStyle, lineJoinStyle;
+  int lineCapStyle;
+  String lineJoinStyle;
+  num cornerRadius;
 
   final type = 'border_options';
 
@@ -15,6 +17,7 @@ class PBDLBorderOptions {
     this.dashPattern,
     this.lineCapStyle,
     this.lineJoinStyle,
+    this.cornerRadius,
   });
 
   @override

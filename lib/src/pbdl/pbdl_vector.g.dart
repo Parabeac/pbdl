@@ -10,10 +10,13 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
   return PBDLVector(
     name: json['name'] as String,
     layoutAlign: json['layoutAlign'],
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     size: json['size'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],
@@ -25,21 +28,35 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'],
+    layoutMainAxisSizing:
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
+    layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
+        json['layoutCrossAxisSizing'] as String),
   )
+    ..isVisible = json['isVisible'] as bool
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..type = json['type'] as String
-    ..isVisible = json['isVisible'] as bool
     ..imageReference = json['imageReference'] as String
     ..image = json['image'];
 }
 
 Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
     <String, dynamic>{
+      'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
+      'name': instance.name,
+      'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'style': instance.style?.toJson(),
+      'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
       'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
@@ -47,12 +64,11 @@ Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
       'styles': instance.styles,
       'fillsList': instance.fillsList,
       'type': instance.type,
-      'UUID': instance.UUID,
-      'isVisible': instance.isVisible,
-      'name': instance.name,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'style': instance.style?.toJson(),
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'imageReference': instance.imageReference,
       'image': instance.image,
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

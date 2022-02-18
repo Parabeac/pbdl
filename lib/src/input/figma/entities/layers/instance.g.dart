@@ -13,13 +13,16 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    boundaryRectangle: json['absoluteBoundingBox'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],
     strokeAlign: json['strokeAlign'],
     cornerRadius: json['cornerRadius'],
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
     layoutAlign: json['layoutAlign'],
+    layoutGrow: json['layoutGrow'],
     size: json['size'],
     horizontalPadding: json['horizontalPadding'],
     verticalPadding: json['verticalPadding'],
@@ -41,6 +44,10 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
+        ? null
+        : FigmaRect.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>)
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
@@ -56,19 +63,20 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints?.toJson(),
       'child': instance.child?.toJson(),
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'absoluteBoundingBox': instance.boundaryRectangle?.toJson(),
+      'absoluteBoundingBox': instance.absoluteBoundingBox?.toJson(),
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'cornerRadius': instance.cornerRadius,
-      'constraints': instance.constraints,
-      'layoutAlign': instance.layoutAlign,
       'size': instance.size,
       'horizontalPadding': instance.horizontalPadding,
       'verticalPadding': instance.verticalPadding,

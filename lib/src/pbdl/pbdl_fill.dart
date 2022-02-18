@@ -6,6 +6,7 @@ part 'pbdl_fill.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLFill {
   PBDLColor color;
+  @JsonKey(defaultValue: true)
   bool isEnabled;
   PBDLFill(this.color, [this.isEnabled = true]);
   final type = 'fill';

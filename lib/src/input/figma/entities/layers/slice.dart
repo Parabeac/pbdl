@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -19,13 +20,9 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   @override
   String type = 'SLICE';
 
-  String layoutAlign;
-
-  var constraints;
-
   @override
-  @JsonKey(name: 'absoluteBoundingBox')
-  var boundaryRectangle;
+  @JsonKey()
+  var absoluteBoundingBox;
 
   var size;
 
@@ -35,9 +32,10 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
     String type,
     pluginData,
     sharedPluginData,
-    this.layoutAlign,
-    this.constraints,
-    this.boundaryRectangle,
+    layoutAlign,
+    layoutGrow,
+    FigmaConstraints constraints,
+    this.absoluteBoundingBox,
     this.size,
     String transitionNodeID,
     num transitionDuration,
@@ -51,6 +49,9 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          constraints: constraints,
+          layoutAlign: layoutAlign,
+          layoutGrow: layoutGrow,
         );
 
   @override
@@ -63,15 +64,20 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() async {
-    return Future.value(PBDLRectangle(
-      UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      style: style.interpretStyle(),
-      child: await child.interpretNode(),
-      prototypeNodeUUID: transitionNodeID,
-    ));
+    return Future.value(
+      PBDLRectangle(
+        UUID: UUID,
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        style: style.interpretStyle(),
+        child: await child.interpretNode(),
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      ),
+    );
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'package:pbdl/pbdl.dart';
+
 import 'pbdl_artboard.dart';
 import 'pbdl_boolean_operation.dart';
 import 'pbdl_group_node.dart';
@@ -34,6 +36,9 @@ class AbstractPBDLNodeFactory {
     PBDLProject(),
     PBDLPage(),
     PBDLScreen(),
+    PBDLFrame(),
+    PBDLRow(),
+    PBDLCol(),
   ];
 
   AbstractPBDLNodeFactory();

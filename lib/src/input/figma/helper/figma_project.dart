@@ -1,4 +1,5 @@
 import 'package:pbdl/src/input/figma/entities/layers/canvas.dart';
+import 'package:pbdl/src/input/figma/entities/layers/component_set.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
 import 'package:pbdl/src/input/figma/helper/figma_page.dart';
 import 'package:pbdl/src/pbdl/pbdl_project.dart';
@@ -44,11 +45,27 @@ class FigmaProject {
         if (layer.UUID == node.prototypeStartNodeID && layer is FigmaFrame) {
           layer.isFlowHome = true;
         }
-        pg.addScreen(FigmaScreen(
-          figmaNode: layer,
-          id: layer.UUID,
-          name: layer.name,
-        ));
+        // If layer is a component set
+        // Add each component as a screen
+        if (layer is FigmaComponentSet) {
+          for (var child in layer.children) {
+            pg.addScreen(FigmaScreen(
+              figmaNode: child,
+              id: child.UUID,
+              name: child.name,
+              isVisible: child.isVisible,
+            ));
+          }
+        }
+        // Else just add the screen
+        else {
+          pg.addScreen(FigmaScreen(
+            figmaNode: layer,
+            id: layer.UUID,
+            name: layer.name,
+            isVisible: layer.isVisible,
+          ));
+        }
       }
       figmaPages.add(pg);
     }

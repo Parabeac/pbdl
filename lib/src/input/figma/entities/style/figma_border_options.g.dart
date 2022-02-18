@@ -11,7 +11,8 @@ FigmaBorderOptions _$FigmaBorderOptionsFromJson(Map<String, dynamic> json) {
     json['dashPattern'] as List,
     json['isEnabled'] as bool,
     json['lineCapStyle'] as int,
-    json['lineJoinStyle'] as int,
+    json['lineJoinStyle'] as String,
+    json['cornerRadius'] as num,
   );
 }
 
@@ -21,4 +22,5 @@ Map<String, dynamic> _$FigmaBorderOptionsToJson(FigmaBorderOptions instance) =>
       'isEnabled': instance.isEnabled,
       'lineCapStyle': instance.lineCapStyle,
       'lineJoinStyle': instance.lineJoinStyle,
+      'cornerRadius': instance.cornerRadius,
     };

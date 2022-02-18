@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:http/http.dart' as http;
+import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
-import 'asset_processing_service.dart';
 import 'package:path/path.dart' as p;
+import 'package:sentry/sentry.dart';
 
 class SketchAssetProcessor extends AssetProcessingService {
   final svg_convertion_endpoint =
@@ -58,7 +59,8 @@ class SketchAssetProcessor extends AssetProcessingService {
       }
 
       return response?.bodyBytes;
-    } catch (e) {
+    } catch (e, stackTrace) {
+      await Sentry.captureException(e, stackTrace: stackTrace);
       var imageErr = File(
               '${MainInfo().cwd.path}/lib/src/input/assets/image-conversion-error.png')
           .readAsBytesSync();
@@ -77,10 +79,23 @@ class SketchAssetProcessor extends AssetProcessingService {
     }
   }
 
+  static Map<String, int> imageNames = {};
+
+  static String _getImageName(String name) {
+    if (!imageNames.containsKey(name)) {
+      imageNames[name] = 0;
+      return name;
+    } else {
+      var imageNumber = ++imageNames[name];
+      return name + '_$imageNumber';
+    }
+  }
+
   /// Writes image `bytes` to output png path using `name` as filename.
   static String writeImage(String name, Uint8List bytes) {
     if (!Platform.environment.containsKey('SAC_ENDPOINT')) {
-      var path = p.join(MainInfo().pngPath, '$name.png');
+      var checkedName = _getImageName(name);
+      var path = p.join(MainInfo().pngPath, '$checkedName.png');
       File(path).writeAsBytesSync(bytes);
       return path;
     }

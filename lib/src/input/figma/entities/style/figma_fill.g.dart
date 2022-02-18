@@ -11,7 +11,7 @@ FigmaFill _$FigmaFillFromJson(Map<String, dynamic> json) {
     json['color'] == null
         ? null
         : FigmaColor.fromJson(json['color'] as Map<String, dynamic>),
-    json['isEnabled'] as bool,
+    json['isEnabled'] as bool ?? true,
   );
 }
 

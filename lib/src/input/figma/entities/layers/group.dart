@@ -8,6 +8,7 @@ import 'package:quick_log/quick_log.dart';
 import '../../helper/figma_rect.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'figma_frame.dart';
 import 'text.dart';
@@ -42,7 +43,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       strokeWeight,
       strokeAlign,
       cornerRadius,
-      constraints,
+      FigmaConstraints constraints,
       layoutAlign,
       size,
       horizontalPadding,
@@ -60,7 +61,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
             type: type,
             pluginData: pluginData,
             sharedPluginData: sharedPluginData,
-            boundaryRectangle: boundaryRectangle != null
+            absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
             style: style,
@@ -101,7 +102,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       }
 
       if (children != null && children.isNotEmpty) {
-        boundaryRectangle = fitFrame();
+        absoluteBoundingBox = fitFrame();
       }
 
       children.clear();
@@ -110,71 +111,32 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         PBDLImage(
           imageReference: imageReference,
           UUID: UUID,
-          boundaryRectangle: boundaryRectangle.interpretFrame(),
+          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
           isVisible: isVisible,
           name: name,
           style: style?.interpretStyle(),
+          constraints: constraints?.interpret(),
           prototypeNodeUUID: transitionNodeID,
+          layoutMainAxisSizing: getGrowSizing(layoutGrow),
+          layoutCrossAxisSizing: getAlignSizing(layoutAlign),
         ),
       );
     }
     return Future.value(
       PBDLGroupNode(
         UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style?.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
         children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList(),
         ),
       ),
     );
-  }
-
-  bool areAllVectors() {
-    if (children == null) {
-      return false;
-    }
-    for (var child in children) {
-      if (child is! FigmaVector) {
-        return false;
-      }
-      if (child is FigmaText) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  FigmaRect fitFrame() {
-    var heights = [];
-    var widths = [];
-    for (var child in children) {
-      heights.add(child.boundaryRectangle.height);
-      widths.add(child.boundaryRectangle.width);
-    }
-
-    if (heights.every((element) => element == heights[0]) &&
-        widths.every((element) => element == widths[0])) {
-      return FigmaRect(
-        height: heights[0],
-        width: widths[0],
-        x: boundaryRectangle.x,
-        y: boundaryRectangle.y,
-      );
-    } else {
-      return boundaryRectangle;
-    }
-  }
-
-  String childrenHavePrototypeNode() {
-    for (child in children) {
-      if (child.transitionNodeID != null) {
-        return child.transitionNodeID;
-      }
-    }
-    return null;
   }
 }

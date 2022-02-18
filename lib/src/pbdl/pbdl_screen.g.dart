@@ -11,38 +11,54 @@ PBDLScreen _$PBDLScreenFromJson(Map<String, dynamic> json) {
     designNode: json['designNode'] == null
         ? null
         : PBDLNode.fromJson(json['designNode'] as Map<String, dynamic>),
-    id: json['id'] as String,
+    UUID: json['UUID'] as String,
     name: json['name'] as String,
+    isVisible: json['isVisible'] as bool,
   )
-    ..convert = json['convert'] as bool
-    ..imageURI = json['imageURI'] as String
-    ..type = json['type'] as String
-    ..UUID = json['UUID'] as String
+    ..layoutMainAxisSizing =
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
+    ..layoutCrossAxisSizing =
+        PBDLNode.parentLayoutFromString(json['layoutCrossAxisSizing'] as String)
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>)
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>)
+    ..style = json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
+    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..isVisible = json['isVisible'] as bool
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-    ..style = json['style'] == null
+    ..constraints = json['constraints'] == null
         ? null
-        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>);
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
+    ..convert = json['convert'] as bool
+    ..imageURI = json['imageURI'] as String
+    ..type = json['type'] as String;
 }
 
 Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'name': instance.name,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'style': instance.style?.toJson(),
+      'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
       'convert': instance.convert,
       'imageURI': instance.imageURI,
       'type': instance.type,
       'designNode': instance.designNode?.toJson(),
-      'UUID': instance.UUID,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'child': instance.child?.toJson(),
       'isVisible': instance.isVisible,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'style': instance.style?.toJson(),
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

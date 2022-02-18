@@ -1,5 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -10,7 +13,6 @@ import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
 import 'figma_frame.dart';
-
 part 'instance.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -20,39 +22,40 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   List parameters;
 
-  Instance(
-      {name,
-      isVisible,
-      type,
-      pluginData,
-      sharedPluginData,
-      boundaryRectangle,
-      style,
-      fills,
-      strokes,
-      strokeWeight,
-      strokeAlign,
-      cornerRadius,
-      constraints,
-      layoutAlign,
-      size,
-      horizontalPadding,
-      verticalPadding,
-      itemSpacing,
-      this.componentId,
-      List<FigmaNode> children,
-      this.parameters,
-      FigmaColor backgroundColor,
-      String transitionNodeID,
-      num transitionDuration,
-      String transitionEasing})
-      : super(
+  Instance({
+    name,
+    isVisible,
+    type,
+    pluginData,
+    sharedPluginData,
+    boundaryRectangle,
+    style,
+    fills,
+    strokes,
+    strokeWeight,
+    strokeAlign,
+    cornerRadius,
+    FigmaConstraints constraints,
+    layoutAlign,
+    layoutGrow,
+    size,
+    horizontalPadding,
+    verticalPadding,
+    itemSpacing,
+    this.componentId,
+    List<FigmaNode> children,
+    this.parameters,
+    FigmaColor backgroundColor,
+    String transitionNodeID,
+    num transitionDuration,
+    String transitionEasing,
+  }) : super(
             name: name,
             isVisible: isVisible,
             type: type,
             pluginData: pluginData,
             sharedPluginData: sharedPluginData,
-            boundaryRectangle: boundaryRectangle != null
+            absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
             style: style,
@@ -63,6 +66,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             cornerRadius: cornerRadius,
             constraints: constraints,
             layoutAlign: layoutAlign,
+            layoutGrow: layoutGrow,
             size: size,
             horizontalPadding: horizontalPadding,
             verticalPadding: verticalPadding,
@@ -92,16 +96,41 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       overrideValues.addAll(currVals);
     });
 
-    return Future.value(PBDLSharedInstanceNode(
-      UUID: UUID,
-      overrideValues: overrideValues,
-      name: name,
-      isVisible: isVisible,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      style: style,
-      prototypeNodeUUID: transitionNodeID,
-      symbolID: componentId,
-    ));
+    /// If the component is not a local component
+    /// then the instance must become a component aka [PBDLSharedMasterNode]
+    if (ComponentCacheService().localComponents.containsKey(componentId)) {
+      return Future.value(PBDLSharedInstanceNode(
+        UUID: UUID,
+        overrideValues: overrideValues,
+        name: name,
+        isVisible: isVisible,
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        style: style,
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
+        symbolID: componentId,
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+        sharedNodeSetID: ComponentCacheService().getComponentSetId(componentId),
+      ));
+    } else {
+      ComponentCacheService().localComponents[componentId] = toJson();
+      return Future.value(PBDLSharedMasterNode(
+          UUID: UUID,
+          overrideProperties: null,
+          name: name,
+          isVisible: isVisible,
+          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+          style: style?.interpretStyle(),
+          prototypeNodeUUID: transitionNodeID,
+          symbolID: componentId,
+          constraints: constraints.interpret(),
+          isFlowHome: isFlowHome,
+          layoutMainAxisSizing: getGrowSizing(layoutGrow),
+          layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+          children: await Future.wait(
+              children.map((e) async => await e.interpretNode()).toList())));
+    }
   }
 
   Future<List<PBDLOverrideValue>> _traverseChildrenForOverrides(
@@ -125,8 +154,9 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           current.UUID.split(';').last, // Get UUID of node to replace
           current.name,
           override.getPBDLType(),
+          await override.getProperty(current),
           await override.getValue(current),
-        ));
+        )..constraints = current.constraints?.interpret());
       }
 
       if (current.child != null) {

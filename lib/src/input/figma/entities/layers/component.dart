@@ -1,16 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
+import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
 import 'package:pbdl/src/input/figma/helper/style_extractor.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_override_property.dart';
-import 'package:pbdl/src/pbdl/pbdl_shared_master_node.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'figma_frame.dart';
+import 'instance.dart';
 
 part 'component.g.dart';
 
@@ -21,6 +23,11 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   var repeatNames = <String, int>{};
   @override
   String type = 'COMPONENT';
+
+  String componentSetId;
+
+  String componentSetName;
+
   Component({
     name,
     isVisible,
@@ -34,7 +41,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     strokeWeight,
     strokeAlign,
     cornerRadius,
-    constraints,
+    FigmaConstraints constraints,
     layoutAlign,
     size,
     horizontalPadding,
@@ -46,13 +53,15 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
+    this.componentSetId,
+    this.componentSetName,
   }) : super(
           name: name,
           isVisible: isVisible,
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          boundaryRectangle: boundaryRectangle != null
+          absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
           style: style,
@@ -83,8 +92,13 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     return component;
   }
 
-  factory Component.fromJson(Map<String, dynamic> json) =>
-      _$ComponentFromJson(json);
+  factory Component.fromJson(Map<String, dynamic> json) {
+    /// Save component ID to the cache
+    if (json['id'] != null) {
+      ComponentCacheService().localComponents[json['id']] = json;
+    }
+    return _$ComponentFromJson(json);
+  }
   @override
   Map<String, dynamic> toJson() => _$ComponentToJson(this);
 
@@ -100,17 +114,25 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     }
 
     return PBDLSharedMasterNode(
-        UUID: UUID,
-        overrideProperties: props,
-        name: name,
-        isVisible: isVisible,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
-        style: style.interpretStyle(),
-        prototypeNodeUUID: transitionNodeID,
-        symbolID: UUID,
-        isFlowHome: isFlowHome,
-        children: await Future.wait(
-            children.map((e) async => await e.interpretNode()).toList()));
+      UUID: UUID,
+      overrideProperties: props,
+      name: name,
+      isVisible: isVisible,
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+      style: style.interpretStyle(),
+      prototypeNodeUUID: transitionNodeID,
+      symbolID: UUID,
+      constraints: isRoot
+          ? PBDLConstraints.defaultConstraints()
+          : constraints?.interpret(),
+      isFlowHome: isFlowHome,
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      children: await Future.wait(
+          children.map((e) async => await e.interpretNode()).toList()),
+      sharedNodeSetID: componentSetId,
+      componentSetName: componentSetName,
+    );
   }
 
   Future<List<PBDLOverrideProperty>> _traverseChildrenForOverrides(
@@ -130,7 +152,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
 
           current.name =
               '${current.name}${repeatNames[current.name].toString()}';
-        } else {
+        } else if (current is! Instance) {
           repeatNames[current.name] = 1;
         }
 
@@ -139,11 +161,15 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           current.name,
           override.getPBDLType(),
           await override.getProperty(current),
-        );
+        )..constraints = current.constraints?.interpret();
         values.add(overrideProp);
       }
 
-      if (current.child != null) {
+      // We do not want to process children of instance as override properties
+      // since Instances have their own overrides
+      if (current is Instance) {
+        continue;
+      } else if (current.child != null) {
         stack.add(current.child);
       } else if (current is FigmaChildrenNode && current.children != null) {
         current.children.forEach(stack.add);

@@ -17,7 +17,7 @@ class AzureAssetService {
 
   String get projectUUID => _projectUUID.toLowerCase();
 
-  static const KEY_NAME = 'STORAGE_CONNECTION_STRING';
+  static const KEY_NAME = 'AZURE_STORAGE_CONNECTION_STRING';
 
   String getImageURI(String imageName) => getContainerUri() + '/${imageName}';
 
@@ -63,7 +63,8 @@ class AzureAssetService {
 
   Future<http.StreamedResponse> putBlob(
           String container, String filename, Uint8List bodyBytes) async =>
-      await _putRequestBlob('/${container}/${filename}', bodyBytes);
+      await _putRequestBlob(
+          '/$container/${filename.replaceAll(':', '_')}', bodyBytes);
 
   Future<Uint8List> downloadImage(String uuid) async {
     var storage = AzureStorage.parse(Platform.environment[KEY_NAME]);

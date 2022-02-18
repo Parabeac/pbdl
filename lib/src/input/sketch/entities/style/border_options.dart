@@ -12,7 +12,8 @@ class BorderOptions {
   @override
   List dashPattern;
   @override
-  int lineCapStyle, lineJoinStyle;
+  int lineCapStyle;
+  String lineJoinStyle;
 
   BorderOptions(
     this.classField,

@@ -1,3 +1,6 @@
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -7,25 +10,29 @@ import 'package:json_annotation/json_annotation.dart';
 part 'pbdl_group_node.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
+
+/// This is essentially a folder used to organize the [PBDLNodes] inside. This tends to
+/// provide no value, unless it comes with extra metadata that could interpret this group into
+/// other usefull objects.
+class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
   List<PBDLNode> children = [];
 
   PBDLGroupNode({
     bool hasClickThrough,
     groupLayout,
-    this.UUID,
+    String UUID,
     booleanOperation,
     exportOptions,
-    PBDLFrame this.boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    this.isVisible,
+    bool isVisible,
     layerListExpandedType,
-    this.name,
+    String name,
     nameIsFixed,
-    resizingConstraint,
+    PBDLConstraints constraints,
     resizingType,
     rotation,
     sharedStyleID,
@@ -34,10 +41,22 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    this.style,
+    PBDLStyle style,
     this.children,
-    this.prototypeNodeUUID,
-  });
+    String prototypeNodeUUID,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
+  }) : super(
+          UUID,
+          name,
+          isVisible,
+          boundaryRectangle,
+          style,
+          prototypeNodeUUID,
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -48,27 +67,18 @@ class PBDLGroupNode implements PBDLNodeFactory, PBDLNode {
   Map<String, dynamic> toJson() => _$PBDLGroupNodeToJson(this);
 
   @override
-  String UUID;
-
-  @override
-  var boundaryRectangle;
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  PBDLStyle style;
-
-  @override
   String type = 'group';
 
   @override
   @JsonKey(ignore: true)
   PBDLNode child;
+
+  @override
+  void sortByUUID() {
+    /// Sort `children` within this [PBDLGroupNode]
+    children.sort();
+
+    /// Make each `child` sort its own children, if applicable
+    children.forEach((child) => child.sortByUUID());
+  }
 }

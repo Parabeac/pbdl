@@ -15,9 +15,11 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
     style: json['style'] == null
         ? null
         : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
-    layoutAlign: json['layoutAlign'] as String,
-    constraints: json['constraints'],
-    boundaryRectangle: json['absoluteBoundingBox'] == null
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
+    absoluteBoundingBox: json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>),
@@ -31,6 +33,8 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
     transitionNodeID: json['transitionNodeID'] as String,
+    layoutAlign: json['layoutAlign'],
+    layoutGrow: json['layoutGrow'],
   )
     ..child = json['child'] == null
         ? null
@@ -45,15 +49,16 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints,
       'child': instance.child,
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'style': instance.style,
-      'layoutAlign': instance.layoutAlign,
-      'constraints': instance.constraints,
-      'absoluteBoundingBox': instance.boundaryRectangle,
+      'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,

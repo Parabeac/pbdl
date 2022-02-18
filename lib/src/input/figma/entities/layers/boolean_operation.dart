@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -24,7 +25,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   final String type = 'BOOLEAN_OPERATION';
 
   @override
-  FigmaRect boundaryRectangle;
+  FigmaRect absoluteBoundingBox;
 
   @override
   String imageReference;
@@ -33,7 +34,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     this.children,
     this.booleanOperation,
     style,
-    this.boundaryRectangle,
+    this.absoluteBoundingBox,
     UUID,
     String transitionNodeID,
     transitionDuration,
@@ -62,13 +63,16 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
       UUID: UUID,
-      boundaryRectangle: boundaryRectangle?.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: style?.interpretStyle(),
       booleanOperation: booleanOperation,
       prototypeNodeUUID: transitionNodeID,
       imageReference: imageReference,
+      constraints: constraints?.interpret(),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
     ));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -16,6 +17,9 @@ class PBDLElement extends PBDLNode {
     type,
     style,
     prototypeNodeUUID,
+    PBDLConstraints constraints,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
   }) : super(
           UUID,
           name,
@@ -23,6 +27,9 @@ class PBDLElement extends PBDLNode {
           boundaryRectangle,
           style,
           prototypeNodeUUID,
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
 
   factory PBDLElement.fromJson(Map<String, dynamic> json) =>

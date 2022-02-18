@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text.dart';
@@ -20,9 +21,8 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       String type,
       pluginData,
       sharedPluginData,
-      FigmaStyle this.style,
-      layoutAlign,
-      constraints,
+      FigmaStyle style,
+      FigmaConstraints constraints,
       boundaryRectangle,
       size,
       fills,
@@ -35,7 +35,9 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
       this.styleOverrideTable,
       String transitionNodeID,
       num transitionDuration,
-      String transitionEasing})
+      String transitionEasing,
+      layoutAlign,
+      layoutGrow})
       : super(
           name: name,
           visible: visible,
@@ -43,9 +45,8 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
           style: style,
-          layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle != null
+          absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
           size: size,
@@ -56,14 +57,12 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          layoutAlign: layoutAlign,
+          layoutGrow: layoutGrow,
         );
 
   @JsonKey(name: 'characters')
   String content;
-
-  @override
-  @JsonKey(ignore: true)
-  FigmaStyle style;
 
   List<double> characterStyleOverrides;
 
@@ -86,12 +85,15 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
     return Future.value(
       PBDLText(
         UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style.interpretStyle(),
         content: content,
         prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
       ),
     );
   }

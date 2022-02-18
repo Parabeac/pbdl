@@ -1,3 +1,5 @@
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -10,8 +12,6 @@ part 'pbdl_vector.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   var layoutAlign;
-
-  var constraints;
 
   var size;
 
@@ -29,24 +29,26 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   final type = 'vector';
 
   PBDLVector({
-    this.name,
+    String name,
     visible,
     pluginData,
     sharedPluginData,
     this.layoutAlign,
-    this.constraints,
-    PBDLFrame this.boundaryRectangle,
+    PBDLConstraints constraints,
+    PBDLBoundaryBox boundaryRectangle,
     this.size,
     this.strokes,
     this.strokeWeight,
     this.strokeAlign,
     this.styles,
     this.fillsList,
-    this.UUID,
-    this.style,
+    String UUID,
+    PBDLStyle style,
     prototypeNodeUUID,
     transitionDuration,
     transitionEasing,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
   }) : super(
           UUID,
           name,
@@ -56,6 +58,9 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
           prototypeNodeUUID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
 
   @override
@@ -65,24 +70,6 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
       _$PBDLVectorFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLVectorToJson(this);
-
-  @override
-  String UUID;
-
-  @override
-  bool isVisible;
-
-  @override
-  String name;
-
-  @override
-  String prototypeNodeUUID;
-
-  @override
-  PBDLStyle style;
-
-  @override
-  var boundaryRectangle;
 
   @override
   String imageReference;

@@ -1,5 +1,7 @@
 import 'package:pbdl/src/pbdl/pbdl_border.dart';
 import 'package:pbdl/src/pbdl/pbdl_border_options.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -20,26 +22,6 @@ class PBDLStyle extends PBDLNode {
 
   @override
   @JsonKey(ignore: true)
-  PBDLStyle style;
-
-  @override
-  @JsonKey(ignore: true)
-  String UUID;
-
-  @override
-  @JsonKey(ignore: true)
-  String name;
-
-  @override
-  @JsonKey(ignore: true)
-  PBDLFrame boundaryRectangle;
-
-  @override
-  @JsonKey(ignore: true)
-  String prototypeNodeUUID;
-
-  @override
-  @JsonKey(ignore: true)
   var child;
 
   @override
@@ -53,6 +35,13 @@ class PBDLStyle extends PBDLNode {
     this.textStyle,
     this.hasShadow,
   }) : super('', '', true, null, null, '');
+
+  static PBDLStyle getStyle(dynamic style) {
+    if (style is Map) {
+      return PBDLStyle.fromJson(style);
+    }
+    return style;
+  }
 
   @override
   factory PBDLStyle.fromJson(Map<String, dynamic> json) =>

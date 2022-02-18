@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:path/path.dart' as p;
-import 'package:pbdl/src/input/sketch/helper/azure_asset_service.dart';
+import 'package:pbdl/src/input/general_helper/azure_asset_service.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_project.dart';
 import 'package:pbdl/src/input/sketch/services/input_design.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
+import 'package:sentry/sentry.dart';
 
 class SketchController {
   var log;
@@ -35,10 +36,7 @@ class SketchController {
     try {
       return SketchProject(ids, pagesAndArtboards, projectName);
     } catch (e, stackTrace) {
-      // MainInfo().sentry.captureException(
-      //       exception: e,
-      //       stackTrace: stackTrace,
-      //     );
+      Sentry.captureException(e, stackTrace: stackTrace);
       log.error(e.toString());
       return null;
     }

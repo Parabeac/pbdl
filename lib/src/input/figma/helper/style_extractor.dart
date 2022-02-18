@@ -15,14 +15,10 @@ class StyleExtractor {
     if (json != null) {
       var bgColor;
       // Check if color exists in fills
-      if (json['fills'] != null && json['fills'].isNotEmpty) {
-        // Check if color should be visible
-        if (!json['fills'][0].containsKey('visible') ||
-            !json['fills'][0]['visible']) {
-          bgColor = _getColor(null);
-        } else {
-          bgColor = _getColor(json['background'][0]['color']);
-        }
+      if (json['background'] != null &&
+          json['background'].isNotEmpty &&
+          (json['background'][0]['visible'] ?? true)) {
+        bgColor = _getColor(json['background'][0]['color']);
       } else {
         bgColor = _getColor(null);
       }
@@ -56,17 +52,17 @@ class StyleExtractor {
         tempVisible ?? true,
         json['strokeCap'],
         json['strokeJoin'],
+        json['cornerRadius'],
       );
 
       borders.add(figmaBorder);
 
-      List<FigmaFill> fills = [];
+      var fills = <FigmaFill>[];
 
-      var fill = FigmaFill(
-        _getColor(json['fills'].isNotEmpty ? json['fills'][0]['color'] : null),
-      );
+      var fill = (json['fills'] as List)
+          .firstWhere((fill) => fill.containsKey('color'), orElse: () => null);
 
-      fills.add(fill);
+      fills.add(FigmaFill(_getColor(fill == null ? null : fill['color'])));
 
       return FigmaStyle(
         backgroundColor: bgColor,
@@ -88,7 +84,13 @@ class StyleExtractor {
     var alignment = _getAlignment(json['style']['textAlignHorizontal']);
 
     return FigmaTextStyle(
-      fontColor: fontColor,
+      fontColor: fontColor ??
+          FigmaColor(
+            alpha: 1,
+            red: 0,
+            green: 0,
+            blue: 0,
+          ),
       fontDescriptor: fontDescriptor,
       weight: '${json['style']['fontWeight']}',
       paragraphStyle: FigmaParagraphStyle(alignment: alignment.index),

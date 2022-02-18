@@ -15,9 +15,13 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
     UUID: json['UUID'],
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
-        : PBDLFrame.fromJson(json['boundaryRectangle'] as Map<String, dynamic>),
+        : PBDLBoundaryBox.fromJson(
+            json['boundaryRectangle'] as Map<String, dynamic>),
     isVisible: json['isVisible'],
     name: json['name'],
+    constraints: json['constraints'] == null
+        ? null
+        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'],
     style: json['style'] == null
         ? null
@@ -26,6 +30,10 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : PBDLNode.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    layoutMainAxisSizing:
+        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
+    layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
+        json['layoutCrossAxisSizing'] as String),
   )
     ..child = json['child'] == null
         ? null
@@ -36,14 +44,24 @@ PBDLArtboard _$PBDLArtboardFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$PBDLArtboardToJson(PBDLArtboard instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
       'name': instance.name,
       'isVisible': instance.isVisible,
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
       'backgroundColor': instance.backgroundColor?.toJson(),
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'isFlowHome': instance.isFlowHome,
       'type': instance.type,
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
     };
+
+const _$ParentLayoutSizingEnumMap = {
+  ParentLayoutSizing.INHERIT: 'INHERIT',
+  ParentLayoutSizing.STRETCH: 'STRETCH',
+};

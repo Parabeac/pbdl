@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 
 part 'sketch_rect.g.dart';
@@ -21,8 +22,8 @@ class SketchRect {
       _$SketchRectFromJson(json);
   Map<String, dynamic> toJson() => _$SketchRectToJson(this);
 
-  PBDLFrame interpretFrame() {
-    return PBDLFrame(
+  PBDLBoundaryBox interpretFrame() {
+    return PBDLBoundaryBox(
       constrainProportions: constrainProportions,
       x: x,
       y: y,

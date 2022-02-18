@@ -1,7 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
+import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'vector.dart';
 
@@ -18,9 +22,8 @@ class FigmaRegularPolygon extends FigmaVector
     String type,
     pluginData,
     sharedPluginData,
-    style,
     layoutAlign,
-    constraints,
+    FigmaConstraints constraints,
     boundaryRectangle,
     size,
     fills,
@@ -37,10 +40,11 @@ class FigmaRegularPolygon extends FigmaVector
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle,
+          absoluteBoundingBox: boundaryRectangle == null
+              ? null
+              : FigmaRect.fromJson(boundaryRectangle),
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -61,14 +65,17 @@ class FigmaRegularPolygon extends FigmaVector
 
   @override
   Future<PBDLNode> interpretNode() {
+    imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret(),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
     ));
   }
 

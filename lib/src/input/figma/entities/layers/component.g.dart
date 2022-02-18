@@ -13,12 +13,14 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    boundaryRectangle: json['absoluteBoundingBox'],
     strokes: json['strokes'],
     strokeWeight: json['strokeWeight'],
     strokeAlign: json['strokeAlign'],
     cornerRadius: json['cornerRadius'],
-    constraints: json['constraints'],
+    constraints: json['constraints'] == null
+        ? null
+        : FigmaConstraints.fromJson(
+            json['constraints'] as Map<String, dynamic>),
     layoutAlign: json['layoutAlign'],
     size: json['size'],
     horizontalPadding: json['horizontalPadding'],
@@ -35,11 +37,18 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
+    componentSetId: json['componentSetId'] as String,
+    componentSetName: json['componentSetName'] as String,
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..layoutGrow = json['layoutGrow'] as num
+    ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
+        ? null
+        : FigmaRect.fromJson(
+            json['absoluteBoundingBox'] as Map<String, dynamic>)
     ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
     ..isFlowHome = json['isFlowHome'] as bool ?? false;
@@ -50,19 +59,20 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'name': instance.name,
       'pluginData': instance.pluginData,
       'sharedPluginData': instance.sharedPluginData,
+      'constraints': instance.constraints,
       'child': instance.child,
+      'layoutAlign': instance.layoutAlign,
+      'layoutGrow': instance.layoutGrow,
       'visible': instance.isVisible,
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
       'children': instance.children,
-      'absoluteBoundingBox': instance.boundaryRectangle,
+      'absoluteBoundingBox': instance.absoluteBoundingBox,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'cornerRadius': instance.cornerRadius,
-      'constraints': instance.constraints,
-      'layoutAlign': instance.layoutAlign,
       'size': instance.size,
       'horizontalPadding': instance.horizontalPadding,
       'verticalPadding': instance.verticalPadding,
@@ -71,6 +81,8 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
+      'componentSetId': instance.componentSetId,
+      'componentSetName': instance.componentSetName,
       'symbolID': instance.symbolID,
       'isFlowHome': instance.isFlowHome,
     };

@@ -1,6 +1,9 @@
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
+import '../../pbdl.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -12,8 +15,8 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   List parameters;
 
   final List<PBDLOverrideValue> overrideValues;
-  @override
-  PBDLFrame boundaryRectangle;
+
+  String sharedNodeSetID;
 
   @override
   final type = 'shared_instance';
@@ -23,7 +26,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     this.overrideValues,
     String name,
     bool isVisible,
-    this.boundaryRectangle,
+    PBDLBoundaryBox boundaryRectangle,
     style,
     exportOptions,
     booleanOperation,
@@ -47,13 +50,20 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     num verticalSpacing,
     num horizontalSpacing,
     String prototypeNodeUUID,
+    PBDLConstraints constraints,
+    layoutMainAxisSizing,
+    layoutCrossAxisSizing,
+    this.sharedNodeSetID,
   }) : super(
           UUID,
           name,
           isVisible,
           boundaryRectangle,
-          style,
+          PBDLStyle.getStyle(style),
           prototypeNodeUUID,
+          constraints: constraints,
+          layoutMainAxisSizing: layoutMainAxisSizing,
+          layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
 
   @override
@@ -63,4 +73,13 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
       _$PBDLSharedInstanceNodeFromJson(json);
   @override
   Map<String, dynamic> toJson() => _$PBDLSharedInstanceNodeToJson(this);
+
+  @override
+  void sortByUUID() {
+    /// Sort [PBDLOverrideValue] by UUID
+    overrideValues.sort();
+
+    /// Ensure each `value` sorts its elements
+    overrideValues.forEach((value) => value.sortByUUID());
+  }
 }

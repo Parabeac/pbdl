@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -32,8 +33,8 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     sharedPluginData,
     style,
     layoutAlign,
-    constraints,
-    boundaryRectangle,
+    FigmaConstraints constraints,
+    FigmaRect boundaryRectangle,
     size,
     this.fills,
     strokes,
@@ -52,9 +53,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle != null
-              ? FigmaRect.fromJson(boundaryRectangle)
-              : null,
+          absoluteBoundingBox: boundaryRectangle,
           size: size,
           strokes: strokes,
           strokeWeight: strokeWeight,
@@ -80,12 +79,15 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
       UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
+      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: style?.interpretStyle(),
       imageReference: imageReference,
+      constraints: constraints?.interpret(),
       prototypeNodeUUID: transitionNodeID,
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
     ));
   }
 

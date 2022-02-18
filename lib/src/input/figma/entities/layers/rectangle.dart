@@ -1,13 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/pbdl/pbdl_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
-import '../style/figma_color.dart';
 import 'figma_node.dart';
 import 'vector.dart';
 
@@ -25,9 +26,9 @@ class FigmaRectangle extends FigmaVector
     type,
     pluginData,
     sharedPluginData,
-    style,
+    FigmaStyle style,
     layoutAlign,
-    constraints,
+    FigmaConstraints constraints,
     boundaryRectangle,
     size,
     strokes,
@@ -50,7 +51,7 @@ class FigmaRectangle extends FigmaVector
           style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
-          boundaryRectangle: boundaryRectangle != null
+          absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
           size: size,
@@ -68,10 +69,6 @@ class FigmaRectangle extends FigmaVector
   double cornerRadius;
 
   List<double> rectangleCornerRadii;
-
-  @override
-  @JsonKey(ignore: true)
-  FigmaStyle style;
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
@@ -95,23 +92,31 @@ class FigmaRectangle extends FigmaVector
       return Future.value(PBDLImage(
         imageReference: imageReference,
         UUID: UUID,
-        boundaryRectangle: boundaryRectangle.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
       ));
     }
-    return Future.value(PBDLRectangle(
-      UUID: UUID,
-      boundaryRectangle: boundaryRectangle.interpretFrame(),
-      isVisible: isVisible,
-      name: name,
-      style: style.interpretStyle(),
-      child: await child?.interpretNode(),
-      fixedRadius: cornerRadius ?? 0,
-      prototypeNodeUUID: transitionNodeID,
-    ));
+    return Future.value(
+      PBDLRectangle(
+        UUID: UUID,
+        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        isVisible: isVisible,
+        name: name,
+        style: style.interpretStyle(),
+        child: await child?.interpretNode(),
+        fixedRadius: cornerRadius ?? 0,
+        prototypeNodeUUID: transitionNodeID,
+        constraints: constraints?.interpret(),
+        layoutMainAxisSizing: getGrowSizing(layoutGrow),
+        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      ),
+    );
   }
 
   @override

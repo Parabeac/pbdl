@@ -152,14 +152,14 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
   @override
   Map<String, dynamic> toJson() => _$SymbolMasterToJson(this);
 
-  ///Converting the [OverridableProperty] into [PBSharedParameterProp] to be processed in intermediate phase.
-  // List<PBSharedParameterProp> _extractParameters() {
+  ///Converting the [OverridableProperty] into [PBMasterOverride] to be processed in intermediate phase.
+  // List<PBMasterOverride> _extractParameters() {
   //   Set<String> ovrNames = {};
-  //   List<PBSharedParameterProp> sharedParameters = [];
+  //   List<PBMasterOverride> sharedParameters = [];
   //   for (var prop in overrideProperties) {
   //     if (!ovrNames.contains(prop.overrideName)) {
   //       var properties = AddMasterSymbolName(prop.overrideName, children);
-  //       sharedParameters.add(PBSharedParameterProp(
+  //       sharedParameters.add(PBMasterOverride(
   //           properties['name'],
   //           properties['type'],
   //           null,
@@ -190,7 +190,8 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
           uuidTypeMap['uuid'],
           overrideChild.name,
           ovrType.getPBDLType(), // Map SketchOverrideType to PBDLOverrideType
-          await ovrType.getProperty(overrideChild), // Get default value from child
+          await ovrType
+              .getProperty(overrideChild), // Get default value from child
         );
       }
     }));
@@ -224,7 +225,7 @@ class SymbolMaster extends AbstractGroupLayer implements SketchNodeFactory {
       shouldBreakMaskChain: shouldBreakMaskChain,
       rotation: rotation,
       resizingType: resizingType,
-      resizingConstraint: resizingConstraint,
+      constraints: resizingConstraint,
       resizesContent: resizesContent,
       presetDictionary: presetDictionary,
       maintainScrollPosition: maintainScrollPosition,
