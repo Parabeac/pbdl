@@ -1,9 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
-import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
-import 'package:pbdl/src/input/figma/entities/layers/group.dart';
+import 'package:pbdl/src/input/figma/entities/layers/rectangle.dart';
 import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.dart';
@@ -11,9 +10,6 @@ import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
-import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
@@ -197,7 +193,9 @@ class FigmaFrame extends FigmaChildrenNode
       return false;
     }
     for (var child in children) {
-      if (child is FigmaText || child is! FigmaVector) {
+      if (child is FigmaText ||
+          child is! FigmaVector ||
+          child is FigmaRectangle) {
         return false;
       }
     }
