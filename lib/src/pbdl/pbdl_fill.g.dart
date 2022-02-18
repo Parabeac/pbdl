@@ -16,14 +16,40 @@ PBDLFill _$PBDLFillFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLColor.fromJson(json['color'] as Map<String, dynamic>),
     imageRef: json['imageRef'] as String,
+    gradientStops: (json['gradientStops'] as List)
+        ?.map((e) => e == null
+            ? null
+            : PBDLGradientStop.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    gradientHandlePositions:
+        PBDLFill._pointsFromJson(json['gradientHandlePositions'] as List),
   );
 }
 
 Map<String, dynamic> _$PBDLFillToJson(PBDLFill instance) => <String, dynamic>{
+      'gradientStops':
+          instance.gradientStops?.map((e) => e?.toJson())?.toList(),
+      'gradientHandlePositions':
+          PBDLFill._pointsToJson(instance.gradientHandlePositions),
       'imageRef': instance.imageRef,
       'color': instance.color?.toJson(),
       'opacity': instance.opacity,
       'blendMode': instance.blendMode,
       'type': instance.type,
       'isEnabled': instance.isEnabled,
+    };
+
+PBDLGradientStop _$PBDLGradientStopFromJson(Map<String, dynamic> json) {
+  return PBDLGradientStop(
+    color: json['color'] == null
+        ? null
+        : PBDLColor.fromJson(json['color'] as Map<String, dynamic>),
+    position: json['position'] as num,
+  );
+}
+
+Map<String, dynamic> _$PBDLGradientStopToJson(PBDLGradientStop instance) =>
+    <String, dynamic>{
+      'color': instance.color?.toJson(),
+      'position': instance.position,
     };

@@ -7,6 +7,7 @@ import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
 
+import '../../../../../pbdl.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
 
@@ -79,7 +80,26 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaVectorToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
+  Future<PBDLNode> interpretNode() async {
+    if (figmaStyleProperty.fills.first.type
+        .toLowerCase()
+        .contains('gradient')) {
+      return Future.value(
+        PBDLRectangle(
+          UUID: UUID,
+          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+          isVisible: isVisible,
+          name: name,
+          style: figmaStyleProperty.interpretStyle(),
+          child: await child?.interpretNode(),
+          fixedRadius: figmaStyleProperty.stroke.cornerRadius,
+          prototypeNodeUUID: transitionNodeID,
+          constraints: constraints?.interpret(),
+          layoutMainAxisSizing: getGrowSizing(layoutGrow),
+          layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+        ),
+      );
+    }
     imageReference = FigmaAssetProcessor().processImage(UUID);
     return Future.value(PBDLImage(
       UUID: UUID,

@@ -72,6 +72,10 @@ class GradientFillType implements FigmaFill {
       type: type,
       isEnabled: visible,
       color: color?.interpretColor(),
+      gradientStops: gradientStops
+          .map((gradientStop) => gradientStop.interpretGradientStop())
+          .toList(),
+      gradientHandlePositions: gradientHandlePositions,
     );
   }
 }
@@ -85,6 +89,13 @@ class GradientStop {
     this.color,
     this.position,
   });
+
+  PBDLGradientStop interpretGradientStop() {
+    return PBDLGradientStop(
+      color: color.interpretColor(),
+      position: position,
+    );
+  }
 
   factory GradientStop.fromJson(Map<String, dynamic> json) =>
       _$GradientStopFromJson(json);
