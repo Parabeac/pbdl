@@ -7,6 +7,8 @@ import 'package:quick_log/quick_log.dart';
 import 'api_call_service.dart';
 import 'package:path/path.dart' as p;
 
+import 'figma_rect.dart';
+
 class FigmaAssetProcessor extends AssetProcessingService {
   /// Variable that represents how many images per request we are processing
   final IMAGE_REQ_LIMIT = 50;
@@ -19,6 +21,8 @@ class FigmaAssetProcessor extends AssetProcessingService {
 
   final List<String> _uuidQueue = [];
 
+  final List<String> _uuidNoBoxQueue = [];
+
   List<String> get uuidQueue => _uuidQueue;
 
   Logger log = Logger('Figma Image helper');
@@ -26,8 +30,15 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// Adds [uuid] to queue to be processed as an image.
   /// Returns the formatted name of the image reference.
   @override
-  String processImage(String uuid) {
-    _uuidQueue.add(uuid);
+  String processImage(String uuid, [FigmaRect absoluteBoundingBox]) {
+    if (absoluteBoundingBox != null &&
+        absoluteBoundingBox.height > 0 &&
+        absoluteBoundingBox.width > 0) {
+      _uuidQueue.add(uuid);
+    } else {
+      _uuidNoBoxQueue.add(uuid);
+    }
+
     return AssetProcessingService.getImageName(uuid);
   }
 
@@ -39,6 +50,7 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// the image downloading process.
   Future<void> processImageQueue({bool writeAsFile = true}) async {
     var chunks = <List<String>>[];
+    var boundlessChuck = <List<String>>[];
     for (var i = 0; i < _uuidQueue.length; i += IMAGE_REQ_LIMIT) {
       chunks.add(_uuidQueue.sublist(
           i,
@@ -47,10 +59,24 @@ class FigmaAssetProcessor extends AssetProcessingService {
               : i + IMAGE_REQ_LIMIT));
     }
 
+    for (var i = 0; i < _uuidNoBoxQueue.length; i += IMAGE_REQ_LIMIT) {
+      boundlessChuck.add(_uuidNoBoxQueue.sublist(
+          i,
+          i + IMAGE_REQ_LIMIT > _uuidNoBoxQueue.length
+              ? _uuidNoBoxQueue.length
+              : i + IMAGE_REQ_LIMIT));
+    }
+
     // Process images in separate queues
     var futures = <Future>[];
     for (var uuidList in chunks) {
-      futures.add(_processImages(uuidList, writeAsFile: writeAsFile));
+      futures.add(
+          _processImages(uuidList, writeAsFile: writeAsFile, hasBounds: true));
+    }
+
+    for (var uuidList in boundlessChuck) {
+      futures.add(
+          _processImages(uuidList, writeAsFile: writeAsFile, hasBounds: false));
     }
 
     // Wait for the images to complete writing process
@@ -62,10 +88,10 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// Returns true if the operation was successful. Returns false
   /// otherwise.
   Future<dynamic> _processImages(List<String> uuids,
-      {bool writeAsFile = true}) async {
+      {bool writeAsFile = true, bool hasBounds = true}) async {
     return Future(() async {
       var response = await APICallService.makeAPICall(
-          'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&use_absolute_bounds=true',
+          'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&use_absolute_bounds=${hasBounds}',
           MainInfo().figmaKey);
 
       if (response != null &&
