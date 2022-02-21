@@ -1,8 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
-import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -14,8 +12,6 @@ import '../style/figma_color.dart';
 import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'figma_frame.dart';
-import 'text.dart';
-import 'vector.dart';
 
 part 'group.g.dart';
 
@@ -44,11 +40,6 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     pluginData,
     sharedPluginData,
     boundaryRectangle,
-    style,
-    strokes,
-    strokeWeight,
-    strokeAlign,
-    cornerRadius,
     FigmaConstraints constraints,
     layoutAlign,
     size,
@@ -71,10 +62,6 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
             absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
-            strokes: strokes,
-            strokeWeight: strokeWeight,
-            strokeAlign: strokeAlign,
-            cornerRadius: cornerRadius,
             constraints: constraints,
             layoutAlign: layoutAlign,
             size: size,
@@ -119,7 +106,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           UUID: UUID,
           boundaryRectangle: absoluteBoundingBox.interpretFrame(),
           isVisible: isVisible,
-          name: AssetProcessingService.getImageName(name),
+          name: name,
           style: figmaStyleProperty?.interpretStyle(),
           constraints: constraints?.interpret(),
           prototypeNodeUUID: transitionNodeID,

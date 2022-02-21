@@ -8,7 +8,6 @@ import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.da
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
@@ -60,10 +59,6 @@ class FigmaFrame extends FigmaChildrenNode
     pluginData,
     sharedPluginData,
     this.absoluteBoundingBox,
-    this.strokes,
-    this.strokeWeight,
-    this.strokeAlign,
-    this.cornerRadius,
     FigmaConstraints constraints,
     layoutAlign,
     layoutGrow,
@@ -93,7 +88,6 @@ class FigmaFrame extends FigmaChildrenNode
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaFrame.fromJson(json);
-    // node.style = StyleExtractor().getStyle(json); TODO: Fix
     if (json.containsKey('layoutMode')) {
       node.autoLayoutOptions = FigmaAutoLayoutOptions.fromJson(json);
     }
@@ -146,7 +140,7 @@ class FigmaFrame extends FigmaChildrenNode
             UUID: UUID,
             boundaryRectangle: absoluteBoundingBox.interpretFrame(),
             isVisible: isVisible,
-            name: AssetProcessingService.getImageName(name),
+            name: name,
             style: figmaStyleProperty?.interpretStyle(),
             constraints: constraints?.interpret(),
             prototypeNodeUUID: transitionNodeID,

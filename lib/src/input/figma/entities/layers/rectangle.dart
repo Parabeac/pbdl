@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/pbdl/pbdl_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -98,7 +97,7 @@ class FigmaRectangle extends FigmaVector
         UUID: UUID,
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
-        name: AssetProcessingService.getImageName(name),
+        name: name,
         style: figmaStyleProperty.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
