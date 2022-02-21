@@ -6,9 +6,6 @@ import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
-import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
 import '../../helper/override_value.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
@@ -58,10 +55,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
-            strokes: strokes,
-            strokeWeight: strokeWeight,
-            strokeAlign: strokeAlign,
-            cornerRadius: cornerRadius,
             constraints: constraints,
             layoutAlign: layoutAlign,
             layoutGrow: layoutGrow,

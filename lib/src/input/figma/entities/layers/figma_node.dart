@@ -64,10 +64,8 @@ class FigmaNode extends FigmaBaseNode {
   @JsonKey(ignore: true)
   FigmaStyleProperty figmaStyleProperty;
 
-  static Map figmaStylePropertyToJson(FigmaStyleProperty property) {
-    var map = {};
-    // TODO: implement
-    return map;
+  Map figmaStylePropertyToJson(FigmaStyleProperty property) {
+    return figmaStyleProperty.toJson();
   }
 
   static FigmaStyleProperty figmaStylePropertyFromJson(Map json) {

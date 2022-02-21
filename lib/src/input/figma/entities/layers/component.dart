@@ -62,10 +62,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
-          strokes: strokes,
-          strokeWeight: strokeWeight,
-          strokeAlign: strokeAlign,
-          cornerRadius: cornerRadius,
           constraints: constraints,
           layoutAlign: layoutAlign,
           size: size,
@@ -83,11 +79,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var component = Component.fromJson(json)
       ..figmaStyleProperty = FigmaNode.figmaStylePropertyFromJson(json);
-
-    // component.style = StyleExtractor().getStyle(json);
-
-    /// IF figmaStyleProperty already have the fills
-    /// do we still need a fills field?
 
     return component;
   }

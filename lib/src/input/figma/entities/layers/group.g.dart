@@ -13,10 +13,6 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    strokes: json['strokes'],
-    strokeWeight: json['strokeWeight'],
-    strokeAlign: json['strokeAlign'],
-    cornerRadius: json['cornerRadius'],
     constraints: json['constraints'] == null
         ? null
         : FigmaConstraints.fromJson(
@@ -47,6 +43,10 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
+    ..strokes = json['strokes']
+    ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
+    ..strokeAlign = json['strokeAlign'] as String
+    ..cornerRadius = (json['cornerRadius'] as num)?.toDouble()
     ..isFlowHome = json['isFlowHome'] as bool ?? false
     ..imageReference = json['imageReference'] as String;
 }
