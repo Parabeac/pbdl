@@ -19,9 +19,6 @@ FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
     size: json['size'],
-    strokes: json['strokes'],
-    strokeWeight: json['strokeWeight'],
-    strokeAlign: json['strokeAlign'],
     styles: json['styles'],
     cornerRadius: (json['cornerRadius'] as num)?.toDouble(),
     rectangleCornerRadii: (json['rectangleCornerRadii'] as List)
@@ -41,6 +38,9 @@ FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
+    ..strokes = json['strokes']
+    ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
+    ..strokeAlign = json['strokeAlign'] as String
     ..imageReference = json['imageReference'] as String;
 }
 
