@@ -1,10 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_constraints.dart';
 import 'figma_node.dart';
@@ -57,22 +53,6 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    var tempStyle = figmaStyleProperty.fills.isNotEmpty
-        ? FigmaStyleProperty(fills: figmaStyleProperty.fills)
-        : FigmaStyleProperty(
-            fills: [
-              FigmaFill.fromJson({
-                'isEnabled': true,
-                'color': {
-                  'a': 1.0,
-                  'r': 0.0,
-                  'g': 0.0,
-                  'b': 0.0,
-                }
-              })
-            ],
-          );
-
     /// Added thickness as the height for [PBDLRectangle]
     /// and substracted to the y axis, so it can still fit
     /// on the frame
