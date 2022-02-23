@@ -74,25 +74,25 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() async {
-    if (figmaStyleProperty.fills.first.type
-        .toLowerCase()
-        .contains('gradient')) {
-      return Future.value(
-        PBDLRectangle(
-          UUID: UUID,
-          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-          isVisible: isVisible,
-          name: name,
-          style: figmaStyleProperty.interpretStyle(),
-          child: await child?.interpretNode(),
-          fixedRadius: figmaStyleProperty.stroke.cornerRadius,
-          prototypeNodeUUID: transitionNodeID,
-          constraints: constraints?.interpret(),
-          layoutMainAxisSizing: getGrowSizing(layoutGrow),
-          layoutCrossAxisSizing: getAlignSizing(layoutAlign),
-        ),
-      );
-    }
+    // if (figmaStyleProperty.fills.first.type
+    //     .toLowerCase()
+    //     .contains('gradient')) {
+    //   return Future.value(
+    //     PBDLRectangle(
+    //       UUID: UUID,
+    //       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+    //       isVisible: isVisible,
+    //       name: name,
+    //       style: figmaStyleProperty.interpretStyle(),
+    //       child: await child?.interpretNode(),
+    //       fixedRadius: figmaStyleProperty.stroke.cornerRadius,
+    //       prototypeNodeUUID: transitionNodeID,
+    //       constraints: constraints?.interpret(),
+    //       layoutMainAxisSizing: getGrowSizing(layoutGrow),
+    //       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+    //     ),
+    //   );
+    // }
 
     imageReference =
         FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
