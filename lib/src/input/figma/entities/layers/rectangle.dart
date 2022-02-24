@@ -72,17 +72,10 @@ class FigmaRectangle extends FigmaVector
 
   @override
   Future<PBDLNode> interpretNode() async {
-    var tempFill;
+    var isTempFill = figmaStyleProperty?.fills?.length == 1 &&
+        figmaStyleProperty?.fills?.first?.type == 'IMAGE';
 
-    try {
-      tempFill = figmaStyleProperty.fills.length == 1
-          ? figmaStyleProperty.fills.first.type == 'IMAGE'
-          : null;
-    } catch (e) {
-      tempFill = null;
-    }
-
-    if (tempFill != null && tempFill) {
+    if (isTempFill != null && isTempFill) {
       imageReference =
           FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
 
