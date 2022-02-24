@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/layers/rectangle.dart';
 import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.dart';
@@ -80,7 +81,7 @@ class FigmaFrame extends FigmaChildrenNode
             children: children,
             constraints: constraints,
             layoutAlign: layoutAlign,
-            layoutGrow: layoutGrow) {}
+            layoutGrow: layoutGrow);
 
   @JsonKey(ignore: true)
   List points;
@@ -175,7 +176,9 @@ class FigmaFrame extends FigmaChildrenNode
       return false;
     }
     for (var child in children) {
-      if (child is FigmaText || child is! FigmaVector) {
+      if (child is FigmaText ||
+          child is! FigmaVector ||
+          child is FigmaRectangle) {
         return false;
       }
     }
