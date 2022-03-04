@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_constraints.dart';
@@ -53,24 +54,53 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
+    if (absoluteBoundingBox.width == 0.0) {
+      absoluteBoundingBox.width = strokeWeight;
+      absoluteBoundingBox.x -= strokeWeight;
+    }
+    if (absoluteBoundingBox.height == 0.0) {
+      absoluteBoundingBox.height = strokeWeight;
+      absoluteBoundingBox.y -= strokeWeight;
+    }
+
+    imageReference = FigmaAssetProcessor().processImage(
+      UUID,
+      absoluteBoundingBox,
+      name,
+      IMAGE_FORMAT.SVG,
+    );
+
+    return Future.value(PBDLImage(
+      UUID: UUID,
+      imageReference: imageReference,
+      boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
+      isVisible: isVisible,
+      name: name,
+      style: figmaStyleProperty?.interpretStyle(),
+      prototypeNodeUUID: transitionNodeID,
+      constraints: constraints?.interpret(),
+      layoutMainAxisSizing: getGrowSizing(layoutGrow),
+      layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+    ));
+
     /// Added thickness as the height for [PBDLRectangle]
     /// and substracted to the y axis, so it can still fit
     /// on the frame
-    absoluteBoundingBox.height = strokeWeight;
-    absoluteBoundingBox.y -= strokeWeight;
-    return Future.value(
-      PBDLRectangle(
-        style: figmaStyleProperty?.interpretStyle(),
-        UUID: UUID,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-        isVisible: isVisible,
-        name: name,
-        prototypeNodeUUID: transitionNodeID,
-        constraints: constraints?.interpret(),
-        layoutMainAxisSizing: getGrowSizing(layoutGrow),
-        layoutCrossAxisSizing: getAlignSizing(layoutAlign),
-      ),
-    );
+    // absoluteBoundingBox.height = strokeWeight;
+    // absoluteBoundingBox.y -= strokeWeight;
+    // return Future.value(
+    //   PBDLRectangle(
+    //     style: figmaStyleProperty?.interpretStyle(),
+    //     UUID: UUID,
+    //     boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+    //     isVisible: isVisible,
+    //     name: name,
+    //     prototypeNodeUUID: transitionNodeID,
+    //     constraints: constraints?.interpret(),
+    //     layoutMainAxisSizing: getGrowSizing(layoutGrow),
+    //     layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+    //   ),
+    // );
   }
 
   @override
