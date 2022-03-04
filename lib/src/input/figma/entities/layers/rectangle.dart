@@ -72,8 +72,16 @@ class FigmaRectangle extends FigmaVector
 
   @override
   Future<PBDLNode> interpretNode() async {
-    var isTempFill = figmaStyleProperty?.fills?.length == 1 &&
-        figmaStyleProperty?.fills?.first?.type == 'IMAGE';
+    var isTempFill = false;
+
+    if (figmaStyleProperty?.fills?.isNotEmpty ?? false) {
+      if (figmaStyleProperty.fills.isNotEmpty) {
+        isTempFill = true;
+      }
+      for (var fill in figmaStyleProperty.fills) {
+        isTempFill = isTempFill || (fill.type == 'IMAGE');
+      }
+    }
 
     if (isTempFill != null && isTempFill) {
       imageReference =
