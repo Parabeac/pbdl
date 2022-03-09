@@ -75,13 +75,14 @@ class FigmaAssetProcessor extends AssetProcessingService {
     // Process images in separate queues
     var futures = <Future>[];
 
-    futures.addAll(_getImagesToProcess(chunks, writeAsFile, IMAGE_FORMAT.PNG));
+    futures.addAll(
+        _getImagesToProcess(chunks, writeAsFile, IMAGE_FORMAT.PNG, true));
+
+    futures.addAll(_getImagesToProcess(
+        boundlessChunk, writeAsFile, IMAGE_FORMAT.PNG, false));
 
     futures.addAll(
-        _getImagesToProcess(boundlessChunk, writeAsFile, IMAGE_FORMAT.PNG));
-
-    futures
-        .addAll(_getImagesToProcess(svgChunk, writeAsFile, IMAGE_FORMAT.SVG));
+        _getImagesToProcess(svgChunk, writeAsFile, IMAGE_FORMAT.SVG, false));
 
     // Wait for the images to complete writing process
     await Future.wait(futures, eagerError: true);
@@ -92,12 +93,14 @@ class FigmaAssetProcessor extends AssetProcessingService {
     List<List<String>> chunks,
     bool writeAsFile,
     IMAGE_FORMAT imageFormat,
+    bool hasBounds,
   ) {
     var futuresToReturn = <Future>[];
     for (var uuidList in chunks) {
       futuresToReturn.add(_processImages(
         uuidList,
         writeAsFile: writeAsFile,
+        hasBounds: hasBounds,
         imageFormat: imageFormat,
       ));
     }
