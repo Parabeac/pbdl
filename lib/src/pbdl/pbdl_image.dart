@@ -58,9 +58,7 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
-        ) {
-    this.name = AssetProcessingService.getImageName(name);
-  }
+        );
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
