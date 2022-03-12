@@ -40,7 +40,7 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLProjectToJson(this);
 
   @override
-  String type = 'project';
+  String pbdlType = 'project';
 
   @override
   void sortByUUID() {

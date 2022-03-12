@@ -55,7 +55,7 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLPageToJson(this);
 
   @override
-  String type = 'page';
+  String pbdlType = 'page';
 
   @override
   void sortByUUID() {

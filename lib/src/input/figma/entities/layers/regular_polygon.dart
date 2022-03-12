@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -26,10 +25,6 @@ class FigmaRegularPolygon extends FigmaVector
     FigmaConstraints constraints,
     boundaryRectangle,
     size,
-    fills,
-    strokes,
-    strokeWeight,
-    strokeAlign,
     styles,
     String transitionNodeID,
     num transitionDuration,
@@ -46,9 +41,6 @@ class FigmaRegularPolygon extends FigmaVector
               ? null
               : FigmaRect.fromJson(boundaryRectangle),
           size: size,
-          strokes: strokes,
-          strokeWeight: strokeWeight,
-          strokeAlign: strokeAlign,
           styles: styles,
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
@@ -66,7 +58,7 @@ class FigmaRegularPolygon extends FigmaVector
   @override
   Future<PBDLNode> interpretNode() {
     imageReference =
-        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
     return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,

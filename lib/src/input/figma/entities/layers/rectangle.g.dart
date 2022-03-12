@@ -13,25 +13,18 @@ FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    style: json['style'] == null
-        ? null
-        : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
     layoutAlign: json['layoutAlign'],
     constraints: json['constraints'] == null
         ? null
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
     size: json['size'],
-    strokes: json['strokes'],
-    strokeWeight: json['strokeWeight'],
-    strokeAlign: json['strokeAlign'],
     styles: json['styles'],
     cornerRadius: (json['cornerRadius'] as num)?.toDouble(),
     rectangleCornerRadii: (json['rectangleCornerRadii'] as List)
         ?.map((e) => (e as num)?.toDouble())
         ?.toList(),
     points: json['points'] as List,
-    fillsList: json['fills'] as List,
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
@@ -45,6 +38,9 @@ FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
+    ..strokes = json['strokes']
+    ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
+    ..strokeAlign = json['strokeAlign'] as String
     ..imageReference = json['imageReference'] as String;
 }
 
@@ -62,14 +58,12 @@ Map<String, dynamic> _$FigmaRectangleToJson(FigmaRectangle instance) =>
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
-      'style': instance.style,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
-      'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
       'points': instance.points,

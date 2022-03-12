@@ -62,7 +62,7 @@ class PBDLOval extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLOvalToJson(this);
 
   @override
-  String type = 'oval';
+  String pbdlType = 'oval';
 
   @override
   PBDLNode child;

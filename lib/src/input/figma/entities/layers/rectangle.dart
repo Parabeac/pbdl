@@ -1,13 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
-import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_node.dart';
 import 'vector.dart';
@@ -26,19 +24,14 @@ class FigmaRectangle extends FigmaVector
     type,
     pluginData,
     sharedPluginData,
-    FigmaStyle style,
     layoutAlign,
     FigmaConstraints constraints,
     boundaryRectangle,
     size,
-    strokes,
-    strokeWeight,
-    strokeAlign,
     styles,
     this.cornerRadius,
     this.rectangleCornerRadii,
     this.points,
-    List fillsList,
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
@@ -48,18 +41,13 @@ class FigmaRectangle extends FigmaVector
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
           absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
           size: size,
-          strokes: strokes,
-          strokeWeight: strokeWeight,
-          strokeAlign: strokeAlign,
           styles: styles,
-          fillsList: fillsList,
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
@@ -73,7 +61,7 @@ class FigmaRectangle extends FigmaVector
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaRectangle.fromJson(json);
-    node.style = StyleExtractor().getStyle(json);
+    // node.style = StyleExtractor().getStyle(json);
     return node;
   }
 
@@ -84,11 +72,30 @@ class FigmaRectangle extends FigmaVector
 
   @override
   Future<PBDLNode> interpretNode() async {
-    var fillsMap =
-        (fillsList == null || fillsList.isEmpty) ? {} : fillsList.first;
-    if (fillsMap != null && fillsMap['type'] == 'IMAGE') {
+    var isImage;
+
+    if (figmaStyleProperty?.fills?.isNotEmpty ?? false) {
+      if (figmaStyleProperty.fills.length == 1) {
+        if (figmaStyleProperty.fills.first.type == 'IMAGE') {
+          isImage = true;
+        } else {
+          isImage = false;
+        }
+      } else {
+        for (var fill in figmaStyleProperty.fills) {
+          if (fill.type != 'SOLID') {
+            isImage = true;
+            break;
+          }
+        }
+      }
+    } else {
+      isImage = false;
+    }
+
+    if (isImage != null && isImage) {
       imageReference =
-          FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+          FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
 
       return Future.value(PBDLImage(
         imageReference: imageReference,
@@ -96,7 +103,7 @@ class FigmaRectangle extends FigmaVector
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: style.interpretStyle(),
+        style: figmaStyleProperty.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
@@ -109,7 +116,7 @@ class FigmaRectangle extends FigmaVector
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: style.interpretStyle(),
+        style: figmaStyleProperty.interpretStyle(),
         child: await child?.interpretNode(),
         fixedRadius: cornerRadius ?? 0,
         prototypeNodeUUID: transitionNodeID,

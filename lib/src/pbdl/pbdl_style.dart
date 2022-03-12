@@ -1,46 +1,35 @@
-import 'package:pbdl/src/pbdl/pbdl_border.dart';
-import 'package:pbdl/src/pbdl/pbdl_border_options.dart';
+import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
-import 'package:pbdl/src/pbdl/pbdl_fill.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_text_style.dart';
-import 'pbdl_color.dart';
+import 'package:pbdl/src/pbdl/pbdl_effect.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_style.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLStyle extends PBDLNode {
-  PBDLColor backgroundColor;
   List<PBDLFill> fills;
-  List<PBDLBorder> borders;
   PBDLBorderOptions borderOptions;
+  List<PBDLEffect> effects;
+
   PBDLTextStyle textStyle;
-  bool hasShadow = false;
 
   @override
-  @JsonKey(ignore: true)
-  var child;
-
-  @override
-  final type = 'style';
+  final pbdlType = 'style';
 
   PBDLStyle({
     this.fills,
-    this.backgroundColor,
-    this.borders,
     this.borderOptions,
     this.textStyle,
-    this.hasShadow,
+    this.effects,
   }) : super('', '', true, null, null, '');
 
   static PBDLStyle getStyle(dynamic style) {
     if (style is Map) {
       return PBDLStyle.fromJson(style);
     }
-    return style;
+    return (style as FigmaStyleProperty).interpretStyle();
   }
 
   @override

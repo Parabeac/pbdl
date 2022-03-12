@@ -47,7 +47,7 @@ class AbstractPBDLNodeFactory {
     var className = json[DESIGN_CLASS_KEY];
     if (className != null) {
       for (var designNode in _designNodes) {
-        if (designNode.type == className) {
+        if (designNode.pbdlType == className) {
           return designNode.createPBDLNode(json);
         }
       }

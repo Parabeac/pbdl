@@ -61,7 +61,7 @@ class PBDLStar extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLStarToJson(this);
 
   @override
-  String type = 'star';
+  String pbdlType = 'star';
 
   @override
   PBDLNode child;

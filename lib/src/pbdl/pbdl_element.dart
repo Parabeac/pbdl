@@ -8,7 +8,7 @@ part 'pbdl_element.g.dart';
 // TODO: Not sure why this class exists.
 class PBDLElement extends PBDLNode {
   @override
-  final type = 'element';
+  final pbdlType = 'element';
   PBDLElement({
     UUID,
     name,

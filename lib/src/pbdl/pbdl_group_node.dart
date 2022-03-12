@@ -67,7 +67,7 @@ class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLGroupNodeToJson(this);
 
   @override
-  String type = 'group';
+  String pbdlType = 'group';
 
   @override
   @JsonKey(ignore: true)

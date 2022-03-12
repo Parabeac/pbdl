@@ -23,6 +23,8 @@ class FigmaAssetProcessor extends AssetProcessingService {
 
   final List<String> _uuidNoBoxQueue = [];
 
+  final Map<String, String> _uuidToName = {};
+
   List<String> get uuidQueue => _uuidQueue;
 
   Logger log = Logger('Figma Image helper');
@@ -30,7 +32,8 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// Adds [uuid] to queue to be processed as an image.
   /// Returns the formatted name of the image reference.
   @override
-  String processImage(String uuid, [FigmaRect absoluteBoundingBox]) {
+  String processImage(String uuid,
+      [FigmaRect absoluteBoundingBox, String name]) {
     if (absoluteBoundingBox != null &&
         absoluteBoundingBox.height > 0 &&
         absoluteBoundingBox.width > 0) {
@@ -39,7 +42,9 @@ class FigmaAssetProcessor extends AssetProcessingService {
       _uuidNoBoxQueue.add(uuid);
     }
 
-    return AssetProcessingService.getImageName(uuid);
+    var finalName = AssetProcessingService.getImageName(name);
+    _uuidToName[uuid] = finalName;
+    return ('images/' + finalName + '.png');
   }
 
   /// Adds [uuids] to queue to be processed as an image.
@@ -108,8 +113,8 @@ class FigmaAssetProcessor extends AssetProcessingService {
               if (imageRes == null || imageRes.statusCode != 200) {
                 log.error('Image ${entry.key} was not processed correctly');
               }
-
-              var pngPath = p.join(MainInfo().pngPath, '${entry.key}.png');
+              var imageName = _uuidToName[entry.key];
+              var pngPath = p.join(MainInfo().pngPath, '${imageName}.png');
               var file = File(pngPath.replaceAll(':', '_'))
                 ..createSync(recursive: true);
               file.writeAsBytesSync(imageRes.bodyBytes);

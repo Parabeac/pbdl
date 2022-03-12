@@ -5,17 +5,22 @@ part 'pbdl_border.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLBorder {
-  final bool isEnabled;
-  final double fillType;
-  final PBDLColor color;
-  final double thickness;
-  final type = 'border';
+  String blendMode;
+
+  String type;
+
+  PBDLColor color;
+
+  @JsonKey(defaultValue: true)
+  bool visible;
+
+  final pbdlType = 'border';
 
   PBDLBorder({
-    this.isEnabled = true,
-    this.fillType,
+    this.blendMode,
+    this.type,
     this.color,
-    this.thickness,
+    this.visible,
   });
 
   factory PBDLBorder.fromJson(Map<String, dynamic> json) {

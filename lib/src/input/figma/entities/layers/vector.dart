@@ -2,12 +2,9 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_image.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:quick_log/quick_log.dart';
-
+import '../../../../../pbdl.dart';
 import '../abstract_figma_node_factory.dart';
-import '../style/figma_style.dart';
 import 'figma_node.dart';
 
 part 'vector.g.dart';
@@ -16,8 +13,6 @@ part 'vector.g.dart';
 class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   @JsonKey(ignore: true)
   Logger log;
-
-  FigmaStyle style;
 
   @override
   @JsonKey()
@@ -32,11 +27,9 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   String strokeAlign;
 
   var styles;
+
   @override
   String type = 'VECTOR';
-
-  @JsonKey(name: 'fills')
-  List fillsList;
 
   FigmaVector({
     String name,
@@ -44,15 +37,10 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     String type,
     pluginData,
     sharedPluginData,
-    this.style,
     FigmaConstraints constraints,
     this.absoluteBoundingBox,
     this.size,
-    this.strokes,
-    this.strokeWeight,
-    this.strokeAlign,
     this.styles,
-    this.fillsList,
     String UUID,
     num transitionDuration,
     String transitionEasing,
@@ -85,9 +73,29 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Map<String, dynamic> toJson() => _$FigmaVectorToJson(this);
 
   @override
-  Future<PBDLNode> interpretNode() {
+  Future<PBDLNode> interpretNode() async {
+    // if (figmaStyleProperty.fills.first.type
+    //     .toLowerCase()
+    //     .contains('gradient')) {
+    //   return Future.value(
+    //     PBDLRectangle(
+    //       UUID: UUID,
+    //       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+    //       isVisible: isVisible,
+    //       name: name,
+    //       style: figmaStyleProperty.interpretStyle(),
+    //       child: await child?.interpretNode(),
+    //       fixedRadius: figmaStyleProperty.stroke.cornerRadius,
+    //       prototypeNodeUUID: transitionNodeID,
+    //       constraints: constraints?.interpret(),
+    //       layoutMainAxisSizing: getGrowSizing(layoutGrow),
+    //       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+    //     ),
+    //   );
+    // }
+
     imageReference =
-        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
 
     if (absoluteBoundingBox != null) {
       if (absoluteBoundingBox.height == 0.0) {
@@ -104,7 +112,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style?.interpretStyle(),
+      style: figmaStyleProperty?.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),

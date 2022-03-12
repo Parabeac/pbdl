@@ -16,12 +16,12 @@ class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
   String valueName;
 
   @override
-  final type;
+  final pbdlType;
 
   PBDLOverrideValue(
     String UUID,
     String name,
-    this.type,
+    this.pbdlType,
     this.value,
     this.valueName,
   ) : super(

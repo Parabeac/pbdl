@@ -14,7 +14,7 @@ class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
   PBDLNode value;
 
   @override
-  final type;
+  final pbdlType;
 
   @override
   @JsonKey(ignore: true)
@@ -35,7 +35,7 @@ class PBDLOverrideProperty extends PBDLNode implements PBDLNodeFactory {
   PBDLOverrideProperty(
     String UUID,
     String name,
-    this.type,
+    this.pbdlType,
     this.value,
   ) : super(
           UUID,

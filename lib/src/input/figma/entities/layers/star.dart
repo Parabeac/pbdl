@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -26,10 +25,6 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     FigmaConstraints constraints,
     FigmaRect boundaryRectangle,
     size,
-    fills,
-    strokes,
-    strokeWeight,
-    strokeAlign,
     styles,
     String transitionNodeID,
     num transitionDuration,
@@ -44,9 +39,6 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
           constraints: constraints,
           absoluteBoundingBox: boundaryRectangle,
           size: size,
-          strokes: strokes,
-          strokeWeight: strokeWeight,
-          strokeAlign: strokeAlign,
           styles: styles,
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
@@ -63,14 +55,14 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
   Future<PBDLNode> interpretNode() {
     imageReference =
-        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
     return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style?.interpretStyle(),
+      style: figmaStyleProperty?.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),

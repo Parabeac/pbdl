@@ -1,3 +1,4 @@
+import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
@@ -68,5 +69,5 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   Map<String, dynamic> toJson() => _$PBDLImageToJson(this);
 
   @override
-  String type = 'image';
+  String pbdlType = 'image';
 }

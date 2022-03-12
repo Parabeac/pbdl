@@ -12,9 +12,6 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
     type: json['type'] as String,
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    style: json['style'] == null
-        ? null
-        : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>),
     constraints: json['constraints'] == null
         ? null
         : FigmaConstraints.fromJson(
@@ -24,11 +21,7 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>),
     size: json['size'],
-    strokes: json['strokes'],
-    strokeWeight: (json['strokeWeight'] as num)?.toDouble(),
-    strokeAlign: json['strokeAlign'] as String,
     styles: json['styles'],
-    fillsList: json['fills'] as List,
     UUID: json['id'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
@@ -40,6 +33,9 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..isVisible = json['visible'] as bool ?? true
+    ..strokes = json['strokes']
+    ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
+    ..strokeAlign = json['strokeAlign'] as String
     ..imageReference = json['imageReference'] as String;
 }
 
@@ -57,7 +53,6 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
-      'style': instance.style,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
@@ -65,6 +60,5 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
       'type': instance.type,
-      'fills': instance.fillsList,
       'imageReference': instance.imageReference,
     };

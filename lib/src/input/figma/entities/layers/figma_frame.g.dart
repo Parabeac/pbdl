@@ -17,10 +17,6 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>),
-    strokes: json['strokes'],
-    strokeWeight: (json['strokeWeight'] as num)?.toDouble(),
-    strokeAlign: json['strokeAlign'] as String,
-    cornerRadius: (json['cornerRadius'] as num)?.toDouble(),
     constraints: json['constraints'] == null
         ? null
         : FigmaConstraints.fromJson(
@@ -46,8 +42,11 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..strokes = json['strokes']
+    ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
+    ..strokeAlign = json['strokeAlign'] as String
+    ..cornerRadius = (json['cornerRadius'] as num)?.toDouble()
     ..isFlowHome = json['isFlowHome'] as bool ?? false
-    ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String;
 }
 
@@ -78,6 +77,5 @@ Map<String, dynamic> _$FigmaFrameToJson(FigmaFrame instance) =>
       'backgroundColor': instance.backgroundColor?.toJson(),
       'type': instance.type,
       'isFlowHome': instance.isFlowHome,
-      'fills': instance.fillsList,
       'imageReference': instance.imageReference,
     };

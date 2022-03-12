@@ -1,22 +1,31 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../pbdl.dart';
+
 part 'pbdl_border_options.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLBorderOptions {
-  bool isEnabled;
-  List dashPattern;
-  int lineCapStyle;
-  String lineJoinStyle;
+  List<PBDLBorder> borders;
+
+  num strokeWeight;
+
+  String strokeAlign;
+
+  String strokeJoin;
+
+  List strokeDashes;
+
   num cornerRadius;
 
-  final type = 'border_options';
+  final pbdlType = 'border_options';
 
   PBDLBorderOptions({
-    this.isEnabled,
-    this.dashPattern,
-    this.lineCapStyle,
-    this.lineJoinStyle,
+    this.borders,
+    this.strokeWeight,
+    this.strokeAlign,
+    this.strokeJoin,
+    this.strokeDashes,
     this.cornerRadius,
   });
 

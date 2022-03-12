@@ -39,8 +39,8 @@ class Fill {
 
   PBDLFill interpretFill() {
     return PBDLFill(
-      color.interpretColor(),
-      isEnabled
-    );
+        // color.interpretColor(),
+        // isEnabled
+        );
   }
 }

@@ -25,7 +25,7 @@ class FigmaOverrideTextValue extends FigmaOverrideType {
     if (!matches(node)) {
       return null;
     }
-    return (node as FigmaText).style?.interpretStyle();
+    return (node as FigmaText).figmaStyleProperty?.interpretStyle();
   }
 
   @override

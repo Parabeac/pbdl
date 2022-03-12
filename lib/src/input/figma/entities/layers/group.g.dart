@@ -13,10 +13,6 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
     type: json['type'],
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
-    strokes: json['strokes'],
-    strokeWeight: json['strokeWeight'],
-    strokeAlign: json['strokeAlign'],
-    cornerRadius: json['cornerRadius'],
     constraints: json['constraints'] == null
         ? null
         : FigmaConstraints.fromJson(
@@ -37,6 +33,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
+    figmaStyleProperty: json['figmaStyleProperty'],
   )
     ..child = json['child'] == null
         ? null
@@ -46,8 +43,11 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
+    ..strokes = json['strokes']
+    ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
+    ..strokeAlign = json['strokeAlign'] as String
+    ..cornerRadius = (json['cornerRadius'] as num)?.toDouble()
     ..isFlowHome = json['isFlowHome'] as bool ?? false
-    ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String;
 }
 
@@ -76,7 +76,7 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'itemSpacing': instance.itemSpacing,
       'backgroundColor': instance.backgroundColor?.toJson(),
       'isFlowHome': instance.isFlowHome,
-      'fills': instance.fillsList,
       'type': instance.type,
       'imageReference': instance.imageReference,
+      'figmaStyleProperty': instance.figmaStyleProperty?.toJson(),
     };

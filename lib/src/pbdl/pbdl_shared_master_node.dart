@@ -16,7 +16,7 @@ class PBDLSharedMasterNode extends PBDLNode
   List<PBDLNode> children = [];
 
   @override
-  final type = 'shared_master';
+  final pbdlType = 'shared_master';
 
   String componentSetName;
 
@@ -72,7 +72,7 @@ class PBDLSharedMasterNode extends PBDLNode
           name,
           isVisible,
           boundaryRectangle,
-          PBDLStyle.getStyle(style),
+          style,
           prototypeNodeUUID,
           constraints: (constraints is! Map)
               ? constraints

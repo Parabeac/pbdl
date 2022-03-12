@@ -19,7 +19,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
   var isFlowHome;
 
   @override
-  final type = 'artboard';
+  final pbdlType = 'artboard';
 
   PBDLArtboard({
     this.backgroundColor,
