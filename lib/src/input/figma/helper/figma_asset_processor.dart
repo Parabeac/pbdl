@@ -23,6 +23,8 @@ class FigmaAssetProcessor extends AssetProcessingService {
 
   final List<String> _uuidNoBoxQueue = [];
 
+  final List<String> _uuidSvgQueue = [];
+
   final Map<String, String> _uuidToName = {};
 
   List<String> get uuidQueue => _uuidQueue;
@@ -32,9 +34,15 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// Adds [uuid] to queue to be processed as an image.
   /// Returns the formatted name of the image reference.
   @override
-  String processImage(String uuid,
-      [FigmaRect absoluteBoundingBox, String name]) {
-    if (absoluteBoundingBox != null &&
+  String processImage(
+    String uuid, [
+    FigmaRect absoluteBoundingBox,
+    String name,
+    IMAGE_FORMAT format = IMAGE_FORMAT.PNG,
+  ]) {
+    if (format == IMAGE_FORMAT.SVG) {
+      _uuidSvgQueue.add(uuid);
+    } else if (absoluteBoundingBox != null &&
         absoluteBoundingBox.height > 0 &&
         absoluteBoundingBox.width > 0) {
       _uuidQueue.add(uuid);
@@ -44,7 +52,7 @@ class FigmaAssetProcessor extends AssetProcessingService {
 
     var finalName = AssetProcessingService.getImageName(name);
     _uuidToName[uuid] = finalName;
-    return ('images/' + finalName + '.png');
+    return ('images/' + finalName + '.${format.toShortLowerCaseString()}');
   }
 
   /// Adds [uuids] to queue to be processed as an image.
@@ -55,48 +63,79 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// the image downloading process.
   Future<void> processImageQueue({bool writeAsFile = true}) async {
     var chunks = <List<String>>[];
-    var boundlessChuck = <List<String>>[];
-    for (var i = 0; i < _uuidQueue.length; i += IMAGE_REQ_LIMIT) {
-      chunks.add(_uuidQueue.sublist(
-          i,
-          i + IMAGE_REQ_LIMIT > _uuidQueue.length
-              ? _uuidQueue.length
-              : i + IMAGE_REQ_LIMIT));
-    }
+    var boundlessChunk = <List<String>>[];
+    var svgChunk = <List<String>>[];
 
-    for (var i = 0; i < _uuidNoBoxQueue.length; i += IMAGE_REQ_LIMIT) {
-      boundlessChuck.add(_uuidNoBoxQueue.sublist(
-          i,
-          i + IMAGE_REQ_LIMIT > _uuidNoBoxQueue.length
-              ? _uuidNoBoxQueue.length
-              : i + IMAGE_REQ_LIMIT));
-    }
+    chunks.addAll(_getChunks(_uuidQueue));
+
+    boundlessChunk.addAll(_getChunks(_uuidNoBoxQueue));
+
+    svgChunk.addAll(_getChunks(_uuidSvgQueue));
 
     // Process images in separate queues
     var futures = <Future>[];
-    for (var uuidList in chunks) {
-      futures.add(
-          _processImages(uuidList, writeAsFile: writeAsFile, hasBounds: true));
-    }
 
-    for (var uuidList in boundlessChuck) {
-      futures.add(
-          _processImages(uuidList, writeAsFile: writeAsFile, hasBounds: false));
-    }
+    futures.addAll(
+        _getImagesToProcess(chunks, writeAsFile, IMAGE_FORMAT.PNG, true));
+
+    futures.addAll(_getImagesToProcess(
+        boundlessChunk, writeAsFile, IMAGE_FORMAT.PNG, false));
+
+    futures.addAll(
+        _getImagesToProcess(svgChunk, writeAsFile, IMAGE_FORMAT.SVG, false));
 
     // Wait for the images to complete writing process
     await Future.wait(futures, eagerError: true);
+  }
+
+  /// Passes the chunks to process each image at a time
+  List<Future<dynamic>> _getImagesToProcess(
+    List<List<String>> chunks,
+    bool writeAsFile,
+    IMAGE_FORMAT imageFormat,
+    bool hasBounds,
+  ) {
+    var futuresToReturn = <Future>[];
+    for (var uuidList in chunks) {
+      futuresToReturn.add(_processImages(
+        uuidList,
+        writeAsFile: writeAsFile,
+        hasBounds: hasBounds,
+        imageFormat: imageFormat,
+      ));
+    }
+
+    return futuresToReturn;
+  }
+
+  /// Method to get the queue into chunks
+  /// for easier processing
+  List<List<String>> _getChunks(List<String> queue) {
+    var chunksToReturn = <List<String>>[];
+    for (var i = 0; i < queue.length; i += IMAGE_REQ_LIMIT) {
+      chunksToReturn.add(queue.sublist(
+          i,
+          i + IMAGE_REQ_LIMIT > queue.length
+              ? queue.length
+              : i + IMAGE_REQ_LIMIT));
+    }
+
+    return chunksToReturn;
   }
 
   /// Downloads the image with the given `UUID`
   /// and writes it to the `pngs` folder in the `outputPath`.
   /// Returns true if the operation was successful. Returns false
   /// otherwise.
-  Future<dynamic> _processImages(List<String> uuids,
-      {bool writeAsFile = true, bool hasBounds = true}) async {
+  Future<dynamic> _processImages(
+    List<String> uuids, {
+    bool writeAsFile = true,
+    bool hasBounds = true,
+    IMAGE_FORMAT imageFormat,
+  }) async {
     return Future(() async {
       var response = await APICallService.makeAPICall(
-          'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&use_absolute_bounds=${hasBounds}',
+          'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&format=${imageFormat.toShortLowerCaseString()}&use_absolute_bounds=${hasBounds}',
           MainInfo().figmaKey);
 
       if (response != null &&
@@ -114,7 +153,8 @@ class FigmaAssetProcessor extends AssetProcessingService {
                 log.error('Image ${entry.key} was not processed correctly');
               }
               var imageName = _uuidToName[entry.key];
-              var pngPath = p.join(MainInfo().pngPath, '${imageName}.png');
+              var pngPath = p.join(MainInfo().pngPath,
+                  '${imageName}.${imageFormat.toShortLowerCaseString()}');
               var file = File(pngPath.replaceAll(':', '_'))
                 ..createSync(recursive: true);
               file.writeAsBytesSync(imageRes.bodyBytes);
@@ -158,5 +198,18 @@ class FigmaAssetProcessor extends AssetProcessingService {
       return newList;
     });
     return listOnChunks;
+  }
+}
+
+enum IMAGE_FORMAT {
+  PNG,
+  JPG,
+  SVG,
+  PDF,
+}
+
+extension ImageFormatString on IMAGE_FORMAT {
+  String toShortLowerCaseString() {
+    return toString().split('.').last.toLowerCase();
   }
 }
