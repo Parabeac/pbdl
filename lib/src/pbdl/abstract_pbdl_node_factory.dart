@@ -18,7 +18,7 @@ import 'pbdl_text.dart';
 import 'pbdl_vector.dart';
 
 class AbstractPBDLNodeFactory {
-  static final String DESIGN_CLASS_KEY = 'type';
+  static final String DESIGN_CLASS_KEY = 'pbdlType';
 
   static final List<PBDLNode> _designNodes = [
     PBDLArtboard(),
