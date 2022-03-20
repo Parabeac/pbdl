@@ -28,7 +28,7 @@ class PBDLSharedMasterNode extends PBDLNode
     String name,
     bool isVisible,
     PBDLBoundaryBox boundaryRectangle,
-    style,
+    PBDLStyle style,
     String prototypeNodeUUID,
     bool hasClickThrough,
     groupLayout,

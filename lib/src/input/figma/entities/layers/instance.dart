@@ -96,7 +96,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         name: name,
         isVisible: isVisible,
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-        style: figmaStyleProperty,
+        style: figmaStyleProperty.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         symbolID: componentId,

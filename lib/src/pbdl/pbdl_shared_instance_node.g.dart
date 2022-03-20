@@ -21,7 +21,9 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
         ? null
         : PBDLBoundaryBox.fromJson(
             json['boundaryRectangle'] as Map<String, dynamic>),
-    style: json['style'],
+    style: json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     symbolID: json['symbolID'] as String,
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
     constraints: json['constraints'] == null

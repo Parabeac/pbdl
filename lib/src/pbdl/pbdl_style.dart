@@ -29,7 +29,7 @@ class PBDLStyle extends PBDLNode {
     if (style is Map) {
       return PBDLStyle.fromJson(style);
     }
-    return (style as FigmaStyleProperty).interpretStyle();
+    return (style as FigmaStyleProperty)?.interpretStyle();
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
 part 'pbdl_element.g.dart';
 
@@ -15,7 +16,7 @@ class PBDLElement extends PBDLNode {
     isVisible,
     boundaryRectangle,
     type,
-    style,
+    PBDLStyle style,
     prototypeNodeUUID,
     PBDLConstraints constraints,
     layoutMainAxisSizing,
