@@ -58,7 +58,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
           name,
           isVisible,
           boundaryRectangle,
-          PBDLStyle.getStyle(style),
+          style,
           prototypeNodeUUID,
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,

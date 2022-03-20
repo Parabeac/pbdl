@@ -55,7 +55,7 @@ class PBDLBooleanOperation extends PBDLVector
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
   }) : super(
-          style: PBDLStyle.getStyle(style),
+          style: style,
           UUID: UUID,
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,
