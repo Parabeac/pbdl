@@ -10,7 +10,9 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
   return PBDLBooleanOperation(
     children: json['children'],
     booleanOperation: json['booleanOperation'],
-    style: json['style'],
+    style: json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     boundaryRectangle: json['boundaryRectangle'] == null
         ? null
         : PBDLBoundaryBox.fromJson(

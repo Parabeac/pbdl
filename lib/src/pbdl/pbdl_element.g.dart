@@ -12,7 +12,9 @@ PBDLElement _$PBDLElementFromJson(Map<String, dynamic> json) {
     name: json['name'],
     isVisible: json['isVisible'],
     boundaryRectangle: json['boundaryRectangle'],
-    style: json['style'],
+    style: json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'],
     constraints: json['constraints'] == null
         ? null
