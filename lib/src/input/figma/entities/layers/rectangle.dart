@@ -76,7 +76,10 @@ class FigmaRectangle extends FigmaVector
 
     if (figmaStyleProperty?.fills?.isNotEmpty ?? false) {
       if (figmaStyleProperty.fills.length == 1) {
-        if (figmaStyleProperty.fills.first.type == 'IMAGE') {
+        if (figmaStyleProperty.fills.first.type == 'IMAGE' ||
+            !figmaStyleProperty.fills.first.type
+                .toLowerCase()
+                .contains('linear')) {
           isImage = true;
         } else {
           isImage = false;
@@ -94,8 +97,11 @@ class FigmaRectangle extends FigmaVector
     }
 
     if (isImage != null && isImage) {
-      imageReference =
-          FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
+      imageReference = FigmaAssetProcessor().processImage(
+        UUID,
+        absoluteBoundingBox,
+        name,
+      );
 
       return Future.value(PBDLImage(
         imageReference: imageReference,

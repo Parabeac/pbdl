@@ -54,8 +54,12 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    imageReference =
-        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
+    imageReference = FigmaAssetProcessor().processImage(
+      UUID,
+      absoluteBoundingBox,
+      name,
+      IMAGE_FORMAT.SVG,
+    );
     return Future.value(PBDLImage(
       imageReference: imageReference,
       UUID: UUID,
