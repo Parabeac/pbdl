@@ -77,7 +77,9 @@ class FigmaRectangle extends FigmaVector
     if (figmaStyleProperty?.fills?.isNotEmpty ?? false) {
       if (figmaStyleProperty.fills.length == 1) {
         if (figmaStyleProperty.fills.first.type == 'IMAGE' ||
-            !figmaStyleProperty.fills.first.type.contains('linear')) {
+            !figmaStyleProperty.fills.first.type
+                .toLowerCase()
+                .contains('linear')) {
           isImage = true;
         } else {
           isImage = false;
