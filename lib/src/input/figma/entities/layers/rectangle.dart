@@ -97,8 +97,12 @@ class FigmaRectangle extends FigmaVector
     }
 
     if (isImage != null && isImage) {
-      imageReference =
-          FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
+      imageReference = FigmaAssetProcessor().processImage(
+        UUID,
+        absoluteBoundingBox,
+        name,
+        IMAGE_FORMAT.SVG,
+      );
 
       return Future.value(PBDLImage(
         imageReference: imageReference,
