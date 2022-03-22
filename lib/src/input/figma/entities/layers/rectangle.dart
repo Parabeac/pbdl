@@ -101,7 +101,6 @@ class FigmaRectangle extends FigmaVector
         UUID,
         absoluteBoundingBox,
         name,
-        IMAGE_FORMAT.SVG,
       );
 
       return Future.value(PBDLImage(
