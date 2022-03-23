@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/input/figma/entities/layers/ellipse.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/layers/rectangle.dart';
@@ -182,7 +183,8 @@ class FigmaFrame extends FigmaChildrenNode
     for (var child in children) {
       if (child is FigmaText ||
           child is! FigmaVector ||
-          child is FigmaRectangle) {
+          child is FigmaRectangle ||
+          child is FigmaEllipse) {
         return false;
       }
     }
