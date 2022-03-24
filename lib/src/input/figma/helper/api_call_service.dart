@@ -4,7 +4,6 @@ import 'dart:io';
 import 'package:http2/http2.dart';
 import 'package:pbdl/src/input/figma/entities/figma_key.dart';
 import 'package:quick_log/quick_log.dart';
-import 'package:sentry/sentry.dart';
 
 import 'api_exceptions.dart';
 
@@ -69,7 +68,6 @@ class APICallService {
           .join()
           .then((jsonString) => json.decode(jsonString))
           .onError((error, stackTrace) {
-        // MainInfo().sentry.captureException(exception: error);
         log.error(error.toString());
 
         _returnResponse(500);
@@ -78,7 +76,6 @@ class APICallService {
       await transport.finish();
       return decoded_data;
     } catch (e, stackTrace) {
-      await Sentry.captureException(e, stackTrace: stackTrace);
       print(e);
     }
   }

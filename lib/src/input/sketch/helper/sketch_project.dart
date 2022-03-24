@@ -12,7 +12,6 @@ import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:archive/archive.dart';
 import 'package:recase/recase.dart';
-import 'package:sentry/sentry.dart';
 import '../entities/documents/document.dart';
 import '../entities/layers/page.dart';
 import '../entities/objects/foreign_symbol.dart';
@@ -75,7 +74,6 @@ class SketchProject {
 
       return sharedStyles;
     } catch (e, stackTrace) {
-      Sentry.captureException(e, stackTrace: stackTrace);
       log.error(e.toString());
       return null;
     }
@@ -98,7 +96,6 @@ class SketchProject {
       }
       return pg;
     } catch (e, stackTrace) {
-      Sentry.captureException(e, stackTrace: stackTrace);
       log.error(e.toString());
       return null;
     }

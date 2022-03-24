@@ -11,7 +11,6 @@ import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:pbdl/src/util/sketch/sac_installer.dart';
 import 'package:path/path.dart' as p;
-import 'package:sentry/sentry.dart';
 
 import 'dart:convert';
 
@@ -37,10 +36,6 @@ class PBDL {
       if (pngPath == null || pngPath.isEmpty) {
         pngPath = outputPath;
       }
-      await Sentry.init(
-        (p0) => p0.dsn =
-            'https://6e011ce0d8cd4b7fb0ff284a23c5cb37@o433482.ingest.sentry.io/5388747',
-      );
 
       _setupMainInfo(
         outputPath,
@@ -67,12 +62,9 @@ class PBDL {
 
       SACInstaller.process.kill();
 
-      await Sentry.close();
-
       return pbdl;
     }, (error, stackTrace) async {
-      await Sentry.captureException(error, stackTrace: stackTrace);
-      await Sentry.close();
+      print(error.toString());
     });
   }
 
@@ -97,14 +89,14 @@ class PBDL {
       if (pngPath == null || pngPath.isEmpty) {
         pngPath = outputPath;
       }
-      await Sentry.init(
-        (p0) => p0.dsn =
-            'https://6e011ce0d8cd4b7fb0ff284a23c5cb37@o433482.ingest.sentry.io/5388747',
-      );
+
       _setupMainInfo(outputPath, pngPath);
       var figmaKey = FigmaKey(personalAccessToken: key, oAuthToken: oauthKey);
-      var figmaProject = await FigmaController().convertFile(projectID, figmaKey);
+      var figmaProject =
+          await FigmaController().convertFile(projectID, figmaKey);
       var pbdl = await figmaProject.interpretNode();
+
+      // TODO: add services
 
       await FigmaAssetProcessor().processImageQueue(
           writeAsFile:
@@ -119,11 +111,9 @@ class PBDL {
         _jsonToAzure(pbdl, FigmaAssetProcessor());
       }
 
-      await Sentry.close();
       return pbdl;
     }, (error, stackTrace) async {
-      await Sentry.captureException(error, stackTrace: stackTrace);
-      await Sentry.close();
+      print(error.toString());
     });
   }
 
