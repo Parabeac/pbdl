@@ -105,6 +105,10 @@ class FigmaNode extends FigmaBaseNode {
     ));
   }
 
+  /// Applicable for auto-layout frames. Determines how the frame will
+  /// grow on the parent's [counter axis].
+  /// 
+  /// https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
   ParentLayoutSizing getAlignSizing(String layoutAlign) {
     if (layoutAlign == 'STRETCH') {
       return ParentLayoutSizing.STRETCH;
@@ -113,6 +117,10 @@ class FigmaNode extends FigmaBaseNode {
     }
   }
 
+  /// Applicable for auto-layout frames. Determines how the frame will
+  /// grow on the parent's [main axis].
+  /// 
+  /// https://www.figma.com/plugin-docs/api/properties/nodes-layoutgrow/
   ParentLayoutSizing getGrowSizing(num layoutGrow) {
     if (layoutGrow == 0.0) {
       return ParentLayoutSizing.INHERIT;
