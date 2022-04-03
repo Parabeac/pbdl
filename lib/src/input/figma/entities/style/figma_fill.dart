@@ -1,13 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/fill/figma_fill_factory.dart';
+import 'package:pbdl/src/input/figma/entities/style/style_addition.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
-import '../../../../../pbdl.dart';
 import 'figma_color.dart';
 
 part 'figma_fill.g.dart';
 
-@JsonSerializable()
-class FigmaFill {
+@JsonSerializable(createFactory: false)
+abstract class FigmaFill implements StyleAdditionNode {
   FigmaColor color;
 
   @JsonKey(defaultValue: 100)
@@ -15,6 +15,7 @@ class FigmaFill {
 
   String blendMode;
 
+  @override
   String type;
 
   @JsonKey(defaultValue: true)
@@ -43,36 +44,4 @@ class FigmaFill {
       color: color.interpretColor(),
     );
   }
-
-  // Future<PBDLStyle> interpretStyle() async {
-  //   var interpretedFills = await Future.wait(
-  //       fills.map((e) async => await e.interpretNode()).toList());
-  //   return PBDLStyle(
-  //     backgroundColor: backgroundColor?.interpretColor(),
-  //     fills: interpretedFills,
-  //     borders: borders.map((e) => e.interpretBorder()).toList(),
-  //     borderOptions: borderOptions?.interpretOptions(),
-  //     textStyle: textStyle?.interpretTextStyle(),
-  //     hasShadow: false,
-  //   );
-  // }
 }
-
-// enum BlendMode {
-//   NORMAL,
-//   DARKEN,
-//   MULTIPLY,
-//   COLOR_BURN,
-//   LIGHTEN,
-//   SCREEN,
-//   COLOR_DODGE,
-//   OVERLAY,
-//   SOFT_LIGHT,
-//   HARD_LIGHT,
-//   DIFFERENCE,
-//   EXCLUSION,
-//   HUE,
-//   SATURATION,
-//   COLOR,
-//   LUMINOSITY,
-// }
