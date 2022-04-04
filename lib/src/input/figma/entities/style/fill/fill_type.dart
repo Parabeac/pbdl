@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
+import 'package:pbdl/src/input/figma/entities/style/style_addition.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 part 'fill_type.g.dart';
 
@@ -58,6 +56,12 @@ class ImageFillType implements FigmaFill {
       imageRef: imageRef,
     );
   }
+
+  @override
+  String addStyle(StyleAdditionNode style) {
+    /// Adding any [style] to IMAGE returns IMAGE
+    return 'IMAGE';
+  }
 }
 
 @JsonSerializable()
@@ -104,5 +108,14 @@ class SolidFillType implements FigmaFill {
       isEnabled: visible,
       color: color.interpretColor(),
     );
+  }
+
+  @override
+  String addStyle(StyleAdditionNode style) {
+    /// For SOLID, we only support adding other SOLID styles
+    if (style is SolidFillType) {
+      return 'SOLID';
+    }
+    return 'IMAGE';
   }
 }

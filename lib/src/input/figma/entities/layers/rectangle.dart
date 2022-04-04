@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/figma/helper/style_helper.dart';
 import 'package:pbdl/src/pbdl/pbdl_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -72,31 +73,8 @@ class FigmaRectangle extends FigmaVector
 
   @override
   Future<PBDLNode> interpretNode() async {
-    var isImage;
-
-    if (figmaStyleProperty?.fills?.isNotEmpty ?? false) {
-      if (figmaStyleProperty.fills.length == 1) {
-        if (figmaStyleProperty.fills.first.type == 'IMAGE' ||
-            !figmaStyleProperty.fills.first.type
-                .toLowerCase()
-                .contains('linear')) {
-          isImage = true;
-        } else {
-          isImage = false;
-        }
-      } else {
-        for (var fill in figmaStyleProperty.fills) {
-          if (fill.type != 'SOLID') {
-            isImage = true;
-            break;
-          }
-        }
-      }
-    } else {
-      isImage = false;
-    }
-
-    if (isImage != null && isImage) {
+    if (StyleHelper.isImage(figmaStyleProperty?.fills) ||
+        StyleHelper.isImage(figmaStyleProperty?.stroke?.strokes)) {
       imageReference = FigmaAssetProcessor().processImage(
         UUID,
         absoluteBoundingBox,

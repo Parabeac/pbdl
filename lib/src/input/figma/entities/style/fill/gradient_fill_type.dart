@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
+import 'package:pbdl/src/input/figma/entities/style/style_addition.dart';
 import 'package:pbdl/src/pbdl/pbdl_fill.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../figma_color.dart';
 
 part 'gradient_fill_type.g.dart';
@@ -77,6 +77,12 @@ class GradientFillType implements FigmaFill {
           .toList(),
       gradientHandlePositions: gradientHandlePositions,
     );
+  }
+
+  @override
+  String addStyle(StyleAdditionNode style) {
+    /// Any style added to GRADIENT returns IMAGE
+    return 'IMAGE';
   }
 }
 
