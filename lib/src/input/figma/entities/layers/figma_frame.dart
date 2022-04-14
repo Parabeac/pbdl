@@ -150,6 +150,8 @@ class FigmaFrame extends FigmaChildrenNode
             style: figmaStyleProperty?.interpretStyle(),
             constraints: constraints?.interpret(),
             prototypeNodeUUID: transitionNodeID,
+            layoutMainAxisSizing: getGrowSizing(layoutGrow),
+            layoutCrossAxisSizing: getAlignSizing(layoutAlign),
           ),
         );
       } else {
