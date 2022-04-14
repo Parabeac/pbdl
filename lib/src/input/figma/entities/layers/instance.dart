@@ -80,6 +80,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() async {
+    var cacheService = ComponentCacheService();
     var overrideValues = <PBDLOverrideValue>[];
     children.forEach((child) async {
       var currVals = await _traverseChildrenForOverrides(child)
@@ -89,7 +90,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
     /// If the component is not a local component
     /// then the instance must become a component aka [PBDLSharedMasterNode]
-    if (ComponentCacheService().localComponents.containsKey(componentId)) {
+    if (cacheService.localComponents.containsKey(componentId)) {
       return Future.value(PBDLSharedInstanceNode(
         UUID: UUID,
         overrideValues: overrideValues,
@@ -102,12 +103,13 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         symbolID: componentId,
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
-        sharedNodeSetID: ComponentCacheService().getComponentSetId(componentId),
+        sharedNodeSetID: cacheService.getComponentSetId(componentId),
       ));
     } else {
-      ComponentCacheService().localComponents[componentId] = toJson();
-      return Future.value(PBDLSharedMasterNode(
-          UUID: UUID,
+      cacheService.localComponents[componentId] = toJson()..['componentSetId'] = componentId;
+      return Future.value(
+        PBDLSharedMasterNode(
+          UUID: componentId,
           overrideProperties: null,
           name: name,
           isVisible: isVisible,
@@ -120,7 +122,12 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           layoutMainAxisSizing: getGrowSizing(layoutGrow),
           layoutCrossAxisSizing: getAlignSizing(layoutAlign),
           children: await Future.wait(
-              children.map((e) async => await e.interpretNode()).toList())));
+            children.map((e) async => await e.interpretNode()).toList(),
+          ),
+          sharedNodeSetID: cacheService.getComponentSetId(componentId),
+          // componentSetName: componentsetName
+        ),
+      );
     }
   }
 
