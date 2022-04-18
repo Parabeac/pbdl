@@ -15,6 +15,8 @@ class PBDLStyle extends PBDLNode {
 
   PBDLTextStyle textStyle;
 
+  bool clipsContent;
+
   @override
   final pbdlType = 'style';
 
@@ -23,6 +25,7 @@ class PBDLStyle extends PBDLNode {
     this.borderOptions,
     this.textStyle,
     this.effects,
+    this.clipsContent,
   }) : super('', '', true, null, null, '');
 
   static PBDLStyle getStyle(dynamic style) {
