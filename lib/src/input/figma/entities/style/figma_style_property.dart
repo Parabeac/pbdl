@@ -12,11 +12,13 @@ class FigmaStyleProperty {
   List<FigmaFill> fills;
   FigmaStroke stroke;
   List<FigmaEffect> effects;
+  bool clipsContent;
 
   FigmaStyleProperty({
     this.fills,
     this.stroke,
     this.effects,
+    this.clipsContent,
   });
 
   factory FigmaStyleProperty.fromJson(Map<String, dynamic> json) =>
@@ -30,6 +32,7 @@ class FigmaStyleProperty {
       borderOptions: stroke.interpretStroke(),
       effects: effects.map((effect) => effect.interpretEffect()).toList(),
       textStyle: textStyle?.interpretTextStyle(),
+      clipsContent: clipsContent,
     );
   }
 }

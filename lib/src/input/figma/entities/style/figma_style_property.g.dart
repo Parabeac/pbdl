@@ -19,6 +19,7 @@ FigmaStyleProperty _$FigmaStylePropertyFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : FigmaEffect.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    clipsContent: json['clipsContent'] as bool,
   );
 }
 
@@ -27,4 +28,5 @@ Map<String, dynamic> _$FigmaStylePropertyToJson(FigmaStyleProperty instance) =>
       'fills': instance.fills,
       'stroke': instance.stroke,
       'effects': instance.effects,
+      'clipsContent': instance.clipsContent,
     };

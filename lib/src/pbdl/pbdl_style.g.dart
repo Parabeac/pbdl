@@ -23,6 +23,7 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : PBDLEffect.fromJson(e as Map<String, dynamic>))
         ?.toList(),
+    clipsContent: json['clipsContent'] as bool,
   )
     ..UUID = json['UUID'] as String
     ..layoutMainAxisSizing =
@@ -65,6 +66,7 @@ Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
       'borderOptions': instance.borderOptions?.toJson(),
       'effects': instance.effects?.map((e) => e?.toJson())?.toList(),
       'textStyle': instance.textStyle?.toJson(),
+      'clipsContent': instance.clipsContent,
       'pbdlType': instance.pbdlType,
     };
 

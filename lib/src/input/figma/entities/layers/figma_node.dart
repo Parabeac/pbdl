@@ -84,7 +84,10 @@ class FigmaNode extends FigmaBaseNode {
     }
 
     var property = FigmaStyleProperty(
-        fills: listFills, stroke: figmaStroke, effects: listEffects);
+        fills: listFills,
+        stroke: figmaStroke,
+        effects: listEffects,
+        clipsContent: json['clipsContent']);
 
     return property;
   }
@@ -107,7 +110,7 @@ class FigmaNode extends FigmaBaseNode {
 
   /// Applicable for auto-layout frames. Determines how the frame will
   /// grow on the parent's [counter axis].
-  /// 
+  ///
   /// https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
   ParentLayoutSizing getAlignSizing(String layoutAlign) {
     if (layoutAlign == 'STRETCH') {
@@ -119,7 +122,7 @@ class FigmaNode extends FigmaBaseNode {
 
   /// Applicable for auto-layout frames. Determines how the frame will
   /// grow on the parent's [main axis].
-  /// 
+  ///
   /// https://www.figma.com/plugin-docs/api/properties/nodes-layoutgrow/
   ParentLayoutSizing getGrowSizing(num layoutGrow) {
     if (layoutGrow == 0.0) {
