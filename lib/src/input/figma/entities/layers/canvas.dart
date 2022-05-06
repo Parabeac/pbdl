@@ -11,7 +11,7 @@ import 'figma_node.dart';
 part 'canvas.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
+class Canvas extends FigmaChildrenNode {
   @override
   String type = 'CANVAS';
 

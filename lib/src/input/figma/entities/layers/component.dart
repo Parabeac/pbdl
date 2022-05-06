@@ -16,7 +16,7 @@ import 'instance.dart';
 part 'component.g.dart';
 
 @JsonSerializable()
-class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
+class Component extends FigmaFrame {
   /// Map that keeps track of override properties repeated names.
   @JsonKey(ignore: true)
   var repeatNames = <String, int>{};

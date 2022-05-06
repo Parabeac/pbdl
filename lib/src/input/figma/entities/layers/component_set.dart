@@ -8,7 +8,7 @@ import 'figma_node.dart';
 part 'component_set.g.dart';
 
 @JsonSerializable()
-class FigmaComponentSet extends FigmaNode implements FigmaNodeFactory {
+class FigmaComponentSet extends FigmaNode {
   @override
   String type = 'COMPONENT_SET';
 

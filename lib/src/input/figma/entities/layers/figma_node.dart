@@ -7,12 +7,29 @@ import 'package:pbdl/src/input/figma/entities/style/figma_stroke.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/util/figma/rules/figma_rule.dart';
 import '../abstract_figma_node_factory.dart';
+import 'boolean_operation.dart';
+import 'canvas.dart';
+import 'component.dart';
+import 'component_set.dart';
+import 'ellipse.dart';
+import 'figma_frame.dart';
+import 'group.dart';
+import 'instance.dart';
+import 'line.dart';
+import 'rectangle.dart';
+import 'regular_polygon.dart';
+import 'star.dart';
+import 'text.dart';
+import 'vector.dart';
 
 part 'figma_node.g.dart';
 
 @JsonSerializable(nullable: true)
 class FigmaNode extends FigmaBaseNode {
+  @JsonKey(ignore: true)
+  static final String FIGMA_CLASS_KEY = 'type';
   @JsonKey(
     name: 'id',
   )
@@ -20,6 +37,7 @@ class FigmaNode extends FigmaBaseNode {
 
   String name;
 
+  @override
   String type;
 
   var pluginData;
@@ -135,9 +153,67 @@ class FigmaNode extends FigmaBaseNode {
   }
 
   factory FigmaNode.fromJson(Map<String, dynamic> json) {
-    return AbstractFigmaNodeFactory.getFigmaNode(json)
+    return FigmaBaseNode.createFigmaNode(json)
       ..figmaStyleProperty = figmaStylePropertyFromJson(json);
   }
   @override
   Map<String, dynamic> toJson() => _$FigmaNodeToJson(this);
+
+  @override
+  void addRule(FigmaRule rule) {
+    // TODO: implement addRule
+  }
+
+  @override
+  void removeRule(FigmaRule rule) {
+    // TODO: implement removeRule
+  }
+
+  @override
+  void checkRules() {
+    for (FigmaRule rule in rules) {
+      if (rule.validateRule([this])) {
+        rule.executeAction();
+      }
+    }
+  }
+
+  @override
+  FigmaNode createFigmaNode(Map<String, dynamic> json) {
+    var className = json[FIGMA_CLASS_KEY];
+    if (className != null) {
+      for (var figmaNode in _figmaNodes) {
+        if (figmaNode.type == className) {
+          var interpretedNode = figmaNode.createFigmaNode(json);
+
+          interpretedNode.checkRules();
+          return interpretedNode;
+        }
+      }
+    }
+    return null;
+  }
+
+  static final List<FigmaBaseNode> _figmaNodes = [
+    BooleanOperation(),
+    Canvas(),
+    Component(),
+    FigmaEllipse(),
+    FigmaFrame(),
+    Group(),
+    Instance(),
+    FigmaLine(),
+    FigmaRectangle(),
+    // FigmaSlice(),
+    FigmaStar(),
+    FigmaText(),
+    FigmaVector(),
+    FigmaRegularPolygon(),
+    FigmaComponentSet(),
+  ];
 }
+
+// abstract class FigmaNodeFactory {
+//   String type;
+//   FigmaNode createFigmaNode(Map<String, dynamic> json);
+// }

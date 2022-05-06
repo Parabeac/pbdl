@@ -17,9 +17,7 @@ import 'figma_node.dart';
 part 'figma_frame.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class FigmaFrame extends FigmaChildrenNode
-    with PBColorMixin
-    implements FigmaNodeFactory {
+class FigmaFrame extends FigmaChildrenNode with PBColorMixin {
   @JsonKey()
   @override
   FigmaRect absoluteBoundingBox;

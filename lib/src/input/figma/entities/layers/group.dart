@@ -20,7 +20,7 @@ part 'group.g.dart';
 /// Class that represents a Figma Group.
 /// The reason this class implements Image is because Groups can hold multiple vectors
 /// which we need to convert into images.
-class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
+class Group extends FigmaFrame {
   @JsonKey(ignore: true)
   Logger log;
   @override
