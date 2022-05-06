@@ -153,7 +153,7 @@ class FigmaNode extends FigmaBaseNode {
   }
 
   factory FigmaNode.fromJson(Map<String, dynamic> json) {
-    return FigmaBaseNode.createFigmaNode(json)
+    return AbstractFigmaNodeFactory.getFigmaNode(json)
       ..figmaStyleProperty = figmaStylePropertyFromJson(json);
   }
   @override

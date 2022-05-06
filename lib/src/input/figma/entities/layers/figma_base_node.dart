@@ -10,5 +10,5 @@ abstract class FigmaBaseNode {
   void addRule(FigmaRule rule);
   void removeRule(FigmaRule rule);
   void checkRules();
-  static FigmaNode createFigmaNode(Map<String, dynamic> json) {}
+  FigmaNode createFigmaNode(Map<String, dynamic> json);
 }
