@@ -14,7 +14,7 @@ import 'figma_frame.dart';
 part 'instance.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
+class Instance extends FigmaFrame {
   @override
   String type = 'INSTANCE';
 
@@ -106,7 +106,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         sharedNodeSetID: cacheService.getComponentSetId(componentId),
       ));
     } else {
-      cacheService.localComponents[componentId] = toJson()..['componentSetId'] = componentId;
+      cacheService.localComponents[componentId] = toJson()
+        ..['componentSetId'] = componentId;
       return Future.value(
         PBDLSharedMasterNode(
           UUID: componentId,

@@ -11,8 +11,7 @@ import 'vector.dart';
 part 'regular_polygon.g.dart';
 
 @JsonSerializable()
-class FigmaRegularPolygon extends FigmaVector
-    implements AbstractFigmaNodeFactory {
+class FigmaRegularPolygon extends FigmaVector {
   @override
   String type = 'REGULAR_POLYGON';
   FigmaRegularPolygon({

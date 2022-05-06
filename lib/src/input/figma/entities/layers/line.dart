@@ -10,7 +10,7 @@ import 'vector.dart';
 part 'line.g.dart';
 
 @JsonSerializable()
-class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
+class FigmaLine extends FigmaVector {
   @override
   String type = 'LINE';
   FigmaLine({

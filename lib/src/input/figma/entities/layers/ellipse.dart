@@ -13,7 +13,7 @@ import 'vector.dart';
 part 'ellipse.g.dart';
 
 @JsonSerializable()
-class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
+class FigmaEllipse extends FigmaVector {
   @override
   String imageReference;
   @override

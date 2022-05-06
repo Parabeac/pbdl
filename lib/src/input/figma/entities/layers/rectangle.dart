@@ -14,9 +14,7 @@ import 'vector.dart';
 part 'rectangle.g.dart';
 
 @JsonSerializable()
-class FigmaRectangle extends FigmaVector
-    with PBColorMixin
-    implements AbstractFigmaNodeFactory {
+class FigmaRectangle extends FigmaVector with PBColorMixin {
   @override
   String type = 'RECTANGLE';
   FigmaRectangle({

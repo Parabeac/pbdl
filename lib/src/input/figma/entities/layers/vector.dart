@@ -10,7 +10,7 @@ import 'figma_node.dart';
 part 'vector.g.dart';
 
 @JsonSerializable()
-class FigmaVector extends FigmaNode implements FigmaNodeFactory {
+class FigmaVector extends FigmaNode {
   @JsonKey(ignore: true)
   Logger log;
 

@@ -12,7 +12,7 @@ import 'vector.dart';
 part 'star.g.dart';
 
 @JsonSerializable()
-class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
+class FigmaStar extends FigmaVector {
   @override
   String type = 'STAR';
   FigmaStar({

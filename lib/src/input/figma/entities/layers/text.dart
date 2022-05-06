@@ -12,7 +12,7 @@ import 'vector.dart';
 part 'text.g.dart';
 
 @JsonSerializable()
-class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
+class FigmaText extends FigmaVector {
   FigmaTextStyle style;
 
   @override

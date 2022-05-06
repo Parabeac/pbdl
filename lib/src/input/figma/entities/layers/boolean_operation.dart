@@ -11,7 +11,7 @@ import 'vector.dart';
 part 'boolean_operation.g.dart';
 
 @JsonSerializable()
-class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
+class BooleanOperation extends FigmaVector {
   @override
   @JsonKey(ignore: true)
   Logger log;

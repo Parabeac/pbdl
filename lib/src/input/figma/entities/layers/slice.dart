@@ -16,7 +16,7 @@ part 'slice.g.dart';
 ///Its purpose is to allow you to export a specific part of a document.
 ///Generally, the only thing you will do with a slice is to add an
 ///exportSettings and export its content via exportAsync.
-class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
+class FigmaSlice extends FigmaNode {
   @override
   String type = 'SLICE';
 
