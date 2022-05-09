@@ -61,7 +61,7 @@ class PBDLPolygon extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLPolygonToJson(this);
 
   @override
-  String type = 'polygon';
+  String pbdlType = 'polygon';
 
   @override
   PBDLNode child;

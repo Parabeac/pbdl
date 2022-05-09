@@ -1,3 +1,4 @@
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
@@ -13,7 +14,7 @@ part 'pbdl_text.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
-  final type = 'text';
+  final pbdlType = 'text';
 
   String content;
 

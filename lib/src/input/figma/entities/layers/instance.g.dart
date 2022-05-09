@@ -49,7 +49,6 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
     ..isFlowHome = json['isFlowHome'] as bool ?? false
-    ..fillsList = json['fills'] as List
     ..imageReference = json['imageReference'] as String
     ..overrideValues = (json['overrideValues'] as List)
         ?.map((e) => e == null
@@ -83,7 +82,6 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'itemSpacing': instance.itemSpacing,
       'backgroundColor': instance.backgroundColor?.toJson(),
       'isFlowHome': instance.isFlowHome,
-      'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
       'parameters': instance.parameters,

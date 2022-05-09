@@ -17,7 +17,7 @@ part 'pbdl_frame.g.dart';
 class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
   List<PBDLNode> children = [];
   @override
-  String type = 'frame';
+  String pbdlType = 'frame';
 
   @override
   @JsonKey(ignore: true)
@@ -76,10 +76,10 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
     if (autoLayoutOptions != null) {
       switch (autoLayoutOptions.orientation) {
         case Orientation.HORIZONTAL:
-          type = 'row';
+          pbdlType = 'row';
           break;
         case Orientation.VERTICAL:
-          type = 'col';
+          pbdlType = 'col';
           break;
         default:
       }
@@ -117,7 +117,7 @@ class PBDLRow extends PBDLFrame {
   PBDLRow();
 
   @override
-  String type = 'row';
+  String pbdlType = 'row';
 
   factory PBDLRow.fromJson(Map<String, dynamic> json) =>
       _$PBDLRowFromJson(json);
@@ -130,7 +130,7 @@ class PBDLCol extends PBDLFrame {
   PBDLCol();
 
   @override
-  String type = 'col';
+  String pbdlType = 'col';
 
   factory PBDLCol.fromJson(Map<String, dynamic> json) =>
       _$PBDLColFromJson(json);

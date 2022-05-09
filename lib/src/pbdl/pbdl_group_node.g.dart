@@ -30,7 +30,7 @@ PBDLGroupNode _$PBDLGroupNodeFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
-  )..type = json['type'] as String;
+  )..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>
@@ -47,7 +47,7 @@ Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'constraints': instance.constraints?.toJson(),
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'type': instance.type,
+      'pbdlType': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

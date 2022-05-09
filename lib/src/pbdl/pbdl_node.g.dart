@@ -29,7 +29,7 @@ PBDLNode _$PBDLNodeFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
-  )..type = json['type'] as String;
+  )..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLNodeToJson(PBDLNode instance) => <String, dynamic>{
@@ -41,7 +41,7 @@ Map<String, dynamic> _$PBDLNodeToJson(PBDLNode instance) => <String, dynamic>{
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'type': instance.type,
+      'pbdlType': instance.pbdlType,
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),

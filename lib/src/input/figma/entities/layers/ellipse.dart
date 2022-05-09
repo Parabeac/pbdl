@@ -37,9 +37,6 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     FigmaRect boundaryRectangle,
     size,
     this.fills,
-    strokes,
-    strokeWeight,
-    strokeAlign,
     styles,
     String transitionNodeID,
     num transitionDuration,
@@ -50,14 +47,10 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           type: type,
           pluginData: pluginData,
           sharedPluginData: sharedPluginData,
-          style: style,
           layoutAlign: layoutAlign,
           constraints: constraints,
           absoluteBoundingBox: boundaryRectangle,
           size: size,
-          strokes: strokes,
-          strokeWeight: strokeWeight,
-          strokeAlign: strokeAlign,
           styles: styles,
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
@@ -76,14 +69,17 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    imageReference =
-        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+    imageReference = FigmaAssetProcessor().processImage(
+      UUID,
+      absoluteBoundingBox,
+      name,
+    );
     return Future.value(PBDLImage(
       UUID: UUID,
       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
       isVisible: isVisible,
       name: name,
-      style: style?.interpretStyle(),
+      style: figmaStyleProperty?.interpretStyle(),
       imageReference: imageReference,
       constraints: constraints?.interpret(),
       prototypeNodeUUID: transitionNodeID,

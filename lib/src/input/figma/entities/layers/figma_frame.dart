@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/input/figma/entities/layers/ellipse.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/layers/rectangle.dart';
@@ -7,10 +8,8 @@ import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import '../../helper/style_extractor.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
@@ -24,12 +23,6 @@ class FigmaFrame extends FigmaChildrenNode
   @JsonKey()
   @override
   FigmaRect absoluteBoundingBox;
-
-  @JsonKey(ignore: true)
-  FigmaStyle style;
-
-  @JsonKey(ignore: true)
-  var fills;
 
   var strokes;
 
@@ -68,12 +61,6 @@ class FigmaFrame extends FigmaChildrenNode
     pluginData,
     sharedPluginData,
     this.absoluteBoundingBox,
-    this.style,
-    this.fills,
-    this.strokes,
-    this.strokeWeight,
-    this.strokeAlign,
-    this.cornerRadius,
     FigmaConstraints constraints,
     layoutAlign,
     layoutGrow,
@@ -95,18 +82,14 @@ class FigmaFrame extends FigmaChildrenNode
             children: children,
             constraints: constraints,
             layoutAlign: layoutAlign,
-            layoutGrow: layoutGrow) {}
+            layoutGrow: layoutGrow);
 
   @JsonKey(ignore: true)
   List points;
 
-  @JsonKey(name: 'fills')
-  List fillsList;
-
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
     var node = FigmaFrame.fromJson(json);
-    node.style = StyleExtractor().getStyle(json);
     if (json.containsKey('layoutMode')) {
       node.autoLayoutOptions = FigmaAutoLayoutOptions.fromJson(json);
     }
@@ -129,18 +112,22 @@ class FigmaFrame extends FigmaChildrenNode
             boundaryRectangle: absoluteBoundingBox.interpretFrame(),
             isVisible: isVisible,
             name: name,
-            style: style.interpretStyle(),
+            style: figmaStyleProperty.interpretStyle(),
             prototypeNodeUUID: transitionNodeID,
             constraints: constraints?.interpret(),
-            layoutMainAxisSizing: getAlignSizing(layoutAlign),
-            layoutCrossAxisSizing: getGrowSizing(layoutGrow),
+            layoutMainAxisSizing: getGrowSizing(layoutGrow),
+            layoutCrossAxisSizing: getAlignSizing(layoutAlign),
             children: await Future.wait(
                 children.map((e) async => await e.interpretNode()).toList())),
       );
     } else {
       if (areAllVectors()) {
-        imageReference =
-            FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+        imageReference = FigmaAssetProcessor().processImage(
+          UUID,
+          absoluteBoundingBox,
+          name,
+          IMAGE_FORMAT.SVG,
+        );
 
         var tempPrototypeID = childrenHavePrototypeNode();
         if (tempPrototypeID != null) {
@@ -160,9 +147,11 @@ class FigmaFrame extends FigmaChildrenNode
             boundaryRectangle: absoluteBoundingBox.interpretFrame(),
             isVisible: isVisible,
             name: name,
-            style: style?.interpretStyle(),
+            style: figmaStyleProperty?.interpretStyle(),
             constraints: constraints?.interpret(),
             prototypeNodeUUID: transitionNodeID,
+            layoutMainAxisSizing: getGrowSizing(layoutGrow),
+            layoutCrossAxisSizing: getAlignSizing(layoutAlign),
           ),
         );
       } else {
@@ -172,12 +161,12 @@ class FigmaFrame extends FigmaChildrenNode
               boundaryRectangle: absoluteBoundingBox.interpretFrame(),
               isVisible: isVisible,
               name: name,
-              style: style.interpretStyle(),
+              style: figmaStyleProperty.interpretStyle(),
               prototypeNodeUUID: transitionNodeID,
               constraints: constraints?.interpret(),
               autoLayoutOptions: autoLayoutOptions?.interpretOptions(),
-              layoutMainAxisSizing: getAlignSizing(layoutAlign),
-              layoutCrossAxisSizing: getGrowSizing(layoutGrow),
+              layoutMainAxisSizing: getGrowSizing(layoutGrow),
+              layoutCrossAxisSizing: getAlignSizing(layoutAlign),
               children: await Future.wait(
                   children.map((e) async => await e.interpretNode()).toList())),
         );
@@ -196,7 +185,8 @@ class FigmaFrame extends FigmaChildrenNode
     for (var child in children) {
       if (child is FigmaText ||
           child is! FigmaVector ||
-          child is FigmaRectangle) {
+          child is FigmaRectangle ||
+          child is FigmaEllipse) {
         return false;
       }
     }

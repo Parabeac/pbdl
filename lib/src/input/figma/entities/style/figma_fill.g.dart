@@ -6,16 +6,10 @@ part of 'figma_fill.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FigmaFill _$FigmaFillFromJson(Map<String, dynamic> json) {
-  return FigmaFill(
-    json['color'] == null
-        ? null
-        : FigmaColor.fromJson(json['color'] as Map<String, dynamic>),
-    json['isEnabled'] as bool ?? true,
-  );
-}
-
 Map<String, dynamic> _$FigmaFillToJson(FigmaFill instance) => <String, dynamic>{
       'color': instance.color,
-      'isEnabled': instance.isEnabled,
+      'opacity': instance.opacity,
+      'blendMode': instance.blendMode,
+      'type': instance.type,
+      'visible': instance.visible,
     };

@@ -4,7 +4,6 @@ import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
-import 'package:pbdl/src/input/figma/helper/style_extractor.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -36,7 +35,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     sharedPluginData,
     boundaryRectangle,
     style,
-    fills,
     strokes,
     strokeWeight,
     strokeAlign,
@@ -64,12 +62,6 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           absoluteBoundingBox: boundaryRectangle != null
               ? FigmaRect.fromJson(boundaryRectangle)
               : null,
-          style: style,
-          fills: fills,
-          strokes: strokes,
-          strokeWeight: strokeWeight,
-          strokeAlign: strokeAlign,
-          cornerRadius: cornerRadius,
           constraints: constraints,
           layoutAlign: layoutAlign,
           size: size,
@@ -85,9 +77,8 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
-    var component = Component.fromJson(json);
-
-    component.style = StyleExtractor().getStyle(json);
+    var component = Component.fromJson(json)
+      ..figmaStyleProperty = FigmaNode.figmaStylePropertyFromJson(json);
 
     return component;
   }
@@ -119,7 +110,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       name: name,
       isVisible: isVisible,
       boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-      style: style.interpretStyle(),
+      style: figmaStyleProperty.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
       symbolID: UUID,
       constraints: isRoot

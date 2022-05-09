@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/pbdl/pbdl_text_style.dart';
 
 import '../layers/figma_font_descriptor.dart';
@@ -8,21 +9,78 @@ part 'figma_text_style.g.dart';
 
 @JsonSerializable()
 class FigmaTextStyle {
-  FigmaColor fontColor;
+  String fontFamily;
 
-  String weight;
+  String fontPostScriptName;
 
-  @JsonKey(ignore: true)
-  FigmaFontDescriptor fontDescriptor;
+  @JsonKey(defaultValue: 0)
+  num paragraphSpacing;
 
-  @JsonKey(ignore: true)
-  FigmaParagraphStyle paragraphStyle;
+  @JsonKey(defaultValue: 0)
+  num paragraphIndent;
+
+  @JsonKey(defaultValue: 0)
+  num listSpacing;
+
+  bool italics;
+
+  num fontWeight;
+
+  num fontSize;
+
+  @JsonKey(defaultValue: 'ORIGINAL')
+  String textCase;
+
+  @JsonKey(defaultValue: 'NONE')
+  String textDecoration;
+
+  @JsonKey(defaultValue: 'NONE')
+  String textAutoResize;
+
+  String textAlignHorizontal;
+
+  String textAlignVertical;
+
+  num letterSpacing;
+
+  List<FigmaFill> fills;
+
+  String hyperLink;
+
+  @JsonKey(defaultValue: {})
+  Map<String, num> opentypeFlags;
+
+  num lineHeightPx;
+
+  @JsonKey(defaultValue: 100)
+  num lineHeightPercent;
+
+  num lineHeightPercentFontSize;
+
+  String lineHeightUnit;
 
   FigmaTextStyle({
-    FigmaColor this.fontColor,
-    this.fontDescriptor,
-    this.weight,
-    this.paragraphStyle,
+    this.fontFamily,
+    this.fontPostScriptName,
+    this.paragraphSpacing,
+    this.paragraphIndent,
+    this.listSpacing,
+    this.italics,
+    this.fontWeight,
+    this.fontSize,
+    this.textCase,
+    this.textDecoration,
+    this.textAutoResize,
+    this.textAlignHorizontal,
+    this.textAlignVertical,
+    this.letterSpacing,
+    this.fills,
+    this.hyperLink,
+    this.opentypeFlags,
+    this.lineHeightPx,
+    this.lineHeightPercent,
+    this.lineHeightPercentFontSize,
+    this.lineHeightUnit,
   });
 
   Map<String, dynamic> toJson() => _$FigmaTextStyleToJson(this);
@@ -31,10 +89,27 @@ class FigmaTextStyle {
 
   PBDLTextStyle interpretTextStyle() {
     return PBDLTextStyle(
-      fontColor: fontColor.interpretColor(),
-      weight: weight,
-      paragraphStyle: paragraphStyle.interpretParagraphStyle(),
-      fontDescriptor: fontDescriptor.interpretFontDescriptor(),
+      fontFamily: fontFamily,
+      fontPostScriptName: fontPostScriptName,
+      paragraphSpacing: paragraphSpacing,
+      paragraphIndent: paragraphIndent,
+      listSpacing: listSpacing,
+      italics: italics,
+      fontWeight: fontWeight,
+      fontSize: fontSize,
+      textCase: textCase,
+      textDecoration: textDecoration,
+      textAutoResize: textAutoResize,
+      textAlignHorizontal: textAlignHorizontal,
+      textAlignVertical: textAlignVertical,
+      letterSpacing: letterSpacing,
+      fills: fills?.map((fill) => fill.interpretFill())?.toList(),
+      hyperLink: hyperLink,
+      opentypeFlags: opentypeFlags,
+      lineHeightPx: lineHeightPx,
+      lineHeightPercent: lineHeightPercent,
+      lineHeightPercentFontSize: lineHeightPercentFontSize,
+      lineHeightUnit: lineHeightUnit,
     );
   }
 }

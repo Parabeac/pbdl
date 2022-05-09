@@ -25,7 +25,7 @@ class FigmaOverrideSymbolID extends FigmaOverrideType {
     if (!matches(node)) {
       return null;
     }
-    return (node as Instance).style?.interpretStyle();
+    return (node as Instance).figmaStyleProperty?.interpretStyle();
   }
 
   @override

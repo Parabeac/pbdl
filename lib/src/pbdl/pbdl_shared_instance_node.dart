@@ -1,11 +1,10 @@
+import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
-import '../../pbdl.dart';
-import 'abstract_pbdl_node_factory.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
 part 'pbdl_shared_instance_node.g.dart';
 
@@ -19,7 +18,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   String sharedNodeSetID;
 
   @override
-  final type = 'shared_instance';
+  final pbdlType = 'shared_instance';
 
   PBDLSharedInstanceNode({
     String UUID,
@@ -27,7 +26,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     String name,
     bool isVisible,
     PBDLBoundaryBox boundaryRectangle,
-    style,
+    PBDLStyle style,
     exportOptions,
     booleanOperation,
     bool isFixedToViewport,
@@ -59,7 +58,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
           name,
           isVisible,
           boundaryRectangle,
-          PBDLStyle.getStyle(style),
+          style,
           prototypeNodeUUID,
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,

@@ -12,13 +12,6 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
         ?.map((e) =>
             e == null ? null : PBDLFill.fromJson(e as Map<String, dynamic>))
         ?.toList(),
-    backgroundColor: json['backgroundColor'] == null
-        ? null
-        : PBDLColor.fromJson(json['backgroundColor'] as Map<String, dynamic>),
-    borders: (json['borders'] as List)
-        ?.map((e) =>
-            e == null ? null : PBDLBorder.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
     borderOptions: json['borderOptions'] == null
         ? null
         : PBDLBorderOptions.fromJson(
@@ -26,7 +19,11 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
     textStyle: json['textStyle'] == null
         ? null
         : PBDLTextStyle.fromJson(json['textStyle'] as Map<String, dynamic>),
-    hasShadow: json['hasShadow'] as bool,
+    effects: (json['effects'] as List)
+        ?.map((e) =>
+            e == null ? null : PBDLEffect.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
+    clipsContent: json['clipsContent'] as bool,
   )
     ..UUID = json['UUID'] as String
     ..layoutMainAxisSizing =
@@ -43,10 +40,13 @@ PBDLStyle _$PBDLStyleFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
     ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..constraints = json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..type = json['type'] as String;
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
@@ -60,14 +60,14 @@ Map<String, dynamic> _$PBDLStyleToJson(PBDLStyle instance) => <String, dynamic>{
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
-      'backgroundColor': instance.backgroundColor?.toJson(),
       'fills': instance.fills?.map((e) => e?.toJson())?.toList(),
-      'borders': instance.borders?.map((e) => e?.toJson())?.toList(),
       'borderOptions': instance.borderOptions?.toJson(),
+      'effects': instance.effects?.map((e) => e?.toJson())?.toList(),
       'textStyle': instance.textStyle?.toJson(),
-      'hasShadow': instance.hasShadow,
-      'type': instance.type,
+      'clipsContent': instance.clipsContent,
+      'pbdlType': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

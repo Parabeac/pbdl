@@ -28,10 +28,10 @@ class BorderOptions {
 
   PBDLBorderOptions interpretOptions() {
     return PBDLBorderOptions(
-      isEnabled: isEnabled,
-      dashPattern: dashPattern,
-      lineCapStyle: lineCapStyle,
-      lineJoinStyle: lineJoinStyle,
-    );
+        // isEnabled: isEnabled,
+        // dashPattern: dashPattern,
+        // lineCapStyle: lineCapStyle,
+        // lineJoinStyle: lineJoinStyle,
+        );
   }
 }

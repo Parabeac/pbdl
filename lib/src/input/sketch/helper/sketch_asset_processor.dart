@@ -6,7 +6,6 @@ import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:path/path.dart' as p;
-import 'package:sentry/sentry.dart';
 
 class SketchAssetProcessor extends AssetProcessingService {
   final svg_convertion_endpoint =
@@ -60,11 +59,9 @@ class SketchAssetProcessor extends AssetProcessingService {
 
       return response?.bodyBytes;
     } catch (e, stackTrace) {
-      await Sentry.captureException(e, stackTrace: stackTrace);
       var imageErr = File(
               '${MainInfo().cwd.path}/lib/src/input/assets/image-conversion-error.png')
           .readAsBytesSync();
-      // await MainInfo().sentry.captureException(exception: e);
       log.error(e.toString());
       return imageErr;
     }

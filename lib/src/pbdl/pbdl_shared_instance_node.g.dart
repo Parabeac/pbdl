@@ -21,7 +21,9 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
         ? null
         : PBDLBoundaryBox.fromJson(
             json['boundaryRectangle'] as Map<String, dynamic>),
-    style: json['style'],
+    style: json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     symbolID: json['symbolID'] as String,
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
     constraints: json['constraints'] == null
@@ -37,7 +39,7 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
     ..parameters = json['parameters'] as List
-    ..type = json['type'] as String;
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
@@ -60,7 +62,7 @@ Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
       'overrideValues':
           instance.overrideValues?.map((e) => e?.toJson())?.toList(),
       'sharedNodeSetID': instance.sharedNodeSetID,
-      'type': instance.type,
+      'pbdlType': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {

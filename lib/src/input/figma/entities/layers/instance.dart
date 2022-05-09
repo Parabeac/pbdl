@@ -2,12 +2,10 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
-import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
-import 'package:pbdl/src/pbdl/pbdl_shared_instance_node.dart';
 import '../../helper/override_value.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
@@ -30,7 +28,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     sharedPluginData,
     boundaryRectangle,
     style,
-    fills,
     strokes,
     strokeWeight,
     strokeAlign,
@@ -58,12 +55,6 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
             absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
-            style: style,
-            fills: fills,
-            strokes: strokes,
-            strokeWeight: strokeWeight,
-            strokeAlign: strokeAlign,
-            cornerRadius: cornerRadius,
             constraints: constraints,
             layoutAlign: layoutAlign,
             layoutGrow: layoutGrow,
@@ -89,6 +80,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() async {
+    var cacheService = ComponentCacheService();
     var overrideValues = <PBDLOverrideValue>[];
     children.forEach((child) async {
       var currVals = await _traverseChildrenForOverrides(child)
@@ -98,30 +90,31 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
 
     /// If the component is not a local component
     /// then the instance must become a component aka [PBDLSharedMasterNode]
-    if (ComponentCacheService().localComponents.containsKey(componentId)) {
+    if (cacheService.localComponents.containsKey(componentId)) {
       return Future.value(PBDLSharedInstanceNode(
         UUID: UUID,
         overrideValues: overrideValues,
         name: name,
         isVisible: isVisible,
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-        style: style,
+        style: figmaStyleProperty.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         symbolID: componentId,
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
-        sharedNodeSetID: ComponentCacheService().getComponentSetId(componentId),
+        sharedNodeSetID: cacheService.getComponentSetId(componentId),
       ));
     } else {
-      ComponentCacheService().localComponents[componentId] = toJson();
-      return Future.value(PBDLSharedMasterNode(
-          UUID: UUID,
+      cacheService.localComponents[componentId] = toJson()..['componentSetId'] = componentId;
+      return Future.value(
+        PBDLSharedMasterNode(
+          UUID: componentId,
           overrideProperties: null,
           name: name,
           isVisible: isVisible,
           boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-          style: style?.interpretStyle(),
+          style: figmaStyleProperty?.interpretStyle(),
           prototypeNodeUUID: transitionNodeID,
           symbolID: componentId,
           constraints: constraints.interpret(),
@@ -129,7 +122,12 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
           layoutMainAxisSizing: getGrowSizing(layoutGrow),
           layoutCrossAxisSizing: getAlignSizing(layoutAlign),
           children: await Future.wait(
-              children.map((e) async => await e.interpretNode()).toList())));
+            children.map((e) async => await e.interpretNode()).toList(),
+          ),
+          sharedNodeSetID: cacheService.getComponentSetId(componentId),
+          // componentSetName: componentsetName
+        ),
+      );
     }
   }
 

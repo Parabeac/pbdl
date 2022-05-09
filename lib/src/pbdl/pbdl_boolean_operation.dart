@@ -1,7 +1,6 @@
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_vector.dart';
 import 'abstract_pbdl_node_factory.dart';
@@ -17,7 +16,7 @@ class PBDLBooleanOperation extends PBDLVector
   String booleanOperation;
 
   @override
-  String type = 'boolean_operation';
+  String pbdlType = 'boolean_operation';
 
   @override
   var boundaryRectangle;
@@ -45,7 +44,7 @@ class PBDLBooleanOperation extends PBDLVector
     children,
     booleanOperation,
     type,
-    style,
+    PBDLStyle style,
     PBDLBoundaryBox boundaryRectangle,
     String UUID,
     prototypeNodeUUID,
@@ -56,7 +55,7 @@ class PBDLBooleanOperation extends PBDLVector
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
   }) : super(
-          style: PBDLStyle.getStyle(style),
+          style: style,
           UUID: UUID,
           prototypeNodeUUID: prototypeNodeUUID,
           transitionDuration: transitionDuration,

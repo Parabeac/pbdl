@@ -1,5 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_effect.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_stroke.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
@@ -7,7 +12,7 @@ import '../abstract_figma_node_factory.dart';
 part 'figma_node.g.dart';
 
 @JsonSerializable(nullable: true)
-class FigmaNode {
+class FigmaNode extends FigmaBaseNode {
   @JsonKey(
     name: 'id',
   )
@@ -56,6 +61,38 @@ class FigmaNode {
     this.layoutGrow,
   });
 
+  @JsonKey(ignore: true)
+  FigmaStyleProperty figmaStyleProperty;
+
+  Map figmaStylePropertyToJson(FigmaStyleProperty property) {
+    return figmaStyleProperty.toJson();
+  }
+
+  static FigmaStyleProperty figmaStylePropertyFromJson(Map json) {
+    var listFills = <FigmaFill>[];
+
+    var listEffects = <FigmaEffect>[];
+
+    for (var fill in json['fills']) {
+      listFills.add(FigmaFill.fromJson(fill));
+    }
+
+    var figmaStroke = FigmaStroke.fromJson(json);
+
+    for (var effect in json['effects']) {
+      listEffects.add(FigmaEffect.fromJson(effect));
+    }
+
+    var property = FigmaStyleProperty(
+        fills: listFills,
+        stroke: figmaStroke,
+        effects: listEffects,
+        clipsContent: json['clipsContent']);
+
+    return property;
+  }
+
+  @override
   Future<PBDLNode> interpretNode() async {
     return Future.value(PBDLNode(
       UUID,
@@ -71,6 +108,10 @@ class FigmaNode {
     ));
   }
 
+  /// Applicable for auto-layout frames. Determines how the frame will
+  /// grow on the parent's [counter axis].
+  ///
+  /// https://www.figma.com/plugin-docs/api/properties/nodes-layoutalign/
   ParentLayoutSizing getAlignSizing(String layoutAlign) {
     if (layoutAlign == 'STRETCH') {
       return ParentLayoutSizing.STRETCH;
@@ -79,6 +120,10 @@ class FigmaNode {
     }
   }
 
+  /// Applicable for auto-layout frames. Determines how the frame will
+  /// grow on the parent's [main axis].
+  ///
+  /// https://www.figma.com/plugin-docs/api/properties/nodes-layoutgrow/
   ParentLayoutSizing getGrowSizing(num layoutGrow) {
     if (layoutGrow == 0.0) {
       return ParentLayoutSizing.INHERIT;
@@ -89,8 +134,10 @@ class FigmaNode {
     }
   }
 
-  factory FigmaNode.fromJson(Map<String, dynamic> json) =>
-      AbstractFigmaNodeFactory.getFigmaNode(json);
+  factory FigmaNode.fromJson(Map<String, dynamic> json) {
+    return AbstractFigmaNodeFactory.getFigmaNode(json)
+      ..figmaStyleProperty = figmaStylePropertyFromJson(json);
+  }
   @override
   Map<String, dynamic> toJson() => _$FigmaNodeToJson(this);
 }

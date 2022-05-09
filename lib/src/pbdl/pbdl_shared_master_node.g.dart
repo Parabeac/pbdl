@@ -20,7 +20,9 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLBoundaryBox.fromJson(
             json['boundaryRectangle'] as Map<String, dynamic>),
-    style: json['style'],
+    style: json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'] as String,
     constraints: json['constraints'],
     symbolID: json['symbolID'] as String,
@@ -38,7 +40,7 @@ PBDLSharedMasterNode _$PBDLSharedMasterNodeFromJson(Map<String, dynamic> json) {
     ..child = json['child'] == null
         ? null
         : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..type = json['type'] as String;
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
@@ -60,7 +62,7 @@ Map<String, dynamic> _$PBDLSharedMasterNodeToJson(
       'overrideProperties':
           instance.overrideProperties?.map((e) => e?.toJson())?.toList(),
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'type': instance.type,
+      'pbdlType': instance.pbdlType,
       'componentSetName': instance.componentSetName,
       'sharedNodeSetID': instance.sharedNodeSetID,
     };

@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -11,8 +12,6 @@ import '../style/figma_color.dart';
 import 'figma_constraints.dart';
 import 'figma_node.dart';
 import 'figma_frame.dart';
-import 'text.dart';
-import 'vector.dart';
 
 part 'group.g.dart';
 
@@ -30,32 +29,31 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   String imageReference;
 
-  Group(
-      {name,
-      isVisible,
-      type,
-      pluginData,
-      sharedPluginData,
-      boundaryRectangle,
-      style,
-      fills,
-      strokes,
-      strokeWeight,
-      strokeAlign,
-      cornerRadius,
-      FigmaConstraints constraints,
-      layoutAlign,
-      size,
-      horizontalPadding,
-      verticalPadding,
-      itemSpacing,
-      List<FigmaNode> children,
-      String UUID,
-      FigmaColor backgroundColor,
-      String transitionNodeID,
-      num transitionDuration,
-      String transitionEasing})
-      : super(
+  @override
+  @JsonKey(ignore: false)
+  FigmaStyleProperty figmaStyleProperty;
+
+  Group({
+    name,
+    isVisible,
+    type,
+    pluginData,
+    sharedPluginData,
+    boundaryRectangle,
+    FigmaConstraints constraints,
+    layoutAlign,
+    size,
+    horizontalPadding,
+    verticalPadding,
+    itemSpacing,
+    List<FigmaNode> children,
+    String UUID,
+    FigmaColor backgroundColor,
+    String transitionNodeID,
+    num transitionDuration,
+    String transitionEasing,
+    figmaStyleProperty,
+  }) : super(
             name: name,
             isVisible: isVisible,
             type: type,
@@ -64,12 +62,6 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
             absoluteBoundingBox: boundaryRectangle != null
                 ? FigmaRect.fromJson(boundaryRectangle)
                 : null,
-            style: style,
-            fills: fills,
-            strokes: strokes,
-            strokeWeight: strokeWeight,
-            strokeAlign: strokeAlign,
-            cornerRadius: cornerRadius,
             constraints: constraints,
             layoutAlign: layoutAlign,
             size: size,
@@ -94,8 +86,12 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   @override
   Future<PBDLNode> interpretNode() async {
     if (areAllVectors()) {
-      imageReference =
-          FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox);
+      imageReference = FigmaAssetProcessor().processImage(
+        UUID,
+        absoluteBoundingBox,
+        name,
+        IMAGE_FORMAT.SVG,
+      );
 
       var tempPrototypeID = childrenHavePrototypeNode();
       if (tempPrototypeID != null) {
@@ -115,7 +111,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           boundaryRectangle: absoluteBoundingBox.interpretFrame(),
           isVisible: isVisible,
           name: name,
-          style: style?.interpretStyle(),
+          style: figmaStyleProperty?.interpretStyle(),
           constraints: constraints?.interpret(),
           prototypeNodeUUID: transitionNodeID,
           layoutMainAxisSizing: getGrowSizing(layoutGrow),
@@ -129,7 +125,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         boundaryRectangle: absoluteBoundingBox.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: style?.interpretStyle(),
+        style: figmaStyleProperty?.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),

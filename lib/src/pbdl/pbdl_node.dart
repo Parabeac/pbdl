@@ -23,7 +23,7 @@ class PBDLNode implements Comparable<PBDLNode> {
   String name;
   bool isVisible;
   PBDLBoundaryBox boundaryRectangle;
-  String type;
+  String pbdlType;
   PBDLStyle style;
   String prototypeNodeUUID;
   PBDLNode child;

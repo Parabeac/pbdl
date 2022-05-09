@@ -100,11 +100,11 @@ class TextStyle {
 
   PBDLTextStyle interpretTextStyle() {
     return PBDLTextStyle(
-      fontColor: fontColor.interpretColor(),
-      weight: fontDescriptor?.fontWeight?.replaceFirst('w', '') ?? '100',
-      paragraphStyle: paragraphStyle.interpretParagraphStyle(),
-      fontDescriptor: fontDescriptor.interpretFontDescriptor(),
-    );
+        // fontColor: fontColor.interpretColor(),
+        // weight: fontDescriptor?.fontWeight?.replaceFirst('w', '') ?? '100',
+        // paragraphStyle: paragraphStyle.interpretParagraphStyle(),
+        // fontDescriptor: fontDescriptor.interpretFontDescriptor(),
+        );
   }
 
   @JsonKey(ignore: true)

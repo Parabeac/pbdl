@@ -18,9 +18,6 @@ FigmaStar _$FigmaStarFromJson(Map<String, dynamic> json) {
         : FigmaConstraints.fromJson(
             json['constraints'] as Map<String, dynamic>),
     size: json['size'],
-    strokes: json['strokes'],
-    strokeWeight: json['strokeWeight'],
-    strokeAlign: json['strokeAlign'],
     styles: json['styles'],
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
@@ -32,14 +29,13 @@ FigmaStar _$FigmaStarFromJson(Map<String, dynamic> json) {
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..layoutGrow = json['layoutGrow'] as num
     ..isVisible = json['visible'] as bool ?? true
-    ..style = json['style'] == null
-        ? null
-        : FigmaStyle.fromJson(json['style'] as Map<String, dynamic>)
     ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
             json['absoluteBoundingBox'] as Map<String, dynamic>)
-    ..fillsList = json['fills'] as List
+    ..strokes = json['strokes']
+    ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
+    ..strokeAlign = json['strokeAlign'] as String
     ..imageReference = json['imageReference'] as String;
 }
 
@@ -56,14 +52,12 @@ Map<String, dynamic> _$FigmaStarToJson(FigmaStar instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
-      'style': instance.style,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,
       'strokeAlign': instance.strokeAlign,
       'styles': instance.styles,
-      'fills': instance.fillsList,
       'imageReference': instance.imageReference,
       'type': instance.type,
     };

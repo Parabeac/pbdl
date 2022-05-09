@@ -12,8 +12,9 @@ PBDLElement _$PBDLElementFromJson(Map<String, dynamic> json) {
     name: json['name'],
     isVisible: json['isVisible'],
     boundaryRectangle: json['boundaryRectangle'],
-    type: json['type'],
-    style: json['style'],
+    style: json['style'] == null
+        ? null
+        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>),
     prototypeNodeUUID: json['prototypeNodeUUID'],
     constraints: json['constraints'] == null
         ? null
@@ -22,9 +23,11 @@ PBDLElement _$PBDLElementFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
-  )..child = json['child'] == null
-      ? null
-      : PBDLNode.fromJson(json['child'] as Map<String, dynamic>);
+  )
+    ..child = json['child'] == null
+        ? null
+        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
+    ..pbdlType = json['pbdlType'] as String;
 }
 
 Map<String, dynamic> _$PBDLElementToJson(PBDLElement instance) =>
@@ -41,7 +44,7 @@ Map<String, dynamic> _$PBDLElementToJson(PBDLElement instance) =>
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
-      'type': instance.type,
+      'pbdlType': instance.pbdlType,
     };
 
 const _$ParentLayoutSizingEnumMap = {
