@@ -2,7 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/abstract_pbdl_node_factory.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
@@ -16,12 +15,15 @@ class PBDLOverrideValue extends PBDLNode implements PBDLNodeFactory {
   String valueName;
 
   @override
-  final pbdlType;
+  final pbdlType = 'pbdl_override_value';
+
+  /// Type of the override value
+  final ovrType;
 
   PBDLOverrideValue(
     String UUID,
     String name,
-    this.pbdlType,
+    this.ovrType,
     this.value,
     this.valueName,
   ) : super(
