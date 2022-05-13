@@ -82,11 +82,11 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() async {
     var cacheService = ComponentCacheService();
     var overrideValues = <PBDLOverrideValue>[];
-    children.forEach((child) async {
+    for (var child in children) {
       var currVals = await _traverseChildrenForOverrides(child)
         ..removeWhere((element) => element.value == null);
       overrideValues.addAll(currVals);
-    });
+    }
 
     /// If the component is not a local component
     /// then the instance must become a component aka [PBDLSharedMasterNode]
@@ -106,7 +106,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
         sharedNodeSetID: cacheService.getComponentSetId(componentId),
       ));
     } else {
-      cacheService.localComponents[componentId] = toJson()..['componentSetId'] = componentId;
+      cacheService.localComponents[componentId] = toJson()
+        ..['componentSetId'] = componentId;
       return Future.value(
         PBDLSharedMasterNode(
           UUID: componentId,
