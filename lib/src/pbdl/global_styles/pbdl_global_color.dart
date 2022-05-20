@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 
 part 'pbdl_global_color.g.dart';
 
