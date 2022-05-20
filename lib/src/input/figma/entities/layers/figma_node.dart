@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
@@ -5,6 +6,8 @@ import 'package:pbdl/src/input/figma/entities/style/figma_effect.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_stroke.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
+import 'package:pbdl/src/input/figma/entities/style/global/fill_style_global.dart';
+import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
@@ -81,6 +84,26 @@ class FigmaNode extends FigmaBaseNode {
 
     for (var effect in json['effects']) {
       listEffects.add(FigmaEffect.fromJson(effect));
+    }
+
+    /// Check for global styles [this] may reference.
+    if (json.containsKey('styles')) {
+      Map<String, dynamic> styles = json['styles'];
+
+      //TODO: Potentially abstract this and leave the responsibility of adding
+      // the color to the property.
+      if (styles.containsKey('fill')) {
+        String uuid = styles['fill'];
+
+        var styleHolder = GetIt.I.get<GlobalStyleHolder>();
+        var globalProperty = styleHolder.getProperty<FillStyleGlobal>(uuid);
+
+        // Check if the uuid exists as a global style of the file.
+        // If it does, populate the color.
+        if (globalProperty != null) {
+          globalProperty.color = listFills.first.color;
+        }
+      }
     }
 
     var property = FigmaStyleProperty(
