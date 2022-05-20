@@ -1,6 +1,6 @@
+import 'package:pbdl/src/pbdl/global_styles/pbdl_global_styles.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -23,6 +23,7 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
     String UUID,
     this.pages,
     this.pngPath,
+    this.globalStyles,
   }) : super(UUID, name, true, null, null, null) {
     MainInfo().projectName = name ?? 'foo';
   }
@@ -30,6 +31,7 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
   List<PBDLPage> pages = [];
   List<PBDLPage> miscPages = [];
   List<SharedStyle> sharedStyles = [];
+  PBDLGlobalStyles globalStyles = PBDLGlobalStyles();
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

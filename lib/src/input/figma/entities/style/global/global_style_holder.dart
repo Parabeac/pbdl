@@ -1,6 +1,7 @@
 import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/fill_style_global.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
+import 'package:pbdl/src/pbdl/global_styles/pbdl_global_color.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_styles.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
@@ -30,7 +31,7 @@ class GlobalStyleHolder extends FigmaBaseNode {
   @override
   Future<PBDLNode> interpretNode() async {
     /// Interpret fills to [PBDLGlobalFillProperty]
-    var interpretedFills = <PBDLNode>[];
+    var interpretedFills = <PBDLGlobalColor>[];
     for (var fill in fills) {
       interpretedFills.add(await fill.interpretNode());
     }

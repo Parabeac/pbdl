@@ -19,4 +19,10 @@ class PBDLGlobalStyles extends PBDLNode {
 
   @JsonKey(defaultValue: [])
   final List<PBDLGlobalColor> colors;
+
+  factory PBDLGlobalStyles.fromJson(Map<String, dynamic> json) =>
+      _$PBDLGlobalStylesFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$PBDLGlobalStylesToJson(this);
 }

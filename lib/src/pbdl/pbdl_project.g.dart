@@ -15,6 +15,10 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
             e == null ? null : PBDLPage.fromJson(e as Map<String, dynamic>))
         ?.toList(),
     pngPath: json['pngPath'] as String,
+    globalStyles: json['globalStyles'] == null
+        ? null
+        : PBDLGlobalStyles.fromJson(
+            json['globalStyles'] as Map<String, dynamic>),
   )
     ..layoutMainAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
@@ -66,6 +70,7 @@ Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
       'pages': instance.pages?.map((e) => e?.toJson())?.toList(),
       'miscPages': instance.miscPages?.map((e) => e?.toJson())?.toList(),
       'sharedStyles': instance.sharedStyles?.map((e) => e?.toJson())?.toList(),
+      'globalStyles': instance.globalStyles?.toJson(),
       'pbdlType': instance.pbdlType,
     };
 

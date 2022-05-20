@@ -13,7 +13,7 @@ PBDLGlobalColor _$PBDLGlobalColorFromJson(Map<String, dynamic> json) {
     json['color'] == null
         ? null
         : PBDLColor.fromJson(json['color'] as Map<String, dynamic>),
-    description: json['description'] as String,
+    description: json['description'] as String ?? '',
   )
     ..layoutMainAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)

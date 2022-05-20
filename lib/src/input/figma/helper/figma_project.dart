@@ -110,6 +110,7 @@ class FigmaProject {
       UUID: id,
       pages: processedPages,
       pngPath: MainInfo().pngPath,
+      globalStyles: await globalStyles.interpretNode(),
     );
   }
 }

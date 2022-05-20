@@ -25,9 +25,12 @@ class PBDLGlobalColor extends PBDLNode {
   PBDLColor color;
 
   /// User-defined description of the color
+  @JsonKey(defaultValue: '')
   String description;
 
-  factory PBDLGlobalColor.fromJson(Map<String, dynamic> json) => _$PBDLGlobalColorFromJson(json);
+  factory PBDLGlobalColor.fromJson(Map<String, dynamic> json) =>
+      _$PBDLGlobalColorFromJson(json);
 
+  @override
   Map<String, dynamic> toJson() => _$PBDLGlobalColorToJson(this);
 }
