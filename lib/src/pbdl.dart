@@ -1,10 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
 import 'package:pbdl/src/input/figma/entities/figma_key.dart';
+import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
@@ -86,6 +88,10 @@ class PBDL {
     String projectName,
   }) async {
     return await runZonedGuarded(() async {
+      final getIt = GetIt.instance;
+
+      getIt.registerSingleton(GlobalStyleHolder());
+
       if (pngPath == null || pngPath.isEmpty) {
         pngPath = outputPath;
       }
