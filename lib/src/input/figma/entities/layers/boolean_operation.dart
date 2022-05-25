@@ -58,8 +58,12 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
 
   @override
   Future<PBDLNode> interpretNode() {
-    imageReference =
-        FigmaAssetProcessor().processImage(UUID, absoluteBoundingBox, name);
+    imageReference = FigmaAssetProcessor().processImage(
+      UUID,
+      absoluteBoundingBox: absoluteBoundingBox,
+      name: name,
+      effects: figmaStyleProperty?.effects ?? [],
+    );
     return Future.value(PBDLImage(
       UUID: UUID,
       boundaryRectangle: absoluteBoundingBox?.interpretFrame(),

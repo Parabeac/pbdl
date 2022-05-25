@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:pbdl/src/input/figma/entities/style/figma_effect.dart';
 import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
@@ -35,16 +36,18 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// Returns the formatted name of the image reference.
   @override
   String processImage(
-    String uuid, [
+    String uuid, {
     FigmaRect absoluteBoundingBox,
     String name,
     IMAGE_FORMAT format = IMAGE_FORMAT.PNG,
-  ]) {
+    List<FigmaEffect> effects,
+  }) {
     if (format == IMAGE_FORMAT.SVG) {
       _uuidSvgQueue.add(uuid);
     } else if (absoluteBoundingBox != null &&
         absoluteBoundingBox.height > 0 &&
-        absoluteBoundingBox.width > 0) {
+        absoluteBoundingBox.width > 0 &&
+        (effects == null || effects.isEmpty)) {
       _uuidQueue.add(uuid);
     } else {
       _uuidNoBoxQueue.add(uuid);

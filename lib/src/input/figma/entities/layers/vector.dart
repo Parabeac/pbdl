@@ -76,9 +76,10 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   Future<PBDLNode> interpretNode() async {
     imageReference = FigmaAssetProcessor().processImage(
       UUID,
-      absoluteBoundingBox,
-      name,
-      IMAGE_FORMAT.SVG,
+      absoluteBoundingBox: absoluteBoundingBox,
+      name: name,
+      format: IMAGE_FORMAT.SVG,
+      effects: figmaStyleProperty?.effects ?? [],
     );
 
     if (absoluteBoundingBox != null) {

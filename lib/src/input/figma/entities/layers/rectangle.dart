@@ -77,8 +77,9 @@ class FigmaRectangle extends FigmaVector
         StyleHelper.isImage(figmaStyleProperty?.stroke?.strokes)) {
       imageReference = FigmaAssetProcessor().processImage(
         UUID,
-        absoluteBoundingBox,
-        name,
+        absoluteBoundingBox: absoluteBoundingBox,
+        name: name,
+        effects: figmaStyleProperty?.effects ?? [],
       );
 
       return Future.value(PBDLImage(

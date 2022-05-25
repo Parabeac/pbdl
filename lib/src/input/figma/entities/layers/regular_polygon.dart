@@ -59,9 +59,10 @@ class FigmaRegularPolygon extends FigmaVector
   Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(
       UUID,
-      absoluteBoundingBox,
-      name,
-      IMAGE_FORMAT.SVG,
+      absoluteBoundingBox: absoluteBoundingBox,
+      name: name,
+      format: IMAGE_FORMAT.SVG,
+      effects: figmaStyleProperty?.effects ?? [],
     );
     return Future.value(PBDLImage(
       imageReference: imageReference,

@@ -71,8 +71,9 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
   Future<PBDLNode> interpretNode() {
     imageReference = FigmaAssetProcessor().processImage(
       UUID,
-      absoluteBoundingBox,
-      name,
+      absoluteBoundingBox: absoluteBoundingBox,
+      name: name,
+      effects: figmaStyleProperty?.effects ?? [],
     );
     return Future.value(PBDLImage(
       UUID: UUID,
