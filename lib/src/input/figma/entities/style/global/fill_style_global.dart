@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -34,4 +35,12 @@ class FillStyleGlobal extends GlobalStyleProperty {
 
   factory FillStyleGlobal.fromJson(Map<String, dynamic> json) =>
       _$FillStyleGlobalFromJson(json);
+
+  @override
+  void populate(Map<String, dynamic> json) {
+    if (json.containsKey('fills')) {
+      var figmaFill = FigmaFill.fromJson(json['fills'][0]);
+      color = figmaFill?.color;
+    }
+  }
 }

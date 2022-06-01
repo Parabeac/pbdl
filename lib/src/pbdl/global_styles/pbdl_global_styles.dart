@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
-import 'package:pbdl/src/pbdl/global_styles/pbdl_global_color.dart';
+import 'package:pbdl/src/pbdl/global_styles/pbdl_global_text_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 
@@ -12,6 +12,7 @@ part 'pbdl_global_styles.g.dart';
 class PBDLGlobalStyles extends PBDLNode {
   PBDLGlobalStyles({
     this.colors,
+    this.textStyles,
   }) : super('', '', false, null, null, null);
 
   @override
@@ -19,6 +20,9 @@ class PBDLGlobalStyles extends PBDLNode {
 
   @JsonKey(defaultValue: [])
   final List<PBDLGlobalColor> colors;
+
+  @JsonKey(defaultValue: [])
+  final List<PBDLGlobalTextStyle> textStyles;
 
   factory PBDLGlobalStyles.fromJson(Map<String, dynamic> json) =>
       _$PBDLGlobalStylesFromJson(json);

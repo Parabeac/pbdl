@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pbdl_global_color.dart';
+part of 'pbdl_global_text_style.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLGlobalColor _$PBDLGlobalColorFromJson(Map<String, dynamic> json) {
-  return PBDLGlobalColor(
+PBDLGlobalTextStyle _$PBDLGlobalTextStyleFromJson(Map<String, dynamic> json) {
+  return PBDLGlobalTextStyle(
     json['UUID'] as String,
     json['name'] as String,
-    json['color'] == null
+    json['textStyle'] == null
         ? null
-        : PBDLColor.fromJson(json['color'] as Map<String, dynamic>),
+        : PBDLTextStyle.fromJson(json['textStyle'] as Map<String, dynamic>),
     description: json['description'] as String ?? '',
   )
     ..layoutMainAxisSizing =
@@ -37,7 +37,8 @@ PBDLGlobalColor _$PBDLGlobalColorFromJson(Map<String, dynamic> json) {
     ..pbdlType = json['pbdlType'] as String;
 }
 
-Map<String, dynamic> _$PBDLGlobalColorToJson(PBDLGlobalColor instance) =>
+Map<String, dynamic> _$PBDLGlobalTextStyleToJson(
+        PBDLGlobalTextStyle instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'layoutMainAxisSizing':
@@ -53,7 +54,7 @@ Map<String, dynamic> _$PBDLGlobalColorToJson(PBDLGlobalColor instance) =>
       'constraints': instance.constraints?.toJson(),
       'description': instance.description,
       'pbdlType': instance.pbdlType,
-      'color': instance.color?.toJson(),
+      'textStyle': instance.textStyle?.toJson(),
     };
 
 const _$ParentLayoutSizingEnumMap = {

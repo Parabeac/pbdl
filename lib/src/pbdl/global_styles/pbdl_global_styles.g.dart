@@ -14,6 +14,12 @@ PBDLGlobalStyles _$PBDLGlobalStylesFromJson(Map<String, dynamic> json) {
                 : PBDLGlobalColor.fromJson(e as Map<String, dynamic>))
             ?.toList() ??
         [],
+    textStyles: (json['textStyles'] as List)
+            ?.map((e) => e == null
+                ? null
+                : PBDLGlobalTextStyle.fromJson(e as Map<String, dynamic>))
+            ?.toList() ??
+        [],
   )
     ..UUID = json['UUID'] as String
     ..layoutMainAxisSizing =
@@ -55,6 +61,7 @@ Map<String, dynamic> _$PBDLGlobalStylesToJson(PBDLGlobalStyles instance) =>
       'constraints': instance.constraints?.toJson(),
       'pbdlType': instance.pbdlType,
       'colors': instance.colors?.map((e) => e?.toJson())?.toList(),
+      'textStyles': instance.textStyles?.map((e) => e?.toJson())?.toList(),
     };
 
 const _$ParentLayoutSizingEnumMap = {

@@ -6,7 +6,6 @@ import 'package:pbdl/src/input/figma/entities/style/figma_effect.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_stroke.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
-import 'package:pbdl/src/input/figma/entities/style/global/fill_style_global.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -90,18 +89,19 @@ class FigmaNode extends FigmaBaseNode {
     if (json.containsKey('styles')) {
       Map<String, dynamic> styles = json['styles'];
 
-      //TODO: Potentially abstract this and leave the responsibility of adding
-      // the color to the property.
-      if (styles.containsKey('fill')) {
-        String uuid = styles['fill'];
+      var styleHolder = GetIt.I.get<GlobalStyleHolder>();
 
-        var styleHolder = GetIt.I.get<GlobalStyleHolder>();
-        var globalProperty = styleHolder.getProperty<FillStyleGlobal>(uuid);
+      /// Check if we can interpret a supported global style.
+      for (var key in styleHolder.registeredPropertyNames) {
+        if (styles.containsKey(key)) {
+          /// If the global style is supported, look for the global property
+          /// so we can populate its style.
+          var uuid = styles[key];
+          var globalProperty = styleHolder.getProperty(uuid);
 
-        // Check if the uuid exists as a global style of the file.
-        // If it does, populate the color.
-        if (globalProperty != null) {
-          globalProperty.color = listFills.first.color;
+          if (globalProperty != null) {
+            globalProperty.populate(json);
+          }
         }
       }
     }
