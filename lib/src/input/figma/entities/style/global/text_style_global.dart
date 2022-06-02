@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_text_style.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_text_style.dart';
@@ -39,7 +40,9 @@ class TextStyleGlobal extends GlobalStyleProperty {
   @override
   void populate(Map<String, dynamic> json) {
     if (json.containsKey('style')) {
-      textStyle = FigmaTextStyle.fromJson(json['style']);
+      var figmaFills = json['fills'] as List;
+      var fills = figmaFills.map((fill) => FigmaFill.fromJson(fill)).toList();
+      textStyle = FigmaTextStyle.fromJson(json['style'])..fills = fills;
     }
   }
 }
