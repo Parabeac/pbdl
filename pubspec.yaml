@@ -1,6 +1,6 @@
 name: pbdl
 description: A starting point for Dart libraries or applications.
-version: 2.0.1
+version: 2.1.0
 # homepage: https://www.example.com
 
 environment:
