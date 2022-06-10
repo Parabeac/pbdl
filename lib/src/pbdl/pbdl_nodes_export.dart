@@ -29,3 +29,6 @@ export 'pbdl_style.dart';
 export 'pbdl_text.dart';
 export 'pbdl_text_style.dart';
 export 'pbdl_vector.dart';
+export 'global_styles/pbdl_global_color.dart';
+export 'global_styles/pbdl_global_text_style.dart';
+export 'global_styles/pbdl_global_styles.dart';

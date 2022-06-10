@@ -22,7 +22,7 @@ class FigmaTextStyle {
   @JsonKey(defaultValue: 0)
   num listSpacing;
 
-  bool italics;
+  bool italic;
 
   num fontWeight;
 
@@ -65,7 +65,7 @@ class FigmaTextStyle {
     this.paragraphSpacing,
     this.paragraphIndent,
     this.listSpacing,
-    this.italics,
+    this.italic,
     this.fontWeight,
     this.fontSize,
     this.textCase,
@@ -94,7 +94,7 @@ class FigmaTextStyle {
       paragraphSpacing: paragraphSpacing,
       paragraphIndent: paragraphIndent,
       listSpacing: listSpacing,
-      italics: italics,
+      italics: italic,
       fontWeight: fontWeight,
       fontSize: fontSize,
       textCase: textCase,

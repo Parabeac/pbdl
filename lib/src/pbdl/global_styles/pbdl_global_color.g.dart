@@ -1,24 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pbdl_project.dart';
+part of 'pbdl_global_color.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
-  return PBDLProject(
-    name: json['name'] as String,
-    UUID: json['UUID'] as String,
-    pages: (json['pages'] as List)
-        ?.map((e) =>
-            e == null ? null : PBDLPage.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    pngPath: json['pngPath'] as String,
-    globalStyles: json['globalStyles'] == null
+PBDLGlobalColor _$PBDLGlobalColorFromJson(Map<String, dynamic> json) {
+  return PBDLGlobalColor(
+    json['UUID'] as String,
+    json['name'] as String,
+    json['color'] == null
         ? null
-        : PBDLGlobalStyles.fromJson(
-            json['globalStyles'] as Map<String, dynamic>),
+        : PBDLColor.fromJson(json['color'] as Map<String, dynamic>),
+    description: json['description'] as String ?? '',
   )
     ..layoutMainAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
@@ -39,19 +34,10 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
     ..constraints = json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..debug = json['debug'] as bool
-    ..miscPages = (json['miscPages'] as List)
-        ?.map((e) =>
-            e == null ? null : PBDLPage.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..sharedStyles = (json['sharedStyles'] as List)
-        ?.map((e) =>
-            e == null ? null : SharedStyle.fromJson(e as Map<String, dynamic>))
-        ?.toList()
     ..pbdlType = json['pbdlType'] as String;
 }
 
-Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
+Map<String, dynamic> _$PBDLGlobalColorToJson(PBDLGlobalColor instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'layoutMainAxisSizing':
@@ -65,13 +51,9 @@ Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
-      'debug': instance.debug,
-      'pngPath': instance.pngPath,
-      'pages': instance.pages?.map((e) => e?.toJson())?.toList(),
-      'miscPages': instance.miscPages?.map((e) => e?.toJson())?.toList(),
-      'sharedStyles': instance.sharedStyles?.map((e) => e?.toJson())?.toList(),
-      'globalStyles': instance.globalStyles?.toJson(),
+      'description': instance.description,
       'pbdlType': instance.pbdlType,
+      'color': instance.color?.toJson(),
     };
 
 const _$ParentLayoutSizingEnumMap = {

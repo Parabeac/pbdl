@@ -1,3 +1,4 @@
+import 'package:get_it/get_it.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
@@ -5,6 +6,7 @@ import 'package:pbdl/src/input/figma/entities/style/figma_effect.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_stroke.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
+import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
@@ -81,6 +83,27 @@ class FigmaNode extends FigmaBaseNode {
 
     for (var effect in json['effects']) {
       listEffects.add(FigmaEffect.fromJson(effect));
+    }
+
+    /// Check for global styles [this] may reference.
+    if (json.containsKey('styles')) {
+      Map<String, dynamic> styles = json['styles'];
+
+      var styleHolder = GetIt.I.get<GlobalStyleHolder>();
+
+      /// Check if we can interpret a supported global style.
+      for (var key in styleHolder.registeredPropertyNames) {
+        if (styles.containsKey(key)) {
+          /// If the global style is supported, look for the global property
+          /// so we can populate its style.
+          var uuid = styles[key];
+          var globalProperty = styleHolder.getProperty(uuid);
+
+          if (globalProperty != null) {
+            globalProperty.populate(json);
+          }
+        }
+      }
     }
 
     var property = FigmaStyleProperty(

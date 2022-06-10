@@ -10,7 +10,6 @@ import 'layers/instance.dart';
 import 'layers/line.dart';
 import 'layers/rectangle.dart';
 import 'layers/regular_polygon.dart';
-import 'layers/slice.dart';
 import 'layers/star.dart';
 import 'layers/text.dart';
 import 'layers/vector.dart';
@@ -28,7 +27,6 @@ class AbstractFigmaNodeFactory {
     Instance(),
     FigmaLine(),
     FigmaRectangle(),
-    // FigmaSlice(),
     FigmaStar(),
     FigmaText(),
     FigmaVector(),
