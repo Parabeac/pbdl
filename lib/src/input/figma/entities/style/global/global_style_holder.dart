@@ -19,6 +19,10 @@ class GlobalStyleHolder extends FigmaBaseNode {
 
   /// Adds the [GlobalStyleProperty] to the correct list.
   void add(GlobalStyleProperty property) {
+    // Check if any properties contain the same name with different UUID.
+    if (_properties.entries.any((prop) => prop.value.name == property.name)) {
+      return;
+    }
     _properties[property.UUID] = property;
   }
 
@@ -54,9 +58,16 @@ class GlobalStyleHolder extends FigmaBaseNode {
       interpretedTextStyles.add(await textStyle.interpretNode());
     }
 
+    /// FIXME: Find out why some fills are returning null.
+    /// Theory is that this might have to do with global styles coming from another file.
+    final filteredFills =
+        interpretedFills.where((fill) => fill != null).toList();
+    final filteredTextStyles =
+        interpretedTextStyles.where((textStyle) => textStyle != null).toList();
+
     return PBDLGlobalStyles(
-      colors: interpretedFills,
-      textStyles: interpretedTextStyles,
+      colors: filteredFills,
+      textStyles: filteredTextStyles,
     );
   }
 }
