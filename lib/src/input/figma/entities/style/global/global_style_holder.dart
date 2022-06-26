@@ -1,3 +1,4 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/fill_style_global.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
@@ -7,8 +8,13 @@ import 'package:pbdl/src/pbdl/global_styles/pbdl_global_styles.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_text_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
+part 'global_style_holder.g.dart';
+
 /// Class that holds the global style properties of a Figma node.
+@JsonSerializable()
 class GlobalStyleHolder extends FigmaBaseNode {
+  GlobalStyleHolder();
+
   /// Registered [GlobalStyleProperty]s.
   final _properties = <String, GlobalStyleProperty>{};
 
@@ -29,9 +35,8 @@ class GlobalStyleHolder extends FigmaBaseNode {
   Iterable<FillStyleGlobal> get fills =>
       _properties.values.whereType<FillStyleGlobal>();
 
-  Iterable<TextStyleGlobal> get textStyles => _properties.values
-      .whereType<TextStyleGlobal>()
-      .where((style) => style.textStyle != null);
+  Iterable<TextStyleGlobal> get textStyles =>
+      _properties.values.whereType<TextStyleGlobal>();
 
   /// Returns the [GlobalStyleProperty] with the given [UUID] and specified type [T].
   ///
@@ -70,4 +75,10 @@ class GlobalStyleHolder extends FigmaBaseNode {
       textStyles: filteredTextStyles,
     );
   }
+
+  @override
+  Map<String, dynamic> toJson() => _$GlobalStyleHolderToJson(this);
+
+  factory GlobalStyleHolder.fromJson(Map<String, dynamic> json) =>
+      _$GlobalStyleHolderFromJson(json);
 }

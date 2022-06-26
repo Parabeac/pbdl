@@ -31,6 +31,8 @@ class FigmaController {
     MainInfo().figmaProjectID = projectID;
     figmaProject ??=
         generateFigmaTree(figmaProjectID, jsonFigma, MainInfo().projectName);
+    // FIXME: improve this so that it doesn't have to be called separately when creating a [FigmaProject]
+    await figmaProject.populateGlobalStyles();
     figmaProject = declareScaffolds(figmaProject);
 
     await _sortPages(figmaProject);

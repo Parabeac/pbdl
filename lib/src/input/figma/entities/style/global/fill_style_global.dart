@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
+import 'package:pbdl/src/input/figma/entities/layers/rectangle.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -14,33 +15,39 @@ class FillStyleGlobal extends GlobalStyleProperty {
     String styleType, {
     String name,
     String description,
-  }) : super(UUID, styleType, name: name, description: description);
-
-  FigmaColor color;
+    FigmaColor styleNode,
+  }) : super(
+          UUID,
+          styleType,
+          name: name,
+          description: description,
+          styleNode: styleNode,
+        );
 
   @override
   Future<PBDLNode> interpretNode() async {
-    if (color == null) {
+    if (styleNode == null) {
       return null;
     }
     return PBDLGlobalColor(
       UUID,
       name,
-      color.interpretColor(),
+      (styleNode as FigmaColor).interpretColor(),
       description: description,
     );
   }
 
   Map<String, dynamic> toJson() => _$FillStyleGlobalToJson(this);
 
-  factory FillStyleGlobal.fromJson(Map<String, dynamic> json) =>
-      _$FillStyleGlobalFromJson(json);
-
-  @override
-  void populate(Map<String, dynamic> json) {
-    if (json.containsKey('fills')) {
-      var figmaFill = FigmaFill.fromJson(json['fills'][0]);
-      color = figmaFill?.color;
+  factory FillStyleGlobal.fromJson(
+      Map<String, dynamic> json, FigmaBaseNode styleNode) {
+    if (styleNode is! FigmaRectangle) {
+      return null;
     }
+    var color =
+        (styleNode as FigmaRectangle).figmaStyleProperty.fills.first.color;
+    var globalFill = _$FillStyleGlobalFromJson(json)..styleNode = color;
+
+    return globalFill;
   }
 }
