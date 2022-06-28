@@ -4,6 +4,7 @@ import 'package:pbdl/src/input/figma/entities/layers/component_set.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.dart';
+import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_page.dart';
 import 'package:pbdl/src/pbdl/pbdl_project.dart';
 import 'package:pbdl/src/util/main_info.dart';
@@ -35,29 +36,40 @@ class FigmaProject {
     this.id,
   }) : super() {
     globalStyles = GetIt.I.get<GlobalStyleHolder>();
-    _populateGlobalStyles();
     pages.addAll(_setConventionalPages(figmaJson['document']['children']));
   }
 
   /// Checks whether we have global styles to export in the project.
-  void _populateGlobalStyles() {
+  Future<void> populateGlobalStyles() async {
     if (!figmaJson.containsKey('styles')) {
       return null;
     }
 
     Map<String, dynamic> jsonStyles = figmaJson['styles'];
 
+    var ids = jsonStyles.keys;
+
+    var stylingNodes =
+        await APICallService.getFileNodes(id, ids, MainInfo().figmaKey);
+
     for (var entry in jsonStyles.entries) {
-      // Need to condense all attributes into a single map for easier interpretation.
-      var formattedJson = {
-        'UUID': entry.key,
-        'name': entry.value['name'],
-        'styleType': entry.value['styleType'],
-        'description': entry.value['description'],
-      };
-      var globalStyle = GlobalStyleProperty.fromJson(formattedJson);
-      if (globalStyle != null) {
-        globalStyles.add(globalStyle);
+      // ?: [ApiCallService.getFileNodes] could return a [Map<String,dynamic>] to make this faster.
+      var figmaNode = stylingNodes.firstWhere(
+          (element) => element.UUID == entry.key,
+          orElse: () => null);
+      if (figmaNode != null) {
+        // Need to condense all attributes into a single map for easier interpretation.
+        var formattedJson = {
+          'UUID': entry.key,
+          'name': entry.value['name'],
+          'styleType': entry.value['styleType'],
+          'description': entry.value['description'],
+        };
+        var globalStyle =
+            GlobalStyleProperty.fromJson(formattedJson, figmaNode);
+        if (globalStyle != null) {
+          globalStyles.add(globalStyle);
+        }
       }
     }
   }

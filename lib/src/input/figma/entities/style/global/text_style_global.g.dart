@@ -12,9 +12,10 @@ TextStyleGlobal _$TextStyleGlobalFromJson(Map<String, dynamic> json) {
     json['styleType'] as String,
     name: json['name'] as String,
     description: json['description'] as String,
-  )..textStyle = json['textStyle'] == null
-      ? null
-      : FigmaTextStyle.fromJson(json['textStyle'] as Map<String, dynamic>);
+    styleNode: json['styleNode'] == null
+        ? null
+        : FigmaTextStyle.fromJson(json['styleNode'] as Map<String, dynamic>),
+  );
 }
 
 Map<String, dynamic> _$TextStyleGlobalToJson(TextStyleGlobal instance) =>
@@ -23,5 +24,5 @@ Map<String, dynamic> _$TextStyleGlobalToJson(TextStyleGlobal instance) =>
       'name': instance.name,
       'description': instance.description,
       'styleType': instance.styleType,
-      'textStyle': instance.textStyle?.toJson(),
+      'styleNode': instance.styleNode?.toJson(),
     };

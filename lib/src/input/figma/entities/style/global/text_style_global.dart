@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
+import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_text_style.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_text_style.dart';
@@ -14,35 +15,40 @@ class TextStyleGlobal extends GlobalStyleProperty {
     String styleType, {
     String name,
     String description,
-  }) : super(UUID, styleType, name: name, description: description);
+    FigmaTextStyle styleNode,
+  }) : super(
+          UUID,
+          styleType,
+          name: name,
+          description: description,
+          styleNode: styleNode,
+        );
 
   /// Contains the actual text style value.
-  FigmaTextStyle textStyle;
 
   @override
   Future<PBDLNode> interpretNode() async {
-    if (textStyle == null) {
+    if (styleNode == null) {
       return null;
     }
     return PBDLGlobalTextStyle(
       UUID,
       name,
-      textStyle.interpretTextStyle(),
+      (styleNode as FigmaTextStyle).interpretTextStyle(),
       description: description,
     );
   }
 
   Map<String, dynamic> toJson() => _$TextStyleGlobalToJson(this);
 
-  factory TextStyleGlobal.fromJson(Map<String, dynamic> json) =>
-      _$TextStyleGlobalFromJson(json);
-
-  @override
-  void populate(Map<String, dynamic> json) {
-    if (json.containsKey('style')) {
-      var figmaFills = json['fills'] as List;
-      var fills = figmaFills.map((fill) => FigmaFill.fromJson(fill)).toList();
-      textStyle = FigmaTextStyle.fromJson(json['style'])..fills = fills;
+  factory TextStyleGlobal.fromJson(
+      Map<String, dynamic> json, FigmaBaseNode styleNode) {
+    if (styleNode is! FigmaText) {
+      return null;
     }
+    final textStyle = (styleNode as FigmaText).style;
+    final figmaNode = _$TextStyleGlobalFromJson(json)..styleNode = textStyle;
+
+    return figmaNode;
   }
 }

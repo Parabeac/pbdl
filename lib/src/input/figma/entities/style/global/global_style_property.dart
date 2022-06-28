@@ -7,19 +7,25 @@ abstract class GlobalStyleProperty extends FigmaBaseNode {
   final String name;
   final String description;
   final String styleType;
+  FigmaBaseNode styleNode;
 
-  GlobalStyleProperty(this.UUID, this.styleType,
-      {this.name = '', this.description = ''});
+  GlobalStyleProperty(
+    this.UUID,
+    this.styleType, {
+    this.name = '',
+    this.description = '',
+    this.styleNode,
+  });
 
-  /// Function that populates [this] with the necessary information from [json].
-  void populate(Map<String, dynamic> json);
-
-  factory GlobalStyleProperty.fromJson(Map<String, dynamic> json) {
+  /// Converts [json] into a [GlobalStyleProperty]. Needs [styleNode]
+  /// in order for each subclass to extract styling information from it.
+  factory GlobalStyleProperty.fromJson(
+      Map<String, dynamic> json, FigmaBaseNode styleNode) {
     switch (json['styleType']) {
       case 'FILL':
-        return FillStyleGlobal.fromJson(json);
+        return FillStyleGlobal.fromJson(json, styleNode);
       case 'TEXT':
-        return TextStyleGlobal.fromJson(json);
+        return TextStyleGlobal.fromJson(json, styleNode);
       default:
         return null;
     }

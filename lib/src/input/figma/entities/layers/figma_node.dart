@@ -85,27 +85,6 @@ class FigmaNode extends FigmaBaseNode {
       listEffects.add(FigmaEffect.fromJson(effect));
     }
 
-    /// Check for global styles [this] may reference.
-    if (json.containsKey('styles')) {
-      Map<String, dynamic> styles = json['styles'];
-
-      var styleHolder = GetIt.I.get<GlobalStyleHolder>();
-
-      /// Check if we can interpret a supported global style.
-      for (var key in styleHolder.registeredPropertyNames) {
-        if (styles.containsKey(key)) {
-          /// If the global style is supported, look for the global property
-          /// so we can populate its style.
-          var uuid = styles[key];
-          var globalProperty = styleHolder.getProperty(uuid);
-
-          if (globalProperty != null) {
-            globalProperty.populate(json);
-          }
-        }
-      }
-    }
-
     var property = FigmaStyleProperty(
         fills: listFills,
         stroke: figmaStroke,
