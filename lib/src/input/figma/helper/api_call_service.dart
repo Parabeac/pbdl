@@ -17,6 +17,9 @@ class APICallService {
   /// from [fileId]. Requires a [FigmaKey].
   static Future<List<FigmaNode>> getFileNodes(
       String fileId, Iterable<String> ids, FigmaKey key) async {
+    if (ids == null || ids.isEmpty) {
+      return [];
+    }
     final flatIds = ids.join(',');
     final url = 'https://api.figma.com/v1/files/$fileId/nodes?ids=$flatIds';
 
