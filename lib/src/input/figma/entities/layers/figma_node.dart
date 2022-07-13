@@ -117,8 +117,10 @@ class FigmaNode extends FigmaBaseNode {
   ParentLayoutSizing getAlignSizing(String layoutAlign) {
     if (layoutAlign == 'STRETCH') {
       return ParentLayoutSizing.STRETCH;
-    } else {
+    } else if (layoutAlign == 'INHERIT') {
       return ParentLayoutSizing.INHERIT;
+    } else {
+      return ParentLayoutSizing.NONE;
     }
   }
 
@@ -132,7 +134,7 @@ class FigmaNode extends FigmaBaseNode {
     } else if (layoutGrow == 1.0) {
       return ParentLayoutSizing.STRETCH;
     } else {
-      return ParentLayoutSizing.INHERIT;
+      return ParentLayoutSizing.NONE;
     }
   }
 
