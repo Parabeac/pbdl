@@ -9,6 +9,7 @@ class FigmaPage {
   String imageURI;
   String name;
 
+  String type;
   bool convert = true;
   List<FigmaScreen> screens = [];
 
@@ -54,8 +55,6 @@ class FigmaPage {
     return page;
   }
 
-  String type;
-
   Future<PBDLPage> interpretNode() async {
     var resultScreens = await Future.wait(
         screens.map((e) async => await e?.interpretNode())?.toList());
@@ -64,5 +63,25 @@ class FigmaPage {
       UUID: id,
       screens: resultScreens,
     );
+  }
+
+  FigmaPage copyWith({
+    String id,
+    String imageURI,
+    String name,
+    bool convert,
+    List<FigmaScreen> screens,
+    String type,
+    Logger log,
+  }) {
+    return FigmaPage(
+      name: name ?? this.name,
+      id: id ?? this.id,
+    )
+      ..imageURI = imageURI ?? this.imageURI
+      ..convert = convert ?? this.convert
+      ..screens = screens ?? this.screens
+      ..type = type ?? this.type
+      ..log = log ?? this.log;
   }
 }

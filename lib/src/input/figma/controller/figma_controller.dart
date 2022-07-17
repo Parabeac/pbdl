@@ -1,10 +1,9 @@
-//Responsive UI code
-
 import 'package:pbdl/src/input/figma/entities/figma_key.dart';
 import 'package:pbdl/src/input/figma/entities/layers/component.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
 import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_project.dart';
+import 'package:pbdl/src/input/figma/integration/integration_strategy.dart';
 import 'package:pbdl/src/input/general_helper/azure_asset_service.dart';
 import 'package:pbdl/src/util/main_info.dart';
 
@@ -16,8 +15,9 @@ class FigmaController {
 
   Future<FigmaProject> convertFile(
     String projectID,
-    FigmaKey figmaKey,
-  ) async {
+    FigmaKey figmaKey, {
+    String integrationStrategy = 'screen',
+  }) async {
     figmaProjectID = projectID;
     figmaAPIKey = figmaKey;
     FigmaProject figmaProject;
@@ -25,10 +25,13 @@ class FigmaController {
     if (jsonFigma == null) {
       throw Error(); //todo: find correct error
     }
+    var mainInfo = MainInfo();
     AzureAssetService().projectUUID = figmaProjectID;
-    MainInfo().projectName = jsonFigma['name'];
-    MainInfo().figmaKey = figmaKey;
-    MainInfo().figmaProjectID = projectID;
+    mainInfo.projectName = jsonFigma['name'];
+    mainInfo.figmaKey = figmaKey;
+    mainInfo.figmaProjectID = projectID;
+    mainInfo.integrationStrategy =
+        IntegrationStrategy.fromString(integrationStrategy);
     figmaProject ??=
         generateFigmaTree(figmaProjectID, jsonFigma, MainInfo().projectName);
     // FIXME: improve this so that it doesn't have to be called separately when creating a [FigmaProject]
