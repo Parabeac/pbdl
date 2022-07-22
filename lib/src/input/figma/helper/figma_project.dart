@@ -11,7 +11,6 @@ import 'package:pbdl/src/util/main_info.dart';
 import 'package:quick_log/quick_log.dart';
 import '../entities/layers/canvas.dart';
 import 'figma_page.dart';
-import 'figma_screen.dart';
 
 class FigmaProject {
   bool debug;
@@ -30,11 +29,14 @@ class FigmaProject {
 
   GlobalStyleHolder globalStyles;
 
+  MainInfo _mainInfo;
+
   FigmaProject(
     this.projectName,
     this.figmaJson, {
     this.id,
   }) : super() {
+    _mainInfo = MainInfo();
     globalStyles = GetIt.I.get<GlobalStyleHolder>();
     pages.addAll(_setConventionalPages(figmaJson['document']['children']));
   }
@@ -87,26 +89,16 @@ class FigmaProject {
         if (layer.UUID == node.prototypeStartNodeID && layer is FigmaFrame) {
           layer.isFlowHome = true;
         }
-        // If layer is a component set
+        // If node is a component set
         // Add each component as a screen
-        if (layer is FigmaComponentSet) {
-          for (var child in layer.children) {
-            pg.addScreen(FigmaScreen(
-              figmaNode: child,
-              id: child.UUID,
-              name: child.name,
-              isVisible: child.isVisible,
-            ));
+        if (node is FigmaComponentSet) {
+          for (var child in node.children) {
+            pg = _mainInfo.integrationStrategy.execute(child, pg);
           }
         }
         // Else just add the screen
         else {
-          pg.addScreen(FigmaScreen(
-            figmaNode: layer,
-            id: layer.UUID,
-            name: layer.name,
-            isVisible: layer.isVisible,
-          ));
+          pg = _mainInfo.integrationStrategy.execute(layer, pg);
         }
       }
       figmaPages.add(pg);

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:pbdl/src/input/figma/entities/figma_key.dart';
+import 'package:pbdl/src/input/figma/integration/integration_strategy.dart';
 
 class MainInfo {
   static final MainInfo _singleton = MainInfo._internal();
@@ -22,6 +23,8 @@ class MainInfo {
   String projectName;
 
   String pngPath;
+
+  IntegrationStrategy integrationStrategy;
 
   factory MainInfo() {
     return _singleton;

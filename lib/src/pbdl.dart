@@ -86,6 +86,7 @@ class PBDL {
     /// [bool] that indicates whether the pbdl file will be written to the `outputPath`
     bool exportPbdlJson = false,
     String projectName,
+    String integrationStrategy = 'screen',
   }) async {
     return await runZonedGuarded(() async {
       final getIt = GetIt.instance;
@@ -98,8 +99,11 @@ class PBDL {
 
       _setupMainInfo(outputPath, pngPath);
       var figmaKey = FigmaKey(personalAccessToken: key, oAuthToken: oauthKey);
-      var figmaProject =
-          await FigmaController().convertFile(projectID, figmaKey);
+      var figmaProject = await FigmaController().convertFile(
+        projectID,
+        figmaKey,
+        integrationStrategy: integrationStrategy,
+      );
       var pbdl = await figmaProject.interpretNode();
 
       // TODO: add services
