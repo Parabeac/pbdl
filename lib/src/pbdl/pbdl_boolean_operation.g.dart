@@ -76,5 +76,4 @@ Map<String, dynamic> _$PBDLBooleanOperationToJson(
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',
   ParentLayoutSizing.STRETCH: 'STRETCH',
-  ParentLayoutSizing.NONE: 'NONE',
 };

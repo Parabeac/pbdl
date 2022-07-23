@@ -80,6 +80,4 @@ enum ParentLayoutSizing {
   INHERIT,
   @JsonValue('STRETCH')
   STRETCH,
-  @JsonValue('NONE')
-  NONE,
 }
