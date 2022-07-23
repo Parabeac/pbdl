@@ -59,4 +59,5 @@ Map<String, dynamic> _$PBDLGlobalColorToJson(PBDLGlobalColor instance) =>
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',
   ParentLayoutSizing.STRETCH: 'STRETCH',
+  ParentLayoutSizing.NONE: 'NONE',
 };

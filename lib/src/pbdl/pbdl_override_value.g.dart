@@ -61,4 +61,5 @@ Map<String, dynamic> _$PBDLOverrideValueToJson(PBDLOverrideValue instance) =>
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',
   ParentLayoutSizing.STRETCH: 'STRETCH',
+  ParentLayoutSizing.NONE: 'NONE',
 };

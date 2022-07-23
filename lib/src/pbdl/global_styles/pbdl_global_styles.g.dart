@@ -67,4 +67,5 @@ Map<String, dynamic> _$PBDLGlobalStylesToJson(PBDLGlobalStyles instance) =>
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',
   ParentLayoutSizing.STRETCH: 'STRETCH',
+  ParentLayoutSizing.NONE: 'NONE',
 };
