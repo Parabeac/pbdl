@@ -50,5 +50,4 @@ Map<String, dynamic> _$PBDLElementToJson(PBDLElement instance) =>
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',
   ParentLayoutSizing.STRETCH: 'STRETCH',
-  ParentLayoutSizing.NONE: 'NONE',
 };
