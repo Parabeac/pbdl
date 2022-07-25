@@ -21,8 +21,20 @@ class PBDLColor {
 
   factory PBDLColor.fromJson(Map<String, dynamic> json) =>
       _$PBDLColorFromJson(json);
-  @override
   Map<String, dynamic> toJson() => _$PBDLColorToJson(this);
+
+  String toHex() {
+    if (a != null && b != null && g != null && r != null) {
+      int a, r, g, b;
+      a = ((this.a ?? 0) * 255).round();
+      r = ((this.r ?? 0) * 255).round();
+      g = ((this.g ?? 0) * 255).round();
+      b = ((this.b ?? 0) * 255).round();
+      return '0x' + HEX.encode([a, r, g, b]);
+    } else {
+      return '0x' + HEX.encode([0, 0, 0, 0]);
+    }
+  }
 }
 
 mixin PBColorMixin {

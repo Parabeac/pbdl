@@ -1,20 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pbdl_override_value.dart';
+part of 'pbdl_global_text_style.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLOverrideValue _$PBDLOverrideValueFromJson(Map<String, dynamic> json) {
-  return PBDLOverrideValue(
+PBDLGlobalTextStyle _$PBDLGlobalTextStyleFromJson(Map<String, dynamic> json) {
+  return PBDLGlobalTextStyle(
     json['UUID'] as String,
     json['name'] as String,
-    json['ovrType'],
-    json['value'] == null
+    json['textStyle'] == null
         ? null
-        : PBDLNode.fromJson(json['value'] as Map<String, dynamic>),
-    json['valueName'] as String,
+        : PBDLTextStyle.fromJson(json['textStyle'] as Map<String, dynamic>),
+    description: json['description'] as String ?? '',
   )
     ..layoutMainAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
@@ -38,7 +37,8 @@ PBDLOverrideValue _$PBDLOverrideValueFromJson(Map<String, dynamic> json) {
     ..pbdlType = json['pbdlType'] as String;
 }
 
-Map<String, dynamic> _$PBDLOverrideValueToJson(PBDLOverrideValue instance) =>
+Map<String, dynamic> _$PBDLGlobalTextStyleToJson(
+        PBDLGlobalTextStyle instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'layoutMainAxisSizing':
@@ -52,10 +52,9 @@ Map<String, dynamic> _$PBDLOverrideValueToJson(PBDLOverrideValue instance) =>
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
-      'value': instance.value?.toJson(),
-      'valueName': instance.valueName,
+      'description': instance.description,
       'pbdlType': instance.pbdlType,
-      'ovrType': instance.ovrType,
+      'textStyle': instance.textStyle?.toJson(),
     };
 
 const _$ParentLayoutSizingEnumMap = {

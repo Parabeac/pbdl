@@ -29,3 +29,4 @@ export 'pbdl_style.dart';
 export 'pbdl_text.dart';
 export 'pbdl_text_style.dart';
 export 'pbdl_vector.dart';
+export 'global_styles/global_styles.dart';

@@ -88,9 +88,10 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     if (areAllVectors()) {
       imageReference = FigmaAssetProcessor().processImage(
         UUID,
-        absoluteBoundingBox,
-        name,
-        IMAGE_FORMAT.SVG,
+        absoluteBoundingBox: absoluteBoundingBox,
+        name: name,
+        format: IMAGE_FORMAT.SVG,
+        effects: figmaStyleProperty?.effects ?? [],
       );
 
       var tempPrototypeID = childrenHavePrototypeNode();

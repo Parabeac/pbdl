@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:hex/hex.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_color.dart';
+import 'package:pbdl/src/pbdl/pbdl_node.dart';
 part 'figma_color.g.dart';
 
 @JsonSerializable()
-class FigmaColor {
+class FigmaColor extends FigmaBaseNode {
   @JsonKey(name: 'a')
   double alpha;
 
@@ -27,31 +28,10 @@ class FigmaColor {
   PBDLColor interpretColor() {
     return PBDLColor(alpha, red, green, blue);
   }
+
+  @override
+  Future<PBDLNode> interpretNode() {
+    // TODO: implement interpretNode
+    throw UnimplementedError();
+  }
 }
-
-// mixin PBColorMixin {
-//   String toHex(FigmaColor color) {
-//     if (color != null) {
-//       int a, r, g, b;
-//       a = ((color.alpha ?? 0) * 255).round();
-//       r = ((color.red ?? 0) * 255).round();
-//       g = ((color.green ?? 0) * 255).round();
-//       b = ((color.blue ?? 0) * 255).round();
-//       return '0x' + HEX.encode([a, r, g, b]);
-//     } else {
-//       return '0x' + HEX.encode([0, 0, 0, 0]);
-//     }
-//   }
-
-//   String findDefaultColor(String hex) {
-//     switch (hex) {
-//       case '0xffffffff':
-//         return 'Colors.white';
-//         break;
-//       case '0xff000000':
-//         return 'Colors.black';
-//         break;
-//     }
-//     return null;
-//   }
-// }

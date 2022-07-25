@@ -61,6 +61,7 @@ Map<String, dynamic> _$PBDLFrameToJson(PBDLFrame instance) => <String, dynamic>{
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',
   ParentLayoutSizing.STRETCH: 'STRETCH',
+  ParentLayoutSizing.NONE: 'NONE',
 };
 
 PBDLRow _$PBDLRowFromJson(Map<String, dynamic> json) {

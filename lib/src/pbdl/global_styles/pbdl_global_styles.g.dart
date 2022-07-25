@@ -1,25 +1,32 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pbdl_override_value.dart';
+part of 'pbdl_global_styles.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLOverrideValue _$PBDLOverrideValueFromJson(Map<String, dynamic> json) {
-  return PBDLOverrideValue(
-    json['UUID'] as String,
-    json['name'] as String,
-    json['ovrType'],
-    json['value'] == null
-        ? null
-        : PBDLNode.fromJson(json['value'] as Map<String, dynamic>),
-    json['valueName'] as String,
+PBDLGlobalStyles _$PBDLGlobalStylesFromJson(Map<String, dynamic> json) {
+  return PBDLGlobalStyles(
+    colors: (json['colors'] as List)
+            ?.map((e) => e == null
+                ? null
+                : PBDLGlobalColor.fromJson(e as Map<String, dynamic>))
+            ?.toList() ??
+        [],
+    textStyles: (json['textStyles'] as List)
+            ?.map((e) => e == null
+                ? null
+                : PBDLGlobalTextStyle.fromJson(e as Map<String, dynamic>))
+            ?.toList() ??
+        [],
   )
+    ..UUID = json['UUID'] as String
     ..layoutMainAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
     ..layoutCrossAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutCrossAxisSizing'] as String)
+    ..name = json['name'] as String
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
@@ -38,7 +45,7 @@ PBDLOverrideValue _$PBDLOverrideValueFromJson(Map<String, dynamic> json) {
     ..pbdlType = json['pbdlType'] as String;
 }
 
-Map<String, dynamic> _$PBDLOverrideValueToJson(PBDLOverrideValue instance) =>
+Map<String, dynamic> _$PBDLGlobalStylesToJson(PBDLGlobalStyles instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'layoutMainAxisSizing':
@@ -52,10 +59,9 @@ Map<String, dynamic> _$PBDLOverrideValueToJson(PBDLOverrideValue instance) =>
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
-      'value': instance.value?.toJson(),
-      'valueName': instance.valueName,
       'pbdlType': instance.pbdlType,
-      'ovrType': instance.ovrType,
+      'colors': instance.colors?.map((e) => e?.toJson())?.toList(),
+      'textStyles': instance.textStyles?.map((e) => e?.toJson())?.toList(),
     };
 
 const _$ParentLayoutSizingEnumMap = {

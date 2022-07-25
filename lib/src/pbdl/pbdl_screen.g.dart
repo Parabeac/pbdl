@@ -38,27 +38,36 @@ PBDLScreen _$PBDLScreenFromJson(Map<String, dynamic> json) {
     ..pbdlType = json['pbdlType'] as String;
 }
 
-Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) =>
-    <String, dynamic>{
-      'UUID': instance.UUID,
-      'layoutMainAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
-      'layoutCrossAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-      'name': instance.name,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'style': instance.style?.toJson(),
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child?.toJson(),
-      'constraints': instance.constraints?.toJson(),
-      'convert': instance.convert,
-      'imageURI': instance.imageURI,
-      'pbdlType': instance.pbdlType,
-      'designNode': instance.designNode?.toJson(),
-      'isVisible': instance.isVisible,
-    };
+Map<String, dynamic> _$PBDLScreenToJson(PBDLScreen instance) {
+  final val = <String, dynamic>{};
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('UUID', instance.UUID);
+  writeNotNull('layoutMainAxisSizing',
+      _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing]);
+  writeNotNull('layoutCrossAxisSizing',
+      _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing]);
+  writeNotNull('name', instance.name);
+  writeNotNull('boundaryRectangle', instance.boundaryRectangle?.toJson());
+  writeNotNull('style', instance.style?.toJson());
+  writeNotNull('prototypeNodeUUID', instance.prototypeNodeUUID);
+  writeNotNull('child', instance.child?.toJson());
+  writeNotNull('constraints', instance.constraints?.toJson());
+  val['convert'] = instance.convert;
+  val['imageURI'] = instance.imageURI;
+  val['pbdlType'] = instance.pbdlType;
+  val['designNode'] = instance.designNode?.toJson();
+  val['isVisible'] = instance.isVisible;
+  return val;
+}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',
   ParentLayoutSizing.STRETCH: 'STRETCH',
+  ParentLayoutSizing.NONE: 'NONE',
 };

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:http2/http2.dart';
 import 'package:pbdl/src/input/figma/entities/figma_key.dart';
+import 'package:pbdl/src/input/figma/entities/layers/figma_node.dart';
 import 'package:quick_log/quick_log.dart';
 
 import 'api_exceptions.dart';
@@ -11,6 +12,30 @@ class APICallService {
   APICallService();
   static var log = Logger('API Call Service');
   static String HTTP_STATUS_KEY = ':status';
+
+  /// Returns [FigmaNodes] with UUIDs specified in [ids]
+  /// from [fileId]. Requires a [FigmaKey].
+  static Future<List<FigmaNode>> getFileNodes(
+      String fileId, Iterable<String> ids, FigmaKey key) async {
+    if (ids == null || ids.isEmpty) {
+      return [];
+    }
+    final flatIds = ids.join(',');
+    final url = 'https://api.figma.com/v1/files/$fileId/nodes?ids=$flatIds';
+
+    final apiResult = await makeAPICall(url, key);
+    final figmaNodes = <FigmaNode>[];
+
+    if (apiResult is Map<String, dynamic> && apiResult.containsKey('nodes')) {
+      for (Map<String, dynamic> node in apiResult['nodes'].values) {
+        if (node.containsKey('document')) {
+          figmaNodes.add(FigmaNode.fromJson(node['document']));
+        }
+      }
+      return figmaNodes;
+    }
+    return [];
+  }
 
   /// Makes a GET call to figma using `url` and `token`
   static Future<dynamic> makeAPICall(
