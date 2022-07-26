@@ -91,8 +91,8 @@ class FigmaProject {
         }
         // If node is a component set
         // Add each component as a screen
-        if (node is FigmaComponentSet) {
-          for (var child in node.children) {
+        if (layer is FigmaComponentSet) {
+          for (var child in layer.children) {
             pg = _mainInfo.integrationStrategy.execute(child, pg);
           }
         }
