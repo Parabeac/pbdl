@@ -3,6 +3,7 @@ import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/fill_style_global.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/text_style_global.dart';
+import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_theme_data.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_color.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_styles.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_text_style.dart';
@@ -13,7 +14,7 @@ part 'global_style_holder.g.dart';
 /// Class that holds the global style properties of a Figma node.
 @JsonSerializable()
 class GlobalStyleHolder extends FigmaBaseNode {
-  GlobalStyleHolder();
+  GlobalStyleHolder([this.designSystemThemeData]);
 
   /// Registered [GlobalStyleProperty]s.
   final _properties = <String, GlobalStyleProperty>{};
@@ -22,6 +23,9 @@ class GlobalStyleHolder extends FigmaBaseNode {
     'fill',
     'text',
   ];
+
+  @JsonKey(ignore: true)
+  final DesignSystemThemeData designSystemThemeData;
 
   /// Adds the [GlobalStyleProperty] to the correct list.
   void add(GlobalStyleProperty property) {
@@ -52,27 +56,41 @@ class GlobalStyleHolder extends FigmaBaseNode {
   @override
   Future<PBDLNode> interpretNode() async {
     /// Interpret fills to [PBDLGlobalFillProperty]
-    var interpretedFills = <PBDLGlobalColor>[];
+    var themeColors = <PBDLGlobalColor>[];
+    var globalColors = <PBDLGlobalColor>[];
+    var themeTextStyles = <PBDLGlobalTextStyle>[];
+    var globalTextStyles = <PBDLGlobalTextStyle>[];
+
     for (var fill in fills) {
-      interpretedFills.add(await fill.interpretNode());
+      final interpretedFill = await fill.interpretNode();
+      if (interpretedFill == null) {
+        continue;
+      }
+      if (designSystemThemeData.isColorScheme(fill.name)) {
+        themeColors.add(interpretedFill);
+      } else {
+        globalColors.add(interpretedFill);
+      }
     }
 
     /// Interpret text styles to [PBDLGlobalTextStyle]
-    var interpretedTextStyles = <PBDLGlobalTextStyle>[];
     for (var textStyle in textStyles) {
-      interpretedTextStyles.add(await textStyle.interpretNode());
+      final interpretedTextStyle = await textStyle.interpretNode();
+      if (interpretedTextStyle == null) {
+        continue;
+      }
+      if (designSystemThemeData.isTextStyle(interpretedTextStyle.name)) {
+        themeTextStyles.add(interpretedTextStyle);
+      } else {
+        globalTextStyles.add(interpretedTextStyle);
+      }
     }
 
-    /// FIXME: Find out why some fills are returning null.
-    /// Theory is that this might have to do with global styles coming from another file.
-    final filteredFills =
-        interpretedFills.where((fill) => fill != null).toList();
-    final filteredTextStyles =
-        interpretedTextStyles.where((textStyle) => textStyle != null).toList();
-
     return PBDLGlobalStyles(
-      colors: filteredFills,
-      textStyles: filteredTextStyles,
+      colors: globalColors,
+      textStyles: globalTextStyles,
+      themeColors: themeColors,
+      themeTextStyles: themeTextStyles,
     );
   }
 

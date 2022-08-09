@@ -42,39 +42,31 @@ PBDLVector _$PBDLVectorFromJson(Map<String, dynamic> json) {
     ..image = json['image'];
 }
 
-Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) {
-  final val = <String, dynamic>{};
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('UUID', instance.UUID);
-  writeNotNull('layoutMainAxisSizing',
-      _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing]);
-  writeNotNull('layoutCrossAxisSizing',
-      _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing]);
-  writeNotNull('name', instance.name);
-  writeNotNull('isVisible', instance.isVisible);
-  writeNotNull('boundaryRectangle', instance.boundaryRectangle?.toJson());
-  writeNotNull('style', instance.style?.toJson());
-  writeNotNull('prototypeNodeUUID', instance.prototypeNodeUUID);
-  writeNotNull('child', instance.child?.toJson());
-  writeNotNull('constraints', instance.constraints?.toJson());
-  val['layoutAlign'] = instance.layoutAlign;
-  val['size'] = instance.size;
-  val['strokes'] = instance.strokes;
-  val['strokeWeight'] = instance.strokeWeight;
-  val['strokeAlign'] = instance.strokeAlign;
-  val['styles'] = instance.styles;
-  val['fillsList'] = instance.fillsList;
-  val['pbdlType'] = instance.pbdlType;
-  val['imageReference'] = instance.imageReference;
-  val['image'] = instance.image;
-  return val;
-}
+Map<String, dynamic> _$PBDLVectorToJson(PBDLVector instance) =>
+    <String, dynamic>{
+      'UUID': instance.UUID,
+      'layoutMainAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+      'layoutCrossAxisSizing':
+          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
+      'name': instance.name,
+      'isVisible': instance.isVisible,
+      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'style': instance.style?.toJson(),
+      'prototypeNodeUUID': instance.prototypeNodeUUID,
+      'child': instance.child?.toJson(),
+      'constraints': instance.constraints?.toJson(),
+      'layoutAlign': instance.layoutAlign,
+      'size': instance.size,
+      'strokes': instance.strokes,
+      'strokeWeight': instance.strokeWeight,
+      'strokeAlign': instance.strokeAlign,
+      'styles': instance.styles,
+      'fillsList': instance.fillsList,
+      'pbdlType': instance.pbdlType,
+      'imageReference': instance.imageReference,
+      'image': instance.image,
+    };
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',

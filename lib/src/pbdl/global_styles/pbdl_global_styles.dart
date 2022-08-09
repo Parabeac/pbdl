@@ -13,16 +13,31 @@ class PBDLGlobalStyles extends PBDLNode {
   PBDLGlobalStyles({
     this.colors,
     this.textStyles,
+    this.themeColors,
+    this.themeTextStyles,
+    this.designSystem = 'material',
   }) : super('', '', false, null, null, null);
 
   @override
   final String pbdlType = 'global_styles';
+
+  /// Design system that is being used (i.e. material, cupertino, etc.)
+  @JsonKey(defaultValue: 'material')
+  final String designSystem;
 
   @JsonKey(defaultValue: [])
   final List<PBDLGlobalColor> colors;
 
   @JsonKey(defaultValue: [])
   final List<PBDLGlobalTextStyle> textStyles;
+
+  /// List of [PBDLGlobalColor] that are specific to the design system's theme
+  @JsonKey(defaultValue: [])
+  final List<PBDLGlobalColor> themeColors;
+
+  /// List of [PBDLGlobalTextStyle] that are specific to the design system's theme
+  @JsonKey(defaultValue: [])
+  final List<PBDLGlobalTextStyle> themeTextStyles;
 
   factory PBDLGlobalStyles.fromJson(Map<String, dynamic> json) =>
       _$PBDLGlobalStylesFromJson(json);
