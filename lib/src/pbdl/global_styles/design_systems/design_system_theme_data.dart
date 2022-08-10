@@ -16,6 +16,8 @@ abstract class DesignSystemThemeData extends PBDLNode {
   bool isTextStyle(String style) => textStyles.contains(style);
 
   /// Returns [true] if [color] is part of the [DesignSystemThemeData's] [ColorSchemes]
-  bool isColorScheme(String color) =>
-      colorSchemes.any((element) => element.isSupportedColor(color));
+  DesignSystemColorScheme colorScheme(String color) => colorSchemes.firstWhere(
+        (element) => element.isSupportedColor(color),
+        orElse: () => null,
+      );
 }

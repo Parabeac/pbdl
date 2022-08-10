@@ -66,7 +66,9 @@ class GlobalStyleHolder extends FigmaBaseNode {
       if (interpretedFill == null) {
         continue;
       }
-      if (designSystemThemeData.isColorScheme(fill.name)) {
+      final colorScheme = designSystemThemeData.colorScheme(fill.name);
+      if (colorScheme != null) {
+        (interpretedFill as PBDLGlobalColor).colorScheme = colorScheme.name;
         themeColors.add(interpretedFill);
       } else {
         globalColors.add(interpretedFill);
