@@ -34,27 +34,38 @@ PBDLGlobalColor _$PBDLGlobalColorFromJson(Map<String, dynamic> json) {
     ..constraints = json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..pbdlType = json['pbdlType'] as String;
+    ..pbdlType = json['pbdlType'] as String
+    ..colorScheme = json['colorScheme'] as String;
 }
 
-Map<String, dynamic> _$PBDLGlobalColorToJson(PBDLGlobalColor instance) =>
-    <String, dynamic>{
-      'UUID': instance.UUID,
-      'layoutMainAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
-      'layoutCrossAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-      'name': instance.name,
-      'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'style': instance.style?.toJson(),
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child?.toJson(),
-      'constraints': instance.constraints?.toJson(),
-      'description': instance.description,
-      'pbdlType': instance.pbdlType,
-      'color': instance.color?.toJson(),
-    };
+Map<String, dynamic> _$PBDLGlobalColorToJson(PBDLGlobalColor instance) {
+  final val = <String, dynamic>{
+    'UUID': instance.UUID,
+    'layoutMainAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+    'layoutCrossAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
+    'name': instance.name,
+    'isVisible': instance.isVisible,
+    'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+    'style': instance.style?.toJson(),
+    'prototypeNodeUUID': instance.prototypeNodeUUID,
+    'child': instance.child?.toJson(),
+    'constraints': instance.constraints?.toJson(),
+    'description': instance.description,
+    'pbdlType': instance.pbdlType,
+    'color': instance.color?.toJson(),
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('colorScheme', instance.colorScheme);
+  return val;
+}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',

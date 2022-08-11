@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
-import 'package:pbdl/src/pbdl/global_styles/pbdl_global_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 
@@ -24,6 +23,14 @@ class PBDLGlobalColor extends PBDLGlobalStyle {
 
   /// Contains the actual color value.
   PBDLColor color;
+
+  /// If [this] is part of a theme [ColorScheme],
+  /// the value will be contained within this [String].
+  ///
+  /// For example, if [this] is part of [ColorScheme.light], the value
+  /// of [colorScheme] would be `light`
+  @JsonKey(includeIfNull: false)
+  String colorScheme;
 
   factory PBDLGlobalColor.fromJson(Map<String, dynamic> json) =>
       _$PBDLGlobalColorFromJson(json);
