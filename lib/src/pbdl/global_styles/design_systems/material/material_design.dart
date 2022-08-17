@@ -38,6 +38,16 @@ class MaterialDesign extends DesignSystemThemeData {
     MaterialColorScheme('dark'),
   ];
 
+  int get supportedAttributesCount {
+    var total = 0;
+    for (var scheme in _colorSchemes) {
+      total += scheme.supportedAttributes.length;
+    }
+    return total;
+  }
+
+  int get totalMaterialCount => _textStyles.length + supportedAttributesCount;
+
   MaterialDesign()
       : super(
           'material',
