@@ -21,7 +21,6 @@ abstract class IntegrationStrategy {
         name: node.name,
         isVisible: node.isVisible,
       ));
-     
     }
     return page;
   }
@@ -30,11 +29,11 @@ abstract class IntegrationStrategy {
 
   factory IntegrationStrategy.fromString(String integrationStrategy) {
     switch (integrationStrategy.toLowerCase()) {
-      case 'theming':
+      case 'themes':
         return ThemingStrategy();
-      case 'component':
+      case 'components':
         return ComponentStrategy();
-      case 'screen':
+      case 'screens':
         return ScreenStrategy();
       default:
         return ScreenStrategy();
