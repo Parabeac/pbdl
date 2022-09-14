@@ -24,5 +24,5 @@ Map<String, dynamic> _$TextStyleGlobalToJson(TextStyleGlobal instance) =>
       'name': instance.name,
       'description': instance.description,
       'styleType': instance.styleType,
-      'styleNode': instance.styleNode?.toJson(),
+      'styleNode': instance.styleNode,
     };

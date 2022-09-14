@@ -26,7 +26,7 @@ class PBDLGlobalStyles extends PBDLNode {
   final String designSystem;
 
   @JsonKey(defaultValue: [])
-  final List<PBDLGlobalColor> colors;
+  final List<PBDLGlobalStyle> colors;
 
   @JsonKey(defaultValue: [])
   final List<PBDLGlobalTextStyle> textStyles;

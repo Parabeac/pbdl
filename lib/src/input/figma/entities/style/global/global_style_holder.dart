@@ -5,6 +5,7 @@ import 'package:pbdl/src/input/figma/entities/style/global/global_style_property
 import 'package:pbdl/src/input/figma/entities/style/global/text_style_global.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_theme_data.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_color.dart';
+import 'package:pbdl/src/pbdl/global_styles/pbdl_global_style.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_styles.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_text_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -57,7 +58,7 @@ class GlobalStyleHolder extends FigmaBaseNode {
   Future<PBDLNode> interpretNode() async {
     /// Interpret fills to [PBDLGlobalFillProperty]
     var themeColors = <PBDLGlobalColor>[];
-    var globalColors = <PBDLGlobalColor>[];
+    var globalColors = <PBDLGlobalStyle>[];
     var themeTextStyles = <PBDLGlobalTextStyle>[];
     var globalTextStyles = <PBDLGlobalTextStyle>[];
 

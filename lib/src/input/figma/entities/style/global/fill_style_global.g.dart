@@ -12,9 +12,7 @@ FillStyleGlobal _$FillStyleGlobalFromJson(Map<String, dynamic> json) {
     json['styleType'] as String,
     name: json['name'] as String,
     description: json['description'] as String,
-    styleNode: json['styleNode'] == null
-        ? null
-        : FigmaColor.fromJson(json['styleNode'] as Map<String, dynamic>),
+    styleNode: json['styleNode'],
   );
 }
 
@@ -24,5 +22,5 @@ Map<String, dynamic> _$FillStyleGlobalToJson(FillStyleGlobal instance) =>
       'name': instance.name,
       'description': instance.description,
       'styleType': instance.styleType,
-      'styleNode': instance.styleNode?.toJson(),
+      'styleNode': instance.styleNode,
     };
