@@ -6,6 +6,7 @@ import 'package:pbdl/src/input/figma/entities/style/fill/fill_type.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.dart';
 import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_page.dart';
 import 'package:pbdl/src/pbdl/pbdl_project.dart';
 import 'package:pbdl/src/util/main_info.dart';
@@ -80,8 +81,10 @@ class FigmaProject {
         if (globalStyle != null) {
           // If the styleNode is a image fill type, replace imageRef for their download url
           if (globalStyle.styleNode is ImageFillType) {
-            globalStyle.styleNode.imageRef =
-                imagesByReference[globalStyle.styleNode.imageRef];
+            globalStyle.styleNode.imageRef = FigmaAssetProcessor()
+                .processImageWithURL(globalStyle.UUID,
+                    imagesByReference[globalStyle.styleNode.imageRef],
+                    name: globalStyle.name);
           }
           globalStyles.add(globalStyle);
         }
