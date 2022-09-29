@@ -16,6 +16,7 @@ class PBDLGlobalStyles extends PBDLNode {
     this.themeColors,
     this.themeTextStyles,
     this.designSystem = 'material',
+    this.effects,
   }) : super('', '', false, null, null, null);
 
   @override
@@ -38,6 +39,10 @@ class PBDLGlobalStyles extends PBDLNode {
   /// List of [PBDLGlobalTextStyle] that are specific to the design system's theme
   @JsonKey(defaultValue: [])
   final List<PBDLGlobalTextStyle> themeTextStyles;
+
+  /// List of [PBDLGlobalEffect]
+  @JsonKey(defaultValue: [])
+  final List<PBDLGlobalEffect> effects;
 
   factory PBDLGlobalStyles.fromJson(Map<String, dynamic> json) =>
       _$PBDLGlobalStylesFromJson(json);
