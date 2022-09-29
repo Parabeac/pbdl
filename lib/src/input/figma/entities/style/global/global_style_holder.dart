@@ -1,14 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
+import 'package:pbdl/src/input/figma/entities/style/global/effect_global.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/fill_style_global.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/text_style_global.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_theme_data.dart';
-import 'package:pbdl/src/pbdl/global_styles/pbdl_global_color.dart';
-import 'package:pbdl/src/pbdl/global_styles/pbdl_global_style.dart';
-import 'package:pbdl/src/pbdl/global_styles/pbdl_global_styles.dart';
-import 'package:pbdl/src/pbdl/global_styles/pbdl_global_text_style.dart';
-import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
 part 'global_style_holder.g.dart';
 
@@ -19,11 +16,6 @@ class GlobalStyleHolder extends FigmaBaseNode {
 
   /// Registered [GlobalStyleProperty]s.
   final _properties = <String, GlobalStyleProperty>{};
-
-  final registeredPropertyNames = <String>[
-    'fill',
-    'text',
-  ];
 
   @JsonKey(ignore: true)
   final DesignSystemThemeData designSystemThemeData;
@@ -43,6 +35,9 @@ class GlobalStyleHolder extends FigmaBaseNode {
   Iterable<TextStyleGlobal> get textStyles =>
       _properties.values.whereType<TextStyleGlobal>();
 
+  Iterable<EffectGlobal> get effects =>
+      _properties.values.whereType<EffectGlobal>();
+
   /// Returns the [GlobalStyleProperty] with the given [UUID] and specified type [T].
   ///
   /// If the [UUID] is not found, returns null.
@@ -61,6 +56,7 @@ class GlobalStyleHolder extends FigmaBaseNode {
     var globalColors = <PBDLGlobalStyle>[];
     var themeTextStyles = <PBDLGlobalTextStyle>[];
     var globalTextStyles = <PBDLGlobalTextStyle>[];
+    var globalEffects = <PBDLGlobalEffect>[];
 
     for (var fill in fills) {
       final interpretedFill = await fill.interpretNode();
@@ -89,11 +85,17 @@ class GlobalStyleHolder extends FigmaBaseNode {
       }
     }
 
+    /// Interpret effects
+    for (var effect in effects) {
+      globalEffects.add(await effect.interpretNode());
+    }
+
     return PBDLGlobalStyles(
       colors: globalColors,
       textStyles: globalTextStyles,
       themeColors: themeColors,
       themeTextStyles: themeTextStyles,
+      effects: globalEffects,
     );
   }
 

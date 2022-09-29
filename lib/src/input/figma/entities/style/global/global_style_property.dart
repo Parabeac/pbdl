@@ -1,4 +1,5 @@
 import 'package:pbdl/src/input/figma/entities/layers/figma_base_node.dart';
+import 'package:pbdl/src/input/figma/entities/style/global/effect_global.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/fill_style_global.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/text_style_global.dart';
 
@@ -26,6 +27,8 @@ abstract class GlobalStyleProperty extends FigmaBaseNode {
         return FillStyleGlobal.fromJson(json, styleNode);
       case 'TEXT':
         return TextStyleGlobal.fromJson(json, styleNode);
+      case 'EFFECT':
+        return EffectGlobal.fromJson(json, styleNode);
       default:
         return null;
     }
