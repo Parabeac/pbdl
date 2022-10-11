@@ -3,6 +3,7 @@ import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/entities/layers/ellipse.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
+import 'package:pbdl/src/input/figma/entities/layers/line.dart';
 import 'package:pbdl/src/input/figma/entities/layers/rectangle.dart';
 import 'package:pbdl/src/input/figma/entities/layers/text.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
@@ -103,6 +104,9 @@ class FigmaFrame extends FigmaChildrenNode
 
   @override
   Future<PBDLNode> interpretNode() async {
+    // Check if the frame contains a line widget
+    // and handles it
+    _checkAbsoluteBoundingBox();
     if (isRoot) {
       return Future.value(
         PBDLArtboard(
@@ -171,6 +175,21 @@ class FigmaFrame extends FigmaChildrenNode
               children: await Future.wait(
                   children.map((e) async => await e.interpretNode()).toList())),
         );
+      }
+    }
+  }
+
+  /// Check if the frame has a child that is a FigmaLine
+  /// if it does, add its width/height
+  void _checkAbsoluteBoundingBox() {
+    for (var childNode in children) {
+      if (childNode is FigmaLine) {
+        if (childNode.absoluteBoundingBox.height >
+            childNode.absoluteBoundingBox.width) {
+          absoluteBoundingBox.width += childNode.absoluteBoundingBox.width;
+        } else {
+          absoluteBoundingBox.height += childNode.absoluteBoundingBox.height;
+        }
       }
     }
   }
