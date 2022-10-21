@@ -83,25 +83,6 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       layoutMainAxisSizing: getGrowSizing(layoutGrow),
       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
     ));
-
-    /// Added thickness as the height for [PBDLRectangle]
-    /// and substracted to the y axis, so it can still fit
-    /// on the frame
-    // absoluteBoundingBox.height = strokeWeight;
-    // absoluteBoundingBox.y -= strokeWeight;
-    // return Future.value(
-    //   PBDLRectangle(
-    //     style: figmaStyleProperty?.interpretStyle(),
-    //     UUID: UUID,
-    //     boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-    //     isVisible: isVisible,
-    //     name: name,
-    //     prototypeNodeUUID: transitionNodeID,
-    //     constraints: constraints?.interpret(),
-    //     layoutMainAxisSizing: getGrowSizing(layoutGrow),
-    //     layoutCrossAxisSizing: getAlignSizing(layoutAlign),
-    //   ),
-    // );
   }
 
   @override
