@@ -172,7 +172,9 @@ class FigmaAssetProcessor extends AssetProcessingService {
         }
         return response;
       } else {
-        throw Exception('Image did not generate');
+        log.error('Image did not generate');
+        return response;
+        //throw Exception('Image did not generate');
       }
     });
   }
