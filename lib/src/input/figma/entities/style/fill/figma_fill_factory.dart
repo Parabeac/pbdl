@@ -13,7 +13,9 @@ class FigmaFillFactory {
     for (var fill in _fills) {
       if (fill.type == json['type']) {
         // Fix for opacity for global colors
-        json['color']['a'] = json['opacity'];
+        if (fill.type == 'SOLID') {
+          json['color']['a'] = json['opacity'];
+        }
         return fill.createFigmaFill(json);
       } else if (json['type'].toLowerCase().contains('gradient')) {
         return GradientFillType.fromJson(json);
