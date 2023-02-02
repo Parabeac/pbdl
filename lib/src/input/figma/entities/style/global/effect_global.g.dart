@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'text_style_global.dart';
+part of 'effect_global.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-TextStyleGlobal _$TextStyleGlobalFromJson(Map<String, dynamic> json) {
-  return TextStyleGlobal(
+EffectGlobal _$EffectGlobalFromJson(Map<String, dynamic> json) {
+  return EffectGlobal(
     json['UUID'] as String,
     json['styleType'] as String,
     name: json['name'] as String,
     description: json['description'] as String,
     styleNode: json['styleNode'] == null
         ? null
-        : FigmaTextStyle.fromJson(json['styleNode'] as Map<String, dynamic>),
+        : FigmaEffect.fromJson(json['styleNode'] as Map<String, dynamic>),
   );
 }
 
-Map<String, dynamic> _$TextStyleGlobalToJson(TextStyleGlobal instance) =>
+Map<String, dynamic> _$EffectGlobalToJson(EffectGlobal instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'name': instance.name,
