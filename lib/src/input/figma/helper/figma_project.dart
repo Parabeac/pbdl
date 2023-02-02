@@ -2,9 +2,11 @@ import 'package:get_it/get_it.dart';
 import 'package:pbdl/src/input/figma/entities/layers/canvas.dart';
 import 'package:pbdl/src/input/figma/entities/layers/component_set.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
+import 'package:pbdl/src/input/figma/entities/style/fill/fill_type.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_property.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.dart';
 import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
+import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_page.dart';
 import 'package:pbdl/src/pbdl/pbdl_project.dart';
 import 'package:pbdl/src/util/main_info.dart';
@@ -54,6 +56,13 @@ class FigmaProject {
     var stylingNodes =
         await APICallService.getFileNodes(id, ids, MainInfo().figmaKey);
 
+    /// Get all images meta data, using imageReference or imageRef as key
+    /// for their download url
+    var metaData = await APICallService.makeAPICall(
+        'https://api.figma.com/v1/files/${MainInfo().figmaProjectID}/images',
+        MainInfo().figmaKey);
+    var imagesByReference = metaData['meta']['images'];
+
     for (var entry in jsonStyles.entries) {
       // ?: [ApiCallService.getFileNodes] could return a [Map<String,dynamic>] to make this faster.
       var figmaNode = stylingNodes.firstWhere(
@@ -70,6 +79,13 @@ class FigmaProject {
         var globalStyle =
             GlobalStyleProperty.fromJson(formattedJson, figmaNode);
         if (globalStyle != null) {
+          // If the styleNode is a image fill type, replace imageRef for their download url
+          if (globalStyle.styleNode is ImageFillType) {
+            globalStyle.styleNode.imageRef = FigmaAssetProcessor()
+                .processImageWithURL(globalStyle.UUID,
+                    imagesByReference[globalStyle.styleNode.imageRef],
+                    name: globalStyle.name);
+          }
           globalStyles.add(globalStyle);
         }
       }

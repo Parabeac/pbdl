@@ -7,7 +7,7 @@ abstract class GlobalStyleProperty extends FigmaBaseNode {
   final String name;
   final String description;
   final String styleType;
-  FigmaBaseNode styleNode;
+  var styleNode;
 
   GlobalStyleProperty(
     this.UUID,

@@ -32,6 +32,8 @@ class FigmaAssetProcessor extends AssetProcessingService {
 
   Logger log = Logger('Figma Image helper');
 
+  Map<String, dynamic> globalImages = {};
+
   /// Adds [uuid] to queue to be processed as an image.
   /// Returns the formatted name of the image reference.
   @override
@@ -53,9 +55,29 @@ class FigmaAssetProcessor extends AssetProcessingService {
       _uuidNoBoxQueue.add(uuid);
     }
 
+    var finalName = _getNameAndRegister(uuid, name);
+    return _imageFinalName(finalName, format);
+  }
+
+  // To add images to get processed when they have their url
+  String processImageWithURL(String uuid, String url,
+      {String name, IMAGE_FORMAT format = IMAGE_FORMAT.PNG}) {
+    globalImages[uuid] = url;
+
+    var finalName = _getNameAndRegister(uuid, name);
+
+    return _imageFinalName(finalName, format);
+  }
+
+  // Get image format correctly
+  String _imageFinalName(String name, IMAGE_FORMAT format) =>
+      ('images/$name.${format.toShortLowerCaseString()}');
+
+  // Get name and register to uuid to name
+  String _getNameAndRegister(String uuid, String name) {
     var finalName = AssetProcessingService.getImageName(name);
     _uuidToName[uuid] = finalName;
-    return ('images/' + finalName + '.${format.toShortLowerCaseString()}');
+    return finalName;
   }
 
   /// Adds [uuids] to queue to be processed as an image.
@@ -146,35 +168,45 @@ class FigmaAssetProcessor extends AssetProcessingService {
           response['images'] != null &&
           response['images'].values.isNotEmpty) {
         Map images = response['images'];
+        images.addAll(globalImages);
         // Download the images
-        for (var entry in images.entries) {
-          if (entry?.value != null && (entry?.value?.isNotEmpty ?? false)) {
-            response =
-                await http.get(Uri.parse(entry.value)).then((imageRes) async {
-              // Check if the request was successful
-              if (imageRes == null || imageRes.statusCode != 200) {
-                log.error('Image ${entry.key} was not processed correctly');
-              }
-              var imageName = _uuidToName[entry.key];
-              var pngPath = p.join(MainInfo().pngPath,
-                  '${imageName}.${imageFormat.toShortLowerCaseString()}');
-              var file = File(pngPath.replaceAll(':', '_'))
-                ..createSync(recursive: true);
-              file.writeAsBytesSync(imageRes.bodyBytes);
 
-              // TODO: Only print out when verbose flag is active
-              // log.debug('File written to following path ${file.path}');
-            }).catchError((e) {
-              //MainInfo().sentry.captureException(exception: e);
-              log.error(e.toString());
-            });
-          }
-        }
+        response = downloadImages(images, imageFormat);
+
         return response;
       } else {
         throw Exception('Image did not generate');
       }
     });
+  }
+
+  Future<dynamic> downloadImages(
+      Map<dynamic, dynamic> images, IMAGE_FORMAT imageFormat) async {
+    // Download the images
+    var response;
+    images.forEach((var key, var value) async {
+      if (value != null && (value?.isNotEmpty ?? false)) {
+        response = await http.get(Uri.parse(value)).then((imageRes) async {
+          // Check if the request was successful
+          if (imageRes == null || imageRes.statusCode != 200) {
+            log.error('Image $key was not processed correctly');
+          }
+          var imageName = _uuidToName[key];
+          var pngPath = p.join(MainInfo().pngPath,
+              '${imageName}.${imageFormat.toShortLowerCaseString()}');
+          var file = File(pngPath.replaceAll(':', '_'))
+            ..createSync(recursive: true);
+          file.writeAsBytesSync(imageRes.bodyBytes);
+
+          // TODO: Only print out when verbose flag is active
+          // log.debug('File written to following path ${file.path}');
+        }).catchError((e) {
+          //MainInfo().sentry.captureException(exception: e);
+          log.error(e.toString());
+        });
+      }
+    });
+    return response;
   }
 
   @override
