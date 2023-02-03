@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
+import 'package:pbdl/src/input/general_helper/input_formatter.dart';
 
 @JsonSerializable(explicitToJson: true)
 
@@ -11,5 +12,8 @@ abstract class PBDLGlobalStyle extends PBDLNode {
     String UUID,
     String name, {
     this.description = '',
-  }) : super(UUID, name, false, null, null, null);
+  }) : super(UUID, name, false, null, null, null) {
+    /// Format variable name
+    this.name = PBInputFormatter.formatVariable(name);
+  }
 }
