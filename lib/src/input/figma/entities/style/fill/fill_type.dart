@@ -92,7 +92,7 @@ class SolidFillType implements FigmaFill {
   @override
   FigmaFill createFigmaFill(Map<String, dynamic> json) {
     // Added opacity on alpha
-    json['color']['a'] = json['opacity'];
+    json['color']['a'] = json['opacity'] ?? json['color']['a'];
 
     return SolidFillType.fromJson(json);
   }
