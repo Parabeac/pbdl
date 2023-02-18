@@ -31,7 +31,8 @@ class MaterialDesign2 extends DesignSystemThemeData {
     return total;
   }
 
-  int get totalMaterialCount => _textStyles.length + supportedAttributesCount;
+  @override
+  int get totalDesignCount => _textStyles.length + supportedAttributesCount;
 
   MaterialDesign2()
       : super(

@@ -14,7 +14,7 @@ abstract class DesignSystemThemeData extends PBDLNode {
 
   List<DesignSystemColorScheme> colorSchemes;
 
-  int get totalMaterialCount;
+  int get totalDesignCount;
 
   /// Returns [true] if [style] is part of the [DesignSystemThemeData's] [TextStyles]
   bool isTextStyle(String style) => textStyles.contains(style);
