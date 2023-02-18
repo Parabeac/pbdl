@@ -1,4 +1,5 @@
-import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material_design.dart';
+import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_theme_data.dart';
+import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material2_design.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_styles.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
@@ -34,7 +35,8 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
   List<SharedStyle> sharedStyles = [];
   PBDLGlobalStyles globalStyles = PBDLGlobalStyles();
 
-  int get materialDesignCount => MaterialDesign().totalMaterialCount;
+  int materialDesignCount(designSystem) =>
+      DesignSystemThemeData.getDesignSystem(designSystem).totalMaterialCount;
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
