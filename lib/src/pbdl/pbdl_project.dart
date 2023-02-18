@@ -20,12 +20,15 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
 
   String pngPath;
 
+  DesignSystemThemeData designSystem;
+
   PBDLProject({
     String name,
     String UUID,
     this.pages,
     this.pngPath,
     this.globalStyles,
+    this.designSystem,
   }) : super(UUID, name, true, null, null, null) {
     MainInfo().projectName = name ?? 'foo';
   }
@@ -35,8 +38,7 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
   List<SharedStyle> sharedStyles = [];
   PBDLGlobalStyles globalStyles = PBDLGlobalStyles();
 
-  int materialDesignCount(designSystem) =>
-      DesignSystemThemeData.getDesignSystem(designSystem).totalMaterialCount;
+  int materialDesignCount() => designSystem.totalDesignCount;
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
