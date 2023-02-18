@@ -10,7 +10,8 @@ import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.d
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
 import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
-import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material_design.dart';
+import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_theme_data.dart';
+import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material2_design.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:pbdl/src/util/sketch/sac_installer.dart';
 import 'package:path/path.dart' as p;
@@ -88,12 +89,13 @@ class PBDL {
     bool exportPbdlJson = false,
     String projectName,
     String integrationStrategy = 'screen',
+    String designSystemType = 'material2',
   }) async {
     return await runZonedGuarded(() async {
       final getIt = GetIt.instance;
 
-      ///TODO: Implement factory when we add more design systems
-      final designSystem = MaterialDesign();
+      final designSystem =
+          DesignSystemThemeData.getDesignSystem(designSystemType);
 
       getIt.registerSingleton(GlobalStyleHolder(designSystem));
 
