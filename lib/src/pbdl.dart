@@ -94,6 +94,11 @@ class PBDL {
     return await runZonedGuarded(() async {
       final getIt = GetIt.instance;
 
+      final designSystem =
+          DesignSystemThemeData.getDesignSystem(designSystemType);
+
+      getIt.registerSingleton(GlobalStyleHolder(designSystem));
+
       if (pngPath == null || pngPath.isEmpty) {
         pngPath = outputPath;
       }
@@ -107,10 +112,7 @@ class PBDL {
       );
       var pbdl = await figmaProject.interpretNode();
 
-      pbdl.designSystem =
-          DesignSystemThemeData.getDesignSystem(designSystemType);
-
-      getIt.registerSingleton(GlobalStyleHolder(pbdl.designSystem));
+      pbdl.designSystem = designSystem;
 
       // TODO: add services
 
