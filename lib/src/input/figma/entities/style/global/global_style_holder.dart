@@ -55,7 +55,6 @@ class GlobalStyleHolder extends FigmaBaseNode {
   String _checkAndReturnValueName(String valueName) {
     var name = valueName.toLowerCase();
     if (_styleNameCounter.containsKey(name)) {
-      print('Name changed!');
       _styleNameCounter[name] += 1;
       return valueName + _styleNameCounter[name].toString();
     } else {
