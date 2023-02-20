@@ -4,7 +4,7 @@ import 'package:pbdl/src/input/figma/entities/style/global/text_style_global.dar
 
 abstract class GlobalStyleProperty extends FigmaBaseNode {
   final String UUID;
-  final String name;
+  String name;
   final String description;
   final String styleType;
   FigmaBaseNode styleNode;
