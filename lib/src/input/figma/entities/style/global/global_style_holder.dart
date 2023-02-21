@@ -24,15 +24,14 @@ class GlobalStyleHolder extends FigmaBaseNode {
     'text',
   ];
 
+  static var _styleNameCounter = Map<String, int>();
+
   @JsonKey(ignore: true)
   final DesignSystemThemeData designSystemThemeData;
 
   /// Adds the [GlobalStyleProperty] to the correct list.
   void add(GlobalStyleProperty property) {
-    // Check if any properties contain the same name with different UUID.
-    if (_properties.entries.any((prop) => prop.value.name == property.name)) {
-      return;
-    }
+    property.name = _checkAndReturnValueName(property.name);
     _properties[property.UUID] = property;
   }
 
@@ -51,6 +50,17 @@ class GlobalStyleHolder extends FigmaBaseNode {
       return _properties[UUID];
     }
     return null;
+  }
+
+  String _checkAndReturnValueName(String valueName) {
+    var name = valueName.toLowerCase();
+    if (_styleNameCounter.containsKey(name)) {
+      _styleNameCounter[name] += 1;
+      return valueName + _styleNameCounter[name].toString();
+    } else {
+      _styleNameCounter[name] = 1;
+      return valueName;
+    }
   }
 
   @override
@@ -93,6 +103,7 @@ class GlobalStyleHolder extends FigmaBaseNode {
       textStyles: globalTextStyles,
       themeColors: themeColors,
       themeTextStyles: themeTextStyles,
+      designSystem: designSystemThemeData.name,
     );
   }
 
