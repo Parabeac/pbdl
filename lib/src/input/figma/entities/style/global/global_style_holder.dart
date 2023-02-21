@@ -104,6 +104,7 @@ class GlobalStyleHolder extends FigmaBaseNode {
       textStyles: globalTextStyles,
       themeColors: themeColors,
       themeTextStyles: themeTextStyles,
+      designSystem: designSystemThemeData.name,
     );
   }
 
