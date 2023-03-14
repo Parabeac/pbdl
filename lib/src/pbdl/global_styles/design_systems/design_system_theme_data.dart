@@ -1,8 +1,12 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_color_scheme.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material2_design.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material3_design.dart';
 
+part 'design_system_theme_data.g.dart';
+
+@JsonSerializable(createFactory: false)
 abstract class DesignSystemThemeData extends PBDLNode {
   DesignSystemThemeData(
     String name, {
@@ -27,11 +31,21 @@ abstract class DesignSystemThemeData extends PBDLNode {
 
   static DesignSystemThemeData getDesignSystem(String designSystem) {
     switch (designSystem) {
-      case 'material3':
-        return MaterialDesign3();
       case 'material2':
-      default:
         return MaterialDesign2();
+      case 'material3':
+      default:
+        return MaterialDesign3();
+    }
+  }
+
+  factory DesignSystemThemeData.fromJson(Map<String, dynamic> json) {
+    switch (json['name']) {
+      case 'material2':
+        return MaterialDesign2.fromJson(json);
+      case 'material3':
+      default:
+        return MaterialDesign3.fromJson(json);
     }
   }
 }

@@ -1,29 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pbdl_project.dart';
+part of 'material_color_scheme.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
-  return PBDLProject(
-    name: json['name'] as String,
-    UUID: json['UUID'] as String,
-    pages: (json['pages'] as List)
-        ?.map((e) =>
-            e == null ? null : PBDLPage.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-    pngPath: json['pngPath'] as String,
-    globalStyles: json['globalStyles'] == null
-        ? null
-        : PBDLGlobalStyles.fromJson(
-            json['globalStyles'] as Map<String, dynamic>),
-    designSystem: json['designSystem'] == null
-        ? null
-        : DesignSystemThemeData.fromJson(
-            json['designSystem'] as Map<String, dynamic>),
+MaterialColorScheme _$MaterialColorSchemeFromJson(Map<String, dynamic> json) {
+  return MaterialColorScheme(
+    json['name'] as String,
   )
+    ..UUID = json['UUID'] as String
     ..layoutMainAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
     ..layoutCrossAxisSizing =
@@ -33,6 +20,7 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
         ? null
         : PBDLBoundaryBox.fromJson(
             json['boundaryRectangle'] as Map<String, dynamic>)
+    ..pbdlType = json['pbdlType'] as String
     ..style = json['style'] == null
         ? null
         : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
@@ -43,19 +31,12 @@ PBDLProject _$PBDLProjectFromJson(Map<String, dynamic> json) {
     ..constraints = json['constraints'] == null
         ? null
         : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..debug = json['debug'] as bool
-    ..miscPages = (json['miscPages'] as List)
-        ?.map((e) =>
-            e == null ? null : PBDLPage.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..sharedStyles = (json['sharedStyles'] as List)
-        ?.map((e) =>
-            e == null ? null : SharedStyle.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..pbdlType = json['pbdlType'] as String;
+    ..supportedAttributes =
+        (json['supportedAttributes'] as List)?.map((e) => e as String)?.toSet();
 }
 
-Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
+Map<String, dynamic> _$MaterialColorSchemeToJson(
+        MaterialColorScheme instance) =>
     <String, dynamic>{
       'UUID': instance.UUID,
       'layoutMainAxisSizing':
@@ -65,18 +46,12 @@ Map<String, dynamic> _$PBDLProjectToJson(PBDLProject instance) =>
       'name': instance.name,
       'isVisible': instance.isVisible,
       'boundaryRectangle': instance.boundaryRectangle?.toJson(),
+      'pbdlType': instance.pbdlType,
       'style': instance.style?.toJson(),
       'prototypeNodeUUID': instance.prototypeNodeUUID,
       'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
-      'debug': instance.debug,
-      'pngPath': instance.pngPath,
-      'designSystem': instance.designSystem?.toJson(),
-      'pages': instance.pages?.map((e) => e?.toJson())?.toList(),
-      'miscPages': instance.miscPages?.map((e) => e?.toJson())?.toList(),
-      'sharedStyles': instance.sharedStyles?.map((e) => e?.toJson())?.toList(),
-      'globalStyles': instance.globalStyles?.toJson(),
-      'pbdlType': instance.pbdlType,
+      'supportedAttributes': instance.supportedAttributes?.toList(),
     };
 
 const _$ParentLayoutSizingEnumMap = {

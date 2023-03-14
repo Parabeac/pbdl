@@ -1,5 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_color_scheme.dart';
+import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
+import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
+import 'package:pbdl/src/pbdl/pbdl_nodes_export.dart';
+
+part 'material_color_scheme.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class MaterialColorScheme extends DesignSystemColorScheme {
@@ -56,5 +61,14 @@ class MaterialColorScheme extends DesignSystemColorScheme {
     }
 
     return false;
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$MaterialColorSchemeToJson(this);
+  }
+
+  factory MaterialColorScheme.fromJson(Map<String, dynamic> json) {
+    return _$MaterialColorSchemeFromJson(json);
   }
 }
