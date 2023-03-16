@@ -11,6 +11,7 @@ import 'package:pbdl/src/input/figma/entities/style/figma_auto_layout_options.da
 import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
 import 'figma_node.dart';
@@ -75,6 +76,7 @@ class FigmaFrame extends FigmaChildrenNode
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
+    componentPropertyReferences,
   }) : super(name, isVisible, type, pluginData, sharedPluginData,
             UUID: UUID,
             transitionNodeID: transitionNodeID,

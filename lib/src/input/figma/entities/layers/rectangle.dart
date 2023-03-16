@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import 'package:pbdl/src/input/figma/helper/style_helper.dart';
 import 'package:pbdl/src/pbdl/pbdl_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
@@ -36,6 +37,7 @@ class FigmaRectangle extends FigmaVector
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
+    componentPropertyReferences,
   }) : super(
           name: name,
           visible: isVisible,

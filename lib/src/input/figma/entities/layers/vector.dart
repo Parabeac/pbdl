@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import 'package:quick_log/quick_log.dart';
 import '../../../../../pbdl.dart';
 import '../abstract_figma_node_factory.dart';
@@ -47,6 +48,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     String transitionNodeID,
     layoutAlign,
     layoutGrow,
+    componentPropertyReferences,
   }) : super(
           name,
           visible,

@@ -38,6 +38,7 @@ FigmaFrame _$FigmaFrameFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
+    componentPropertyReferences: json['componentPropertyReferences'],
   )
     ..child = json['child'] == null
         ? null
@@ -64,6 +65,8 @@ Map<String, dynamic> _$FigmaFrameToJson(FigmaFrame instance) =>
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences':
+          instance.componentPropertyReferences?.toJson(),
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'absoluteBoundingBox': instance.absoluteBoundingBox?.toJson(),
       'strokes': instance.strokes,

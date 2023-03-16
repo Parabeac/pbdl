@@ -34,6 +34,7 @@ Group _$GroupFromJson(Map<String, dynamic> json) {
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
     figmaStyleProperty: json['figmaStyleProperty'],
+    componentPropertyReferences: json['componentPropertyReferences'],
   )
     ..child = json['child'] == null
         ? null
@@ -64,6 +65,8 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences':
+          instance.componentPropertyReferences?.toJson(),
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'absoluteBoundingBox': instance.absoluteBoundingBox?.toJson(),
       'strokes': instance.strokes,

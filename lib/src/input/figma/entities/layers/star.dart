@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
@@ -29,6 +30,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
+    componentPropertyReferences,
   }) : super(
           name: name,
           visible: visible,

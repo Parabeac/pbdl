@@ -23,6 +23,7 @@ Canvas _$CanvasFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
     layoutAlign: json['layoutAlign'],
     layoutGrow: json['layoutGrow'],
+    componentPropertyReferences: json['componentPropertyReferences'],
   )
     ..UUID = json['id'] as String
     ..pluginData = json['pluginData']
@@ -48,6 +49,8 @@ Map<String, dynamic> _$CanvasToJson(Canvas instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences':
+          instance.componentPropertyReferences?.toJson(),
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'type': instance.type,
       'name': instance.name,

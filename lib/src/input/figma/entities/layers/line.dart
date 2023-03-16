@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import '../abstract_figma_node_factory.dart';
 import 'figma_constraints.dart';
 import 'figma_node.dart';
@@ -27,6 +28,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
+    componentPropertyReferences,
   }) : super(
           name: name,
           visible: visible,

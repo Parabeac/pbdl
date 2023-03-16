@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import 'package:pbdl/src/pbdl/pbdl_group_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_image.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
@@ -53,6 +54,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     num transitionDuration,
     String transitionEasing,
     figmaStyleProperty,
+    componentPropertyReferences,
   }) : super(
             name: name,
             isVisible: isVisible,

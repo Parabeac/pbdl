@@ -31,6 +31,7 @@ FigmaText _$FigmaTextFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
     layoutAlign: json['layoutAlign'],
     layoutGrow: json['layoutGrow'],
+    componentPropertyReferences: json['componentPropertyReferences'],
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null
@@ -67,6 +68,7 @@ Map<String, dynamic> _$FigmaTextToJson(FigmaText instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences': instance.componentPropertyReferences,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,

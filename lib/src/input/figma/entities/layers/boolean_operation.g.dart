@@ -22,6 +22,7 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
     transitionDuration: json['transitionDuration'],
     transitionEasing: json['transitionEasing'],
     imageReference: json['imageReference'],
+    componentPropertyReferences: json['componentPropertyReferences'],
   )
     ..name = json['name'] as String
     ..pluginData = json['pluginData']
@@ -53,6 +54,7 @@ Map<String, dynamic> _$BooleanOperationToJson(BooleanOperation instance) =>
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences': instance.componentPropertyReferences,
       'size': instance.size,
       'strokes': instance.strokes,
       'strokeWeight': instance.strokeWeight,

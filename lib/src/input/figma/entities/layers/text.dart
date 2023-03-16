@@ -3,6 +3,7 @@ import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_text_style.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_text.dart';
 import '../abstract_figma_node_factory.dart';
@@ -36,6 +37,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
     String transitionEasing,
     layoutAlign,
     layoutGrow,
+    componentPropertyReferences,
   }) : super(
           name: name,
           visible: visible,

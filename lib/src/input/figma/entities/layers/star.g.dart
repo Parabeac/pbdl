@@ -22,6 +22,7 @@ FigmaStar _$FigmaStarFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
+    componentPropertyReferences: json['componentPropertyReferences'],
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null
@@ -52,6 +53,7 @@ Map<String, dynamic> _$FigmaStarToJson(FigmaStar instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences': instance.componentPropertyReferences,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,

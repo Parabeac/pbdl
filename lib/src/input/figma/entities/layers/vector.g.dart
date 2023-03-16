@@ -28,6 +28,7 @@ FigmaVector _$FigmaVectorFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     layoutAlign: json['layoutAlign'],
     layoutGrow: json['layoutGrow'],
+    componentPropertyReferences: json['componentPropertyReferences'],
   )
     ..child = json['child'] == null
         ? null
@@ -53,6 +54,7 @@ Map<String, dynamic> _$FigmaVectorToJson(FigmaVector instance) =>
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences': instance.componentPropertyReferences,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'size': instance.size,
       'strokes': instance.strokes,

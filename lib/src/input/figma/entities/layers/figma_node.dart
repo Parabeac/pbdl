@@ -8,6 +8,7 @@ import 'package:pbdl/src/input/figma/entities/style/figma_stroke.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_style_property.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import '../abstract_figma_node_factory.dart';
 
@@ -48,6 +49,9 @@ class FigmaNode extends FigmaBaseNode {
   @JsonKey()
   String transitionEasing;
 
+  @JsonKey()
+  ComponentPropertyReference componentPropertyReferences;
+
   FigmaNode(
     this.name,
     this.isVisible,
@@ -61,6 +65,7 @@ class FigmaNode extends FigmaBaseNode {
     this.constraints,
     this.layoutAlign,
     this.layoutGrow,
+    this.componentPropertyReferences,
   });
 
   @JsonKey(ignore: true)

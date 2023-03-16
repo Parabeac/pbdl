@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import 'package:pbdl/src/pbdl/pbdl_artboard.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
@@ -28,6 +29,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
     String transitionEasing,
     layoutAlign,
     layoutGrow,
+    componentPropertyReferences,
   }) : super(name, true, type, null, null,
             transitionNodeID: transitionNodeID,
             transitionDuration: transitionDuration,
