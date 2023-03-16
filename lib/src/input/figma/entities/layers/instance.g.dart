@@ -39,6 +39,8 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
+    componentProperties: json['componentProperties'],
+    componentPropertyReferences: json['componentPropertyReferences'],
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null
@@ -70,6 +72,8 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences':
+          instance.componentPropertyReferences?.toJson(),
       'children': instance.children?.map((e) => e?.toJson())?.toList(),
       'absoluteBoundingBox': instance.absoluteBoundingBox?.toJson(),
       'strokes': instance.strokes,
@@ -85,6 +89,8 @@ Map<String, dynamic> _$InstanceToJson(Instance instance) => <String, dynamic>{
       'imageReference': instance.imageReference,
       'type': instance.type,
       'parameters': instance.parameters,
+      'componentProperties':
+          instance.componentProperties?.map((k, e) => MapEntry(k, e?.toJson())),
       'componentId': instance.componentId,
       'overrideValues':
           instance.overrideValues?.map((e) => e?.toJson())?.toList(),

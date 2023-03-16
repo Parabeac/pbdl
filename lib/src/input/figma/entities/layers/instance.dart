@@ -6,6 +6,8 @@ import 'package:pbdl/src/input/figma/entities/style/figma_fill.dart';
 import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
+import 'package:pbdl/src/input/figma/helper/properties/figma_component_property.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import '../../helper/override_value.dart';
 import '../abstract_figma_node_factory.dart';
 import '../style/figma_color.dart';
@@ -19,6 +21,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
   String type = 'INSTANCE';
 
   List parameters;
+
+  Map<String, ComponentProperty> componentProperties;
 
   Instance({
     name,
@@ -46,6 +50,8 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
+    componentProperties,
+    componentPropertyReferences,
   }) : super(
             name: name,
             isVisible: isVisible,
