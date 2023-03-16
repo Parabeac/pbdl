@@ -4,6 +4,8 @@ import 'package:pbdl/src/input/figma/entities/layers/figma_children_node.dart';
 import 'package:pbdl/src/input/figma/helper/component_cache_service.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type_factory.dart';
+import 'package:pbdl/src/input/figma/helper/properties/definitions/figma_component_property_definition.dart';
+import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 
 import '../abstract_figma_node_factory.dart';
@@ -26,6 +28,8 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   String componentSetId;
 
   String componentSetName;
+
+  Map<String, ComponentPropertyDefinition> componentPropertyDefinitions;
 
   Component({
     name,
@@ -53,6 +57,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     String transitionEasing,
     this.componentSetId,
     this.componentSetName,
+    this.componentPropertyDefinitions,
   }) : super(
           name: name,
           isVisible: isVisible,

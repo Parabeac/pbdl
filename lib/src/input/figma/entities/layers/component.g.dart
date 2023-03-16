@@ -39,12 +39,25 @@ Component _$ComponentFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
     componentSetId: json['componentSetId'] as String,
     componentSetName: json['componentSetName'] as String,
+    componentPropertyDefinitions:
+        (json['componentPropertyDefinitions'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(
+          k,
+          e == null
+              ? null
+              : ComponentPropertyDefinition.fromJson(
+                  e as Map<String, dynamic>)),
+    ),
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null
         ? null
         : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
     ..layoutGrow = json['layoutGrow'] as num
+    ..componentPropertyReferences = json['componentPropertyReferences'] == null
+        ? null
+        : ComponentPropertyReference.fromJson(
+            json['componentPropertyReferences'] as Map<String, dynamic>)
     ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
         ? null
         : FigmaRect.fromJson(
@@ -66,6 +79,7 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences': instance.componentPropertyReferences,
       'children': instance.children,
       'absoluteBoundingBox': instance.absoluteBoundingBox,
       'strokes': instance.strokes,
@@ -81,6 +95,7 @@ Map<String, dynamic> _$ComponentToJson(Component instance) => <String, dynamic>{
       'type': instance.type,
       'componentSetId': instance.componentSetId,
       'componentSetName': instance.componentSetName,
+      'componentPropertyDefinitions': instance.componentPropertyDefinitions,
       'symbolID': instance.symbolID,
       'isFlowHome': instance.isFlowHome,
     };
