@@ -13,6 +13,7 @@ FigmaComponentSet _$FigmaComponentSetFromJson(Map<String, dynamic> json) {
     type: json['type'] as String,
     pluginData: json['pluginData'],
     sharedPluginData: json['sharedPluginData'],
+    componentPropertyDefinitions: json['componentPropertyDefinitions'],
   )
     ..UUID = json['id'] as String
     ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
@@ -27,6 +28,10 @@ FigmaComponentSet _$FigmaComponentSetFromJson(Map<String, dynamic> json) {
     ..transitionNodeID = json['transitionNodeID'] as String
     ..transitionDuration = json['transitionDuration'] as num
     ..transitionEasing = json['transitionEasing'] as String
+    ..componentPropertyReferences = json['componentPropertyReferences'] == null
+        ? null
+        : ComponentPropertyReference.fromJson(
+            json['componentPropertyReferences'] as Map<String, dynamic>)
     ..children = (json['children'] as List)
         ?.map((e) =>
             e == null ? null : FigmaNode.fromJson(e as Map<String, dynamic>))
@@ -47,6 +52,8 @@ Map<String, dynamic> _$FigmaComponentSetToJson(FigmaComponentSet instance) =>
       'transitionNodeID': instance.transitionNodeID,
       'transitionDuration': instance.transitionDuration,
       'transitionEasing': instance.transitionEasing,
+      'componentPropertyReferences': instance.componentPropertyReferences,
       'type': instance.type,
       'children': instance.children,
+      'componentPropertyDefinitions': instance.componentPropertyDefinitions,
     };
