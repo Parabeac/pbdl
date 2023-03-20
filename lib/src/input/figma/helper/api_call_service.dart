@@ -117,8 +117,8 @@ class APICallService {
         break;
       case 401:
       case 403:
-        log.error('UnauthorizedException : $status');
-        throw UnauthorisedException();
+        // log.error('UnauthorizedException : $status');
+        // throw UnauthorisedException();
         break;
       case 500:
       default:
