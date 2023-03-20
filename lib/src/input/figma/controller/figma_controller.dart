@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:pbdl/src/input/figma/entities/figma_key.dart';
 import 'package:pbdl/src/input/figma/entities/layers/component.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_frame.dart';
@@ -15,13 +18,16 @@ class FigmaController {
 
   Future<FigmaProject> convertFile(
     String projectID,
-    FigmaKey figmaKey, {
+    FigmaKey figmaKey,
+    String jsonPath, {
     String integrationStrategy = 'screen',
   }) async {
     figmaProjectID = projectID;
     figmaAPIKey = figmaKey;
     FigmaProject figmaProject;
-    var jsonFigma = await _fetchFigmaFile();
+
+    final jsonFigma = jsonDecode(File(jsonPath).readAsStringSync());
+
     if (jsonFigma == null) {
       throw Error(); //todo: find correct error
     }

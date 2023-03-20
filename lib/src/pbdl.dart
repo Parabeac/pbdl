@@ -25,7 +25,6 @@ class PBDL {
   /// Method that creates and returns a [PBDLProject] from a Sketch file `path`
   static Future<PBDLProject> fromSketch(
     String sketchPath, {
-
     /// Absolute path to where JSON will be exported
     @required String outputPath,
 
@@ -74,7 +73,8 @@ class PBDL {
 
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
   static Future<PBDLProject> fromFigma(
-    String projectID, {
+    String projectID,
+    String jsonPath, {
     String key,
     String oauthKey,
 
@@ -108,6 +108,7 @@ class PBDL {
       var figmaProject = await FigmaController().convertFile(
         projectID,
         figmaKey,
+        jsonPath,
         integrationStrategy: integrationStrategy,
       );
       var pbdl = await figmaProject.interpretNode();

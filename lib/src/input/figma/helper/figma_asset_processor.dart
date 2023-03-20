@@ -136,6 +136,7 @@ class FigmaAssetProcessor extends AssetProcessingService {
     bool hasBounds = true,
     IMAGE_FORMAT imageFormat,
   }) async {
+    return;
     return Future(() async {
       var response = await APICallService.makeAPICall(
           'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&format=${imageFormat.toShortLowerCaseString()}&use_absolute_bounds=${hasBounds}',
