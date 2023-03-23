@@ -37,7 +37,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
     String transitionEasing,
     layoutAlign,
     layoutGrow,
-    componentPropertyReferences,
+    ComponentPropertyReference componentPropertyReferences,
   }) : super(
           name: name,
           visible: visible,
@@ -55,6 +55,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
           transitionEasing: transitionEasing,
           layoutAlign: layoutAlign,
           layoutGrow: layoutGrow,
+          componentPropertyReferences: componentPropertyReferences,
         );
 
   @JsonKey(name: 'characters')
@@ -90,6 +91,7 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+        masterPropertyReferences: componentPropertyReferences?.toPBDL(),
       ),
     );
   }

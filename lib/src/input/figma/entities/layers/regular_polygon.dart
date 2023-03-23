@@ -30,7 +30,7 @@ class FigmaRegularPolygon extends FigmaVector
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-    componentPropertyReferences,
+    ComponentPropertyReference componentPropertyReferences,
   }) : super(
           name: name,
           visible: visible,
@@ -47,6 +47,7 @@ class FigmaRegularPolygon extends FigmaVector
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          componentPropertyReferences: componentPropertyReferences,
         );
 
   @override
@@ -76,6 +77,7 @@ class FigmaRegularPolygon extends FigmaVector
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),
       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      masterPropertyReferences: componentPropertyReferences?.toPBDL(),
     ));
   }
 

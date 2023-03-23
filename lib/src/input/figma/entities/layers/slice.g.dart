@@ -26,7 +26,10 @@ FigmaSlice _$FigmaSliceFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
-    componentPropertyReferences: json['componentPropertyReferences'],
+    componentPropertyReferences: json['componentPropertyReferences'] == null
+        ? null
+        : ComponentPropertyReference.fromJson(
+            json['componentPropertyReferences'] as Map<String, dynamic>),
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null

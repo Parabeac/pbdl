@@ -13,7 +13,6 @@ import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import 'package:pbdl/src/input/figma/helper/properties/references/figma_component_property_reference.dart';
 import '../abstract_figma_node_factory.dart';
-import '../style/figma_color.dart';
 import 'figma_node.dart';
 
 part 'figma_frame.g.dart';
@@ -76,16 +75,23 @@ class FigmaFrame extends FigmaChildrenNode
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-    componentPropertyReferences,
-  }) : super(name, isVisible, type, pluginData, sharedPluginData,
-            UUID: UUID,
-            transitionNodeID: transitionNodeID,
-            transitionDuration: transitionDuration,
-            transitionEasing: transitionEasing,
-            children: children,
-            constraints: constraints,
-            layoutAlign: layoutAlign,
-            layoutGrow: layoutGrow);
+    ComponentPropertyReference componentPropertyReferences,
+  }) : super(
+          name,
+          isVisible,
+          type,
+          pluginData,
+          sharedPluginData,
+          UUID: UUID,
+          transitionNodeID: transitionNodeID,
+          transitionDuration: transitionDuration,
+          transitionEasing: transitionEasing,
+          children: children,
+          constraints: constraints,
+          layoutAlign: layoutAlign,
+          layoutGrow: layoutGrow,
+          componentPropertyReferences: componentPropertyReferences,
+        );
 
   @JsonKey(ignore: true)
   List points;
@@ -112,19 +118,21 @@ class FigmaFrame extends FigmaChildrenNode
     if (isRoot) {
       return Future.value(
         PBDLArtboard(
-            backgroundColor: backgroundColor.interpretColor(),
-            isFlowHome: false,
-            UUID: UUID,
-            boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-            isVisible: isVisible,
-            name: name,
-            style: figmaStyleProperty.interpretStyle(),
-            prototypeNodeUUID: transitionNodeID,
-            constraints: constraints?.interpret(),
-            layoutMainAxisSizing: getGrowSizing(layoutGrow),
-            layoutCrossAxisSizing: getAlignSizing(layoutAlign),
-            children: await Future.wait(
-                children.map((e) async => await e.interpretNode()).toList())),
+          backgroundColor: backgroundColor.interpretColor(),
+          isFlowHome: false,
+          UUID: UUID,
+          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+          isVisible: isVisible,
+          name: name,
+          style: figmaStyleProperty.interpretStyle(),
+          prototypeNodeUUID: transitionNodeID,
+          constraints: constraints?.interpret(),
+          layoutMainAxisSizing: getGrowSizing(layoutGrow),
+          layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+          children: await Future.wait(
+              children.map((e) async => await e.interpretNode()).toList()),
+          masterPropertyReferences: componentPropertyReferences?.toPBDL(),
+        ),
       );
     } else {
       if (areAllVectors()) {

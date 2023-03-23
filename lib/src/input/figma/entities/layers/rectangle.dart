@@ -37,7 +37,7 @@ class FigmaRectangle extends FigmaVector
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-    componentPropertyReferences,
+    ComponentPropertyReference componentPropertyReferences,
   }) : super(
           name: name,
           visible: isVisible,
@@ -54,6 +54,7 @@ class FigmaRectangle extends FigmaVector
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          componentPropertyReferences: componentPropertyReferences,
         );
 
   List points;
@@ -95,6 +96,7 @@ class FigmaRectangle extends FigmaVector
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+        masterPropertyReferences: componentPropertyReferences?.toPBDL(),
       ));
     }
     return Future.value(
@@ -110,6 +112,7 @@ class FigmaRectangle extends FigmaVector
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+        masterPropertyReferences: componentPropertyReferences?.toPBDL(),
       ),
     );
   }

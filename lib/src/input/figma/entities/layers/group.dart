@@ -54,28 +54,30 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     num transitionDuration,
     String transitionEasing,
     figmaStyleProperty,
-    componentPropertyReferences,
+    ComponentPropertyReference componentPropertyReferences,
   }) : super(
-            name: name,
-            isVisible: isVisible,
-            type: type,
-            pluginData: pluginData,
-            sharedPluginData: sharedPluginData,
-            absoluteBoundingBox: boundaryRectangle != null
-                ? FigmaRect.fromJson(boundaryRectangle)
-                : null,
-            constraints: constraints,
-            layoutAlign: layoutAlign,
-            size: size,
-            horizontalPadding: horizontalPadding,
-            verticalPadding: verticalPadding,
-            itemSpacing: itemSpacing,
-            children: children,
-            UUID: UUID,
-            backgroundColor: backgroundColor,
-            transitionNodeID: transitionNodeID,
-            transitionDuration: transitionDuration,
-            transitionEasing: transitionEasing) {
+          name: name,
+          isVisible: isVisible,
+          type: type,
+          pluginData: pluginData,
+          sharedPluginData: sharedPluginData,
+          absoluteBoundingBox: boundaryRectangle != null
+              ? FigmaRect.fromJson(boundaryRectangle)
+              : null,
+          constraints: constraints,
+          layoutAlign: layoutAlign,
+          size: size,
+          horizontalPadding: horizontalPadding,
+          verticalPadding: verticalPadding,
+          itemSpacing: itemSpacing,
+          children: children,
+          UUID: UUID,
+          backgroundColor: backgroundColor,
+          transitionNodeID: transitionNodeID,
+          transitionDuration: transitionDuration,
+          transitionEasing: transitionEasing,
+          componentPropertyReferences: componentPropertyReferences,
+        ) {
     log = Logger(runtimeType.toString());
   }
 
@@ -119,6 +121,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
           prototypeNodeUUID: transitionNodeID,
           layoutMainAxisSizing: getGrowSizing(layoutGrow),
           layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+          masterPropertyReferences: componentPropertyReferences?.toPBDL(),
         ),
       );
     }
@@ -136,6 +139,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         children: await Future.wait(
           children.map((e) async => await e.interpretNode()).toList(),
         ),
+        masterPropertyReferences: componentPropertyReferences?.toPBDL(),
       ),
     );
   }

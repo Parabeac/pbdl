@@ -41,7 +41,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-    componentPropertyReferences,
+    ComponentPropertyReference componentPropertyReferences,
   }) : super(
           name,
           visible,
@@ -54,6 +54,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
           constraints: constraints,
           layoutAlign: layoutAlign,
           layoutGrow: layoutGrow,
+          componentPropertyReferences: componentPropertyReferences,
         );
 
   @override
@@ -78,6 +79,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+        masterPropertyReferences: componentPropertyReferences?.toPBDL(),
       ),
     );
   }

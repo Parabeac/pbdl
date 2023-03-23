@@ -23,7 +23,10 @@ Canvas _$CanvasFromJson(Map<String, dynamic> json) {
     transitionEasing: json['transitionEasing'] as String,
     layoutAlign: json['layoutAlign'],
     layoutGrow: json['layoutGrow'],
-    componentPropertyReferences: json['componentPropertyReferences'],
+    componentPropertyReferences: json['componentPropertyReferences'] == null
+        ? null
+        : ComponentPropertyReference.fromJson(
+            json['componentPropertyReferences'] as Map<String, dynamic>),
   )
     ..UUID = json['id'] as String
     ..pluginData = json['pluginData']

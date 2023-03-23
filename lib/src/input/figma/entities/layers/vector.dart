@@ -48,7 +48,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     String transitionNodeID,
     layoutAlign,
     layoutGrow,
-    componentPropertyReferences,
+    ComponentPropertyReference componentPropertyReferences,
   }) : super(
           name,
           visible,
@@ -62,6 +62,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
           constraints: constraints,
           layoutAlign: layoutAlign,
           layoutGrow: layoutGrow,
+          componentPropertyReferences: componentPropertyReferences,
         ) {
     log = Logger(runtimeType.toString());
   }
@@ -104,6 +105,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),
       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      masterPropertyReferences: componentPropertyReferences?.toPBDL(),
     ));
   }
 

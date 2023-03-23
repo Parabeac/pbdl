@@ -28,7 +28,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-    componentPropertyReferences,
+    ComponentPropertyReference componentPropertyReferences,
   }) : super(
           name: name,
           visible: visible,
@@ -43,6 +43,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          componentPropertyReferences: componentPropertyReferences,
         );
 
   @override
@@ -84,6 +85,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),
       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      masterPropertyReferences: componentPropertyReferences?.toPBDL(),
     ));
   }
 

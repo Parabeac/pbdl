@@ -109,6 +109,14 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       props.addAll(currProps);
     }
 
+    var tempPropertyDefinitions;
+    // TODO: add it to the constructor
+    if (componentPropertyDefinitions != null) {
+      tempPropertyDefinitions = componentPropertyDefinitions.values
+          .map((value) => value.toPBDL())
+          .toList();
+    }
+
     return PBDLSharedMasterNode(
       UUID: UUID,
       overrideProperties: props,
@@ -128,6 +136,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
           children.map((e) async => await e.interpretNode()).toList()),
       sharedNodeSetID: componentSetId,
       componentSetName: componentSetName,
+      masterPropertyDefinition: tempPropertyDefinitions,
     );
   }
 

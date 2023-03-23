@@ -22,7 +22,10 @@ BooleanOperation _$BooleanOperationFromJson(Map<String, dynamic> json) {
     transitionDuration: json['transitionDuration'],
     transitionEasing: json['transitionEasing'],
     imageReference: json['imageReference'],
-    componentPropertyReferences: json['componentPropertyReferences'],
+    componentPropertyReferences: json['componentPropertyReferences'] == null
+        ? null
+        : ComponentPropertyReference.fromJson(
+            json['componentPropertyReferences'] as Map<String, dynamic>),
   )
     ..name = json['name'] as String
     ..pluginData = json['pluginData']

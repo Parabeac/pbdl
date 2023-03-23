@@ -39,8 +39,18 @@ Instance _$InstanceFromJson(Map<String, dynamic> json) {
     transitionNodeID: json['transitionNodeID'] as String,
     transitionDuration: json['transitionDuration'] as num,
     transitionEasing: json['transitionEasing'] as String,
-    componentProperties: json['componentProperties'],
-    componentPropertyReferences: json['componentPropertyReferences'],
+    componentProperties:
+        (json['componentProperties'] as Map<String, dynamic>)?.map(
+      (k, e) => MapEntry(
+          k,
+          e == null
+              ? null
+              : ComponentProperty.fromJson(e as Map<String, dynamic>)),
+    ),
+    componentPropertyReferences: json['componentPropertyReferences'] == null
+        ? null
+        : ComponentPropertyReference.fromJson(
+            json['componentPropertyReferences'] as Map<String, dynamic>),
   )
     ..UUID = json['id'] as String
     ..child = json['child'] == null

@@ -42,7 +42,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     String transitionNodeID,
     num transitionDuration,
     String transitionEasing,
-    componentPropertyReferences,
+    ComponentPropertyReference componentPropertyReferences,
   }) : super(
           name: name,
           visible: visible,
@@ -57,6 +57,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          componentPropertyReferences: componentPropertyReferences,
         ) {
     log = Logger(runtimeType.toString());
   }
@@ -88,6 +89,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       prototypeNodeUUID: transitionNodeID,
       layoutMainAxisSizing: getGrowSizing(layoutGrow),
       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      masterPropertyReferences: componentPropertyReferences?.toPBDL(),
     ));
   }
 

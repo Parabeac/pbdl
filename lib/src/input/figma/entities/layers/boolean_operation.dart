@@ -40,12 +40,13 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     transitionDuration,
     transitionEasing,
     imageReference,
-    componentPropertyReferences,
+    ComponentPropertyReference componentPropertyReferences,
   }) : super(
           UUID: UUID,
           transitionNodeID: transitionNodeID,
           transitionDuration: transitionDuration,
           transitionEasing: transitionEasing,
+          componentPropertyReferences: componentPropertyReferences,
         ) {
     log = Logger(runtimeType.toString());
   }
@@ -78,6 +79,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
       constraints: constraints?.interpret(),
       layoutMainAxisSizing: getGrowSizing(layoutGrow),
       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
+      masterPropertyReferences: componentPropertyReferences?.toPBDL(),
     ));
   }
 }
