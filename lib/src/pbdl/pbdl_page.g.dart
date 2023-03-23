@@ -18,6 +18,10 @@ PBDLPage _$PBDLPageFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
+    masterPropertyReferences: json['masterPropertyReferences'] == null
+        ? null
+        : MasterPropertyReference.fromJson(
+            json['masterPropertyReferences'] as Map<String, dynamic>),
   )
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
@@ -46,13 +50,6 @@ Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) {
         _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
     'layoutCrossAxisSizing':
         _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-    'name': instance.name,
-    'isVisible': instance.isVisible,
-    'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-    'style': instance.style?.toJson(),
-    'prototypeNodeUUID': instance.prototypeNodeUUID,
-    'child': instance.child?.toJson(),
-    'constraints': instance.constraints?.toJson(),
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -61,6 +58,15 @@ Map<String, dynamic> _$PBDLPageToJson(PBDLPage instance) {
     }
   }
 
+  writeNotNull(
+      'masterPropertyReferences', instance.masterPropertyReferences?.toJson());
+  val['name'] = instance.name;
+  val['isVisible'] = instance.isVisible;
+  val['boundaryRectangle'] = instance.boundaryRectangle?.toJson();
+  val['style'] = instance.style?.toJson();
+  val['prototypeNodeUUID'] = instance.prototypeNodeUUID;
+  val['child'] = instance.child?.toJson();
+  val['constraints'] = instance.constraints?.toJson();
   writeNotNull('imageURI', instance.imageURI);
   writeNotNull('convert', instance.convert);
   writeNotNull('screens', instance.screens?.map((e) => e?.toJson())?.toList());

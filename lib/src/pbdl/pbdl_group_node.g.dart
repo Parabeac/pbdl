@@ -30,25 +30,40 @@ PBDLGroupNode _$PBDLGroupNodeFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
+    masterPropertyReferences: json['masterPropertyReferences'] == null
+        ? null
+        : MasterPropertyReference.fromJson(
+            json['masterPropertyReferences'] as Map<String, dynamic>),
   )..pbdlType = json['pbdlType'] as String;
 }
 
-Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) =>
-    <String, dynamic>{
-      'UUID': instance.UUID,
-      'layoutMainAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
-      'layoutCrossAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-      'name': instance.name,
-      'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'style': instance.style?.toJson(),
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'constraints': instance.constraints?.toJson(),
-      'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'pbdlType': instance.pbdlType,
-    };
+Map<String, dynamic> _$PBDLGroupNodeToJson(PBDLGroupNode instance) {
+  final val = <String, dynamic>{
+    'UUID': instance.UUID,
+    'layoutMainAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+    'layoutCrossAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'masterPropertyReferences', instance.masterPropertyReferences?.toJson());
+  val['name'] = instance.name;
+  val['isVisible'] = instance.isVisible;
+  val['boundaryRectangle'] = instance.boundaryRectangle?.toJson();
+  val['style'] = instance.style?.toJson();
+  val['prototypeNodeUUID'] = instance.prototypeNodeUUID;
+  val['constraints'] = instance.constraints?.toJson();
+  val['children'] = instance.children?.map((e) => e?.toJson())?.toList();
+  val['pbdlType'] = instance.pbdlType;
+  return val;
+}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',

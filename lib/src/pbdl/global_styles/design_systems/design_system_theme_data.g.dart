@@ -7,25 +7,35 @@ part of 'design_system_theme_data.dart';
 // **************************************************************************
 
 Map<String, dynamic> _$DesignSystemThemeDataToJson(
-        DesignSystemThemeData instance) =>
-    <String, dynamic>{
-      'UUID': instance.UUID,
-      'layoutMainAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
-      'layoutCrossAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-      'name': instance.name,
-      'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle,
-      'pbdlType': instance.pbdlType,
-      'style': instance.style,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child,
-      'constraints': instance.constraints,
-      'textStyles': instance.textStyles,
-      'colorSchemes': instance.colorSchemes,
-      'totalDesignCount': instance.totalDesignCount,
-    };
+    DesignSystemThemeData instance) {
+  final val = <String, dynamic>{
+    'UUID': instance.UUID,
+    'layoutMainAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+    'layoutCrossAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('masterPropertyReferences', instance.masterPropertyReferences);
+  val['name'] = instance.name;
+  val['isVisible'] = instance.isVisible;
+  val['boundaryRectangle'] = instance.boundaryRectangle;
+  val['pbdlType'] = instance.pbdlType;
+  val['style'] = instance.style;
+  val['prototypeNodeUUID'] = instance.prototypeNodeUUID;
+  val['child'] = instance.child;
+  val['constraints'] = instance.constraints;
+  val['textStyles'] = instance.textStyles;
+  val['colorSchemes'] = instance.colorSchemes;
+  val['totalDesignCount'] = instance.totalDesignCount;
+  return val;
+}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',

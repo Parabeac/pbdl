@@ -3,6 +3,7 @@ import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/global_styles/pbdl_global_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 
 part 'pbdl_global_text_style.g.dart';
 

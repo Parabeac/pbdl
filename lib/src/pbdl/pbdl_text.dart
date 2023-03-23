@@ -4,6 +4,7 @@ import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_element.dart';
@@ -45,6 +46,7 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
     PBDLConstraints constraints,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
+    MasterPropertyReference masterPropertyReferences,
   }) : super(
           UUID: UUID,
           name: name,
@@ -55,6 +57,7 @@ class PBDLText extends PBDLElement implements PBDLNodeFactory, PBDLNode {
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
+          masterPropertyReferences: masterPropertyReferences,
         );
 
   @override

@@ -2,6 +2,7 @@ import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
@@ -26,6 +27,7 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
     this.screens,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
+    MasterPropertyReference masterPropertyReferences,
   }) : super(
           UUID,
           name,
@@ -35,6 +37,7 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
           null,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
+          masterPropertyReferences: masterPropertyReferences,
         );
 
   void addScreen(PBDLScreen item) {

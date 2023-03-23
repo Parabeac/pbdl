@@ -19,6 +19,10 @@ PBDLGlobalColor _$PBDLGlobalColorFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
     ..layoutCrossAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutCrossAxisSizing'] as String)
+    ..masterPropertyReferences = json['masterPropertyReferences'] == null
+        ? null
+        : MasterPropertyReference.fromJson(
+            json['masterPropertyReferences'] as Map<String, dynamic>)
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
         ? null
@@ -45,16 +49,6 @@ Map<String, dynamic> _$PBDLGlobalColorToJson(PBDLGlobalColor instance) {
         _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
     'layoutCrossAxisSizing':
         _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-    'name': instance.name,
-    'isVisible': instance.isVisible,
-    'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-    'style': instance.style?.toJson(),
-    'prototypeNodeUUID': instance.prototypeNodeUUID,
-    'child': instance.child?.toJson(),
-    'constraints': instance.constraints?.toJson(),
-    'description': instance.description,
-    'pbdlType': instance.pbdlType,
-    'color': instance.color?.toJson(),
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -63,6 +57,18 @@ Map<String, dynamic> _$PBDLGlobalColorToJson(PBDLGlobalColor instance) {
     }
   }
 
+  writeNotNull(
+      'masterPropertyReferences', instance.masterPropertyReferences?.toJson());
+  val['name'] = instance.name;
+  val['isVisible'] = instance.isVisible;
+  val['boundaryRectangle'] = instance.boundaryRectangle?.toJson();
+  val['style'] = instance.style?.toJson();
+  val['prototypeNodeUUID'] = instance.prototypeNodeUUID;
+  val['child'] = instance.child?.toJson();
+  val['constraints'] = instance.constraints?.toJson();
+  val['description'] = instance.description;
+  val['pbdlType'] = instance.pbdlType;
+  val['color'] = instance.color?.toJson();
   writeNotNull('colorScheme', instance.colorScheme);
   return val;
 }

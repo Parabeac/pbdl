@@ -41,6 +41,10 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
     ..layoutCrossAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutCrossAxisSizing'] as String)
+    ..masterPropertyReferences = json['masterPropertyReferences'] == null
+        ? null
+        : MasterPropertyReference.fromJson(
+            json['masterPropertyReferences'] as Map<String, dynamic>)
     ..name = json['name'] as String
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
@@ -60,43 +64,54 @@ PBDLTextStyle _$PBDLTextStyleFromJson(Map<String, dynamic> json) {
     ..pbdlType = json['pbdlType'] as String;
 }
 
-Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) =>
-    <String, dynamic>{
-      'UUID': instance.UUID,
-      'layoutMainAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
-      'layoutCrossAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-      'name': instance.name,
-      'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'style': instance.style?.toJson(),
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child?.toJson(),
-      'constraints': instance.constraints?.toJson(),
-      'fontFamily': instance.fontFamily,
-      'fontPostScriptName': instance.fontPostScriptName,
-      'paragraphSpacing': instance.paragraphSpacing,
-      'paragraphIndent': instance.paragraphIndent,
-      'listSpacing': instance.listSpacing,
-      'italics': instance.italics,
-      'fontWeight': instance.fontWeight,
-      'fontSize': instance.fontSize,
-      'textCase': instance.textCase,
-      'textDecoration': instance.textDecoration,
-      'textAutoResize': instance.textAutoResize,
-      'textAlignHorizontal': instance.textAlignHorizontal,
-      'textAlignVertical': instance.textAlignVertical,
-      'letterSpacing': instance.letterSpacing,
-      'fills': instance.fills?.map((e) => e?.toJson())?.toList(),
-      'hyperLink': instance.hyperLink,
-      'opentypeFlags': instance.opentypeFlags,
-      'lineHeightPx': instance.lineHeightPx,
-      'lineHeightPercent': instance.lineHeightPercent,
-      'lineHeightPercentFontSize': instance.lineHeightPercentFontSize,
-      'lineHeightUnit': instance.lineHeightUnit,
-      'pbdlType': instance.pbdlType,
-    };
+Map<String, dynamic> _$PBDLTextStyleToJson(PBDLTextStyle instance) {
+  final val = <String, dynamic>{
+    'UUID': instance.UUID,
+    'layoutMainAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+    'layoutCrossAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'masterPropertyReferences', instance.masterPropertyReferences?.toJson());
+  val['name'] = instance.name;
+  val['isVisible'] = instance.isVisible;
+  val['boundaryRectangle'] = instance.boundaryRectangle?.toJson();
+  val['style'] = instance.style?.toJson();
+  val['prototypeNodeUUID'] = instance.prototypeNodeUUID;
+  val['child'] = instance.child?.toJson();
+  val['constraints'] = instance.constraints?.toJson();
+  val['fontFamily'] = instance.fontFamily;
+  val['fontPostScriptName'] = instance.fontPostScriptName;
+  val['paragraphSpacing'] = instance.paragraphSpacing;
+  val['paragraphIndent'] = instance.paragraphIndent;
+  val['listSpacing'] = instance.listSpacing;
+  val['italics'] = instance.italics;
+  val['fontWeight'] = instance.fontWeight;
+  val['fontSize'] = instance.fontSize;
+  val['textCase'] = instance.textCase;
+  val['textDecoration'] = instance.textDecoration;
+  val['textAutoResize'] = instance.textAutoResize;
+  val['textAlignHorizontal'] = instance.textAlignHorizontal;
+  val['textAlignVertical'] = instance.textAlignVertical;
+  val['letterSpacing'] = instance.letterSpacing;
+  val['fills'] = instance.fills?.map((e) => e?.toJson())?.toList();
+  val['hyperLink'] = instance.hyperLink;
+  val['opentypeFlags'] = instance.opentypeFlags;
+  val['lineHeightPx'] = instance.lineHeightPx;
+  val['lineHeightPercent'] = instance.lineHeightPercent;
+  val['lineHeightPercentFontSize'] = instance.lineHeightPercentFontSize;
+  val['lineHeightUnit'] = instance.lineHeightUnit;
+  val['pbdlType'] = instance.pbdlType;
+  return val;
+}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',

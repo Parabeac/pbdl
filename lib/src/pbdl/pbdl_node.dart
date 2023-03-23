@@ -4,6 +4,8 @@ import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:quick_log/quick_log.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'properties/pbdl_master_property_reference.dart';
+
 part 'pbdl_node.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -15,6 +17,9 @@ class PBDLNode implements Comparable<PBDLNode> {
   ParentLayoutSizing layoutMainAxisSizing;
   @JsonKey(fromJson: parentLayoutFromString)
   ParentLayoutSizing layoutCrossAxisSizing;
+
+  @JsonKey(includeIfNull: false)
+  MasterPropertyReference masterPropertyReferences;
 
   @JsonKey(ignore: true)
   Logger logger;
@@ -40,6 +45,7 @@ class PBDLNode implements Comparable<PBDLNode> {
     this.constraints,
     this.layoutMainAxisSizing,
     this.layoutCrossAxisSizing,
+    this.masterPropertyReferences,
   }) {
     logger = Logger(runtimeType.toString());
   }

@@ -2,6 +2,8 @@ import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_definition.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 
 part 'pbdl_shared_master_node.g.dart';
 
@@ -21,6 +23,9 @@ class PBDLSharedMasterNode extends PBDLNode
   String componentSetName;
 
   String sharedNodeSetID;
+
+  @JsonKey(includeIfNull: false)
+  List<MasterPropertyDefinition> masterPropertyDefinition;
 
   PBDLSharedMasterNode({
     String UUID,
@@ -67,6 +72,8 @@ class PBDLSharedMasterNode extends PBDLNode
     layoutCrossAxisSizing,
     this.sharedNodeSetID,
     this.componentSetName,
+    MasterPropertyReference masterPropertyReferences,
+    this.masterPropertyDefinition,
   }) : super(
           UUID,
           name,
@@ -79,6 +86,7 @@ class PBDLSharedMasterNode extends PBDLNode
               : PBDLConstraints.fromJson(constraints),
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
+          masterPropertyReferences: masterPropertyReferences,
         );
 
   @override

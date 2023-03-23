@@ -3,6 +3,7 @@ import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_image.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -49,6 +50,7 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
     transitionEasing,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
+    MasterPropertyReference masterPropertyReferences,
   }) : super(
           UUID,
           name,
@@ -61,6 +63,7 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
+          masterPropertyReferences: masterPropertyReferences,
         );
 
   @override

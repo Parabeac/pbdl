@@ -4,6 +4,7 @@ import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_effect.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 
 part 'pbdl_style.g.dart';
 

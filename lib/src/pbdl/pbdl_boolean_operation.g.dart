@@ -27,6 +27,10 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String),
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
+    masterPropertyReferences: json['masterPropertyReferences'] == null
+        ? null
+        : MasterPropertyReference.fromJson(
+            json['masterPropertyReferences'] as Map<String, dynamic>),
   )
     ..child = json['child'] == null
         ? null
@@ -45,33 +49,44 @@ PBDLBooleanOperation _$PBDLBooleanOperationFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$PBDLBooleanOperationToJson(
-        PBDLBooleanOperation instance) =>
-    <String, dynamic>{
-      'layoutMainAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
-      'layoutCrossAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-      'child': instance.child?.toJson(),
-      'constraints': instance.constraints?.toJson(),
-      'layoutAlign': instance.layoutAlign,
-      'size': instance.size,
-      'strokes': instance.strokes,
-      'strokeWeight': instance.strokeWeight,
-      'strokeAlign': instance.strokeAlign,
-      'styles': instance.styles,
-      'fillsList': instance.fillsList,
-      'children': instance.children?.map((e) => e?.toJson())?.toList(),
-      'booleanOperation': instance.booleanOperation,
-      'pbdlType': instance.pbdlType,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'imageReference': instance.imageReference,
-      'UUID': instance.UUID,
-      'name': instance.name,
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'style': instance.style?.toJson(),
-      'isVisible': instance.isVisible,
-      'image': instance.image,
-    };
+    PBDLBooleanOperation instance) {
+  final val = <String, dynamic>{
+    'layoutMainAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+    'layoutCrossAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'masterPropertyReferences', instance.masterPropertyReferences?.toJson());
+  val['child'] = instance.child?.toJson();
+  val['constraints'] = instance.constraints?.toJson();
+  val['layoutAlign'] = instance.layoutAlign;
+  val['size'] = instance.size;
+  val['strokes'] = instance.strokes;
+  val['strokeWeight'] = instance.strokeWeight;
+  val['strokeAlign'] = instance.strokeAlign;
+  val['styles'] = instance.styles;
+  val['fillsList'] = instance.fillsList;
+  val['children'] = instance.children?.map((e) => e?.toJson())?.toList();
+  val['booleanOperation'] = instance.booleanOperation;
+  val['pbdlType'] = instance.pbdlType;
+  val['boundaryRectangle'] = instance.boundaryRectangle?.toJson();
+  val['imageReference'] = instance.imageReference;
+  val['UUID'] = instance.UUID;
+  val['name'] = instance.name;
+  val['prototypeNodeUUID'] = instance.prototypeNodeUUID;
+  val['style'] = instance.style?.toJson();
+  val['isVisible'] = instance.isVisible;
+  val['image'] = instance.image;
+  return val;
+}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',

@@ -3,6 +3,7 @@ import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_auto_layout_options.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 
 part 'pbdl_frame.g.dart';
 
@@ -62,6 +63,7 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
     this.autoLayoutOptions,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
+    MasterPropertyReference masterPropertyReferences,
   }) : super(
           UUID,
           name,
@@ -72,6 +74,7 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
+          masterPropertyReferences: masterPropertyReferences,
         ) {
     if (autoLayoutOptions != null) {
       switch (autoLayoutOptions.orientation) {

@@ -34,6 +34,15 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
     layoutCrossAxisSizing: PBDLNode.parentLayoutFromString(
         json['layoutCrossAxisSizing'] as String),
     sharedNodeSetID: json['sharedNodeSetID'] as String,
+    masterPropertyReferences: json['masterPropertyReferences'] == null
+        ? null
+        : MasterPropertyReference.fromJson(
+            json['masterPropertyReferences'] as Map<String, dynamic>),
+    masterProperties: (json['masterProperties'] as List)
+        ?.map((e) => e == null
+            ? null
+            : MasterProperty.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   )
     ..child = json['child'] == null
         ? null
@@ -43,27 +52,40 @@ PBDLSharedInstanceNode _$PBDLSharedInstanceNodeFromJson(
 }
 
 Map<String, dynamic> _$PBDLSharedInstanceNodeToJson(
-        PBDLSharedInstanceNode instance) =>
-    <String, dynamic>{
-      'UUID': instance.UUID,
-      'layoutMainAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
-      'layoutCrossAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-      'name': instance.name,
-      'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'style': instance.style?.toJson(),
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child?.toJson(),
-      'constraints': instance.constraints?.toJson(),
-      'symbolID': instance.symbolID,
-      'parameters': instance.parameters,
-      'overrideValues':
-          instance.overrideValues?.map((e) => e?.toJson())?.toList(),
-      'sharedNodeSetID': instance.sharedNodeSetID,
-      'pbdlType': instance.pbdlType,
-    };
+    PBDLSharedInstanceNode instance) {
+  final val = <String, dynamic>{
+    'UUID': instance.UUID,
+    'layoutMainAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+    'layoutCrossAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'masterPropertyReferences', instance.masterPropertyReferences?.toJson());
+  val['name'] = instance.name;
+  val['isVisible'] = instance.isVisible;
+  val['boundaryRectangle'] = instance.boundaryRectangle?.toJson();
+  val['style'] = instance.style?.toJson();
+  val['prototypeNodeUUID'] = instance.prototypeNodeUUID;
+  val['child'] = instance.child?.toJson();
+  val['constraints'] = instance.constraints?.toJson();
+  val['symbolID'] = instance.symbolID;
+  val['parameters'] = instance.parameters;
+  val['overrideValues'] =
+      instance.overrideValues?.map((e) => e?.toJson())?.toList();
+  val['sharedNodeSetID'] = instance.sharedNodeSetID;
+  val['pbdlType'] = instance.pbdlType;
+  writeNotNull('masterProperties',
+      instance.masterProperties?.map((e) => e?.toJson())?.toList());
+  return val;
+}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',

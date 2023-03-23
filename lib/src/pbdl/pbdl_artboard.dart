@@ -5,6 +5,7 @@ import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_flow.dart';
 import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_group_node.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -53,6 +54,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
     this.children,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
+    MasterPropertyReference masterPropertyReferences,
   }) : super(
           UUID,
           name,
@@ -62,7 +64,8 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
           prototypeNodeUUID,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
-        ) {}
+          masterPropertyReferences: masterPropertyReferences,
+        );
 
   @override
   List<PBDLNode> children = [];

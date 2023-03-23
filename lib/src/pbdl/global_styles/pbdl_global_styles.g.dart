@@ -39,6 +39,10 @@ PBDLGlobalStyles _$PBDLGlobalStylesFromJson(Map<String, dynamic> json) {
         PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
     ..layoutCrossAxisSizing =
         PBDLNode.parentLayoutFromString(json['layoutCrossAxisSizing'] as String)
+    ..masterPropertyReferences = json['masterPropertyReferences'] == null
+        ? null
+        : MasterPropertyReference.fromJson(
+            json['masterPropertyReferences'] as Map<String, dynamic>)
     ..name = json['name'] as String
     ..isVisible = json['isVisible'] as bool
     ..boundaryRectangle = json['boundaryRectangle'] == null
@@ -58,28 +62,39 @@ PBDLGlobalStyles _$PBDLGlobalStylesFromJson(Map<String, dynamic> json) {
     ..pbdlType = json['pbdlType'] as String;
 }
 
-Map<String, dynamic> _$PBDLGlobalStylesToJson(PBDLGlobalStyles instance) =>
-    <String, dynamic>{
-      'UUID': instance.UUID,
-      'layoutMainAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
-      'layoutCrossAxisSizing':
-          _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
-      'name': instance.name,
-      'isVisible': instance.isVisible,
-      'boundaryRectangle': instance.boundaryRectangle?.toJson(),
-      'style': instance.style?.toJson(),
-      'prototypeNodeUUID': instance.prototypeNodeUUID,
-      'child': instance.child?.toJson(),
-      'constraints': instance.constraints?.toJson(),
-      'pbdlType': instance.pbdlType,
-      'designSystem': instance.designSystem,
-      'colors': instance.colors?.map((e) => e?.toJson())?.toList(),
-      'textStyles': instance.textStyles?.map((e) => e?.toJson())?.toList(),
-      'themeColors': instance.themeColors?.map((e) => e?.toJson())?.toList(),
-      'themeTextStyles':
-          instance.themeTextStyles?.map((e) => e?.toJson())?.toList(),
-    };
+Map<String, dynamic> _$PBDLGlobalStylesToJson(PBDLGlobalStyles instance) {
+  final val = <String, dynamic>{
+    'UUID': instance.UUID,
+    'layoutMainAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutMainAxisSizing],
+    'layoutCrossAxisSizing':
+        _$ParentLayoutSizingEnumMap[instance.layoutCrossAxisSizing],
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull(
+      'masterPropertyReferences', instance.masterPropertyReferences?.toJson());
+  val['name'] = instance.name;
+  val['isVisible'] = instance.isVisible;
+  val['boundaryRectangle'] = instance.boundaryRectangle?.toJson();
+  val['style'] = instance.style?.toJson();
+  val['prototypeNodeUUID'] = instance.prototypeNodeUUID;
+  val['child'] = instance.child?.toJson();
+  val['constraints'] = instance.constraints?.toJson();
+  val['pbdlType'] = instance.pbdlType;
+  val['designSystem'] = instance.designSystem;
+  val['colors'] = instance.colors?.map((e) => e?.toJson())?.toList();
+  val['textStyles'] = instance.textStyles?.map((e) => e?.toJson())?.toList();
+  val['themeColors'] = instance.themeColors?.map((e) => e?.toJson())?.toList();
+  val['themeTextStyles'] =
+      instance.themeTextStyles?.map((e) => e?.toJson())?.toList();
+  return val;
+}
 
 const _$ParentLayoutSizingEnumMap = {
   ParentLayoutSizing.INHERIT: 'INHERIT',

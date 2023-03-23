@@ -2,6 +2,7 @@ import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_color.dart';
 import 'pbdl_frame.dart';
@@ -47,6 +48,7 @@ class PBDLRectangle extends PBDLNode
     PBDLConstraints constraints,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
+    MasterPropertyReference masterPropertyReferences,
   }) : super(
           UUID,
           name,
@@ -57,6 +59,7 @@ class PBDLRectangle extends PBDLNode
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
+          masterPropertyReferences: masterPropertyReferences,
         );
 
   @override

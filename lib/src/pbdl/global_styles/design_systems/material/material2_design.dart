@@ -5,6 +5,7 @@ import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material_col
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_nodes_export.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 
 part 'material2_design.g.dart';
 

@@ -5,6 +5,8 @@ import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_override_value.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 
 part 'pbdl_shared_instance_node.g.dart';
 
@@ -19,6 +21,9 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
 
   @override
   final pbdlType = 'shared_instance';
+
+  @JsonKey(includeIfNull: false)
+  List<MasterProperty> masterProperties;
 
   PBDLSharedInstanceNode({
     String UUID,
@@ -53,6 +58,8 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
     this.sharedNodeSetID,
+    MasterPropertyReference masterPropertyReferences,
+    this.masterProperties,
   }) : super(
           UUID,
           name,
@@ -63,6 +70,7 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
+          masterPropertyReferences: masterPropertyReferences,
         );
 
   @override

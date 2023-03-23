@@ -2,6 +2,7 @@ import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 
 part 'pbdl_element.g.dart';
 
@@ -21,6 +22,7 @@ class PBDLElement extends PBDLNode {
     PBDLConstraints constraints,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
+    MasterPropertyReference masterPropertyReferences,
   }) : super(
           UUID,
           name,
@@ -31,6 +33,7 @@ class PBDLElement extends PBDLNode {
           constraints: constraints,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
+          masterPropertyReferences: masterPropertyReferences,
         );
 
   factory PBDLElement.fromJson(Map<String, dynamic> json) =>

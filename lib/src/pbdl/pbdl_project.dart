@@ -7,6 +7,7 @@ import 'package:pbdl/src/pbdl/pbdl_page.dart';
 import 'package:pbdl/src/input/sketch/entities/style/shared_style.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 
