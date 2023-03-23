@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_reference.dart';
 
 part 'figma_component_property_reference.g.dart';
 
@@ -18,4 +19,7 @@ class ComponentPropertyReference {
       _$ComponentPropertyReferenceFromJson(json);
 
   Map toJson() => _$ComponentPropertyReferenceToJson(this);
+
+  MasterPropertyReference toPBDL() =>
+      MasterPropertyReference.fromJson(toJson());
 }

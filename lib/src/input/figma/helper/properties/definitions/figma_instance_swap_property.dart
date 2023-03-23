@@ -1,6 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/helper/properties/figma_component_property.dart';
 import 'package:pbdl/src/input/figma/helper/properties/utils/figma_instance_swap_preferred_value.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property_definition.dart';
 import 'figma_component_property_definition.dart';
 
 part 'figma_instance_swap_property.g.dart';
@@ -40,4 +41,8 @@ class InstanceSwapProperty implements ComponentPropertyDefinition {
 
   @override
   Map toJson() => _$InstanceSwapPropertyToJson(this);
+
+  @override
+  MasterPropertyDefinition toPBDL() =>
+      MasterPropertyDefinition.fromJson(toJson());
 }

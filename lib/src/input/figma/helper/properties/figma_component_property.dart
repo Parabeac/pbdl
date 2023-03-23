@@ -1,5 +1,6 @@
 import 'package:pbdl/src/input/figma/helper/properties/utils/figma_instance_swap_preferred_value.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:pbdl/src/pbdl/properties/pbdl_master_property.dart';
 
 part 'figma_component_property.g.dart';
 
@@ -25,6 +26,8 @@ class ComponentProperty {
       _$ComponentPropertyFromJson(json);
 
   Map toJson() => _$ComponentPropertyToJson(this);
+
+  MasterProperty toPBDL() => MasterProperty.fromJson(toJson());
 }
 
 enum ComponentPropertyType {
