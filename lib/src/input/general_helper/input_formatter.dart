@@ -23,7 +23,7 @@ class PBInputFormatter {
   ///Formats `input` to destroy spaces and other intrusive characters.
   ///
   ///Returns a camelCase string.
-  static String formatVariable(String input) => _formatStr(input).camelCase;
+  static String formatVariable(String input) => _formatStr(input.camelCase);
 
   static String _formatStr(
     String input, {
