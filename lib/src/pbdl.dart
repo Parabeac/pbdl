@@ -8,12 +8,8 @@ import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
 import 'package:pbdl/src/input/figma/entities/figma_key.dart';
 import 'package:pbdl/src/input/figma/entities/style/global/global_style_holder.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
-import 'package:pbdl/src/input/sketch/controller/sketch_controller.dart';
-import 'package:pbdl/src/input/sketch/helper/sketch_asset_processor.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_theme_data.dart';
-import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material2_design.dart';
 import 'package:pbdl/src/util/main_info.dart';
-import 'package:pbdl/src/util/sketch/sac_installer.dart';
 import 'package:path/path.dart' as p;
 
 import 'dart:convert';
@@ -22,56 +18,6 @@ import 'input/general_helper/asset_processing_service.dart';
 import 'input/general_helper/azure_asset_service.dart';
 
 class PBDL {
-  /// Method that creates and returns a [PBDLProject] from a Sketch file `path`
-  static Future<PBDLProject> fromSketch(
-    String sketchPath, {
-
-    /// Absolute path to where JSON will be exported
-    @required String outputPath,
-
-    /// Absolute path to where pngs will be exported.
-    /// If [null], will have the same path as `outputPath`
-    String pngPath,
-
-    /// [bool] that indicates whether the pbdl file will be written to the `outputPath`
-    bool exportPbdlJson = false,
-  }) async {
-    return await runZonedGuarded(() async {
-      if (pngPath == null || pngPath.isEmpty) {
-        pngPath = outputPath;
-      }
-
-      _setupMainInfo(
-        outputPath,
-        pngPath,
-        projectName: p.basename(sketchPath).replaceFirst('.sketch', ''),
-      );
-
-      MainInfo().sketchPath = sketchPath;
-
-      await SACInstaller.installAndRun();
-
-      var sketchProject = await SketchController().convertFile(sketchPath);
-
-      var pbdl = await sketchProject.interpretNode();
-
-      if (exportPbdlJson) {
-        _writePbdlJson(pbdl);
-      }
-
-      if (Platform.environment.containsKey(AzureAssetService.KEY_NAME) &&
-          exportPbdlJson) {
-        _jsonToAzure(pbdl, SketchAssetProcessor());
-      }
-
-      SACInstaller.process.kill();
-
-      return pbdl;
-    }, (error, stackTrace) async {
-      print(error.toString());
-    });
-  }
-
   /// Method that creates and returns a [PBDLProject] from figma `projectID` and `key`
   static Future<PBDLProject> fromFigma(
     String projectID, {

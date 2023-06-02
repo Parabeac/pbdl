@@ -18,8 +18,6 @@ class MainInfo {
   /// Project ID on Figma
   String figmaProjectID;
 
-  String sketchPath;
-
   String projectName;
 
   String pngPath;
@@ -33,4 +31,4 @@ class MainInfo {
   MainInfo._internal();
 }
 
-enum DesignType { SKETCH, FIGMA, PBDL, UNKNOWN }
+enum DesignType { FIGMA, PBDL, UNKNOWN }

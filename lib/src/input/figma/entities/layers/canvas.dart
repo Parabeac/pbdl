@@ -48,7 +48,6 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
 
   dynamic exportSettings;
 
-  Canvas createSketchNode(Map<String, dynamic> json) => Canvas.fromJson(json);
   factory Canvas.fromJson(Map<String, dynamic> json) => _$CanvasFromJson(json);
 
   @override
