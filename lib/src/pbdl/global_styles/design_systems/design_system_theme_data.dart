@@ -3,6 +3,7 @@ import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_color_scheme.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material2_design.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/material/material3_design.dart';
+import 'package:collection/collection.dart';
 
 part 'design_system_theme_data.g.dart';
 
@@ -10,9 +11,17 @@ part 'design_system_theme_data.g.dart';
 abstract class DesignSystemThemeData extends PBDLNode {
   DesignSystemThemeData(
     String name, {
-    this.textStyles,
-    this.colorSchemes,
-  }) : super('', name, false, null, null, '');
+    required this.textStyles,
+    required this.colorSchemes,
+  }) : super(
+          '',
+          name,
+          false,
+          null,
+          null,
+          '',
+          pbdlType: 'design_system_theme_data',
+        );
 
   List<String> textStyles;
 
@@ -24,10 +33,8 @@ abstract class DesignSystemThemeData extends PBDLNode {
   bool isTextStyle(String style) => textStyles.contains(style);
 
   /// Returns [true] if [color] is part of the [DesignSystemThemeData's] [ColorSchemes]
-  DesignSystemColorScheme colorScheme(String color) => colorSchemes.firstWhere(
-        (element) => element.isSupportedColor(color),
-        orElse: () => null,
-      );
+  DesignSystemColorScheme? colorScheme(String color) => colorSchemes
+      .firstWhereOrNull((element) => element.isSupportedColor(color));
 
   static DesignSystemThemeData getDesignSystem(String designSystem) {
     switch (designSystem) {

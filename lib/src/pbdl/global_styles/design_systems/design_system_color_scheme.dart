@@ -9,8 +9,16 @@ abstract class DesignSystemColorScheme extends PBDLNode {
   Set<String> supportedAttributes;
   DesignSystemColorScheme(
     String name, {
-    this.supportedAttributes,
-  }) : super('', name, false, null, null, '');
+    required this.supportedAttributes,
+  }) : super(
+          '',
+          name,
+          false,
+          null,
+          null,
+          '',
+          pbdlType: 'design_system_color_scheme',
+        );
 
   /// Returns [true] if [color] is part of [this] ColorScheme's attributes.
   bool isSupportedColor(String color);

@@ -13,10 +13,12 @@ class PBDLGlobalTextStyle extends PBDLGlobalStyle {
     String name,
     this.textStyle, {
     String description = '',
-  }) : super(UUID, name, description: description);
-
-  @override
-  String pbdlType = 'global_text_style';
+  }) : super(
+          UUID,
+          name,
+          description: description,
+          pbdlType: 'global_text_style',
+        );
 
   /// Contains the actual text style value.
   PBDLTextStyle textStyle;
