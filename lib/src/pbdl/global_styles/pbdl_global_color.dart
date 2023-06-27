@@ -16,12 +16,10 @@ class PBDLGlobalColor extends PBDLGlobalStyle {
     String name,
     this.color, {
     String description = '',
-  }) : super(
-          UUID,
-          name,
-          description: description,
-          pbdlType: 'global_color',
-        );
+  }) : super(UUID, name, description: description);
+
+  @override
+  final String pbdlType = 'global_color';
 
   /// Contains the actual color value.
   PBDLColor color;
@@ -32,7 +30,7 @@ class PBDLGlobalColor extends PBDLGlobalStyle {
   /// For example, if [this] is part of [ColorScheme.light], the value
   /// of [colorScheme] would be `light`
   @JsonKey(includeIfNull: false)
-  String? colorScheme;
+  String colorScheme;
 
   factory PBDLGlobalColor.fromJson(Map<String, dynamic> json) =>
       _$PBDLGlobalColorFromJson(json);

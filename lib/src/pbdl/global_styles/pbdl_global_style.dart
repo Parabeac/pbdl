@@ -11,14 +11,5 @@ abstract class PBDLGlobalStyle extends PBDLNode {
     String UUID,
     String name, {
     this.description = '',
-    required String pbdlType,
-  }) : super(
-          UUID,
-          name,
-          false,
-          null,
-          null,
-          null,
-          pbdlType: pbdlType,
-        );
+  }) : super(UUID, name, false, null, null, null);
 }

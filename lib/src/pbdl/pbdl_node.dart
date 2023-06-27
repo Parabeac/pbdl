@@ -11,22 +11,22 @@ class PBDLNode implements Comparable<PBDLNode> {
   /// [UUID] that is inherited from the design node
   String UUID;
 
+  @JsonKey(fromJson: parentLayoutFromString)
+  ParentLayoutSizing layoutMainAxisSizing;
+  @JsonKey(fromJson: parentLayoutFromString)
+  ParentLayoutSizing layoutCrossAxisSizing;
+
+  @JsonKey(ignore: true)
+  Logger logger;
   String name;
   bool isVisible;
+  PBDLBoundaryBox boundaryRectangle;
   String pbdlType;
-
-  // TODO: Consider whether the below variables need to be enforced for every [PBDLNode]
-  // or if they need to be part of a different subclass of [PBDLNode]
-  String? prototypeNodeUUID;
-  PBDLStyle? style;
-  PBDLBoundaryBox? boundaryRectangle;
-  @JsonKey(fromJson: parentLayoutFromString)
-  ParentLayoutSizing? layoutMainAxisSizing;
-  @JsonKey(fromJson: parentLayoutFromString)
-  ParentLayoutSizing? layoutCrossAxisSizing;
-  PBDLConstraints? constraints;
-  PBDLNode? child;
-
+  PBDLStyle style;
+  String prototypeNodeUUID;
+  PBDLNode child;
+  @JsonKey()
+  PBDLConstraints constraints;
   PBDLNode(
     this.UUID,
     this.name,
@@ -34,18 +34,23 @@ class PBDLNode implements Comparable<PBDLNode> {
     this.boundaryRectangle,
     this.style,
     this.prototypeNodeUUID, {
+    transitionDuration,
+    transitionEasing,
     this.child,
     this.constraints,
     this.layoutMainAxisSizing,
     this.layoutCrossAxisSizing,
-    required this.pbdlType,
-  });
+  }) {
+    logger = Logger(runtimeType.toString());
+  }
 
   /// Method that sorts the [PBDLProject]'s nodes based on [UUID].
   ///
   /// This is done in order to consistently generate PBDL files in the same order
   void sortByUUID() {
-    child?.sortByUUID();
+    if (child != null) {
+      child.sortByUUID();
+    }
   }
 
   PBDLNode createPBDLNode(Map<String, dynamic> json) => PBDLNode.fromJson(json);
