@@ -76,7 +76,7 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
       effects: figmaStyleProperty?.effects ?? [],
     );
     return Future.value(PBDLImage(
-      UUID: UUID!,
+      UUID: UUID,
       boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
       isVisible: isVisible,
       name: name,

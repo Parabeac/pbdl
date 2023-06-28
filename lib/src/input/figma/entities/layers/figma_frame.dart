@@ -12,7 +12,6 @@ import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
 import '../abstract_figma_node_factory.dart';
-import '../style/figma_color.dart';
 import 'figma_node.dart';
 
 part 'figma_frame.g.dart';
@@ -148,7 +147,7 @@ class FigmaFrame extends FigmaChildrenNode
         return Future.value(
           PBDLImage(
             imageReference: imageReference,
-            UUID: UUID!,
+            UUID: UUID,
             boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
             isVisible: isVisible,
             name: name,
@@ -162,7 +161,7 @@ class FigmaFrame extends FigmaChildrenNode
       } else {
         return Future.value(
           PBDLFrame(
-              UUID: UUID!,
+              UUID: UUID,
               boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
               isVisible: isVisible,
               name: name,

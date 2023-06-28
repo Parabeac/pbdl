@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:pbdl/pbdl.dart';
 
 part 'pbdl_constraints.g.dart';
 

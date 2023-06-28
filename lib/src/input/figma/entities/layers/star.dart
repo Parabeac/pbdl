@@ -63,7 +63,7 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     );
     return Future.value(PBDLImage(
       imageReference: imageReference,
-      UUID: UUID!,
+      UUID: UUID,
       boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
       isVisible: isVisible,
       name: name,

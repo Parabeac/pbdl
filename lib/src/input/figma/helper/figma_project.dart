@@ -69,9 +69,7 @@ class FigmaProject {
         };
         var globalStyle =
             GlobalStyleProperty.fromJson(formattedJson, figmaNode);
-        if (globalStyle != null) {
-          globalStyles.add(globalStyle);
-        }
+        globalStyles.add(globalStyle);
       }
     }
   }

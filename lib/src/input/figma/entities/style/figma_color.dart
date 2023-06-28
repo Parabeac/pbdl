@@ -20,6 +20,7 @@ class FigmaColor extends FigmaBaseNode {
 
   FigmaColor({this.alpha, this.red, this.green, this.blue});
 
+  @override
   Map<String, dynamic> toJson() => _$FigmaColorToJson(this);
 
   factory FigmaColor.fromJson(Map<String, dynamic> json) =>

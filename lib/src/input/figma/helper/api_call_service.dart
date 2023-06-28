@@ -17,7 +17,7 @@ class APICallService {
   /// from [fileId]. Requires a [FigmaKey].
   static Future<List<FigmaNode>> getFileNodes(
       String? fileId, Iterable<String> ids, FigmaKey? key) async {
-    if (ids == null || ids.isEmpty) {
+    if (ids.isEmpty) {
       return [];
     }
     final flatIds = ids.join(',');
@@ -71,7 +71,7 @@ class APICallService {
       );
       Stream<StreamMessage?> broadcast = stream.incomingMessages.asBroadcastStream();
 
-      HeadersStreamMessage? header = await (broadcast.firstWhere(
+      var header = await (broadcast.firstWhere(
           (event) => event is HeadersStreamMessage,
           orElse: () => null) as FutureOr<HeadersStreamMessage?>);
 
@@ -100,7 +100,7 @@ class APICallService {
 
       await transport.finish();
       return decoded_data;
-    } catch (e, stackTrace) {
+    } catch (e) {
       print(e);
     }
   }

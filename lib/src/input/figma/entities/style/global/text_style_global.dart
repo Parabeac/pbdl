@@ -39,6 +39,7 @@ class TextStyleGlobal extends GlobalStyleProperty {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() => _$TextStyleGlobalToJson(this);
 
   factory TextStyleGlobal.fromJson(

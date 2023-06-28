@@ -82,6 +82,7 @@ class FigmaTextStyle extends FigmaBaseNode {
     this.lineHeightUnit,
   });
 
+  @override
   Map<String, dynamic> toJson() => _$FigmaTextStyleToJson(this);
   factory FigmaTextStyle.fromJson(Map<String, dynamic> json) =>
       _$FigmaTextStyleFromJson(json);

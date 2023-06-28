@@ -65,7 +65,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
       effects: figmaStyleProperty?.effects ?? [],
     );
     return Future.value(PBDLImage(
-      UUID: UUID!,
+      UUID: UUID,
       boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
       name: name,

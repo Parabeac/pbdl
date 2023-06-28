@@ -91,7 +91,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
     /// then the instance must become a component aka [PBDLSharedMasterNode]
     if (cacheService.localComponents.containsKey(componentId)) {
       return Future.value(PBDLSharedInstanceNode(
-        UUID: UUID!,
+        UUID: UUID,
         overrideValues: overrideValues,
         name: name,
         isVisible: isVisible,
@@ -149,7 +149,7 @@ class Instance extends FigmaFrame implements AbstractFigmaNodeFactory {
       if (override != null) {
         // Create override value and add it to list
         values.add(PBDLOverrideValue(
-          current!.UUID!.split(';').last, // Get UUID of node to replace
+          current.UUID.split(';').last, // Get UUID of node to replace
           current.name,
           override.getPBDLType(),
           await override.getProperty(current),

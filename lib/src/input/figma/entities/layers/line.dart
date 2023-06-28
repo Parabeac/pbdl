@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:path/path.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/helper/figma_asset_processor.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
@@ -73,7 +72,7 @@ class FigmaLine extends FigmaVector implements AbstractFigmaNodeFactory {
     );
 
     return Future.value(PBDLImage(
-      UUID: UUID!,
+      UUID: UUID,
       imageReference: imageReference,
       boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,

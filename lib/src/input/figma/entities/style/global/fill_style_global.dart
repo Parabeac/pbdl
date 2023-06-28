@@ -37,6 +37,7 @@ class FillStyleGlobal extends GlobalStyleProperty {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() => _$FillStyleGlobalToJson(this);
 
   factory FillStyleGlobal.fromJson(

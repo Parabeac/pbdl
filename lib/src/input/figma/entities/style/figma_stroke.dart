@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
-import 'package:pbdl/src/input/figma/entities/style/figma_color.dart';
 import 'package:pbdl/src/input/figma/entities/style/figma_list_stroke.dart';
 
 part 'figma_stroke.g.dart';

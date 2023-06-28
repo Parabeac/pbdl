@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/input/figma/entities/layers/figma_constraints.dart';
 import 'package:pbdl/src/input/figma/helper/figma_rect.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'package:pbdl/src/pbdl/pbdl_rectangle.dart';
 import '../abstract_figma_node_factory.dart';
@@ -66,7 +65,7 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   Future<PBDLNode> interpretNode() async {
     return Future.value(
       PBDLRectangle(
-        UUID: UUID!,
+        UUID: UUID,
         boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,

@@ -66,7 +66,7 @@ class FigmaRegularPolygon extends FigmaVector
     );
     return Future.value(PBDLImage(
       imageReference: imageReference,
-      UUID: UUID!,
+      UUID: UUID,
       boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
       isVisible: isVisible,
       name: name,

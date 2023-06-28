@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:get_it/get_it.dart';
-import 'package:meta/meta.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/input/figma/controller/figma_controller.dart';
 import 'package:pbdl/src/input/figma/entities/figma_key.dart';
@@ -95,7 +94,7 @@ class PBDL {
   /// Normalizes `absPath` if non-null and non-empty.
   /// Otherwise, returns current path
   static String _normalizedPath(String absPath) {
-    if (absPath != null && absPath.isNotEmpty) {
+    if (absPath.isNotEmpty) {
       return p.normalize(p.absolute(p.join(absPath)));
     }
     return p.join(Directory.current.path);
@@ -138,7 +137,7 @@ class PBDL {
     final result = <String, Map>{};
 
     for (var page in project.pages!) {
-      for (PBDLScreen screen in page.screens as Iterable<PBDLScreen>) {
+      for (var screen in page.screens as Iterable<PBDLScreen>) {
         screen.imageURI = AzureAssetService().getImageURI('${screen.UUID}.png');
         result[screen.UUID] = {
           'width': screen.designNode!.boundaryRectangle!.width,
@@ -148,7 +147,7 @@ class PBDL {
     }
 
     for (var page in project.miscPages!) {
-      for (PBDLScreen screen in page.screens as Iterable<PBDLScreen>) {
+      for (var screen in page.screens as Iterable<PBDLScreen>) {
         result[screen.UUID] = {
           'width': screen.designNode!.boundaryRectangle!.width,
           'height': screen.designNode!.boundaryRectangle!.height

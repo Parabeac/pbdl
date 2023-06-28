@@ -24,7 +24,7 @@ class GlobalStyleHolder extends FigmaBaseNode {
     'text',
   ];
 
-  static var _styleNameCounter = Map<String, int>();
+  static final _styleNameCounter = <String, int>{};
 
   @JsonKey(ignore: true)
   final DesignSystemThemeData? designSystemThemeData;

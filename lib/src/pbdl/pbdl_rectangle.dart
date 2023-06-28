@@ -4,7 +4,6 @@ import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_color.dart';
-import 'pbdl_frame.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'pbdl_rectangle.g.dart';

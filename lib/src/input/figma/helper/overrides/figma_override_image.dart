@@ -3,8 +3,6 @@ import 'package:pbdl/src/input/figma/entities/layers/figma_node.dart';
 import 'package:pbdl/src/input/figma/entities/layers/vector.dart';
 import 'package:pbdl/src/input/figma/helper/overrides/figma_override_type.dart';
 import 'package:pbdl/src/input/general_helper/overrides/pbdl_override_image.dart';
-import 'package:pbdl/src/pbdl/pbdl_image.dart';
-import 'package:pbdl/src/pbdl/pbdl_style.dart';
 
 /// Map used to prevent duplicates when referencing override images
 final _uuidToRef = <String, PBDLImage>{};

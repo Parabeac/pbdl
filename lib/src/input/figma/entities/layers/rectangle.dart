@@ -84,7 +84,7 @@ class FigmaRectangle extends FigmaVector
 
       return Future.value(PBDLImage(
         imageReference: imageReference,
-        UUID: UUID!,
+        UUID: UUID,
         boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,
@@ -97,7 +97,7 @@ class FigmaRectangle extends FigmaVector
     }
     return Future.value(
       PBDLRectangle(
-        UUID: UUID!,
+        UUID: UUID,
         boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,

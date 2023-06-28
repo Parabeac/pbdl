@@ -137,7 +137,7 @@ class FigmaAssetProcessor extends AssetProcessingService {
   }) async {
     return Future(() async {
       var response = await APICallService.makeAPICall(
-          'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&format=${imageFormat!.toShortLowerCaseString()}&use_absolute_bounds=${hasBounds}',
+          'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&format=${imageFormat!.toShortLowerCaseString()}&use_absolute_bounds=$hasBounds',
           MainInfo().figmaKey!);
 
       if (response != null &&
@@ -147,16 +147,16 @@ class FigmaAssetProcessor extends AssetProcessingService {
         Map images = response['images'];
         // Download the images
         for (var entry in images.entries) {
-          if (entry?.value != null && (entry?.value?.isNotEmpty ?? false)) {
+          if (entry.value != null && (entry.value?.isNotEmpty ?? false)) {
             response =
                 await http.get(Uri.parse(entry.value)).then((imageRes) async {
               // Check if the request was successful
-              if (imageRes == null || imageRes.statusCode != 200) {
+              if (imageRes.statusCode != 200) {
                 log.error('Image ${entry.key} was not processed correctly');
               }
               var imageName = _uuidToName[entry.key];
               var pngPath = p.join(MainInfo().pngPath!,
-                  '${imageName}.${imageFormat.toShortLowerCaseString()}');
+                  '$imageName.${imageFormat.toShortLowerCaseString()}');
               var file = File(pngPath.replaceAll(':', '_'))
                 ..createSync(recursive: true);
               file.writeAsBytesSync(imageRes.bodyBytes);

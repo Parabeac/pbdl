@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 
 part 'figma_rect.g.dart';
 

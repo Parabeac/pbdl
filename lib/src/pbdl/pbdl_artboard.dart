@@ -3,7 +3,6 @@ import 'package:pbdl/src/pbdl/pbdl_color.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
 import 'package:pbdl/src/pbdl/pbdl_style.dart';
 import 'package:pbdl/src/pbdl/pbdl_flow.dart';
-import 'package:pbdl/src/pbdl/pbdl_frame.dart';
 import 'package:pbdl/src/pbdl/pbdl_node.dart';
 import 'abstract_pbdl_node_factory.dart';
 import 'pbdl_group_node.dart';
@@ -62,7 +61,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
           prototypeNodeUUID,
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
-        ) {}
+        );
 
   @override
   List<PBDLNode?>? children = [];

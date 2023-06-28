@@ -10,7 +10,6 @@ class PBInputFormatter {
       bool spaceToUnderscore = true,
       bool destroyDigits = false,
       bool destroySpecialSym = false}) {
-    assert(input != null);
     var result = _formatStr(input,
         spaceToUnderscore: spaceToUnderscore, destroyDigits: destroyDigits);
 

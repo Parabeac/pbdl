@@ -105,7 +105,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     }
 
     return PBDLSharedMasterNode(
-      UUID: UUID!,
+      UUID: UUID,
       overrideProperties: props,
       name: name,
       isVisible: isVisible,
@@ -148,7 +148,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
         }
 
         var overrideProp = PBDLOverrideProperty(
-          current.UUID!,
+          current.UUID,
           current.name!,
           override.getPBDLType(),
           await override.getProperty(current),

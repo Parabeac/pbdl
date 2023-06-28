@@ -108,7 +108,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       return Future.value(
         PBDLImage(
           imageReference: imageReference,
-          UUID: UUID!,
+          UUID: UUID,
           boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
           isVisible: isVisible,
           name: name,
@@ -122,7 +122,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     }
     return Future.value(
       PBDLGroupNode(
-        UUID: UUID!,
+        UUID: UUID,
         boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,
