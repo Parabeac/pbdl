@@ -4,12 +4,12 @@ part 'pbdl_flow.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLFlow {
-  String nodeID;
-  String type = 'flow';
+  String? nodeID;
+  String? type = 'flow';
 
-  final String classField;
-  String destinationArtboardID;
-  bool maintainScrollPosition;
+  final String? classField;
+  String? destinationArtboardID;
+  bool? maintainScrollPosition;
   dynamic animationType;
   PBDLFlow({
     this.classField,

@@ -22,16 +22,16 @@ part 'group.g.dart';
 /// which we need to convert into images.
 class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
   @JsonKey(ignore: true)
-  Logger log;
+  Logger? log;
   @override
-  String type = 'GROUP';
+  String? type = 'GROUP';
 
   @override
-  String imageReference;
+  String? imageReference;
 
   @override
   @JsonKey(ignore: false)
-  FigmaStyleProperty figmaStyleProperty;
+  FigmaStyleProperty? figmaStyleProperty;
 
   Group({
     name,
@@ -40,18 +40,18 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     pluginData,
     sharedPluginData,
     boundaryRectangle,
-    FigmaConstraints constraints,
+    FigmaConstraints? constraints,
     layoutAlign,
     size,
     horizontalPadding,
     verticalPadding,
     itemSpacing,
-    List<FigmaNode> children,
-    String UUID,
-    FigmaColor backgroundColor,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    List<FigmaNode>? children,
+    String UUID = '',
+    FigmaColor? backgroundColor,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
     figmaStyleProperty,
   }) : super(
             name: name,
@@ -89,7 +89,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
       imageReference = FigmaAssetProcessor().processImage(
         UUID,
         absoluteBoundingBox: absoluteBoundingBox,
-        name: name,
+        name: name!,
         format: IMAGE_FORMAT.SVG,
         effects: figmaStyleProperty?.effects ?? [],
       );
@@ -99,17 +99,17 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         transitionNodeID = tempPrototypeID;
       }
 
-      if (children != null && children.isNotEmpty) {
+      if (children != null && children!.isNotEmpty) {
         absoluteBoundingBox = fitFrame();
       }
 
-      children.clear();
+      children!.clear();
 
       return Future.value(
         PBDLImage(
           imageReference: imageReference,
-          UUID: UUID,
-          boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+          UUID: UUID!,
+          boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
           isVisible: isVisible,
           name: name,
           style: figmaStyleProperty?.interpretStyle(),
@@ -122,8 +122,8 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
     }
     return Future.value(
       PBDLGroupNode(
-        UUID: UUID,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        UUID: UUID!,
+        boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: figmaStyleProperty?.interpretStyle(),
@@ -132,7 +132,7 @@ class Group extends FigmaFrame implements AbstractFigmaNodeFactory {
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
         children: await Future.wait(
-          children.map((e) async => await e.interpretNode()).toList(),
+          children!.map((e) async => await e.interpretNode()).toList(),
         ),
       ),
     );

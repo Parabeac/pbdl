@@ -9,24 +9,24 @@ part 'fill_type.g.dart';
 @JsonSerializable()
 class ImageFillType implements FigmaFill {
   // String that identifies the ID of the image
-  String imageRef;
+  String? imageRef;
 
   @override
-  String type = 'IMAGE';
+  String? type = 'IMAGE';
 
   @override
-  String blendMode;
+  String? blendMode;
 
   @override
   @JsonKey(defaultValue: true)
-  bool visible;
+  bool? visible;
 
   @override
   @JsonKey(defaultValue: 100)
-  num opacity;
+  num? opacity;
 
   @override
-  FigmaColor color;
+  FigmaColor? color;
 
   ImageFillType({
     this.imageRef,
@@ -37,8 +37,8 @@ class ImageFillType implements FigmaFill {
   });
 
   @override
-  FigmaFill createFigmaFill(Map<String, dynamic> json) =>
-      ImageFillType.fromJson(json);
+  FigmaFill createFigmaFill(Map<String, dynamic>? json) =>
+      ImageFillType.fromJson(json!);
   factory ImageFillType.fromJson(Map<String, dynamic> json) =>
       _$ImageFillTypeFromJson(json);
 
@@ -67,21 +67,21 @@ class ImageFillType implements FigmaFill {
 @JsonSerializable()
 class SolidFillType implements FigmaFill {
   @override
-  String type = 'SOLID';
+  String? type = 'SOLID';
 
   @override
-  FigmaColor color;
+  FigmaColor? color;
 
   @override
-  String blendMode;
+  String? blendMode;
 
   @override
   @JsonKey(defaultValue: true)
-  bool visible;
+  bool? visible;
 
   @override
   @JsonKey(defaultValue: 100)
-  num opacity;
+  num? opacity;
 
   SolidFillType({
     this.blendMode,
@@ -90,9 +90,9 @@ class SolidFillType implements FigmaFill {
   });
 
   @override
-  FigmaFill createFigmaFill(Map<String, dynamic> json) {
+  FigmaFill createFigmaFill(Map<String, dynamic>? json) {
     // Added opacity on alpha
-    json['color']['a'] = json['opacity'] ?? json['color']['a'];
+    json!['color']['a'] = json['opacity'] ?? json['color']['a'];
 
     return SolidFillType.fromJson(json);
   }
@@ -110,7 +110,7 @@ class SolidFillType implements FigmaFill {
       blendMode: blendMode,
       type: type,
       isEnabled: visible,
-      color: color.interpretColor(),
+      color: color!.interpretColor(),
     );
   }
 

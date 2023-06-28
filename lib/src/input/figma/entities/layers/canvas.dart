@@ -13,19 +13,19 @@ part 'canvas.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
   @override
-  String type = 'CANVAS';
+  String? type = 'CANVAS';
 
   Canvas({
     this.name,
     this.type,
-    List<FigmaNode> children,
+    List<FigmaNode>? children,
     this.backgroundColor,
     this.prototypeStartNodeID,
     this.prototypeDevice,
     this.exportSettings,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
     layoutAlign,
     layoutGrow,
   }) : super(name, true, type, null, null,
@@ -38,7 +38,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
   // Last two nulls are used for Figma plugins
 
   @override
-  String name;
+  String? name;
 
   dynamic backgroundColor;
 
@@ -57,7 +57,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
   FigmaNode createFigmaNode(Map<String, dynamic> json) => Canvas.fromJson(json);
 
   @override
-  var absoluteBoundingBox;
+  FigmaRect? absoluteBoundingBox;
 
   @JsonKey(ignore: true)
   var style;
@@ -70,7 +70,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         isFlowHome: false, // TODO: get it dynamically
         UUID: UUID,
         exportOptions: exportSettings,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style,
@@ -79,7 +79,7 @@ class Canvas extends FigmaChildrenNode implements FigmaNodeFactory {
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
         layoutCrossAxisSizing: getAlignSizing(layoutAlign),
         children: await Future.wait(
-          children.map((e) async => await e.interpretNode()).toList(),
+          children!.map((e) async => await e.interpretNode()).toList(),
         ),
       ),
     );

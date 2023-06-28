@@ -8,55 +8,55 @@ part 'figma_text_style.g.dart';
 
 @JsonSerializable()
 class FigmaTextStyle extends FigmaBaseNode {
-  String fontFamily;
+  String? fontFamily;
 
-  String fontPostScriptName;
-
-  @JsonKey(defaultValue: 0)
-  num paragraphSpacing;
+  String? fontPostScriptName;
 
   @JsonKey(defaultValue: 0)
-  num paragraphIndent;
+  num? paragraphSpacing;
 
   @JsonKey(defaultValue: 0)
-  num listSpacing;
+  num? paragraphIndent;
 
-  bool italic;
+  @JsonKey(defaultValue: 0)
+  num? listSpacing;
 
-  num fontWeight;
+  bool? italic;
 
-  num fontSize;
+  num? fontWeight;
+
+  num? fontSize;
 
   @JsonKey(defaultValue: 'ORIGINAL')
-  String textCase;
+  String? textCase;
 
   @JsonKey(defaultValue: 'NONE')
-  String textDecoration;
+  String? textDecoration;
 
   @JsonKey(defaultValue: 'NONE')
-  String textAutoResize;
+  String? textAutoResize;
 
-  String textAlignHorizontal;
+  String? textAlignHorizontal;
 
-  String textAlignVertical;
+  String? textAlignVertical;
 
-  num letterSpacing;
+  num? letterSpacing;
 
-  List<FigmaFill> fills;
+  List<FigmaFill>? fills;
 
-  String hyperLink;
+  String? hyperLink;
 
   @JsonKey(defaultValue: {})
-  Map<String, num> opentypeFlags;
+  Map<String, num>? opentypeFlags;
 
-  num lineHeightPx;
+  num? lineHeightPx;
 
   @JsonKey(defaultValue: 100)
-  num lineHeightPercent;
+  num? lineHeightPercent;
 
-  num lineHeightPercentFontSize;
+  num? lineHeightPercentFontSize;
 
-  String lineHeightUnit;
+  String? lineHeightUnit;
 
   FigmaTextStyle({
     this.fontFamily,
@@ -102,7 +102,7 @@ class FigmaTextStyle extends FigmaBaseNode {
       textAlignHorizontal: textAlignHorizontal,
       textAlignVertical: textAlignVertical,
       letterSpacing: letterSpacing,
-      fills: fills?.map((fill) => fill.interpretFill())?.toList(),
+      fills: fills?.map((fill) => fill.interpretFill()).toList(),
       hyperLink: hyperLink,
       opentypeFlags: opentypeFlags,
       lineHeightPx: lineHeightPx,

@@ -7,17 +7,17 @@ part 'figma_stroke.g.dart';
 
 @JsonSerializable()
 class FigmaStroke {
-  List<FigmaListStroke> strokes;
+  List<FigmaListStroke>? strokes;
 
-  num strokeWeight;
+  num? strokeWeight;
 
-  String strokeAlign;
+  String? strokeAlign;
 
-  String strokeJoin;
+  String? strokeJoin;
 
-  List strokeDashes;
+  List? strokeDashes;
 
-  num cornerRadius;
+  num? cornerRadius;
 
   FigmaStroke({
     this.strokes,
@@ -30,7 +30,7 @@ class FigmaStroke {
 
   PBDLBorderOptions interpretStroke() {
     return PBDLBorderOptions(
-      borders: strokes.map((stroke) => stroke.interpretStroke()).toList(),
+      borders: strokes!.map((stroke) => stroke.interpretStroke()).toList(),
       strokeWeight: strokeWeight,
       strokeAlign: strokeAlign,
       strokeJoin: strokeJoin,

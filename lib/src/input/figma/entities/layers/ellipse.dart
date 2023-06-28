@@ -15,32 +15,32 @@ part 'ellipse.g.dart';
 @JsonSerializable()
 class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
-  String imageReference;
+  String? imageReference;
   @override
   @JsonKey(ignore: true)
-  Logger log;
+  Logger? log;
 
   @JsonKey(ignore: true)
   var fills;
 
   @override
-  String type = 'ELLIPSE';
+  String? type = 'ELLIPSE';
   FigmaEllipse({
-    String name,
-    bool visible,
-    String type,
+    String? name,
+    bool? visible,
+    String? type,
     pluginData,
     sharedPluginData,
     style,
     layoutAlign,
-    FigmaConstraints constraints,
-    FigmaRect boundaryRectangle,
+    FigmaConstraints? constraints,
+    FigmaRect? boundaryRectangle,
     size,
     this.fills,
     styles,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
   }) : super(
           name: name,
           visible: visible,
@@ -72,12 +72,12 @@ class FigmaEllipse extends FigmaVector implements AbstractFigmaNodeFactory {
     imageReference = FigmaAssetProcessor().processImage(
       UUID,
       absoluteBoundingBox: absoluteBoundingBox,
-      name: name,
+      name: name!,
       effects: figmaStyleProperty?.effects ?? [],
     );
     return Future.value(PBDLImage(
-      UUID: UUID,
-      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+      UUID: UUID!,
+      boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: figmaStyleProperty?.interpretStyle(),

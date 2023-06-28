@@ -36,7 +36,7 @@ class AbstractFigmaNodeFactory {
 
   AbstractFigmaNodeFactory();
 
-  static FigmaNode getFigmaNode(Map<String, dynamic> json) {
+  static FigmaNode? getFigmaNode(Map<String, dynamic> json) {
     var className = json[FIGMA_CLASS_KEY];
     if (className != null) {
       for (var figmaNode in _figmaNodes) {
@@ -50,6 +50,6 @@ class AbstractFigmaNodeFactory {
 }
 
 abstract class FigmaNodeFactory {
-  String type;
+  String? type;
   FigmaNode createFigmaNode(Map<String, dynamic> json);
 }

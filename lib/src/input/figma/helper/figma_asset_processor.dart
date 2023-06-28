@@ -5,7 +5,6 @@ import 'package:pbdl/src/input/general_helper/asset_processing_service.dart';
 import 'package:pbdl/src/util/main_info.dart';
 import 'package:pbdl/src/input/figma/helper/api_call_service.dart';
 import 'package:quick_log/quick_log.dart';
-import 'api_call_service.dart';
 import 'package:path/path.dart' as p;
 
 import 'figma_rect.dart';
@@ -20,33 +19,33 @@ class FigmaAssetProcessor extends AssetProcessingService {
 
   factory FigmaAssetProcessor() => _instance;
 
-  final List<String> _uuidQueue = [];
+  final List<String?> _uuidQueue = [];
 
-  final List<String> _uuidNoBoxQueue = [];
+  final List<String?> _uuidNoBoxQueue = [];
 
-  final List<String> _uuidSvgQueue = [];
+  final List<String?> _uuidSvgQueue = [];
 
-  final Map<String, String> _uuidToName = {};
+  final Map<String?, String> _uuidToName = {};
 
-  List<String> get uuidQueue => _uuidQueue;
+  List<String?> get uuidQueue => _uuidQueue;
 
   Logger log = Logger('Figma Image helper');
 
   /// Adds [uuid] to queue to be processed as an image.
   /// Returns the formatted name of the image reference.
   @override
-  String processImage(
-    String uuid, {
-    FigmaRect absoluteBoundingBox,
-    String name,
+  dynamic processImage(
+    String? uuid, {
+    FigmaRect? absoluteBoundingBox,
+    String name = '',
     IMAGE_FORMAT format = IMAGE_FORMAT.PNG,
-    List<FigmaEffect> effects,
+    List<FigmaEffect>? effects,
   }) {
     if (format == IMAGE_FORMAT.SVG) {
       _uuidSvgQueue.add(uuid);
     } else if (absoluteBoundingBox != null &&
-        absoluteBoundingBox.height > 0 &&
-        absoluteBoundingBox.width > 0 &&
+        absoluteBoundingBox.height! > 0 &&
+        absoluteBoundingBox.width! > 0 &&
         (effects == null || effects.isEmpty)) {
       _uuidQueue.add(uuid);
     } else {
@@ -65,9 +64,9 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// Creates separate API requests from `uuidQueue` to speed up
   /// the image downloading process.
   Future<void> processImageQueue({bool writeAsFile = true}) async {
-    var chunks = <List<String>>[];
-    var boundlessChunk = <List<String>>[];
-    var svgChunk = <List<String>>[];
+    List<List<String?>> chunks = <List<String>>[];
+    List<List<String?>> boundlessChunk = <List<String>>[];
+    List<List<String?>> svgChunk = <List<String>>[];
 
     chunks.addAll(_getChunks(_uuidQueue));
 
@@ -93,7 +92,7 @@ class FigmaAssetProcessor extends AssetProcessingService {
 
   /// Passes the chunks to process each image at a time
   List<Future<dynamic>> _getImagesToProcess(
-    List<List<String>> chunks,
+    List<List<String?>> chunks,
     bool writeAsFile,
     IMAGE_FORMAT imageFormat,
     bool hasBounds,
@@ -113,8 +112,8 @@ class FigmaAssetProcessor extends AssetProcessingService {
 
   /// Method to get the queue into chunks
   /// for easier processing
-  List<List<String>> _getChunks(List<String> queue) {
-    var chunksToReturn = <List<String>>[];
+  List<List<String?>> _getChunks(List<String?> queue) {
+    List<List<String?>> chunksToReturn = <List<String>>[];
     for (var i = 0; i < queue.length; i += IMAGE_REQ_LIMIT) {
       chunksToReturn.add(queue.sublist(
           i,
@@ -131,15 +130,15 @@ class FigmaAssetProcessor extends AssetProcessingService {
   /// Returns true if the operation was successful. Returns false
   /// otherwise.
   Future<dynamic> _processImages(
-    List<String> uuids, {
+    List<String?> uuids, {
     bool writeAsFile = true,
     bool hasBounds = true,
-    IMAGE_FORMAT imageFormat,
+    IMAGE_FORMAT? imageFormat,
   }) async {
     return Future(() async {
       var response = await APICallService.makeAPICall(
-          'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&format=${imageFormat.toShortLowerCaseString()}&use_absolute_bounds=${hasBounds}',
-          MainInfo().figmaKey);
+          'https://api.figma.com/v1/images/${MainInfo().figmaProjectID}?ids=${uuids.join(',')}&format=${imageFormat!.toShortLowerCaseString()}&use_absolute_bounds=${hasBounds}',
+          MainInfo().figmaKey!);
 
       if (response != null &&
           response.containsKey('images') &&
@@ -156,7 +155,7 @@ class FigmaAssetProcessor extends AssetProcessingService {
                 log.error('Image ${entry.key} was not processed correctly');
               }
               var imageName = _uuidToName[entry.key];
-              var pngPath = p.join(MainInfo().pngPath,
+              var pngPath = p.join(MainInfo().pngPath!,
                   '${imageName}.${imageFormat.toShortLowerCaseString()}');
               var file = File(pngPath.replaceAll(':', '_'))
                 ..createSync(recursive: true);
@@ -179,7 +178,7 @@ class FigmaAssetProcessor extends AssetProcessingService {
 
   @override
   Future<void> processRootElements(Map uuids) async {
-    _addImagesToQueue(uuids.keys.toList());
+    _addImagesToQueue(uuids.keys.toList() as List<String>);
     await processImageQueue(writeAsFile: false);
   }
 

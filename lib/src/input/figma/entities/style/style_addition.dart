@@ -3,7 +3,7 @@
 ///
 /// This is helpful when combining multiple fills or strokes
 abstract class StyleAdditionNode {
-  String type;
+  String? type;
   /// Returns what [this] StyleNode would return if it were
   /// combined with [style].
   String addStyle(StyleAdditionNode style);

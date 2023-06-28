@@ -5,19 +5,19 @@ part 'figma_auto_layout_options.g.dart';
 
 @JsonSerializable()
 class FigmaAutoLayoutOptions {
-  String layoutMode;
-  num itemSpacing;
+  String? layoutMode;
+  num? itemSpacing;
 
-  num paddingLeft;
-  num paddingRight;
-  num paddingTop;
-  num paddingBottom;
+  num? paddingLeft;
+  num? paddingRight;
+  num? paddingTop;
+  num? paddingBottom;
 
-  String primaryAxisSizingMode;
-  String counterAxisSizingMode;
+  String? primaryAxisSizingMode;
+  String? counterAxisSizingMode;
 
-  String primaryAxisAlignItems;
-  String counterAxisAlignItems;
+  String? primaryAxisAlignItems;
+  String? counterAxisAlignItems;
 
   FigmaAutoLayoutOptions({
     this.layoutMode,
@@ -57,7 +57,7 @@ class FigmaAutoLayoutOptions {
     );
   }
 
-  AxisAlignment _getAlignment(String axisAlignment) {
+  AxisAlignment _getAlignment(String? axisAlignment) {
     switch (axisAlignment) {
       case 'CENTER':
         return AxisAlignment.CENTER;
@@ -70,7 +70,7 @@ class FigmaAutoLayoutOptions {
     }
   }
 
-  AxisMode _getAxisSizing(String sizingMode) {
+  AxisMode _getAxisSizing(String? sizingMode) {
     switch (sizingMode) {
       case 'FIXED':
         return AxisMode.FIXED;

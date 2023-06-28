@@ -11,11 +11,11 @@ class AzureAssetService {
 
   factory AzureAssetService() => _instance;
 
-  String _projectUUID;
+  String? _projectUUID;
 
-  set projectUUID(String UUID) => _projectUUID = UUID;
+  set projectUUID(String? UUID) => _projectUUID = UUID;
 
-  String get projectUUID => _projectUUID.toLowerCase();
+  String get projectUUID => _projectUUID!.toLowerCase();
 
   static const KEY_NAME = 'AZURE_STORAGE_CONNECTION_STRING';
 
@@ -23,7 +23,7 @@ class AzureAssetService {
 
   String getContainerUri() {
     if (Platform.environment.containsKey(KEY_NAME) && projectUUID != null) {
-      var storageStringList = Platform.environment[KEY_NAME].split(';');
+      var storageStringList = Platform.environment[KEY_NAME]!.split(';');
       var protocol = storageStringList[0].split('=')[1];
       var accName = storageStringList[1].split('=')[1];
       var suffix = storageStringList.last.split('=')[1];
@@ -34,8 +34,8 @@ class AzureAssetService {
 
   Future<http.StreamedResponse> _putRequestBlob(
       String path, Uint8List bodyBytes,
-      {Map<String, String> queryParams}) async {
-    var storage = AzureStorage.parse(Platform.environment[KEY_NAME]);
+      {Map<String, String>? queryParams}) async {
+    var storage = AzureStorage.parse(Platform.environment[KEY_NAME]!);
     var uri, headers;
     // Request
     if (queryParams == null) {
@@ -67,7 +67,7 @@ class AzureAssetService {
           '/$container/${filename.replaceAll(':', '_')}', bodyBytes);
 
   Future<Uint8List> downloadImage(String uuid) async {
-    var storage = AzureStorage.parse(Platform.environment[KEY_NAME]);
+    var storage = AzureStorage.parse(Platform.environment[KEY_NAME]!);
     var uri = storage.uri(path: '/${projectUUID}/${uuid}.png');
 
     var request = http.Request('GET', uri);

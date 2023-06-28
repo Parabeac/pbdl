@@ -10,8 +10,8 @@ import 'package:pbdl/src/util/main_info.dart';
 class FigmaController {
   DesignType get designType => DesignType.FIGMA;
 
-  String figmaProjectID;
-  FigmaKey figmaAPIKey;
+  String? figmaProjectID;
+  late FigmaKey figmaAPIKey;
 
   Future<FigmaProject> convertFile(
     String projectID,
@@ -20,7 +20,7 @@ class FigmaController {
   }) async {
     figmaProjectID = projectID;
     figmaAPIKey = figmaKey;
-    FigmaProject figmaProject;
+    FigmaProject? figmaProject;
     var jsonFigma = await _fetchFigmaFile();
     if (jsonFigma == null) {
       throw Error(); //todo: find correct error

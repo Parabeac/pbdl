@@ -5,15 +5,15 @@ part 'pbdl_effect.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLEffect {
-  String type;
-  bool visible;
-  num radius;
-  PBDLColor color;
-  String blendMode;
-  Map offset;
-  bool showShadowBehindNode;
+  String? type;
+  bool? visible;
+  num? radius;
+  PBDLColor? color;
+  String? blendMode;
+  Map? offset;
+  bool? showShadowBehindNode;
 
-  var pbdlType = 'effect';
+  String? pbdlType = 'effect';
 
   PBDLEffect({
     this.type,

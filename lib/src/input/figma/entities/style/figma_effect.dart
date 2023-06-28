@@ -7,13 +7,13 @@ part 'figma_effect.g.dart';
 
 @JsonSerializable()
 class FigmaEffect {
-  String type;
-  bool visible;
-  num radius;
-  FigmaColor color;
-  String blendMode;
-  Map offset;
-  bool showShadowBehindNode;
+  String? type;
+  bool? visible;
+  num? radius;
+  FigmaColor? color;
+  String? blendMode;
+  Map? offset;
+  bool? showShadowBehindNode;
 
   FigmaEffect({
     this.type,

@@ -9,10 +9,10 @@ part 'figma_style_property.g.dart';
 
 @JsonSerializable()
 class FigmaStyleProperty {
-  List<FigmaFill> fills;
-  FigmaStroke stroke;
-  List<FigmaEffect> effects;
-  bool clipsContent;
+  List<FigmaFill>? fills;
+  FigmaStroke? stroke;
+  List<FigmaEffect>? effects;
+  bool? clipsContent;
 
   FigmaStyleProperty({
     this.fills,
@@ -26,11 +26,11 @@ class FigmaStyleProperty {
 
   Map<String, dynamic> toJson() => _$FigmaStylePropertyToJson(this);
 
-  PBDLStyle interpretStyle([FigmaTextStyle textStyle]) {
+  PBDLStyle interpretStyle([FigmaTextStyle? textStyle]) {
     return PBDLStyle(
-      fills: fills.map((fill) => fill.interpretFill()).toList(),
-      borderOptions: stroke.interpretStroke(),
-      effects: effects.map((effect) => effect.interpretEffect()).toList(),
+      fills: fills!.map((fill) => fill.interpretFill()).toList(),
+      borderOptions: stroke!.interpretStroke(),
+      effects: effects!.map((effect) => effect.interpretEffect()).toList(),
       textStyle: textStyle?.interpretTextStyle(),
       clipsContent: clipsContent,
     );

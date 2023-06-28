@@ -17,7 +17,7 @@ class GlobalStyleHolder extends FigmaBaseNode {
   GlobalStyleHolder([this.designSystemThemeData]);
 
   /// Registered [GlobalStyleProperty]s.
-  final _properties = <String, GlobalStyleProperty>{};
+  final _properties = <String?, GlobalStyleProperty>{};
 
   final registeredPropertyNames = <String>[
     'fill',
@@ -27,11 +27,11 @@ class GlobalStyleHolder extends FigmaBaseNode {
   static var _styleNameCounter = Map<String, int>();
 
   @JsonKey(ignore: true)
-  final DesignSystemThemeData designSystemThemeData;
+  final DesignSystemThemeData? designSystemThemeData;
 
   /// Adds the [GlobalStyleProperty] to the correct list.
   void add(GlobalStyleProperty property) {
-    property.name = _checkAndReturnValueName(property.name);
+    property.name = _checkAndReturnValueName(property.name!);
     _properties[property.UUID] = property;
   }
 
@@ -45,9 +45,9 @@ class GlobalStyleHolder extends FigmaBaseNode {
   ///
   /// If the [UUID] is not found, returns null.
   /// If the [UUID] is found, but the type [T] does not match, returns null.
-  T getProperty<T extends GlobalStyleProperty>(String UUID) {
+  T? getProperty<T extends GlobalStyleProperty?>(String UUID) {
     if (_properties.containsKey(UUID) && _properties[UUID] is T) {
-      return _properties[UUID];
+      return _properties[UUID] as T?;
     }
     return null;
   }
@@ -55,7 +55,7 @@ class GlobalStyleHolder extends FigmaBaseNode {
   String _checkAndReturnValueName(String valueName) {
     var name = valueName.toLowerCase();
     if (_styleNameCounter.containsKey(name)) {
-      _styleNameCounter[name] += 1;
+      _styleNameCounter[name] = _styleNameCounter[name]! + 1;
       return valueName + _styleNameCounter[name].toString();
     } else {
       _styleNameCounter[name] = 1;
@@ -76,12 +76,12 @@ class GlobalStyleHolder extends FigmaBaseNode {
       if (interpretedFill == null) {
         continue;
       }
-      final colorScheme = designSystemThemeData.colorScheme(fill.name);
+      final colorScheme = designSystemThemeData!.colorScheme(fill.name);
       if (colorScheme != null) {
         (interpretedFill as PBDLGlobalColor).colorScheme = colorScheme.name;
         themeColors.add(interpretedFill);
       } else {
-        globalColors.add(interpretedFill);
+        globalColors.add(interpretedFill as PBDLGlobalColor);
       }
     }
 
@@ -91,10 +91,10 @@ class GlobalStyleHolder extends FigmaBaseNode {
       if (interpretedTextStyle == null) {
         continue;
       }
-      if (designSystemThemeData.isTextStyle(interpretedTextStyle.name)) {
-        themeTextStyles.add(interpretedTextStyle);
+      if (designSystemThemeData!.isTextStyle(interpretedTextStyle.name)) {
+        themeTextStyles.add(interpretedTextStyle as PBDLGlobalTextStyle);
       } else {
-        globalTextStyles.add(interpretedTextStyle);
+        globalTextStyles.add(interpretedTextStyle as PBDLGlobalTextStyle);
       }
     }
 
@@ -103,7 +103,7 @@ class GlobalStyleHolder extends FigmaBaseNode {
       textStyles: globalTextStyles,
       themeColors: themeColors,
       themeTextStyles: themeTextStyles,
-      designSystem: designSystemThemeData.name,
+      designSystem: designSystemThemeData!.name,
     );
   }
 

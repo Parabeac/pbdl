@@ -7,13 +7,12 @@ part of 'override_value.dart';
 // **************************************************************************
 
 FigmaOverridableValue _$FigmaOverridableValueFromJson(
-    Map<String, dynamic> json) {
-  return FigmaOverridableValue(
-    json['overrideName'] as String,
-    json['do_objectID'] as String,
-    json['value'],
-  );
-}
+        Map<String, dynamic> json) =>
+    FigmaOverridableValue(
+      json['overrideName'] as String?,
+      json['do_objectID'] as String?,
+      json['value'],
+    );
 
 Map<String, dynamic> _$FigmaOverridableValueToJson(
         FigmaOverridableValue instance) =>

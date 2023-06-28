@@ -11,24 +11,24 @@ part 'pbdl_screen.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLScreen extends PBDLNode implements PBDLNodeFactory {
-  bool convert = true;
-  String imageURI;
+  bool? convert = true;
+  String? imageURI;
 
   @override
-  String pbdlType = 'screen';
+  String? pbdlType = 'screen';
 
-  PBDLNode designNode;
+  PBDLNode? designNode;
 
   @override
-  bool isVisible;
+  bool? isVisible;
 
   // Do we still need this?
   // DesignPage parentPage;
 
   PBDLScreen({
-    PBDLNode designNode,
-    String UUID,
-    String name,
+    PBDLNode? designNode,
+    String UUID = '',
+    String? name,
     this.isVisible,
   }) : super(UUID, name, isVisible, null, null, null) {
     this.designNode = designNode;

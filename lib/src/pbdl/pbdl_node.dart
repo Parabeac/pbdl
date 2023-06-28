@@ -1,3 +1,4 @@
+import 'package:meta/meta.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/pbdl_boundary_box.dart';
 import 'package:pbdl/src/pbdl/pbdl_constraints.dart';
@@ -12,21 +13,23 @@ class PBDLNode implements Comparable<PBDLNode> {
   String UUID;
 
   @JsonKey(fromJson: parentLayoutFromString)
-  ParentLayoutSizing layoutMainAxisSizing;
+  ParentLayoutSizing? layoutMainAxisSizing;
   @JsonKey(fromJson: parentLayoutFromString)
-  ParentLayoutSizing layoutCrossAxisSizing;
+  ParentLayoutSizing? layoutCrossAxisSizing;
 
   @JsonKey(ignore: true)
-  Logger logger;
-  String name;
-  bool isVisible;
-  PBDLBoundaryBox boundaryRectangle;
-  String pbdlType;
-  PBDLStyle style;
-  String prototypeNodeUUID;
-  PBDLNode child;
+  Logger? logger;
+  String? name;
+  //TODO: make [isVisible] a named attribute and defaut it to true
+  bool? isVisible;
+  PBDLBoundaryBox? boundaryRectangle;
+  //TODO: Add [pbdlType] as a required parameter in the constructor
+  String? pbdlType;
+  PBDLStyle? style;
+  String? prototypeNodeUUID;
+  PBDLNode? child;
   @JsonKey()
-  PBDLConstraints constraints;
+  PBDLConstraints? constraints;
   PBDLNode(
     this.UUID,
     this.name,
@@ -49,7 +52,7 @@ class PBDLNode implements Comparable<PBDLNode> {
   /// This is done in order to consistently generate PBDL files in the same order
   void sortByUUID() {
     if (child != null) {
-      child.sortByUUID();
+      child!.sortByUUID();
     }
   }
 
@@ -58,13 +61,13 @@ class PBDLNode implements Comparable<PBDLNode> {
   Map<String, dynamic> toJson() => _$PBDLNodeToJson(this);
 
   factory PBDLNode.fromJson(Map<String, dynamic> json) =>
-      AbstractPBDLNodeFactory.getPBDLNode(json);
+      AbstractPBDLNodeFactory.getPBDLNode(json)!;
 
   /// Compares `this` [PBDLNode] to `other` based on `UUID` to make it simpler to sort elements
   @override
   int compareTo(PBDLNode other) => UUID.compareTo(other.UUID);
 
-  static ParentLayoutSizing parentLayoutFromString(String value) {
+  static ParentLayoutSizing parentLayoutFromString(String? value) {
     for (var enumVal in ParentLayoutSizing.values) {
       if (enumVal.toString().split('.')[1] == value) {
         return enumVal;

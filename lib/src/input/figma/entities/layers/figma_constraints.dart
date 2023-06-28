@@ -7,8 +7,8 @@ part 'figma_constraints.g.dart';
 @JsonSerializable(nullable: true)
 class FigmaConstraints {
   FigmaConstraints(this.horizontal, this.vertical);
-  FigmaConstraintType horizontal;
-  FigmaConstraintType vertical;
+  FigmaConstraintType? horizontal;
+  FigmaConstraintType? vertical;
 
   factory FigmaConstraints.fromJson(Map<String, dynamic> json) =>
       _$FigmaConstraintsFromJson(json);
@@ -21,7 +21,7 @@ class FigmaConstraints {
   }
 
   PBDLConstraints _convertFigmaConstraint(
-      FigmaConstraintType figmaConstraintType,
+      FigmaConstraintType? figmaConstraintType,
       PBDLConstraints constraints,
       bool isVertical) {
     if (figmaConstraintType == FigmaConstraintType.SCALE) {

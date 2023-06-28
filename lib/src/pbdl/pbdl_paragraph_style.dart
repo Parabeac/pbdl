@@ -5,7 +5,7 @@ part 'pbdl_paragraph_style.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLParagraphStyle {
   PBDLParagraphStyle({this.alignment});
-  int alignment;
+  int? alignment;
 
   final type = 'paragraph_style';
 

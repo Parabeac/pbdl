@@ -7,15 +7,15 @@ part 'figma_list_stroke.g.dart';
 
 @JsonSerializable()
 class FigmaListStroke implements StyleAdditionNode {
-  String blendMode;
+  String? blendMode;
 
   @override
-  String type;
+  String? type;
 
-  FigmaColor color;
+  FigmaColor? color;
 
   @JsonKey(defaultValue: true)
-  bool visible;
+  bool? visible;
 
   FigmaListStroke({
     this.blendMode,

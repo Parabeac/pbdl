@@ -10,16 +10,16 @@ part 'pbdl_global_text_style.g.dart';
 class PBDLGlobalTextStyle extends PBDLGlobalStyle {
   PBDLGlobalTextStyle(
     String UUID,
-    String name,
+    String? name,
     this.textStyle, {
-    String description = '',
+    String? description = '',
   }) : super(UUID, name, description: description);
 
   @override
-  String pbdlType = 'global_text_style';
+  String? pbdlType = 'global_text_style';
 
   /// Contains the actual text style value.
-  PBDLTextStyle textStyle;
+  PBDLTextStyle? textStyle;
 
   factory PBDLGlobalTextStyle.fromJson(Map<String, dynamic> json) =>
       _$PBDLGlobalTextStyleFromJson(json);

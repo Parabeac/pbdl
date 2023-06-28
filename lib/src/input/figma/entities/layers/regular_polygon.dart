@@ -14,21 +14,21 @@ part 'regular_polygon.g.dart';
 class FigmaRegularPolygon extends FigmaVector
     implements AbstractFigmaNodeFactory {
   @override
-  String type = 'REGULAR_POLYGON';
+  String? type = 'REGULAR_POLYGON';
   FigmaRegularPolygon({
-    String name,
-    bool visible,
-    String type,
+    String? name,
+    bool? visible,
+    String? type,
     pluginData,
     sharedPluginData,
     layoutAlign,
-    FigmaConstraints constraints,
+    FigmaConstraints? constraints,
     boundaryRectangle,
     size,
     styles,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
   }) : super(
           name: name,
           visible: visible,
@@ -60,14 +60,14 @@ class FigmaRegularPolygon extends FigmaVector
     imageReference = FigmaAssetProcessor().processImage(
       UUID,
       absoluteBoundingBox: absoluteBoundingBox,
-      name: name,
+      name: name!,
       format: IMAGE_FORMAT.SVG,
       effects: figmaStyleProperty?.effects ?? [],
     );
     return Future.value(PBDLImage(
       imageReference: imageReference,
-      UUID: UUID,
-      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+      UUID: UUID!,
+      boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
       isVisible: isVisible,
       name: name,
       prototypeNodeUUID: transitionNodeID,
@@ -78,7 +78,7 @@ class FigmaRegularPolygon extends FigmaVector
   }
 
   @override
-  String imageReference;
+  String? imageReference;
 
   @override
   Map<String, dynamic> toPBDF() => toJson();

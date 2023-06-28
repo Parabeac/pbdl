@@ -13,30 +13,32 @@ part 'text.g.dart';
 
 @JsonSerializable()
 class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
-  FigmaTextStyle style;
+  FigmaTextStyle? style;
 
   @override
-  String type = 'TEXT';
+  String? type = 'TEXT';
   FigmaText({
-    String name,
-    bool visible,
-    String type,
+    String UUID = '',
+    String? name,
+    bool? visible,
+    String? type,
     pluginData,
     sharedPluginData,
     this.style,
-    FigmaConstraints constraints,
+    FigmaConstraints? constraints,
     boundaryRectangle,
     size,
     styles,
     this.content,
     this.characterStyleOverrides,
     this.styleOverrideTable,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
     layoutAlign,
     layoutGrow,
   }) : super(
+          UUID: UUID,
           name: name,
           visible: visible,
           type: type,
@@ -56,11 +58,11 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
         );
 
   @JsonKey(name: 'characters')
-  String content;
+  String? content;
 
-  List<double> characterStyleOverrides;
+  List<double>? characterStyleOverrides;
 
-  Map styleOverrideTable;
+  Map? styleOverrideTable;
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
@@ -79,10 +81,10 @@ class FigmaText extends FigmaVector implements AbstractFigmaNodeFactory {
     return Future.value(
       PBDLText(
         UUID: UUID,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: figmaStyleProperty.interpretStyle(style),
+        style: figmaStyleProperty!.interpretStyle(style),
         content: content,
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),

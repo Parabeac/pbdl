@@ -13,9 +13,9 @@ part 'pbdl_artboard.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
-  PBDLColor backgroundColor;
+  PBDLColor? backgroundColor;
   @override
-  PBDLBoundaryBox boundaryRectangle;
+  PBDLBoundaryBox? boundaryRectangle;
   var isFlowHome;
 
   @override
@@ -26,11 +26,11 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
     this.isFlowHome,
     hasClickThrough,
     groupLayout,
-    UUID,
+    UUID = '',
     booleanOperation,
     exportOptions,
     this.boundaryRectangle,
-    PBDLFlow flow,
+    PBDLFlow? flow,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
@@ -39,7 +39,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
     layerListExpandedType,
     name,
     nameIsFixed,
-    PBDLConstraints constraints,
+    PBDLConstraints? constraints,
     resizingType,
     rotation,
     sharedStyleID,
@@ -49,7 +49,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
     userInfo,
     maintainScrollPosition,
     prototypeNodeUUID,
-    PBDLStyle style,
+    PBDLStyle? style,
     this.children,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
@@ -65,7 +65,7 @@ class PBDLArtboard extends PBDLNode implements PBDLGroupNode, PBDLNodeFactory {
         ) {}
 
   @override
-  List<PBDLNode> children = [];
+  List<PBDLNode?>? children = [];
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>

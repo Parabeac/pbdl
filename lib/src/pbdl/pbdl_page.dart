@@ -15,14 +15,14 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
   @JsonKey(ignore: true)
   var log = Logger('DesignPage');
 
-  String imageURI;
-  bool convert = true;
+  String? imageURI;
+  bool? convert = true;
 
-  List<PBDLNode> screens = [];
+  List<PBDLNode>? screens = [];
 
   PBDLPage({
-    String name,
-    String UUID,
+    String? name,
+    String UUID = '',
     this.screens,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
@@ -38,12 +38,12 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
         );
 
   void addScreen(PBDLScreen item) {
-    screens.add(item);
+    screens!.add(item);
   }
 
-  List<PBDLScreen> getPageItems() {
-    log.info('We encountered a page that has ${screens.length} page items.');
-    return screens;
+  List<PBDLScreen>? getPageItems() {
+    log.info('We encountered a page that has ${screens!.length} page items.');
+    return screens as List<PBDLScreen>?;
   }
 
   @override
@@ -55,14 +55,14 @@ class PBDLPage extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLPageToJson(this);
 
   @override
-  String pbdlType = 'page';
+  String? pbdlType = 'page';
 
   @override
   void sortByUUID() {
     /// Sort [PBDLNode] `Screens` within this [PBDLPage]
-    screens.sort();
+    screens!.sort();
 
     /// Ensure each `screen` sorts its elements
-    screens.forEach((screen) => screen.sortByUUID());
+    screens!.forEach((screen) => screen.sortByUUID());
   }
 }

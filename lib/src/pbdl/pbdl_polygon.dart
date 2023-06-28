@@ -11,21 +11,21 @@ part 'pbdl_polygon.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLPolygon extends PBDLNode implements PBDLNodeFactory {
   PBDLPolygon({
-    bool edited,
-    bool isClosed,
+    bool? edited,
+    bool? isClosed,
     pointRadiusBehaviour,
-    List points,
-    String UUID,
+    List? points,
+    String UUID = '',
     booleanOperation,
     exportOptions,
-    PBDLBoundaryBox boundaryRectangle,
+    PBDLBoundaryBox? boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    bool isVisible,
+    bool? isVisible,
     layerListExpandedType,
-    String name,
+    String? name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -36,9 +36,9 @@ class PBDLPolygon extends PBDLNode implements PBDLNodeFactory {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    PBDLStyle style,
+    PBDLStyle? style,
     this.child,
-    String prototypeNodeUUID,
+    String? prototypeNodeUUID,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
   }) : super(
@@ -61,8 +61,8 @@ class PBDLPolygon extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLPolygonToJson(this);
 
   @override
-  String pbdlType = 'polygon';
+  String? pbdlType = 'polygon';
 
   @override
-  PBDLNode child;
+  PBDLNode? child;
 }

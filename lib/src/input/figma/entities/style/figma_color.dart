@@ -7,16 +7,16 @@ part 'figma_color.g.dart';
 @JsonSerializable()
 class FigmaColor extends FigmaBaseNode {
   @JsonKey(name: 'a')
-  double alpha;
+  double? alpha;
 
   @JsonKey(name: 'b')
-  double blue;
+  double? blue;
 
   @JsonKey(name: 'g')
-  double green;
+  double? green;
 
   @JsonKey(name: 'r')
-  double red;
+  double? red;
 
   FigmaColor({this.alpha, this.red, this.green, this.blue});
 

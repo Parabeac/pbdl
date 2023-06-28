@@ -10,46 +10,46 @@ part 'pbdl_shared_instance_node.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
-  String symbolID;
-  List parameters;
+  String? symbolID;
+  List? parameters;
 
-  final List<PBDLOverrideValue> overrideValues;
+  final List<PBDLOverrideValue>? overrideValues;
 
-  String sharedNodeSetID;
+  String? sharedNodeSetID;
 
   @override
   final pbdlType = 'shared_instance';
 
   PBDLSharedInstanceNode({
-    String UUID,
+    String UUID = '',
     this.overrideValues,
-    String name,
-    bool isVisible,
-    PBDLBoundaryBox boundaryRectangle,
-    PBDLStyle style,
+    String? name,
+    bool? isVisible,
+    PBDLBoundaryBox? boundaryRectangle,
+    PBDLStyle? style,
     exportOptions,
     booleanOperation,
-    bool isFixedToViewport,
-    bool isFlippedVertical,
-    bool isFlippedHorizontal,
-    bool isLocked,
+    bool? isFixedToViewport,
+    bool? isFlippedVertical,
+    bool? isFlippedHorizontal,
+    bool? isLocked,
     layerListExpandedType,
-    bool nameIsFixed,
+    bool? nameIsFixed,
     resizingConstraint,
     resizingType,
-    num rotation,
+    num? rotation,
     sharedStyleID,
-    bool shouldBreakMaskChain,
-    bool hasClippingMask,
-    int clippingMaskMode,
+    bool? shouldBreakMaskChain,
+    bool? hasClippingMask,
+    int? clippingMaskMode,
     userInfo,
-    bool maintainScrollPosition,
-    num scale,
+    bool? maintainScrollPosition,
+    num? scale,
     this.symbolID,
-    num verticalSpacing,
-    num horizontalSpacing,
-    String prototypeNodeUUID,
-    PBDLConstraints constraints,
+    num? verticalSpacing,
+    num? horizontalSpacing,
+    String? prototypeNodeUUID,
+    PBDLConstraints? constraints,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
     this.sharedNodeSetID,
@@ -76,9 +76,9 @@ class PBDLSharedInstanceNode extends PBDLNode implements PBDLNodeFactory {
   @override
   void sortByUUID() {
     /// Sort [PBDLOverrideValue] by UUID
-    overrideValues.sort();
+    overrideValues!.sort();
 
     /// Ensure each `value` sorts its elements
-    overrideValues.forEach((value) => value.sortByUUID());
+    overrideValues!.forEach((value) => value.sortByUUID());
   }
 }

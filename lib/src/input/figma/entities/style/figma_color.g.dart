@@ -6,14 +6,12 @@ part of 'figma_color.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FigmaColor _$FigmaColorFromJson(Map<String, dynamic> json) {
-  return FigmaColor(
-    alpha: (json['a'] as num)?.toDouble(),
-    red: (json['r'] as num)?.toDouble(),
-    green: (json['g'] as num)?.toDouble(),
-    blue: (json['b'] as num)?.toDouble(),
-  );
-}
+FigmaColor _$FigmaColorFromJson(Map<String, dynamic> json) => FigmaColor(
+      alpha: (json['a'] as num?)?.toDouble(),
+      red: (json['r'] as num?)?.toDouble(),
+      green: (json['g'] as num?)?.toDouble(),
+      blue: (json['b'] as num?)?.toDouble(),
+    );
 
 Map<String, dynamic> _$FigmaColorToJson(FigmaColor instance) =>
     <String, dynamic>{

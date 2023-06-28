@@ -13,24 +13,24 @@ part 'pbdl_rectangle.g.dart';
 class PBDLRectangle extends PBDLNode
     with PBColorMixin
     implements PBDLNodeFactory {
-  num fixedRadius;
+  num? fixedRadius;
 
   PBDLRectangle({
     this.fixedRadius,
-    bool edited,
-    bool isClosed,
+    bool? edited,
+    bool? isClosed,
     pointRadiusBehaviour,
-    String UUID,
+    String UUID = '',
     booleanOperation,
     exportOptions,
-    PBDLBoundaryBox boundaryRectangle,
+    PBDLBoundaryBox? boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    bool isVisible,
+    bool? isVisible,
     layerListExpandedType,
-    String name,
+    String? name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -41,10 +41,10 @@ class PBDLRectangle extends PBDLNode
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    PBDLStyle style,
+    PBDLStyle? style,
     this.child,
-    String prototypeNodeUUID,
-    PBDLConstraints constraints,
+    String? prototypeNodeUUID,
+    PBDLConstraints? constraints,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
   }) : super(
@@ -68,8 +68,8 @@ class PBDLRectangle extends PBDLNode
   Map<String, dynamic> toJson() => _$PBDLRectangleToJson(this);
 
   @override
-  String pbdlType = 'rectangle';
+  String? pbdlType = 'rectangle';
 
   @override
-  PBDLNode child;
+  PBDLNode? child;
 }

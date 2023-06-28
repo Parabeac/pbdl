@@ -18,14 +18,14 @@ part 'component.g.dart';
 @JsonSerializable()
 class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
   /// Map that keeps track of override properties repeated names.
-  @JsonKey(ignore: true)
-  var repeatNames = <String, int>{};
+  @JsonKey(includeFromJson: true, includeToJson: false)
+  final repeatNames = <String, int>{};
   @override
-  String type = 'COMPONENT';
+  String? type = 'COMPONENT';
 
-  String componentSetId;
+  String? componentSetId;
 
-  String componentSetName;
+  String? componentSetName;
 
   Component({
     name,
@@ -39,18 +39,18 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     strokeWeight,
     strokeAlign,
     cornerRadius,
-    FigmaConstraints constraints,
+    FigmaConstraints? constraints,
     layoutAlign,
     size,
     horizontalPadding,
     verticalPadding,
     itemSpacing,
-    List<FigmaNode> children,
-    FigmaColor backgroundColor,
+    List<FigmaNode>? children,
+    FigmaColor? backgroundColor,
     this.symbolID,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
     this.componentSetId,
     this.componentSetName,
   }) : super(
@@ -98,19 +98,19 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
     /// Create Overidable Properties.
     var props = <PBDLOverrideProperty>[];
 
-    for (var child in children) {
+    for (var child in children!) {
       var currProps = await _traverseChildrenForOverrides(child)
         ..removeWhere((element) => element.value == null);
       props.addAll(currProps);
     }
 
     return PBDLSharedMasterNode(
-      UUID: UUID,
+      UUID: UUID!,
       overrideProperties: props,
       name: name,
       isVisible: isVisible,
-      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
-      style: figmaStyleProperty.interpretStyle(),
+      boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
+      style: figmaStyleProperty!.interpretStyle(),
       prototypeNodeUUID: transitionNodeID,
       symbolID: UUID,
       constraints: isRoot
@@ -120,7 +120,7 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       layoutMainAxisSizing: getGrowSizing(layoutGrow),
       layoutCrossAxisSizing: getAlignSizing(layoutAlign),
       children: await Future.wait(
-          children.map((e) async => await e.interpretNode()).toList()),
+          children!.map((e) async => await e.interpretNode()).toList()),
       sharedNodeSetID: componentSetId,
       componentSetName: componentSetName,
     );
@@ -139,17 +139,17 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       if (override != null) {
         // Check `current.name` for name collisions
         if (repeatNames.containsKey(current.name)) {
-          repeatNames[current.name]++;
+          repeatNames[current.name!] = repeatNames[current.name]! + 1;
 
           current.name =
               '${current.name}${repeatNames[current.name].toString()}';
         } else if (current is! Instance) {
-          repeatNames[current.name] = 1;
+          repeatNames[current.name!] = 1;
         }
 
         var overrideProp = PBDLOverrideProperty(
-          current.UUID,
-          current.name,
+          current.UUID!,
+          current.name!,
           override.getPBDLType(),
           await override.getProperty(current),
         )..constraints = current.constraints?.interpret();
@@ -161,19 +161,19 @@ class Component extends FigmaFrame implements AbstractFigmaNodeFactory {
       if (current is Instance) {
         continue;
       } else if (current.child != null) {
-        stack.add(current.child);
+        stack.add(current.child!);
       } else if (current is FigmaChildrenNode && current.children != null) {
-        current.children.forEach(stack.add);
+        current.children!.forEach(stack.add);
       }
     }
     return Future.value(values);
   }
 
-  String symbolID;
+  String? symbolID;
 
   @override
   Map<String, dynamic> toPBDF() => toJson();
 
   @override
-  var isFlowHome;
+  bool? isFlowHome;
 }

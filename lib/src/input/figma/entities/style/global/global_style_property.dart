@@ -3,11 +3,11 @@ import 'package:pbdl/src/input/figma/entities/style/global/fill_style_global.dar
 import 'package:pbdl/src/input/figma/entities/style/global/text_style_global.dart';
 
 abstract class GlobalStyleProperty extends FigmaBaseNode {
-  final String UUID;
-  String name;
-  final String description;
-  final String styleType;
-  FigmaBaseNode styleNode;
+  final String? UUID;
+  String? name;
+  final String? description;
+  final String? styleType;
+  FigmaBaseNode? styleNode;
 
   GlobalStyleProperty(
     this.UUID,
@@ -27,7 +27,7 @@ abstract class GlobalStyleProperty extends FigmaBaseNode {
       case 'TEXT':
         return TextStyleGlobal.fromJson(json, styleNode);
       default:
-        return null;
+        throw Exception('Invalid or unsupported styleType');
     }
   }
 }

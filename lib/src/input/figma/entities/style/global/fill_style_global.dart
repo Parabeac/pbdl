@@ -11,11 +11,11 @@ part 'fill_style_global.g.dart';
 @JsonSerializable(explicitToJson: true)
 class FillStyleGlobal extends GlobalStyleProperty {
   FillStyleGlobal(
-    String UUID,
-    String styleType, {
-    String name,
-    String description,
-    FigmaColor styleNode,
+    String? UUID,
+    String? styleType, {
+    String? name,
+    String? description,
+    FigmaColor? styleNode,
   }) : super(
           UUID,
           styleType,
@@ -25,12 +25,12 @@ class FillStyleGlobal extends GlobalStyleProperty {
         );
 
   @override
-  Future<PBDLNode> interpretNode() async {
+  Future<PBDLNode?> interpretNode() async {
     if (styleNode == null) {
       return null;
     }
     return PBDLGlobalColor(
-      UUID,
+      UUID!,
       name,
       (styleNode as FigmaColor).interpretColor(),
       description: description,
@@ -42,10 +42,9 @@ class FillStyleGlobal extends GlobalStyleProperty {
   factory FillStyleGlobal.fromJson(
       Map<String, dynamic> json, FigmaBaseNode styleNode) {
     if (styleNode is! FigmaRectangle) {
-      return null;
+      throw Exception('StyleNode must be a rectangle');
     }
-    var color =
-        (styleNode as FigmaRectangle).figmaStyleProperty.fills.first.color;
+    var color = styleNode.figmaStyleProperty!.fills!.first.color;
     var globalFill = _$FillStyleGlobalFromJson(json)..styleNode = color;
 
     return globalFill;

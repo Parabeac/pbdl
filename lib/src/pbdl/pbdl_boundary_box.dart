@@ -5,10 +5,10 @@ part 'pbdl_boundary_box.g.dart';
 
 @JsonSerializable()
 class PBDLBoundaryBox {
-  final bool constrainProportions;
-  PBDLConstraints constraints;
-  double height, width, x, y, z;
-  String type = 'boundaryBox';
+  final bool? constrainProportions;
+  PBDLConstraints? constraints;
+  double? height, width, x, y, z;
+  String? type = 'boundaryBox';
 
   PBDLBoundaryBox(
       {this.constrainProportions,

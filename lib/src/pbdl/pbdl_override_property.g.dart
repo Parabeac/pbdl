@@ -6,27 +6,28 @@ part of 'pbdl_override_property.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PBDLOverrideProperty _$PBDLOverridePropertyFromJson(Map<String, dynamic> json) {
-  return PBDLOverrideProperty(
-    json['UUID'] as String,
-    json['name'] as String,
-    json['ovrType'],
-    json['value'] == null
-        ? null
-        : PBDLNode.fromJson(json['value'] as Map<String, dynamic>),
-  )
-    ..layoutMainAxisSizing =
-        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
-    ..layoutCrossAxisSizing =
-        PBDLNode.parentLayoutFromString(json['layoutCrossAxisSizing'] as String)
-    ..child = json['child'] == null
-        ? null
-        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..constraints = json['constraints'] == null
-        ? null
-        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..pbdlType = json['pbdlType'] as String;
-}
+PBDLOverrideProperty _$PBDLOverridePropertyFromJson(
+        Map<String, dynamic> json) =>
+    PBDLOverrideProperty(
+      json['UUID'] as String,
+      json['name'] as String,
+      json['ovrType'],
+      json['value'] == null
+          ? null
+          : PBDLNode.fromJson(json['value'] as Map<String, dynamic>),
+    )
+      ..layoutMainAxisSizing = PBDLNode.parentLayoutFromString(
+          json['layoutMainAxisSizing'] as String?)
+      ..layoutCrossAxisSizing = PBDLNode.parentLayoutFromString(
+          json['layoutCrossAxisSizing'] as String?)
+      ..child = json['child'] == null
+          ? null
+          : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
+      ..constraints = json['constraints'] == null
+          ? null
+          : PBDLConstraints.fromJson(
+              json['constraints'] as Map<String, dynamic>)
+      ..pbdlType = json['pbdlType'] as String?;
 
 Map<String, dynamic> _$PBDLOverridePropertyToJson(
         PBDLOverrideProperty instance) =>

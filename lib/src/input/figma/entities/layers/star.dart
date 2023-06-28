@@ -14,21 +14,21 @@ part 'star.g.dart';
 @JsonSerializable()
 class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
   @override
-  String type = 'STAR';
+  String? type = 'STAR';
   FigmaStar({
-    String name,
-    bool visible,
-    String type,
+    String? name,
+    bool? visible,
+    String? type,
     pluginData,
     sharedPluginData,
     layoutAlign,
-    FigmaConstraints constraints,
-    FigmaRect boundaryRectangle,
+    FigmaConstraints? constraints,
+    FigmaRect? boundaryRectangle,
     size,
     styles,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
   }) : super(
           name: name,
           visible: visible,
@@ -57,14 +57,14 @@ class FigmaStar extends FigmaVector implements AbstractFigmaNodeFactory {
     imageReference = FigmaAssetProcessor().processImage(
       UUID,
       absoluteBoundingBox: absoluteBoundingBox,
-      name: name,
+      name: name!,
       format: IMAGE_FORMAT.SVG,
       effects: figmaStyleProperty?.effects ?? [],
     );
     return Future.value(PBDLImage(
       imageReference: imageReference,
-      UUID: UUID,
-      boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+      UUID: UUID!,
+      boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
       isVisible: isVisible,
       name: name,
       style: figmaStyleProperty?.interpretStyle(),

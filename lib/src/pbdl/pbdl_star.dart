@@ -12,21 +12,21 @@ part 'pbdl_star.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLStar extends PBDLNode implements PBDLNodeFactory {
   PBDLStar({
-    bool edited,
-    bool isClosed,
+    bool? edited,
+    bool? isClosed,
     pointRadiusBehaviour,
-    List points,
-    String UUID,
+    List? points,
+    String UUID = '',
     booleanOperation,
     exportOptions,
-    PBDLBoundaryBox boundaryRectangle,
+    PBDLBoundaryBox? boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    bool isVisible,
+    bool? isVisible,
     layerListExpandedType,
-    String name,
+    String? name,
     nameIsFixed,
     resizingConstraint,
     resizingType,
@@ -37,9 +37,9 @@ class PBDLStar extends PBDLNode implements PBDLNodeFactory {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    PBDLStyle style,
+    PBDLStyle? style,
     this.child,
-    String prototypeNodeUUID,
+    String? prototypeNodeUUID,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
   }) : super(
@@ -61,8 +61,8 @@ class PBDLStar extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLStarToJson(this);
 
   @override
-  String pbdlType = 'star';
+  String? pbdlType = 'star';
 
   @override
-  PBDLNode child;
+  PBDLNode? child;
 }

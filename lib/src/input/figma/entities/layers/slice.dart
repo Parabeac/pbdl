@@ -18,28 +18,28 @@ part 'slice.g.dart';
 ///exportSettings and export its content via exportAsync.
 class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   @override
-  String type = 'SLICE';
+  String? type = 'SLICE';
 
   @override
   @JsonKey()
-  var absoluteBoundingBox;
+  FigmaRect? absoluteBoundingBox;
 
   var size;
 
   FigmaSlice({
-    String name,
-    bool visible,
-    String type,
+    String? name,
+    bool? visible,
+    String? type,
     pluginData,
     sharedPluginData,
     layoutAlign,
     layoutGrow,
-    FigmaConstraints constraints,
+    FigmaConstraints? constraints,
     this.absoluteBoundingBox,
     this.size,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
   }) : super(
           name,
           visible,
@@ -66,12 +66,12 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   Future<PBDLNode> interpretNode() async {
     return Future.value(
       PBDLRectangle(
-        UUID: UUID,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        UUID: UUID!,
+        boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,
         style: style.interpretStyle(),
-        child: await child.interpretNode(),
+        child: await child!.interpretNode(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
@@ -81,10 +81,10 @@ class FigmaSlice extends FigmaNode implements FigmaNodeFactory {
   }
 
   @override
-  bool isVisible;
+  bool? isVisible;
 
   @JsonKey(ignore: true)
-  var style;
+  late var style;
 
   Map<String, dynamic> toPBDF() => toJson();
 }

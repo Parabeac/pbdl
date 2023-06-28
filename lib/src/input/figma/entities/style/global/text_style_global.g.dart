@@ -6,17 +6,16 @@ part of 'text_style_global.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TextStyleGlobal _$TextStyleGlobalFromJson(Map<String, dynamic> json) {
-  return TextStyleGlobal(
-    json['UUID'] as String,
-    json['styleType'] as String,
-    name: json['name'] as String,
-    description: json['description'] as String,
-    styleNode: json['styleNode'] == null
-        ? null
-        : FigmaTextStyle.fromJson(json['styleNode'] as Map<String, dynamic>),
-  );
-}
+TextStyleGlobal _$TextStyleGlobalFromJson(Map<String, dynamic> json) =>
+    TextStyleGlobal(
+      json['UUID'] as String?,
+      json['styleType'] as String?,
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      styleNode: json['styleNode'] == null
+          ? null
+          : FigmaTextStyle.fromJson(json['styleNode'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$TextStyleGlobalToJson(TextStyleGlobal instance) =>
     <String, dynamic>{

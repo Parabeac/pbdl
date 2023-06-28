@@ -14,11 +14,11 @@ class FigmaRect {
     this.height,
   });
 
-  double x;
-  double y;
-  double z;
-  double width;
-  double height;
+  double? x;
+  double? y;
+  double? z;
+  double? width;
+  double? height;
 
   @override
   factory FigmaRect.fromJson(Map<String, dynamic> json) =>

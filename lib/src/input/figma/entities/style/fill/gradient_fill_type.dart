@@ -9,30 +9,30 @@ part 'gradient_fill_type.g.dart';
 
 @JsonSerializable()
 class GradientFillType implements FigmaFill {
-  List<GradientStop> gradientStops;
+  List<GradientStop>? gradientStops;
   @JsonKey(fromJson: _pointsFromJson, toJson: _pointsToJson)
   List<Point> gradientHandlePositions;
 
   @override
-  FigmaColor color;
+  FigmaColor? color;
 
   @override
-  String type;
+  String? type;
 
   @override
-  String blendMode;
+  String? blendMode;
 
   @override
   @JsonKey(defaultValue: true)
-  bool visible;
+  bool? visible;
 
   @override
   @JsonKey(defaultValue: 100)
-  num opacity;
+  num? opacity;
 
   GradientFillType({
     this.gradientStops,
-    this.gradientHandlePositions,
+    this.gradientHandlePositions = const [],
     this.blendMode,
     this.visible,
     this.opacity,
@@ -61,8 +61,8 @@ class GradientFillType implements FigmaFill {
   Map<String, dynamic> toJson() => _$GradientFillTypeToJson(this);
 
   @override
-  FigmaFill createFigmaFill(Map<String, dynamic> json) =>
-      GradientFillType.fromJson(json);
+  FigmaFill createFigmaFill(Map<String, dynamic>? json) =>
+      GradientFillType.fromJson(json!);
 
   @override
   PBDLFill interpretFill() {
@@ -72,7 +72,7 @@ class GradientFillType implements FigmaFill {
       type: type,
       isEnabled: visible,
       color: color?.interpretColor(),
-      gradientStops: gradientStops
+      gradientStops: gradientStops!
           .map((gradientStop) => gradientStop.interpretGradientStop())
           .toList(),
       gradientHandlePositions: gradientHandlePositions,
@@ -88,8 +88,8 @@ class GradientFillType implements FigmaFill {
 
 @JsonSerializable()
 class GradientStop {
-  FigmaColor color;
-  num position;
+  FigmaColor? color;
+  num? position;
 
   GradientStop({
     this.color,
@@ -98,7 +98,7 @@ class GradientStop {
 
   PBDLGradientStop interpretGradientStop() {
     return PBDLGradientStop(
-      color: color.interpretColor(),
+      color: color!.interpretColor(),
       position: position,
     );
   }

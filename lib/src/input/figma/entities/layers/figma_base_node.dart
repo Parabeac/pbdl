@@ -4,7 +4,7 @@ import 'package:pbdl/pbdl.dart';
 @JsonSerializable()
 abstract class FigmaBaseNode {
   FigmaBaseNode();
-  Future<PBDLNode> interpretNode();
+  Future<PBDLNode?> interpretNode();
 
   factory FigmaBaseNode.fromJson() {
     throw UnimplementedError();

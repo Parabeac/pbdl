@@ -12,10 +12,10 @@ class PBDLColor {
     this.b,
   );
 
-  double a;
-  double r;
-  double g;
-  double b;
+  double? a;
+  double? r;
+  double? g;
+  double? b;
 
   final type = 'color';
 
@@ -51,7 +51,7 @@ mixin PBColorMixin {
     }
   }
 
-  String findDefaultColor(String hex) {
+  String? findDefaultColor(String hex) {
     switch (hex) {
       case '0xffffffff':
         return 'Colors.white';

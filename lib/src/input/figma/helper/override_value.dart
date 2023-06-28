@@ -8,9 +8,9 @@ part 'override_value.g.dart';
 /// description: Defines override properties on symbol masters
 class FigmaOverridableValue {
   static final String CLASS_NAME = 'overrideValue';
-  final String overrideName;
+  final String? overrideName;
   @JsonKey(name: 'do_objectID')
-  final String UUID;
+  final String? UUID;
   final dynamic value;
 
   FigmaOverridableValue(this.overrideName, this.UUID, this.value);

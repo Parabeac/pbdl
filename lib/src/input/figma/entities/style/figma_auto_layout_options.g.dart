@@ -7,20 +7,19 @@ part of 'figma_auto_layout_options.dart';
 // **************************************************************************
 
 FigmaAutoLayoutOptions _$FigmaAutoLayoutOptionsFromJson(
-    Map<String, dynamic> json) {
-  return FigmaAutoLayoutOptions(
-    layoutMode: json['layoutMode'] as String,
-    itemSpacing: json['itemSpacing'] as num,
-    paddingLeft: json['paddingLeft'] as num,
-    paddingRight: json['paddingRight'] as num,
-    paddingTop: json['paddingTop'] as num,
-    paddingBottom: json['paddingBottom'] as num,
-    primaryAxisSizingMode: json['primaryAxisSizingMode'] as String,
-    counterAxisSizingMode: json['counterAxisSizingMode'] as String,
-    primaryAxisAlignItems: json['primaryAxisAlignItems'] as String,
-    counterAxisAlignItems: json['counterAxisAlignItems'] as String,
-  );
-}
+        Map<String, dynamic> json) =>
+    FigmaAutoLayoutOptions(
+      layoutMode: json['layoutMode'] as String?,
+      itemSpacing: json['itemSpacing'] as num?,
+      paddingLeft: json['paddingLeft'] as num?,
+      paddingRight: json['paddingRight'] as num?,
+      paddingTop: json['paddingTop'] as num?,
+      paddingBottom: json['paddingBottom'] as num?,
+      primaryAxisSizingMode: json['primaryAxisSizingMode'] as String?,
+      counterAxisSizingMode: json['counterAxisSizingMode'] as String?,
+      primaryAxisAlignItems: json['primaryAxisAlignItems'] as String?,
+      counterAxisAlignItems: json['counterAxisAlignItems'] as String?,
+    );
 
 Map<String, dynamic> _$FigmaAutoLayoutOptionsToJson(
         FigmaAutoLayoutOptions instance) =>

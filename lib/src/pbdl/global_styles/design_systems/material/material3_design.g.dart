@@ -6,38 +6,38 @@ part of 'material3_design.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MaterialDesign3 _$MaterialDesign3FromJson(Map<String, dynamic> json) {
-  return MaterialDesign3()
-    ..UUID = json['UUID'] as String
-    ..layoutMainAxisSizing =
-        PBDLNode.parentLayoutFromString(json['layoutMainAxisSizing'] as String)
-    ..layoutCrossAxisSizing =
-        PBDLNode.parentLayoutFromString(json['layoutCrossAxisSizing'] as String)
-    ..name = json['name'] as String
-    ..isVisible = json['isVisible'] as bool
-    ..boundaryRectangle = json['boundaryRectangle'] == null
-        ? null
-        : PBDLBoundaryBox.fromJson(
-            json['boundaryRectangle'] as Map<String, dynamic>)
-    ..pbdlType = json['pbdlType'] as String
-    ..style = json['style'] == null
-        ? null
-        : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
-    ..prototypeNodeUUID = json['prototypeNodeUUID'] as String
-    ..child = json['child'] == null
-        ? null
-        : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..constraints = json['constraints'] == null
-        ? null
-        : PBDLConstraints.fromJson(json['constraints'] as Map<String, dynamic>)
-    ..textStyles =
-        (json['textStyles'] as List)?.map((e) => e as String)?.toList()
-    ..colorSchemes = (json['colorSchemes'] as List)
-        ?.map((e) => e == null
-            ? null
-            : DesignSystemColorScheme.fromJson(e as Map<String, dynamic>))
-        ?.toList();
-}
+MaterialDesign3 _$MaterialDesign3FromJson(Map<String, dynamic> json) =>
+    MaterialDesign3()
+      ..UUID = json['UUID'] as String
+      ..layoutMainAxisSizing = PBDLNode.parentLayoutFromString(
+          json['layoutMainAxisSizing'] as String?)
+      ..layoutCrossAxisSizing = PBDLNode.parentLayoutFromString(
+          json['layoutCrossAxisSizing'] as String?)
+      ..name = json['name'] as String?
+      ..isVisible = json['isVisible'] as bool?
+      ..boundaryRectangle = json['boundaryRectangle'] == null
+          ? null
+          : PBDLBoundaryBox.fromJson(
+              json['boundaryRectangle'] as Map<String, dynamic>)
+      ..pbdlType = json['pbdlType'] as String?
+      ..style = json['style'] == null
+          ? null
+          : PBDLStyle.fromJson(json['style'] as Map<String, dynamic>)
+      ..prototypeNodeUUID = json['prototypeNodeUUID'] as String?
+      ..child = json['child'] == null
+          ? null
+          : PBDLNode.fromJson(json['child'] as Map<String, dynamic>)
+      ..constraints = json['constraints'] == null
+          ? null
+          : PBDLConstraints.fromJson(
+              json['constraints'] as Map<String, dynamic>)
+      ..textStyles = (json['textStyles'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList()
+      ..colorSchemes = (json['colorSchemes'] as List<dynamic>?)
+          ?.map((e) =>
+              DesignSystemColorScheme.fromJson(e as Map<String, dynamic>))
+          .toList();
 
 Map<String, dynamic> _$MaterialDesign3ToJson(MaterialDesign3 instance) =>
     <String, dynamic>{
@@ -55,7 +55,7 @@ Map<String, dynamic> _$MaterialDesign3ToJson(MaterialDesign3 instance) =>
       'child': instance.child?.toJson(),
       'constraints': instance.constraints?.toJson(),
       'textStyles': instance.textStyles,
-      'colorSchemes': instance.colorSchemes?.map((e) => e?.toJson())?.toList(),
+      'colorSchemes': instance.colorSchemes?.map((e) => e.toJson()).toList(),
     };
 
 const _$ParentLayoutSizingEnumMap = {

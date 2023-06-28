@@ -5,14 +5,14 @@ part 'pbdl_border.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLBorder {
-  String blendMode;
+  String? blendMode;
 
-  String type;
+  String? type;
 
-  PBDLColor color;
+  PBDLColor? color;
 
   @JsonKey(defaultValue: true)
-  bool visible;
+  bool? visible;
 
   final pbdlType = 'border';
 

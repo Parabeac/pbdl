@@ -26,24 +26,24 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   var fillsList;
 
   @override
-  final pbdlType = 'vector';
+  final String? pbdlType = 'vector';
 
   PBDLVector({
-    String name,
+    String? name,
     visible,
     pluginData,
     sharedPluginData,
     this.layoutAlign,
-    PBDLConstraints constraints,
-    PBDLBoundaryBox boundaryRectangle,
+    PBDLConstraints? constraints,
+    PBDLBoundaryBox? boundaryRectangle,
     this.size,
     this.strokes,
     this.strokeWeight,
     this.strokeAlign,
     this.styles,
     this.fillsList,
-    String UUID,
-    PBDLStyle style,
+    String UUID = '',
+    PBDLStyle? style,
     prototypeNodeUUID,
     transitionDuration,
     transitionEasing,
@@ -72,7 +72,7 @@ class PBDLVector extends PBDLNode implements PBDLNodeFactory, PBDLImage {
   Map<String, dynamic> toJson() => _$PBDLVectorToJson(this);
 
   @override
-  String imageReference;
+  String? imageReference;
 
   @override
   var image;

@@ -6,43 +6,42 @@ part of 'rectangle.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) {
-  return FigmaRectangle(
-    name: json['name'] as String,
-    isVisible: json['visible'] as bool ?? true,
-    type: json['type'],
-    pluginData: json['pluginData'],
-    sharedPluginData: json['sharedPluginData'],
-    layoutAlign: json['layoutAlign'],
-    constraints: json['constraints'] == null
-        ? null
-        : FigmaConstraints.fromJson(
-            json['constraints'] as Map<String, dynamic>),
-    size: json['size'],
-    styles: json['styles'],
-    cornerRadius: (json['cornerRadius'] as num)?.toDouble(),
-    rectangleCornerRadii: (json['rectangleCornerRadii'] as List)
-        ?.map((e) => (e as num)?.toDouble())
-        ?.toList(),
-    points: json['points'] as List,
-    transitionNodeID: json['transitionNodeID'] as String,
-    transitionDuration: json['transitionDuration'] as num,
-    transitionEasing: json['transitionEasing'] as String,
-  )
-    ..UUID = json['id'] as String
-    ..child = json['child'] == null
-        ? null
-        : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..layoutGrow = json['layoutGrow'] as num
-    ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
-        ? null
-        : FigmaRect.fromJson(
-            json['absoluteBoundingBox'] as Map<String, dynamic>)
-    ..strokes = json['strokes']
-    ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
-    ..strokeAlign = json['strokeAlign'] as String
-    ..imageReference = json['imageReference'] as String;
-}
+FigmaRectangle _$FigmaRectangleFromJson(Map<String, dynamic> json) =>
+    FigmaRectangle(
+      name: json['name'] as String?,
+      isVisible: json['visible'] as bool? ?? true,
+      type: json['type'],
+      pluginData: json['pluginData'],
+      sharedPluginData: json['sharedPluginData'],
+      layoutAlign: json['layoutAlign'],
+      constraints: json['constraints'] == null
+          ? null
+          : FigmaConstraints.fromJson(
+              json['constraints'] as Map<String, dynamic>),
+      size: json['size'],
+      styles: json['styles'],
+      cornerRadius: (json['cornerRadius'] as num?)?.toDouble(),
+      rectangleCornerRadii: (json['rectangleCornerRadii'] as List<dynamic>?)
+          ?.map((e) => (e as num).toDouble())
+          .toList(),
+      points: json['points'] as List<dynamic>?,
+      transitionNodeID: json['transitionNodeID'] as String?,
+      transitionDuration: json['transitionDuration'] as num?,
+      transitionEasing: json['transitionEasing'] as String?,
+    )
+      ..UUID = json['id'] as String
+      ..child = json['child'] == null
+          ? null
+          : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
+      ..layoutGrow = json['layoutGrow'] as num?
+      ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
+          ? null
+          : FigmaRect.fromJson(
+              json['absoluteBoundingBox'] as Map<String, dynamic>)
+      ..strokes = json['strokes']
+      ..strokeWeight = (json['strokeWeight'] as num?)?.toDouble()
+      ..strokeAlign = json['strokeAlign'] as String?
+      ..imageReference = json['imageReference'] as String?;
 
 Map<String, dynamic> _$FigmaRectangleToJson(FigmaRectangle instance) =>
     <String, dynamic>{

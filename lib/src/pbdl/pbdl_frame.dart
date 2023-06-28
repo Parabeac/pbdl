@@ -15,37 +15,37 @@ part 'pbdl_frame.g.dart';
 /// ```
 /// - One important thing to note is that [PBDLFrame] contains [PBDLConstraints], one things that differenciates from [PBDLGroup].
 class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
-  List<PBDLNode> children = [];
+  List<PBDLNode?>? children = [];
   @override
-  String pbdlType = 'frame';
+  String? pbdlType = 'frame';
 
   @override
   @JsonKey(ignore: true)
-  PBDLNode child;
+  PBDLNode? child;
 
-  num fixedRadius;
+  num? fixedRadius;
 
-  Map background;
+  Map? background;
 
   @JsonKey()
-  PBDLAutoLayoutOptions autoLayoutOptions;
+  PBDLAutoLayoutOptions? autoLayoutOptions;
 
   PBDLFrame({
-    bool hasClickThrough,
+    bool? hasClickThrough,
     groupLayout,
-    String UUID,
+    String UUID = '',
     booleanOperation,
     exportOptions,
-    PBDLBoundaryBox boundaryRectangle,
+    PBDLBoundaryBox? boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    bool isVisible,
+    bool? isVisible,
     layerListExpandedType,
-    String name,
+    String? name,
     nameIsFixed,
-    PBDLConstraints constraints,
+    PBDLConstraints? constraints,
     resizingType,
     rotation,
     sharedStyleID,
@@ -54,9 +54,9 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    PBDLStyle style,
+    PBDLStyle? style,
     this.children,
-    String prototypeNodeUUID,
+    String? prototypeNodeUUID,
     this.fixedRadius,
     this.background,
     this.autoLayoutOptions,
@@ -74,7 +74,7 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
           layoutCrossAxisSizing: layoutCrossAxisSizing,
         ) {
     if (autoLayoutOptions != null) {
-      switch (autoLayoutOptions.orientation) {
+      switch (autoLayoutOptions!.orientation) {
         case Orientation.HORIZONTAL:
           pbdlType = 'row';
           break;
@@ -101,7 +101,7 @@ class PBDLFrame extends PBDLNode implements PBDLNodeFactory {
 
   static PBDLFrame getFrame(dynamic boundaryRectangle) {
     if (boundaryRectangle is Map) {
-      return PBDLFrame.fromJson(boundaryRectangle);
+      return PBDLFrame.fromJson(boundaryRectangle as Map<String, dynamic>);
     }
     return boundaryRectangle;
   }
@@ -117,7 +117,7 @@ class PBDLRow extends PBDLFrame {
   PBDLRow();
 
   @override
-  String pbdlType = 'row';
+  String? pbdlType = 'row';
 
   factory PBDLRow.fromJson(Map<String, dynamic> json) =>
       _$PBDLRowFromJson(json);
@@ -130,7 +130,7 @@ class PBDLCol extends PBDLFrame {
   PBDLCol();
 
   @override
-  String pbdlType = 'col';
+  String? pbdlType = 'col';
 
   factory PBDLCol.fromJson(Map<String, dynamic> json) =>
       _$PBDLColFromJson(json);

@@ -8,7 +8,7 @@ class APIException implements Exception {
 }
 
 class FetchDataException extends APIException {
-  FetchDataException([String message])
+  FetchDataException([String? message])
       : super(message, "Error During Communication: ");
 }
 
@@ -21,5 +21,5 @@ class UnauthorisedException extends APIException {
 }
 
 class InvalidInputException extends APIException {
-  InvalidInputException([String message]) : super(message, "Invalid Input: ");
+  InvalidInputException([String? message]) : super(message, "Invalid Input: ");
 }

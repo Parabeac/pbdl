@@ -9,16 +9,16 @@ part 'pbdl_element.g.dart';
 // TODO: Not sure why this class exists.
 class PBDLElement extends PBDLNode {
   @override
-  final pbdlType = 'element';
+  final String? pbdlType = 'element';
   PBDLElement({
-    UUID,
+    required UUID,
     name,
     isVisible,
     boundaryRectangle,
     type,
-    PBDLStyle style,
+    PBDLStyle? style,
     prototypeNodeUUID,
-    PBDLConstraints constraints,
+    PBDLConstraints? constraints,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
   }) : super(

@@ -5,11 +5,11 @@ import 'figma_screen.dart';
 class FigmaPage {
   var log = Logger('FigmaPage');
 
-  String id;
-  String imageURI;
-  String name;
+  String? id;
+  String? imageURI;
+  String? name;
 
-  String type;
+  String? type;
   bool convert = true;
   List<FigmaScreen> screens = [];
 
@@ -46,7 +46,7 @@ class FigmaPage {
   factory FigmaPage.fromPBDF(Map<String, dynamic> json) {
     var page = FigmaPage(name: json['name'], id: json['id']);
     if (json.containsKey('screens')) {
-      (json['screens'] as List)?.forEach((value) {
+      (json['screens'] as List?)?.forEach((value) {
         if (value != null && (value['convert'] ?? true)) {
           page.screens.add(FigmaScreen.fromJson(value as Map<String, dynamic>));
         }
@@ -57,22 +57,22 @@ class FigmaPage {
 
   Future<PBDLPage> interpretNode() async {
     var resultScreens = await Future.wait(
-        screens.map((e) async => await e?.interpretNode())?.toList());
+        screens.map((e) async => await e.interpretNode()).toList());
     return PBDLPage(
       name: name,
-      UUID: id,
+      UUID: id!,
       screens: resultScreens,
     );
   }
 
   FigmaPage copyWith({
-    String id,
-    String imageURI,
-    String name,
-    bool convert,
-    List<FigmaScreen> screens,
-    String type,
-    Logger log,
+    String? id,
+    String? imageURI,
+    String? name,
+    bool? convert,
+    List<FigmaScreen>? screens,
+    String? type,
+    Logger? log,
   }) {
     return FigmaPage(
       name: name ?? this.name,

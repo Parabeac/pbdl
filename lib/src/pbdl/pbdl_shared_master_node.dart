@@ -8,29 +8,29 @@ part 'pbdl_shared_master_node.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLSharedMasterNode extends PBDLNode
     implements PBDLNodeFactory, PBDLGroupNode {
-  String symbolID;
+  String? symbolID;
 
-  List<PBDLOverrideProperty> overrideProperties;
+  List<PBDLOverrideProperty>? overrideProperties;
 
   @override
-  List<PBDLNode> children = [];
+  List<PBDLNode?>? children = [];
 
   @override
   final pbdlType = 'shared_master';
 
-  String componentSetName;
+  String? componentSetName;
 
-  String sharedNodeSetID;
+  String? sharedNodeSetID;
 
   PBDLSharedMasterNode({
-    String UUID,
+    String UUID = '',
     this.overrideProperties,
-    String name,
-    bool isVisible,
-    PBDLBoundaryBox boundaryRectangle,
-    PBDLStyle style,
-    String prototypeNodeUUID,
-    bool hasClickThrough,
+    String? name,
+    bool? isVisible,
+    PBDLBoundaryBox? boundaryRectangle,
+    PBDLStyle? style,
+    String? prototypeNodeUUID,
+    bool? hasClickThrough,
     groupLayout,
     booleanOperation,
     exportOptions,
@@ -40,12 +40,12 @@ class PBDLSharedMasterNode extends PBDLNode
     isLocked,
     layerListExpandedType,
     presetDictionary,
-    bool allowsOverrides,
+    bool? allowsOverrides,
     nameIsFixed,
     constraints,
     resizingType,
     horizontalRulerData,
-    bool hasBackgroundColor,
+    bool? hasBackgroundColor,
     rotation,
     sharedStyleID,
     shouldBreakMaskChain,
@@ -53,15 +53,15 @@ class PBDLSharedMasterNode extends PBDLNode
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    bool includeBackgroundColorInExport,
-    int changeIdentifier,
+    bool? includeBackgroundColorInExport,
+    int? changeIdentifier,
     this.symbolID,
-    bool includeBackgroundColorInInstance,
+    bool? includeBackgroundColorInInstance,
     verticalRulerData,
-    bool resizesContent,
-    bool includeInCloudUpload,
-    bool isFlowHome,
-    List parameters,
+    bool? resizesContent,
+    bool? includeInCloudUpload,
+    bool? isFlowHome,
+    List? parameters,
     this.children,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
@@ -76,7 +76,7 @@ class PBDLSharedMasterNode extends PBDLNode
           prototypeNodeUUID,
           constraints: (constraints is! Map)
               ? constraints
-              : PBDLConstraints.fromJson(constraints),
+              : PBDLConstraints.fromJson(constraints as Map<String, dynamic>),
           layoutMainAxisSizing: layoutMainAxisSizing,
           layoutCrossAxisSizing: layoutCrossAxisSizing,
         );
@@ -92,9 +92,9 @@ class PBDLSharedMasterNode extends PBDLNode
   @override
   void sortByUUID() {
     /// Sort list of [PBDLOverrideProperty] by UUID
-    overrideProperties.sort();
+    overrideProperties!.sort();
 
     /// Ensure each `property` sorts its elements
-    overrideProperties.forEach((property) => property.sortByUUID());
+    overrideProperties!.forEach((property) => property.sortByUUID());
   }
 }

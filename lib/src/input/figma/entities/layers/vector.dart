@@ -12,39 +12,39 @@ part 'vector.g.dart';
 @JsonSerializable()
 class FigmaVector extends FigmaNode implements FigmaNodeFactory {
   @JsonKey(ignore: true)
-  Logger log;
+  Logger? log;
 
   @override
   @JsonKey()
-  FigmaRect absoluteBoundingBox;
+  FigmaRect? absoluteBoundingBox;
 
   var size;
 
   var strokes;
 
-  double strokeWeight;
+  double? strokeWeight;
 
-  String strokeAlign;
+  String? strokeAlign;
 
   var styles;
 
   @override
-  String type = 'VECTOR';
+  String? type = 'VECTOR';
 
   FigmaVector({
-    String name,
-    bool visible,
-    String type,
+    String? name,
+    bool? visible,
+    String? type,
     pluginData,
     sharedPluginData,
-    FigmaConstraints constraints,
+    FigmaConstraints? constraints,
     this.absoluteBoundingBox,
     this.size,
     this.styles,
-    String UUID,
-    num transitionDuration,
-    String transitionEasing,
-    String transitionNodeID,
+    String UUID = '',
+    num? transitionDuration,
+    String? transitionEasing,
+    String? transitionNodeID,
     layoutAlign,
     layoutGrow,
   }) : super(
@@ -77,17 +77,17 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     imageReference = FigmaAssetProcessor().processImage(
       UUID,
       absoluteBoundingBox: absoluteBoundingBox,
-      name: name,
+      name: name!,
       format: IMAGE_FORMAT.SVG,
       effects: figmaStyleProperty?.effects ?? [],
     );
 
     if (absoluteBoundingBox != null) {
-      if (absoluteBoundingBox.height == 0.0) {
-        absoluteBoundingBox.height = strokeWeight;
+      if (absoluteBoundingBox!.height == 0.0) {
+        absoluteBoundingBox!.height = strokeWeight;
       }
-      if (absoluteBoundingBox.width == 0.0) {
-        absoluteBoundingBox.width = strokeWeight;
+      if (absoluteBoundingBox!.width == 0.0) {
+        absoluteBoundingBox!.width = strokeWeight;
       }
     }
 
@@ -105,7 +105,7 @@ class FigmaVector extends FigmaNode implements FigmaNodeFactory {
     ));
   }
 
-  String imageReference;
+  String? imageReference;
 
   Map<String, dynamic> toPBDF() => toJson();
 }

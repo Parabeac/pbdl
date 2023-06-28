@@ -15,24 +15,24 @@ part 'pbdl_group_node.g.dart';
 /// provide no value, unless it comes with extra metadata that could interpret this group into
 /// other usefull objects.
 class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
-  List<PBDLNode> children = [];
+  List<PBDLNode?>? children = [];
 
   PBDLGroupNode({
-    bool hasClickThrough,
+    bool? hasClickThrough,
     groupLayout,
-    String UUID,
+    String UUID = '',
     booleanOperation,
     exportOptions,
-    PBDLBoundaryBox boundaryRectangle,
+    PBDLBoundaryBox? boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    bool isVisible,
+    bool? isVisible,
     layerListExpandedType,
-    String name,
+    String? name,
     nameIsFixed,
-    PBDLConstraints constraints,
+    PBDLConstraints? constraints,
     resizingType,
     rotation,
     sharedStyleID,
@@ -41,9 +41,9 @@ class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
     clippingMaskMode,
     userInfo,
     maintainScrollPosition,
-    PBDLStyle style,
+    PBDLStyle? style,
     this.children,
-    String prototypeNodeUUID,
+    String? prototypeNodeUUID,
     layoutMainAxisSizing,
     layoutCrossAxisSizing,
   }) : super(
@@ -67,18 +67,18 @@ class PBDLGroupNode extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLGroupNodeToJson(this);
 
   @override
-  String pbdlType = 'group';
+  String? pbdlType = 'group';
 
   @override
   @JsonKey(ignore: true)
-  PBDLNode child;
+  PBDLNode? child;
 
   @override
   void sortByUUID() {
     /// Sort `children` within this [PBDLGroupNode]
-    children.sort();
+    children!.sort();
 
     /// Make each `child` sort its own children, if applicable
-    children.forEach((child) => child.sortByUUID());
+    children!.forEach((child) => child!.sortByUUID());
   }
 }

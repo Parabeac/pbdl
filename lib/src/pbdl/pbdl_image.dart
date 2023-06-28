@@ -14,31 +14,31 @@ part 'pbdl_image.g.dart';
 @JsonSerializable(explicitToJson: true)
 class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   @override
-  var style;
+  PBDLStyle? style;
 
   /// [imageReference] is when we have the reference to the image instead
-  String imageReference;
+  String? imageReference;
 
   @override
-  String prototypeNodeUUID;
+  String? prototypeNodeUUID;
 
   PBDLImage({
     this.imageReference,
-    String UUID,
+    String UUID = '',
     booleanOperation,
     exportOptions,
-    PBDLBoundaryBox boundaryRectangle,
+    PBDLBoundaryBox? boundaryRectangle,
     isFixedToViewport,
     isFlippedHorizontal,
     isFlippedVertical,
     isLocked,
-    bool isVisible,
+    bool? isVisible,
     layerListExpandedType,
-    String name,
+    String? name,
     nameIsFixed,
-    PBDLConstraints constraints,
+    PBDLConstraints? constraints,
     resizingType,
-    num rotation,
+    num? rotation,
     sharedStyleID,
     shouldBreakMaskChain,
     hasClippingMask,
@@ -69,5 +69,5 @@ class PBDLImage extends PBDLElement implements PBDLNodeFactory, PBDLNode {
   Map<String, dynamic> toJson() => _$PBDLImageToJson(this);
 
   @override
-  String pbdlType = 'image';
+  String? pbdlType = 'image';
 }

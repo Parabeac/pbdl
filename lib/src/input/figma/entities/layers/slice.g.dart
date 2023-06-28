@@ -6,33 +6,31 @@ part of 'slice.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FigmaSlice _$FigmaSliceFromJson(Map<String, dynamic> json) {
-  return FigmaSlice(
-    name: json['name'] as String,
-    type: json['type'] as String,
-    pluginData: json['pluginData'],
-    sharedPluginData: json['sharedPluginData'],
-    layoutAlign: json['layoutAlign'],
-    layoutGrow: json['layoutGrow'],
-    constraints: json['constraints'] == null
-        ? null
-        : FigmaConstraints.fromJson(
-            json['constraints'] as Map<String, dynamic>),
-    absoluteBoundingBox: json['absoluteBoundingBox'] == null
-        ? null
-        : FigmaRect.fromJson(
-            json['absoluteBoundingBox'] as Map<String, dynamic>),
-    size: json['size'],
-    transitionNodeID: json['transitionNodeID'] as String,
-    transitionDuration: json['transitionDuration'] as num,
-    transitionEasing: json['transitionEasing'] as String,
-  )
-    ..UUID = json['id'] as String
-    ..child = json['child'] == null
-        ? null
-        : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..isVisible = json['visible'] as bool ?? true;
-}
+FigmaSlice _$FigmaSliceFromJson(Map<String, dynamic> json) => FigmaSlice(
+      name: json['name'] as String?,
+      type: json['type'] as String?,
+      pluginData: json['pluginData'],
+      sharedPluginData: json['sharedPluginData'],
+      layoutAlign: json['layoutAlign'],
+      layoutGrow: json['layoutGrow'],
+      constraints: json['constraints'] == null
+          ? null
+          : FigmaConstraints.fromJson(
+              json['constraints'] as Map<String, dynamic>),
+      absoluteBoundingBox: json['absoluteBoundingBox'] == null
+          ? null
+          : FigmaRect.fromJson(
+              json['absoluteBoundingBox'] as Map<String, dynamic>),
+      size: json['size'],
+      transitionNodeID: json['transitionNodeID'] as String?,
+      transitionDuration: json['transitionDuration'] as num?,
+      transitionEasing: json['transitionEasing'] as String?,
+    )
+      ..UUID = json['id'] as String
+      ..child = json['child'] == null
+          ? null
+          : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
+      ..isVisible = json['visible'] as bool? ?? true;
 
 Map<String, dynamic> _$FigmaSliceToJson(FigmaSlice instance) =>
     <String, dynamic>{

@@ -10,12 +10,12 @@ part 'component_set.g.dart';
 @JsonSerializable()
 class FigmaComponentSet extends FigmaNode implements FigmaNodeFactory {
   @override
-  String type = 'COMPONENT_SET';
+  String? type = 'COMPONENT_SET';
 
-  List<FigmaNode> children;
+  List<FigmaNode>? children;
 
   FigmaComponentSet(
-      {String name, bool isVisible, String type, pluginData, sharedPluginData})
+      {String? name, bool? isVisible, String? type, pluginData, sharedPluginData})
       : super(name, isVisible, type, pluginData, sharedPluginData);
 
   @override
@@ -49,7 +49,7 @@ class FigmaComponentSet extends FigmaNode implements FigmaNodeFactory {
   }
 
   @override
-  Future<PBDLNode> interpretNode() async {
+  Future<PBDLNode?> interpretNode() async {
     return null;
   }
 }

@@ -11,13 +11,13 @@ class PBDLFontDescriptor {
     this.fontWeight,
     this.letterSpacing,
   });
-  String fontName;
-  num fontSize;
-  String fontWeight;
+  String? fontName;
+  num? fontSize;
+  String? fontWeight;
 
-  String fontStyle;
+  String? fontStyle;
 
-  num letterSpacing;
+  num? letterSpacing;
 
   final type = 'font_descriptor';
 

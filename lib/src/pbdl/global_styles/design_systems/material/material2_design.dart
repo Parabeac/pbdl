@@ -34,7 +34,7 @@ class MaterialDesign2 extends DesignSystemThemeData {
   int get supportedAttributesCount {
     var total = 0;
     for (var scheme in _colorSchemes) {
-      total += scheme.supportedAttributes.length;
+      total += scheme.supportedAttributes!.length;
     }
     return total;
   }

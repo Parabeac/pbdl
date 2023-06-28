@@ -16,7 +16,7 @@ class FigmaOverrideTypeFactory {
   ];
 
   /// Returns an [OverrideType] from a [FigmaNode] or `null` if node is not overridable.
-  static FigmaOverrideType getType(FigmaNode node) {
+  static FigmaOverrideType? getType(FigmaNode? node) {
     for (var ovrType in _overrideTypes) {
       if (ovrType.matches(node)) {
         return ovrType;

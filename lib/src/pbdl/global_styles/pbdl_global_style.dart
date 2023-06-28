@@ -6,10 +6,10 @@ import 'package:pbdl/pbdl.dart';
 /// Abstract class that represents a global style node of the project.
 abstract class PBDLGlobalStyle extends PBDLNode {
   @JsonKey(defaultValue: '')
-  String description;
+  String? description;
   PBDLGlobalStyle(
     String UUID,
-    String name, {
+    String? name, {
     this.description = '',
   }) : super(UUID, name, false, null, null, null);
 }

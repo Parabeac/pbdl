@@ -16,14 +16,14 @@ class APICallService {
   /// Returns [FigmaNodes] with UUIDs specified in [ids]
   /// from [fileId]. Requires a [FigmaKey].
   static Future<List<FigmaNode>> getFileNodes(
-      String fileId, Iterable<String> ids, FigmaKey key) async {
+      String? fileId, Iterable<String> ids, FigmaKey? key) async {
     if (ids == null || ids.isEmpty) {
       return [];
     }
     final flatIds = ids.join(',');
     final url = 'https://api.figma.com/v1/files/$fileId/nodes?ids=$flatIds';
 
-    final apiResult = await makeAPICall(url, key);
+    final apiResult = await makeAPICall(url, key!);
     final figmaNodes = <FigmaNode>[];
 
     if (apiResult is Map<String, dynamic> && apiResult.containsKey('nodes')) {
@@ -69,11 +69,11 @@ class APICallService {
         ],
         endStream: true,
       );
-      var broadcast = stream.incomingMessages.asBroadcastStream();
+      Stream<StreamMessage?> broadcast = stream.incomingMessages.asBroadcastStream();
 
-      HeadersStreamMessage header = await broadcast.firstWhere(
+      HeadersStreamMessage? header = await (broadcast.firstWhere(
           (event) => event is HeadersStreamMessage,
-          orElse: () => null);
+          orElse: () => null) as FutureOr<HeadersStreamMessage?>);
 
       /// Fetching the status code of the request
       if (header != null) {
@@ -92,7 +92,7 @@ class APICallService {
           .transform(utf8.decoder)
           .join()
           .then((jsonString) => json.decode(jsonString))
-          .onError((error, stackTrace) {
+          .onError((dynamic error, stackTrace) {
         log.error(error.toString());
 
         _returnResponse(500);

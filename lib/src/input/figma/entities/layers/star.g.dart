@@ -6,38 +6,36 @@ part of 'star.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FigmaStar _$FigmaStarFromJson(Map<String, dynamic> json) {
-  return FigmaStar(
-    name: json['name'] as String,
-    type: json['type'] as String,
-    pluginData: json['pluginData'],
-    sharedPluginData: json['sharedPluginData'],
-    layoutAlign: json['layoutAlign'],
-    constraints: json['constraints'] == null
-        ? null
-        : FigmaConstraints.fromJson(
-            json['constraints'] as Map<String, dynamic>),
-    size: json['size'],
-    styles: json['styles'],
-    transitionNodeID: json['transitionNodeID'] as String,
-    transitionDuration: json['transitionDuration'] as num,
-    transitionEasing: json['transitionEasing'] as String,
-  )
-    ..UUID = json['id'] as String
-    ..child = json['child'] == null
-        ? null
-        : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
-    ..layoutGrow = json['layoutGrow'] as num
-    ..isVisible = json['visible'] as bool ?? true
-    ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
-        ? null
-        : FigmaRect.fromJson(
-            json['absoluteBoundingBox'] as Map<String, dynamic>)
-    ..strokes = json['strokes']
-    ..strokeWeight = (json['strokeWeight'] as num)?.toDouble()
-    ..strokeAlign = json['strokeAlign'] as String
-    ..imageReference = json['imageReference'] as String;
-}
+FigmaStar _$FigmaStarFromJson(Map<String, dynamic> json) => FigmaStar(
+      name: json['name'] as String?,
+      type: json['type'] as String?,
+      pluginData: json['pluginData'],
+      sharedPluginData: json['sharedPluginData'],
+      layoutAlign: json['layoutAlign'],
+      constraints: json['constraints'] == null
+          ? null
+          : FigmaConstraints.fromJson(
+              json['constraints'] as Map<String, dynamic>),
+      size: json['size'],
+      styles: json['styles'],
+      transitionNodeID: json['transitionNodeID'] as String?,
+      transitionDuration: json['transitionDuration'] as num?,
+      transitionEasing: json['transitionEasing'] as String?,
+    )
+      ..UUID = json['id'] as String
+      ..child = json['child'] == null
+          ? null
+          : FigmaNode.fromJson(json['child'] as Map<String, dynamic>)
+      ..layoutGrow = json['layoutGrow'] as num?
+      ..isVisible = json['visible'] as bool? ?? true
+      ..absoluteBoundingBox = json['absoluteBoundingBox'] == null
+          ? null
+          : FigmaRect.fromJson(
+              json['absoluteBoundingBox'] as Map<String, dynamic>)
+      ..strokes = json['strokes']
+      ..strokeWeight = (json['strokeWeight'] as num?)?.toDouble()
+      ..strokeAlign = json['strokeAlign'] as String?
+      ..imageReference = json['imageReference'] as String?;
 
 Map<String, dynamic> _$FigmaStarToJson(FigmaStar instance) => <String, dynamic>{
       'id': instance.UUID,

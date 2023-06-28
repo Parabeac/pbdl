@@ -8,18 +8,18 @@ part 'figma_fill.g.dart';
 
 @JsonSerializable(createFactory: false)
 abstract class FigmaFill implements StyleAdditionNode {
-  FigmaColor color;
+  FigmaColor? color;
 
   @JsonKey(defaultValue: 100)
-  num opacity;
+  num? opacity;
 
-  String blendMode;
+  String? blendMode;
 
   @override
-  String type;
+  String? type;
 
   @JsonKey(defaultValue: true)
-  bool visible;
+  bool? visible;
 
   FigmaFill(
     this.opacity,
@@ -29,11 +29,11 @@ abstract class FigmaFill implements StyleAdditionNode {
     this.color,
   );
 
-  Map<String, dynamic> toJson() {}
-  FigmaFill createFigmaFill(Map<String, dynamic> json) =>
+  Map<String, dynamic> toJson();
+  FigmaFill createFigmaFill(Map<String, dynamic>? json) =>
       FigmaFill.fromJson(json);
-  factory FigmaFill.fromJson(Map<String, dynamic> json) =>
-      FigmaFillFactory.getFill(json);
+  factory FigmaFill.fromJson(Map<String, dynamic>? json) =>
+      FigmaFillFactory.getFill(json)!;
 
   PBDLFill interpretFill() {
     return PBDLFill(
@@ -41,7 +41,7 @@ abstract class FigmaFill implements StyleAdditionNode {
       blendMode: blendMode,
       type: type,
       isEnabled: visible,
-      color: color.interpretColor(),
+      color: color!.interpretColor(),
     );
   }
 }

@@ -6,17 +6,17 @@ part 'pbdl_border_options.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLBorderOptions {
-  List<PBDLBorder> borders;
+  List<PBDLBorder>? borders;
 
-  num strokeWeight;
+  num? strokeWeight;
 
-  String strokeAlign;
+  String? strokeAlign;
 
-  String strokeJoin;
+  String? strokeJoin;
 
-  List strokeDashes;
+  List? strokeDashes;
 
-  num cornerRadius;
+  num? cornerRadius;
 
   final pbdlType = 'border_options';
 

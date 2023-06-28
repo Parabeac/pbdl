@@ -48,8 +48,8 @@ class MaterialColorScheme extends DesignSystemColorScheme {
         );
 
   @override
-  bool isSupportedColor(String color) {
-    final tokenizedColor = color.split('/');
+  bool isSupportedColor(String? color) {
+    final tokenizedColor = color!.split('/');
 
     /// Check whether the color is in the format of `<color-scheme>/<color>`.
     if (tokenizedColor.length >= 2) {

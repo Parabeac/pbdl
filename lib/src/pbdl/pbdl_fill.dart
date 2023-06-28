@@ -9,23 +9,23 @@ part 'pbdl_fill.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLFill {
-  List<PBDLGradientStop> gradientStops;
+  List<PBDLGradientStop>? gradientStops;
   @JsonKey(fromJson: _pointsFromJson, toJson: _pointsToJson)
-  List<Point> gradientHandlePositions;
+  List<Point>? gradientHandlePositions;
   // String that tidentifies the ID of the image
-  String imageRef;
+  String? imageRef;
 
-  PBDLColor color;
+  PBDLColor? color;
 
   @JsonKey(defaultValue: 100)
-  num opacity;
+  num? opacity;
 
-  String blendMode;
+  String? blendMode;
 
-  String type;
+  String? type;
 
   @JsonKey(defaultValue: true)
-  bool isEnabled;
+  bool? isEnabled;
 
   final pbdlType = 'fill';
 
@@ -48,7 +48,7 @@ class PBDLFill {
     return objPoints;
   }
 
-  static List<Map> _pointsToJson(List<Point> points) {
+  static List<Map> _pointsToJson(List<Point>? points) {
     var maps = <Map>[];
     if (points != null) {
       for (var p in points) {
@@ -67,8 +67,8 @@ class PBDLFill {
 
 @JsonSerializable(explicitToJson: true)
 class PBDLGradientStop {
-  PBDLColor color;
-  num position;
+  PBDLColor? color;
+  num? position;
 
   PBDLGradientStop({
     this.color,

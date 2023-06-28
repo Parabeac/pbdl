@@ -18,24 +18,24 @@ class FigmaRectangle extends FigmaVector
     with PBColorMixin
     implements AbstractFigmaNodeFactory {
   @override
-  String type = 'RECTANGLE';
+  String? type = 'RECTANGLE';
   FigmaRectangle({
-    String name,
-    bool isVisible,
+    String? name,
+    bool? isVisible,
     type,
     pluginData,
     sharedPluginData,
     layoutAlign,
-    FigmaConstraints constraints,
+    FigmaConstraints? constraints,
     boundaryRectangle,
     size,
     styles,
     this.cornerRadius,
     this.rectangleCornerRadii,
     this.points,
-    String transitionNodeID,
-    num transitionDuration,
-    String transitionEasing,
+    String? transitionNodeID,
+    num? transitionDuration,
+    String? transitionEasing,
   }) : super(
           name: name,
           visible: isVisible,
@@ -54,10 +54,10 @@ class FigmaRectangle extends FigmaVector
           transitionEasing: transitionEasing,
         );
 
-  List points;
-  double cornerRadius;
+  List? points;
+  double? cornerRadius;
 
-  List<double> rectangleCornerRadii;
+  List<double>? rectangleCornerRadii;
 
   @override
   FigmaNode createFigmaNode(Map<String, dynamic> json) {
@@ -78,17 +78,17 @@ class FigmaRectangle extends FigmaVector
       imageReference = FigmaAssetProcessor().processImage(
         UUID,
         absoluteBoundingBox: absoluteBoundingBox,
-        name: name,
+        name: name!,
         effects: figmaStyleProperty?.effects ?? [],
       );
 
       return Future.value(PBDLImage(
         imageReference: imageReference,
-        UUID: UUID,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        UUID: UUID!,
+        boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: figmaStyleProperty.interpretStyle(),
+        style: figmaStyleProperty!.interpretStyle(),
         prototypeNodeUUID: transitionNodeID,
         constraints: constraints?.interpret(),
         layoutMainAxisSizing: getGrowSizing(layoutGrow),
@@ -97,11 +97,11 @@ class FigmaRectangle extends FigmaVector
     }
     return Future.value(
       PBDLRectangle(
-        UUID: UUID,
-        boundaryRectangle: absoluteBoundingBox.interpretFrame(),
+        UUID: UUID!,
+        boundaryRectangle: absoluteBoundingBox!.interpretFrame(),
         isVisible: isVisible,
         name: name,
-        style: figmaStyleProperty.interpretStyle(),
+        style: figmaStyleProperty!.interpretStyle(),
         child: await child?.interpretNode(),
         fixedRadius: cornerRadius ?? 0,
         prototypeNodeUUID: transitionNodeID,

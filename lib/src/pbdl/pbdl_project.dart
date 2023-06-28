@@ -15,15 +15,13 @@ part 'pbdl_project.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLProject extends PBDLNode implements PBDLNodeFactory {
-  bool debug = false;
+  String? pngPath;
 
-  String pngPath;
-
-  DesignSystemThemeData designSystem;
+  DesignSystemThemeData? designSystem;
 
   PBDLProject({
-    String name,
-    String UUID,
+    String? name,
+    String UUID = '',
     this.pages,
     this.pngPath,
     this.globalStyles,
@@ -32,12 +30,11 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
     MainInfo().projectName = name ?? 'foo';
   }
 
-  List<PBDLPage> pages = [];
-  List<PBDLPage> miscPages = [];
-  List<SharedStyle> sharedStyles = [];
-  PBDLGlobalStyles globalStyles = PBDLGlobalStyles();
+  List<PBDLPage>? pages = [];
+  List<PBDLPage>? miscPages = [];
+  PBDLGlobalStyles? globalStyles = PBDLGlobalStyles();
 
-  int materialDesignCount() => designSystem.totalDesignCount;
+  int materialDesignCount() => designSystem!.totalDesignCount;
 
   @override
   PBDLNode createPBDLNode(Map<String, dynamic> json) =>
@@ -48,16 +45,16 @@ class PBDLProject extends PBDLNode implements PBDLNodeFactory {
   Map<String, dynamic> toJson() => _$PBDLProjectToJson(this);
 
   @override
-  String pbdlType = 'project';
+  String? pbdlType = 'project';
 
   @override
   void sortByUUID() {
     /// Sort [PBDLPage]s within this [PBDLProject]
-    pages.sort();
-    miscPages.sort();
+    pages!.sort();
+    miscPages!.sort();
 
     /// Ensure all [pages] sort their [screens]
-    pages.forEach((page) => page.sortByUUID());
-    miscPages.forEach((page) => page.sortByUUID());
+    pages!.forEach((page) => page.sortByUUID());
+    miscPages!.forEach((page) => page.sortByUUID());
   }
 }

@@ -14,20 +14,20 @@ part 'boolean_operation.g.dart';
 class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
   @override
   @JsonKey(ignore: true)
-  Logger log;
+  Logger? log;
 
-  List<FigmaNode> children;
+  List<FigmaNode>? children;
 
-  String booleanOperation;
+  String? booleanOperation;
 
   @override
   final String type = 'BOOLEAN_OPERATION';
 
   @override
-  FigmaRect absoluteBoundingBox;
+  FigmaRect? absoluteBoundingBox;
 
   @override
-  String imageReference;
+  String? imageReference;
 
   BooleanOperation({
     this.children,
@@ -35,7 +35,7 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     style,
     this.absoluteBoundingBox,
     UUID,
-    String transitionNodeID,
+    String? transitionNodeID,
     transitionDuration,
     transitionEasing,
     imageReference,
@@ -61,11 +61,11 @@ class BooleanOperation extends FigmaVector implements FigmaNodeFactory {
     imageReference = FigmaAssetProcessor().processImage(
       UUID,
       absoluteBoundingBox: absoluteBoundingBox,
-      name: name,
+      name: name!,
       effects: figmaStyleProperty?.effects ?? [],
     );
     return Future.value(PBDLImage(
-      UUID: UUID,
+      UUID: UUID!,
       boundaryRectangle: absoluteBoundingBox?.interpretFrame(),
       isVisible: isVisible,
       name: name,

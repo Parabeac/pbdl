@@ -3,13 +3,13 @@ import 'package:pbdl/src/pbdl/pbdl_screen.dart';
 import '../entities/layers/figma_node.dart';
 
 class FigmaScreen {
-  String id;
-  String name;
+  String? id;
+  String? name;
   bool convert = true;
-  String imageURI;
-  String type;
-  FigmaNode figmaNode;
-  bool isVisible;
+  String? imageURI;
+  String? type;
+  FigmaNode? figmaNode;
+  bool? isVisible;
 
   // Do we still need this?
   // DesignPage parentPage;
@@ -30,16 +30,16 @@ class FigmaScreen {
     return screen;
   }
 
-  Map<String, Object> toJson() {
-    var result = <String, Object>{'azure_blob_uri': imageURI};
-    result.addAll(figmaNode.toJson());
+  Map<String, Object?> toJson() {
+    var result = <String, Object?>{'azure_blob_uri': imageURI};
+    result.addAll(figmaNode!.toJson());
     return result;
   }
 
   Future<PBDLScreen> interpretNode() async {
     return PBDLScreen(
       designNode: await figmaNode?.interpretNode(),
-      UUID: id,
+      UUID: id!,
       name: name,
       isVisible: isVisible,
     );

@@ -4,19 +4,19 @@ part 'pbdl_auto_layout_options.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class PBDLAutoLayoutOptions {
-  Orientation orientation;
-  num spacing;
+  Orientation? orientation;
+  num? spacing;
 
-  num leftPadding;
-  num rightPadding;
-  num topPadding;
-  num bottomPadding;
+  num? leftPadding;
+  num? rightPadding;
+  num? topPadding;
+  num? bottomPadding;
 
-  AxisAlignment counterAxisAlignment;
-  AxisAlignment primaryAxisAlignment;
+  AxisAlignment? counterAxisAlignment;
+  AxisAlignment? primaryAxisAlignment;
 
-  AxisMode counterAxisSizing;
-  AxisMode primaryAxisSizing;
+  AxisMode? counterAxisSizing;
+  AxisMode? primaryAxisSizing;
 
   PBDLAutoLayoutOptions({
     this.orientation,

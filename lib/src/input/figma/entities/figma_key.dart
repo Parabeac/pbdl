@@ -1,13 +1,13 @@
 /// Class that is used to store the personal access token or oAuthToken.
 class FigmaKey {
   /// Returns the personal access token or OAuth token.
-  String keyStr;
+  late String keyStr;
 
   /// Indicates what [FIGMA_KEY_TYPE] this key is.
-  FIGMA_KEY_TYPE type;
+  FIGMA_KEY_TYPE? type;
   FigmaKey({
-    String personalAccessToken,
-    String oAuthToken,
+    String? personalAccessToken,
+    String? oAuthToken,
   }) {
     /// If both personalAccessToken and oAuthToken are provided,
     /// oAuthToken will be used.

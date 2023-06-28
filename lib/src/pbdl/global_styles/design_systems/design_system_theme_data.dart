@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart' show IterableExtension;
 import 'package:json_annotation/json_annotation.dart';
 import 'package:pbdl/pbdl.dart';
 import 'package:pbdl/src/pbdl/global_styles/design_systems/design_system_color_scheme.dart';
@@ -14,19 +15,18 @@ abstract class DesignSystemThemeData extends PBDLNode {
     this.colorSchemes,
   }) : super('', name, false, null, null, '');
 
-  List<String> textStyles;
+  List<String>? textStyles;
 
-  List<DesignSystemColorScheme> colorSchemes;
+  List<DesignSystemColorScheme>? colorSchemes;
 
   int get totalDesignCount;
 
   /// Returns [true] if [style] is part of the [DesignSystemThemeData's] [TextStyles]
-  bool isTextStyle(String style) => textStyles.contains(style);
+  bool isTextStyle(String? style) => textStyles!.contains(style);
 
   /// Returns [true] if [color] is part of the [DesignSystemThemeData's] [ColorSchemes]
-  DesignSystemColorScheme colorScheme(String color) => colorSchemes.firstWhere(
+  DesignSystemColorScheme? colorScheme(String? color) => colorSchemes!.firstWhereOrNull(
         (element) => element.isSupportedColor(color),
-        orElse: () => null,
       );
 
   static DesignSystemThemeData getDesignSystem(String designSystem) {

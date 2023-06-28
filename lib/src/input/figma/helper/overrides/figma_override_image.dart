@@ -11,11 +11,11 @@ final _uuidToRef = <String, PBDLImage>{};
 
 class FigmaOverrideImage extends FigmaOverrideType {
   @override
-  Future<PBDLNode> getProperty(FigmaNode node) async {
+  Future<PBDLNode?> getProperty(FigmaNode? node) async {
     if (!matches(node)) {
       return null;
     }
-    if (_uuidToRef.containsKey(node.UUID)) {
+    if (_uuidToRef.containsKey(node!.UUID)) {
       return Future.value(_uuidToRef[node.UUID]);
     }
     var interpretedNode = await (node as FigmaVector).interpretNode();
@@ -23,7 +23,7 @@ class FigmaOverrideImage extends FigmaOverrideType {
     if (interpretedNode is! PBDLImage) {
       return null;
     }
-    _uuidToRef[interpretedNode.UUID] = interpretedNode as PBDLImage;
+    _uuidToRef[interpretedNode.UUID] = interpretedNode;
     return Future.value(_uuidToRef[interpretedNode.UUID]);
   }
 
@@ -31,10 +31,10 @@ class FigmaOverrideImage extends FigmaOverrideType {
   String getPBDLType() => PBDLOverrideImage.PBDL_TYPE_NAME;
 
   @override
-  bool matches(FigmaNode node) => node is FigmaVector;
+  bool matches(FigmaNode? node) => node is FigmaVector;
 
   @override
-  PBDLStyle getPBDLStyle(FigmaNode node) {
+  PBDLStyle? getPBDLStyle(FigmaNode node) {
     if (!matches(node)) {
       return null;
     }
@@ -42,7 +42,7 @@ class FigmaOverrideImage extends FigmaOverrideType {
   }
 
   @override
-  Future<String> getValue(FigmaNode node) async {
+  Future<String?> getValue(FigmaNode? node) async {
     var pbdlNode = await getProperty(node);
 
     if (pbdlNode != null && pbdlNode is PBDLImage) {

@@ -6,17 +6,16 @@ part of 'fill_style_global.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FillStyleGlobal _$FillStyleGlobalFromJson(Map<String, dynamic> json) {
-  return FillStyleGlobal(
-    json['UUID'] as String,
-    json['styleType'] as String,
-    name: json['name'] as String,
-    description: json['description'] as String,
-    styleNode: json['styleNode'] == null
-        ? null
-        : FigmaColor.fromJson(json['styleNode'] as Map<String, dynamic>),
-  );
-}
+FillStyleGlobal _$FillStyleGlobalFromJson(Map<String, dynamic> json) =>
+    FillStyleGlobal(
+      json['UUID'] as String?,
+      json['styleType'] as String?,
+      name: json['name'] as String?,
+      description: json['description'] as String?,
+      styleNode: json['styleNode'] == null
+          ? null
+          : FigmaColor.fromJson(json['styleNode'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$FillStyleGlobalToJson(FillStyleGlobal instance) =>
     <String, dynamic>{
